@@ -39,6 +39,17 @@ public class CharacterController : MonoBehaviour
 
         if (isWalkingRight) anim.SetBool("WalkRight", true);
         else anim.SetBool("WalkRight", false);
+
+        //Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Ataca");
+            anim.SetBool("Attack", true);
+        }else if (Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("Para de atacar");
+            anim.SetBool("Attack", false);
+        }
     }
 
     private void FixedUpdate()
@@ -80,6 +91,8 @@ public class CharacterController : MonoBehaviour
                 isGround = false;
             }
         }
+
+        
     }
 
 
