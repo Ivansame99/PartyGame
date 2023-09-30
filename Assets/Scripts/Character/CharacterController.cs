@@ -14,6 +14,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private Rigidbody hips;
 
+    [SerializeField]
+    private Animator anim;
+
     //Variables que tienen que ser publicas
     public bool isGround;
     
@@ -28,7 +31,11 @@ public class CharacterController : MonoBehaviour
         //Movement
         if (Input.GetKey(KeyCode.W))
         {
+            anim.SetBool("Walking", true);
             hips.AddForce(hips.transform.forward * speed);
+        } else
+        {
+            anim.SetBool("Walking", false);
         }
 
         if (Input.GetKey(KeyCode.D))
