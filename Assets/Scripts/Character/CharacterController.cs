@@ -19,37 +19,55 @@ public class CharacterController : MonoBehaviour
 
     //Variables que tienen que ser publicas
     public bool isGround;
-    
+
+    private bool isWalking=false;
+    private bool isWalkingLeft = false;
+    private bool isWalkingRight = false;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
+    private void Update()
+    {
+        if(isWalking) anim.SetBool("Walking", true);
+        else anim.SetBool("Walking", false);
+
+        if (isWalkingLeft) anim.SetBool("WalkLeft", true);
+        else anim.SetBool("WalkLeft", false);
+
+        if (isWalkingRight) anim.SetBool("WalkRight", true);
+        else anim.SetBool("WalkRight", false);
+    }
+
     private void FixedUpdate()
     {
+        isWalking = false;
+        isWalkingLeft = false;
+        isWalkingRight = false;
         //Movement
         if (Input.GetKey(KeyCode.W))
         {
-            anim.SetBool("Walking", true);
+            isWalking=true;
             hips.AddForce(hips.transform.forward * speed);
-        } else
-        {
-            anim.SetBool("Walking", false);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
+            isWalkingRight = true;
             hips.AddForce(hips.transform.right * strafeSpeed);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            isWalkingLeft = true;
             hips.AddForce(-hips.transform.right * strafeSpeed);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
+            isWalking = true;
             hips.AddForce(-hips.transform.forward * speed);
         }
 
