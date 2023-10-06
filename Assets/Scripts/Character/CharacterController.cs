@@ -14,9 +14,12 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private Rigidbody hips;
 
+    [SerializeField] private ConfigurableJoint hipJoint;
+
     [SerializeField]
     private Animator anim;
 
+    private Quaternion lastRotation;
     //Variables que tienen que ser publicas
     public bool isGround;
 
@@ -34,20 +37,20 @@ public class CharacterController : MonoBehaviour
         if(isWalking) anim.SetBool("Walking", true);
         else anim.SetBool("Walking", false);
 
-        if (isWalkingLeft) anim.SetBool("WalkLeft", true);
+        /*if (isWalkingLeft) anim.SetBool("WalkLeft", true);
         else anim.SetBool("WalkLeft", false);
 
         if (isWalkingRight) anim.SetBool("WalkRight", true);
-        else anim.SetBool("WalkRight", false);
+        else anim.SetBool("WalkRight", false);*/
 
         //Attack
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Ataca");
+            //Debug.Log("Ataca");
             anim.SetBool("Attack", true);
         }else if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Para de atacar");
+            //Debug.Log("Para de atacar");
             anim.SetBool("Attack", false);
         }
     }
@@ -56,7 +59,7 @@ public class CharacterController : MonoBehaviour
     {
         isWalking = false;
         isWalkingLeft = false;
-        isWalkingRight = false;
+        /*isWalkingRight = false;
         //Movement
         if (Input.GetKey(KeyCode.W))
         {
@@ -80,6 +83,27 @@ public class CharacterController : MonoBehaviour
         {
             isWalking = true;
             hips.AddForce(-hips.transform.forward * speed);
+        }*/
+
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+        if (direction.magnitude >= 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(-direction.x, direction.z) * Mathf.Rad2Deg;
+
+            hipJoint.targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+            lastRotation = hipJoint.targetRotation;
+            hips.AddForce(direction * speed);
+
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+            hipJoint.targetRotation = lastRotation;
         }
 
         //Jump
