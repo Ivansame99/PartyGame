@@ -12,6 +12,13 @@ public class CharacterController : MonoBehaviour
     private float jumpForce;
 
     [SerializeField]
+    private float dodgeCD;
+
+    private float dodgeTimer=0;
+
+    private bool dodge = false;
+
+    [SerializeField]
     private Rigidbody hips;
 
     [SerializeField] private ConfigurableJoint hipJoint;
@@ -52,6 +59,20 @@ public class CharacterController : MonoBehaviour
         {
             //Debug.Log("Para de atacar");
             anim.SetBool("Attack", false);
+        }
+
+        if (dodgeTimer > 0)
+        {
+            dodgeTimer-=Time.deltaTime;
+        } 
+
+
+        if (Input.GetMouseButtonDown(1) && dodgeTimer<=0)
+        {
+            dodge = true;
+            dodgeTimer = dodgeCD;
+            Debug.Log("Rueda");
+            anim.SetBool("Dodge", true);
         }
     }
 
@@ -116,6 +137,12 @@ public class CharacterController : MonoBehaviour
             }
         }
 
+        if (dodge)
+        {
+            hips.AddForce(direction * speed * 50);
+
+            dodge = false;
+        }
         
     }
 
