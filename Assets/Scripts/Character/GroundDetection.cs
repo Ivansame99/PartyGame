@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundDetection : MonoBehaviour
 {
     [SerializeField]
-    private CharacterController characterController;
+    private RagdollController characterController;
 
     private void OnCollisionStay(Collision collision)
     {
