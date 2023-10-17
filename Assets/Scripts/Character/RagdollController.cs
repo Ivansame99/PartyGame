@@ -26,13 +26,11 @@ public class RagdollController : MonoBehaviour
     [SerializeField]
     private Animator anim;
 
-    private Quaternion lastRotation;
+    private Quaternion lastRotation = Quaternion.identity;
     //Variables que tienen que ser publicas
     public bool isGround;
 
     private bool isWalking=false;
-    private bool isWalkingLeft = false;
-    private bool isWalkingRight = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,15 +69,14 @@ public class RagdollController : MonoBehaviour
         {
             dodge = true;
             dodgeTimer = dodgeCD;
-            Debug.Log("Rueda");
-            anim.SetBool("Dodge", true);
+            //Debug.Log("Rueda");
+            //anim.SetBool("Dodge", true);
         }
     }
 
     private void FixedUpdate()
     {
         isWalking = false;
-        isWalkingLeft = false;
         /*isWalkingRight = false;
         //Movement
         if (Input.GetKey(KeyCode.W))

@@ -6,24 +6,28 @@ public class Character2Controller : MonoBehaviour
 {
     //public CharacterController controller;
 
-    public float speed = 6;
+    public float speed;
+    public float dodgeSpeed;
 
-    public float turnSmooth = 1f;
+    public float turnSmooth;
     float turnSmoothTime;
     private Rigidbody rb;
 
-    [SerializeField]
     private Animator anim;
 
     [SerializeField]
     private float dodgeCD;
+    //[SerializeField]
+    //private float invencibilityCD;
 
     private float dodgeTimer = 0;
-
+    //private float invencibilityTimer = 0;
+    private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
 
     private Vector3 direction;
+    private Vector3 rollDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -36,38 +40,52 @@ public class Character2Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Movimiento
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
         direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (direction.magnitude >= 0.1f && !dodge)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
             //controller.Move(direction*speed*Time.deltaTime);
-            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+            //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             isWalking = true;
-            anim.SetBool("Walking", true);
         }
         else
         {
             isWalking = false;
-            anim.SetBool("Walking", false);
         }
 
-        if (Input.GetMouseButtonDown(1) && dodgeTimer <= 0)
+        //Voltereta
+        if (Input.GetMouseButtonDown(1) && dodgeTimer <= 0 && isWalking && !dodge)
         {
+            rollDirection = direction;
             dodge = true;
             dodgeTimer = dodgeCD;
-            Debug.Log("Rueda");
+            //invencibilityTimer = invencibilityCD;
             anim.SetTrigger("Roll");
-            
+            //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
-        if (isWalking)
+        if(dodgeTimer>=0) dodgeTimer-=Time.deltaTime;
+
+        /*if (invencibilityTimer >= 0)
         {
+            dodgeTimer -= Time.deltaTime;
+
+        }*/
+
+        //Animaciones
+        if (dodge)
+        {
+            rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.deltaTime);
+        }else if (isWalking)
+        {
+            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             anim.SetBool("Walking", true);
         } else
         {
@@ -75,9 +93,16 @@ public class Character2Controller : MonoBehaviour
         }
     }
 
+    public void RollEnded()
+    {
+        Debug.Log("asad");
+        dodge = false;
+        invencibility = true;
+    }
+
     private void FixedUpdate()
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
-        if (dodge) rb.AddForce(direction * speed * 30);
+        //if (dodge) rb.AddForce(direction * speed * 30);
     }
 }
