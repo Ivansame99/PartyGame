@@ -95,7 +95,7 @@ public class Character2Controller : MonoBehaviour
 
     public void RollEnded()
     {
-        Debug.Log("asad");
+        //Debug.Log("asad");
         dodge = false;
         invencibility = true;
     }
