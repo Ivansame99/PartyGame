@@ -80,14 +80,11 @@ public class Character2Controller : MonoBehaviour
         }*/
 
         //Animaciones
-        if (dodge)
+        if (isWalking && !dodge)
         {
-            rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.deltaTime);
-        }else if (isWalking)
-        {
-            rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
+            //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             anim.SetBool("Walking", true);
-        } else
+        } else if(!isWalking)
         {
             anim.SetBool("Walking", false);
         }
@@ -95,7 +92,7 @@ public class Character2Controller : MonoBehaviour
 
     public void RollEnded()
     {
-        //Debug.Log("asad");
+        Debug.Log("asad");
         dodge = false;
         invencibility = true;
     }
@@ -104,5 +101,14 @@ public class Character2Controller : MonoBehaviour
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         //if (dodge) rb.AddForce(direction * speed * 30);
+        if (dodge)
+        {
+            rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
+        }
+        else if (isWalking)
+        {
+            rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+            //anim.SetBool("Walking", true);
+        }
     }
 }
