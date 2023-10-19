@@ -5,27 +5,43 @@ using UnityEngine;
 public class Character2Controller : MonoBehaviour
 {
     //public CharacterController controller;
+    
+    //Speed
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float dodgeSpeed;
 
-    public float speed;
-    public float dodgeSpeed;
-
-    public float turnSmooth;
+    [SerializeField]
+    private float turnSmooth;
     float turnSmoothTime;
-    private Rigidbody rb;
 
+    //Components
+    private Rigidbody rb;
     private Animator anim;
 
+    //Timers
     [SerializeField]
     private float dodgeCD;
     //[SerializeField]
     //private float invencibilityCD;
-
     private float dodgeTimer = 0;
     //private float invencibilityTimer = 0;
+
+    //GameObjects
+    [SerializeField]
+    private GameObject weapon;
+
+    [SerializeField]
+    private GameObject hand;
+
+    //States
     private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
+    private bool attacking = false;
 
+    //Movement
     private Vector3 direction;
     private Vector3 rollDirection;
 
@@ -72,9 +88,11 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Ataque
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !dodge)
         {
+            weapon.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("Entras");
+            attacking = true;
             anim.SetTrigger("Attack1");
         }
 
@@ -97,6 +115,12 @@ public class Character2Controller : MonoBehaviour
         }
     }
 
+    void ChangeWeapon(GameObject newWeapon)
+    {
+        weapon = newWeapon;
+        weapon.transform.parent = hand.transform;
+    }
+
     public void RollEnded()
     {
         //Debug.Log("asad");
@@ -104,18 +128,28 @@ public class Character2Controller : MonoBehaviour
         invencibility = true;
     }
 
+    public void Attack1Ended()
+    {
+        //Debug.Log("asad");
+        weapon.GetComponent<BoxCollider>().enabled = false;
+        attacking = false;
+    }
+
     private void FixedUpdate()
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         //if (dodge) rb.AddForce(direction * speed * 30);
-        if (dodge)
+        if (!attacking)
         {
-            rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
-        }
-        else if (isWalking)
-        {
-            rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-            //anim.SetBool("Walking", true);
+            if (dodge)
+            {
+                rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
+            }
+            else if (isWalking)
+            {
+                rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+                //anim.SetBool("Walking", true);
+            }
         }
     }
 }
