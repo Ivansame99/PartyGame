@@ -14,6 +14,7 @@ public class SwordController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Character2")
         {
+            Debug.Log("Pegas");
             target = collision.gameObject;
             attack = true;
         }        

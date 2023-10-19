@@ -71,7 +71,14 @@ public class Character2Controller : MonoBehaviour
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
-        if(dodgeTimer>=0) dodgeTimer-=Time.deltaTime;
+        //Ataque
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Debug.Log("Entras");
+            anim.SetTrigger("Attack1");
+        }
+
+        if (dodgeTimer>=0) dodgeTimer-=Time.deltaTime;
 
         /*if (invencibilityTimer >= 0)
         {
@@ -92,7 +99,7 @@ public class Character2Controller : MonoBehaviour
 
     public void RollEnded()
     {
-        Debug.Log("asad");
+        //Debug.Log("asad");
         dodge = false;
         invencibility = true;
     }
