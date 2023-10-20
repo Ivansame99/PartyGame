@@ -11,8 +11,6 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     [SerializeField]
     private GameObject readyPanel;
-    [SerializeField]
-    private GameObject hatPanel;
 
     private float ignoreInputTime = 1.5f;
     private bool inputEnabled;
@@ -34,16 +32,16 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SetPrefab(int hat)
     {
-        if (!inputEnabled) { return; }
-        readyPanel.SetActive(true);
-        hatPanel.SetActive(false);
+        //if (!inputEnabled) { return; }
+        //readyPanel.SetActive(true);
+        //hatPanel.SetActive(false);
     }
 
     public void ReadyPlayer()
     {
         if (!inputEnabled) { return; }
         PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
-        hatPanel.SetActive(false);
+        //hatPanel.SetActive(false);
         readyPanel.SetActive(true);
     }
 }

@@ -52,7 +52,7 @@ public class PlayerConfigurationManager : MonoBehaviour
             DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
         }
-        transitionMaterial.SetFloat(propertyName, 1);
+       // transitionMaterial.SetFloat(propertyName, 1);
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -70,9 +70,9 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].IsReady = true;
         if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
         {
-            StartCoroutine(CloseTranition());
+            //StartCoroutine(CloseTranition());
             //Invoke("ChangeScene", 2.0f);
-            //ChangeScene();
+            ChangeScene();
         }
     }
 
