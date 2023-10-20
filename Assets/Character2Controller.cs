@@ -39,7 +39,7 @@ public class Character2Controller : MonoBehaviour
     private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
-    private bool attacking = false;
+    private int attacking = 0;
 
     //Movement
     private Vector3 direction;
@@ -92,8 +92,9 @@ public class Character2Controller : MonoBehaviour
         {
             weapon.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("Entras");
-            attacking = true;
-            anim.SetTrigger("Attack1");
+            if(attacking==0) anim.SetTrigger("Attack1");
+            attacking++;
+            rb.AddForce(transform.forward * 3, ForceMode.Impulse);
         }
 
         if (dodgeTimer>=0) dodgeTimer-=Time.deltaTime;
@@ -130,16 +131,35 @@ public class Character2Controller : MonoBehaviour
 
     public void Attack1Ended()
     {
+        if (attacking == 1) //Si solo ha hecho un ataque para, sino ya entrara en el siguiente
+        {
+            Debug.Log("Sales");
+            //Debug.Log("asad");
+            rb.velocity = Vector3.zero;
+            weapon.GetComponent<BoxCollider>().enabled = false;
+            attacking = 0;
+        }
+    }
+
+    public void Attack2Ended()
+    {
+        Debug.Log("Sales");
         //Debug.Log("asad");
+        rb.velocity = Vector3.zero;
         weapon.GetComponent<BoxCollider>().enabled = false;
-        attacking = false;
+        attacking = 0;
+    }
+
+    public void AttackCombo()
+    {
+        if(attacking>=2) anim.SetTrigger("Attack2");
     }
 
     private void FixedUpdate()
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         //if (dodge) rb.AddForce(direction * speed * 30);
-        if (!attacking)
+        if (attacking==0)
         {
             if (dodge)
             {
