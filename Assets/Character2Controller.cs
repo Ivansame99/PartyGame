@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character2Controller : MonoBehaviour
 {
     //public CharacterController controller;
-    
+
     //Speed
     [SerializeField]
     private float speed;
@@ -28,9 +28,15 @@ public class Character2Controller : MonoBehaviour
     private float dodgeTimer = 0;
     //private float invencibilityTimer = 0;
 
-    //GameObjects
+    //Weapon
     [SerializeField]
     private GameObject weapon;
+    private Weapon weaponController;
+
+    private int comboCounter;
+    float attackCoolDownTime = 0.1f;
+    float lastClicked;
+    float lastComboEnd;
 
     [SerializeField]
     private GameObject hand;
@@ -48,6 +54,7 @@ public class Character2Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
@@ -88,16 +95,18 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Ataque
-        if (Input.GetMouseButtonDown(0) && !dodge)
+        Attack();
+        /*if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
         {
+            //Attack();
             weapon.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("Entras");
             if(attacking==0) anim.SetTrigger("Attack1");
             attacking++;
             rb.AddForce(transform.forward * 3, ForceMode.Impulse);
-        }
+        }*/
 
-        if (dodgeTimer>=0) dodgeTimer-=Time.deltaTime;
+        if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 
         /*if (invencibilityTimer >= 0)
         {
@@ -110,7 +119,8 @@ public class Character2Controller : MonoBehaviour
         {
             //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             anim.SetBool("Walking", true);
-        } else if(!isWalking)
+        }
+        else if (!isWalking)
         {
             anim.SetBool("Walking", false);
         }
@@ -129,6 +139,49 @@ public class Character2Controller : MonoBehaviour
         invencibility = true;
     }
 
+    private void Attack()
+    {
+        if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
+        {
+            comboCounter++;
+            comboCounter = Mathf.Clamp(comboCounter, 0, weaponController.comboLenght);
+
+            for (int i = 0; i < comboCounter; i++)
+            {
+                if (i == 0) //Si es el primer ataque del combo
+                {
+                    if (comboCounter == 1)
+                    {
+                        anim.SetBool("AttackStart", true);
+                        anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
+                        lastClicked = Time.time;
+                    }
+                }
+                else
+                {
+                    if (comboCounter >= (i + 1) && anim.GetCurrentAnimatorStateInfo(0).IsName(weaponController.weaponName + "Attack" + i))
+                    {
+                        anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
+                        anim.SetBool(weaponController.weaponName + "Attack" + i, true);
+                        lastClicked = Time.time;
+                    }
+                }
+            }
+        }
+
+        //animator bool reset
+        for (int i = 0; i < weaponController.comboLenght; i++)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsName(weaponController.weaponName + "Attack" + (i + 1)))
+            {
+                comboCounter = 0;
+                lastComboEnd = Time.time;
+                anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), false);
+                anim.SetBool("AttackStart", false);
+            }
+        }
+    }
+
     public void Attack1Ended()
     {
         if (attacking == 1) //Si solo ha hecho un ataque para, sino ya entrara en el siguiente
@@ -139,6 +192,7 @@ public class Character2Controller : MonoBehaviour
             weapon.GetComponent<BoxCollider>().enabled = false;
             attacking = 0;
         }
+        else AttackCombo();
     }
 
     public void Attack2Ended()
@@ -152,14 +206,14 @@ public class Character2Controller : MonoBehaviour
 
     public void AttackCombo()
     {
-        if(attacking>=2) anim.SetTrigger("Attack2");
+        if (attacking >= 2) anim.SetTrigger("Attack2");
     }
 
     private void FixedUpdate()
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         //if (dodge) rb.AddForce(direction * speed * 30);
-        if (attacking==0)
+        if (attacking == 0)
         {
             if (dodge)
             {
