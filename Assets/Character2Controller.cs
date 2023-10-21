@@ -141,7 +141,7 @@ public class Character2Controller : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
+        if (Input.GetMouseButtonDown(0) && !dodge /*&& Time.time - lastComboEnd > attackCoolDownTime*/)
         {
             comboCounter++;
             comboCounter = Mathf.Clamp(comboCounter, 0, weaponController.comboLenght);
@@ -150,10 +150,12 @@ public class Character2Controller : MonoBehaviour
             {
                 if (i == 0) //Si es el primer ataque del combo
                 {
-                    if (comboCounter == 1)
+                    if (comboCounter == 1 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"))
                     {
                         anim.SetBool("AttackStart", true);
                         anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
+                        weapon.GetComponent<BoxCollider>().enabled = true;
+                        rb.AddForce(transform.forward * 3, ForceMode.Impulse);
                         lastClicked = Time.time;
                     }
                 }
@@ -163,10 +165,15 @@ public class Character2Controller : MonoBehaviour
                     {
                         anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
                         anim.SetBool(weaponController.weaponName + "Attack" + i, true);
+                        weapon.GetComponent<BoxCollider>().enabled = true;
+                        rb.AddForce(transform.forward * 3, ForceMode.Impulse);
                         lastClicked = Time.time;
                     }
                 }
             }
+
+            
+            
         }
 
         //animator bool reset
@@ -178,11 +185,12 @@ public class Character2Controller : MonoBehaviour
                 lastComboEnd = Time.time;
                 anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), false);
                 anim.SetBool("AttackStart", false);
+                weapon.GetComponent<BoxCollider>().enabled = false;
             }
         }
     }
 
-    public void Attack1Ended()
+    /*public void Attack1Ended()
     {
         if (attacking == 1) //Si solo ha hecho un ataque para, sino ya entrara en el siguiente
         {
@@ -207,7 +215,7 @@ public class Character2Controller : MonoBehaviour
     public void AttackCombo()
     {
         if (attacking >= 2) anim.SetTrigger("Attack2");
-    }
+    }*/
 
     private void FixedUpdate()
     {
