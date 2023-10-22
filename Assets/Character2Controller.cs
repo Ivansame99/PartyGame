@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,7 +46,7 @@ public class Character2Controller : MonoBehaviour
     private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
-    private int attacking = 0;
+    private bool attacking = false;
 
     //Movement
     private Vector3 direction;
@@ -54,7 +55,7 @@ public class Character2Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weaponController = weapon.GetComponent<Weapon>();
+        if(weapon!=null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
@@ -69,7 +70,7 @@ public class Character2Controller : MonoBehaviour
 
         direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f && !dodge)
+        if (direction.magnitude >= 0.1f && !dodge && !attacking)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
@@ -130,7 +131,37 @@ public class Character2Controller : MonoBehaviour
     void ChangeWeapon(GameObject newWeapon)
     {
         weapon = newWeapon;
+        weaponController = weapon.GetComponent<Weapon>();
+        weapon.GetComponent<BoxCollider>().isTrigger=false;
+        weapon.GetComponent<BoxCollider>().enabled = false;
+        GameObject parent = weapon.transform.parent.gameObject;
         weapon.transform.parent = hand.transform;
+        Destroy(parent);
+        weapon.layer = this.gameObject.layer;
+        Destroy(weapon.GetComponent<Animator>());
+        switch (weapon.tag)
+        {
+
+            case "Sword":
+                Debug.Log("Espada");
+                //weapon.transform.rotation = Quaternion.Euler(-4.941f, -251.08f, -340.81f);
+
+                //weapon.transform.eulerAngles = new Vector3(355.059021f, 108.920013f, 19.1900253f);
+                
+                weapon.transform.localPosition = Vector3.zero;
+                weapon.transform.localRotation = new Quaternion(0.110803805f, 0.805757701f, 0.131379381f, 0.566759765f);
+                break;
+
+            case "two":
+                Console.WriteLine("It is 2");
+                break;
+
+            default:
+                Console.WriteLine("Nothing");
+                break;
+        }
+        
+
     }
 
     public void RollEnded()
@@ -191,22 +222,26 @@ public class Character2Controller : MonoBehaviour
         //Forma nueva
         if (Input.GetMouseButtonDown(0) && !dodge)
         {
-            if (Time.time - lastComboEnd > 1f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+            if (weapon != null)
             {
-                CancelInvoke("EndCombo");
-
-                if (Time.time - lastClicked >= 0.3f) //Tiempo entre ataques
+                if (Time.time - lastComboEnd > 1f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
                 {
-                    anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
-                    anim.Play("Attack", 0, 0);
-                    weaponController.damage = weaponController.combo[comboCounter].damage;
-                    comboCounter++;
-                    lastClicked = Time.time;
-                    weapon.GetComponent<BoxCollider>().enabled = true;
-                    if (comboCounter >= weaponController.combo.Count)
+                    CancelInvoke("EndCombo");
+
+                    if (Time.time - lastClicked >= 0.3f) //Tiempo entre ataques
                     {
-                        comboCounter = 0;
-                        lastComboEnd = Time.time;
+                        attacking = true;
+                        anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
+                        anim.Play("Attack", 0, 0);
+                        weaponController.damage = weaponController.combo[comboCounter].damage;
+                        comboCounter++;
+                        lastClicked = Time.time;
+                        weapon.GetComponent<BoxCollider>().enabled = true;
+                        if (comboCounter >= weaponController.combo.Count)
+                        {
+                            comboCounter = 0;
+                            lastComboEnd = Time.time;
+                        }
                     }
                 }
             }
@@ -217,13 +252,15 @@ public class Character2Controller : MonoBehaviour
     {
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            Invoke("EndCombo", 1);
+            Invoke("EndCombo", 0.5f);
             weapon.GetComponent<BoxCollider>().enabled = false;
+            attacking = false;
         }
     }
 
     private void EndCombo()
     {
+        attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
         weapon.GetComponent<BoxCollider>().enabled = false;
@@ -261,7 +298,7 @@ public class Character2Controller : MonoBehaviour
     {
         //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
         //if (dodge) rb.AddForce(direction * speed * 30);
-        if (attacking == 0)
+        if (!attacking)
         {
             if (dodge)
             {
@@ -272,6 +309,14 @@ public class Character2Controller : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
                 //anim.SetBool("Walking", true);
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Sword") //|| tag==greatsword||tag==bow
+        {
+            ChangeWeapon(other.gameObject);
         }
     }
 }
