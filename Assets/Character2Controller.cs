@@ -130,6 +130,7 @@ public class Character2Controller : MonoBehaviour
 
     void ChangeWeapon(GameObject newWeapon)
     {
+        Destroy(weapon);
         weapon = newWeapon;
         weaponController = weapon.GetComponent<Weapon>();
         weapon.GetComponent<BoxCollider>().isTrigger=false;
@@ -143,7 +144,7 @@ public class Character2Controller : MonoBehaviour
         {
 
             case "Sword":
-                Debug.Log("Espada");
+                //Debug.Log("Espada");
                 //weapon.transform.rotation = Quaternion.Euler(-4.941f, -251.08f, -340.81f);
 
                 //weapon.transform.eulerAngles = new Vector3(355.059021f, 108.920013f, 19.1900253f);
@@ -152,8 +153,9 @@ public class Character2Controller : MonoBehaviour
                 weapon.transform.localRotation = new Quaternion(0.110803805f, 0.805757701f, 0.131379381f, 0.566759765f);
                 break;
 
-            case "two":
-                Console.WriteLine("It is 2");
+            case "GreatSword":
+                weapon.transform.localPosition = new Vector3(0.0134290522f, -0.00872362964f, 0.00462706713f);
+                weapon.transform.localRotation = new Quaternion(-0.147978142f, 0.552269399f, -0.596118569f, 0.563687623f);
                 break;
 
             default:
@@ -314,7 +316,7 @@ public class Character2Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Sword") //|| tag==greatsword||tag==bow
+        if(other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword") //|| tag==greatsword||tag==bow
         {
             ChangeWeapon(other.gameObject);
         }
