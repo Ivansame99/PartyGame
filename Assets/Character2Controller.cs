@@ -96,6 +96,7 @@ public class Character2Controller : MonoBehaviour
 
         //Ataque
         Attack();
+        ExitAttack();
         /*if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
         {
             //Attack();
@@ -141,7 +142,8 @@ public class Character2Controller : MonoBehaviour
 
     private void Attack()
     {
-        if (Input.GetMouseButtonDown(0) && !dodge /*&& Time.time - lastComboEnd > attackCoolDownTime*/)
+        //Forma antigua
+        /*if (Input.GetMouseButtonDown(0) && !dodge) //&& Time.time - lastComboEnd > attackCoolDownTime
         {
             comboCounter++;
             comboCounter = Mathf.Clamp(comboCounter, 0, weaponController.comboLenght);
@@ -155,7 +157,7 @@ public class Character2Controller : MonoBehaviour
                         anim.SetBool("AttackStart", true);
                         anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
                         weapon.GetComponent<BoxCollider>().enabled = true;
-                        rb.AddForce(transform.forward * 3, ForceMode.Impulse);
+                        //rb.AddForce(transform.forward * 3, ForceMode.Impulse);
                         lastClicked = Time.time;
                     }
                 }
@@ -164,16 +166,13 @@ public class Character2Controller : MonoBehaviour
                     if (comboCounter >= (i + 1) && anim.GetCurrentAnimatorStateInfo(0).IsName(weaponController.weaponName + "Attack" + i))
                     {
                         anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
-                        anim.SetBool(weaponController.weaponName + "Attack" + i, true);
+                        anim.SetBool(weaponController.weaponName + "Attack" + i, false);
                         weapon.GetComponent<BoxCollider>().enabled = true;
-                        rb.AddForce(transform.forward * 3, ForceMode.Impulse);
+                        //rb.AddForce(transform.forward * 3, ForceMode.Impulse);
                         lastClicked = Time.time;
                     }
                 }
             }
-
-            
-            
         }
 
         //animator bool reset
@@ -187,8 +186,49 @@ public class Character2Controller : MonoBehaviour
                 anim.SetBool("AttackStart", false);
                 weapon.GetComponent<BoxCollider>().enabled = false;
             }
+        }*/
+
+        //Forma nueva
+        if (Input.GetMouseButtonDown(0) && !dodge)
+        {
+            if (Time.time - lastComboEnd > 1f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+            {
+                CancelInvoke("EndCombo");
+
+                if (Time.time - lastClicked >= 0.3f) //Tiempo entre ataques
+                {
+                    anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
+                    anim.Play("Attack", 0, 0);
+                    weaponController.damage = weaponController.combo[comboCounter].damage;
+                    comboCounter++;
+                    lastClicked = Time.time;
+                    weapon.GetComponent<BoxCollider>().enabled = true;
+                    if (comboCounter >= weaponController.combo.Count)
+                    {
+                        comboCounter = 0;
+                        lastComboEnd = Time.time;
+                    }
+                }
+            }
         }
     }
+
+    private void ExitAttack()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            Invoke("EndCombo", 1);
+            weapon.GetComponent<BoxCollider>().enabled = false;
+        }
+    }
+
+    private void EndCombo()
+    {
+        comboCounter = 0;
+        lastComboEnd = Time.time;
+        weapon.GetComponent<BoxCollider>().enabled = false;
+    }
+
 
     /*public void Attack1Ended()
     {

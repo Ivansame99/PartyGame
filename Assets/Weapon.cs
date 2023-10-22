@@ -6,15 +6,17 @@ public class Weapon : MonoBehaviour
 {
     //Variables que tienen que ser publicas
     public string weaponName;
-    public int comboLenght;
+    public List<AttackSO> combo;
+    public float damage;
+    //public int comboLenght;
 
     private GameObject target;
     private bool attack;
 
     [SerializeField]
     private float pushForce;
-    [SerializeField]
-    private float damage;
+    //[SerializeField]
+    //private float damage;
 
     private void OnCollisionEnter(Collision collision)
     {

@@ -16223,9 +16223,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Sword
-  comboLenght: 2
-  pushForce: 100
+  combo:
+  - {fileID: 11400000, guid: 5c6cc5eb1e4d18448a0ed7b5e4875c17, type: 2}
+  - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
+  - {fileID: 11400000, guid: 5c6cc5eb1e4d18448a0ed7b5e4875c17, type: 2}
+  - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
+  - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
   damage: 5
+  pushForce: 100
 --- !u!65 &1517674881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20384,9 +20389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: 
-  comboLenght: 0
-  pushForce: 125
+  combo: []
   damage: 0
+  pushForce: 125
 --- !u!1 &2030875974 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 75f735461837791428b5bbb3b60f0217,
