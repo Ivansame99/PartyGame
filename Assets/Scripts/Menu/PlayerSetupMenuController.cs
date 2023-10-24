@@ -41,6 +41,7 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         if (!inputEnabled) { return; }
         PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
+        Debug.Log("aparece canvas");
         //hatPanel.SetActive(false);
         readyPanel.SetActive(true);
     }

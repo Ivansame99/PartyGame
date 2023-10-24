@@ -11,15 +11,17 @@
                     "id": "757ec656-573b-4cbb-a4d9-8dd2a708f4a0",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Dodge",
                     "type": "Button",
                     "id": "22f0b2f9-153d-49ef-a1fc-8e78a7282310",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Run",
@@ -27,15 +29,17 @@
                     "id": "62f41ef8-b105-4f95-92e8-c01457d2b58e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
-                    "name": "Sound",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "f244a16c-9a28-4bdf-a06f-3a202acc6834",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Cancel",
@@ -43,7 +47,8 @@
                     "id": "1c56139b-79b5-4d1b-9690-cbefab6b2968",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Pause",
@@ -51,7 +56,8 @@
                     "id": "92e3cdd3-e6ce-4236-98a2-dbc73710ecf5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Hat",
@@ -59,7 +65,8 @@
                     "id": "c44afa54-63b2-479a-952e-4949b194f5ab",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Hack",
@@ -67,7 +74,8 @@
                     "id": "2b58e775-3124-45cb-bb08-919faa1d4adc",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -188,18 +196,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "cbd8c519-b616-4ac0-9b51-bc03d93d6c40",
-                    "path": "<Keyboard>/space",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -232,18 +240,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sound",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "f390fdd2-da1d-4ea2-96a8-40f030866b1d",
-                    "path": "<Keyboard>/f",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Sound",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -336,7 +344,8 @@
                     "id": "abc70ea7-7275-40ef-ba7d-e8a15601ae8a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Run",
@@ -344,7 +353,8 @@
                     "id": "0a008796-eabb-4046-9a55-cbb395b57922",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Jump",
@@ -352,7 +362,8 @@
                     "id": "609216d9-62d7-450f-907f-b1200a3825e4",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

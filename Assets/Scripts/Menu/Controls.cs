@@ -37,7 +37,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""22f0b2f9-153d-49ef-a1fc-8e78a7282310"",
                     ""expectedControlType"": ""Button"",
@@ -55,7 +55,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Sound"",
+                    ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""f244a16c-9a28-4bdf-a06f-3a202acc6834"",
                     ""expectedControlType"": ""Button"",
@@ -218,18 +218,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""cbd8c519-b616-4ac0-9b51-bc03d93d6c40"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -262,18 +262,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Sound"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
                     ""id"": ""f390fdd2-da1d-4ea2-96a8-40f030866b1d"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Sound"",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -507,9 +507,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Dog
         m_Dog = asset.FindActionMap("Dog", throwIfNotFound: true);
         m_Dog_Movement = m_Dog.FindAction("Movement", throwIfNotFound: true);
-        m_Dog_Jump = m_Dog.FindAction("Jump", throwIfNotFound: true);
+        m_Dog_Dodge = m_Dog.FindAction("Dodge", throwIfNotFound: true);
         m_Dog_Run = m_Dog.FindAction("Run", throwIfNotFound: true);
-        m_Dog_Sound = m_Dog.FindAction("Sound", throwIfNotFound: true);
+        m_Dog_Attack = m_Dog.FindAction("Attack", throwIfNotFound: true);
         m_Dog_Cancel = m_Dog.FindAction("Cancel", throwIfNotFound: true);
         m_Dog_Pause = m_Dog.FindAction("Pause", throwIfNotFound: true);
         m_Dog_Hat = m_Dog.FindAction("Hat", throwIfNotFound: true);
@@ -581,9 +581,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Dog;
     private List<IDogActions> m_DogActionsCallbackInterfaces = new List<IDogActions>();
     private readonly InputAction m_Dog_Movement;
-    private readonly InputAction m_Dog_Jump;
+    private readonly InputAction m_Dog_Dodge;
     private readonly InputAction m_Dog_Run;
-    private readonly InputAction m_Dog_Sound;
+    private readonly InputAction m_Dog_Attack;
     private readonly InputAction m_Dog_Cancel;
     private readonly InputAction m_Dog_Pause;
     private readonly InputAction m_Dog_Hat;
@@ -593,9 +593,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         private @Controls m_Wrapper;
         public DogActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Dog_Movement;
-        public InputAction @Jump => m_Wrapper.m_Dog_Jump;
+        public InputAction @Dodge => m_Wrapper.m_Dog_Dodge;
         public InputAction @Run => m_Wrapper.m_Dog_Run;
-        public InputAction @Sound => m_Wrapper.m_Dog_Sound;
+        public InputAction @Attack => m_Wrapper.m_Dog_Attack;
         public InputAction @Cancel => m_Wrapper.m_Dog_Cancel;
         public InputAction @Pause => m_Wrapper.m_Dog_Pause;
         public InputAction @Hat => m_Wrapper.m_Dog_Hat;
@@ -612,15 +612,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
-            @Sound.started += instance.OnSound;
-            @Sound.performed += instance.OnSound;
-            @Sound.canceled += instance.OnSound;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
             @Cancel.started += instance.OnCancel;
             @Cancel.performed += instance.OnCancel;
             @Cancel.canceled += instance.OnCancel;
@@ -640,15 +640,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
-            @Sound.started -= instance.OnSound;
-            @Sound.performed -= instance.OnSound;
-            @Sound.canceled -= instance.OnSound;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
             @Cancel.started -= instance.OnCancel;
             @Cancel.performed -= instance.OnCancel;
             @Cancel.canceled -= instance.OnCancel;
@@ -743,9 +743,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public interface IDogActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
-        void OnSound(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnHat(InputAction.CallbackContext context);

@@ -40,8 +40,10 @@ public class Character2Controller : MonoBehaviour
     private bool dodge = false;
     private bool isWalking = false;
     private int attacking = 0;
-
+    private bool isDodging = false;
+    private bool isAttacking = false;
     //Movement
+    Vector2 moveUniversal;
     private Vector3 direction;
     private Vector3 rollDirection;
 
@@ -52,7 +54,19 @@ public class Character2Controller : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
     }
-
+    public void SetInputVector(Vector2 direction)
+    {
+        moveUniversal = direction;
+    }
+    public void SetDodge(bool pressDodge)
+    {
+        isDodging = pressDodge;
+        Debug.Log("boton");
+    }
+    public void SetAttack(bool pressAttack)
+    {
+        isAttacking = pressAttack;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -77,7 +91,7 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetMouseButtonDown(1) && dodgeTimer <= 0 && isWalking && !dodge)
+        if (isDodging && dodgeTimer <= 0 && isWalking && !dodge)
         {
             rollDirection = direction;
             dodge = true;
@@ -86,9 +100,9 @@ public class Character2Controller : MonoBehaviour
             anim.SetTrigger("Roll");
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
-
+        if (isAttacking) Debug.Log("atacar funciona");
         //Ataque
-        if (Input.GetMouseButtonDown(0) && !dodge)
+        if (isAttacking && !dodge)
         {
             weapon.GetComponent<BoxCollider>().enabled = true;
             //Debug.Log("Entras");

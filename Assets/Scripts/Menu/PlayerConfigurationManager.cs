@@ -41,7 +41,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void Awake()
     {
-        firstLevelFinished = PlayerPrefs.GetInt("firstLevelFinished");
         if (Instance != null)
         {
             //Debug.Log("olis");
@@ -80,10 +79,12 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
+            Debug.Log(playerIndex);
             if (playerIndex == 0)
             {
                 player1Text.SetActive(false);
                 playerIndex++;
+                
             }
             else player2Text.SetActive(false);
             pi.transform.SetParent(transform);

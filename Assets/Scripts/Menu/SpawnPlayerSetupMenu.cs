@@ -17,6 +17,7 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
         var rootMenu = GameObject.Find("PlayerCanvas3");
         if(rootMenu != null)
         {
+
             if (input.playerIndex == 0)
             {
                 var menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);
@@ -30,6 +31,7 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
                 input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
                 menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
                 PlayerConfigurationManager.Instance.ReadyPlayer(1);
+                Debug.Log("funciona");
             }
 
         }
