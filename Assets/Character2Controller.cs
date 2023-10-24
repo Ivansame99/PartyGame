@@ -251,13 +251,19 @@ public class Character2Controller : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && !dodge)
+        if (Input.GetMouseButton(1) && !dodge)
         {
             Debug.Log("Holaa");
+
             if (weapon != null)
             {
-
+                if(!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
+                weapon.GetComponent<BoxCollider>().enabled = true;
             }
+        } else if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack"))
+        {
+            weapon.GetComponent<BoxCollider>().enabled = false;
+            anim.SetTrigger("Ulti");
         }
     }
 
@@ -267,7 +273,7 @@ public class Character2Controller : MonoBehaviour
         {
             Invoke("EndCombo", 0.5f);
             weapon.GetComponent<BoxCollider>().enabled = false;
-            attacking = false;
+            //attacking = false;
         }
     }
 
