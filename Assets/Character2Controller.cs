@@ -85,7 +85,7 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetMouseButtonDown(1) && dodgeTimer <= 0 && isWalking && !dodge)
+        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && isWalking && !dodge)
         {
             rollDirection = direction;
             dodge = true;
@@ -96,6 +96,8 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Ataque
+        
+
         Attack();
         ExitAttack();
         /*if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
@@ -246,6 +248,15 @@ public class Character2Controller : MonoBehaviour
                         }
                     }
                 }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) && !dodge)
+        {
+            Debug.Log("Holaa");
+            if (weapon != null)
+            {
+
             }
         }
     }
