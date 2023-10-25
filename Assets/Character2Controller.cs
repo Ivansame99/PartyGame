@@ -228,7 +228,7 @@ public class Character2Controller : MonoBehaviour
         {
             if (weapon != null)
             {
-                if (Time.time - lastComboEnd > 1f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+                if (Time.time - lastComboEnd > 0.7f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
 
@@ -271,7 +271,7 @@ public class Character2Controller : MonoBehaviour
     {
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            Invoke("EndCombo", 0.5f);
+            Invoke("EndCombo", 0.3f);
             //weapon.GetComponent<BoxCollider>().enabled = false;
             //attacking = false;
         }
