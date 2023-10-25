@@ -23,14 +23,17 @@ public class Weapon : MonoBehaviour
         if (collision.gameObject.tag == "Character2")
         {
             //Debug.Log("Pegas");
+
             target = collision.gameObject;
+            //target.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
+            target.transform.parent.gameObject.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
             attack = true;
         }
     }
 
     private void FixedUpdate()
     {
-        if (attack)
+        if (attack && target!=null)
         {
             Vector3 direction = (target.transform.position - transform.position).normalized;
 

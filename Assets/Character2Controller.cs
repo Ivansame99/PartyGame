@@ -253,7 +253,7 @@ public class Character2Controller : MonoBehaviour
 
         if (Input.GetMouseButton(1) && !dodge)
         {
-            Debug.Log("Holaa");
+            //Debug.Log("Holaa");
 
             if (weapon != null)
             {
@@ -272,7 +272,7 @@ public class Character2Controller : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             Invoke("EndCombo", 0.5f);
-            weapon.GetComponent<BoxCollider>().enabled = false;
+            //weapon.GetComponent<BoxCollider>().enabled = false;
             //attacking = false;
         }
     }
