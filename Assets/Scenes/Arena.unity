@@ -21474,6 +21474,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterNoRagdoll Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8411829698539761456, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8439790786372074106, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -23893,9 +23898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0a6e05084c1de4d90385ad87695d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 3
-  distanciaAtaque: 2
-  jugadores:
+  velocity: 3
+  AtackDistance: 2
+  players:
   - {fileID: 1205454018}
 --- !u!4 &1384759172 stripped
 Transform:
@@ -25371,9 +25376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0a6e05084c1de4d90385ad87695d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 3
-  distanciaAtaque: 2
-  jugadores:
+  velocity: 3
+  AtackDistance: 2
+  players:
   - {fileID: 1205454018}
 --- !u!1 &1501165901
 GameObject:
@@ -27533,13 +27538,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0a6e05084c1de4d90385ad87695d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 3
-  distanciaAtaque: 2
-  jugadores:
-  - {fileID: 1331268695}
-  - {fileID: 2116919760}
-  - {fileID: 2001323864}
-  - {fileID: 385654815}
+  velocity: 3
+  AtackDistance: 2
+  players: []
 --- !u!65 &1685208237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28069,9 +28070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0a6e05084c1de4d90385ad87695d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 3
-  distanciaAtaque: 2
-  jugadores:
+  velocity: 3
+  AtackDistance: 2
+  players:
   - {fileID: 1205454018}
 --- !u!1 &1738788979
 GameObject:
@@ -28442,13 +28443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0a6e05084c1de4d90385ad87695d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidadMovimiento: 3
-  distanciaAtaque: 2
-  jugadores:
-  - {fileID: 1331268695}
-  - {fileID: 2116919760}
-  - {fileID: 2001323864}
-  - {fileID: 385654815}
+  velocity: 3
+  AtackDistance: 2
+  players: []
 --- !u!54 &1747371826
 Rigidbody:
   m_ObjectHideFlags: 0

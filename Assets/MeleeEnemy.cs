@@ -4,61 +4,61 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
-    public float velocidadMovimiento = 3.0f;
-    public float distanciaAtaque = 2.0f;
-    public List<Transform> jugadores; 
+    public float velocity = 3.0f;
+    public float AtackDistance = 2.0f;
+    public List<Transform> players; 
 
-    private Transform jugadorMasCercano;
+    private Transform NearestPlayer;
 
     private void Start()
     {
        
-        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject jugadorObj in jugadoresArray)
-        {
-            jugadores.Add(jugadorObj.transform);
-        }
+      //  GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
+      //  foreach (GameObject jugadorObj in jugadoresArray)
+    //    {
+      //      players.Add(jugadorObj.transform);
+      //  }
     }
 
     private void Update()
     {
-        jugadorMasCercano = EncontrarJugadorMasCercano();
+        NearestPlayer = FindNearestPlayer();
 
-        if (jugadorMasCercano != null)
+        if (NearestPlayer != null)
         {
-            float distanciaAlJugador = Vector3.Distance(transform.position, jugadorMasCercano.position);
+            float distancePlayer = Vector3.Distance(transform.position, NearestPlayer.position);
 
-            if (distanciaAlJugador <= distanciaAtaque)
+            if (distancePlayer <= AtackDistance)
             {//ATACANDO
-                Debug.Log(distanciaAlJugador);
-                Debug.Log(distanciaAtaque);
+                Debug.Log(distancePlayer);
+                Debug.Log(AtackDistance);
             }
             else
             {
                 Debug.Log("Siguiendo a un player");
-                Vector3 direccionAlJugador = (jugadorMasCercano.position - transform.position).normalized;
-                direccionAlJugador.y = 0; 
-                transform.Translate(direccionAlJugador * velocidadMovimiento * Time.deltaTime);
+                Vector3 DirectionToPLayer = (NearestPlayer.position - transform.position).normalized;
+                DirectionToPLayer.y = 0; 
+                transform.Translate(DirectionToPLayer * velocity * Time.deltaTime);
             }
         }
     }
 
-    private Transform EncontrarJugadorMasCercano()
+    private Transform FindNearestPlayer()
     {
-        Transform jugadorMasCercano = null;
-        float distanciaMinima = float.MaxValue;
+        Transform NearestPlayer2 = null;
+        float MinumunDistance = float.MaxValue;
 
-        foreach (Transform jugador in jugadores)
+        foreach (Transform player in players)
         {
-            float distancia = Vector3.Distance(transform.position, jugador.position);
+            float distance = Vector3.Distance(transform.position, player.position);
 
-            if (distancia < distanciaMinima)
+            if (distance < MinumunDistance)
             {
-                distanciaMinima = distancia;
-                jugadorMasCercano = jugador;
+                MinumunDistance = distance;
+                NearestPlayer2 = player;
             }
         }
 
-        return jugadorMasCercano;
+        return NearestPlayer2;
     }
 }
