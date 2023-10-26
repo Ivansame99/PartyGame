@@ -8,13 +8,9 @@ using System.Linq;
 public class SelectPlayerController : MonoBehaviour
 {
     [SerializeField]
-    private Transform[] playerSpawns;
+    public GameObject[] playerPos;
     [SerializeField]
-    public GameObject player1Pos;
-    [SerializeField]
-    public GameObject player2Pos;
-    [SerializeField]
-    public GameObject prefabPlayer,prefabPlayer2;
+    public GameObject prefabPlayer;
     [SerializeField]
     public GameObject character;
 
@@ -24,29 +20,10 @@ public class SelectPlayerController : MonoBehaviour
         var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
         for (int i = 0; i < playerConfigs.Length; i++)
         {
-            if (i == 0)
-            {
-                
-                player1Pos.SetActive(false);
-                GameObject player1 = Instantiate(prefabPlayer, player1Pos.transform.position, player1Pos.transform.rotation) as GameObject;
-                //player1.transform.parent = character.transform;
-                player1.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
-            }
-            if (i == 1)
-            {
-                
-                    player2Pos.SetActive(false);
-                    GameObject player2 = Instantiate(prefabPlayer2, player2Pos.transform.position, player2Pos.transform.rotation) as GameObject;
-                    //player2.transform.parent = character.transform;
-                    player2.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
-                
-            }
+            playerPos[i].SetActive(false);
+            GameObject player = Instantiate(prefabPlayer, playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
+            //player1.transform.parent = character.transform;
+            player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
