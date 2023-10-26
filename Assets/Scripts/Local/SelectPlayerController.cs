@@ -29,11 +29,8 @@ public class SelectPlayerController : MonoBehaviour
                 
                 player1Pos.SetActive(false);
                 GameObject player1 = Instantiate(prefabPlayer, player1Pos.transform.position, player1Pos.transform.rotation) as GameObject;
-
                 //player1.transform.parent = character.transform;
-                Debug.Log("player2");
                 player1.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
-                Debug.Log("player3");
             }
             if (i == 1)
             {

@@ -13,12 +13,12 @@ public class playerInputHandler : MonoBehaviour
     private PlayerConfiguration playerConfig;
     private Character2Controller playerController;
 
-    private Controls controls;
+    private Inputs inputs;
     // Start is called before the first frame update
     void Awake()
     {
         playerController = GetComponent<Character2Controller>();
-        controls = new Controls();
+        inputs = new Inputs();
     }
 
     public void InitializePlayer(PlayerConfiguration pc)
@@ -29,15 +29,15 @@ public class playerInputHandler : MonoBehaviour
 
     private void Input_onActionTriggered(CallbackContext obj)
     {
-        if(obj.action.name == controls.Dog.Movement.name)
+        if(obj.action.name == inputs.Player.Movement.name)
         {
             OnMove(obj);
         }
-        if (obj.action.name == controls.Dog.Dodge.name)
+        if (obj.action.name == inputs.Player.Dodge.name)
         {
             OnDodge(obj);
         }
-        if (obj.action.name == controls.Dog.Attack.name)
+        if (obj.action.name == inputs.Player.Attack.name)
         {
             OnAttack(obj);
         }

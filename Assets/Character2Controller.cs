@@ -100,7 +100,6 @@ public class Character2Controller : MonoBehaviour
             anim.SetTrigger("Roll");
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
-        if (isAttacking) Debug.Log("atacar funciona");
         //Ataque
         if (isAttacking && !dodge)
         {
@@ -108,7 +107,7 @@ public class Character2Controller : MonoBehaviour
             //Debug.Log("Entras");
             if(attacking==0) anim.SetTrigger("Attack1");
             attacking++;
-            rb.AddForce(transform.forward * 3, ForceMode.Impulse);
+            rb.AddForce(transform.forward * 1, ForceMode.Impulse);
         }
 
         if (dodgeTimer>=0) dodgeTimer-=Time.deltaTime;

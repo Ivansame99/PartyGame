@@ -39,6 +39,8 @@ public class PlayerConfigurationManager : MonoBehaviour
     public static PlayerConfigurationManager Instance { get; private set; }
     private int firstLevelFinished;
 
+    public bool goToPlay = false;
+
     public void Awake()
     {
         if (Instance != null)
@@ -71,7 +73,7 @@ public class PlayerConfigurationManager : MonoBehaviour
         {
             //StartCoroutine(CloseTranition());
             //Invoke("ChangeScene", 2.0f);
-            ChangeScene();
+            //ChangeScene();
         }
     }
 

@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
+using UnityEngine.EventSystems;
 public class PlayerSetupMenuController : MonoBehaviour
 {
     private int PlayerIndex;
 
     [SerializeField]
-    private GameObject readyPanel;
+    private GameObject waitingPanel;
+    [SerializeField]
+    private Button readyButton;
 
-    private float ignoreInputTime = 1.5f;
+    private float ignoreInputTime = 0.5f;
     private bool inputEnabled;
 
     public void SetPlayerIndex(int pi)
@@ -32,17 +35,20 @@ public class PlayerSetupMenuController : MonoBehaviour
 
     public void SetPrefab(int hat)
     {
-        //if (!inputEnabled) { return; }
-        //readyPanel.SetActive(true);
+        if (!inputEnabled) { return; }
+        readyButton.gameObject.SetActive(true);
+        readyButton.Select();
+        //EventSystem.current.SetSelectedGameObject(this.gameObject);
         //hatPanel.SetActive(false);
     }
 
     public void ReadyPlayer()
     {
         if (!inputEnabled) { return; }
-        PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
-        Debug.Log("aparece canvas");
+        //PlayerConfigurationManager.Instance.ReadyPlayer(PlayerIndex);
         //hatPanel.SetActive(false);
-        readyPanel.SetActive(true);
+        readyButton.gameObject.SetActive(false);
+        waitingPanel.SetActive(true);
+        SceneManager.LoadScene("SampleScene");
     }
 }
