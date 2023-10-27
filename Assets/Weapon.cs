@@ -8,15 +8,11 @@ public class Weapon : MonoBehaviour
     public string weaponName;
     public List<AttackSO> combo;
     public float damage;
+    public float pushForce;
     //public int comboLenght;
 
     private GameObject target;
     private bool attack;
-
-    [SerializeField]
-    private float pushForce;
-    //[SerializeField]
-    //private float damage;
 
     private void OnCollisionEnter(Collision collision)
     {

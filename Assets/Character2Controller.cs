@@ -78,6 +78,7 @@ public class Character2Controller : MonoBehaviour
             //controller.Move(direction*speed*Time.deltaTime);
             //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             isWalking = true;
+            if(attacking) EndCombo();
         }
         else
         {
@@ -85,13 +86,25 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && isWalking && !dodge)
+        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge)
         {
-            rollDirection = direction;
+            //Debug.Log(direction);
+            if (direction == Vector3.zero)
+            {
+                rollDirection = this.transform.forward;
+            }
+            else
+            {
+                rollDirection = direction;
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
             dodge = true;
             dodgeTimer = dodgeCD;
             //invencibilityTimer = invencibilityCD;
             anim.SetTrigger("Roll");
+            if (attacking) EndCombo();
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
@@ -228,7 +241,7 @@ public class Character2Controller : MonoBehaviour
         {
             if (weapon != null)
             {
-                if (Time.time - lastComboEnd > 0.7f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+                if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
 
@@ -238,6 +251,7 @@ public class Character2Controller : MonoBehaviour
                         anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                         anim.Play("Attack", 0, 0);
                         weaponController.damage = weaponController.combo[comboCounter].damage;
+                        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                         comboCounter++;
                         lastClicked = Time.time;
                         weapon.GetComponent<BoxCollider>().enabled = true;

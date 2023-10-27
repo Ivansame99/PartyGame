@@ -13,11 +13,11 @@ public class MeleeEnemy : MonoBehaviour
     private void Start()
     {
        
-        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
+        /*GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject jugadorObj in jugadoresArray)
         {
             jugadores.Add(jugadorObj.transform);
-        }
+        }*/
     }
 
     private void Update()
