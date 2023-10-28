@@ -42,6 +42,8 @@ public class Character2Controller : MonoBehaviour
     [SerializeField]
     private GameObject hand;
 
+    private int greatSwordAttackState = 0;
+
     //States
     private bool invencibility = false;
     private bool dodge = false;
@@ -173,6 +175,11 @@ public class Character2Controller : MonoBehaviour
                 weapon.transform.localRotation = new Quaternion(-0.147978142f, 0.552269399f, -0.596118569f, 0.563687623f);
                 break;
 
+            case "Bow":
+                weapon.transform.localPosition = new Vector3(0.000869999989f, -0.000429999985f, -0.00173999998f);
+                weapon.transform.localRotation = new Quaternion(-0.389829606f, -0.491401315f, -0.705046117f, 0.330858946f);
+                break;
+
             default:
                 Console.WriteLine("Nothing");
                 break;
@@ -265,14 +272,19 @@ public class Character2Controller : MonoBehaviour
             }
         }
 
+        //Especial
         if (Input.GetMouseButton(1) && !dodge)
         {
             //Debug.Log("Holaa");
 
             if (weapon != null)
             {
-                if(!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
-                weapon.GetComponent<BoxCollider>().enabled = true;
+                if (weapon.tag == "GreatSword")
+                {
+                    if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
+                    weapon.GetComponent<BoxCollider>().enabled = true;
+                    greatSwordAttackState = 1;
+                }
             }
         } else if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack"))
         {
@@ -347,7 +359,7 @@ public class Character2Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword") //|| tag==greatsword||tag==bow
+        if(other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
         {
             ChangeWeapon(other.gameObject);
         }
