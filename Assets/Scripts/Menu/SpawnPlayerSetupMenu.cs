@@ -7,9 +7,10 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
 {
     [Header("Logic select players Variables")]
     [SerializeField]
-    public GameObject playerSetupMenuPrefab,playerSetupMenuPrefab2;
+    public GameObject[] playerSetupMenuPrefab;
     [SerializeField]
     public PlayerInput input;
+    private int maxPlayers = 4;
 
 
     private void Awake()
@@ -17,22 +18,16 @@ public class SpawnPlayerSetupMenu : MonoBehaviour
         var rootMenu = GameObject.Find("PlayerCanvas3");
         if(rootMenu != null)
         {
-
-            if (input.playerIndex == 0)
+            for (int i = 0; i < maxPlayers; i++)
             {
-                var menu = Instantiate(playerSetupMenuPrefab, rootMenu.transform);
-                input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
-                menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
-                PlayerConfigurationManager.Instance.ReadyPlayer(0);
+                if (input.playerIndex == i)
+                {
+                    var menu = Instantiate(playerSetupMenuPrefab[i], rootMenu.transform);
+                    input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
+                    menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(i);
+                    PlayerConfigurationManager.Instance.ReadyPlayer(i);
+                }
             }
-            if (input.playerIndex == 1)
-            {
-                var menu = Instantiate(playerSetupMenuPrefab2, rootMenu.transform);
-                input.uiInputModule = menu.GetComponentInChildren<InputSystemUIInputModule>();
-                menu.GetComponent<PlayerSetupMenuController>().SetPlayerIndex(input.playerIndex);
-                PlayerConfigurationManager.Instance.ReadyPlayer(1);
-            }
-
         }
     }
 }

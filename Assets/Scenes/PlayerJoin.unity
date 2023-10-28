@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 337614829}
   - component: {fileID: 337614828}
   m_Layer: 5
-  m_Name: TextPlayer2 (2)
+  m_Name: TextPlayer4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1434,9 +1434,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba1fb74c3a6fd64b8abf6242829aa87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Text: {fileID: 460612013}
-  player2Text: {fileID: 887011336}
-  MaxPlayers: 3
+  playerText:
+  - {fileID: 460612013}
+  - {fileID: 887011336}
+  - {fileID: 1983258085}
+  - {fileID: 337614826}
+  MaxPlayers: 4
   firstLevel: SampleScene
   levelName: SampleScene
   transitionMaterial: {fileID: 0}
@@ -1473,7 +1476,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: 2
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -1529,7 +1532,7 @@ GameObject:
   - component: {fileID: 1983258088}
   - component: {fileID: 1983258087}
   m_Layer: 5
-  m_Name: TextPlayer2 (1)
+  m_Name: TextPlayer3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

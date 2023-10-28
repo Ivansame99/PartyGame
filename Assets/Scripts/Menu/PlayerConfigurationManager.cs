@@ -11,10 +11,10 @@ public class PlayerConfigurationManager : MonoBehaviour
     private List<PlayerConfiguration> playerConfigs;
 
     [SerializeField]
-    public GameObject player1Text, player2Text;
+    public GameObject[] playerText;
 
     [SerializeField]
-    private int MaxPlayers = 2;
+    private int MaxPlayers;
     private int playerIndex=0;
 
     [Header("Level names")]
@@ -81,14 +81,13 @@ public class PlayerConfigurationManager : MonoBehaviour
     {
         if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
-            Debug.Log(playerIndex);
-            if (playerIndex == 0)
+            for(int i = 0; i < playerIndex; i++)
             {
-                player1Text.SetActive(false);
-                playerIndex++;
-                
+                if (playerIndex < playerText.Length)
+                {
+                    playerText[playerIndex].SetActive(false);
+                }
             }
-            else player2Text.SetActive(false);
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
