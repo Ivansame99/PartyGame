@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Character2Controller : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class Character2Controller : MonoBehaviour
     //private float invencibilityCD;
     private float dodgeTimer = 0;
     //private float invencibilityTimer = 0;
+    private float greatSwordTimePressed = 0;
 
     //Weapon
     [SerializeField]
@@ -42,20 +44,25 @@ public class Character2Controller : MonoBehaviour
     [SerializeField]
     private GameObject hand;
 
+    private float attackMovement;
+
     //States
     private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
     private bool attacking = false;
+    private bool moveAttack = false;
+    private int greatSwordAttackState = 0;
 
     //Movement
     private Vector3 direction;
     private Vector3 rollDirection;
+    private Vector3 greatSwordAttackDirection;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(weapon!=null) weaponController = weapon.GetComponent<Weapon>();
+        if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
@@ -78,6 +85,7 @@ public class Character2Controller : MonoBehaviour
             //controller.Move(direction*speed*Time.deltaTime);
             //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             isWalking = true;
+            if (attacking) EndCombo();
         }
         else
         {
@@ -85,18 +93,30 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && isWalking && !dodge)
+        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge)
         {
-            rollDirection = direction;
+            //Debug.Log(direction);
+            if (direction == Vector3.zero)
+            {
+                rollDirection = this.transform.forward;
+            }
+            else
+            {
+                rollDirection = direction;
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
             dodge = true;
             dodgeTimer = dodgeCD;
             //invencibilityTimer = invencibilityCD;
             anim.SetTrigger("Roll");
+            if (attacking) EndCombo();
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
         //Ataque
-        
+
 
         Attack();
         ExitAttack();
@@ -135,7 +155,7 @@ public class Character2Controller : MonoBehaviour
         Destroy(weapon);
         weapon = newWeapon;
         weaponController = weapon.GetComponent<Weapon>();
-        weapon.GetComponent<BoxCollider>().isTrigger=false;
+        weapon.GetComponent<BoxCollider>().isTrigger = false;
         weapon.GetComponent<BoxCollider>().enabled = false;
         GameObject parent = weapon.transform.parent.gameObject;
         weapon.transform.parent = hand.transform;
@@ -150,7 +170,7 @@ public class Character2Controller : MonoBehaviour
                 //weapon.transform.rotation = Quaternion.Euler(-4.941f, -251.08f, -340.81f);
 
                 //weapon.transform.eulerAngles = new Vector3(355.059021f, 108.920013f, 19.1900253f);
-                
+
                 weapon.transform.localPosition = Vector3.zero;
                 weapon.transform.localRotation = new Quaternion(0.110803805f, 0.805757701f, 0.131379381f, 0.566759765f);
                 break;
@@ -160,11 +180,16 @@ public class Character2Controller : MonoBehaviour
                 weapon.transform.localRotation = new Quaternion(-0.147978142f, 0.552269399f, -0.596118569f, 0.563687623f);
                 break;
 
+            case "Bow":
+                weapon.transform.localPosition = new Vector3(0.000869999989f, -0.000429999985f, -0.00173999998f);
+                weapon.transform.localRotation = new Quaternion(-0.389829606f, -0.491401315f, -0.705046117f, 0.330858946f);
+                break;
+
             default:
                 Console.WriteLine("Nothing");
                 break;
         }
-        
+
 
     }
 
@@ -228,7 +253,7 @@ public class Character2Controller : MonoBehaviour
         {
             if (weapon != null)
             {
-                if (Time.time - lastComboEnd > 0.7f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+                if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
 
@@ -238,7 +263,10 @@ public class Character2Controller : MonoBehaviour
                         anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                         anim.Play("Attack", 0, 0);
                         weaponController.damage = weaponController.combo[comboCounter].damage;
+                        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                        attackMovement = weaponController.combo[comboCounter].attackMovement;
                         comboCounter++;
+                        moveAttack = true;
                         lastClicked = Time.time;
                         weapon.GetComponent<BoxCollider>().enabled = true;
                         if (comboCounter >= weaponController.combo.Count)
@@ -251,19 +279,34 @@ public class Character2Controller : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1) && !dodge)
+        //Especial espadon
+        if (weapon!=null && weapon.tag == "GreatSword")
         {
-            //Debug.Log("Holaa");
-
-            if (weapon != null)
+            if (Input.GetMouseButton(1) && !dodge && greatSwordAttackState==0)
             {
-                if(!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
+                attacking = true;
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
                 weapon.GetComponent<BoxCollider>().enabled = true;
+                if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
+                else greatSwordAttackState = 1; //Llega al maximo tiempo
+                //Debug.Log(greatSwordTimePressed);
             }
-        } else if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack"))
-        {
-            weapon.GetComponent<BoxCollider>().enabled = false;
-            anim.SetTrigger("Ulti");
+            else if (Input.GetMouseButtonUp(1)) //Para de apretar antes de llegar al maximo
+            {
+                greatSwordAttackState = 1;
+            }
+
+            //Se acaba el tiempo
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack") && greatSwordTimePressed <= 0)
+            {
+                attacking = false;
+                greatSwordTimePressed = 0;
+                greatSwordAttackState = 0;
+                weapon.GetComponent<BoxCollider>().enabled = false;
+                anim.SetTrigger("Ulti");
+            }
+
+            if(greatSwordAttackState==1 && greatSwordTimePressed>=0) greatSwordTimePressed-= Time.deltaTime; //Se va reduciendo el timer
         }
     }
 
@@ -328,12 +371,19 @@ public class Character2Controller : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
                 //anim.SetBool("Walking", true);
             }
+            
+        } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
+
+        if (moveAttack)
+        {
+            rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
+            moveAttack = false;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword") //|| tag==greatsword||tag==bow
+        if (other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
         {
             ChangeWeapon(other.gameObject);
         }
