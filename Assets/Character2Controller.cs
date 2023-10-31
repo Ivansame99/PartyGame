@@ -59,6 +59,11 @@ public class Character2Controller : MonoBehaviour
     private Vector3 rollDirection;
     private Vector3 greatSwordAttackDirection;
 
+    //Positions&Rotations
+    public GameObject boundCharacter;
+    Vector3 savedPosition;
+    Quaternion savedRotation;
+    public GameObject SlashP, Slash;
     // Start is called before the first frame update
     void Start()
     {
@@ -256,7 +261,8 @@ public class Character2Controller : MonoBehaviour
                 if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
-
+                    SlashP.SetActive(false);
+                    Slash.SetActive(false);
                     if (Time.time - lastClicked >= 0.3f) //Tiempo entre ataques
                     {
                         attacking = true;
@@ -274,6 +280,17 @@ public class Character2Controller : MonoBehaviour
                             comboCounter = 0;
                             lastComboEnd = Time.time;
                         }
+
+                        Vector3 savedPosition = boundCharacter.transform.position;
+                        Quaternion savedRotation = boundCharacter.transform.rotation;
+
+                        SlashP.transform.position = savedPosition;
+                        SlashP.transform.rotation = savedRotation;
+                        Slash.transform.position = savedPosition;
+                        Slash.transform.rotation = savedRotation;
+                        SlashP.SetActive(true);
+                        Slash.SetActive(true);
+
                     }
                 }
             }
