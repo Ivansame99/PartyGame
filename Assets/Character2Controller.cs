@@ -61,8 +61,6 @@ public class Character2Controller : MonoBehaviour
 
     //Positions&Rotations
     public GameObject boundCharacter;
-    Vector3 savedPosition;
-    Quaternion savedRotation;
     public GameObject SlashP, Slash;
     // Start is called before the first frame update
     void Start()
