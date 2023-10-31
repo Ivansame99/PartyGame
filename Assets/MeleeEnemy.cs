@@ -30,12 +30,12 @@ public class MeleeEnemy : MonoBehaviour
 
             if (distanciaAlJugador <= distanciaAtaque)
             {//ATACANDO
-                Debug.Log(distanciaAlJugador);
-                Debug.Log(distanciaAtaque);
+                //Debug.Log(distanciaAlJugador);
+                //Debug.Log(distanciaAtaque);
             }
             else
             {
-                Debug.Log("Siguiendo a un player");
+                //Debug.Log("Siguiendo a un player");
                 Vector3 direccionAlJugador = (jugadorMasCercano.position - transform.position).normalized;
                 direccionAlJugador.y = 0; 
                 transform.Translate(direccionAlJugador * velocidadMovimiento * Time.deltaTime);

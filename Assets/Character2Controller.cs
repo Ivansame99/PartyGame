@@ -42,13 +42,15 @@ public class Character2Controller : MonoBehaviour
     [SerializeField]
     private GameObject hand;
 
-    private int greatSwordAttackState = 0;
+    private float attackMovement;
 
     //States
     private bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
     private bool attacking = false;
+    private bool moveAttack = false;
+    private int greatSwordAttackState = 0;
 
     //Movement
     private Vector3 direction;
@@ -259,7 +261,9 @@ public class Character2Controller : MonoBehaviour
                         anim.Play("Attack", 0, 0);
                         weaponController.damage = weaponController.combo[comboCounter].damage;
                         weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                        attackMovement = weaponController.combo[comboCounter].attackMovement;
                         comboCounter++;
+                        moveAttack=true;
                         lastClicked = Time.time;
                         weapon.GetComponent<BoxCollider>().enabled = true;
                         if (comboCounter >= weaponController.combo.Count)
@@ -354,6 +358,12 @@ public class Character2Controller : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
                 //anim.SetBool("Walking", true);
             }
+        }
+
+        if (moveAttack)
+        {
+            rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
+            moveAttack = false;
         }
     }
 

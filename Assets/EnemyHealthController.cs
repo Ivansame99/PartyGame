@@ -15,7 +15,10 @@ public class EnemyHealthController : MonoBehaviour
     private float inmuneTime;
 
     [SerializeField]
-    private HealthBarController healthBar;
+    private HealthBarController healthBarC;
+
+    [SerializeField]
+    private Transform healthBar;
 
     private float timer;
 
@@ -39,18 +42,17 @@ public class EnemyHealthController : MonoBehaviour
         {
             timer-=Time.deltaTime;
         }
-
-        if (health <= 0) Die();
     }
 
     public void ReceiveDamage(float damage)
     {
         if (timer <= 0)
-        {
-            healthBar.SetProgress(health/maxHealth, 3);
+        {   
             health -= damage;
             timer = inmuneTime;
+            healthBarC.SetProgress(health / maxHealth, 2);
             Debug.Log(health);
+            if (health <= 0) Die();
         }
     }
 

@@ -9,6 +9,7 @@ public class AttackSO : ScriptableObject
     public AnimatorOverrideController animatorOR;
     public float damage;
     public float pushForce;
+    public float attackMovement;
     //public GameObject effect;
     //public float knockback;
 }
