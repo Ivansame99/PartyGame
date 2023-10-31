@@ -57,6 +57,7 @@ public class Character2Controller : MonoBehaviour
     //Movement
     private Vector3 direction;
     private Vector3 rollDirection;
+    private Vector3 greatSwordAttackDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -288,7 +289,7 @@ public class Character2Controller : MonoBehaviour
                 weapon.GetComponent<BoxCollider>().enabled = true;
                 if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
                 else greatSwordAttackState = 1; //Llega al maximo tiempo
-                Debug.Log(greatSwordTimePressed);
+                //Debug.Log(greatSwordTimePressed);
             }
             else if (Input.GetMouseButtonUp(1)) //Para de apretar antes de llegar al maximo
             {
