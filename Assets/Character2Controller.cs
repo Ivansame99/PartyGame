@@ -57,7 +57,7 @@ public class Character2Controller : MonoBehaviour
     //Movement
     private Vector3 direction;
     private Vector3 rollDirection;
-    private Vector3 greatSwordAttackDirection;
+    private Vector3 greatSwordAttackDirection = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -166,11 +166,6 @@ public class Character2Controller : MonoBehaviour
         {
 
             case "Sword":
-                //Debug.Log("Espada");
-                //weapon.transform.rotation = Quaternion.Euler(-4.941f, -251.08f, -340.81f);
-
-                //weapon.transform.eulerAngles = new Vector3(355.059021f, 108.920013f, 19.1900253f);
-
                 weapon.transform.localPosition = Vector3.zero;
                 weapon.transform.localRotation = new Quaternion(0.110803805f, 0.805757701f, 0.131379381f, 0.566759765f);
                 break;
@@ -202,52 +197,6 @@ public class Character2Controller : MonoBehaviour
 
     private void Attack()
     {
-        //Forma antigua
-        /*if (Input.GetMouseButtonDown(0) && !dodge) //&& Time.time - lastComboEnd > attackCoolDownTime
-        {
-            comboCounter++;
-            comboCounter = Mathf.Clamp(comboCounter, 0, weaponController.comboLenght);
-
-            for (int i = 0; i < comboCounter; i++)
-            {
-                if (i == 0) //Si es el primer ataque del combo
-                {
-                    if (comboCounter == 1 && anim.GetCurrentAnimatorStateInfo(0).IsTag("Movement"))
-                    {
-                        anim.SetBool("AttackStart", true);
-                        anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
-                        weapon.GetComponent<BoxCollider>().enabled = true;
-                        //rb.AddForce(transform.forward * 3, ForceMode.Impulse);
-                        lastClicked = Time.time;
-                    }
-                }
-                else
-                {
-                    if (comboCounter >= (i + 1) && anim.GetCurrentAnimatorStateInfo(0).IsName(weaponController.weaponName + "Attack" + i))
-                    {
-                        anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), true);
-                        anim.SetBool(weaponController.weaponName + "Attack" + i, false);
-                        weapon.GetComponent<BoxCollider>().enabled = true;
-                        //rb.AddForce(transform.forward * 3, ForceMode.Impulse);
-                        lastClicked = Time.time;
-                    }
-                }
-            }
-        }
-
-        //animator bool reset
-        for (int i = 0; i < weaponController.comboLenght; i++)
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsName(weaponController.weaponName + "Attack" + (i + 1)))
-            {
-                comboCounter = 0;
-                lastComboEnd = Time.time;
-                anim.SetBool(weaponController.weaponName + "Attack" + (i + 1), false);
-                anim.SetBool("AttackStart", false);
-                weapon.GetComponent<BoxCollider>().enabled = false;
-            }
-        }*/
-
         //Forma nueva
         if (Input.GetMouseButtonDown(0) && !dodge)
         {
@@ -284,6 +233,18 @@ public class Character2Controller : MonoBehaviour
         {
             if (Input.GetMouseButton(1) && !dodge && greatSwordAttackState==0)
             {
+                if (direction == Vector3.zero)
+                {
+                    greatSwordAttackDirection = this.transform.forward;
+                }
+                else
+                {
+                    greatSwordAttackDirection = direction;
+                    float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+                    transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                }
+
                 attacking = true;
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
                 weapon.GetComponent<BoxCollider>().enabled = true;
@@ -328,38 +289,8 @@ public class Character2Controller : MonoBehaviour
         weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
-
-    /*public void Attack1Ended()
-    {
-        if (attacking == 1) //Si solo ha hecho un ataque para, sino ya entrara en el siguiente
-        {
-            Debug.Log("Sales");
-            //Debug.Log("asad");
-            rb.velocity = Vector3.zero;
-            weapon.GetComponent<BoxCollider>().enabled = false;
-            attacking = 0;
-        }
-        else AttackCombo();
-    }
-
-    public void Attack2Ended()
-    {
-        Debug.Log("Sales");
-        //Debug.Log("asad");
-        rb.velocity = Vector3.zero;
-        weapon.GetComponent<BoxCollider>().enabled = false;
-        attacking = 0;
-    }
-
-    public void AttackCombo()
-    {
-        if (attacking >= 2) anim.SetTrigger("Attack2");
-    }*/
-
     private void FixedUpdate()
     {
-        //if(isWalking) rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
-        //if (dodge) rb.AddForce(direction * speed * 30);
         if (!attacking)
         {
             if (dodge)
@@ -372,7 +303,7 @@ public class Character2Controller : MonoBehaviour
                 //anim.SetBool("Walking", true);
             }
             
-        } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
+        } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);
 
         if (moveAttack)
         {
