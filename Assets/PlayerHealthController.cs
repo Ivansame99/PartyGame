@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class EnemyHealthController : MonoBehaviour
+public class PlayerHealthController : MonoBehaviour
 {
-   
     private float health;
 
     [SerializeField]
@@ -20,6 +18,9 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField]
     private Transform healthBar;
 
+    [SerializeField]
+    private Transform staminaBar;
+
     private float timer;
 
     //Variables que iran donde se spawneen los pjs
@@ -28,11 +29,13 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField]
     private Camera camera;
+
     // Start is called before the first frame update
     void Start()
     {
         SetupHealthBar(healBarCanvas, camera);
-        health=maxHealth;
+        SetupStaminaBar(healBarCanvas, camera);
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -40,14 +43,14 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (timer >= 0)
         {
-            timer-=Time.deltaTime;
+            timer -= Time.deltaTime;
         }
     }
 
     public void ReceiveDamage(float damage)
     {
         if (timer <= 0)
-        {   
+        {
             health -= damage;
             timer = inmuneTime;
             healthBarC.SetProgress(health / maxHealth, 2);
@@ -66,6 +69,15 @@ public class EnemyHealthController : MonoBehaviour
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);
+        /*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+        {
+            faceCamera.camera = camera;
+        }*/
+    }
+
+    public void SetupStaminaBar(Canvas canvas, Camera camera)
+    {
+        staminaBar.transform.SetParent(canvas.transform);
         /*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
         {
             faceCamera.camera = camera;

@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class Character2Controller : MonoBehaviour
 {
     //public CharacterController controller;
-
+    [Header("Speed")]
     //Speed
     [SerializeField]
     private float speed;
@@ -18,10 +18,24 @@ public class Character2Controller : MonoBehaviour
     private float turnSmooth;
     float turnSmoothTime;
 
+    [Header("Stamina")]
+    //Stamina
+    [SerializeField]
+    private float maxStamina;
+    [SerializeField]
+    private float staminaRegen;
+    [SerializeField]
+    private float dodgeStamina;
+    private float stamina;
+
+    [Header("Components")]
     //Components
     private Rigidbody rb;
     private Animator anim;
+    [SerializeField]
+    private StaminaBarController staminaBarC;
 
+    [Header("Timers")]
     //Timers
     [SerializeField]
     private float dodgeCD;
@@ -31,6 +45,7 @@ public class Character2Controller : MonoBehaviour
     //private float invencibilityTimer = 0;
     private float greatSwordTimePressed = 0;
 
+    [Header("Weapons")]
     //Weapon
     [SerializeField]
     private GameObject weapon;
@@ -65,6 +80,7 @@ public class Character2Controller : MonoBehaviour
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        stamina=maxStamina;
         //controller = GetComponent<CharacterController>();
     }
 
@@ -93,7 +109,7 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge)
+        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge && stamina>=dodgeStamina)
         {
             //Debug.Log(direction);
             if (direction == Vector3.zero)
@@ -110,33 +126,22 @@ public class Character2Controller : MonoBehaviour
             dodge = true;
             dodgeTimer = dodgeCD;
             //invencibilityTimer = invencibilityCD;
+            stamina -= dodgeStamina;
+            staminaBarC.SetProgress(stamina / maxStamina, 2);
             anim.SetTrigger("Roll");
             if (attacking) EndCombo();
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
-        //Ataque
-
-
-        Attack();
-        ExitAttack();
-        /*if (Input.GetMouseButtonDown(0) && !dodge && Time.time - lastComboEnd > attackCoolDownTime)
-        {
-            //Attack();
-            weapon.GetComponent<BoxCollider>().enabled = true;
-            //Debug.Log("Entras");
-            if(attacking==0) anim.SetTrigger("Attack1");
-            attacking++;
-            rb.AddForce(transform.forward * 3, ForceMode.Impulse);
-        }*/
-
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 
-        /*if (invencibilityTimer >= 0)
-        {
-            dodgeTimer -= Time.deltaTime;
+        //Ataque
+        Attack();
+        ExitAttack();
 
-        }*/
+        //Stamina
+        Debug.Log(stamina);
+        RecoverStamina();
 
         //Animaciones
         if (isWalking && !dodge)
@@ -147,6 +152,17 @@ public class Character2Controller : MonoBehaviour
         else if (!isWalking)
         {
             anim.SetBool("Walking", false);
+        }
+    }
+
+    void RecoverStamina()
+    {
+        if (stamina < maxStamina)
+        {
+            Debug.Log("DAS");
+            stamina += Time.deltaTime * staminaRegen;
+            staminaBarC.RecoverBar(stamina);
+            //staminaBarC.SetProgress(stamina / maxStamina, 0.1f);
         }
     }
 
