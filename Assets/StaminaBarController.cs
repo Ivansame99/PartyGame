@@ -18,6 +18,8 @@ public class StaminaBarController : MonoBehaviour
 
     private Coroutine AnimationCoroutine;
 
+    public bool canRecover=true;
+
     private void Start()
     {
         if (ProgressImage.type != Image.Type.Filled)
@@ -40,6 +42,11 @@ public class StaminaBarController : MonoBehaviour
         ProgressImage.fillAmount = Progress;
     }
 
+    public void WasteBar(float Progress)
+    {
+        ProgressImage.fillAmount = Progress;
+    }
+
     public void SetProgress(float Progress, float Speed)
     {
         if (Progress < 0 || Progress > 1)
@@ -53,7 +60,7 @@ public class StaminaBarController : MonoBehaviour
             {
                 StopCoroutine(AnimationCoroutine);
             }
-
+            canRecover = false;
             AnimationCoroutine = StartCoroutine(AnimateProgress(Progress, Speed));
         }
     }
@@ -75,5 +82,6 @@ public class StaminaBarController : MonoBehaviour
         ProgressImage.fillAmount = Progress;
         OnProgress?.Invoke(Progress);
         OnCompleted?.Invoke();
+        canRecover = true;
     }
 }

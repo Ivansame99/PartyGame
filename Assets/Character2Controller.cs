@@ -26,6 +26,9 @@ public class Character2Controller : MonoBehaviour
     private float staminaRegen;
     [SerializeField]
     private float dodgeStamina;
+    [SerializeField]
+    private float attackStamina;
+
     private float stamina;
 
     [Header("Components")]
@@ -81,7 +84,6 @@ public class Character2Controller : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         stamina=maxStamina;
-        //controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -98,8 +100,6 @@ public class Character2Controller : MonoBehaviour
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            //controller.Move(direction*speed*Time.deltaTime);
-            //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             isWalking = true;
             if (attacking) EndCombo();
         }
@@ -111,7 +111,6 @@ public class Character2Controller : MonoBehaviour
         //Voltereta
         if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge && stamina>=dodgeStamina)
         {
-            //Debug.Log(direction);
             if (direction == Vector3.zero)
             {
                 rollDirection = this.transform.forward;
@@ -125,12 +124,9 @@ public class Character2Controller : MonoBehaviour
             }
             dodge = true;
             dodgeTimer = dodgeCD;
-            //invencibilityTimer = invencibilityCD;
-            stamina -= dodgeStamina;
-            staminaBarC.SetProgress(stamina / maxStamina, 2);
+            WasteStamina(dodgeStamina);
             anim.SetTrigger("Roll");
             if (attacking) EndCombo();
-            //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
 
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
@@ -140,13 +136,11 @@ public class Character2Controller : MonoBehaviour
         ExitAttack();
 
         //Stamina
-        Debug.Log(stamina);
         RecoverStamina();
 
         //Animaciones
         if (isWalking && !dodge)
         {
-            //rb.MovePosition(transform.position + direction * speed * Time.deltaTime);
             anim.SetBool("Walking", true);
         }
         else if (!isWalking)
@@ -157,13 +151,23 @@ public class Character2Controller : MonoBehaviour
 
     void RecoverStamina()
     {
-        if (stamina < maxStamina)
+        if (stamina < maxStamina && staminaBarC.canRecover)
         {
-            Debug.Log("DAS");
             stamina += Time.deltaTime * staminaRegen;
-            staminaBarC.RecoverBar(stamina);
-            //staminaBarC.SetProgress(stamina / maxStamina, 0.1f);
+            staminaBarC.RecoverBar(stamina/maxStamina);
         }
+    }
+
+    void WasteStamina(float wastedStamina)
+    {
+        stamina -= wastedStamina;
+        staminaBarC.SetProgress(stamina / maxStamina, 2);
+    }
+
+    void WasteStaminaPerSecond(float wastedStamina)
+    {
+        stamina -= wastedStamina;
+        staminaBarC.SetProgress(stamina / maxStamina, 2);
     }
 
     void ChangeWeapon(GameObject newWeapon)
@@ -200,30 +204,27 @@ public class Character2Controller : MonoBehaviour
                 Console.WriteLine("Nothing");
                 break;
         }
-
-
     }
 
     public void RollEnded()
     {
-        //Debug.Log("asad");
         dodge = false;
         invencibility = true;
     }
 
     private void Attack()
     {
-        //Forma nueva
         if (Input.GetMouseButtonDown(0) && !dodge)
         {
             if (weapon != null)
             {
-                if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count) //Tiempo entre combos
+                if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
 
-                    if (Time.time - lastClicked >= 0.3f) //Tiempo entre ataques
+                    if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                     {
+                        WasteStamina(attackStamina);
                         attacking = true;
                         anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                         anim.Play("Attack", 0, 0);
@@ -266,7 +267,6 @@ public class Character2Controller : MonoBehaviour
                 weapon.GetComponent<BoxCollider>().enabled = true;
                 if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
                 else greatSwordAttackState = 1; //Llega al maximo tiempo
-                //Debug.Log(greatSwordTimePressed);
             }
             else if (Input.GetMouseButtonUp(1)) //Para de apretar antes de llegar al maximo
             {
@@ -289,11 +289,9 @@ public class Character2Controller : MonoBehaviour
 
     private void ExitAttack()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            Invoke("EndCombo", 0.3f);
-            //weapon.GetComponent<BoxCollider>().enabled = false;
-            //attacking = false;
+            Invoke("EndCombo", 0.1f);
         }
     }
 
@@ -316,7 +314,6 @@ public class Character2Controller : MonoBehaviour
             else if (isWalking)
             {
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-                //anim.SetBool("Walking", true);
             }
             
         } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);

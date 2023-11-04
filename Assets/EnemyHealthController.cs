@@ -50,7 +50,7 @@ public class EnemyHealthController : MonoBehaviour
         {   
             health -= damage;
             timer = inmuneTime;
-            healthBarC.SetProgress(health / maxHealth, 2);
+            healthBarC.SetProgress(health / maxHealth, 5f);
             //Debug.Log(health);
             if (health <= 0) Die();
         }
@@ -58,9 +58,11 @@ public class EnemyHealthController : MonoBehaviour
 
     void Die()
     {
-        float destroyDelay = Random.value;
+        /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
-        Destroy(healthBar.gameObject, destroyDelay);
+        Destroy(healthBar.gameObject, destroyDelay);*/
+        Destroy(this.gameObject);
+        Destroy(healthBar.gameObject);
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)
