@@ -269,6 +269,28 @@ public class Character2Controller : MonoBehaviour
                         weaponController.damage = weaponController.combo[comboCounter].damage;
                         weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                         attackMovement = weaponController.combo[comboCounter].attackMovement;
+                       
+                        
+                        if (comboCounter == 0)//COMBO 0
+                        { 
+
+                            Quaternion savedRotation = boundCharacter.transform.rotation;
+                            SlashP.transform.rotation = savedRotation;
+                            Slash.transform.rotation = savedRotation;
+
+                        }
+                        else if (comboCounter == 1) //COMBO 1
+                        {
+                            Quaternion savedRotation = boundCharacter.transform.rotation;
+                            SlashP.transform.rotation = savedRotation;
+                            Slash.transform.rotation = savedRotation;
+                        }
+                        else if (comboCounter == 2) // COMBO 2
+                        {
+                            Quaternion savedRotation = boundCharacter.transform.rotation;
+                            SlashP.transform.rotation = savedRotation;
+                            Slash.transform.rotation = savedRotation;
+                        }
                         comboCounter++;
                         moveAttack = true;
                         lastClicked = Time.time;
@@ -280,12 +302,12 @@ public class Character2Controller : MonoBehaviour
                         }
 
                         Vector3 savedPosition = boundCharacter.transform.position;
-                        Quaternion savedRotation = boundCharacter.transform.rotation;
-
+                       
+                       
+                
                         SlashP.transform.position = savedPosition;
-                        SlashP.transform.rotation = savedRotation;
                         Slash.transform.position = savedPosition;
-                        Slash.transform.rotation = savedRotation;
+                   
                         SlashP.SetActive(true);
                         Slash.SetActive(true);
 
