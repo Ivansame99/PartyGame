@@ -81,6 +81,9 @@ public class Character2Controller : MonoBehaviour
     private Vector3 rollDirection;
     private Vector3 greatSwordAttackDirection = Vector3.zero;
 
+    //Positions&Rotations
+    public GameObject boundCharacter;
+    public GameObject SlashP, Slash;
     // Start is called before the first frame update
     void Start()
     {
@@ -242,9 +245,21 @@ public class Character2Controller : MonoBehaviour
                 if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                 {
                     CancelInvoke("EndCombo");
-
+                   
                     if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                     {
+                        Vector3 savedPosition = boundCharacter.transform.position;
+
+                        Quaternion savedRotation = boundCharacter.transform.rotation;
+                        SlashP.transform.rotation = savedRotation;
+                        Slash.transform.rotation = savedRotation;
+
+                        Debug.Log(savedRotation);
+
+                        SlashP.transform.position = savedPosition;
+                        Slash.transform.position = savedPosition;
+
+
                         WasteStamina(attackStamina);
                         attacking = true;
                         anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
@@ -261,13 +276,23 @@ public class Character2Controller : MonoBehaviour
                             comboCounter = 0;
                             lastComboEnd = Time.time;
                         }
+
+
+                     
+
+                        SlashP.SetActive(false);
+                        Slash.SetActive(false);
+
+                        SlashP.SetActive(true);
+                        Slash.SetActive(true);
+
                     }
                 }
             }
         }
 
         //Especial espadon
-        if (weapon!=null && weapon.tag == "GreatSword")
+        if (weapon != null && weapon.tag == "GreatSword")
         {
             if (isSpecialAttacking && !dodge && greatSwordAttackState==0)
             {
@@ -312,7 +337,7 @@ public class Character2Controller : MonoBehaviour
                 anim.SetTrigger("Ulti");
             }
 
-            if(greatSwordAttackState==1 && greatSwordTimePressed>=0) greatSwordTimePressed-= Time.deltaTime; //Se va reduciendo el timer
+            if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) greatSwordTimePressed -= Time.deltaTime; //Se va reduciendo el timer
         }
     }
 
@@ -320,12 +345,16 @@ public class Character2Controller : MonoBehaviour
     {
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
+            SlashP.SetActive(false);
+            Slash.SetActive(false);
             Invoke("EndCombo", 0.1f);
         }
     }
 
     private void EndCombo()
     {
+        SlashP.SetActive(false);
+        Slash.SetActive(false);
         attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
