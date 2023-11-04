@@ -53,8 +53,10 @@ public class Character2Controller : MonoBehaviour
     private bool attacking = false;
     private bool moveAttack = false;
     private int greatSwordAttackState = 0;
-
+    private bool isCharging = false;
+    private bool isDodging, isAttacking,isSpecialAttacking;
     //Movement
+    Vector2 moveUniversal;
     private Vector3 direction;
     private Vector3 rollDirection;
     private Vector3 greatSwordAttackDirection;
@@ -67,15 +69,30 @@ public class Character2Controller : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         //controller = GetComponent<CharacterController>();
     }
-
+    public void SetInputVector(Vector2 direction)
+    {
+        moveUniversal = direction;
+    }
+    public void SetDodge(bool pressDodge)
+    {
+        isDodging = pressDodge;
+    }
+    public void SetAttack(bool pressAttack)
+    {
+        isAttacking = pressAttack;
+    }
+    public void SetSpecialAttack(bool pressSpecialAttack)
+    {
+        isSpecialAttacking = pressSpecialAttack;
+    }
     // Update is called once per frame
     void Update()
     {
         //Movimiento
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        //float horizontal = Input.GetAxisRaw("Horizontal");
+        //float vertical = Input.GetAxisRaw("Vertical");
 
-        direction = new Vector3(horizontal, 0f, vertical).normalized;
+        direction = new Vector3(moveUniversal.x, 0f, moveUniversal.y).normalized;
 
         if (direction.magnitude >= 0.1f && !dodge && !attacking)
         {
@@ -93,7 +110,7 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (Input.GetKey(KeyCode.Space) && dodgeTimer <= 0 && !dodge)
+        if (isDodging && dodgeTimer <= 0 && !dodge)
         {
             //Debug.Log(direction);
             if (direction == Vector3.zero)
@@ -114,7 +131,6 @@ public class Character2Controller : MonoBehaviour
             if (attacking) EndCombo();
             //rb.AddForce(direction * dodgeSpeed * Time.deltaTime);
         }
-
         //Ataque
 
 
@@ -249,7 +265,7 @@ public class Character2Controller : MonoBehaviour
         }*/
 
         //Forma nueva
-        if (Input.GetMouseButtonDown(0) && !dodge)
+        if (isAttacking && !dodge)
         {
             if (weapon != null)
             {
@@ -282,16 +298,17 @@ public class Character2Controller : MonoBehaviour
         //Especial espadon
         if (weapon!=null && weapon.tag == "GreatSword")
         {
-            if (Input.GetMouseButton(1) && !dodge && greatSwordAttackState==0)
+            if (isSpecialAttacking && !dodge && greatSwordAttackState==0)
             {
                 attacking = true;
+                isCharging = true;
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
                 weapon.GetComponent<BoxCollider>().enabled = true;
                 if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
                 else greatSwordAttackState = 1; //Llega al maximo tiempo
                 //Debug.Log(greatSwordTimePressed);
             }
-            else if (Input.GetMouseButtonUp(1)) //Para de apretar antes de llegar al maximo
+            else if(!isSpecialAttacking && isCharging == true)//Para de apretar antes de llegar al maximo
             {
                 greatSwordAttackState = 1;
             }
@@ -300,6 +317,7 @@ public class Character2Controller : MonoBehaviour
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack") && greatSwordTimePressed <= 0)
             {
                 attacking = false;
+                isCharging = false;
                 greatSwordTimePressed = 0;
                 greatSwordAttackState = 0;
                 weapon.GetComponent<BoxCollider>().enabled = false;
