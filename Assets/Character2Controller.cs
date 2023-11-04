@@ -28,6 +28,8 @@ public class Character2Controller : MonoBehaviour
     private float dodgeStamina;
     [SerializeField]
     private float attackStamina;
+    [SerializeField]
+    private float greatSwordAttackStamina;
 
     private float stamina;
 
@@ -164,10 +166,10 @@ public class Character2Controller : MonoBehaviour
         staminaBarC.SetProgress(stamina / maxStamina, 2);
     }
 
-    void WasteStaminaPerSecond(float wastedStamina)
+    void WasteStaminaPerSecond()
     {
-        stamina -= wastedStamina;
-        staminaBarC.SetProgress(stamina / maxStamina, 2);
+        stamina -= Time.deltaTime * greatSwordAttackStamina;
+        staminaBarC.WasteBar(stamina / maxStamina);
     }
 
     void ChangeWeapon(GameObject newWeapon)
@@ -265,10 +267,16 @@ public class Character2Controller : MonoBehaviour
                 attacking = true;
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
                 weapon.GetComponent<BoxCollider>().enabled = true;
-                if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
-                else greatSwordAttackState = 1; //Llega al maximo tiempo
+                if (stamina >= 10)
+                {
+                    WasteStaminaPerSecond();
+                    greatSwordTimePressed += Time.deltaTime;
+                }
+                else greatSwordAttackState = 1;
+                //if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
+                //else greatSwordAttackState = 1; //Llega al maximo tiempo
             }
-            else if (Input.GetMouseButtonUp(1)) //Para de apretar antes de llegar al maximo
+            else if (Input.GetMouseButtonUp(1) && attacking) //Para de apretar antes de llegar al maximo
             {
                 greatSwordAttackState = 1;
             }

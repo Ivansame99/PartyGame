@@ -45,6 +45,7 @@ public class StaminaBarController : MonoBehaviour
     public void WasteBar(float Progress)
     {
         ProgressImage.fillAmount = Progress;
+        //canRecover = false;
     }
 
     public void SetProgress(float Progress, float Speed)

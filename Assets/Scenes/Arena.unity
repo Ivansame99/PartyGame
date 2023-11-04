@@ -4442,7 +4442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &450483361
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5049,7 +5049,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &481265787
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18661,7 +18661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &943780139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20384,6 +20384,7 @@ MonoBehaviour:
   staminaRegen: 0
   dodgeStamina: 0
   attackStamina: 0
+  greatSwordAttackStamina: 0
   staminaBarC: {fileID: 0}
   dodgeCD: 0
   weapon: {fileID: 0}
@@ -21712,6 +21713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackStamina
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7650952520577230721, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: greatSwordAttackStamina
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 7792168894469186465, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
@@ -26285,7 +26291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1543898587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31638,6 +31644,7 @@ MonoBehaviour:
   staminaRegen: 0
   dodgeStamina: 0
   attackStamina: 0
+  greatSwordAttackStamina: 0
   staminaBarC: {fileID: 0}
   dodgeCD: 0
   weapon: {fileID: 0}
