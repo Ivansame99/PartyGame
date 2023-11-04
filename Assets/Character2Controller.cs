@@ -269,28 +269,6 @@ public class Character2Controller : MonoBehaviour
                         weaponController.damage = weaponController.combo[comboCounter].damage;
                         weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                         attackMovement = weaponController.combo[comboCounter].attackMovement;
-                       
-                        
-                        if (comboCounter == 0)//COMBO 0
-                        { 
-
-                            Quaternion savedRotation = boundCharacter.transform.rotation;
-                            SlashP.transform.rotation = savedRotation;
-                            Slash.transform.rotation = savedRotation;
-
-                        }
-                        else if (comboCounter == 1) //COMBO 1
-                        {
-                            Quaternion savedRotation = boundCharacter.transform.rotation;
-                            SlashP.transform.rotation = savedRotation;
-                            Slash.transform.rotation = savedRotation;
-                        }
-                        else if (comboCounter == 2) // COMBO 2
-                        {
-                            Quaternion savedRotation = boundCharacter.transform.rotation;
-                            SlashP.transform.rotation = savedRotation;
-                            Slash.transform.rotation = savedRotation;
-                        }
                         comboCounter++;
                         moveAttack = true;
                         lastClicked = Time.time;
@@ -301,13 +279,17 @@ public class Character2Controller : MonoBehaviour
                             lastComboEnd = Time.time;
                         }
 
+
                         Vector3 savedPosition = boundCharacter.transform.position;
-                       
-                       
-                
+
+                        Quaternion savedRotation = boundCharacter.transform.rotation;
+                        SlashP.transform.rotation = savedRotation;
+                        Slash.transform.rotation = savedRotation;
+
+
                         SlashP.transform.position = savedPosition;
                         Slash.transform.position = savedPosition;
-                   
+
                         SlashP.SetActive(true);
                         Slash.SetActive(true);
 
@@ -317,9 +299,9 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Especial espadon
-        if (weapon!=null && weapon.tag == "GreatSword")
+        if (weapon != null && weapon.tag == "GreatSword")
         {
-            if (Input.GetMouseButton(1) && !dodge && greatSwordAttackState==0)
+            if (Input.GetMouseButton(1) && !dodge && greatSwordAttackState == 0)
             {
                 attacking = true;
                 if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
@@ -343,7 +325,7 @@ public class Character2Controller : MonoBehaviour
                 anim.SetTrigger("Ulti");
             }
 
-            if(greatSwordAttackState==1 && greatSwordTimePressed>=0) greatSwordTimePressed-= Time.deltaTime; //Se va reduciendo el timer
+            if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) greatSwordTimePressed -= Time.deltaTime; //Se va reduciendo el timer
         }
     }
 
@@ -408,8 +390,9 @@ public class Character2Controller : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
                 //anim.SetBool("Walking", true);
             }
-            
-        } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
+
+        }
+        else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
 
         if (moveAttack)
         {
