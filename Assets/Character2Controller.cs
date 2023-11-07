@@ -74,7 +74,7 @@ public class Character2Controller : MonoBehaviour
     private bool moveAttack = false;
     private int greatSwordAttackState = 0;
     private bool isCharging = false;
-    private bool isDodging, isAttacking,isSpecialAttacking;
+    private bool isDodging, isAttacking,isSpecialAttacking, isAttacking2;
     //Movement
     Vector2 moveUniversal;
     private Vector3 direction;
@@ -131,25 +131,7 @@ public class Character2Controller : MonoBehaviour
         }
 
         //Voltereta
-        if (isDodging && dodgeTimer <= 0 && !dodge)
-        {
-            if (direction == Vector3.zero)
-            {
-                rollDirection = this.transform.forward;
-            }
-            else
-            {
-                rollDirection = direction;
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            }
-            dodge = true;
-            dodgeTimer = dodgeCD;
-            WasteStamina(dodgeStamina);
-            anim.SetTrigger("Roll");
-            if (attacking) EndCombo();
-        }
+        Roll();
 
         //Ataque
         Attack();
@@ -170,6 +152,29 @@ public class Character2Controller : MonoBehaviour
 
         //CD de la voltereta
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
+    }
+
+    void Roll()
+    {
+        if (isDodging && dodgeTimer <= 0 && !dodge)
+        {
+            if (direction == Vector3.zero)
+            {
+                rollDirection = this.transform.forward;
+            }
+            else
+            {
+                rollDirection = direction;
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+            dodge = true;
+            dodgeTimer = dodgeCD;
+            WasteStamina(dodgeStamina);
+            anim.SetTrigger("Roll");
+            if (attacking) EndCombo();
+        }
     }
 
     void RecoverStamina()
@@ -240,55 +245,108 @@ public class Character2Controller : MonoBehaviour
         //Forma nueva
         if (isAttacking && !dodge)
         {
+            //GreatSword and sword
             if (weapon != null)
             {
-                if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+                if (weapon.tag == "GreatSword" || weapon.tag == "Sword")
                 {
-                    CancelInvoke("EndCombo");
-                   
-                    if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
+                    if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
-                        Vector3 savedPosition = boundCharacter.transform.position;
+                        CancelInvoke("EndCombo");
 
-                        Quaternion savedRotation = boundCharacter.transform.rotation;
-                        SlashP.transform.rotation = savedRotation;
-                        Slash.transform.rotation = savedRotation;
-
-                        Debug.Log(savedRotation);
-
-                        SlashP.transform.position = savedPosition;
-                        Slash.transform.position = savedPosition;
-
-
-                        WasteStamina(attackStamina);
-                        attacking = true;
-                        anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
-                        anim.Play("Attack", 0, 0);
-                        weaponController.damage = weaponController.combo[comboCounter].damage;
-                        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-                        attackMovement = weaponController.combo[comboCounter].attackMovement;
-                        comboCounter++;
-                        moveAttack = true;
-                        lastClicked = Time.time;
-                        weapon.GetComponent<BoxCollider>().enabled = true;
-                        if (comboCounter >= weaponController.combo.Count)
+                        if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                            comboCounter = 0;
-                            lastComboEnd = Time.time;
+                            Vector3 savedPosition = boundCharacter.transform.position;
+
+                            Quaternion savedRotation = boundCharacter.transform.rotation;
+                            SlashP.transform.rotation = savedRotation;
+                            Slash.transform.rotation = savedRotation;
+
+                            //Debug.Log(savedRotation);
+
+                            SlashP.transform.position = savedPosition;
+                            Slash.transform.position = savedPosition;
+
+
+                            WasteStamina(attackStamina);
+                            attacking = true;
+                            anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
+                            anim.Play("Attack", 0, 0);
+                            weaponController.damage = weaponController.combo[comboCounter].damage;
+                            weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                            attackMovement = weaponController.combo[comboCounter].attackMovement;
+                            comboCounter++;
+                            if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
+                            lastClicked = Time.time;
+                            weapon.GetComponent<BoxCollider>().enabled = true;
+                            if (comboCounter >= weaponController.combo.Count)
+                            {
+                                comboCounter = 0;
+                                lastComboEnd = Time.time;
+                            }
+
+
+
+
+                            SlashP.SetActive(false);
+                            Slash.SetActive(false);
+
+                            SlashP.SetActive(true);
+                            Slash.SetActive(true);
+
                         }
+                    }
+                }
 
+                if (weapon.tag == "Bow")
+                {
+                    if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+                    {
+                        CancelInvoke("EndCombo");
 
-                     
+                        if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
+                        {
+                            /*Vector3 savedPosition = boundCharacter.transform.position;
 
-                        SlashP.SetActive(false);
-                        Slash.SetActive(false);
+                            Quaternion savedRotation = boundCharacter.transform.rotation;
+                            SlashP.transform.rotation = savedRotation;
+                            Slash.transform.rotation = savedRotation;
 
-                        SlashP.SetActive(true);
-                        Slash.SetActive(true);
+                            //Debug.Log(savedRotation);
 
+                            SlashP.transform.position = savedPosition;
+                            Slash.transform.position = savedPosition;
+                            */
+
+                            WasteStamina(attackStamina);
+                            attacking = true;
+                            anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
+                            anim.Play("Attack", 0, 0);
+                            Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y +2.0f, this.transform.position.z), this.transform.rotation);
+                            Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+                            weaponController.damage = weaponController.combo[comboCounter].damage;
+                            weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                            attackMovement = weaponController.combo[comboCounter].attackMovement;
+                            comboCounter++;
+                            //if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
+                            lastClicked = Time.time;
+                            //weapon.GetComponent<BoxCollider>().enabled = true;
+                            if (comboCounter >= weaponController.combo.Count)
+                            {
+                                comboCounter = 0;
+                                lastComboEnd = Time.time;
+                            }
+                            /*SlashP.SetActive(false);
+                            Slash.SetActive(false);
+
+                            SlashP.SetActive(true);
+                            Slash.SetActive(true);*/
+                        }
                     }
                 }
             }
+
+            
         }
 
         //Especial espadon

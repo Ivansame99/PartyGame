@@ -1,37 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
-public class Weapon : MonoBehaviour
+public class ArrowController : MonoBehaviour
 {
-    //Variables que tienen que ser publicas
-    public string weaponName;
-    public List<AttackSO> combo;
-    public float damage;
-    public float pushForce;
+    [SerializeField]
+    private float damage;
+    [SerializeField]
+    private float pushForce;
+    [SerializeField]
+    private float speed;
     //public int comboLenght;
 
     private GameObject target;
     private bool attack;
 
-    public GameObject arrow;
+    private Rigidbody rb;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
-            //Debug.Log("Pegas");
-
             target = collision.gameObject;
             target.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
-            //Debug.Log("Entras");
-            //target.transform.parent.gameObject.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
             attack = true;
+            Destroy(this.gameObject);
         }
+
+        if(collision.gameObject.tag == "Ground") Destroy(this.gameObject);
     }
 
     private void FixedUpdate()
     {
-        if (attack && target!=null)
+        if (attack && target != null)
         {
             Vector3 direction = (target.transform.position - transform.position).normalized;
 
@@ -39,5 +53,7 @@ public class Weapon : MonoBehaviour
             target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
             attack = false;
         }
+
+        rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
     }
 }

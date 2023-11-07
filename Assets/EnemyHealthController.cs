@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class EnemyHealthController : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class EnemyHealthController : MonoBehaviour
     private float timer;
 
     //Variables que iran donde se spawneen los pjs
-    [SerializeField]
     private Canvas healBarCanvas;
 
     [SerializeField]
@@ -31,6 +31,7 @@ public class EnemyHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, camera);
         health=maxHealth;
     }
