@@ -322,8 +322,19 @@ public class Character2Controller : MonoBehaviour
                             attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
+                            Quaternion rot = this.transform.rotation;
+
                             Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y +2.0f, this.transform.position.z), this.transform.rotation);
-                            Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+                            
+                            Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
+                            Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
+                            
+                            GameObject arrow2 = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+                            arrow2.transform.eulerAngles = cone1;
+
+                            GameObject arrow3 = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+                            arrow3.transform.eulerAngles = cone2;
+
                             weaponController.damage = weaponController.combo[comboCounter].damage;
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
