@@ -254,7 +254,7 @@ public class Character2Controller : MonoBehaviour
                         SlashP.transform.rotation = savedRotation;
                         Slash.transform.rotation = savedRotation;
 
-                        Debug.Log(savedRotation);
+                        //Debug.Log(savedRotation);
 
                         SlashP.transform.position = savedPosition;
                         Slash.transform.position = savedPosition;
