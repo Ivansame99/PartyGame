@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using System;
 
 public class SelectPlayerController : MonoBehaviour
 {
@@ -17,13 +18,23 @@ public class SelectPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
-        for (int i = 0; i < playerConfigs.Length; i++)
+        try
         {
-            playerPos[i].SetActive(false);
-            GameObject player = Instantiate(prefabPlayer, playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
-            //player1.transform.parent = character.transform;
-            player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
+            var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+            for (int i = 0; i < playerConfigs.Length; i++)
+            {
+                playerPos[i].SetActive(false);
+                GameObject player = Instantiate(prefabPlayer, playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
+                //player1.transform.parent = character.transform;
+                player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
+            }
         }
+        catch (Exception e)
+        {
+            //  Block of code to handle errors
+            GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
+            //player1.transform.parent = character.transform;
+            //player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[0]);
+        }   
     }
 }

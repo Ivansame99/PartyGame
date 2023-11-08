@@ -49,6 +49,6 @@ public class PlayerSetupMenuController : MonoBehaviour
         //hatPanel.SetActive(false);
         readyButton.gameObject.SetActive(false);
         waitingPanel.SetActive(true);
-        SceneManager.LoadScene("ArenaCopia");
+        SceneManager.LoadScene("ArenaCopiaIvan");
     }
 }
