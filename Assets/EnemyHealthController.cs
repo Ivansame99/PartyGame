@@ -31,6 +31,7 @@ public class EnemyHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, camera);
         health=maxHealth;
     }
