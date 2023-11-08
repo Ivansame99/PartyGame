@@ -74,4 +74,12 @@ public class EnemyHealthController : MonoBehaviour
             faceCamera.camera = camera;
         }*/
     }
+     private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("SlashEffect"))
+        {
+            ReceiveDamage(15);
+        }
+    }
 }

@@ -17,7 +17,13 @@ public class MultipleTargetCamera : MonoBehaviour
 
     private void Start()
     {
+        Targets.Clear();
         cam = GetComponent<Camera>();
+        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject jugadorObj in jugadoresArray)
+        {
+            Targets.Add(jugadorObj.transform);
+        }
     }
 
     private void LateUpdate()
