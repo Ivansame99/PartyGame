@@ -84,6 +84,7 @@ public class Character2Controller : MonoBehaviour
     //Positions&Rotations
     public GameObject boundCharacter;
     public GameObject SlashP, Slash;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -195,6 +196,7 @@ public class Character2Controller : MonoBehaviour
 
     void ChangeWeapon(GameObject newWeapon)
     {
+    
         Destroy(weapon);
         weapon = newWeapon;
         weaponController = weapon.GetComponent<Weapon>();
@@ -248,18 +250,16 @@ public class Character2Controller : MonoBehaviour
                    
                     if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                     {
-                        Vector3 savedPosition = boundCharacter.transform.position;
 
+                        Vector3 savedPosition = boundCharacter.transform.position;
                         Quaternion savedRotation = boundCharacter.transform.rotation;
                         SlashP.transform.rotation = savedRotation;
                         Slash.transform.rotation = savedRotation;
 
-                        Debug.Log(savedRotation);
-
                         SlashP.transform.position = savedPosition;
                         Slash.transform.position = savedPosition;
 
-
+                   
                         WasteStamina(attackStamina);
                         attacking = true;
                         anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
@@ -270,7 +270,7 @@ public class Character2Controller : MonoBehaviour
                         comboCounter++;
                         moveAttack = true;
                         lastClicked = Time.time;
-                        weapon.GetComponent<BoxCollider>().enabled = true;
+                       // weapon.GetComponent<BoxCollider>().enabled = true;
                         if (comboCounter >= weaponController.combo.Count)
                         {
                             comboCounter = 0;
@@ -282,10 +282,11 @@ public class Character2Controller : MonoBehaviour
 
                         SlashP.SetActive(false);
                         Slash.SetActive(false);
+                     
 
                         SlashP.SetActive(true);
                         Slash.SetActive(true);
-
+                    
                     }
                 }
             }
@@ -296,6 +297,7 @@ public class Character2Controller : MonoBehaviour
         {
             if (isSpecialAttacking && !dodge && greatSwordAttackState==0)
             {
+
                 if (direction == Vector3.zero)
                 {
                     greatSwordAttackDirection = this.transform.forward;
@@ -385,6 +387,7 @@ public class Character2Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
         {
             ChangeWeapon(other.gameObject);

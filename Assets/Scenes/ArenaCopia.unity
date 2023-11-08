@@ -3177,8 +3177,8 @@ MonoBehaviour:
   offset: {x: 0, y: 42.4, z: -42.8}
   smoothTime: 0.1
   minZoom: 26
-  mazZoom: 62
-  ZoomLimiter: 22.1
+  maxZoom: 10
+  zoomLimiter: 50
 --- !u!1 &340384260
 GameObject:
   m_ObjectHideFlags: 0
@@ -10753,7 +10753,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6684161685538433354, guid: 740655f7d938da548b9b8b6b5905e95c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 697490259}
   m_SourcePrefab: {fileID: 100100000, guid: 740655f7d938da548b9b8b6b5905e95c, type: 3}
 --- !u!4 &697490257 stripped
 Transform:
@@ -10761,6 +10765,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 697490256}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &697490258 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6684161685538433354, guid: 740655f7d938da548b9b8b6b5905e95c,
+    type: 3}
+  m_PrefabInstance: {fileID: 697490256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &697490259
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697490258}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8927364, y: 3.050197, z: 1}
+  m_Center: {x: -0.047471046, y: 3.135923, z: 0}
 --- !u!1 &706688944
 GameObject:
   m_ObjectHideFlags: 0
@@ -20254,6 +20285,9 @@ MonoBehaviour:
   dodgeCD: 0
   weapon: {fileID: 0}
   hand: {fileID: 0}
+  boundCharacter: {fileID: 0}
+  SlashP: {fileID: 0}
+  Slash: {fileID: 0}
 --- !u!95 &1056762131
 Animator:
   serializedVersion: 5
@@ -26407,6 +26441,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreatSwordPickUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6379969389873800680, guid: a4bbfe5ab2ee02547b5f35bd46a93730,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30888,6 +30927,9 @@ MonoBehaviour:
   dodgeCD: 0
   weapon: {fileID: 0}
   hand: {fileID: 0}
+  boundCharacter: {fileID: 0}
+  SlashP: {fileID: 0}
+  Slash: {fileID: 0}
 --- !u!143 &1960724466
 CharacterController:
   m_ObjectHideFlags: 0
@@ -33715,6 +33757,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BowPickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181037143092397640, guid: c3dc746d8dc1a6347ac6a8d4f4598a44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7214505297577382563, guid: c3dc746d8dc1a6347ac6a8d4f4598a44,
         type: 3}
