@@ -38,8 +38,8 @@ public class PowerController : MonoBehaviour
         this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
     }
 
-    public void ChangePowerLevel()
+    public void ChangePowerLevel(float level)
     {
-        this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
+        currentPowerLevel += level;
     }
 }

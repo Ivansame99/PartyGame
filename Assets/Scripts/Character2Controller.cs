@@ -85,7 +85,7 @@ public class Character2Controller : MonoBehaviour
     public GameObject boundCharacter;
     public GameObject SlashP, Slash;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
@@ -93,6 +93,8 @@ public class Character2Controller : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         stamina=maxStamina;
     }
+
+    //Input mando
     public void SetInputVector(Vector2 direction)
     {
         moveUniversal = direction;
@@ -109,13 +111,11 @@ public class Character2Controller : MonoBehaviour
     {
         isSpecialAttacking = pressSpecialAttack;
     }
-    // Update is called once per frame
+
+    
     void Update()
     {
         //Movimiento
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
-
         direction = new Vector3(moveUniversal.x, 0f, moveUniversal.y).normalized;
 
         if (direction.magnitude >= 0.1f && !dodge && !attacking)
@@ -133,6 +133,7 @@ public class Character2Controller : MonoBehaviour
 
         //Voltereta
         Roll();
+        if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 
         //Ataque
         Attack();
@@ -151,9 +152,6 @@ public class Character2Controller : MonoBehaviour
         {
             anim.SetBool("Walking", false);
         }
-
-        //CD de la voltereta
-        if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
     }
 
     void Roll()
