@@ -85,9 +85,10 @@ public class Character2Controller : MonoBehaviour
     public GameObject boundCharacter;
     public GameObject SlashP, Slash;
 
-    
+    private PowerController powerController;
     void Start()
     {
+        powerController = this.GetComponent<PowerController>();
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
