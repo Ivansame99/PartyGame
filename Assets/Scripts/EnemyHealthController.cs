@@ -28,6 +28,9 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField]
     private Camera camera;
+
+    [SerializeField]
+    private GameObject powerLevelGameObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,8 +64,9 @@ public class EnemyHealthController : MonoBehaviour
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
-        Destroy(this.gameObject);
         Destroy(healthBar.gameObject);
+        Destroy(powerLevelGameObject.gameObject);
+        Destroy(this.gameObject);
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UI.Image;
+using TMPro;
 
 public class PowerController : MonoBehaviour
 {
@@ -31,13 +32,16 @@ public class PowerController : MonoBehaviour
     //private  healthBarC;
 
     [SerializeField]
-    private Transform powerLevel;
+    private GameObject powerLevel;
+
+    private TMP_Text powerLevelText;
 
     private Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
     {
+        powerLevelText = powerLevel.GetComponent<TMP_Text>();
         canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupPowerLevelCanvas();
         originalScale = transform.localScale;
@@ -47,7 +51,7 @@ public class PowerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        powerLevelText.SetText("33");
         //Formula para obtener el escalado del personaje
         float totalRange = maxPowerLevel - minPowerLevel;
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
