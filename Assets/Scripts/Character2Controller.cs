@@ -74,7 +74,8 @@ public class Character2Controller : MonoBehaviour
     private bool moveAttack = false;
     private int greatSwordAttackState = 0;
     private bool isCharging = false;
-    private bool isDodging, isAttacking,isSpecialAttacking, isAttacking2;
+    private bool isDodging, isAttacking,isSpecialAttacking, isAttackingAux;
+
     //Movement
     Vector2 moveUniversal;
     private Vector3 direction;
@@ -137,6 +138,7 @@ public class Character2Controller : MonoBehaviour
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 
         //Ataque
+        if(!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver a atacar
         Attack();
         SpecialAttack();
         ExitAttack();
@@ -245,12 +247,12 @@ public class Character2Controller : MonoBehaviour
     private void Attack()
     {
         //Forma nueva
-        if (isAttacking && !dodge)
+        if (isAttacking && !isAttackingAux && !dodge)
         {
             //GreatSword and sword
             if (weapon != null)
             {
-                if (weapon.tag == "GreatSword" || weapon.tag == "Sword")
+                if (weapon.tag == "Sword")
                 {
                     if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
@@ -259,7 +261,6 @@ public class Character2Controller : MonoBehaviour
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
                             Vector3 savedPosition = boundCharacter.transform.position;
-
                             Quaternion savedRotation = boundCharacter.transform.rotation;
                             SlashP.transform.rotation = savedRotation;
                             Slash.transform.rotation = savedRotation;
@@ -268,7 +269,7 @@ public class Character2Controller : MonoBehaviour
 
                             SlashP.transform.position = savedPosition;
                             Slash.transform.position = savedPosition;
-
+                            isAttackingAux = true;
 
                             WasteStamina(attackStamina);
                             attacking = true;
@@ -280,7 +281,7 @@ public class Character2Controller : MonoBehaviour
                             comboCounter++;
                             if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
                             lastClicked = Time.time;
-                           // weapon.GetComponent<BoxCollider>().enabled = true;
+                            //weapon.GetComponent<BoxCollider>().enabled = true;
                             if (comboCounter >= weaponController.combo.Count)
                             {
                                 comboCounter = 0;

@@ -75,8 +75,10 @@ public class EnemyHealthController : MonoBehaviour
     }
      private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("entras");
         if (other.CompareTag("SlashEffect"))
         {
+            Debug.Log("entras");
             ReceiveDamage(15);
         }
     }
