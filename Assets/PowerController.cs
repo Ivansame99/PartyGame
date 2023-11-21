@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.UI.Image;
 
 public class PowerController : MonoBehaviour
@@ -8,18 +9,37 @@ public class PowerController : MonoBehaviour
     //Variables de poder
     [SerializeField]
     private float currentPowerLevel;
+
+    [SerializeField]
     private float minPowerLevel = 0;
+
+    [SerializeField]
     private float maxPowerLevel = 300; //Habra que hacer pruebas
 
     //Variables de escalado
     private float scaleMultiplayer;
+
+    [SerializeField]
     private float maxScaleMultiplier = 2;
+
+    [SerializeField]
     private float minScaleMultiplier = 1;
 
     private Vector3 originalScale;
+
+    //[SerializeField]
+    //private  healthBarC;
+
+    [SerializeField]
+    private Transform powerLevel;
+
+    private Canvas canvas;
+
     // Start is called before the first frame update
     void Start()
     {
+        canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
+        SetupPowerLevelCanvas();
         originalScale = transform.localScale;
         //ChangePowerLevel();
     }
@@ -33,7 +53,6 @@ public class PowerController : MonoBehaviour
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
         
         scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
-        //Debug.Log("Valor calculado para variable2: " + scaleMultiplayer);
 
         this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
     }
@@ -41,5 +60,10 @@ public class PowerController : MonoBehaviour
     public void ChangePowerLevel(float level)
     {
         currentPowerLevel += level;
+    }
+
+    private void SetupPowerLevelCanvas()
+    {
+        powerLevel.transform.SetParent(canvas.transform);
     }
 }

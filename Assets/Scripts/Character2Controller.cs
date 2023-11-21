@@ -478,7 +478,7 @@ public class Character2Controller : MonoBehaviour
        
         if (other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
         {
-            ChangeWeapon(other.gameObject);
+            //ChangeWeapon(other.gameObject);
         }
     }
 }

@@ -273,7 +273,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -303,7 +303,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.862696
+      value: -12.05
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bc150f1efed68448357c26a9e0c048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10000
   inmuneTime: 0.3
   healthBarC: {fileID: 570643773452806354}
   healthBar: {fileID: 7011657926138814564}
@@ -413,7 +413,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9042608217900226322}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -430,7 +430,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!136 &5287247895617697336
 CapsuleCollider:
@@ -451,7 +451,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.21508643
-  m_Height: 1.1535577
+  m_Radius: 0.2474447
+  m_Height: 1.0670074
   m_Direction: 1
-  m_Center: {x: 0, y: 0.57643455, z: -0.000000029802326}
+  m_Center: {x: -0.0052740364, y: 0.69851565, z: -0.02708427}
