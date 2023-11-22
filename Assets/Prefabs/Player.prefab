@@ -11134,7 +11134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPowerLevel: 0
-  minPowerLevel: 0
+  minPowerLevel: 10
   maxPowerLevel: 300
   maxScaleMultiplier: 2
   minScaleMultiplier: 1
@@ -11303,6 +11303,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sword
   combo:
+  - {fileID: 11400000, guid: 5c6cc5eb1e4d18448a0ed7b5e4875c17, type: 2}
+  - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
   - {fileID: 11400000, guid: 5c6cc5eb1e4d18448a0ed7b5e4875c17, type: 2}
   damage: 5
   pushForce: 5

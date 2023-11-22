@@ -31,6 +31,10 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField]
     private GameObject powerLevelGameObject;
+    private float currentPower;
+
+    private GameObject lastAttacker;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,7 @@ public class EnemyHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         if (timer >= 0)
         {
             timer-=Time.deltaTime;
@@ -64,26 +69,25 @@ public class EnemyHealthController : MonoBehaviour
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
         Destroy(this.gameObject);
+        
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);
-        /*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
-        {
-            faceCamera.camera = camera;
-        }*/
     }
+
      private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("entras");
         if (other.CompareTag("SlashEffect"))
         {
-            Debug.Log("entras");
             ReceiveDamage(15);
+            lastAttacker = other.transform.parent.parent.gameObject;
+            //Debug.Log(lastAttacker);
         }
     }
 }

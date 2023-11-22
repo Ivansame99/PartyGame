@@ -247,7 +247,7 @@ public class Character2Controller : MonoBehaviour
     private void Attack()
     {
         //Forma nueva
-        if (isAttacking && !isAttackingAux && !dodge)
+        if (isAttacking /*&& !isAttackingAux*/ && !dodge)
         {
             //GreatSword and sword
             if (weapon != null)
@@ -275,7 +275,8 @@ public class Character2Controller : MonoBehaviour
                             attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            weaponController.damage = weaponController.combo[comboCounter].damage;
+                            weaponController.damage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10;
+                            Debug.Log(weaponController.damage + powerController.GetCurrentPowerLevel()/10);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;

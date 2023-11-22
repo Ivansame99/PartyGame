@@ -12,7 +12,7 @@ public class PowerController : MonoBehaviour
     private float currentPowerLevel;
 
     [SerializeField]
-    private float minPowerLevel = 0;
+    private float minPowerLevel = 10;
 
     [SerializeField]
     private float maxPowerLevel = 300; //Habra que hacer pruebas
@@ -45,13 +45,12 @@ public class PowerController : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupPowerLevelCanvas();
         originalScale = transform.localScale;
-        //ChangePowerLevel();
+        SetCurrentPowerLevel(minPowerLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
-        powerLevelText.SetText("33");
         //Formula para obtener el escalado del personaje
         float totalRange = maxPowerLevel - minPowerLevel;
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
@@ -69,5 +68,16 @@ public class PowerController : MonoBehaviour
     private void SetupPowerLevelCanvas()
     {
         powerLevel.transform.SetParent(canvas.transform);
+    }
+
+    public float GetCurrentPowerLevel()
+    {
+        return currentPowerLevel;
+    }
+
+    public void SetCurrentPowerLevel(float value)
+    {
+        currentPowerLevel += value;
+        powerLevelText.SetText(currentPowerLevel.ToString());
     }
 }
