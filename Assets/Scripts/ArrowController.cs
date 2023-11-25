@@ -56,4 +56,9 @@ public class ArrowController : MonoBehaviour
 
         rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
     }
+
+    public void SetSpeed(float s)
+    {
+        speed = s;
+    }
 }
