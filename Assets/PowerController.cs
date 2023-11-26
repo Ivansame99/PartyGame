@@ -52,12 +52,12 @@ public class PowerController : MonoBehaviour
     void Update()
     {
         //Formula para obtener el escalado del personaje
-        float totalRange = maxPowerLevel - minPowerLevel;
+        /*float totalRange = maxPowerLevel - minPowerLevel;
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
         
         scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
 
-        this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
+        this.gameObject.transform.localScale = originalScale * scaleMultiplayer;*/
     }
 
     public void ChangePowerLevel(float level)

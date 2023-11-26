@@ -16,17 +16,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cc860ea3fd25e434793e8109413d4425,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 130
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc860ea3fd25e434793e8109413d4425,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 130
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc860ea3fd25e434793e8109413d4425,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 130
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cc860ea3fd25e434793e8109413d4425,
         type: 3}
@@ -88,6 +88,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cc860ea3fd25e434793e8109413d4425,
+        type: 3}
+      propertyPath: m_TagString
+      value: Arrow
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -144,9 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 232b147a857a9144eb8e25507cd7dd64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  pushForce: 5
-  speed: 30
+  damage: 20
+  pushForce: 7
+  speed: 9.106058
+  owner: {fileID: 0}
 --- !u!54 &41717595267654725
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,7 +175,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0

@@ -351,27 +351,7 @@ public class Character2Controller : MonoBehaviour
                 }
                 else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
-                    Quaternion rot = this.transform.rotation;
-                    arrowPrefab.GetComponent<ArrowController>().SetSpeed(currentBowStamina*15);
-
-                    Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
-
-                    Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
-                    Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
-
-                    GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-                    arrow2.transform.eulerAngles = cone1;
-
-                    GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-                    arrow3.transform.eulerAngles = cone2;
-
-                    weaponController.damage = weaponController.combo[comboCounter].damage;
-                    weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-                    //attacking = false;
-                    Invoke("StopAttack", 0.5f);
-                    indicativeArrow.SetActive(false);
-                    currentBowStamina = 0;
-                    bowCD=maxBowCD;
+                    ShootArrow();
                 } else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
                     attacking = false;
@@ -380,31 +360,40 @@ public class Character2Controller : MonoBehaviour
             }
         }else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
-            Quaternion rot = this.transform.rotation;
-            arrowPrefab.GetComponent<ArrowController>().SetSpeed(currentBowStamina * 15);
-            Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
-
-            Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
-            Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
-
-            GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-            arrow2.transform.eulerAngles = cone1;
-
-            GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-            arrow3.transform.eulerAngles = cone2;
-
-            weaponController.damage = weaponController.combo[comboCounter].damage;
-            weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-            //attacking = false;
-            Invoke("StopAttack", 0.5f);
-            indicativeArrow.SetActive(false);
-            currentBowStamina = 0;
-            bowCD = maxBowCD;
+            ShootArrow();
         } else if(!isSpecialAttacking && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
             attacking = false;
             indicativeArrow.SetActive(false);
         }
+    }
+
+    void ShootArrow()
+    {
+        Quaternion rot = this.transform.rotation;
+        ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
+
+        ac.SetSpeed(currentBowStamina * 15);
+        ac.owner = this.gameObject;
+
+        Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+
+        Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
+        Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
+
+        GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        arrow2.transform.eulerAngles = cone1;
+
+        GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        arrow3.transform.eulerAngles = cone2;
+
+        weaponController.damage = weaponController.combo[comboCounter].damage;
+        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+        //attacking = false;
+        Invoke("StopAttack", 0.5f);
+        indicativeArrow.SetActive(false);
+        currentBowStamina = 0;
+        bowCD = maxBowCD;
     }
 
     private void ExitAttack()

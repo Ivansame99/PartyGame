@@ -90,4 +90,14 @@ public class EnemyHealthController : MonoBehaviour
             //Debug.Log(lastAttacker);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag=="Arrow")
+        {
+            ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
+            ReceiveDamage(ac.damage);
+            lastAttacker = ac.owner;
+        }
+    }
 }
