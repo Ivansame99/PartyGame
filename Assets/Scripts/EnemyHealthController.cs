@@ -28,6 +28,13 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField]
     private Camera camera;
+
+    [SerializeField]
+    private GameObject powerLevelGameObject;
+    private float currentPower;
+
+    private GameObject lastAttacker;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +46,7 @@ public class EnemyHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         if (timer >= 0)
         {
             timer-=Time.deltaTime;
@@ -52,7 +60,6 @@ public class EnemyHealthController : MonoBehaviour
             health -= damage;
             timer = inmuneTime;
             healthBarC.SetProgress(health / maxHealth, 5f);
-            //Debug.Log(health);
             if (health <= 0) Die();
         }
     }
@@ -62,24 +69,35 @@ public class EnemyHealthController : MonoBehaviour
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
-        Destroy(this.gameObject);
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         Destroy(healthBar.gameObject);
+        Destroy(powerLevelGameObject.gameObject);
+        Destroy(this.gameObject);
+        
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);
-        /*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
-        {
-            faceCamera.camera = camera;
-        }*/
     }
+
      private void OnTriggerEnter(Collider other)
     {
-
         if (other.CompareTag("SlashEffect"))
         {
             ReceiveDamage(15);
+            lastAttacker = other.transform.parent.parent.gameObject;
+            //Debug.Log(lastAttacker);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag=="Arrow")
+        {
+            ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
+            ReceiveDamage(ac.damage);
+            lastAttacker = ac.owner;
         }
     }
 }

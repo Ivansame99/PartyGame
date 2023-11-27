@@ -29,6 +29,12 @@ public class Character2Controller : MonoBehaviour
     [SerializeField]
     private float attackStamina;
     [SerializeField]
+    private float minBowStamina;
+    [SerializeField]
+    private float maxBowStamina;
+    private float currentBowStamina=0;
+
+    [SerializeField]
     private float greatSwordAttackStamina;
 
     private float stamina;
@@ -49,6 +55,9 @@ public class Character2Controller : MonoBehaviour
     private float dodgeTimer = 0;
     //private float invencibilityTimer = 0;
     private float greatSwordTimePressed = 0;
+    [SerializeField]
+    private float maxBowCD;
+    private float bowCD;
 
     [Header("Weapons")]
     //Weapon
@@ -60,6 +69,11 @@ public class Character2Controller : MonoBehaviour
     float attackCoolDownTime = 0.1f;
     float lastClicked;
     float lastComboEnd;
+
+    [SerializeField]
+    private GameObject arrowPrefab;
+    [SerializeField]
+    private GameObject indicativeArrow;
 
     [SerializeField]
     private GameObject hand;
@@ -74,7 +88,10 @@ public class Character2Controller : MonoBehaviour
     private bool moveAttack = false;
     private int greatSwordAttackState = 0;
     private bool isCharging = false;
-    private bool isDodging, isAttacking,isSpecialAttacking, isAttacking2;
+
+    //Control
+    private bool isDodging, isAttacking, isSpecialAttacking, isAttackingAux;
+
     //Movement
     Vector2 moveUniversal;
     private Vector3 direction;
@@ -85,14 +102,17 @@ public class Character2Controller : MonoBehaviour
     public GameObject boundCharacter;
     public GameObject SlashP, Slash;
 
-    // Start is called before the first frame update
+    private PowerController powerController;
     void Start()
     {
+        powerController = this.GetComponent<PowerController>();
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        stamina=maxStamina;
+        stamina = maxStamina;
     }
+
+    //Input mando
     public void SetInputVector(Vector2 direction)
     {
         moveUniversal = direction;
@@ -109,13 +129,10 @@ public class Character2Controller : MonoBehaviour
     {
         isSpecialAttacking = pressSpecialAttack;
     }
-    // Update is called once per frame
+
     void Update()
     {
         //Movimiento
-        //float horizontal = Input.GetAxisRaw("Horizontal");
-        //float vertical = Input.GetAxisRaw("Vertical");
-
         direction = new Vector3(moveUniversal.x, 0f, moveUniversal.y).normalized;
 
         if (direction.magnitude >= 0.1f && !dodge && !attacking)
@@ -133,11 +150,16 @@ public class Character2Controller : MonoBehaviour
 
         //Voltereta
         Roll();
+        if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 
-        //Ataque
+        //Espada
+        if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver a atacar
         Attack();
-        SpecialAttack();
         ExitAttack();
+
+        //Arco
+        SpecialAttack();
+        if(bowCD>=0) bowCD -= Time.deltaTime;
 
         //Stamina
         RecoverStamina();
@@ -151,9 +173,6 @@ public class Character2Controller : MonoBehaviour
         {
             anim.SetBool("Walking", false);
         }
-
-        //CD de la voltereta
-        if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
     }
 
     void Roll()
@@ -184,7 +203,7 @@ public class Character2Controller : MonoBehaviour
         if (stamina < maxStamina && staminaBarC.canRecover)
         {
             stamina += Time.deltaTime * staminaRegen;
-            staminaBarC.RecoverBar(stamina/maxStamina);
+            staminaBarC.RecoverBar(stamina / maxStamina);
         }
     }
 
@@ -192,6 +211,11 @@ public class Character2Controller : MonoBehaviour
     {
         stamina -= wastedStamina;
         staminaBarC.SetProgress(stamina / maxStamina, 2);
+    }
+
+    void StopAttack()
+    {
+        attacking = false;
     }
 
     void WasteStaminaPerSecond()
@@ -202,7 +226,7 @@ public class Character2Controller : MonoBehaviour
 
     void ChangeWeapon(GameObject newWeapon)
     {
-    
+
         Destroy(weapon);
         weapon = newWeapon;
         weaponController = weapon.GetComponent<Weapon>();
@@ -246,12 +270,12 @@ public class Character2Controller : MonoBehaviour
     private void Attack()
     {
         //Forma nueva
-        if (isAttacking && !dodge)
+        if (isAttacking /*&& !isAttackingAux*/ && !dodge)
         {
             //GreatSword and sword
             if (weapon != null)
             {
-                if (weapon.tag == "GreatSword" || weapon.tag == "Sword")
+                if (weapon.tag == "Sword")
                 {
                     if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
@@ -260,7 +284,6 @@ public class Character2Controller : MonoBehaviour
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
                             Vector3 savedPosition = boundCharacter.transform.position;
-
                             Quaternion savedRotation = boundCharacter.transform.rotation;
                             SlashP.transform.rotation = savedRotation;
                             Slash.transform.rotation = savedRotation;
@@ -269,19 +292,20 @@ public class Character2Controller : MonoBehaviour
 
                             SlashP.transform.position = savedPosition;
                             Slash.transform.position = savedPosition;
-
+                            isAttackingAux = true;
 
                             WasteStamina(attackStamina);
                             attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            weaponController.damage = weaponController.combo[comboCounter].damage;
+                            weaponController.damage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10;
+                            Debug.Log(weaponController.damage + powerController.GetCurrentPowerLevel() / 10);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;
                             if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
                             lastClicked = Time.time;
-                           // weapon.GetComponent<BoxCollider>().enabled = true;
+                            //weapon.GetComponent<BoxCollider>().enabled = true;
                             if (comboCounter >= weaponController.combo.Count)
                             {
                                 comboCounter = 0;
@@ -297,46 +321,6 @@ public class Character2Controller : MonoBehaviour
                         }
                     }
                 }
-
-                //Arco
-                if (weapon.tag == "Bow")
-                {
-                    if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
-                    {
-                        CancelInvoke("EndCombo");
-
-                        if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
-                        {
-                            WasteStamina(attackStamina);
-                            attacking = true;
-                            anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
-                            anim.Play("Attack", 0, 0);
-                            Quaternion rot = this.transform.rotation;
-
-                            Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y +2.0f, this.transform.position.z), this.transform.rotation);
-                            
-                            Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
-                            Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
-                            
-                            GameObject arrow2 = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-                            arrow2.transform.eulerAngles = cone1;
-
-                            GameObject arrow3 = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
-                            arrow3.transform.eulerAngles = cone2;
-
-                            weaponController.damage = weaponController.combo[comboCounter].damage;
-                            weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-                            attackMovement = weaponController.combo[comboCounter].attackMovement;
-                            comboCounter++;
-                            lastClicked = Time.time;
-                            if (comboCounter >= weaponController.combo.Count)
-                            {
-                                comboCounter = 0;
-                                lastComboEnd = Time.time;
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -344,92 +328,72 @@ public class Character2Controller : MonoBehaviour
 
     private void SpecialAttack()
     {
-        if (weapon != null)
+        if (isSpecialAttacking && !dodge)
         {
-            //Especial espadon
-            if (weapon.tag == "GreatSword")
+            if (bowCD <= 0) //CD de ataque con arco
             {
-                if (isSpecialAttacking && !dodge && greatSwordAttackState == 0)
+                if (stamina > 0 && currentBowStamina < maxBowStamina) //Mira si tienes stamina para seguir cargando el arco y si puedes seguir cargandolo mas
                 {
-                    if (direction == Vector3.zero)
+                    WasteStaminaPerSecond();
+                    currentBowStamina += Time.deltaTime;
+
+                    if (direction != Vector3.zero) //Hacer que puedas rotar mientras cargas
                     {
-                        greatSwordAttackDirection = this.transform.forward;
-                    }
-                    else
-                    {
-                        greatSwordAttackDirection = direction;
                         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
                         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
                         transform.rotation = Quaternion.Euler(0f, angle, 0f);
                     }
 
                     attacking = true;
-                    isCharging = true;
-                    if (!anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack")) anim.Play("GreatAttackUlti", 0, 0);
-                    weapon.GetComponent<BoxCollider>().enabled = true;
-                    if (stamina >= 10)
-                    {
-                        WasteStaminaPerSecond();
-                        greatSwordTimePressed += Time.deltaTime;
-                    }
-                    else greatSwordAttackState = 1;
-                    //if (greatSwordTimePressed < 2) greatSwordTimePressed += Time.deltaTime;
-                    //else greatSwordAttackState = 1; //Llega al maximo tiempo
+                    indicativeArrow.SetActive(true);
+                    //anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
+                    //anim.Play("Attack", 0, 0);
                 }
-                else if (!isSpecialAttacking && isCharging == true)//Para de apretar antes de llegar al maximo
+                else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
-                    greatSwordAttackState = 1;
-                }
-
-                //Se acaba el tiempo
-                if (anim.GetCurrentAnimatorStateInfo(0).IsTag("GreatAttack") && greatSwordTimePressed <= 0)
+                    ShootArrow();
+                } else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
                     attacking = false;
-                    isCharging = false;
-                    greatSwordTimePressed = 0;
-                    greatSwordAttackState = 0;
-                    weapon.GetComponent<BoxCollider>().enabled = false;
-                    anim.SetTrigger("Ulti");
-                }
-
-                if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) greatSwordTimePressed -= Time.deltaTime; //Se va reduciendo el timer
-            }
-        
-            if(weapon.tag == "Bow")
-            {
-                if (isSpecialAttacking && !dodge)
-                {
-                    if (stamina >= attackStamina) //Tiempo entre combos
-                    {
-                        if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
-                        {
-                            WasteStamina(attackStamina);
-
-                            for(int i = 0; i < 200; i+=20)
-                            {
-                                Quaternion rotation = this.transform.rotation;
-                                Vector3 cone = rotation.eulerAngles + new Vector3(0, i, 0);
-                                Vector3 coneInverse = rotation.eulerAngles + new Vector3(0, -i, 0);
-                                GameObject arrow = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rotation);
-                                arrow.transform.eulerAngles = cone;
-                                GameObject arrowInverse = Instantiate(weaponController.arrow, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rotation);
-                                arrowInverse.transform.eulerAngles = coneInverse;
-                            }
-                            //weaponController.damage = weaponController.combo[comboCounter].damage;
-                            //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-                            //attackMovement = weaponController.combo[comboCounter].attackMovement;
-                            //comboCounter++;
-                            lastClicked = Time.time;
-                            /*if (comboCounter >= weaponController.combo.Count)
-                            {
-                                comboCounter = 0;
-                                lastComboEnd = Time.time;
-                            }*/
-                        }
-                    }
+                    indicativeArrow.SetActive(false);
                 }
             }
+        }else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
+        {
+            ShootArrow();
+        } else if(!isSpecialAttacking && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
+        {
+            attacking = false;
+            indicativeArrow.SetActive(false);
         }
+    }
+
+    void ShootArrow()
+    {
+        Quaternion rot = this.transform.rotation;
+        ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
+
+        ac.SetSpeed(currentBowStamina * 15);
+        ac.owner = this.gameObject;
+
+        Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+
+        Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
+        Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
+
+        GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        arrow2.transform.eulerAngles = cone1;
+
+        GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        arrow3.transform.eulerAngles = cone2;
+
+        weaponController.damage = weaponController.combo[comboCounter].damage;
+        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+        //attacking = false;
+        Invoke("StopAttack", 0.5f);
+        indicativeArrow.SetActive(false);
+        currentBowStamina = 0;
+        bowCD = maxBowCD;
     }
 
     private void ExitAttack()
@@ -464,8 +428,9 @@ public class Character2Controller : MonoBehaviour
             {
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
             }
-            
-        } else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);
+
+        }
+        else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);
 
         if (moveAttack)
         {
@@ -476,10 +441,10 @@ public class Character2Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
+
         if (other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
         {
-            ChangeWeapon(other.gameObject);
+            //ChangeWeapon(other.gameObject);
         }
     }
 }
