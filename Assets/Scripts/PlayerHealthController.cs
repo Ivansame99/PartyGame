@@ -30,6 +30,8 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
