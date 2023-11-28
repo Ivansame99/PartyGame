@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class Character2Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     //public CharacterController controller;
     [Header("Speed")]
@@ -53,7 +53,10 @@ public class Character2Controller : MonoBehaviour
     //[SerializeField]
     //private float invencibilityCD;
     private float dodgeTimer = 0;
-    //private float invencibilityTimer = 0;
+    [SerializeField]
+    private float dodgeInvencibilitySeconds;
+
+    private float invencibilityTimer = 0;
     private float greatSwordTimePressed = 0;
     [SerializeField]
     private float maxBowCD;
@@ -81,7 +84,7 @@ public class Character2Controller : MonoBehaviour
     private float attackMovement;
 
     //States
-    private bool invencibility = false;
+    public bool invencibility = false;
     private bool dodge = false;
     private bool isWalking = false;
     private bool attacking = false;
@@ -151,6 +154,10 @@ public class Character2Controller : MonoBehaviour
         //Voltereta
         Roll();
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
+        if (invencibilityTimer >= 0) {
+            invencibility = true;
+            invencibilityTimer -= Time.deltaTime;
+        } else invencibility = false;
 
         //Espada
         if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver a atacar
@@ -195,6 +202,7 @@ public class Character2Controller : MonoBehaviour
             WasteStamina(dodgeStamina);
             anim.SetTrigger("Roll");
             if (attacking) EndCombo();
+            invencibilityTimer = dodgeInvencibilitySeconds;
         }
     }
 
@@ -264,7 +272,7 @@ public class Character2Controller : MonoBehaviour
     public void RollEnded()
     {
         dodge = false;
-        invencibility = true;
+        //invencibility = false;
     }
 
     private void Attack()
@@ -299,7 +307,7 @@ public class Character2Controller : MonoBehaviour
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
                             weaponController.damage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10;
-                            Debug.Log(weaponController.damage + powerController.GetCurrentPowerLevel() / 10);
+                            //Debug.Log(weaponController.damage + powerController.GetCurrentPowerLevel() / 10);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;

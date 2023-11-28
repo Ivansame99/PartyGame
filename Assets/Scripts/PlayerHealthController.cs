@@ -30,7 +30,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
-    
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -39,11 +39,13 @@ public class PlayerHealthController : MonoBehaviour
         SetupHealthBar(healBarCanvas, camera);
         SetupStaminaBar(healBarCanvas, camera);
         health = maxHealth;
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerController.invencibility);
         if (timer >= 0)
         {
             timer -= Time.deltaTime;
@@ -52,7 +54,7 @@ public class PlayerHealthController : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
-        if (timer <= 0)
+        if (timer <= 0 && playerController.invencibility)
         {
             health -= damage;
             timer = inmuneTime;

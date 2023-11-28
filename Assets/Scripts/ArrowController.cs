@@ -59,7 +59,7 @@ public class ArrowController : MonoBehaviour
         {
             if (attack && target != null)
             {
-                Debug.Log("Entras");
+                //Debug.Log("Entras");
                 Vector3 direction = (target.transform.position - transform.position).normalized;
 
                 direction.y = 0;

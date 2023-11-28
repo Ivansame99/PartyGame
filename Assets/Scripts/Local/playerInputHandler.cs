@@ -11,13 +11,13 @@ using static UnityEngine.InputSystem.InputAction;
 public class playerInputHandler : MonoBehaviour
 {
     private PlayerConfiguration playerConfig;
-    private Character2Controller playerController;
+    private PlayerController playerController;
 
     private Inputs inputs;
     // Start is called before the first frame update
     void Awake()
     {
-        playerController = GetComponent<Character2Controller>();
+        playerController = GetComponent<PlayerController>();
         inputs = new Inputs();
     }
 
