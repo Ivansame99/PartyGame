@@ -29,6 +29,9 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField]
     private Camera camera;
     // Start is called before the first frame update
+    [SerializeField]
+    private GameObject Cross1,Cross2,Glow;
+
     void Start()
     {
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -79,6 +82,15 @@ public class EnemyHealthController : MonoBehaviour
 
         if (other.CompareTag("SlashEffect"))
         {
+            Cross1.SetActive(false);
+            Cross2.SetActive(false);
+            Glow.SetActive(false);
+
+           
+            Cross1.SetActive(true);
+            Cross2.SetActive(true);
+            Glow.SetActive(true);
+
             ReceiveDamage(15);
         }
     }

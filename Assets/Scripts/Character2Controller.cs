@@ -83,11 +83,17 @@ public class Character2Controller : MonoBehaviour
 
     //Positions&Rotations
     public GameObject boundCharacter;
-    public GameObject SlashP, Slash;
+    public GameObject SlashP, Cross1, Cross2, Glow;
 
+    private Vector3 savedPosition;
+    private Vector3 savedRotation;
+    public ParticleSystem SlashParticles;
     // Start is called before the first frame update
     void Start()
     {
+        //  particleSystem = GetComponent<ParticleSystem>();
+  
+
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -256,20 +262,32 @@ public class Character2Controller : MonoBehaviour
                     if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
                         CancelInvoke("EndCombo");
+                        Vector3 savedPosition = boundCharacter.transform.position;
+                        Quaternion savedRotation = boundCharacter.transform.rotation;
 
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                            Vector3 savedPosition = boundCharacter.transform.position;
+                          
 
-                            Quaternion savedRotation = boundCharacter.transform.rotation;
-                            SlashP.transform.rotation = savedRotation;
-                            Slash.transform.rotation = savedRotation;
 
+                            Debug.Log(savedRotation);
+
+                            // Cross1.transform.rotation = savedRotation;
+                            // Cross2.transform.rotation = savedRotation;
+                            //  Glow.transform.rotation = savedRotation;
                             //Debug.Log(savedRotation);
+                            var mainModule = SlashParticles.main;
+                            mainModule.startRotation3D = true;
+                            mainModule.startRotationY = savedRotation.eulerAngles.y;
+                            //   SlashParticles.main.startRotationY = savedRotation.y;
+                            // Instantiate(SlashParticles, savedPosition, new Quaternion(1,savedRotation.x-90, savedRotation.y-90, savedRotation.z));
 
+                          //  SlashParticles.main = mainModule;
+                            SlashP.transform.rotation = savedRotation;
                             SlashP.transform.position = savedPosition;
-                            Slash.transform.position = savedPosition;
-
+                            Cross1.transform.position = savedPosition;
+                            Cross2.transform.position = savedPosition;
+                            Glow.transform.position = savedPosition;
 
                             WasteStamina(attackStamina);
                             attacking = true;
@@ -289,10 +307,14 @@ public class Character2Controller : MonoBehaviour
                             }
 
                             SlashP.SetActive(false);
-                            Slash.SetActive(false);
+                            Cross1.SetActive(false);
+                            Cross2.SetActive(false);
+                            Glow.SetActive(false);
 
                             SlashP.SetActive(true);
-                            Slash.SetActive(true);
+                            Cross1.SetActive(true);
+                            Cross2.SetActive(true);
+                            Glow.SetActive(true);
 
                         }
                     }
@@ -437,7 +459,9 @@ public class Character2Controller : MonoBehaviour
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             SlashP.SetActive(false);
-            Slash.SetActive(false);
+            Cross1.SetActive(false);
+            Cross2.SetActive(false);
+            Glow.SetActive(false);
             Invoke("EndCombo", 0.1f);
         }
     }
@@ -445,7 +469,9 @@ public class Character2Controller : MonoBehaviour
     private void EndCombo()
     {
         SlashP.SetActive(false);
-        Slash.SetActive(false);
+        Cross1.SetActive(false);
+        Cross2.SetActive(false);
+        Glow.SetActive(false);
         attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
