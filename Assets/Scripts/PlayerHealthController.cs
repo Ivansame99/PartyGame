@@ -32,6 +32,8 @@ public class PlayerHealthController : MonoBehaviour
 
     private PlayerController playerController;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +42,13 @@ public class PlayerHealthController : MonoBehaviour
         SetupStaminaBar(healBarCanvas, camera);
         health = maxHealth;
         playerController = GetComponent<PlayerController>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerController.invencibility);
+        //Debug.Log(playerController.invencibility);
         if (timer >= 0)
         {
             timer -= Time.deltaTime;
@@ -66,9 +69,12 @@ public class PlayerHealthController : MonoBehaviour
 
     void Die()
     {
-        float destroyDelay = Random.value;
+        anim.SetTrigger("Death");
+
+        /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
-        Destroy(healthBar.gameObject, destroyDelay);
+        Destroy(healthBar.gameObject, destroyDelay);*/
+        //anim.SetBool("Death", false);
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)
@@ -87,5 +93,13 @@ public class PlayerHealthController : MonoBehaviour
         {
             faceCamera.camera = camera;
         }*/
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Wall")
+        {
+            Die();
+        }
     }
 }
