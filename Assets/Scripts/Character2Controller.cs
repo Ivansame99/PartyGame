@@ -83,7 +83,7 @@ public class Character2Controller : MonoBehaviour
 
     //Positions&Rotations
     public GameObject boundCharacter;
-    public GameObject SlashP, Cross1, Cross2, Glow;
+    public GameObject SlashP, Cross1, Cross2, Glow,Collider;
 
     private Vector3 savedPosition;
     private Vector3 savedRotation;
@@ -262,12 +262,13 @@ public class Character2Controller : MonoBehaviour
                     if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
                         CancelInvoke("EndCombo");
-                        Vector3 savedPosition = boundCharacter.transform.position;
-                        Quaternion savedRotation = boundCharacter.transform.rotation;
+                      
+                      
 
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                          
+                              Vector3 savedPosition = boundCharacter.transform.position;
+                            Quaternion savedRotation = new Quaternion(boundCharacter.transform.rotation.w, boundCharacter.transform.rotation.x, boundCharacter.transform.rotation.y, boundCharacter.transform.rotation.z);
 
 
                             Debug.Log(savedRotation);
@@ -283,8 +284,10 @@ public class Character2Controller : MonoBehaviour
                             // Instantiate(SlashParticles, savedPosition, new Quaternion(1,savedRotation.x-90, savedRotation.y-90, savedRotation.z));
 
                           //  SlashParticles.main = mainModule;
-                            SlashP.transform.rotation = savedRotation;
+                            //SlashP.transform.rotation = savedRotation;
+                            //Collider.transform.position = savedRotation;
                             SlashP.transform.position = savedPosition;
+                            Collider.transform.position = savedPosition;
                             Cross1.transform.position = savedPosition;
                             Cross2.transform.position = savedPosition;
                             Glow.transform.position = savedPosition;
@@ -305,12 +308,13 @@ public class Character2Controller : MonoBehaviour
                                 comboCounter = 0;
                                 lastComboEnd = Time.time;
                             }
-
+                            Collider.SetActive(false);
                             SlashP.SetActive(false);
                             Cross1.SetActive(false);
                             Cross2.SetActive(false);
                             Glow.SetActive(false);
 
+                            Collider.SetActive(true);
                             SlashP.SetActive(true);
                             Cross1.SetActive(true);
                             Cross2.SetActive(true);
@@ -462,6 +466,7 @@ public class Character2Controller : MonoBehaviour
             Cross1.SetActive(false);
             Cross2.SetActive(false);
             Glow.SetActive(false);
+            Collider.SetActive(false);
             Invoke("EndCombo", 0.1f);
         }
     }
@@ -472,6 +477,7 @@ public class Character2Controller : MonoBehaviour
         Cross1.SetActive(false);
         Cross2.SetActive(false);
         Glow.SetActive(false);
+        Collider.SetActive(false);
         attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
