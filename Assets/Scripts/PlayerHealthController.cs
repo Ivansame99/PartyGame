@@ -43,7 +43,7 @@ public class PlayerHealthController : MonoBehaviour
     private float deathCD = 2;
     private float deathTimer = 0;
 
-    private bool dead = false;
+    public bool dead = false;
     private bool deadAux = false;
     private bool restart = false;
 
