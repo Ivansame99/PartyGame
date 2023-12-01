@@ -21,13 +21,17 @@ public class ChaseState : StateMachineBehaviour
             players.Add(jugadorObj.transform);
         }
         agent.speed = 3.0f;
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = FindPlayer();
+        //animator.transform.LookAt(player);
         agent.SetDestination(player.position);
+        
+
         float distance = Vector3.Distance(player.position, animator.transform.position);
         if(distance < triggerDistance)
         {
@@ -42,21 +46,21 @@ public class ChaseState : StateMachineBehaviour
     }
     private Transform FindPlayer()
     {
-        Transform jugadorMasCercano = null;
-        float distanciaMinima = float.MaxValue;
+        Transform searchPlayer = null;
+        float minDist = float.MaxValue;
 
         foreach (Transform player in players)
         {
-            float distancia = Vector3.Distance(agent.transform.position, player.position);
+            float distance = Vector3.Distance(agent.transform.position, player.position);
 
-            if (distancia < distanciaMinima)
+            if (distance < minDist)
             {
-                distanciaMinima = distancia;
-                jugadorMasCercano = player;
+                minDist = distance;
+                searchPlayer = player;
             }
         }
 
-        return jugadorMasCercano;
+        return searchPlayer;
     }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

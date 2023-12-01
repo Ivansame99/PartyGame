@@ -469,7 +469,7 @@ public class Character2Controller : MonoBehaviour
 
         if (moveAttack)
         {
-            rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
+            //rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
             moveAttack = false;
         }
     }

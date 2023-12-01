@@ -288,6 +288,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
   damage: 5
   pushForce: 100
+  arrow: {fileID: 0}
 --- !u!54 &1727590381156458802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1207,9 +1208,18 @@ MonoBehaviour:
   speed: 10
   dodgeSpeed: 15
   turnSmooth: 0.1
+  maxStamina: 0
+  staminaRegen: 0
+  dodgeStamina: 0
+  attackStamina: 0
+  greatSwordAttackStamina: 0
+  staminaBarC: {fileID: 0}
   dodgeCD: 1
   weapon: {fileID: 0}
   hand: {fileID: 1212020477873701239}
+  boundCharacter: {fileID: 0}
+  SlashP: {fileID: 0}
+  Slash: {fileID: 0}
 --- !u!136 &3740672817527373968
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1258,5 +1268,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
