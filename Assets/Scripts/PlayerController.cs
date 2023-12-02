@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     //States
     public bool invencibility = false;
-    private bool dodge = false;
+    public bool dodge = false;
     private bool isWalking = false;
     private bool attacking = false;
     private bool moveAttack = false;
@@ -230,6 +230,12 @@ public class PlayerController : MonoBehaviour
     {
         stamina -= Time.deltaTime * greatSwordAttackStamina;
         staminaBarC.WasteBar(stamina / maxStamina);
+    }
+
+    public void ResetStamina()
+    {
+        stamina = maxStamina;
+        staminaBarC.RecoverBar(stamina / maxStamina);
     }
 
     void ChangeWeapon(GameObject newWeapon)
