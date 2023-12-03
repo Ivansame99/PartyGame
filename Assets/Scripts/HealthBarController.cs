@@ -43,7 +43,7 @@ public class HealthBarController : MonoBehaviour
     {
         if (Progress < 0 || Progress > 1)
         {
-            Debug.LogWarning($"Invalid progress passed, expected value is between 0 and 1, got {Progress}. Clamping.");
+            //Debug.LogWarning($"Invalid progress passed, expected value is between 0 and 1, got {Progress}. Clamping.");
             Progress = Mathf.Clamp01(Progress);
         }
         if (Progress != ProgressImage.fillAmount)
