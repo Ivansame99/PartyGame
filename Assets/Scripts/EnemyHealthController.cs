@@ -56,7 +56,8 @@ public class EnemyHealthController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         if (timer <= 0)
-        {   
+        {
+            Debug.Log(damage);
             health -= damage;
             timer = inmuneTime;
             healthBarC.SetProgress(health / maxHealth, 5f);
@@ -85,7 +86,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (other.CompareTag("SlashEffect"))
         {
-            ReceiveDamage(15);
+            ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
             //Debug.Log(lastAttacker);
         }
@@ -96,7 +97,7 @@ public class EnemyHealthController : MonoBehaviour
         if (collision.gameObject.tag=="Arrow")
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-            ReceiveDamage(ac.damage);
+            ReceiveDamage(ac.finalDamage);
             lastAttacker = ac.owner;
         }
     }

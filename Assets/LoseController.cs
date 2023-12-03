@@ -37,7 +37,7 @@ public class LoseController : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         playersCount = players.Length;
         playerHealth = new PlayerHealthController[playersCount];
-        Debug.Log(playersCount);
+        //Debug.Log(playersCount);
 
         //playerHealth[0] = players[0].GetComponent<PlayerHealthController>();
         //playerHealth[1] = players[1].GetComponent<PlayerHealthController>();

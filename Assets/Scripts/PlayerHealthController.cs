@@ -174,7 +174,7 @@ public class PlayerHealthController : MonoBehaviour
         if (other.gameObject.tag == "Wall" && !dead && this.gameObject.tag=="Player")
         {
             //Debug.Log(other.gameObject.name.ToString());
-            Die();
+            //Die();
         }
     }
 
