@@ -7,9 +7,10 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class ChaseState : StateMachineBehaviour
 {
     private NavMeshAgent agent;
-    private Transform player;
+    private Transform player,player2;
     public List<Transform> players;
     [SerializeField] float triggerDistance = 2.5f;
+    private float evadeAttackCooldown;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,15 +29,25 @@ public class ChaseState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = FindPlayer();
+        player2 = FindSecondClosestPlayer();
         //animator.transform.LookAt(player);
         agent.SetDestination(player.position);
         
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        if(distance < triggerDistance)
+        float secondDistance = Vector3.Distance(player2.position, animator.transform.position);
+        if (distance < triggerDistance)
         {
             animator.SetBool("isAttacking",true);
         }
+        if (secondDistance < triggerDistance) // Verificar si player2 no es null
+        {
+            //animator.SetTrigger("evading");
+        }
+        //if (distance < triggerDistance && secondDistance < triggerDistance)
+        //{
+        //Debug.Log("esquiva ahora");
+        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -59,8 +70,28 @@ public class ChaseState : StateMachineBehaviour
                 searchPlayer = player;
             }
         }
-
         return searchPlayer;
+    }
+    private Transform FindSecondClosestPlayer()
+    {
+        Transform closestPlayer = FindPlayer();
+        Transform secondClosestPlayer = null;
+        float minDist = float.MaxValue;
+
+        foreach (Transform player in players)
+        {
+            if (player != closestPlayer)
+            {
+                float distance = Vector3.Distance(agent.transform.position, player.position);
+
+                if (distance < minDist)
+                {
+                    minDist = distance;
+                    secondClosestPlayer = player;
+                }
+            }
+        }
+        return secondClosestPlayer;
     }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

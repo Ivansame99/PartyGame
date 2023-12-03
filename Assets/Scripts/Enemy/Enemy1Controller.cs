@@ -5,35 +5,58 @@ using UnityEngine.AI;
 
 public class Enemy1Controller : MonoBehaviour
 {
-    [SerializeField] private int HP = 9;
+    [SerializeField] private float HP;
+    [SerializeField] private int damageValue;
+    [SerializeField] private float inmuneTime;
+    private float timer;
+    private float lowHP;
     private Animator animator;
+    private bool onlyOnce;
+    
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        lowHP = HP * 0.50f;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+        }
     }
     public void TakeDamage(int damageAmount)
     {
-        HP -= damageAmount;
-        if(HP < 0)
+        if (timer <= 0)
         {
-            animator.SetTrigger("die");
+            timer = inmuneTime;
+            HP -= damageAmount;
+            if (HP < 0)
+            {
+                animator.SetTrigger("die");
+                animator.SetBool("isChasing",false);
+            }
+            else if (HP <= lowHP)
+            {
+                animator.SetTrigger("evading");
+            }
+            else
+            {
+                //if(!animator.GetBool("isEvading")) 
+                    animator.SetTrigger("damage");               
+            }
         }
-        else
-        {
-            animator.SetTrigger("damage");
-        }
+
+
+
     }
 
     
 
-    void Die()
+    public void Die()
     {
         Destroy(this.gameObject);
     }
@@ -43,7 +66,7 @@ public class Enemy1Controller : MonoBehaviour
 
         if (other.CompareTag("SlashEffect"))
         {
-            TakeDamage(3);
+            TakeDamage(damageValue);
         }
     }
 
