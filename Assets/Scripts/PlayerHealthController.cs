@@ -171,9 +171,10 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wall" && !dead)
+        if (other.gameObject.tag == "Wall" && !dead && this.gameObject.tag=="Player")
         {
-            Die();
+            //Debug.Log(other.gameObject.name.ToString());
+            //Die();
         }
     }
 

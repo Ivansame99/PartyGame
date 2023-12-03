@@ -5,12 +5,12 @@ using UnityEngine;
 public class FollowTarget : MonoBehaviour
 {
     [SerializeField]
-    private Transform Target;
+    private Transform target;
     [SerializeField]
-    private Vector3 Offset;
+    private Vector3 offset;
 
     private void Update()
     {
-        transform.position = Target.position + Offset;
+        transform.position = new Vector3(target.position.x, target.position.y + offset.y + target.localScale.y*2, target.position.z);
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    public float damage;
+    public float baseDamage;
+    public float finalDamage;
     [SerializeField]
     private float pushForce;
     [SerializeField]
@@ -39,7 +40,7 @@ public class ArrowController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             target = collision.gameObject;
-            target.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
+            //target.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
             attack = true;
             
         }

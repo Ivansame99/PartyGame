@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEngine.UI.Image;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PowerController : MonoBehaviour
 {
@@ -58,11 +59,7 @@ public class PowerController : MonoBehaviour
         scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
 
         this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
-    }
-
-    public void ChangePowerLevel(float level)
-    {
-        currentPowerLevel += level;
+        //StartCoroutine(ChangeScale, this.gameObject.transform, originalScale);
     }
 
     private void SetupPowerLevelCanvas()
@@ -79,5 +76,16 @@ public class PowerController : MonoBehaviour
     {
         currentPowerLevel += value;
         powerLevelText.SetText(currentPowerLevel.ToString());
+    }
+
+    IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
+    {
+        //Vector3 initialScale = transform.localScale;
+
+        for (float time = 0; time < duration * 2; time += Time.deltaTime)
+        {
+            transform.localScale = Vector3.Lerp(originalScale, upScale, time);
+            yield return null;
+        }
     }
 }

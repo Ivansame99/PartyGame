@@ -106,8 +106,10 @@ public class PlayerController : MonoBehaviour
     public GameObject SlashP, Slash;
 
     private PowerController powerController;
+    private SlashController slashController;
     void Start()
     {
+        slashController = Slash.GetComponent<SlashController>();
         powerController = this.GetComponent<PowerController>();
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
@@ -144,13 +146,14 @@ public class PlayerController : MonoBehaviour
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
             isWalking = true;
-            if (attacking) EndCombo();
+            //if (attacking) EndCombo();
         }
         else
         {
             isWalking = false;
         }
 
+        //Debug.Log(attacking);
         //Voltereta
         Roll();
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
@@ -284,7 +287,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         //Forma nueva
-        if (isAttacking /*&& !isAttackingAux*/ && !dodge)
+        if (isAttacking && !isAttackingAux && !dodge)
         {
             //GreatSword and sword
             if (weapon != null)
@@ -312,8 +315,8 @@ public class PlayerController : MonoBehaviour
                             attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            weaponController.damage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10;
-                            //Debug.Log(weaponController.damage + powerController.GetCurrentPowerLevel() / 10);
+                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10; //Cambiar escalado poder
+                            //Debug.Log(slashController.finalDamage);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;
@@ -368,6 +371,7 @@ public class PlayerController : MonoBehaviour
                     ShootArrow();
                 } else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
+                    currentBowStamina = 0;
                     attacking = false;
                     indicativeArrow.SetActive(false);
                 }
@@ -375,8 +379,10 @@ public class PlayerController : MonoBehaviour
         }else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
             ShootArrow();
-        } else if(!isSpecialAttacking && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
+        } else if(!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
+            currentBowStamina = 0;
+            //Debug.Log("asdadasdasd");
             attacking = false;
             indicativeArrow.SetActive(false);
         }
@@ -387,6 +393,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rot = this.transform.rotation;
         ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
 
+        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel()/2; //cambiar escalado de poder
         ac.SetSpeed(currentBowStamina * 15);
         ac.owner = this.gameObject;
 
