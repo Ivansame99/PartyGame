@@ -62,6 +62,9 @@ public class EnemyHealthController : MonoBehaviour
 
     void Die()
     {
+       // Cross1.SetActive(true);
+       // Cross2.SetActive(true);
+      //  Glow.SetActive(true);
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/

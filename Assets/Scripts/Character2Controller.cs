@@ -316,9 +316,9 @@ public class Character2Controller : MonoBehaviour
 
                             Collider.SetActive(true);
                             SlashP.SetActive(true);
-                            Cross1.SetActive(true);
-                            Cross2.SetActive(true);
-                            Glow.SetActive(true);
+                          //  Cross1.SetActive(true);
+                          //  Cross2.SetActive(true);
+                           // Glow.SetActive(true);
 
                         }
                     }
