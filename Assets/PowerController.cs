@@ -74,7 +74,15 @@ public class PowerController : MonoBehaviour
 
     public void SetCurrentPowerLevel(float value)
     {
-        currentPowerLevel += value;
+        currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
+        powerLevelText.SetText(currentPowerLevel.ToString());
+    }
+
+    public void OnDieSetCurrentPowerLevel()
+    {
+        currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
+        if(currentPowerLevel<0) currentPowerLevel = 0;
+        //Debug.Log(currentPowerLevel);
         powerLevelText.SetText(currentPowerLevel.ToString());
     }
 

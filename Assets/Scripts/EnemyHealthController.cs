@@ -46,7 +46,7 @@ public class EnemyHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        
         if (timer >= 0)
         {
             timer-=Time.deltaTime;
@@ -57,7 +57,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (timer <= 0)
         {
-            Debug.Log(damage);
+            //Debug.Log(damage);
             health -= damage;
             timer = inmuneTime;
             healthBarC.SetProgress(health / maxHealth, 5f);
@@ -70,7 +70,8 @@ public class EnemyHealthController : MonoBehaviour
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
-        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower/2); //Se le suma la puntuacion del enemigo
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
         Destroy(this.gameObject);

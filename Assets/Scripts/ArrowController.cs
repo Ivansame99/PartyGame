@@ -21,33 +21,44 @@ public class ArrowController : MonoBehaviour
     public GameObject owner; //Tiene que ser publico
 
     private bool ground;
+
+    private float invencibilityTimerOnSpawn = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
         //gravityScale = 0.1f;
         rb = GetComponent<Rigidbody>();
+        this.GetComponent<BoxCollider>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (invencibilityTimerOnSpawn >= 0)
+        {
+            invencibilityTimerOnSpawn -= Time.deltaTime;
+            
+        }
+        else
+        {
+            this.GetComponent<BoxCollider>().enabled = true;
+        }
         //transform.rotation = Quaternion.LookRotation(rb.velocity);
         this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") && !ground)
         {
             target = collision.gameObject;
-            //target.GetComponent<EnemyHealthController>().ReceiveDamage(damage);
             attack = true;
-            
         }
 
-        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
-            //Destroy(this.gameObject);
+            this.GetComponent<BoxCollider>().enabled = false;
+            invencibilityTimerOnSpawn = 50;
             ground = true;
             rb.isKinematic = true;
             Destroy(this.gameObject, 2f);
@@ -76,7 +87,7 @@ public class ArrowController : MonoBehaviour
             /*if (rb.velocity != Vector3.zero)
                 rb.rotation = Quaternion.LookRotation(rb.velocity/1000);*/
 
-            CustomGravity();
+            //CustomGravity();
         }
     }
 
@@ -89,7 +100,7 @@ public class ArrowController : MonoBehaviour
     public void SetSpeed(float s)
     {
         speed = s;
-        gravityScale = s/10;
+        gravityScale = s / 10;
         //Debug.Log(s);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Transform powerBar;
 
-    private float timer;
+    private float timer=0;
 
     //Variables que iran donde se spawneen los pjs
 
@@ -51,6 +51,9 @@ public class PlayerHealthController : MonoBehaviour
 
     [SerializeField]
     private float respawnCD;
+
+    private GameObject lastAttacker;
+    private float currentPower;
 
     // Start is called before the first frame update
     void Start()
@@ -88,12 +91,13 @@ public class PlayerHealthController : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
-        if (timer <= 0 && playerController.invencibility)
+        //Debug.Log(timer);
+        Debug.Log(playerController.invencibility);
+        if (timer <= 0 && !playerController.invencibility)
         {
             health -= damage;
             timer = inmuneTime;
             healthBarC.SetProgress(health / maxHealth, 2);
-            //Debug.Log(health);
             if (health <= 0) Die();
         }
     }
@@ -105,6 +109,10 @@ public class PlayerHealthController : MonoBehaviour
         dead = true;
         respawnTimer = respawnCD;
         DisablePlayer();
+        GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        Debug.Log(currentPower);
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
@@ -127,6 +135,7 @@ public class PlayerHealthController : MonoBehaviour
         playerController.enabled = true;
         playerController.dodge = false; //Por si estaba rodando cuando murio
         powerController.enabled = true;
+        //powerController.SetCurrentPowerLevel(powerController.GetCurrentPowerLevel()/2);
         healthBar.gameObject.SetActive(true);
         staminaBar.gameObject.SetActive(true);
         powerBar.gameObject.SetActive(true);
@@ -134,6 +143,8 @@ public class PlayerHealthController : MonoBehaviour
         deadAux = false;
         restart = false;
         health=maxHealth;
+        timer = inmuneTime;
+        healthBarC.SetProgress(health / maxHealth, 2);
         playerController.ResetStamina();
         //anim.enabled = true;
     }
@@ -171,10 +182,27 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Wall" && !dead && this.gameObject.tag=="Player")
+        /*if (other.gameObject.tag == "Wall" && !dead && this.gameObject.tag=="Player")
         {
             //Debug.Log(other.gameObject.name.ToString());
             //Die();
+        }*/
+        if (other.CompareTag("SlashEffect"))
+        {
+            ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
+            lastAttacker = other.transform.parent.parent.gameObject;
+            //Debug.Log("Daños");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Arrow")
+        {
+            //Debug.Log("Entras aqui flecha");
+            ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
+            ReceiveDamage(ac.finalDamage);
+            lastAttacker = ac.owner;
         }
     }
 

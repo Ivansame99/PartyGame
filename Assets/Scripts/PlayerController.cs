@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
         } else invencibility = false;
 
         //Espada
-        if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver a atacar
+        if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver S atacar
         Attack();
         ExitAttack();
 
@@ -393,7 +393,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rot = this.transform.rotation;
         ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
 
-        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel()/2; //cambiar escalado de poder
+        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel()/5; //cambiar escalado de poder
         ac.SetSpeed(currentBowStamina * 15);
         ac.owner = this.gameObject;
 
