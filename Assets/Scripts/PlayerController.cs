@@ -391,13 +391,14 @@ public class PlayerController : MonoBehaviour
     void ShootArrow()
     {
         Quaternion rot = this.transform.rotation;
-        ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
+        /*ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
 
         ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel()/5; //cambiar escalado de poder
         ac.SetSpeed(currentBowStamina * 15);
-        ac.owner = this.gameObject;
+        ac.SetPushForce(currentBowStamina * 50000);
+        ac.owner = this.gameObject;*/
 
-        Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+        GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
 
         Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
         Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
@@ -408,10 +409,30 @@ public class PlayerController : MonoBehaviour
         GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
         arrow3.transform.eulerAngles = cone2;
 
-        weaponController.damage = weaponController.combo[comboCounter].damage;
-        weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+        ArrowController ac = arrow1.GetComponent<ArrowController>();
+
+        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
+        ac.SetSpeed(currentBowStamina * 15);
+        ac.SetPushForce(currentBowStamina * 20);
+        ac.owner = this.gameObject;
+
+        ArrowController ac2 = arrow2.GetComponent<ArrowController>();
+
+        ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
+        ac2.SetSpeed(currentBowStamina * 15);
+        ac2.SetPushForce(currentBowStamina * 20);
+        ac2.owner = this.gameObject;
+
+        ArrowController ac3 = arrow3.GetComponent<ArrowController>();
+
+        ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
+        ac3.SetSpeed(currentBowStamina * 15);
+        ac3.SetPushForce(currentBowStamina * 20);
+        ac3.owner = this.gameObject;
+        // weaponController.damage = weaponController.combo[comboCounter].damage;
+        //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
         //attacking = false;
-        Invoke("StopAttack", 0.5f);
+        Invoke("StopAttack", 0.7f);
         indicativeArrow.SetActive(false);
         currentBowStamina = 0;
         bowCD = maxBowCD;

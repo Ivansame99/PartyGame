@@ -82,7 +82,6 @@ public class PowerController : MonoBehaviour
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
         if(currentPowerLevel<0) currentPowerLevel = 0;
-        //Debug.Log(currentPowerLevel);
         powerLevelText.SetText(currentPowerLevel.ToString());
     }
 

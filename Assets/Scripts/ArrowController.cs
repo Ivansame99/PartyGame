@@ -6,7 +6,7 @@ public class ArrowController : MonoBehaviour
 {
     public float baseDamage;
     public float finalDamage;
-    [SerializeField]
+
     private float pushForce;
     [SerializeField]
     private float speed;
@@ -22,7 +22,7 @@ public class ArrowController : MonoBehaviour
 
     private bool ground;
 
-    private float invencibilityTimerOnSpawn = 0.2f;
+    private float invencibilityTimerOnSpawn = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -49,7 +49,7 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player") && !ground)
+        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
             target = collision.gameObject;
             attack = true;
@@ -71,9 +71,7 @@ public class ArrowController : MonoBehaviour
         {
             if (attack && target != null)
             {
-                //Debug.Log("Entras");
                 Vector3 direction = (target.transform.position - transform.position).normalized;
-
                 direction.y = 0;
                 target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
                 attack = false;
@@ -101,6 +99,12 @@ public class ArrowController : MonoBehaviour
     {
         speed = s;
         gravityScale = s / 10;
+        //Debug.Log(s);
+    }
+
+    public void SetPushForce(float s)
+    {
+        pushForce = s;
         //Debug.Log(s);
     }
 }

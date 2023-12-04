@@ -92,7 +92,7 @@ public class PlayerHealthController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         //Debug.Log(timer);
-        Debug.Log(playerController.invencibility);
+        //Debug.Log(playerController.invencibility);
         if (timer <= 0 && !playerController.invencibility)
         {
             health -= damage;
