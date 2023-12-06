@@ -23,6 +23,7 @@ public class ArrowController : MonoBehaviour
     private bool ground;
 
     private float invencibilityTimerOnSpawn = 0.1f;
+    private float invencibilityTimerOnSpawnOwner = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +44,12 @@ public class ArrowController : MonoBehaviour
         {
             this.GetComponent<BoxCollider>().enabled = true;
         }
+
+        if (invencibilityTimerOnSpawnOwner >= 0)
+        {
+            invencibilityTimerOnSpawnOwner -= Time.deltaTime;
+
+        }
         //transform.rotation = Quaternion.LookRotation(rb.velocity);
         this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
     }
@@ -51,8 +58,15 @@ public class ArrowController : MonoBehaviour
     {
         if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
-            target = collision.gameObject;
-            attack = true;
+            if (collision.gameObject == owner && invencibilityTimerOnSpawnOwner > 0)
+            {
+                //Para que no colisione el jugador que ha lanzado la flecha al spawnear
+            }
+            else
+            {
+                target = collision.gameObject;
+                attack = true;
+            }
         }
 
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
