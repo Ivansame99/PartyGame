@@ -24,7 +24,8 @@ public class RoundController : MonoBehaviour
     {
         roundIndex = 0;
         currentEnemies = new List<GameObject>();
-        Invoke("StartNextRound", secondsBetweenRounds);
+        //Invoke("StartNextRound", secondsBetweenRounds);
+        StartCoroutine(IStartNextRound());
     }
 
     // Update is called once per frame
@@ -43,10 +44,36 @@ public class RoundController : MonoBehaviour
             {
                 int randomSpawn = Random.Range(0, spawns.Length);
                 currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
+
             }
 
             roundIndex++;
         } else
+        {
+            Debug.Log("Se han acabado las rondas");
+        }
+    }
+
+    IEnumerator IStartNextRound()
+    {
+        Debug.Log("Va a empezar ronda");
+        yield return new WaitForSeconds(secondsBetweenRounds);
+
+        if (roundIndex < enemiesInRound.Length)
+        {
+            int enemyNumberInCurrentRound = enemiesInRound[roundIndex];
+
+            for (int i = 0; i < enemyNumberInCurrentRound; i++)
+            {
+                int randomSpawn = Random.Range(0, spawns.Length);
+                yield return new WaitForSeconds(1);
+                currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
+
+            }
+
+            roundIndex++;
+        }
+        else
         {
             Debug.Log("Se han acabado las rondas");
         }
@@ -64,7 +91,8 @@ public class RoundController : MonoBehaviour
         //Si todos son null
         Debug.Log("Han muerto todos");
         currentEnemies.Clear();
-        Invoke("StartNextRound", secondsBetweenRounds);
+        //Invoke("StartNextRound", secondsBetweenRounds);
+        StartCoroutine(IStartNextRound());
         //if()
         //Debug.Log(currentEnemies[0]);
     }
