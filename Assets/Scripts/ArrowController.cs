@@ -23,7 +23,7 @@ public class ArrowController : MonoBehaviour
     private bool ground;
 
     private float invencibilityTimerOnSpawn = 0.1f;
-    private float invencibilityTimerOnSpawnOwner = 0.5f;
+    private float invencibilityTimerOnSpawnOwner = 0.6f;
     // Start is called before the first frame update
     void Start()
     {

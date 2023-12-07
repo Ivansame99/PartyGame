@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
@@ -55,6 +56,8 @@ public class PlayerHealthController : MonoBehaviour
     private GameObject lastAttacker;
     private float currentPower;
 
+    private PlayersRespawn playersRespawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,7 @@ public class PlayerHealthController : MonoBehaviour
         powerController = GetComponent<PowerController>();
         playerCollider = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
+        playersRespawn = FindObjectOfType<PlayersRespawn>();
     }
 
     // Update is called once per frame
@@ -107,12 +111,13 @@ public class PlayerHealthController : MonoBehaviour
         anim.SetTrigger("Death");
         deathTimer = deathCD;
         dead = true;
-        respawnTimer = respawnCD;
-        DisablePlayer();
+        playersRespawn.NotifyDead();
+        respawnTimer = respawnCD;       
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        Debug.Log(currentPower);
+        //Debug.Log(currentPower);
         lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+        DisablePlayer();
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
@@ -130,7 +135,7 @@ public class PlayerHealthController : MonoBehaviour
         //playerCollider.enabled = false;
     }
 
-    void EnablePlayer()
+    public void EnablePlayer()
     {
         playerController.enabled = true;
         playerController.dodge = false; //Por si estaba rodando cuando murio
@@ -157,8 +162,9 @@ public class PlayerHealthController : MonoBehaviour
         }
         else
         {
-            this.transform.position = Vector3.zero;
-            EnablePlayer();
+            //this.transform.position = Vector3.zero;
+            playersRespawn.SpawnPlayer(this.gameObject);
+            //EnablePlayer();
         }
     }
 

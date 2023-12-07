@@ -432,7 +432,7 @@ public class PlayerController : MonoBehaviour
         // weaponController.damage = weaponController.combo[comboCounter].damage;
         //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
         //attacking = false;
-        Invoke("StopAttack", 0.7f);
+        Invoke("StopAttack", 0.3f);
         indicativeArrow.SetActive(false);
         currentBowStamina = 0;
         bowCD = maxBowCD;
@@ -460,9 +460,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!attacking)
-        {
-            if (dodge)
+//        if (!attacking)
+//        {
+            if (attacking)
+            {
+                rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
+            }
+            else if (dodge)
             {
                 rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
             }
@@ -471,8 +475,7 @@ public class PlayerController : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
             }
 
-        }
-        else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);
+//        }
 
         if (moveAttack)
         {
