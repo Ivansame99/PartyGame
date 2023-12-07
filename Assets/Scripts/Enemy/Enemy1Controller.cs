@@ -15,6 +15,10 @@ public class Enemy1Controller : MonoBehaviour
     private bool onlyOnce;
     NavMeshAgent navMeshAgent;
 
+    //SLASH STUFF
+    public GameObject boundCharacter;
+    public GameObject SlashEffect;
+
     private Vector3 evadeAttackDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -61,7 +65,7 @@ public class Enemy1Controller : MonoBehaviour
         if (animator.GetBool("attackOn"))
         {
             //mete slash normal (SI NO FUNCIONA AQUI, METELO EN LA FUNCION DE ABAJO SLASH
-        
+          //  Slash();
         }
         if (animator.GetBool("isEvading"))
         {
@@ -80,10 +84,42 @@ public class Enemy1Controller : MonoBehaviour
 
     }
 
-    public void Slash()
-    {
+public void Slash()
+{
+        Debug.Log("ENTRO");
+        // Guarda la posición del objeto boundCharacter
+        Vector3 savedPosition = boundCharacter.transform.position;
 
+    // Establece la posición del objeto SlashEffect
+    SlashEffect.transform.position = savedPosition;
+
+    // Calcula la rotación en función de la dirección hacia adelante del boundCharacter
+    Vector3 forwardDirection = boundCharacter.transform.forward;
+    Quaternion lookRotation = Quaternion.LookRotation(forwardDirection, boundCharacter.transform.up);
+
+    // Obtén el componente ParticleSystem
+    ParticleSystem slashParticleSystem = SlashEffect.GetComponent<ParticleSystem>();
+
+    // Ajusta la rotación inicial del sistema de partículas
+    var mainModule = slashParticleSystem.main;
+
+    // Utiliza el ángulo de rotación directamente desde LookRotation
+    float newAngle = lookRotation.eulerAngles.y;
+
+    // Asegura que el nuevo ángulo esté en el rango correcto
+    mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+     Debug.Log(mainModule.startRotationY.constant);
+    // Desactiva y activa el objeto SlashEffect para reiniciar el sistema de partículas
+    SlashEffect.SetActive(false);
+    StartCoroutine(ReactivateSlashEffect());
+
+    IEnumerator ReactivateSlashEffect()
+    {
+        yield return new WaitForSeconds(0.1f); // Ajusta el tiempo según sea necesario
+        SlashEffect.SetActive(true);
     }
+}
+
     public void Die()
     {
         Destroy(this.gameObject);
