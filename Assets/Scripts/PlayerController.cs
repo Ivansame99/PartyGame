@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -102,19 +103,31 @@ public class PlayerController : MonoBehaviour
     private Vector3 greatSwordAttackDirection = Vector3.zero;
 
     //Positions&Rotations
-    public GameObject boundCharacter;
-    public GameObject SlashP, Slash;
+    [SerializeField]
+    private Transform slashDirection;
+
+    [SerializeField]
+    private GameObject slashParticle;
+
+    [SerializeField]
+    private GameObject slashCollider;
+
+    private ParticleSystem slashParticleSystem;
+
+    private Vector3 savedPosition;
+    private Vector3 savedRotation;
 
     private PowerController powerController;
     private SlashController slashController;
     void Start()
     {
-        slashController = Slash.GetComponent<SlashController>();
+        slashController = slashCollider.GetComponent<SlashController>();
         powerController = this.GetComponent<PowerController>();
         if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         stamina = maxStamina;
+        slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
     }
 
     //Input mando
@@ -300,15 +313,27 @@ public class PlayerController : MonoBehaviour
 
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                            Vector3 savedPosition = boundCharacter.transform.position;
-                            Quaternion savedRotation = boundCharacter.transform.rotation;
-                            SlashP.transform.rotation = savedRotation;
-                            Slash.transform.rotation = savedRotation;
+                            //Cosas de slash
+                            Vector3 savedPosition = slashDirection.position;
+                            slashParticle.transform.position = savedPosition;
+                            slashCollider.transform.position = savedPosition;
 
-                            //Debug.Log(savedRotation);
+                            Vector3 forwardDirection = slashDirection.forward;
+                            Quaternion lookRotation = Quaternion.LookRotation(forwardDirection, slashDirection.up);
 
-                            SlashP.transform.position = savedPosition;
-                            Slash.transform.position = savedPosition;
+                            var mainModule = slashParticleSystem.main;
+                            mainModule.startRotationY = 0;
+                            float newAngle = lookRotation.eulerAngles.y;
+                            newAngle = Mathf.Repeat(newAngle, 360f);
+                            if (newAngle < 0) newAngle = newAngle * -1;
+                            if (newAngle >= 360) newAngle = 360;
+                            if (newAngle >= 0 && newAngle <= 5) newAngle = 360;
+                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+                            //Debug.Log(mainModule.startRotationY.constant);
+
+                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+
+
                             isAttackingAux = true;
 
                             WasteStamina(attackStamina);
@@ -329,18 +354,24 @@ public class PlayerController : MonoBehaviour
                                 lastComboEnd = Time.time;
                             }
 
-                            SlashP.SetActive(false);
-                            Slash.SetActive(false);
+                            slashCollider.SetActive(false);
+                            slashParticle.SetActive(false);
 
-                            SlashP.SetActive(true);
-                            Slash.SetActive(true);
-
+                            StartCoroutine(ReactivateObjects());
                         }
                     }
                 }
             }
         }
 
+    }
+
+    IEnumerator ReactivateObjects()
+    {
+        yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
+
+        slashCollider.SetActive(true);
+        slashParticle.SetActive(true);
     }
 
     private void SpecialAttack()
@@ -442,16 +473,16 @@ public class PlayerController : MonoBehaviour
     {
         if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            SlashP.SetActive(false);
-            Slash.SetActive(false);
+            slashCollider.SetActive(false);
+            slashParticle.SetActive(false);
             Invoke("EndCombo", 0.1f);
         }
     }
 
     private void EndCombo()
     {
-        SlashP.SetActive(false);
-        Slash.SetActive(false);
+        slashCollider.SetActive(false);
+        slashParticle.SetActive(false);
         attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
