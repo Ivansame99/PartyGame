@@ -10825,7 +10825,7 @@ PrefabInstance:
     - target: {fileID: 7650952520577230721, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: dodgeSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7650952520577230721, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
@@ -11194,7 +11194,7 @@ MonoBehaviour:
   currentPowerLevel: 0
   minPowerLevel: 10
   maxPowerLevel: 300
-  maxScaleMultiplier: 2
+  maxScaleMultiplier: 1.6
   minScaleMultiplier: 1
   powerLevel: {fileID: 2786752220195326749}
 --- !u!1001 &2566691854728986149
@@ -11777,6 +11777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalDamage: 0
+  pushForce: 0
 --- !u!4 &6244444943224658825 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 260846254971842418, guid: 2979c20cdb2a78e45b6c66d03504f039,

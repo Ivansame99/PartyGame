@@ -81,7 +81,7 @@ public class PowerController : MonoBehaviour
     public void OnDieSetCurrentPowerLevel()
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
-        if(currentPowerLevel<0) currentPowerLevel = 0;
+        if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
         powerLevelText.SetText(currentPowerLevel.ToString());
     }
 

@@ -23,6 +23,7 @@ public class ArrowController : MonoBehaviour
     private bool ground;
 
     private float invencibilityTimerOnSpawn = 0.1f;
+    private float invencibilityTimerOnSpawnOwner = 0.6f;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,16 +44,30 @@ public class ArrowController : MonoBehaviour
         {
             this.GetComponent<BoxCollider>().enabled = true;
         }
+
+        if (invencibilityTimerOnSpawnOwner >= 0)
+        {
+            invencibilityTimerOnSpawnOwner -= Time.deltaTime;
+
+        }
         //transform.rotation = Quaternion.LookRotation(rb.velocity);
-        this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
+        //this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
-            target = collision.gameObject;
-            attack = true;
+            if (collision.gameObject == owner /*&& invencibilityTimerOnSpawnOwner > 0*/)
+            {
+                Debug.Log("Te has pegado a ti mismo");
+                //Para que no colisione el jugador que ha lanzado la flecha al spawnear
+            }
+            else
+            {
+                target = collision.gameObject;
+                attack = true;
+            }
         }
 
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
@@ -75,7 +90,6 @@ public class ArrowController : MonoBehaviour
                 direction.y = 0;
                 target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
                 attack = false;
-                Destroy(this.gameObject);
             }
 
             rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);

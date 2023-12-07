@@ -294,7 +294,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (weapon.tag == "Sword")
                 {
-                    if (Time.time - lastComboEnd > 0.5f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+                    if (Time.time - lastComboEnd > 0.35f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
                         CancelInvoke("EndCombo");
 
@@ -312,10 +312,10 @@ public class PlayerController : MonoBehaviour
                             isAttackingAux = true;
 
                             WasteStamina(attackStamina);
-                            attacking = true;
+                            //attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10; //Cambiar escalado poder
+                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
                             //Debug.Log(slashController.finalDamage);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
@@ -412,27 +412,27 @@ public class PlayerController : MonoBehaviour
         ArrowController ac = arrow1.GetComponent<ArrowController>();
 
         ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 15);
+        ac.SetSpeed(currentBowStamina * 17);
         ac.SetPushForce(currentBowStamina * 20);
         ac.owner = this.gameObject;
 
         ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
         ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac2.SetSpeed(currentBowStamina * 15);
+        ac2.SetSpeed(currentBowStamina * 17);
         ac2.SetPushForce(currentBowStamina * 20);
         ac2.owner = this.gameObject;
 
         ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
         ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac3.SetSpeed(currentBowStamina * 15);
+        ac3.SetSpeed(currentBowStamina * 17);
         ac3.SetPushForce(currentBowStamina * 20);
         ac3.owner = this.gameObject;
         // weaponController.damage = weaponController.combo[comboCounter].damage;
         //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
         //attacking = false;
-        Invoke("StopAttack", 0.7f);
+        Invoke("StopAttack", 0.3f);
         indicativeArrow.SetActive(false);
         currentBowStamina = 0;
         bowCD = maxBowCD;
@@ -460,9 +460,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!attacking)
-        {
-            if (dodge)
+//        if (!attacking)
+//        {
+            if (attacking)
+            {
+                rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
+            }
+            else if (dodge)
             {
                 rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
             }
@@ -471,8 +475,7 @@ public class PlayerController : MonoBehaviour
                 rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
             }
 
-        }
-        else if (greatSwordAttackState == 1 && greatSwordTimePressed >= 0) rb.MovePosition(transform.position + greatSwordAttackDirection * speed * Time.fixedDeltaTime);
+//        }
 
         if (moveAttack)
         {
