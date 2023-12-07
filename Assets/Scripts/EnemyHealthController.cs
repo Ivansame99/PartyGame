@@ -34,6 +34,8 @@ public class EnemyHealthController : MonoBehaviour
     private float currentPower;
 
     private GameObject lastAttacker;
+    [SerializeField]
+    private GameObject Cross1, Cross2, Glow;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +89,15 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (other.CompareTag("SlashEffect"))
         {
+            Cross1.SetActive(false);
+            Cross2.SetActive(false);
+            Glow.SetActive(false);
+
+
+            Cross1.SetActive(true);
+            Cross2.SetActive(true);
+            Glow.SetActive(true);
+
             ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
             //Debug.Log(lastAttacker);
