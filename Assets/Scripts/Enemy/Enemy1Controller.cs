@@ -58,6 +58,10 @@ public class Enemy1Controller : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (animator.GetBool("attackOn"))
+        {
+
+        }
         if (animator.GetBool("isEvading"))
         {
             //navMeshAgent.enabled = false;
