@@ -26,6 +26,10 @@ public class RoundController : MonoBehaviour
     private List<GameObject> currentEnemies;
 
     private GameObject[] playersInGame;
+
+    [SerializeField]
+    private Animator coliseumAnimator;
+
     private int playersCount;
 
     public bool finalRound;
@@ -97,6 +101,9 @@ public class RoundController : MonoBehaviour
         roundUIAnim.SetTrigger("ChangeRound");
         yield return new WaitForSeconds(secondsBetweenRounds);
 
+        coliseumAnimator.SetBool("DoorOpen", true);
+        yield return new WaitForSeconds(1);
+
         int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
 
         for (int i = 0; i < enemyNumberInCurrentRound; i++)
@@ -106,6 +113,7 @@ public class RoundController : MonoBehaviour
             currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
 
         }
+        coliseumAnimator.SetBool("DoorOpen", false);
         roundIndex++;
     }
 
