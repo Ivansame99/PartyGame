@@ -60,11 +60,13 @@ public class Enemy1Controller : MonoBehaviour
     {
         if (animator.GetBool("attackOn"))
         {
-
+            //mete slash normal
+            Debug.Log("ola");
         }
         if (animator.GetBool("isEvading"))
         {
             //navMeshAgent.enabled = false;
+            //METE SLASH ESPECIAL
             rb.MovePosition(transform.position + evadeAttackDirection * specialAttackSpeed * Time.fixedDeltaTime);
             navMeshAgent.updatePosition = false;
             onlyOnce = false;
@@ -78,7 +80,10 @@ public class Enemy1Controller : MonoBehaviour
 
     }
 
+    public void Slash()
+    {
 
+    }
     public void Die()
     {
         Destroy(this.gameObject);
