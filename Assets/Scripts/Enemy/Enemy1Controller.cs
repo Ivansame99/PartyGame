@@ -60,8 +60,8 @@ public class Enemy1Controller : MonoBehaviour
     {
         if (animator.GetBool("attackOn"))
         {
-            //mete slash normal
-            Debug.Log("ola");
+            //mete slash normal (SI NO FUNCIONA AQUI, METELO EN LA FUNCION DE ABAJO SLASH
+        
         }
         if (animator.GetBool("isEvading"))
         {
