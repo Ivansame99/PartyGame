@@ -7,17 +7,23 @@ public class Enemy1Controller : MonoBehaviour
 {
     [SerializeField] private float HP;
     [SerializeField] private int damageValue;
-    [SerializeField] private float inmuneTime;
+    [SerializeField] private float inmuneTime; 
+    [SerializeField] private float specialAttackSpeed;
+    private Rigidbody rb;
     private float timer;
-    private float lowHP;
     private Animator animator;
     private bool onlyOnce;
-    
+    NavMeshAgent navMeshAgent;
+
+    private Vector3 evadeAttackDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        lowHP = HP * 0.50f;
+        evadeAttackDirection = -transform.forward;
+        onlyOnce = true;
     }
 
     // Update is called once per frame
@@ -27,6 +33,7 @@ public class Enemy1Controller : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
+
     }
     public void TakeDamage(int damageAmount)
     {
@@ -39,10 +46,6 @@ public class Enemy1Controller : MonoBehaviour
                 animator.SetTrigger("die");
                 animator.SetBool("isChasing",false);
             }
-            else if (HP <= lowHP)
-            {
-                animator.SetTrigger("evading");
-            }
             else
             {
                 //if(!animator.GetBool("isEvading")) 
@@ -53,8 +56,24 @@ public class Enemy1Controller : MonoBehaviour
 
 
     }
+    private void FixedUpdate()
+    {
+        if (animator.GetBool("isEvading"))
+        {
+            //navMeshAgent.enabled = false;
+            rb.MovePosition(transform.position + evadeAttackDirection * specialAttackSpeed * Time.fixedDeltaTime);
+            navMeshAgent.updatePosition = false;
+            onlyOnce = false;
+            //Debug.Log("entraaqui");
+        }
+        if (!animator.GetBool("isEvading") && !onlyOnce)
+        {
+            navMeshAgent.updatePosition = true;
+            onlyOnce = true;
+        }
 
-    
+    }
+
 
     public void Die()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,27 +23,22 @@ public class ChaseState : StateMachineBehaviour
             players.Add(jugadorObj.transform);
         }
         agent.speed = 3.0f;
-
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = FindPlayer();
-        player2 = FindSecondClosestPlayer();
         //animator.transform.LookAt(player);
         agent.SetDestination(player.position);
         
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
-        float secondDistance = Vector3.Distance(player2.position, animator.transform.position);
+
         if (distance < triggerDistance)
         {
             animator.SetBool("isAttacking",true);
-        }
-        if (secondDistance < triggerDistance) // Verificar si player2 no es null
-        {
-            //animator.SetTrigger("evading");
         }
         //if (distance < triggerDistance && secondDistance < triggerDistance)
         //{
@@ -72,27 +68,7 @@ public class ChaseState : StateMachineBehaviour
         }
         return searchPlayer;
     }
-    private Transform FindSecondClosestPlayer()
-    {
-        Transform closestPlayer = FindPlayer();
-        Transform secondClosestPlayer = null;
-        float minDist = float.MaxValue;
 
-        foreach (Transform player in players)
-        {
-            if (player != closestPlayer)
-            {
-                float distance = Vector3.Distance(agent.transform.position, player.position);
-
-                if (distance < minDist)
-                {
-                    minDist = distance;
-                    secondClosestPlayer = player;
-                }
-            }
-        }
-        return secondClosestPlayer;
-    }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
