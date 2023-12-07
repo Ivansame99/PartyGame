@@ -1685,6 +1685,7 @@ MonoBehaviour:
   enemiesInRound: 030000000400000005000000
   secondsBetweenRounds: 5
   secondsBetweenEnemySpawn: 1
+  coliseumAnimator: {fileID: 6100059491172163795}
   finalRound: 0
   playersDied: 0
   roundsUI: {fileID: 1222882966}
@@ -2504,6 +2505,71 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1301090607601178472, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.429
+      objectReference: {fileID: 0}
+    - target: {fileID: 1301090607601178472, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.8804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.2771
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5721572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5721572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.41549507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.41549504
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 1727318371290001500, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -71.974
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825196535821256461, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.916
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825196535821256461, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.261
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825196535821256461, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.085
+      objectReference: {fileID: 0}
     - target: {fileID: 3723432841621917570, guid: 31832ec71612442418034295a6da27a1,
         type: 3}
       propertyPath: m_RootOrder
@@ -2564,8 +2630,59 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coliseum
       objectReference: {fileID: 0}
+    - target: {fileID: 5805014813048980686, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.281
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805014813048980686, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.898
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793771044190182484, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.709
+      objectReference: {fileID: 0}
+    - target: {fileID: 8793771044190182484, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.594
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4100416261993108792, guid: 31832ec71612442418034295a6da27a1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6100059491172163795}
   m_SourcePrefab: {fileID: 100100000, guid: 31832ec71612442418034295a6da27a1, type: 3}
+--- !u!1 &6100059491172163794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4100416261993108792, guid: 31832ec71612442418034295a6da27a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 6100059491172163793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6100059491172163795
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100059491172163794}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dded844cfed35e141977755755202c80, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
