@@ -267,33 +267,56 @@ public class Character2Controller : MonoBehaviour
 
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                              Vector3 savedPosition = boundCharacter.transform.position;
-                            Quaternion savedRotation = new Quaternion(boundCharacter.transform.rotation.w, boundCharacter.transform.rotation.x, boundCharacter.transform.rotation.y, boundCharacter.transform.rotation.z);
-
-
-                            Debug.Log(savedRotation);
-
-                            // Cross1.transform.rotation = savedRotation;
-                            // Cross2.transform.rotation = savedRotation;
-                            //  Glow.transform.rotation = savedRotation;
-                            //Debug.Log(savedRotation);
-                            var mainModule = SlashParticles.main;
-                            mainModule.startRotation3D = true;
-                            mainModule.startRotationY = savedRotation.eulerAngles.y;
-                            //   SlashParticles.main.startRotationY = savedRotation.y;
-                            // Instantiate(SlashParticles, savedPosition, new Quaternion(1,savedRotation.x-90, savedRotation.y-90, savedRotation.z));
-
-                          //  SlashParticles.main = mainModule;
-                            //SlashP.transform.rotation = savedRotation;
-                            //Collider.transform.position = savedRotation;
+                            
+                            Vector3 savedPosition = boundCharacter.transform.position;
+                            //Quaternion savedRotation = boundCharacter.transform.rotation;
                             SlashP.transform.position = savedPosition;
                             Collider.transform.position = savedPosition;
                             Cross1.transform.position = savedPosition;
                             Cross2.transform.position = savedPosition;
                             Glow.transform.position = savedPosition;
 
+
+                            // Calcula la rotación en función de la dirección hacia adelante del boundCharacter
+                            Vector3 forwardDirection = boundCharacter.transform.forward;
+                            Quaternion lookRotation = Quaternion.LookRotation(forwardDirection, boundCharacter.transform.up);
+
+                            // Obtén el componente ParticleSystem
+                            ParticleSystem slashParticleSystem = SlashP.GetComponent<ParticleSystem>();
+                            // Ajusta la rotación inicial del sistema de partículas
+                            var mainModule = slashParticleSystem.main;
+                            mainModule.startRotationY = 0;
+                            // Utiliza el ángulo de rotación directamente desde LookRotation
+                            float newAngle = lookRotation.eulerAngles.y;
+
+                            // Normaliza el ángulo en el rango correcto utilizando DeltaAngle
+                            newAngle = Mathf.Repeat(newAngle, 360f);
+                            if (newAngle < 0) newAngle = newAngle * -1;
+                            if (newAngle >= 360) newAngle = 360;
+                            if (newAngle >= 0 && newAngle <= 5) newAngle = 360;
+                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+                            Debug.Log(mainModule.startRotationY.constant);
+
+                            // Desactiva y activa el objeto SlashEffect para reiniciar el sistema de partículas
+                           // SlashP.SetActive(false);
+                           // StartCoroutine(ReactivateSlashEffect());
+
+                           // IEnumerator ReactivateSlashEffect()
+                           // {
+                               // yield return new WaitForSeconds(0.1f);
+                                // Ajusta el tiempo según sea necesario
+                              
+                                mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+                            //  SlashP.SetActive(true);
+                            //   }
+                          //  SlashP.SetActive(false);
+                           // SlashP.SetActive(true);
+
+
                             WasteStamina(attackStamina);
                             attacking = true;
+                           // SlashP.SetActive(false);
+                           // SlashP.SetActive(true);
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
                             weaponController.damage = weaponController.combo[comboCounter].damage;
@@ -302,23 +325,31 @@ public class Character2Controller : MonoBehaviour
                             comboCounter++;
                             if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
                             lastClicked = Time.time;
-                           // weapon.GetComponent<BoxCollider>().enabled = true;
+
                             if (comboCounter >= weaponController.combo.Count)
                             {
                                 comboCounter = 0;
                                 lastComboEnd = Time.time;
                             }
+
                             Collider.SetActive(false);
                             SlashP.SetActive(false);
                             Cross1.SetActive(false);
                             Cross2.SetActive(false);
                             Glow.SetActive(false);
 
-                            Collider.SetActive(true);
-                            SlashP.SetActive(true);
-                          //  Cross1.SetActive(true);
-                          //  Cross2.SetActive(true);
-                           // Glow.SetActive(true);
+                            StartCoroutine(ReactivateObjects());
+
+                            IEnumerator ReactivateObjects()
+                            {
+                                yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
+
+                                Collider.SetActive(true);
+                                SlashP.SetActive(true);
+                                Cross1.SetActive(true);
+                                Cross2.SetActive(true);
+                                Glow.SetActive(true);
+                            }
 
                         }
                     }
