@@ -42,7 +42,7 @@ public class RoundController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        roundUIAnim=roundsUI.GetComponent<Animator>();
+        roundUIAnim = roundsUI.GetComponent<Animator>();
         playersDied = 0;
         finalRound = false;
         playersInGame = GameObject.FindGameObjectsWithTag("Player");
@@ -57,14 +57,16 @@ public class RoundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (roundIndex < enemiesInRound.Length) CheckCurrentEnemiesDeath();
+        if (roundIndex <= enemiesInRound.Length) CheckCurrentEnemiesDeath();
         else
         {
-            roundsUIText.text = "Final Round";
-            roundUIAnim.SetTrigger("ChangeRound");
+            if (!finalRound)
+            {
+                roundsUIText.text = "Final Round";
+                roundUIAnim.SetTrigger("ChangeRound");
+            }
             finalRound = true;
-            //Debug.Log("Se han acabado las rondas");
-            if(playersCount>1) CheckEndGame();
+            if (playersCount > 1) CheckEndGame();
         }
     }
 
@@ -91,25 +93,20 @@ public class RoundController : MonoBehaviour
 
     IEnumerator IStartNextRound()
     {
-        if (roundIndex < enemiesInRound.Length)
+        roundsUIText.text = "Round " + ToRoman(roundIndex+1);
+        roundUIAnim.SetTrigger("ChangeRound");
+        yield return new WaitForSeconds(secondsBetweenRounds);
+
+        int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
+
+        for (int i = 0; i < enemyNumberInCurrentRound; i++)
         {
-            Debug.Log("Va a empezar ronda");
-            roundsUIText.text = "Round " + ToRoman(roundIndex+1);
-            roundUIAnim.SetTrigger("ChangeRound");
-            yield return new WaitForSeconds(secondsBetweenRounds);
+            int randomSpawn = Random.Range(0, spawns.Length);
+            yield return new WaitForSeconds(secondsBetweenEnemySpawn);
+            currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
 
-            int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
-
-            for (int i = 0; i < enemyNumberInCurrentRound; i++)
-            {
-                int randomSpawn = Random.Range(0, spawns.Length);
-                yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-                currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
-
-            }
-
-            roundIndex++;
         }
+        roundIndex++;
     }
 
     void CheckCurrentEnemiesDeath()
@@ -122,10 +119,13 @@ public class RoundController : MonoBehaviour
         }
 
         //Si todos son null
-        Debug.Log("Han muerto todos");
+
         currentEnemies.Clear();
         //Invoke("StartNextRound", secondsBetweenRounds);
-        StartCoroutine(IStartNextRound());
+
+        if (roundIndex < enemiesInRound.Length) StartCoroutine(IStartNextRound());
+        else if (roundIndex == enemiesInRound.Length) roundIndex++;
+
         //if()
         //Debug.Log(currentEnemies[0]);
     }

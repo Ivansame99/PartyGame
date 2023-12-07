@@ -97,7 +97,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         //Debug.Log(timer);
         //Debug.Log(playerController.invencibility);
-        if (timer <= 0 && !playerController.invencibility)
+        if (timer <= 0)
         {
             health -= damage;
             timer = inmuneTime;
@@ -193,7 +193,7 @@ public class PlayerHealthController : MonoBehaviour
             //Debug.Log(other.gameObject.name.ToString());
             //Die();
         }*/
-        if (other.CompareTag("SlashEffect"))
+        if (other.CompareTag("SlashEffect") && !playerController.invencibility)
         {
             ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
@@ -203,12 +203,15 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow")
+        if (collision.gameObject.tag == "Arrow" && !playerController.invencibility)
         {
-            //Debug.Log("Entras aqui flecha");
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-            ReceiveDamage(ac.finalDamage);
-            lastAttacker = ac.owner;
+            if (this.gameObject != ac.owner)
+            {
+                ReceiveDamage(ac.finalDamage);
+                lastAttacker = ac.owner;
+                Destroy(collision.gameObject);
+            }
         }
     }
 

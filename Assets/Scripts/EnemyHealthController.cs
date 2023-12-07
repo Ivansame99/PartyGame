@@ -100,6 +100,7 @@ public class EnemyHealthController : MonoBehaviour
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             ReceiveDamage(ac.finalDamage);
             lastAttacker = ac.owner;
+            Destroy(collision.gameObject);
         }
     }
 }

@@ -51,15 +51,16 @@ public class ArrowController : MonoBehaviour
 
         }
         //transform.rotation = Quaternion.LookRotation(rb.velocity);
-        this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
+        //this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
-            if (collision.gameObject == owner && invencibilityTimerOnSpawnOwner > 0)
+            if (collision.gameObject == owner /*&& invencibilityTimerOnSpawnOwner > 0*/)
             {
+                Debug.Log("Te has pegado a ti mismo");
                 //Para que no colisione el jugador que ha lanzado la flecha al spawnear
             }
             else
@@ -89,7 +90,6 @@ public class ArrowController : MonoBehaviour
                 direction.y = 0;
                 target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
                 attack = false;
-                Destroy(this.gameObject);
             }
 
             rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);

@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
                             //attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 10; //Cambiar escalado poder
+                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
                             //Debug.Log(slashController.finalDamage);
                             weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
