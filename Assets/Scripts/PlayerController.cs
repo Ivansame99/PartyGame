@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private float minBowStamina;
     [SerializeField]
     private float maxBowStamina;
-    private float currentBowStamina=0;
+    private float currentBowStamina = 0;
 
     [SerializeField]
     private float greatSwordAttackStamina;
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float dodgeInvencibilitySeconds;
 
-    private float invencibilityTimer = 0;
+    public float invencibilityTimer = 0;
     private float greatSwordTimePressed = 0;
     [SerializeField]
     private float maxBowCD;
@@ -170,10 +170,12 @@ public class PlayerController : MonoBehaviour
         //Voltereta
         Roll();
         if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
-        if (invencibilityTimer >= 0) {
+        if (invencibilityTimer >= 0)
+        {
             invencibility = true;
             invencibilityTimer -= Time.deltaTime;
-        } else invencibility = false;
+        }
+        else invencibility = false;
 
         //Espada
         if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver S atacar
@@ -182,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
         //Arco
         SpecialAttack();
-        if(bowCD>=0) bowCD -= Time.deltaTime;
+        if (bowCD >= 0) bowCD -= Time.deltaTime;
 
         //Stamina
         RecoverStamina();
@@ -401,17 +403,20 @@ public class PlayerController : MonoBehaviour
                 else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
                     ShootArrow();
-                } else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
+                }
+                else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
                     currentBowStamina = 0;
                     attacking = false;
                     indicativeArrow.SetActive(false);
                 }
             }
-        }else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
+        }
+        else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
             ShootArrow();
-        } else if(!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
+        }
+        else if (!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
             currentBowStamina = 0;
             //Debug.Log("asdadasdasd");
@@ -444,26 +449,23 @@ public class PlayerController : MonoBehaviour
         ArrowController ac = arrow1.GetComponent<ArrowController>();
 
         ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 17);
-        ac.SetPushForce(currentBowStamina * 20);
+        ac.SetSpeed(currentBowStamina * 20);
+        ac.SetPushForce(currentBowStamina * 15);
         ac.owner = this.gameObject;
 
         ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
         ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac2.SetSpeed(currentBowStamina * 17);
-        ac2.SetPushForce(currentBowStamina * 20);
+        ac2.SetSpeed(currentBowStamina * 20);
+        ac2.SetPushForce(currentBowStamina * 15);
         ac2.owner = this.gameObject;
 
         ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
         ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac3.SetSpeed(currentBowStamina * 17);
-        ac3.SetPushForce(currentBowStamina * 20);
+        ac3.SetSpeed(currentBowStamina * 20);
+        ac3.SetPushForce(currentBowStamina * 15);
         ac3.owner = this.gameObject;
-        // weaponController.damage = weaponController.combo[comboCounter].damage;
-        //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-        //attacking = false;
         Invoke("StopAttack", 0.3f);
         indicativeArrow.SetActive(false);
         currentBowStamina = 0;
@@ -492,22 +494,22 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-//        if (!attacking)
-//        {
-            if (attacking)
-            {
-                rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
-            }
-            else if (dodge)
-            {
-                rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
-            }
-            else if (isWalking)
-            {
-                rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
-            }
+        //        if (!attacking)
+        //        {
+        if (attacking)
+        {
+            rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
+        }
+        else if (dodge)
+        {
+            rb.MovePosition(transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
+        }
+        else if (isWalking)
+        {
+            rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
+        }
 
-//        }
+        //        }
 
         if (moveAttack)
         {
