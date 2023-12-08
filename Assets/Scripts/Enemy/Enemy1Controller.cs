@@ -19,6 +19,16 @@ public class Enemy1Controller : MonoBehaviour
     public GameObject boundCharacter;
     public GameObject SlashEffect;
     private int veces;
+    [SerializeField]
+    private Transform slashDirection;
+
+    [SerializeField]
+    private GameObject slashParticle;
+
+    [SerializeField]
+    private GameObject slashCollider;
+
+    private ParticleSystem slashParticleSystem;
     private Vector3 evadeAttackDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +38,7 @@ public class Enemy1Controller : MonoBehaviour
         animator = GetComponent<Animator>();
         evadeAttackDirection = -transform.forward;
         onlyOnce = true;
+         slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -88,39 +99,39 @@ public void Slash()
 {
         veces++;
         Debug.Log(veces);
-        // Guarda la posición del objeto boundCharacter
-        Vector3 savedPosition = boundCharacter.transform.position;
+        //Cosas de slash
+        Vector3 savedPosition = slashDirection.position;
+        slashParticle.transform.position = savedPosition;
+        slashCollider.transform.position = savedPosition;
 
-    // Establece la posición del objeto SlashEffect
-    SlashEffect.transform.position = savedPosition;
+        Quaternion lookRotation = slashDirection.rotation; // Usamos directamente la rotación del objeto
+        slashCollider.SetActive(false);
+        slashParticle.SetActive(false);
 
-    // Calcula la rotación en función de la dirección hacia adelante del boundCharacter
-    Vector3 forwardDirection = boundCharacter.transform.forward;
-    Quaternion lookRotation = Quaternion.LookRotation(forwardDirection, boundCharacter.transform.up);
+        var mainModule = slashParticleSystem.main;
 
-    // Obtén el componente ParticleSystem
-    ParticleSystem slashParticleSystem = SlashEffect.GetComponent<ParticleSystem>();
+        float newAngle = lookRotation.eulerAngles.y;
+        newAngle = Mathf.Repeat(newAngle, 360f);
+      //  if (newAngle < 0) newAngle = newAngle * -1;
+        if (newAngle >= 360) newAngle = 360;
+        if (newAngle >= 0 && newAngle <= 5) newAngle = 360;
 
-    // Ajusta la rotación inicial del sistema de partículas
-    var mainModule = slashParticleSystem.main;
+        mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+        Debug.Log(mainModule.startRotationY.constant);
 
-    // Utiliza el ángulo de rotación directamente desde LookRotation
-    float newAngle = lookRotation.eulerAngles.y;
 
-    // Asegura que el nuevo ángulo esté en el rango correcto
-    mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
-     //Debug.Log(mainModule.startRotationY.constant);
-    // Desactiva y activa el objeto SlashEffect para reiniciar el sistema de partículas
-    SlashEffect.SetActive(false);
-    StartCoroutine(ReactivateSlashEffect());
 
-    IEnumerator ReactivateSlashEffect()
-    {
-        yield return new WaitForSeconds(0.1f); // Ajusta el tiempo según sea necesario
-        SlashEffect.SetActive(true);
+        StartCoroutine(ReactivateObjects());
+
+
     }
-}
+    IEnumerator ReactivateObjects()
+    {
+        yield return new WaitForSeconds(0.1f); // Ajusta el tiempo segÃºn sea necesario
 
+        slashCollider.SetActive(true);
+        slashParticle.SetActive(true);
+    }
     public void Die()
     {
         Destroy(this.gameObject);
