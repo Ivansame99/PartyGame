@@ -18,7 +18,7 @@ public class Enemy1Controller : MonoBehaviour
     //SLASH STUFF
     public GameObject boundCharacter;
     public GameObject SlashEffect;
-
+    private int veces;
     private Vector3 evadeAttackDirection = Vector3.zero;
     // Start is called before the first frame update
     void Start()
@@ -86,7 +86,8 @@ public class Enemy1Controller : MonoBehaviour
 
 public void Slash()
 {
-        Debug.Log("ENTRO");
+        veces++;
+        Debug.Log(veces);
         // Guarda la posición del objeto boundCharacter
         Vector3 savedPosition = boundCharacter.transform.position;
 
@@ -108,7 +109,7 @@ public void Slash()
 
     // Asegura que el nuevo ángulo esté en el rango correcto
     mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
-     Debug.Log(mainModule.startRotationY.constant);
+     //Debug.Log(mainModule.startRotationY.constant);
     // Desactiva y activa el objeto SlashEffect para reiniciar el sistema de partículas
     SlashEffect.SetActive(false);
     StartCoroutine(ReactivateSlashEffect());
