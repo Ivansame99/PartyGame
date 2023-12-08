@@ -23,13 +23,16 @@ public class ArrowController : MonoBehaviour
     private bool ground;
 
     private float invencibilityTimerOnSpawn = 0.1f;
-    private float invencibilityTimerOnSpawnOwner = 0.6f;
+    public float invencibilityTimerOnSpawnOwner = 0.3f;
+
+    private Vector3 arrowDirection;
     // Start is called before the first frame update
     void Start()
     {
         //gravityScale = 0.1f;
         rb = GetComponent<Rigidbody>();
         this.GetComponent<BoxCollider>().enabled = false;
+        arrowDirection = transform.forward;
     }
 
     // Update is called once per frame
@@ -50,17 +53,15 @@ public class ArrowController : MonoBehaviour
             invencibilityTimerOnSpawnOwner -= Time.deltaTime;
 
         }
-        //transform.rotation = Quaternion.LookRotation(rb.velocity);
-        //this.transform.forward = Vector3.Slerp(this.transform.forward, this.rb.velocity.normalized, Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
-            if (collision.gameObject == owner /*&& invencibilityTimerOnSpawnOwner > 0*/)
+            if (collision.gameObject == owner && invencibilityTimerOnSpawnOwner > 0)
             {
-                Debug.Log("Te has pegado a ti mismo");
+                //Debug.Log("Te has pegado a ti mismo");
                 //Para que no colisione el jugador que ha lanzado la flecha al spawnear
             }
             else
@@ -120,5 +121,20 @@ public class ArrowController : MonoBehaviour
     {
         pushForce = s;
         //Debug.Log(s);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "SlashEffect")
+        {
+            // Calcular la rotación para revertir la dirección original
+            Quaternion rotacionRevertida = Quaternion.LookRotation(-transform.forward);
+
+            // Aplicar la rotación al objeto
+            transform.rotation = rotacionRevertida;
+
+            speed += 5;
+            //arrowDirection = Vector3.Reflect(arrowDirection, Random.onUnitSphere);
+        }
     }
 }

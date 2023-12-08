@@ -206,7 +206,10 @@ public class PlayerHealthController : MonoBehaviour
         if (collision.gameObject.tag == "Arrow" && !playerController.invencibility)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-            if (this.gameObject != ac.owner)
+            if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner>0)
+            {
+                //Se pega contra si mismo al principio
+            } else
             {
                 ReceiveDamage(ac.finalDamage);
                 lastAttacker = ac.owner;
