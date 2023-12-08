@@ -7,7 +7,7 @@ public class ArrowController : MonoBehaviour
     public float baseDamage;
     public float finalDamage;
 
-    private float pushForce;
+    public float pushForce;
     [SerializeField]
     private float speed;
 
@@ -57,7 +57,7 @@ public class ArrowController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
+        /*if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
         {
             if (collision.gameObject == owner && invencibilityTimerOnSpawnOwner > 0)
             {
@@ -69,7 +69,7 @@ public class ArrowController : MonoBehaviour
                 target = collision.gameObject;
                 attack = true;
             }
-        }
+        }*/
 
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
@@ -85,13 +85,13 @@ public class ArrowController : MonoBehaviour
     {
         if (!ground)
         {
-            if (attack && target != null)
+            /*if (attack && target != null)
             {
                 Vector3 direction = (target.transform.position - transform.position).normalized;
                 direction.y = 0;
                 target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
                 attack = false;
-            }
+            }*/
 
             rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
             //rb.velocity = transform.forward * speed;

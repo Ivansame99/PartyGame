@@ -37,6 +37,10 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField]
     private GameObject Cross1, Cross2, Glow;
 
+    private bool pushBack;
+    private Vector3 attackPosition;
+    private float pushForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +56,17 @@ public class EnemyHealthController : MonoBehaviour
         if (timer >= 0)
         {
             timer-=Time.deltaTime;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (pushBack)
+        {
+            Vector3 direction = (this.transform.position - attackPosition).normalized;
+            direction.y = 0;
+            this.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
+            pushBack = false;
         }
     }
 
@@ -98,9 +113,13 @@ public class EnemyHealthController : MonoBehaviour
             Cross2.SetActive(true);
             Glow.SetActive(true);
 
-            ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
+            SlashController slashController = other.GetComponent<SlashController>();
+            attackPosition = other.gameObject.transform.position;
+            pushBack = true;
+            pushForce = slashController.pushForce;
+
+            ReceiveDamage(slashController.finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
-            //Debug.Log(lastAttacker);
         }
     }
 
@@ -109,6 +128,10 @@ public class EnemyHealthController : MonoBehaviour
         if (collision.gameObject.tag=="Arrow")
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
+            attackPosition = collision.gameObject.transform.position;
+            pushBack = true;
+            pushForce = ac.pushForce;
+
             ReceiveDamage(ac.finalDamage);
             lastAttacker = ac.owner;
             Destroy(collision.gameObject);

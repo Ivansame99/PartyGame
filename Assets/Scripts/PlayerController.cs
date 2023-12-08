@@ -342,7 +342,8 @@ public class PlayerController : MonoBehaviour
                             anim.Play("Attack", 0, 0);
                             slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
                             //Debug.Log(slashController.finalDamage);
-                            weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                            //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+                            slashController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;
                             if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez

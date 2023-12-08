@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerHealthController : MonoBehaviour
 {
@@ -58,6 +59,10 @@ public class PlayerHealthController : MonoBehaviour
 
     private PlayersRespawn playersRespawn;
 
+    private bool pushBack;
+    private Vector3 attackPosition;
+    private float pushForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +75,7 @@ public class PlayerHealthController : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
         playersRespawn = FindObjectOfType<PlayersRespawn>();
+        pushBack = false;
     }
 
     // Update is called once per frame
@@ -91,6 +97,17 @@ public class PlayerHealthController : MonoBehaviour
         }
 
         if (restart) Respawn();
+    }
+
+    private void FixedUpdate()
+    {
+        if (pushBack)
+        {
+            Vector3 direction = (this.transform.position - attackPosition).normalized;
+            direction.y = 0;
+            this.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
+            pushBack = false;
+        }    
     }
 
     public void ReceiveDamage(float damage)
@@ -188,16 +205,14 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*if (other.gameObject.tag == "Wall" && !dead && this.gameObject.tag=="Player")
-        {
-            //Debug.Log(other.gameObject.name.ToString());
-            //Die();
-        }*/
         if (other.CompareTag("SlashEffect") && !playerController.invencibility)
         {
-            ReceiveDamage(other.GetComponent<SlashController>().finalDamage);
+            SlashController slashController = other.GetComponent<SlashController>();
+            attackPosition = other.gameObject.transform.position;
+            pushBack = true;
+            pushForce = slashController.pushForce;
+            ReceiveDamage(slashController.finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
-            //Debug.Log("Daños");
         }
     }
 
@@ -208,9 +223,13 @@ public class PlayerHealthController : MonoBehaviour
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner>0)
             {
-                //Se pega contra si mismo al principio
+                //Se pega contra si mismo al principio, no hace nada
             } else
             {
+                attackPosition = collision.gameObject.transform.position;
+                pushBack = true;
+                pushForce = ac.pushForce;
+
                 ReceiveDamage(ac.finalDamage);
                 lastAttacker = ac.owner;
                 Destroy(collision.gameObject);
