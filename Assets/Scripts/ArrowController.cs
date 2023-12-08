@@ -31,23 +31,13 @@ public class ArrowController : MonoBehaviour
     {
         //gravityScale = 0.1f;
         rb = GetComponent<Rigidbody>();
-        this.GetComponent<BoxCollider>().enabled = false;
+        //this.GetComponent<BoxCollider>().enabled = false;
         arrowDirection = transform.forward;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (invencibilityTimerOnSpawn >= 0)
-        {
-            invencibilityTimerOnSpawn -= Time.deltaTime;
-            
-        }
-        else
-        {
-            this.GetComponent<BoxCollider>().enabled = true;
-        }
-
         if (invencibilityTimerOnSpawnOwner >= 0)
         {
             invencibilityTimerOnSpawnOwner -= Time.deltaTime;

@@ -6,7 +6,7 @@ using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class EnemyHealthController : MonoBehaviour
 {
-   
+
     private float health;
 
     [SerializeField]
@@ -46,16 +46,16 @@ public class EnemyHealthController : MonoBehaviour
     {
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, camera);
-        health=maxHealth;
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (timer >= 0)
         {
-            timer-=Time.deltaTime;
+            timer -= Time.deltaTime;
         }
     }
 
@@ -70,7 +70,7 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
-    public void ReceiveDamage(float damage)
+    public void ReceiveDamageSlash(float damage)
     {
         if (timer <= 0)
         {
@@ -82,17 +82,24 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
+    public void ReceiveDamageArrow(float damage)
+    {
+        health -= damage;
+        healthBarC.SetProgress(health / maxHealth, 5f);
+        if (health <= 0) Die();
+    }
+
     void Die()
     {
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower/2); //Se le suma la puntuacion del enemigo
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
         Destroy(this.gameObject);
-        
+
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)
@@ -100,7 +107,7 @@ public class EnemyHealthController : MonoBehaviour
         healthBar.transform.SetParent(canvas.transform);
     }
 
-     private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SlashEffect"))
         {
@@ -118,21 +125,21 @@ public class EnemyHealthController : MonoBehaviour
             pushBack = true;
             pushForce = slashController.pushForce;
 
-            ReceiveDamage(slashController.finalDamage);
+            ReceiveDamageSlash(slashController.finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag=="Arrow")
+        if (collision.gameObject.tag == "Arrow")
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;
             pushBack = true;
             pushForce = ac.pushForce;
 
-            ReceiveDamage(ac.finalDamage);
+            ReceiveDamageArrow(ac.finalDamage);
             lastAttacker = ac.owner;
             Destroy(collision.gameObject);
         }

@@ -148,7 +148,6 @@ public class PlayerHealthController : MonoBehaviour
         healthBar.gameObject.SetActive(false);
         staminaBar.gameObject.SetActive(false);
         powerBar.gameObject.SetActive(false);
-        
         //playerCollider.enabled = false;
     }
 
@@ -205,7 +204,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect") && !playerController.invencibility)
+        if (other.CompareTag("SlashEffect") && !playerController.invencibility && !dead)
         {
             SlashController slashController = other.GetComponent<SlashController>();
             attackPosition = other.gameObject.transform.position;
@@ -218,7 +217,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !playerController.invencibility)
+        if (collision.gameObject.tag == "Arrow" && !playerController.invencibility && !dead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner>0)

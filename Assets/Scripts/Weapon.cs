@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     private bool attack;
 
     public GameObject arrow;
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
@@ -39,5 +39,5 @@ public class Weapon : MonoBehaviour
             target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
             attack = false;
         }
-    }
+    }*/
 }

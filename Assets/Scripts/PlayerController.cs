@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Roll");
             if (attacking) EndCombo();
             invencibilityTimer = dodgeInvencibilitySeconds;
+            Invoke("RollEnded", 1f); //Por si acaso no entra por animacion
         }
     }
 
