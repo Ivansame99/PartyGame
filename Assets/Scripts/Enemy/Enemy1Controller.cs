@@ -127,9 +127,6 @@ public void Slash()
         if (newAngle >= 0 && newAngle <= 5) newAngle = 360;
 
         mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
-        Debug.Log(mainModule.startRotationY.constant);
-
-
 
         StartCoroutine(ReactivateObjects());
 
