@@ -326,6 +326,9 @@ public class PlayerController : MonoBehaviour
                             float newAngle = lookRotation.eulerAngles.y;
                             newAngle = Mathf.Repeat(newAngle, 360f);
                             int angleInt = Mathf.FloorToInt(newAngle);
+
+                            // LO DE ABAJO FUNCIONA PERO HAY QUE HACERLO BIEN PORQUE ES UNA PUTA MIERDA
+
                             if (angleInt < 0) angleInt = angleInt * -1;
                             if (angleInt >= 360) angleInt = 360;
                             if (angleInt > 5 && angleInt <= 29) angleInt = 20;
@@ -340,7 +343,7 @@ public class PlayerController : MonoBehaviour
                             if (angleInt >= 281 && angleInt <= 350) angleInt = 340;
                             if (angleInt >= 351 && angleInt <= 359) angleInt = 360;
                             mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
-                            Debug.Log(mainModule.startRotationY.constant);
+                            //Debug.Log(mainModule.startRotationY.constant);
 
                             mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
 
