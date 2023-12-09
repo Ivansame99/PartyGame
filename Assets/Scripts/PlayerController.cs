@@ -328,13 +328,27 @@ public class PlayerController : MonoBehaviour
                             mainModule.startRotationY = 0;
                             float newAngle = lookRotation.eulerAngles.y;
                             newAngle = Mathf.Repeat(newAngle, 360f);
-                            if (newAngle < 0) newAngle = newAngle * -1;
-                            if (newAngle >= 360) newAngle = 360;
-                            if (newAngle >= 0 && newAngle <= 5) newAngle = 360;
-                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+                            int angleInt = Mathf.FloorToInt(newAngle);
+
+                            // LO DE ABAJO FUNCIONA PERO HAY QUE HACERLO BIEN PORQUE ES UNA PUTA MIERDA
+
+                            if (angleInt < 0) angleInt = angleInt * -1;
+                            if (angleInt >= 360) angleInt = 360;
+                            if (angleInt > 5 && angleInt <= 29) angleInt = 20;
+                            if (angleInt >= 30 && angleInt <= 50) angleInt = 40;
+                            if (angleInt >= 0 && angleInt <= 5) angleInt = 360;
+                            if (angleInt >= 51 && angleInt <= 69) angleInt = 60;
+                            if (angleInt >= 70 && angleInt <= 139) angleInt = 135;
+                            if (angleInt >= 140 && angleInt <= 169) angleInt = 160; // ESTA LA HACE RARA
+                            if (angleInt >= 170 && angleInt <= 200) angleInt = 200;
+                            if (angleInt >= 201 && angleInt <= 260) angleInt = 250;
+                            if (angleInt >= 261 && angleInt <= 280) angleInt = 270;
+                            if (angleInt >= 281 && angleInt <= 350) angleInt = 340;
+                            if (angleInt >= 351 && angleInt <= 359) angleInt = 360;
+                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
                             //Debug.Log(mainModule.startRotationY.constant);
 
-                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(newAngle);
+                            mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
 
 
                             isAttackingAux = true;
