@@ -213,6 +213,13 @@ public class PlayerHealthController : MonoBehaviour
             ReceiveDamage(slashController.finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
         }
+
+        if(other.gameObject.tag == "Potion")
+        {
+            health += 50;
+            healthBarC.SetProgress(health / maxHealth, 2);
+            Destroy(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
