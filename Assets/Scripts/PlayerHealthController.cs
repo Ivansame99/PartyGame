@@ -63,6 +63,9 @@ public class PlayerHealthController : MonoBehaviour
     private Vector3 attackPosition;
     private float pushForce;
 
+    [SerializeField]
+    private GameObject cross1, cross2, glow;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -206,6 +209,15 @@ public class PlayerHealthController : MonoBehaviour
     {
         if (other.CompareTag("SlashEffect") && !playerController.invencibility && !dead)
         {
+            cross1.SetActive(false);
+            cross2.SetActive(false);
+            glow.SetActive(false);
+
+
+            cross1.SetActive(true);
+            cross2.SetActive(true);
+            glow.SetActive(true);
+
             SlashController slashController = other.GetComponent<SlashController>();
             attackPosition = other.gameObject.transform.position;
             pushBack = true;
