@@ -111,6 +111,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (other.CompareTag("SlashEffect"))
         {
+            if (other.gameObject.transform.parent.parent.tag != "Enemy") { 
             Cross1.SetActive(false);
             Cross2.SetActive(false);
             Glow.SetActive(false);
@@ -127,7 +128,9 @@ public class EnemyHealthController : MonoBehaviour
 
             ReceiveDamageSlash(slashController.finalDamage);
             lastAttacker = other.transform.parent.parent.gameObject;
+            }
         }
+
     }
 
     private void OnCollisionEnter(Collision collision)

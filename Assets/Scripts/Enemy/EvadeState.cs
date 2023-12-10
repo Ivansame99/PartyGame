@@ -7,33 +7,55 @@ using UnityEngine.AI;
 public class EvadeState : StateMachineBehaviour
 {
     private NavMeshAgent agent;
-    private Vector3 oppositeDirection;
-    private Vector3 targetPosition;
+    private Transform player;
+    public List<Transform> players;
     [SerializeField] private float speed;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float angularSpeed;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //animator.SetBool("isEvading", true);
         agent = animator.GetComponent<NavMeshAgent>();
-        oppositeDirection = -animator.transform.forward;
+        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject jugadorObj in jugadoresArray)
+        {
+            players.Add(jugadorObj.transform);
+        }
+        agent.speed = speed;
+        agent.acceleration = acceleration;
+        agent.angularSpeed = angularSpeed;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-
-        // Obtener la posición objetivo restando la dirección opuesta multiplicada por una distancia
-        //targetPosition = animator.transform.position + oppositeDirection * speed * Time.deltaTime; // Cambia 5.0f por la distancia deseada
-
-        // Establecer la posición objetivo usando SetDestination del NavMeshAgent
-        //agent.SetDestination(targetPosition);
+        player = FindPlayer();
+        agent.SetDestination(player.position);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetBool("isEvading", false);
+        //animator.SetBool("isEvading", false);
+        agent.SetDestination(animator.transform.position);
+    }
+    private Transform FindPlayer()
+    {
+        Transform searchPlayer = null;
+        float minDist = float.MaxValue;
 
+        foreach (Transform player in players)
+        {
+            float distance = Vector3.Distance(agent.transform.position, player.position);
+
+            if (distance < minDist)
+            {
+                minDist = distance;
+                searchPlayer = player;
+            }
+        }
+        return searchPlayer;
     }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -47,11 +69,3 @@ public class EvadeState : StateMachineBehaviour
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
 }
-//rb = animator.GetComponent<Rigidbody>();
-//Vector3 oppositeDirection = -animator.transform.forward;
-//Vector3 randomOffset = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f)).normalized * 60f;
-//Vector3 finalDirection = oppositeDirection + randomOffset;
-//rb.AddForce(finalDirection, ForceMode.Impulse);
-
-//rb.velocity = Vector3.zero;
-//rb.angularVelocity = Vector3.zero;

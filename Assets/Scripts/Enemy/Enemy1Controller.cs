@@ -12,7 +12,7 @@ public class Enemy1Controller : MonoBehaviour
     private Rigidbody rb;
     private Animator animator;
     private bool onlyOnceSpecial,onlyOnceAttack;
-    NavMeshAgent navMeshAgent;
+    NavMeshAgent agent;
 
     //SLASH STUFF
     public GameObject boundCharacter;
@@ -34,7 +34,7 @@ public class Enemy1Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         evadeAttackDirection = -transform.forward;
@@ -57,17 +57,25 @@ public class Enemy1Controller : MonoBehaviour
         {
             //mete slash normal (SI NO FUNCIONA AQUI, METELO EN LA FUNCION DE ABAJO SLASH
             //  Slash();
-            navMeshAgent.updatePosition = false;
+            //navMeshAgent.updatePosition = false;
+            //navMeshAgent.updateRotation = false;
+            agent.enabled = false;
             rb.MovePosition(transform.position + transform.forward * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceAttack = false;
+            //navMeshAgent.isStopped = true;
         }
+        
         if (!animator.GetBool("attackOn") && !onlyOnceAttack)
         {
-            navMeshAgent.updatePosition = true;
+            agent.enabled = true;
             onlyOnceAttack = true;
             slashCollider.SetActive(false);
             slashParticle.SetActive(false);
+
+            animator.SetTrigger("attackFinished");
+            //navMeshAgent.isStopped = false;
         }
+        /*
         if (animator.GetBool("isEvading"))
         {
             //navMeshAgent.enabled = false;
@@ -75,13 +83,15 @@ public class Enemy1Controller : MonoBehaviour
             navMeshAgent.updatePosition = false;
             rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceSpecial = false;
-            //Debug.Log("entraaqui");
+            Debug.Log("entraaqui");
         }
         if (!animator.GetBool("isEvading") && !onlyOnceSpecial)
         {
             navMeshAgent.updatePosition = true;
             onlyOnceSpecial = true;
+            Debug.Log("entraaqui");
         }
+        */
 
     }
 

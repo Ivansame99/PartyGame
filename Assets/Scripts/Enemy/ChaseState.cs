@@ -11,8 +11,13 @@ public class ChaseState : StateMachineBehaviour
     private Transform player,player2;
     public List<Transform> players;
     [SerializeField] float triggerDistance = 2.5f;
+    [SerializeField] private float deg;
+    [SerializeField] private float speed;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float angularSpeed;
     [SerializeField] private float evadeAttackCooldown;
     [SerializeField] private float normalAttackCooldown;
+    private float fieldOfView;
     private float timerAttack,timerSpecial;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -24,7 +29,9 @@ public class ChaseState : StateMachineBehaviour
         {
             players.Add(jugadorObj.transform);
         }
-        agent.speed = 3.0f;
+        agent.speed = speed;
+        agent.acceleration = acceleration;
+        agent.angularSpeed = angularSpeed;
 
     }
 
@@ -42,11 +49,13 @@ public class ChaseState : StateMachineBehaviour
         player = FindPlayer();
         player2 = FindSecondClosestPlayer();
         //animator.transform.LookAt(player);
-        agent.SetDestination(player.position);
+        
+        if (agent.isActiveAndEnabled) agent.SetDestination(player.position);
         
         float distance = Vector3.Distance(player.position, animator.transform.position);
+        Vector3 dir = player.transform.position - animator.transform.position;
 
-        if (distance < triggerDistance && timerAttack <= 0)
+        if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward,dir))<deg)
         {
             animator.SetBool("isAttacking",true);
             timerAttack = normalAttackCooldown;
