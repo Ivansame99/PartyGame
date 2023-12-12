@@ -41,12 +41,17 @@ public class EnemyHealthController : MonoBehaviour
     private Vector3 attackPosition;
     private float pushForce;
 
+
+    private ParticlesControler ParticlesControler;
+
     // Start is called before the first frame update
     void Start()
     {
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, camera);
         health = maxHealth;
+
+        ParticlesControler = FindObjectOfType<ParticlesControler>();
     }
 
     // Update is called once per frame
@@ -94,6 +99,13 @@ public class EnemyHealthController : MonoBehaviour
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
+        Vector3 posicionEnemigo = transform.position;
+        ParticlesControler.AgregarPosicionEnemigo(posicionEnemigo);
+
+       
+        ParticlesControler.InstanciarParticulas();
+
+
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
         Destroy(healthBar.gameObject);
