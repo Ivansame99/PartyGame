@@ -20,6 +20,8 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Transform healthBar;
 
+    private Animator healthBarAnimator;
+
     [SerializeField]
     private Transform staminaBar;
 
@@ -79,6 +81,7 @@ public class PlayerHealthController : MonoBehaviour
         anim = GetComponent<Animator>();
         playersRespawn = FindObjectOfType<PlayersRespawn>();
         pushBack = false;
+        healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -112,11 +115,13 @@ public class PlayerHealthController : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
+        healthBarAnimator.SetTrigger("Damage");
+        Debug.Log("Entras aqui");
         health -= damage;
         timer = inmuneTime;
         if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
         if (health <= 0) Die();
-        playerController.invencibilityTimer = 0.5f;
+        playerController.invencibilityTimer = 0.5f;     
     }
 
     void Die()
