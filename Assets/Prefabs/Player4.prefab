@@ -20183,6 +20183,7 @@ GameObject:
   - component: {fileID: 8986378262116761844}
   - component: {fileID: 4519450849743122821}
   - component: {fileID: 182222476413572708}
+  - component: {fileID: 8573936162638202065}
   m_Layer: 5
   m_Name: HealthBarPlayer
   m_TagString: Untagged
@@ -20276,6 +20277,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 0}
+--- !u!95 &8573936162638202065
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4983749128615785710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e37a6308874376c4eb069f77ff56c328, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6042801762303068851
 GameObject:
   m_ObjectHideFlags: 0
