@@ -66,14 +66,14 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private GameObject cross1, cross2, glow;
 
-    public Material materialConURP;
+    public Material URPMaterial;
 
     // Textura original y textura de parpadeo
-    private Texture originalBaseMap;
+   // private Texture originalBaseMap;
     public Texture baseMapParpadeo;
     public Texture baseMapOriginal;
     // Duración del parpadeo
-    public float duracionParpadeo = 0.5f;
+   // public float delayParpadeo = 0.5f;
 
 
     // Start is called before the first frame update
@@ -89,8 +89,8 @@ public class PlayerHealthController : MonoBehaviour
         anim = GetComponent<Animator>();
         playersRespawn = FindObjectOfType<PlayersRespawn>();
         pushBack = false;
-        originalBaseMap = materialConURP.GetTexture("_BaseMap");
-        materialConURP.SetTexture("_BaseMap", baseMapOriginal);
+       // originalBaseMap = URPMaterial.GetTexture("_BaseMap");
+        URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
     }
 
     // Update is called once per frame
@@ -124,20 +124,20 @@ public class PlayerHealthController : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
-        StartCoroutine(ParpadearRojo());
+        StartCoroutine(RedEffect());
         health -= damage;
         timer = inmuneTime;
         if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
         if (health <= 0) Die();
         playerController.invencibilityTimer = 0.5f;
     }
-    IEnumerator ParpadearRojo()
+    IEnumerator RedEffect()
     {
         for (int i = 0; i < 5; i++)
         {
-            materialConURP.SetTexture("_BaseMap", baseMapParpadeo);
+            URPMaterial.SetTexture("_BaseMap", baseMapParpadeo);
             yield return new WaitForSeconds(0.1f);
-            materialConURP.SetTexture("_BaseMap", baseMapOriginal);
+            URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
             yield return new WaitForSeconds(0.1f);
         }
     }

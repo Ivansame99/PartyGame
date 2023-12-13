@@ -31438,12 +31438,12 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.041269146, b: 0, a: 1}
-        key1: {r: 0.7176471, g: 0.3742678, b: 0.3411765, a: 1}
-        key2: {r: 1, g: 0.5803091, b: 0.5411765, a: 0}
-        key3: {r: 0.9137255, g: 0.10659994, b: 0.011764725, a: 0}
-        key4: {r: 1, g: 0.12657726, b: 0, a: 0}
-        key5: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.6792453, g: 0.08009967, b: 0.55393267, a: 1}
+        key1: {r: 0.7176471, g: 0.3411765, b: 0.5634723, a: 1}
+        key2: {r: 1, g: 0.5411765, b: 0.8992232, a: 0}
+        key3: {r: 0.8207547, g: 0.20518868, b: 0.6055456, a: 0}
+        key4: {r: 1, g: 0, b: 0.629899, a: 0}
+        key5: {r: 1, g: 0.12657726, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
@@ -31451,7 +31451,7 @@ ParticleSystem:
         ctime2: 24287
         ctime3: 52621
         ctime4: 65535
-        ctime5: 0
+        ctime5: 65535
         ctime6: 0
         ctime7: 0
         atime0: 0
@@ -40039,6 +40039,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
@@ -40050,6 +40055,16 @@ PrefabInstance:
     - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[5]
       value: 
       objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
     - target: {fileID: 3740672817527373968, guid: c602f1fe3cf28bb48bf14ce72e28f374,
@@ -40348,6 +40363,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -0.93738824
       objectReference: {fileID: 0}
+    - target: {fileID: 8324683109980743073, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
     - target: {fileID: 8411829698539761456, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_Name
@@ -40571,6 +40591,9 @@ MonoBehaviour:
   cross1: {fileID: 1066331372853220587}
   cross2: {fileID: 6783119659585204754}
   glow: {fileID: 6042801762303068851}
+  URPMaterial: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+  baseMapParpadeo: {fileID: 2800000, guid: 5f2c10db8b01b604d8c003516908871b, type: 3}
+  baseMapOriginal: {fileID: 2800000, guid: a2eedf50f61ee1c48a8f10a6b4ea944b, type: 3}
 --- !u!114 &-298731608680883065
 MonoBehaviour:
   m_ObjectHideFlags: 0
