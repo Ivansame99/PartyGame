@@ -64,7 +64,7 @@ public class Enemy1Controller : MonoBehaviour
             onlyOnceAttack = false;
             //navMeshAgent.isStopped = true;
         }
-        
+       
         if (!animator.GetBool("attackOn") && !onlyOnceAttack)
         {
             agent.enabled = true;

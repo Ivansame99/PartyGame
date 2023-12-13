@@ -11,7 +11,8 @@ public class RoundController : MonoBehaviour
 
     [SerializeField]
     private GameObject enemy1Prefab;
-
+    [SerializeField]
+    private GameObject[] enemies1Prefabs;
     [SerializeField]
     private int[] enemiesInRound;
 
