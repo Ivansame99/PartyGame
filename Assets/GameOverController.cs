@@ -7,6 +7,11 @@ public class GameOverController : MonoBehaviour
 {
     public void RestartButton()
     {
-        SceneManager.LoadScene("PlayerJoin");
+        SceneManager.LoadScene("ArenaPowerLevel");
+    }
+
+    public void ExitMenu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }
