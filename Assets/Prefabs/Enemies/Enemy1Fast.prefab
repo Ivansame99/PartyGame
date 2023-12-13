@@ -1380,17 +1380,17 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.14067984, b: 1, a: 1}
-        key1: {r: 0.34158066, g: 0.6619616, b: 0.7169812, a: 1}
-        key2: {r: 0.5424528, g: 0.75406843, b: 1, a: 0}
-        key3: {r: 0.012949424, g: 0.33234236, b: 0.9150943, a: 0}
-        key4: {r: 0, g: 0.2465775, b: 1, a: 0}
+        key0: {r: 1, g: 0.9622972, b: 0, a: 1}
+        key1: {r: 0.92050225, g: 0.990566, b: 0.4812656, a: 1}
+        key2: {r: 1, g: 1, b: 1, a: 0}
+        key3: {r: 1, g: 0.9238702, b: 0, a: 0}
+        key4: {r: 1, g: 0.92892253, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 14649
-        ctime2: 24287
+        ctime1: 11372
+        ctime2: 39899
         ctime3: 52621
         ctime4: 65535
         ctime5: 0
@@ -15126,6 +15126,145 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+--- !u!1 &6232200787539059382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1906812830624235581}
+  - component: {fileID: 1264840298344608857}
+  - component: {fileID: 6940740211225710701}
+  - component: {fileID: 1118457853924744171}
+  - component: {fileID: 8270525497268042837}
+  - component: {fileID: 8561331533150568076}
+  m_Layer: 5
+  m_Name: SlashCoilliderBig
+  m_TagString: SlashEffect
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1906812830624235581
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 2.657501, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3778993883866286188}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -33}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!65 &1264840298344608857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 290.50684, y: 82.86464, z: 0.45732576}
+  m_Center: {x: -12.629986, y: -94.71934, z: 0.88102764}
+--- !u!114 &6940740211225710701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ffef81eeef43c4b88903952ad30238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalDamage: 0
+  pushForce: 0
+--- !u!65 &1118457853924744171
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 94.16287, y: 118.975, z: 0.48860508}
+  m_Center: {x: -158.41362, y: 10.325698, z: 0.851082}
+--- !u!65 &8270525497268042837
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 91.99619, y: 117.750854, z: 0.4334519}
+  m_Center: {x: 143.4693, y: 10.26795, z: 0.87616056}
+--- !u!65 &8561331533150568076
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232200787539059382}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 298.9723, y: 77.33498, z: 0.60248977}
+  m_Center: {x: -15.078034, y: 117.54652, z: 0.7952747}
 --- !u!1 &6387946273866085344
 GameObject:
   m_ObjectHideFlags: 0
@@ -29882,6 +30021,7 @@ RectTransform:
   - {fileID: 6876077127554680086}
   - {fileID: 2495433415715640143}
   - {fileID: 8473610195937347654}
+  - {fileID: 1906812830624235581}
   m_Father: {fileID: 8658279207065666515}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -34840,11 +34980,13 @@ MonoBehaviour:
   inmuneTime: 0.01
   healthBarC: {fileID: 7644565230774832062}
   healthBar: {fileID: 4298932527373973018}
+  timer: 0
   camera: {fileID: 0}
   powerLevelGameObject: {fileID: 1355745150519541729}
   Cross1: {fileID: 3803530691842733119}
   Cross2: {fileID: 6738124332863583290}
   Glow: {fileID: 7908493773936413949}
+  invencibility: 0
 --- !u!95 &8441525135715332434
 Animator:
   serializedVersion: 5
@@ -34956,6 +35098,7 @@ MonoBehaviour:
   slashParticle: {fileID: 187861849272655178}
   bigSlashParticleSystem: {fileID: 6387946273866085344}
   slashCollider: {fileID: 5298929840395707844}
+  BigslashCollider: {fileID: 6232200787539059382}
 --- !u!195 &1031676779660372435
 NavMeshAgent:
   m_ObjectHideFlags: 0

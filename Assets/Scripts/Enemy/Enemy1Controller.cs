@@ -28,6 +28,8 @@ public class Enemy1Controller : MonoBehaviour
 
     [SerializeField]
     private GameObject slashCollider;
+    [SerializeField]
+    private GameObject BigslashCollider;
     private SlashController slashController;
     private ParticleSystem slashParticleSystem;
     private Vector3 evadeAttackDirection = Vector3.zero;
@@ -82,12 +84,14 @@ public class Enemy1Controller : MonoBehaviour
             //navMeshAgent.enabled = false;
             //METE SLASH ESPECIAL
             bigSlashParticleSystem.SetActive(true);
+            BigslashCollider.SetActive(true);
             //rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceSpecial = false;
         }
         if (!animator.GetBool("isEvading") && !onlyOnceSpecial)
         {
             bigSlashParticleSystem.SetActive(false);
+            BigslashCollider.SetActive(false);
             onlyOnceSpecial = true;
         }
         
