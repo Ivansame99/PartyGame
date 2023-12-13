@@ -124,7 +124,6 @@ public class PlayerHealthController : MonoBehaviour
         healthBarAnimator.SetTrigger("Damage");
         playerUIHealthAnimator.SetTrigger("Damage");
         health -= damage;
-        timer = inmuneTime;
         if (healthBarC != null)
         {
             playerUIHealth.SetProgress(health / maxHealth, 2);
@@ -144,7 +143,7 @@ public class PlayerHealthController : MonoBehaviour
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         //Debug.Log(currentPower);
-        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         DisablePlayer();
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
@@ -164,9 +163,9 @@ public class PlayerHealthController : MonoBehaviour
 
     public void EnablePlayer()
     {
+        powerController.enabled = true;
         playerController.enabled = true;
         playerController.dodge = false; //Por si estaba rodando cuando murio
-        powerController.enabled = true;
         //powerController.SetCurrentPowerLevel(powerController.GetCurrentPowerLevel()/2);
         healthBar.gameObject.SetActive(true);
         staminaBar.gameObject.SetActive(true);
@@ -175,8 +174,9 @@ public class PlayerHealthController : MonoBehaviour
         deadAux = false;
         restart = false;
         health = maxHealth;
-        timer = inmuneTime;
+        playerController.invencibilityTimer = 0.5f;
         healthBarC.SetProgress(health / maxHealth, 2);
+        playerUIHealth.SetProgress(health / maxHealth, 2);
         playerController.ResetStamina();
         //anim.enabled = true;
     }
