@@ -11,7 +11,7 @@ public class SelectPlayerController : MonoBehaviour
     [SerializeField]
     public GameObject[] playerPos;
     [SerializeField]
-    public GameObject prefabPlayer;
+    public GameObject[] prefabPlayers;
     [SerializeField]
     public GameObject character;
 
@@ -24,15 +24,16 @@ public class SelectPlayerController : MonoBehaviour
             for (int i = 0; i < playerConfigs.Length; i++)
             {
                 playerPos[i].SetActive(false);
-                GameObject player = Instantiate(prefabPlayer, playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
+                GameObject player = Instantiate(prefabPlayers[i], playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
                 //player1.transform.parent = character.transform;
                 player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
             }
         }
         catch (Exception e)
         {
+            Debug.LogError("Te has olvidado de inciar el juego en la escena PlayerJoin");
             //  Block of code to handle errors
-            GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
+            //GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
             //player1.transform.parent = character.transform;
             //player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[0]);
         }   
