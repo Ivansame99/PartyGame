@@ -109,10 +109,11 @@ public class RoundController : MonoBehaviour
         for (int i = 0; i < enemyNumberInCurrentRound; i++)
         {
             int randomSpawn = Random.Range(0, spawns.Length);
-            int randomEnemy1Variant = Random.Range(0, enemy1Variants.Length);
+            //int randomEnemy1Variant = Random.Range(0, enemy1Variants.Length);
             yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-            currentEnemies.Add(Instantiate(enemy1Variants[randomEnemy1Variant], spawns[randomSpawn].position, enemy1Variants[randomEnemy1Variant].transform.rotation));
-
+            currentEnemies.Add(Instantiate(enemy1Variants[roundIndex], spawns[randomSpawn].position, enemy1Variants[roundIndex].transform.rotation));
+            //if (roundIndex == 1) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
+            //if (roundIndex == 2) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
         }
         coliseumAnimator.SetBool("DoorOpen", false);
         roundIndex++;

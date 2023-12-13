@@ -16,10 +16,13 @@ public class SlashController : MonoBehaviour
 
     private PlayerController playerController;
 
+    private EnemyHealthController enemy1Controller;
+
     private void Start()
     {
         player = transform.parent.parent.gameObject;
         playerController = player.GetComponent<PlayerController>();
+        enemy1Controller = transform.parent.parent.GetComponent<EnemyHealthController>();
         pushForceParry = 15f;
     }
 
@@ -29,8 +32,17 @@ public class SlashController : MonoBehaviour
         {
             pushBack = true;
             attackPosition = other.transform.position;
-            playerController.invencibilityTimer = 1f; //Para que no se hagan daño cuando pase esto
-            playerController.invencibility = true;
+            if (playerController != null)
+            {
+                playerController.invencibilityTimer = 1f; //Para que no se hagan daño cuando pase esto
+                playerController.invencibility = true;
+            }
+
+            if (enemy1Controller)
+            {
+                enemy1Controller.timer = 1f; //Para que no se hagan daño cuando pase esto
+                enemy1Controller.invencibility = true;
+            }
         }
     }
 

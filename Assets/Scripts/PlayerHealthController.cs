@@ -121,7 +121,7 @@ public class PlayerHealthController : MonoBehaviour
         {
             health -= damage;
             timer = inmuneTime;
-            healthBarC.SetProgress(health / maxHealth, 2);
+            if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
             if (health <= 0) Die();
         }
     }

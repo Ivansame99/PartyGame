@@ -21,7 +21,7 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField]
     private Transform healthBar;
 
-    private float timer;
+    public float timer;
 
     //Variables que iran donde se spawneen los pjs
     private Canvas healBarCanvas;
@@ -43,6 +43,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private Animator animator;
 
+    public bool invencibility=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,11 +56,11 @@ public class EnemyHealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (timer >= 0)
         {
+            invencibility = true;
             timer -= Time.deltaTime;
-        }
+        } else invencibility = false;
     }
 
     private void FixedUpdate()
@@ -75,20 +76,17 @@ public class EnemyHealthController : MonoBehaviour
 
     public void ReceiveDamageSlash(float damage)
     {
-        if (timer <= 0)
-        {
-            //Debug.Log(damage);
-            health -= damage;
-            timer = inmuneTime;
-            healthBarC.SetProgress(health / maxHealth, 5f);
-            if (health <= 0) Die();
-        }
+        //Debug.Log(damage);
+        health -= damage;
+        timer = inmuneTime;
+        if(healthBarC!=null) healthBarC.SetProgress(health / maxHealth, 5f);
+        if (health <= 0) Die();
     }
 
     public void ReceiveDamageArrow(float damage)
     {
         health -= damage;
-        healthBarC.SetProgress(health / maxHealth, 5f);
+        if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 5f);
         if (health <= 0) Die();
     }
 
@@ -116,25 +114,26 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect"))
+        if (other.CompareTag("SlashEffect") && !invencibility)
         {
-            if (other.gameObject.transform.parent.parent.tag != "Enemy") { 
-            Cross1.SetActive(false);
-            Cross2.SetActive(false);
-            Glow.SetActive(false);
+            if (other.gameObject.transform.parent.parent.tag != "Enemy")
+            {
+                Cross1.SetActive(false);
+                Cross2.SetActive(false);
+                Glow.SetActive(false);
 
 
-            Cross1.SetActive(true);
-            Cross2.SetActive(true);
-            Glow.SetActive(true);
+                Cross1.SetActive(true);
+                Cross2.SetActive(true);
+                Glow.SetActive(true);
 
-            SlashController slashController = other.GetComponent<SlashController>();
-            attackPosition = other.gameObject.transform.position;
-            pushBack = true;
-            pushForce = slashController.pushForce;
+                SlashController slashController = other.GetComponent<SlashController>();
+                attackPosition = other.gameObject.transform.position;
+                pushBack = true;
+                pushForce = slashController.pushForce;
 
-            ReceiveDamageSlash(slashController.finalDamage);
-            lastAttacker = other.transform.parent.parent.gameObject;
+                ReceiveDamageSlash(slashController.finalDamage);
+                lastAttacker = other.transform.parent.parent.gameObject;
             }
         }
 
@@ -142,7 +141,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow")
+        if (collision.gameObject.tag == "Arrow" && !invencibility)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;
