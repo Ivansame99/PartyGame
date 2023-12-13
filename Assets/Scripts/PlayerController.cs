@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
                             //attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
-                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
+                            slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 6; //Cambiar escalado poder
                             //Debug.Log(slashController.finalDamage);
                             //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
                             slashController.pushForce = weaponController.combo[comboCounter].pushForce;
@@ -463,22 +463,22 @@ public class PlayerController : MonoBehaviour
 
         ArrowController ac = arrow1.GetComponent<ArrowController>();
 
-        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 20);
+        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
+        ac.SetSpeed(currentBowStamina * 22);
         ac.SetPushForce(currentBowStamina * 15);
         ac.owner = this.gameObject;
 
         ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
-        ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac2.SetSpeed(currentBowStamina * 20);
+        ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
+        ac2.SetSpeed(currentBowStamina * 22);
         ac2.SetPushForce(currentBowStamina * 15);
         ac2.owner = this.gameObject;
 
         ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
-        ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 5; //cambiar escalado de poder
-        ac3.SetSpeed(currentBowStamina * 20);
+        ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
+        ac3.SetSpeed(currentBowStamina * 22);
         ac3.SetPushForce(currentBowStamina * 15);
         ac3.owner = this.gameObject;
         Invoke("StopAttack", 0.3f);

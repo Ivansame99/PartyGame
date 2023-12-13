@@ -26,7 +26,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Transform powerBar;
 
-    private float timer=0;
+    private float timer = 0;
 
     //Variables que iran donde se spawneen los pjs
 
@@ -85,15 +85,12 @@ public class PlayerHealthController : MonoBehaviour
     void Update()
     {
         //Debug.Log(playerController.invencibility);
-        if (timer >= 0)
-        {
-            timer -= Time.deltaTime;
-        }
 
         if (deathTimer >= 0)
         {
             deathTimer -= Time.deltaTime;
-        } else if (dead==true && !deadAux)
+        }
+        else if (dead == true && !deadAux)
         {
             deadAux = true;
             StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
@@ -110,20 +107,16 @@ public class PlayerHealthController : MonoBehaviour
             direction.y = 0;
             this.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
             pushBack = false;
-        }    
+        }
     }
 
     public void ReceiveDamage(float damage)
     {
-        //Debug.Log(timer);
-        //Debug.Log(playerController.invencibility);
-        if (timer <= 0)
-        {
-            health -= damage;
-            timer = inmuneTime;
-            if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
-            if (health <= 0) Die();
-        }
+        health -= damage;
+        timer = inmuneTime;
+        if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
+        if (health <= 0) Die();
+        playerController.invencibilityTimer = 0.5f;
     }
 
     void Die()
@@ -132,7 +125,7 @@ public class PlayerHealthController : MonoBehaviour
         deathTimer = deathCD;
         dead = true;
         playersRespawn.NotifyDead();
-        respawnTimer = respawnCD;       
+        respawnTimer = respawnCD;
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         //Debug.Log(currentPower);
@@ -166,7 +159,7 @@ public class PlayerHealthController : MonoBehaviour
         dead = false;
         deadAux = false;
         restart = false;
-        health=maxHealth;
+        health = maxHealth;
         timer = inmuneTime;
         healthBarC.SetProgress(health / maxHealth, 2);
         playerController.ResetStamina();
@@ -205,7 +198,7 @@ public class PlayerHealthController : MonoBehaviour
         }*/
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("SlashEffect") && !playerController.invencibility && !dead)
         {
@@ -226,7 +219,7 @@ public class PlayerHealthController : MonoBehaviour
             lastAttacker = other.transform.parent.parent.gameObject;
         }
 
-        if(other.gameObject.tag == "Potion")
+        if (other.gameObject.tag == "Potion")
         {
             health += 50;
             healthBarC.SetProgress(health / maxHealth, 2);
@@ -239,10 +232,11 @@ public class PlayerHealthController : MonoBehaviour
         if (collision.gameObject.tag == "Arrow" && !playerController.invencibility && !dead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-            if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner>0)
+            if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)
             {
                 //Se pega contra si mismo al principio, no hace nada
-            } else
+            }
+            else
             {
                 attackPosition = collision.gameObject.transform.position;
                 pushBack = true;

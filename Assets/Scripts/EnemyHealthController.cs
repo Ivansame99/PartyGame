@@ -96,15 +96,15 @@ public class EnemyHealthController : MonoBehaviour
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
-        Destroy(healthBar.gameObject);
-        Destroy(powerLevelGameObject.gameObject);
+        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
         animator.SetTrigger("die");
     }
 
     public void enemyDestroy()
     {
         Destroy(this.gameObject);
+        Destroy(healthBar.gameObject);
+        Destroy(powerLevelGameObject.gameObject);
     }
 
     public void SetupHealthBar(Canvas canvas, Camera camera)

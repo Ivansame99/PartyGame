@@ -34976,7 +34976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bc150f1efed68448357c26a9e0c048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 75
+  maxHealth: 55
   inmuneTime: 0.01
   healthBarC: {fileID: 7644565230774832062}
   healthBar: {fileID: 4298932527373973018}
@@ -35044,7 +35044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPowerLevel: 0
-  minPowerLevel: 20
+  minPowerLevel: 10
   maxPowerLevel: 300
   maxScaleMultiplier: 2
   minScaleMultiplier: 1
@@ -35074,7 +35074,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!114 &1860445855484872685
 MonoBehaviour:
@@ -35090,7 +35090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalAttackSpeed: 20
   specialAttackSpeed: 7
-  enemyBaseDamage: 25
+  enemyBaseDamage: 15
   enemyBasePushForce: 10
   boundCharacter: {fileID: 6676320728298494513}
   SlashEffect: {fileID: 187861849272655178}
@@ -35098,7 +35098,7 @@ MonoBehaviour:
   slashParticle: {fileID: 187861849272655178}
   bigSlashParticleSystem: {fileID: 6387946273866085344}
   slashCollider: {fileID: 5298929840395707844}
-  BigslashCollider: {fileID: 6232200787539059382}
+  bigSlashCollider: {fileID: 6232200787539059382}
 --- !u!195 &1031676779660372435
 NavMeshAgent:
   m_ObjectHideFlags: 0

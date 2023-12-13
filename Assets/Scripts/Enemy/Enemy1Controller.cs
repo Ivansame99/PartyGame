@@ -26,10 +26,12 @@ public class Enemy1Controller : MonoBehaviour
     [SerializeField] 
     private GameObject bigSlashParticleSystem;
 
+    private SlashController slashControllerBig;
+
     [SerializeField]
     private GameObject slashCollider;
     [SerializeField]
-    private GameObject BigslashCollider;
+    private GameObject bigSlashCollider;
     private SlashController slashController;
     private ParticleSystem slashParticleSystem;
     private Vector3 evadeAttackDirection = Vector3.zero;
@@ -45,6 +47,7 @@ public class Enemy1Controller : MonoBehaviour
         onlyOnceAttack = true;
         slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
         slashController = slashCollider.GetComponent<SlashController>();
+        slashControllerBig = bigSlashCollider.GetComponent<SlashController>();
         powerController = GetComponent<PowerController>();
     }
 
@@ -84,14 +87,16 @@ public class Enemy1Controller : MonoBehaviour
             //navMeshAgent.enabled = false;
             //METE SLASH ESPECIAL
             bigSlashParticleSystem.SetActive(true);
-            BigslashCollider.SetActive(true);
+            bigSlashCollider.SetActive(true);
+            slashControllerBig.finalDamage = enemyBaseDamage/5 + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
+            slashControllerBig.pushForce = enemyBasePushForce;
             //rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceSpecial = false;
         }
         if (!animator.GetBool("isEvading") && !onlyOnceSpecial)
         {
             bigSlashParticleSystem.SetActive(false);
-            BigslashCollider.SetActive(false);
+            bigSlashCollider.SetActive(false);
             onlyOnceSpecial = true;
         }
         
