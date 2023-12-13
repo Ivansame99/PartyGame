@@ -10,8 +10,6 @@ public class RoundController : MonoBehaviour
     private Transform[] spawns;
 
     [SerializeField]
-    private GameObject enemy1Prefab;
-    [SerializeField]
     private GameObject[] enemy1Variants;
 
     [SerializeField]
