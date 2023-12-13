@@ -39,6 +39,10 @@ public class PowerController : MonoBehaviour
 
     private Canvas canvas;
 
+    private GameObject playerUI;
+    private TMP_Text playerUIPowerText;
+
+    private bool isEnemy=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +50,16 @@ public class PowerController : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupPowerLevelCanvas();
         originalScale = transform.localScale;
+        if(this.gameObject.tag=="Enemy") isEnemy = true;
+
+        if (!isEnemy)
+        {
+            playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
+            GameObject gm = playerUI.transform.GetChild(0).GetChild(1).gameObject;
+            playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+            Debug.Log(playerUIPowerText);
+        }
+
         SetCurrentPowerLevel(minPowerLevel);
     }
 
@@ -75,14 +89,20 @@ public class PowerController : MonoBehaviour
     public void SetCurrentPowerLevel(float value)
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
-        powerLevelText.SetText(currentPowerLevel.ToString());
+        ChangeUIText();
     }
 
     public void OnDieSetCurrentPowerLevel()
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
         if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
+        ChangeUIText();
+    }
+
+    private void ChangeUIText()
+    {
         powerLevelText.SetText(currentPowerLevel.ToString());
+        if(!isEnemy) playerUIPowerText.SetText(currentPowerLevel.ToString());
     }
 
     IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)

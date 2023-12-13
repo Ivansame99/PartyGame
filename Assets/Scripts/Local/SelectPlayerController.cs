@@ -13,6 +13,8 @@ public class SelectPlayerController : MonoBehaviour
     [SerializeField]
     public GameObject[] prefabPlayers;
     [SerializeField]
+    public GameObject[] playersUI;
+    [SerializeField]
     public GameObject character;
 
     // Start is called before the first frame update
@@ -23,8 +25,10 @@ public class SelectPlayerController : MonoBehaviour
             var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
             for (int i = 0; i < playerConfigs.Length; i++)
             {
+                playersUI[i].SetActive(true);
                 playerPos[i].SetActive(false);
                 GameObject player = Instantiate(prefabPlayers[i], playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
+                player.name = prefabPlayers[i].name;
                 //player1.transform.parent = character.transform;
                 player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
             }
