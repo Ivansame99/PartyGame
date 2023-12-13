@@ -20,6 +20,8 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private Transform healthBar;
 
+    private Animator healthBarAnimator;
+
     [SerializeField]
     private Transform staminaBar;
 
@@ -66,6 +68,9 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField]
     private GameObject cross1, cross2, glow;
 
+    private GameObject playerUI;
+    private HealthBarController playerUIHealth;
+    private Animator playerUIHealthAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +84,10 @@ public class PlayerHealthController : MonoBehaviour
         anim = GetComponent<Animator>();
         playersRespawn = FindObjectOfType<PlayersRespawn>();
         pushBack = false;
+        healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
+        playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
+        playerUIHealthAnimator= playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
     }
 
     // Update is called once per frame
@@ -112,11 +121,17 @@ public class PlayerHealthController : MonoBehaviour
 
     public void ReceiveDamage(float damage)
     {
+        healthBarAnimator.SetTrigger("Damage");
+        playerUIHealthAnimator.SetTrigger("Damage");
         health -= damage;
         timer = inmuneTime;
-        if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 2);
+        if (healthBarC != null)
+        {
+            playerUIHealth.SetProgress(health / maxHealth, 2);
+            healthBarC.SetProgress(health / maxHealth, 2);
+        }
         if (health <= 0) Die();
-        playerController.invencibilityTimer = 0.5f;
+        playerController.invencibilityTimer = 0.5f;     
     }
 
     void Die()
