@@ -23,11 +23,12 @@ public class Enemy1Controller : MonoBehaviour
 
     [SerializeField]
     private GameObject slashParticle;
+    [SerializeField] 
+    private GameObject bigSlashParticleSystem;
 
     [SerializeField]
     private GameObject slashCollider;
     private SlashController slashController;
-
     private ParticleSystem slashParticleSystem;
     private Vector3 evadeAttackDirection = Vector3.zero;
 
@@ -75,23 +76,21 @@ public class Enemy1Controller : MonoBehaviour
             animator.SetTrigger("attackFinished");
             //navMeshAgent.isStopped = false;
         }
-        /*
+        
         if (animator.GetBool("isEvading"))
         {
             //navMeshAgent.enabled = false;
             //METE SLASH ESPECIAL
-            navMeshAgent.updatePosition = false;
-            rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
+            bigSlashParticleSystem.SetActive(true);
+            //rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceSpecial = false;
-            Debug.Log("entraaqui");
         }
         if (!animator.GetBool("isEvading") && !onlyOnceSpecial)
         {
-            navMeshAgent.updatePosition = true;
+            bigSlashParticleSystem.SetActive(false);
             onlyOnceSpecial = true;
-            Debug.Log("entraaqui");
         }
-        */
+        
 
     }
 
