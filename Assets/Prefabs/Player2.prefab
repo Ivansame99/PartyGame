@@ -31438,11 +31438,11 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.14067984, b: 1, a: 1}
-        key1: {r: 0.34158066, g: 0.6619616, b: 0.7169812, a: 1}
-        key2: {r: 0.5424528, g: 0.75406843, b: 1, a: 0}
-        key3: {r: 0.012949424, g: 0.33234236, b: 0.9150943, a: 0}
-        key4: {r: 0, g: 0.2465775, b: 1, a: 0}
+        key0: {r: 1, g: 0.041269146, b: 0, a: 1}
+        key1: {r: 0.7176471, g: 0.3742678, b: 0.3411765, a: 1}
+        key2: {r: 1, g: 0.5803091, b: 0.5411765, a: 0}
+        key3: {r: 0.9137255, g: 0.10659994, b: 0.011764725, a: 0}
+        key4: {r: 1, g: 0.12657726, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
@@ -40037,6 +40037,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.623
       objectReference: {fileID: 0}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
+    - target: {fileID: 3585751610362271246, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
     - target: {fileID: 3740672817527373968, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_Radius
@@ -40331,7 +40346,7 @@ PrefabInstance:
     - target: {fileID: 8411829698539761456, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player2
       objectReference: {fileID: 0}
     - target: {fileID: 8411829698539761456, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
@@ -40378,6 +40393,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 5.392717
       objectReference: {fileID: 0}
+    - target: {fileID: 9073953375055379925, guid: c602f1fe3cf28bb48bf14ce72e28f374,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
     - target: {fileID: 9111348824068354909, guid: c602f1fe3cf28bb48bf14ce72e28f374,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
