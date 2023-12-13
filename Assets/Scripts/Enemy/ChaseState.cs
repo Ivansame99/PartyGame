@@ -88,7 +88,7 @@ public class ChaseState : StateMachineBehaviour
         {
             float distance = Vector3.Distance(agent.transform.position, player.position);
 
-            if (distance < minDist)
+            if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
             {
                 minDist = distance;
                 searchPlayer = player;
