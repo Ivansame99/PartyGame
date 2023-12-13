@@ -11,6 +11,8 @@ public class RoundController : MonoBehaviour
 
     [SerializeField]
     private GameObject enemy1Prefab;
+    [SerializeField]
+    private GameObject[] enemy1Variants;
 
     [SerializeField]
     private int[] enemiesInRound;
@@ -109,8 +111,9 @@ public class RoundController : MonoBehaviour
         for (int i = 0; i < enemyNumberInCurrentRound; i++)
         {
             int randomSpawn = Random.Range(0, spawns.Length);
+            int randomEnemy1Variant = Random.Range(0, enemy1Variants.Length);
             yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-            currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
+            currentEnemies.Add(Instantiate(enemy1Variants[randomEnemy1Variant], spawns[randomSpawn].position, enemy1Variants[randomEnemy1Variant].transform.rotation));
 
         }
         coliseumAnimator.SetBool("DoorOpen", false);
