@@ -82,7 +82,7 @@ public class EnemyHealthController : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            animator.SetTrigger("damage");
+            if (health >= 0) animator.SetTrigger("damage");
         }
         if (health <= 0) Die();
     }
@@ -93,7 +93,8 @@ public class EnemyHealthController : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            animator.SetTrigger("damage");
+            if (health >= 0) animator.SetTrigger("damage");
+
         }
         if (health <= 0) Die();
     }
