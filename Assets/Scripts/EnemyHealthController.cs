@@ -44,6 +44,7 @@ public class EnemyHealthController : MonoBehaviour
     private Animator animator;
 
     public bool invencibility=false;
+    [SerializeField] private bool damageAnim;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,7 +83,7 @@ public class EnemyHealthController : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            if (health >= 0) animator.SetTrigger("damage");
+            if (health >= 0 && !damageAnim) animator.SetTrigger("damage");
         }
         if (health <= 0) Die();
     }
@@ -93,7 +94,7 @@ public class EnemyHealthController : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            if (health >= 0) animator.SetTrigger("damage");
+            if (health >= 0 && damageAnim) animator.SetTrigger("damage");
 
         }
         if (health <= 0) Die();
