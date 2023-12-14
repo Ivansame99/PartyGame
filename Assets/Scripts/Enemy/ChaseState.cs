@@ -47,31 +47,29 @@ public class ChaseState : StateMachineBehaviour
         }
         player = FindPlayer();
         player2 = FindSecondClosestPlayer();
-        //animator.transform.LookAt(player);
         
-        if (agent.isActiveAndEnabled) agent.SetDestination(player.position);
-        
-        float distance = Vector3.Distance(player.position, animator.transform.position);
-        Vector3 dir = player.transform.position - animator.transform.position;
+        if (player != null)
+        {
+            if (agent.isActiveAndEnabled) agent.SetDestination(player.position);
 
-        if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward,dir))<deg)
-        {
-            animator.SetBool("isAttacking",true);
-            timerAttack = normalAttackCooldown;
+            float distance = Vector3.Distance(player.position, animator.transform.position);
+            Vector3 dir = player.transform.position - animator.transform.position;
+
+            if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward, dir)) < deg)
+            {
+                animator.SetBool("isAttacking", true);
+                timerAttack = normalAttackCooldown;
+            }
+
+            //animator.transform.LookAt(player);
+            float distanceSpecial = Vector3.Distance(player.position, animator.transform.position);
+            if (player2 != null) distanceSpecial = Vector3.Distance(player2.position, animator.transform.position);
+            if (timerSpecial <= 0 && player2 != null && distanceSpecial < triggerDistance) // Verificar si player2 no es null
+            {
+                animator.SetTrigger("evading");
+                timerSpecial = evadeAttackCooldown;
+            }
         }
-        
-        //animator.transform.LookAt(player);
-        float distanceSpecial = Vector3.Distance(player.position, animator.transform.position);
-        if (player2 != null) distanceSpecial = Vector3.Distance(player2.position, animator.transform.position);
-        if (timerSpecial <= 0 && player2 != null && distanceSpecial < triggerDistance) // Verificar si player2 no es null
-        {
-            animator.SetTrigger("evading");
-            timerSpecial = evadeAttackCooldown;
-        }
-        //if (distance < triggerDistance && secondDistance < triggerDistance)
-        //{
-        //Debug.Log("esquiva ahora");
-        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

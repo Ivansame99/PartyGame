@@ -79,14 +79,22 @@ public class EnemyHealthController : MonoBehaviour
         //Debug.Log(damage);
         health -= damage;
         timer = inmuneTime;
-        if(healthBarC!=null) healthBarC.SetProgress(health / maxHealth, 5f);
+        if (healthBarC != null)
+        {
+            healthBarC.SetProgress(health / maxHealth, 5f);
+            animator.SetTrigger("damage");
+        }
         if (health <= 0) Die();
     }
 
     public void ReceiveDamageArrow(float damage)
     {
         health -= damage;
-        if (healthBarC != null) healthBarC.SetProgress(health / maxHealth, 5f);
+        if (healthBarC != null)
+        {
+            healthBarC.SetProgress(health / maxHealth, 5f);
+            animator.SetTrigger("damage");
+        }
         if (health <= 0) Die();
     }
 
