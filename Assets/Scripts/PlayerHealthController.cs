@@ -261,6 +261,7 @@ public class PlayerHealthController : MonoBehaviour
         {
             health += 50;
             healthBarC.SetProgress(health / maxHealth, 2);
+            playerUIHealth.SetProgress(health / maxHealth, 2);
             Destroy(other.gameObject);
         }
     }

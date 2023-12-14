@@ -390,6 +390,10 @@ public class PlayerController : MonoBehaviour
 
         slashCollider.SetActive(true);
         slashParticle.SetActive(true);
+
+        yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según sea necesario
+        slashCollider.SetActive(false);
+        slashParticle.SetActive(false);
     }
 
     private void SpecialAttack()
