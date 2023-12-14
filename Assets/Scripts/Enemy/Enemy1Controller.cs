@@ -9,9 +9,10 @@ public class Enemy1Controller : MonoBehaviour
     [SerializeField] private float specialAttackSpeed;
     [SerializeField] private float enemyBaseDamage;
     [SerializeField] private float enemyBasePushForce;
+    [SerializeField] private float damagePushForce;
     private Rigidbody rb;
     private Animator animator;
-    private bool onlyOnceSpecial,onlyOnceAttack;
+    private bool onlyOnceSpecial,onlyOnceAttack,onlyOnceDamaged;
     NavMeshAgent agent;
 
     //SLASH STUFF
@@ -99,11 +100,25 @@ public class Enemy1Controller : MonoBehaviour
             bigSlashCollider.SetActive(false);
             onlyOnceSpecial = true;
         }
-        
+
+        if (animator.GetBool("isDamaged"))
+        {
+            agent.enabled = false;
+            rb.MovePosition(transform.position + -transform.forward * damagePushForce * Time.fixedDeltaTime);
+            onlyOnceDamaged = false;
+            //navMeshAgent.isStopped = true;
+        }
+
+        if (!animator.GetBool("isDamaged") && !onlyOnceDamaged)
+        {
+            agent.enabled = true;
+            onlyOnceDamaged = true;
+            //navMeshAgent.isStopped = false;
+        }
 
     }
 
-public void Slash()
+    public void Slash()
 {
         //Cosas de slash
         Vector3 savedPosition = slashDirection.position;

@@ -57,7 +57,6 @@ public class PowerController : MonoBehaviour
             playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
             GameObject gm = playerUI.transform.GetChild(0).GetChild(1).gameObject;
             playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
-            Debug.Log(playerUIPowerText);
         }
 
         SetCurrentPowerLevel(minPowerLevel);
