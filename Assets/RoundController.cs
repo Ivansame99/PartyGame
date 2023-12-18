@@ -4,16 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+
 public class RoundController : MonoBehaviour
 {
     [SerializeField]
     private Transform[] spawns;
 
-    [SerializeField]
-    private GameObject[] enemy1Variants;
+    [System.Serializable]
+    public class Round
+    {
+        public GameObject[] enemiesInRound;
+    }
 
-    [SerializeField]
-    private int[] enemiesInRound;
+    public Round[] rounds;
 
     [SerializeField]
     private float secondsBetweenRounds;
@@ -61,7 +64,7 @@ public class RoundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (roundIndex <= enemiesInRound.Length) CheckCurrentEnemiesDeath();
+        if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
         else
         {
             if (!finalRound)
@@ -104,14 +107,16 @@ public class RoundController : MonoBehaviour
         coliseumAnimator.SetBool("DoorOpen", true);
         yield return new WaitForSeconds(1);
 
-        int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
+        //int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
+
+        int enemyNumberInCurrentRound = rounds[roundIndex].enemiesInRound.Length;
 
         for (int i = 0; i < enemyNumberInCurrentRound; i++)
         {
             int randomSpawn = Random.Range(0, spawns.Length);
             //int randomEnemy1Variant = Random.Range(0, enemy1Variants.Length);
             yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-            currentEnemies.Add(Instantiate(enemy1Variants[roundIndex], spawns[randomSpawn].position, enemy1Variants[roundIndex].transform.rotation));
+            currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i], spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].transform.rotation));
             //if (roundIndex == 1) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
             //if (roundIndex == 2) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
         }
@@ -133,8 +138,8 @@ public class RoundController : MonoBehaviour
         currentEnemies.Clear();
         //Invoke("StartNextRound", secondsBetweenRounds);
 
-        if (roundIndex < enemiesInRound.Length) StartCoroutine(IStartNextRound());
-        else if (roundIndex == enemiesInRound.Length) roundIndex++;
+        if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
+        else if (roundIndex == rounds.Length) roundIndex++;
 
         //if()
         //Debug.Log(currentEnemies[0]);
