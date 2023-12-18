@@ -85,13 +85,13 @@ public class PlayerConfigurationManager : MonoBehaviour
             {
                 if (playerIndex < playerText.Length)
                 {
+                    //Debug.Log("AAA");
                     playerText[playerIndex].SetActive(false);
                 }
             }
             pi.transform.SetParent(transform);
             playerConfigs.Add(new PlayerConfiguration(pi));
         }
-
     }
 
     public void ChangeScene()

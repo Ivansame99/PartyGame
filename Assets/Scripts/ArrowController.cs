@@ -60,7 +60,6 @@ public class ArrowController : MonoBehaviour
                 attack = true;
             }
         }*/
-
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
             this.GetComponent<BoxCollider>().enabled = false;

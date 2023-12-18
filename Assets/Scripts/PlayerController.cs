@@ -469,8 +469,8 @@ public class PlayerController : MonoBehaviour
 
         GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
 
-        Vector3 cone1 = rot.eulerAngles + new Vector3(0, 10, 0);
-        Vector3 cone2 = rot.eulerAngles + new Vector3(0, -10, 0);
+        Vector3 cone1 = rot.eulerAngles + new Vector3(0, 5, 0);
+        Vector3 cone2 = rot.eulerAngles + new Vector3(0, -5, 0);
 
         GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
         arrow2.transform.eulerAngles = cone1;
@@ -481,22 +481,22 @@ public class PlayerController : MonoBehaviour
         ArrowController ac = arrow1.GetComponent<ArrowController>();
 
         ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 22);
-        ac.SetPushForce(currentBowStamina * 15);
+        ac.SetSpeed(currentBowStamina * 37);
+        ac.SetPushForce(currentBowStamina * 70);
         ac.owner = this.gameObject;
 
         ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
         ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac2.SetSpeed(currentBowStamina * 22);
-        ac2.SetPushForce(currentBowStamina * 15);
+        ac2.SetSpeed(currentBowStamina * 37);
+        ac2.SetPushForce(currentBowStamina * 70);
         ac2.owner = this.gameObject;
 
         ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
         ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac3.SetSpeed(currentBowStamina * 22);
-        ac3.SetPushForce(currentBowStamina * 15);
+        ac3.SetSpeed(currentBowStamina * 37);
+        ac3.SetPushForce(currentBowStamina * 70);
         ac3.owner = this.gameObject;
         Invoke("StopAttack", 0.3f);
         indicativeArrow.SetActive(false);

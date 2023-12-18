@@ -144,7 +144,7 @@ public class PlayerHealthController : MonoBehaviour
             healthBarC.SetProgress(health / maxHealth, 2);
         }
         if (health <= 0) Die();
-        playerController.invencibilityTimer = 0.5f;
+        playerController.invencibilityTimer = inmuneTime;
     }
     IEnumerator RedEffect()
     {
