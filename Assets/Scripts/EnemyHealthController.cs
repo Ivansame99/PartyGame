@@ -45,6 +45,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public bool invencibility=false;
     [SerializeField] private bool damageAnim;
+    private bool dead;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,12 +81,17 @@ public class EnemyHealthController : MonoBehaviour
         //Debug.Log(damage);
         health -= damage;
         timer = inmuneTime;
+        if (health <= 0)
+        {
+            dead = true;
+            Die();
+        }
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
             if (health >= 0 && !damageAnim && !animator.GetBool("isEvading")) animator.SetTrigger("damage");
         }
-        if (health <= 0) Die();
+
     }
 
     public void ReceiveDamageArrow(float damage)
@@ -124,7 +130,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect") && !invencibility)
+        if (other.CompareTag("SlashEffect") && !invencibility && !dead)
         {
             if (other.gameObject.transform.parent.parent.tag != "Enemy")
             {
@@ -151,7 +157,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !invencibility)
+        if (collision.gameObject.tag == "Arrow" && !invencibility && !dead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;
