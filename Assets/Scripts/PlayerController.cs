@@ -481,21 +481,21 @@ public class PlayerController : MonoBehaviour
         ArrowController ac = arrow1.GetComponent<ArrowController>();
 
         ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 37);
+        ac.SetSpeed(currentBowStamina * 60);
         ac.SetPushForce(currentBowStamina * 70);
         ac.owner = this.gameObject;
 
         ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
         ac2.finalDamage = ac2.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac2.SetSpeed(currentBowStamina * 37);
+        ac2.SetSpeed(currentBowStamina * 60);
         ac2.SetPushForce(currentBowStamina * 70);
         ac2.owner = this.gameObject;
 
         ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
         ac3.finalDamage = ac3.baseDamage + powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
-        ac3.SetSpeed(currentBowStamina * 37);
+        ac3.SetSpeed(currentBowStamina * 60);
         ac3.SetPushForce(currentBowStamina * 70);
         ac3.owner = this.gameObject;
         Invoke("StopAttack", 0.3f);

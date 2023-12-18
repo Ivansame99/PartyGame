@@ -45,7 +45,9 @@ public class EnemyHealthController : MonoBehaviour
 
     public bool invencibility=false;
     [SerializeField] private bool damageAnim;
+
     private bool dead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,7 +85,6 @@ public class EnemyHealthController : MonoBehaviour
         timer = inmuneTime;
         if (health <= 0)
         {
-            dead = true;
             Die();
         }
         if (healthBarC != null)
@@ -91,7 +92,6 @@ public class EnemyHealthController : MonoBehaviour
             healthBarC.SetProgress(health / maxHealth, 5f);
             if (health >= 0 && !damageAnim && !animator.GetBool("isEvading")) animator.SetTrigger("damage");
         }
-
     }
 
     public void ReceiveDamageArrow(float damage)
@@ -112,8 +112,9 @@ public class EnemyHealthController : MonoBehaviour
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
+        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
         animator.SetTrigger("die");
+        dead = true;
     }
 
     public void enemyDestroy()
@@ -130,7 +131,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect") && !invencibility && !dead)
+        if (other.CompareTag("SlashEffect") && !invencibility)
         {
             if (other.gameObject.transform.parent.parent.tag != "Enemy")
             {
@@ -152,12 +153,11 @@ public class EnemyHealthController : MonoBehaviour
                 lastAttacker = other.transform.parent.parent.gameObject;
             }
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !invencibility && !dead)
+        if (collision.gameObject.tag == "Arrow" && !invencibility)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;

@@ -123,6 +123,7 @@ public class ArrowController : MonoBehaviour
             transform.rotation = rotacionRevertida;
 
             speed += 5;
+            owner = other.transform.parent.parent.gameObject;
             //arrowDirection = Vector3.Reflect(arrowDirection, Random.onUnitSphere);
         }
     }
