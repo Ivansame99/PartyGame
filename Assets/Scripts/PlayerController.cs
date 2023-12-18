@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
     void Roll()
     {
-        if (isDodging && dodgeTimer <= 0 && !dodge)
+        if (isDodging && dodgeTimer <= 0 && !dodge && stamina>=dodgeStamina)
         {
             if (direction == Vector3.zero)
             {

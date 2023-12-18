@@ -71,11 +71,11 @@ public class PlayerHealthController : MonoBehaviour
     public Material URPMaterial;
 
     // Textura original y textura de parpadeo
-   // private Texture originalBaseMap;
+    // private Texture originalBaseMap;
     public Texture baseMapParpadeo;
     public Texture baseMapOriginal;
     // Duraci�n del parpadeo
-   // public float delayParpadeo = 0.5f;
+    // public float delayParpadeo = 0.5f;
 
 
     private GameObject playerUI;
@@ -94,12 +94,12 @@ public class PlayerHealthController : MonoBehaviour
         anim = GetComponent<Animator>();
         playersRespawn = FindObjectOfType<PlayersRespawn>();
         pushBack = false;
-       // originalBaseMap = URPMaterial.GetTexture("_BaseMap");
+        // originalBaseMap = URPMaterial.GetTexture("_BaseMap");
         URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
         pushBack = false;
         healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
         playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-        playerUIHealthAnimator= playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+        playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
     }
 
@@ -144,7 +144,7 @@ public class PlayerHealthController : MonoBehaviour
             healthBarC.SetProgress(health / maxHealth, 2);
         }
         if (health <= 0) Die();
-        playerController.invencibilityTimer = 0.5f;     
+        playerController.invencibilityTimer = 0.5f;
     }
     IEnumerator RedEffect()
     {
@@ -156,7 +156,8 @@ public class PlayerHealthController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
-        void Die()
+
+    void Die()
     {
         anim.SetTrigger("Death");
         deathTimer = deathCD;
@@ -166,7 +167,7 @@ public class PlayerHealthController : MonoBehaviour
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         //Debug.Log(currentPower);
-        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+        if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         DisablePlayer();
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);

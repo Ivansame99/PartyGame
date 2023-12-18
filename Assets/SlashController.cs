@@ -46,11 +46,8 @@ public class SlashController : MonoBehaviour
                 enemy1Controller.invencibility = true;
             }
 
-            if (!hitSound.isPlaying)
-            {
-                hitSound.Play();
-                hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
-            }
+            hitSound.Play();
+            hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
         }
     }
 
