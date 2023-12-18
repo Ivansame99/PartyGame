@@ -18,12 +18,14 @@ public class SlashController : MonoBehaviour
 
     private EnemyHealthController enemy1Controller;
 
+    private AudioSource hitSound;
     private void Start()
     {
         player = transform.parent.parent.gameObject;
         playerController = player.GetComponent<PlayerController>();
         enemy1Controller = transform.parent.parent.GetComponent<EnemyHealthController>();
         pushForceParry = 15f;
+        hitSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +45,8 @@ public class SlashController : MonoBehaviour
                 enemy1Controller.timer = 1f; //Para que no se hagan daño cuando pase esto
                 enemy1Controller.invencibility = true;
             }
+            hitSound.Play();
+            hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
         }
     }
 

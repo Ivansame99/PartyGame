@@ -84,6 +84,14 @@ public class PlayerController : MonoBehaviour
 
     private float attackMovement;
 
+    [Header("Audio")]
+    //AUDIO
+    [SerializeField] 
+    private AudioSource swordAttackSound;
+    [SerializeField]
+    private AudioSource bowAttackSound;
+    [SerializeField] private float minPitch;
+    [SerializeField] private float maxPitch;
     //States
     public bool invencibility = false;
     public bool dodge = false;
@@ -128,6 +136,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         stamina = maxStamina;
         slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
+
     }
 
     //Input mando
@@ -357,6 +366,8 @@ public class PlayerController : MonoBehaviour
                             //attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
+                            swordAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+                            swordAttackSound.Play();
                             slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 6; //Cambiar escalado poder
                             //Debug.Log(slashController.finalDamage);
                             //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
@@ -434,6 +445,8 @@ public class PlayerController : MonoBehaviour
         else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
             ShootArrow();
+            bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+            bowAttackSound.Play();
         }
         else if (!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
