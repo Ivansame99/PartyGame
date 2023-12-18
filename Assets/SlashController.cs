@@ -19,7 +19,7 @@ public class SlashController : MonoBehaviour
     private EnemyHealthController enemy1Controller;
 
     private AudioSource hitSound;
-    private void Start()
+    private void Awake()
     {
         player = transform.parent.parent.gameObject;
         playerController = player.GetComponent<PlayerController>();
@@ -45,8 +45,12 @@ public class SlashController : MonoBehaviour
                 enemy1Controller.timer = 1f; //Para que no se hagan daño cuando pase esto
                 enemy1Controller.invencibility = true;
             }
-            hitSound.Play();
-            hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
+
+            if (!hitSound.isPlaying)
+            {
+                hitSound.Play();
+                hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
+            }
         }
     }
 
