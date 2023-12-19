@@ -81,6 +81,13 @@ public class PlayerHealthController : MonoBehaviour
     private GameObject playerUI;
     private HealthBarController playerUIHealth;
     private Animator playerUIHealthAnimator;
+
+
+    [SerializeField]
+    private AudioSource hitSound;
+    [SerializeField] private float minPitch;
+    [SerializeField] private float maxPitch;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -135,6 +142,8 @@ public class PlayerHealthController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         StartCoroutine(RedEffect());
+        hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        hitSound.Play();
         healthBarAnimator.SetTrigger("Damage");
         playerUIHealthAnimator.SetTrigger("Damage");
         health -= damage;
