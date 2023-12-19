@@ -415,6 +415,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (stamina > 0 && currentBowStamina < maxBowStamina) //Mira si tienes stamina para seguir cargando el arco y si puedes seguir cargandolo mas
                 {
+                    anim.SetBool("Bow", true);
                     WasteStaminaPerSecond();
                     currentBowStamina += Time.deltaTime;
 
@@ -436,6 +437,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
+                    anim.SetBool("Bow", false);
                     currentBowStamina = 0;
                     attacking = false;
                     indicativeArrow.SetActive(false);
@@ -450,6 +452,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
+            anim.SetBool("Bow", false);
             currentBowStamina = 0;
             //Debug.Log("asdadasdasd");
             attacking = false;
@@ -502,6 +505,7 @@ public class PlayerController : MonoBehaviour
         indicativeArrow.SetActive(false);
         currentBowStamina = 0;
         bowCD = maxBowCD;
+        anim.SetBool("Bow", false);
     }
 
     private void ExitAttack()
