@@ -326,7 +326,7 @@ public class PlayerHealthController : MonoBehaviour
     IEnumerator SlowMotion()
     {
         float slowdownFactor = 0.2f;
-        float slowdownDuration = 2f;
+        float slowdownDuration = 1f;
 
         Time.timeScale = slowdownFactor;
         camera.GetComponent<MultipleTargetCamera>().enabled = false;
