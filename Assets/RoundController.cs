@@ -46,6 +46,8 @@ public class RoundController : MonoBehaviour
 
     [SerializeField]
     private TMP_Text roundsUIText;
+
+    private PlayersRespawn playersRespawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,7 @@ public class RoundController : MonoBehaviour
         //Invoke("GetPlayers",0.5f);        
         roundIndex = 0;
         currentEnemies = new List<GameObject>();
+        playersRespawn = this.GetComponent<PlayersRespawn>();
         //Invoke("StartNextRound", secondsBetweenRounds);
         StartCoroutine(IStartNextRound());
     }
@@ -136,6 +139,7 @@ public class RoundController : MonoBehaviour
         //Si todos son null
 
         currentEnemies.Clear();
+        playersRespawn.RespawnDeadPlayers();
         //Invoke("StartNextRound", secondsBetweenRounds);
 
         if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
