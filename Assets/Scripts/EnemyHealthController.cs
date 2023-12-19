@@ -48,6 +48,9 @@ public class EnemyHealthController : MonoBehaviour
 
     private bool dead = false;
 
+    [SerializeField] private AudioSource hitSound;
+    [SerializeField] private AudioSource deathSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,11 +89,18 @@ public class EnemyHealthController : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            deathSound.pitch = UnityEngine.Random.Range(1.2f, 1.5f);
+            deathSound.Play();
         }
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            if (health >= 0 && !damageAnim && !animator.GetBool("isEvading")) animator.SetTrigger("damage");
+            if (health >= 0 && !damageAnim && !animator.GetBool("isEvading"))
+            {
+                animator.SetTrigger("damage");
+                hitSound.pitch = UnityEngine.Random.Range(1f, 1.2f);
+                hitSound.Play();
+            }
         }
     }
 
@@ -100,10 +110,19 @@ public class EnemyHealthController : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
-            if (health >= 0 && damageAnim && !animator.GetBool("isEvading")) animator.SetTrigger("damage");
-
+            if (health >= 0 && damageAnim && !animator.GetBool("isEvading"))
+            {
+                animator.SetTrigger("damage");
+                hitSound.pitch = UnityEngine.Random.Range(1f, 1.2f);
+                hitSound.Play();
+            }
         }
-        if (health <= 0) Die();
+        if (health <= 0)
+        {
+            Die();
+            deathSound.pitch = UnityEngine.Random.Range(1.2f, 1.5f);
+            deathSound.Play();
+        }
     }
 
     void Die()
