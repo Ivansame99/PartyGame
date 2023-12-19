@@ -164,10 +164,10 @@ public class PlayerHealthController : MonoBehaviour
         dead = true;
         playersRespawn.NotifyDead();
         respawnTimer = respawnCD;
-        GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
-        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        //Debug.Log(currentPower);
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel()/2;
+        Debug.Log(lastAttacker);
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+        GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         DisablePlayer();
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
@@ -250,12 +250,12 @@ public class PlayerHealthController : MonoBehaviour
             cross2.SetActive(true);
             glow.SetActive(true);
 
+            lastAttacker = other.transform.parent.parent.gameObject;
             SlashController slashController = other.GetComponent<SlashController>();
             attackPosition = other.gameObject.transform.position;
             pushBack = true;
             pushForce = slashController.pushForce;
             ReceiveDamage(slashController.finalDamage);
-            lastAttacker = other.transform.parent.parent.gameObject;
         }
 
         if (other.gameObject.tag == "Potion")
@@ -278,12 +278,12 @@ public class PlayerHealthController : MonoBehaviour
             }
             else
             {
+                lastAttacker = ac.owner;
                 attackPosition = collision.gameObject.transform.position;
                 pushBack = true;
                 pushForce = ac.pushForce;
 
                 ReceiveDamage(ac.finalDamage);
-                lastAttacker = ac.owner;
                 Destroy(collision.gameObject);
             }
         }

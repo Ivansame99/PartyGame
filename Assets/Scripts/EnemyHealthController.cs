@@ -112,6 +112,7 @@ public class EnemyHealthController : MonoBehaviour
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        Debug.Log(lastAttacker);
         if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
         animator.SetTrigger("die");
         dead = true;
@@ -144,13 +145,14 @@ public class EnemyHealthController : MonoBehaviour
                 Cross2.SetActive(true);
                 Glow.SetActive(true);
 
+                lastAttacker = other.transform.parent.parent.gameObject;
+
                 SlashController slashController = other.GetComponent<SlashController>();
                 attackPosition = other.gameObject.transform.position;
                 pushBack = true;
                 pushForce = slashController.pushForce;
 
                 ReceiveDamageSlash(slashController.finalDamage);
-                lastAttacker = other.transform.parent.parent.gameObject;
             }
         }
     }
@@ -163,9 +165,8 @@ public class EnemyHealthController : MonoBehaviour
             attackPosition = collision.gameObject.transform.position;
             pushBack = true;
             pushForce = ac.pushForce;
-
-            ReceiveDamageArrow(ac.finalDamage);
             lastAttacker = ac.owner;
+            ReceiveDamageArrow(ac.finalDamage);
             Destroy(collision.gameObject);
         }
     }
