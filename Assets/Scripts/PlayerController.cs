@@ -447,8 +447,6 @@ public class PlayerController : MonoBehaviour
         else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
             ShootArrow();
-            bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-            bowAttackSound.Play();
         }
         else if (!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
@@ -506,6 +504,8 @@ public class PlayerController : MonoBehaviour
         currentBowStamina = 0;
         bowCD = maxBowCD;
         anim.SetBool("Bow", false);
+        bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+        bowAttackSound.Play();
     }
 
     private void ExitAttack()
