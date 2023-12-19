@@ -90,8 +90,11 @@ public class PlayerController : MonoBehaviour
     private AudioSource swordAttackSound;
     [SerializeField]
     private AudioSource bowAttackSound;
+    [SerializeField] AudioSource dodgeSound;
+    [SerializeField] AudioSource tensingBow;
     [SerializeField] private float minPitch;
     [SerializeField] private float maxPitch;
+    private bool onlySoundOnce = false;
     //States
     public bool invencibility = false;
     public bool dodge = false;
@@ -224,6 +227,8 @@ public class PlayerController : MonoBehaviour
                 float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
                 transform.rotation = Quaternion.Euler(0f, angle, 0f);
             }
+            swordAttackSound.pitch = UnityEngine.Random.Range(1.5f, 1.9f);
+            dodgeSound.Play();
             dodge = true;
             dodgeTimer = dodgeCD;
             WasteStamina(dodgeStamina);
@@ -416,6 +421,14 @@ public class PlayerController : MonoBehaviour
                 if (stamina > 0 && currentBowStamina < maxBowStamina) //Mira si tienes stamina para seguir cargando el arco y si puedes seguir cargandolo mas
                 {
                     anim.SetBool("Bow", true);
+
+                    if (!onlySoundOnce)
+                    {
+                        tensingBow.Play();
+                        tensingBow.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+                        onlySoundOnce = true;
+                    }
+
                     WasteStaminaPerSecond();
                     currentBowStamina += Time.deltaTime;
 
@@ -434,6 +447,7 @@ public class PlayerController : MonoBehaviour
                 else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
                     ShootArrow();
+                    onlySoundOnce = false;
                 }
                 else //Si no ha tensado el arco hasta lo minimo no lanza las flechas
                 {
@@ -441,12 +455,14 @@ public class PlayerController : MonoBehaviour
                     currentBowStamina = 0;
                     attacking = false;
                     indicativeArrow.SetActive(false);
+                    onlySoundOnce = false;
                 }
             }
         }
         else if (!isSpecialAttacking && currentBowStamina >= minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar almenos hasta lo minimo
         {
             ShootArrow();
+            onlySoundOnce = false;
         }
         else if (!isSpecialAttacking && currentBowStamina > 0 && currentBowStamina < minBowStamina) //Ha dejado de apretar el boton, pero ya lo habia comenzado a cargar sin llegar al minimo, no lanza flechas
         {
@@ -455,6 +471,7 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("asdadasdasd");
             attacking = false;
             indicativeArrow.SetActive(false);
+            onlySoundOnce = true;
         }
     }
 
