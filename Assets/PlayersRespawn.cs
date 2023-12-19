@@ -70,4 +70,16 @@ public class PlayersRespawn : MonoBehaviour
             }
         }
     }
+
+    public void RespawnDeadPlayers()
+    {
+        for (int i = 0; i < playersCount; i++)
+        {
+            if (playerHealth[i].dead)
+            {
+                SpawnPlayer(players[i]);
+            }
+        }
+    }
+
 }

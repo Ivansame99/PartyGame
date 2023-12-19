@@ -20,6 +20,8 @@ public class SelectPlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Time.timeScale = 1f;
+
         try
         {
             var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();

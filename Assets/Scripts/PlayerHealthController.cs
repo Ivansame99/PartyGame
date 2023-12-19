@@ -88,10 +88,13 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private float minPitch;
     [SerializeField] private float maxPitch;
 
+    private MultipleTargetCamera mtp;
     // Start is called before the first frame update
     void Start()
     {
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
+        camera = Camera.main;
+        mtp = camera.GetComponent<MultipleTargetCamera>();
         SetupHealthBar(healBarCanvas, camera);
         SetupStaminaBar(healBarCanvas, camera);
         health = maxHealth;
@@ -119,10 +122,10 @@ public class PlayerHealthController : MonoBehaviour
         {
             deathTimer -= Time.deltaTime;
         }
-        else if (dead == true && !deadAux)
+        if (dead == true && !deadAux)
         {
             deadAux = true;
-            StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
+            StartCoroutine(SlowMotion());
         }
 
         if (restart) Respawn();
@@ -171,13 +174,17 @@ public class PlayerHealthController : MonoBehaviour
         anim.SetTrigger("Death");
         playersRespawn.NotifyDead();
         respawnTimer = respawnCD;
-        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel()/2;
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel() / 2;
         //Debug.Log(lastAttacker);
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         DisablePlayer();
         dead = true;
         deathTimer = deathCD;
+        for(int i = 0; i < mtp.Targets.Count; i++)
+        {
+            if (mtp.Targets[i].name == this.transform.name) mtp.Targets.Remove(mtp.Targets[i]);
+        }
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
@@ -211,6 +218,7 @@ public class PlayerHealthController : MonoBehaviour
         healthBarC.SetProgress(health / maxHealth, 2);
         playerUIHealth.SetProgress(health / maxHealth, 2);
         playerController.ResetStamina();
+        mtp.Targets.Add(this.transform);
         //anim.enabled = true;
     }
 
@@ -308,10 +316,30 @@ public class PlayerHealthController : MonoBehaviour
             transform.localScale = Vector3.Lerp(initialScale, upScale, time);
             yield return null;
         }
-        restart = true;
+        //restart = true;
         anim.SetTrigger("Respawn");
         //Respawn();
         //this.transform.position = 
         //transform.localScale = initialScale;
+    }
+
+    IEnumerator SlowMotion()
+    {
+        float slowdownFactor = 0.2f;
+        float slowdownDuration = 2f;
+
+        Time.timeScale = slowdownFactor;
+        camera.GetComponent<MultipleTargetCamera>().enabled = false;
+        camera.transform.LookAt(this.gameObject.transform);
+        camera.transform.position = this.transform.position - camera.transform.forward * 120;
+        while (Time.timeScale < 1f)
+        {
+            Time.timeScale += (1f / slowdownDuration) * Time.unscaledDeltaTime;
+            Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+            yield return null;
+        }
+        camera.GetComponent<MultipleTargetCamera>().enabled = true;
+        Time.timeScale = 1f; // Asegúrate de restablecer el tiempo a 1 después de la corutina
+        StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
     }
 }
