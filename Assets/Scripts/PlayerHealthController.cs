@@ -160,15 +160,15 @@ public class PlayerHealthController : MonoBehaviour
     void Die()
     {
         anim.SetTrigger("Death");
-        deathTimer = deathCD;
-        dead = true;
         playersRespawn.NotifyDead();
         respawnTimer = respawnCD;
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel()/2;
-        Debug.Log(lastAttacker);
+        //Debug.Log(lastAttacker);
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
         GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
         DisablePlayer();
+        dead = true;
+        deathTimer = deathCD;
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/

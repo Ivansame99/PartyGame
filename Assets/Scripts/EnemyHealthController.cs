@@ -46,7 +46,7 @@ public class EnemyHealthController : MonoBehaviour
     public bool invencibility=false;
     [SerializeField] private bool damageAnim;
 
-    private bool dead;
+    private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -108,14 +108,14 @@ public class EnemyHealthController : MonoBehaviour
 
     void Die()
     {
+        animator.SetTrigger("die");
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        Debug.Log(lastAttacker);
         if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
-        animator.SetTrigger("die");
         dead = true;
+        Invoke("enemyDestroy", 2.0f);
     }
 
     public void enemyDestroy()
@@ -132,7 +132,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect") && !invencibility)
+        if (other.CompareTag("SlashEffect") && !invencibility && !dead)
         {
             if (other.gameObject.transform.parent.parent.tag != "Enemy")
             {
@@ -159,7 +159,7 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !invencibility)
+        if (collision.gameObject.tag == "Arrow" && !invencibility && !dead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;

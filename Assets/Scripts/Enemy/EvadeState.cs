@@ -31,7 +31,7 @@ public class EvadeState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = FindPlayer();
-        agent.SetDestination(player.position);
+        if (agent.isActiveAndEnabled && player != null) agent.SetDestination(player.position);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

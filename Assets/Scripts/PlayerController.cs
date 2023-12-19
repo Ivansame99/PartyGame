@@ -467,15 +467,15 @@ public class PlayerController : MonoBehaviour
         ac.SetPushForce(currentBowStamina * 50000);
         ac.owner = this.gameObject;*/
 
-        GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), this.transform.rotation);
+        GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), this.transform.rotation);
 
         Vector3 cone1 = rot.eulerAngles + new Vector3(0, 5, 0);
         Vector3 cone2 = rot.eulerAngles + new Vector3(0, -5, 0);
 
-        GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), rot);
         arrow2.transform.eulerAngles = cone1;
 
-        GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y + 2.0f, this.transform.position.z), rot);
+        GameObject arrow3 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), rot);
         arrow3.transform.eulerAngles = cone2;
 
         ArrowController ac = arrow1.GetComponent<ArrowController>();
@@ -521,7 +521,6 @@ public class PlayerController : MonoBehaviour
         attacking = false;
         comboCounter = 0;
         lastComboEnd = Time.time;
-        weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     private void FixedUpdate()
