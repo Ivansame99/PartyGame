@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
             anim.SetTrigger("Roll");
             if (attacking) EndCombo();
             invencibilityTimer = dodgeInvencibilitySeconds;
-            Invoke("RollEnded", 1f); //Por si acaso no entra por animacion
+            Invoke("RollEnded", 0.5f); //Por si acaso no entra por animacion
         }
     }
 
@@ -546,8 +546,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //        if (!attacking)
-        //        {
         if (attacking)
         {
             rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
@@ -560,8 +558,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.MovePosition(transform.position + direction * speed * Time.fixedDeltaTime);
         }
-
-        //        }
 
         if (moveAttack)
         {
