@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class PlayerController : MonoBehaviour
 {
@@ -76,7 +77,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject arrowPrefab;
-    [SerializeField]
+	[SerializeField]
+	private GameObject arrowLineIndicator;
+	[SerializeField]
     private GameObject indicativeArrow;
 
     [SerializeField]
@@ -130,7 +133,15 @@ public class PlayerController : MonoBehaviour
 
     private PowerController powerController;
     private SlashController slashController;
-    void Start()
+
+    private bool resetLineArrow = true;
+	private bool resetLineArrowAux = true;
+	private float resetTimer=0f;
+	private bool chargingBow = false;
+
+	private GameObject arrowline1, arrowline2, arrowline3;
+
+	void Start()
     {
         slashController = slashCollider.GetComponent<SlashController>();
         powerController = this.GetComponent<PowerController>();
@@ -324,14 +335,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (weapon.tag == "Sword")
                 {
-                    if (Time.time - lastComboEnd > 0.35f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+                    if (Time.time - lastComboEnd > 0.7f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
                     {
-                        CancelInvoke("EndCombo");
-
                         if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
                         {
-                            //Cosas de slash
-                            Vector3 savedPosition = slashDirection.position;
+							CancelInvoke("EndCombo");
+
+							//Cosas de slash
+							Vector3 savedPosition = slashDirection.position;
                             slashParticle.transform.position = savedPosition;
                             slashCollider.transform.position = savedPosition;
 
@@ -420,6 +431,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (stamina > 0 && currentBowStamina < maxBowStamina) //Mira si tienes stamina para seguir cargando el arco y si puedes seguir cargandolo mas
                 {
+                    chargingBow = true;
                     anim.SetBool("Bow", true);
 
                     if (!onlySoundOnce)
@@ -432,18 +444,52 @@ public class PlayerController : MonoBehaviour
                     WasteStaminaPerSecond();
                     currentBowStamina += Time.deltaTime;
 
-                    if (direction != Vector3.zero) //Hacer que puedas rotar mientras cargas
+					if (resetTimer > 0 && resetLineArrowAux) resetTimer -= Time.deltaTime;
+					
+                    if (resetLineArrowAux && resetTimer<=0)
+					{
+						resetLineArrowAux = false;
+						resetLineArrow = true;
+					}
+
+					if (direction != Vector3.zero) //Hacer que puedas rotar mientras cargas
                     {
                         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
                         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
                         transform.rotation = Quaternion.Euler(0f, angle, 0f);
-                    }
+						//resetLineArrow = true;
+						if (resetTimer <= 0)
+                        {
+							resetTimer = 0.2f;
+                            resetLineArrowAux = true;
+                        }
+					}
 
                     attacking = true;
                     indicativeArrow.SetActive(true);
-                    //anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
-                    //anim.Play("Attack", 0, 0);
-                }
+
+                    //Linea cuando carga
+                    if (resetLineArrow)
+                    {
+						Destroy(arrowline1);
+						Destroy(arrowline2);
+						Destroy(arrowline3);
+
+						Quaternion rot = this.transform.rotation;
+                        arrowline1 = Instantiate(arrowLineIndicator, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), this.transform.rotation);
+                        //arrowline1.transform.parent = this.gameObject.transform;
+                        Vector3 cone1 = rot.eulerAngles + new Vector3(0, 5, 0);
+                        Vector3 cone2 = rot.eulerAngles + new Vector3(0, -5, 0);
+
+                        arrowline2 = Instantiate(arrowLineIndicator, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), rot);
+                        arrowline2.transform.eulerAngles = cone1;
+						//arrowline2.transform.parent = this.gameObject.transform;
+						arrowline3 = Instantiate(arrowLineIndicator, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), rot);
+                        arrowline3.transform.eulerAngles = cone2;
+						//arrowline3.transform.parent = this.gameObject.transform;
+						resetLineArrow = false;
+                    }
+				}
                 else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
                     ShootArrow();
@@ -454,8 +500,12 @@ public class PlayerController : MonoBehaviour
                     anim.SetBool("Bow", false);
                     currentBowStamina = 0;
                     attacking = false;
-                    indicativeArrow.SetActive(false);
-                    onlySoundOnce = false;
+					chargingBow = false;
+					indicativeArrow.SetActive(false);
+                    Destroy(arrowline1);
+					Destroy(arrowline2);
+					Destroy(arrowline3);
+					onlySoundOnce = false;
                 }
             }
         }
@@ -470,20 +520,18 @@ public class PlayerController : MonoBehaviour
             currentBowStamina = 0;
             //Debug.Log("asdadasdasd");
             attacking = false;
-            indicativeArrow.SetActive(false);
-            onlySoundOnce = true;
+			chargingBow = false;
+			indicativeArrow.SetActive(false);
+			Destroy(arrowline1);
+			Destroy(arrowline2);
+			Destroy(arrowline3);
+			onlySoundOnce = true;
         }
     }
 
     void ShootArrow()
     {
         Quaternion rot = this.transform.rotation;
-        /*ArrowController ac = arrowPrefab.GetComponent<ArrowController>();
-
-        ac.finalDamage = ac.baseDamage + powerController.GetCurrentPowerLevel()/5; //cambiar escalado de poder
-        ac.SetSpeed(currentBowStamina * 15);
-        ac.SetPushForce(currentBowStamina * 50000);
-        ac.owner = this.gameObject;*/
 
         GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), this.transform.rotation);
 
@@ -517,22 +565,27 @@ public class PlayerController : MonoBehaviour
         ac3.SetPushForce(currentBowStamina * 70);
         ac3.owner = this.gameObject;
         Invoke("StopAttack", 0.3f);
-        indicativeArrow.SetActive(false);
-        currentBowStamina = 0;
+		chargingBow = false;
+		indicativeArrow.SetActive(false);
+        Destroy(arrowline1);
+		Destroy(arrowline2);
+		Destroy(arrowline3);
+		currentBowStamina = 0;
         bowCD = maxBowCD;
         anim.SetBool("Bow", false);
         bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         bowAttackSound.Play();
+        resetLineArrow = true;
     }
 
     private void ExitAttack()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            slashCollider.SetActive(false);
-            slashParticle.SetActive(false);
-            Invoke("EndCombo", 0.1f);
-        }
+            //slashCollider.SetActive(false);
+            //slashParticle.SetActive(false);
+            Invoke("EndCombo", 0.5f);
+		}
     }
 
     private void EndCombo()
