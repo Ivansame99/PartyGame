@@ -379,7 +379,7 @@ public class PlayerController : MonoBehaviour
                             isAttackingAux = true;
 
                             WasteStamina(attackStamina);
-                            //attacking = true;
+                            attacking = true;
                             anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
                             anim.Play("Attack", 0, 0);
                             swordAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
@@ -390,8 +390,9 @@ public class PlayerController : MonoBehaviour
                             slashController.pushForce = weaponController.combo[comboCounter].pushForce;
                             attackMovement = weaponController.combo[comboCounter].attackMovement;
                             comboCounter++;
-                            if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
-                            lastClicked = Time.time;
+							//if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
+							moveAttack = true;
+							lastClicked = Time.time;
                             //weapon.GetComponent<BoxCollider>().enabled = true;
                             if (comboCounter >= weaponController.combo.Count)
                             {
@@ -584,7 +585,7 @@ public class PlayerController : MonoBehaviour
         {
             //slashCollider.SetActive(false);
             //slashParticle.SetActive(false);
-            Invoke("EndCombo", 0.5f);
+            Invoke("EndCombo", 0.3f);
 		}
     }
 
@@ -599,7 +600,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (attacking)
+        if (chargingBow)
         {
             rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
         }
@@ -614,6 +615,7 @@ public class PlayerController : MonoBehaviour
 
         if (moveAttack)
         {
+            Debug.Log("Entras");
             rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
             moveAttack = false;
         }
