@@ -46,7 +46,7 @@ public class ChaseState : StateMachineBehaviour
             timerAttack -= Time.deltaTime;
         }
         player = FindPlayer();
-        player2 = FindSecondClosestPlayer();
+        player2 = FindSecondClosestPlayer(player);
         
         if (player != null)
         {
@@ -95,9 +95,8 @@ public class ChaseState : StateMachineBehaviour
         return searchPlayer;
     }
 
-    private Transform FindSecondClosestPlayer()
+    private Transform FindSecondClosestPlayer(Transform closestPlayer)
     {
-        Transform closestPlayer = FindPlayer();
         Transform secondClosestPlayer = null;
         float minDist = float.MaxValue;
 
