@@ -1338,6 +1338,7 @@ GameObject:
   - component: {fileID: 1339110353}
   - component: {fileID: 1339110354}
   - component: {fileID: 1339110355}
+  - component: {fileID: 1339110356}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1481,6 +1482,22 @@ MonoBehaviour:
     type: 3}
   maxTimeToSpawn: 30
   minTimeToSpawn: 60
+--- !u!114 &1339110356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339110350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79a0a4c40081dd419a0de5b5295ca1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toPl1: 0
+  toPl2: 0
+  toPl3: 0
+  toPl4: 0
 --- !u!1 &1347223028
 GameObject:
   m_ObjectHideFlags: 0
