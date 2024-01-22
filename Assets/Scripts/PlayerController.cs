@@ -134,10 +134,13 @@ public class PlayerController : MonoBehaviour
     private PowerController powerController;
     private SlashController slashController;
 
-    private bool resetLineArrow = true;
+    /*private bool resetLineArrow = true;
 	private bool resetLineArrowAux = true;
-	private float resetTimer=0f;
+	private float resetTimer=0f;*/
 	private bool chargingBow = false;
+
+    [SerializeField]
+    private GameObject arrowConeIndicator;
 
 	private GameObject arrowline1, arrowline2, arrowline3;
 
@@ -445,13 +448,13 @@ public class PlayerController : MonoBehaviour
                     WasteStaminaPerSecond();
                     currentBowStamina += Time.deltaTime;
 
-					if (resetTimer > 0 && resetLineArrowAux) resetTimer -= Time.deltaTime;
+					/*if (resetTimer > 0 && resetLineArrowAux) resetTimer -= Time.deltaTime;
 					
                     if (resetLineArrowAux && resetTimer<=0)
 					{
 						resetLineArrowAux = false;
 						resetLineArrow = true;
-					}
+					}*/
 
 					if (direction != Vector3.zero) //Hacer que puedas rotar mientras cargas
                     {
@@ -459,18 +462,19 @@ public class PlayerController : MonoBehaviour
                         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
                         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 						//resetLineArrow = true;
-						if (resetTimer <= 0)
+						/*if (resetTimer <= 0)
                         {
 							resetTimer = 0.2f;
                             resetLineArrowAux = true;
-                        }
+                        }*/
 					}
 
                     attacking = true;
                     indicativeArrow.SetActive(true);
+                    arrowConeIndicator.SetActive(true);
 
                     //Linea cuando carga
-                    if (resetLineArrow)
+                    /*if (resetLineArrow)
                     {
 						Destroy(arrowline1);
 						Destroy(arrowline2);
@@ -489,7 +493,7 @@ public class PlayerController : MonoBehaviour
                         arrowline3.transform.eulerAngles = cone2;
 						//arrowline3.transform.parent = this.gameObject.transform;
 						resetLineArrow = false;
-                    }
+                    }*/
 				}
                 else if (currentBowStamina >= minBowStamina) //Si ya no le queda estamina o ha tensado el arco almenos hasta lo minimo
                 {
@@ -503,7 +507,8 @@ public class PlayerController : MonoBehaviour
                     attacking = false;
 					chargingBow = false;
 					indicativeArrow.SetActive(false);
-                    Destroy(arrowline1);
+					arrowConeIndicator.SetActive(false);
+					Destroy(arrowline1);
 					Destroy(arrowline2);
 					Destroy(arrowline3);
 					onlySoundOnce = false;
@@ -523,6 +528,7 @@ public class PlayerController : MonoBehaviour
             attacking = false;
 			chargingBow = false;
 			indicativeArrow.SetActive(false);
+			arrowConeIndicator.SetActive(false);
 			Destroy(arrowline1);
 			Destroy(arrowline2);
 			Destroy(arrowline3);
@@ -568,7 +574,8 @@ public class PlayerController : MonoBehaviour
         Invoke("StopAttack", 0.3f);
 		chargingBow = false;
 		indicativeArrow.SetActive(false);
-        Destroy(arrowline1);
+		arrowConeIndicator.SetActive(false);
+		Destroy(arrowline1);
 		Destroy(arrowline2);
 		Destroy(arrowline3);
 		currentBowStamina = 0;
@@ -576,7 +583,7 @@ public class PlayerController : MonoBehaviour
         anim.SetBool("Bow", false);
         bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         bowAttackSound.Play();
-        resetLineArrow = true;
+        //resetLineArrow = true;
     }
 
     private void ExitAttack()
