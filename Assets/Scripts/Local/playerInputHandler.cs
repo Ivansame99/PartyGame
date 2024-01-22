@@ -33,11 +33,11 @@ public class playerInputHandler : MonoBehaviour
         {
             OnMove(obj);
         }
-        if (obj.action.name == inputs.Player.Dodge.name)
+        if (obj.action.name == inputs.Player.Dodge.name && obj.action.WasPressedThisFrame())
         {
             OnDodge(obj);
         }
-        if (obj.action.name == inputs.Player.Attack.name)
+        if (obj.action.name == inputs.Player.Attack.name && obj.action.WasPressedThisFrame())
         {
             OnAttack(obj);
         }
@@ -45,7 +45,7 @@ public class playerInputHandler : MonoBehaviour
         {
             OnSpecialAttack(obj);
         }
-		if (obj.action.name == inputs.Player.Jump.name)
+		if (obj.action.name == inputs.Player.Jump.name && obj.action.WasPressedThisFrame())
 		{
 			OnJump(obj);
 		}

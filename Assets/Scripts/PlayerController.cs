@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -111,7 +112,7 @@ public class PlayerController : MonoBehaviour
 	private bool isCharging = false;
 
 	//Control
-	private bool isDodging, isAttacking, isSpecialAttacking, isJumping, isAttackingAux;
+	private bool isDodging, isAttacking, isSpecialAttacking, isJumping;
 
 	//Movement
 	Vector2 moveUniversal;
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour
 		else invencibility = false;
 
 		//Espada
-		if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver S atacar
+		//if (!isAttacking && isAttackingAux) isAttackingAux = false; //isAttackingAux se utiliza para detectar que leventas el boton del ataque para volver S atacar
 		Attack();
 		ExitAttack();
 
@@ -237,9 +238,11 @@ public class PlayerController : MonoBehaviour
 
 	void Jump()
 	{
-		if (ground && isJumping)
+		if (ground && isJumping && !jump)
 		{
+			this.gameObject.transform.DOPunchScale(new Vector3(0.7f, -0.7f, 0.7f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
 			jump = true;
+			isJumping = false;
 		}
 	}
 
@@ -267,6 +270,8 @@ public class PlayerController : MonoBehaviour
 			if (attacking) EndCombo();
 			invencibilityTimer = dodgeInvencibilitySeconds;
 			Invoke("RollEnded", 0.5f); //Por si acaso no entra por animacion
+
+			isDodging = false;
 		}
 	}
 
@@ -348,7 +353,7 @@ public class PlayerController : MonoBehaviour
 	private void Attack()
 	{
 		//Forma nueva
-		if (isAttacking && !isAttackingAux && !dodge)
+		if (isAttacking && !dodge)
 		{
 			//GreatSword and sword
 			if (weapon != null)
@@ -395,9 +400,6 @@ public class PlayerController : MonoBehaviour
 
 							mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
 
-
-							isAttackingAux = true;
-
 							WasteStamina(attackStamina);
 							attacking = true;
 							anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
@@ -424,6 +426,7 @@ public class PlayerController : MonoBehaviour
 							slashParticle.SetActive(false);
 
 							StartCoroutine(ReactivateObjects());
+							isAttacking = false;
 						}
 					}
 				}
@@ -645,7 +648,6 @@ public class PlayerController : MonoBehaviour
 
 		if (moveAttack)
 		{
-			Debug.Log("Entras");
 			rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
 			moveAttack = false;
 		}
