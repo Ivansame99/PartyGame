@@ -45,8 +45,12 @@ public class playerInputHandler : MonoBehaviour
         {
             OnSpecialAttack(obj);
         }
+		if (obj.action.name == inputs.Player.Jump.name)
+		{
+			OnJump(obj);
+		}
 
-    }
+	}
 
     public void OnMove(CallbackContext context)
     {
@@ -71,5 +75,11 @@ public class playerInputHandler : MonoBehaviour
             playerController.SetSpecialAttack(context.ReadValueAsButton());
 
     }
+	public void OnJump(CallbackContext context)
+	{
+		if (playerController != null)
+			playerController.SetJump(context.ReadValueAsButton());
+
+	}
 
 }
