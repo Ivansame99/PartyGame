@@ -13,6 +13,7 @@ public class CustomGravityController : MonoBehaviour
 	private Vector3 gravity;
 	Rigidbody m_rb;
 
+	[HideInInspector]
 	public bool gravityOn = true;
 
 	void OnEnable()
@@ -42,7 +43,8 @@ public class CustomGravityController : MonoBehaviour
 			}
 		} else
 		{
-			m_rb.velocity = new Vector3(m_rb.velocity.x, 0, m_rb.velocity.z);
+			//m_rb.velocity = new Vector3(m_rb.velocity.x, 0, m_rb.velocity.z);
+			m_rb.AddForce(gravity/1.5f, ForceMode.Acceleration);
 		}
 	}
 }

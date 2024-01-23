@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		Jump();
+
 		//Voltereta
 		Roll();
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
@@ -311,7 +312,6 @@ public class PlayerController : MonoBehaviour
 
 	void ChangeWeapon(GameObject newWeapon)
 	{
-
 		Destroy(weapon);
 		weapon = newWeapon;
 		weaponController = weapon.GetComponent<Weapon>();
@@ -352,6 +352,11 @@ public class PlayerController : MonoBehaviour
 		//invencibility = false;
 	}
 
+	private void ResetVelocity()
+	{
+		rb.velocity = new Vector3(0,rb.velocity.y,0);
+	}
+
 	private void Attack()
 	{
 		//Forma nueva
@@ -367,7 +372,8 @@ public class PlayerController : MonoBehaviour
 						if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
 						{
 							CancelInvoke("EndCombo");
-
+							
+							ResetVelocity();
 							//Cosas de slash
 							Vector3 savedPosition = slashDirection.position;
 							slashParticle.transform.position = savedPosition;
@@ -412,12 +418,19 @@ public class PlayerController : MonoBehaviour
 																																					//Debug.Log(slashController.finalDamage);
 																																					//weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
 							slashController.pushForce = weaponController.combo[comboCounter].pushForce;
-							attackMovement = weaponController.combo[comboCounter].attackMovement;
+
+							//Solo se hace el dash al atacar si se esta moviendo, si no ataca en el sitio
+							if (direction!=Vector3.zero)
+							{
+								attackMovement = weaponController.combo[comboCounter].attackMovement;
+								moveAttack = true;
+							}
+
 							comboCounter++;
 							//if (comboCounter == 1) moveAttack = true; //solo hace el dash la primera vez
-							moveAttack = true;
+
+							gravityController.gravityOn = false;
 							lastClicked = Time.time;
-							//weapon.GetComponent<BoxCollider>().enabled = true;
 							if (comboCounter >= weaponController.combo.Count)
 							{
 								comboCounter = 0;
@@ -619,6 +632,9 @@ public class PlayerController : MonoBehaviour
 		{
 			//slashCollider.SetActive(false);
 			//slashParticle.SetActive(false);
+			//rb.velocity = Vector3.zero;
+			ResetVelocity();
+			gravityController.gravityOn = true;
 			Invoke("EndCombo", 0.3f);
 		}
 	}

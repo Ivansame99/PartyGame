@@ -32081,7 +32081,7 @@ MonoBehaviour:
   speed: 10
   dodgeSpeed: 20
   turnSmooth: 0.1
-  jumpForce: 10
+  jumpForce: 15
   maxStamina: 100
   staminaRegen: 30
   dodgeStamina: 20
@@ -32093,7 +32093,7 @@ MonoBehaviour:
   dodgeCD: 0
   dodgeInvencibilitySeconds: 0.5
   invencibilityTimer: 0
-  maxBowCD: 1.5
+  maxBowCD: 1
   weapon: {fileID: 6891439088349369807}
   arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
     type: 3}
@@ -32247,6 +32247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 2
+  gravityOn: 1
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
