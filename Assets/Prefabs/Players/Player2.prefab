@@ -26184,6 +26184,7 @@ MonoBehaviour:
   combo:
   - {fileID: 11400000, guid: 5c6cc5eb1e4d18448a0ed7b5e4875c17, type: 2}
   - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
+  - {fileID: 11400000, guid: ecba0ea20a1d8424ca93634c5179b408, type: 2}
   damage: 5
   pushForce: 5
   arrow: {fileID: 0}
@@ -32015,6 +32016,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4457386804806529676}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8270753621171231661}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!4 &1788842633507896409 stripped
 Transform:
@@ -32076,7 +32081,7 @@ MonoBehaviour:
   speed: 10
   dodgeSpeed: 20
   turnSmooth: 0.1
-  jumpForce: 0
+  jumpForce: 10
   maxStamina: 100
   staminaRegen: 30
   dodgeStamina: 20
@@ -32213,10 +32218,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1361772
-  m_Height: 0.80401576
+  m_Radius: 0.13617718
+  m_Height: 0.60431993
   m_Direction: 1
-  m_Center: {x: 0.016438996, y: 0.16963163, z: -0.098717526}
+  m_Center: {x: 0.016438996, y: 0.06978352, z: -0.098717526}
 --- !u!114 &4457386804806529676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32229,6 +32234,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722c399a9f0f8024c90cbdd6c67499b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8270753621171231661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a244e99d03c0a343a3cc52914a42912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 2
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

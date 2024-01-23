@@ -150,6 +150,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool ground = true;
 	private bool jump = false;
+
+	private CustomGravityController gravityController;
 	void Start()
 	{
 		slashController = slashCollider.GetComponent<SlashController>();
@@ -159,7 +161,7 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		stamina = maxStamina;
 		slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
-
+		gravityController = this.GetComponent<CustomGravityController>();
 	}
 
 	//Input mando
@@ -468,6 +470,8 @@ public class PlayerController : MonoBehaviour
 					WasteStaminaPerSecond();
 					currentBowStamina += Time.deltaTime;
 
+					//remove gravity
+					gravityController.gravityOn = false;
 					/*if (resetTimer > 0 && resetLineArrowAux) resetTimer -= Time.deltaTime;
 					
                     if (resetLineArrowAux && resetTimer<=0)
@@ -532,6 +536,7 @@ public class PlayerController : MonoBehaviour
 					Destroy(arrowline2);
 					Destroy(arrowline3);
 					onlySoundOnce = false;
+					gravityController.gravityOn = true;
 				}
 			}
 		}
@@ -553,6 +558,7 @@ public class PlayerController : MonoBehaviour
 			Destroy(arrowline2);
 			Destroy(arrowline3);
 			onlySoundOnce = true;
+			gravityController.gravityOn = true;
 		}
 	}
 
@@ -604,6 +610,7 @@ public class PlayerController : MonoBehaviour
 		bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 		bowAttackSound.Play();
 		//resetLineArrow = true;
+		gravityController.gravityOn = true;
 	}
 
 	private void ExitAttack()
@@ -627,7 +634,7 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (chargingBow)
+		if (chargingBow && ground)
 		{
 			rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
 		}
