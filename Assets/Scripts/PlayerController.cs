@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEngine.Rendering.DebugUI.Table;
 
+[SelectionBase]
 public class PlayerController : MonoBehaviour
 {
 	//public CharacterController controller;
@@ -151,6 +152,8 @@ public class PlayerController : MonoBehaviour
 	private bool ground = true;
 	private bool jump = false;
 
+	private List<GameObject> enemiesNear = new List<GameObject>();
+
 	private CustomGravityController gravityController;
 	void Start()
 	{
@@ -243,7 +246,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (ground && isJumping && !jump)
 		{
-			this.gameObject.transform.DOPunchScale(new Vector3(0.7f, -0.7f, 0.7f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
+			this.gameObject.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
 			jump = true;
 			isJumping = false;
 		}
@@ -357,6 +360,15 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = new Vector3(0,rb.velocity.y,0);
 	}
 
+	private Transform TryGetNearestEnemy()
+	{
+		Transform nearestEnemy = null;
+
+		if (enemiesNear.Count > 1) nearestEnemy = enemiesNear[0].transform;
+
+		return nearestEnemy;
+	}
+
 	private void Attack()
 	{
 		//Forma nueva
@@ -419,9 +431,22 @@ public class PlayerController : MonoBehaviour
 																																					//weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
 							slashController.pushForce = weaponController.combo[comboCounter].pushForce;
 
-							//Solo se hace el dash al atacar si se esta moviendo, si no ataca en el sitio
-							if (direction!=Vector3.zero)
+							Transform target = TryGetNearestEnemy();
+
+							if (target!=null)
 							{
+
+							}
+
+
+							//Solo se hace el dash al atacar si se esta moviendo, si no ataca en el sitio
+							if (direction.magnitude >= 0.1f)
+							{
+								float targetAngle;
+								/*if (target==null)*/ targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+								//else targetAngle = Mathf.Atan2(target.position.x, target.position.z) * Mathf.Rad2Deg;
+								float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+								transform.rotation = Quaternion.Euler(0f, angle, 0f);
 								attackMovement = weaponController.combo[comboCounter].attackMovement;
 								moveAttack = true;
 							}
@@ -678,9 +703,19 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Sword" || other.gameObject.tag == "GreatSword" || other.gameObject.tag == "Bow") //|| tag==greatsword||tag==bow
+		// Verifica si el objeto que entró tiene la etiqueta "Enemigo".
+		if (other.CompareTag("Enemy"))
 		{
-			//ChangeWeapon(other.gameObject);
+			enemiesNear.Add(other.gameObject);
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		// Verifica si el objeto que entró tiene la etiqueta "Enemigo".
+		if (other.CompareTag("Enemy"))
+		{
+			enemiesNear.Remove(other.gameObject);
 		}
 	}
 
