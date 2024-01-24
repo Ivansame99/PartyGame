@@ -7,8 +7,9 @@ public class EnemyDirector : MonoBehaviour
 {
     public int[] playerTarget;
     private int currentEnemies;
-    private int currentPlayers;
+    public int currentPlayers;
     public int splitEnemies;
+    public bool[] full;
     public List<Transform> players;
     public GameObject[] jugadoresArray;
     private RoundController roundController;
@@ -24,6 +25,7 @@ public class EnemyDirector : MonoBehaviour
             players.Add(jugadorObj.transform);
         }
         playerTarget = new int[jugadoresArray.Length];
+        full = new bool[jugadoresArray.Length];
     }
 
     // Update is called once per frame
@@ -33,6 +35,13 @@ public class EnemyDirector : MonoBehaviour
         currentPlayers = roundController.playersCount;
         splitEnemies = currentEnemies / currentPlayers;
 
+        
+        for (int i = 0; i < currentPlayers; i++)
+        {
+            if (playerTarget[i] < splitEnemies) full[i] = false;
+            else if(playerTarget[i] >= splitEnemies) full[i] = true;
+        }
+        Debug.Log(full[0]);
         /*
         for(int i = 0; i < playerTarget.Length; i++)
         {
@@ -42,7 +51,7 @@ public class EnemyDirector : MonoBehaviour
             }
         }
         */
-        Debug.Log(playerTarget[0]);
-        Debug.Log(playerTarget[1]);
+        //Debug.Log(playerTarget[0]);
+        //Debug.Log(playerTarget[1]);
     }
 }

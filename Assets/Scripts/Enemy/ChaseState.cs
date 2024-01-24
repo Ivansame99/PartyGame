@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class ChaseState : StateMachineBehaviour
 {
     private NavMeshAgent agent;
-    private Transform player,player2;
+    private Transform player, player2;
     [SerializeField] float triggerDistance = 2.5f;
     [SerializeField] private float deg;
     [SerializeField] private float speed;
@@ -16,10 +16,11 @@ public class ChaseState : StateMachineBehaviour
     [SerializeField] private float evadeAttackCooldown;
     [SerializeField] private float normalAttackCooldown;
     private float fieldOfView;
-    private float timerAttack,timerSpecial;
+    private float timerAttack, timerSpecial;
     private EnemyDirector enemyDirector;
     private bool newTarget;
     private Transform lastTarget;
+    
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -46,7 +47,7 @@ public class ChaseState : StateMachineBehaviour
         }
         player = FindPlayer();
         player2 = FindSecondClosestPlayer(player);
-        
+
         if (player != null)
         {
             if (agent.isActiveAndEnabled) agent.SetDestination(player.position);
@@ -76,21 +77,33 @@ public class ChaseState : StateMachineBehaviour
     {
         if (agent.isActiveAndEnabled) agent.SetDestination(animator.transform.position);
     }
-private Transform FindPlayer()
-{
-    Transform searchPlayer = null;
-    float minDist = float.MaxValue;
-
-    foreach (Transform player in enemyDirector.players)
+    private Transform FindPlayer()
     {
-        float distance = Vector3.Distance(agent.transform.position, player.position);
-        
-        if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
+        Transform searchPlayer = null;
+        float minDist = float.MaxValue;
+
+        for (int i = 0; i < enemyDirector.currentPlayers; i++)
         {
-            minDist = distance;
-            searchPlayer = player;
+            Transform player = enemyDirector.players[i];
+            float distance = Vector3.Distance(agent.transform.position, player.position);
+
+            if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
+            {
+                if (enemyDirector.full[i] && player == lastTarget)
+                {
+                    minDist = distance;
+                    searchPlayer = player;
+                }
+                if (!enemyDirector.full[i])
+                {
+                    minDist = distance;
+                    searchPlayer = player;
+                }
+                Debug.Log("entra");
+
+                
+            }
         }
-    }
         if (!newTarget)
         {
             // Disminuir el contador del objetivo anterior si ya estaba siguiendo a otro jugador
@@ -106,7 +119,7 @@ private Transform FindPlayer()
             newTarget = false;
         }
         return searchPlayer;
-}
+    }
 
     private void IncreasePlayerTarget(string playerName)
     {
@@ -145,36 +158,36 @@ private Transform FindPlayer()
                 break;
         }
     }
-        private Transform FindSecondClosestPlayer(Transform closestPlayer)
+    private Transform FindSecondClosestPlayer(Transform closestPlayer)
+    {
+        Transform secondClosestPlayer = null;
+        float minDist = float.MaxValue;
+
+        foreach (Transform player in enemyDirector.players)
         {
-            Transform secondClosestPlayer = null;
-            float minDist = float.MaxValue;
-
-            foreach (Transform player in enemyDirector.players)
+            if (player != closestPlayer)
             {
-                if (player != closestPlayer)
-                {
-                    float distance = Vector3.Distance(agent.transform.position, player.position);
+                float distance = Vector3.Distance(agent.transform.position, player.position);
 
-                    if (distance < minDist)
-                    {
-                        minDist = distance;
-                        secondClosestPlayer = player;
-                    }
+                if (distance < minDist)
+                {
+                    minDist = distance;
+                    secondClosestPlayer = player;
                 }
             }
-            return secondClosestPlayer;
         }
-
-        // OnStateMove is called right after Animator.OnAnimatorMove()
-        //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that processes and affects root motion
-        //}
-
-        // OnStateIK is called right after Animator.OnAnimatorIK()
-        //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        //{
-        //    // Implement code that sets up animation IK (inverse kinematics)
-        //}
+        return secondClosestPlayer;
     }
+
+    // OnStateMove is called right after Animator.OnAnimatorMove()
+    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that processes and affects root motion
+    //}
+
+    // OnStateIK is called right after Animator.OnAnimatorIK()
+    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    // Implement code that sets up animation IK (inverse kinematics)
+    //}
+}
