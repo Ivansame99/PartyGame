@@ -155,6 +155,8 @@ public class PlayerController : MonoBehaviour
 	private List<GameObject> enemiesNear = new List<GameObject>();
 
 	private CustomGravityController gravityController;
+
+	private bool nextAttack=false;
 	void Start()
 	{
 		slashController = slashCollider.GetComponent<SlashController>();
@@ -379,9 +381,9 @@ public class PlayerController : MonoBehaviour
 			{
 				if (weapon.tag == "Sword")
 				{
-					if (Time.time - lastComboEnd > 0.7f && comboCounter <= weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+					if (Time.time - lastComboEnd > 0.8f && comboCounter < weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
 					{
-						if (Time.time - lastClicked >= 0.2f) //Tiempo entre ataques
+						if (Time.time - lastClicked >= 0.7f) //Tiempo entre ataques
 						{
 							CancelInvoke("EndCombo");
 							
@@ -456,11 +458,11 @@ public class PlayerController : MonoBehaviour
 
 							gravityController.gravityOn = false;
 							lastClicked = Time.time;
-							if (comboCounter >= weaponController.combo.Count)
+							/*if (comboCounter >= weaponController.combo.Count)
 							{
 								comboCounter = 0;
 								lastComboEnd = Time.time;
-							}
+							}*/
 
 							slashCollider.SetActive(false);
 							slashParticle.SetActive(false);
@@ -479,8 +481,8 @@ public class PlayerController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
 
-		slashCollider.SetActive(true);
-		slashParticle.SetActive(true);
+		//slashCollider.SetActive(true);
+		//slashParticle.SetActive(true);
 
 		yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según sea necesario
 		slashCollider.SetActive(false);
@@ -653,19 +655,22 @@ public class PlayerController : MonoBehaviour
 
 	private void ExitAttack()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+		if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
 			//slashCollider.SetActive(false);
 			//slashParticle.SetActive(false);
 			//rb.velocity = Vector3.zero;
+			//Debug.Log("Entras aquii??2");
+			anim.SetTrigger("Attack");
 			ResetVelocity();
 			gravityController.gravityOn = true;
-			Invoke("EndCombo", 0.3f);
+			Invoke("EndCombo", 0.5f);
 		}
 	}
 
 	private void EndCombo()
 	{
+		anim.ResetTrigger("Attack");
 		slashCollider.SetActive(false);
 		slashParticle.SetActive(false);
 		attacking = false;
