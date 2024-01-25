@@ -180,6 +180,7 @@ public class PlayerController : MonoBehaviour
 	}
 	public void SetAttack(bool pressAttack)
 	{
+		//Debug.Log("Entras");
 		isAttacking = pressAttack;
 	}
 	public void SetSpecialAttack(bool pressSpecialAttack)
@@ -366,7 +367,10 @@ public class PlayerController : MonoBehaviour
 	{
 		Transform nearestEnemy = null;
 
-		if (enemiesNear.Count > 1) nearestEnemy = enemiesNear[0].transform;
+		if (enemiesNear.Count >= 1)
+		{
+			nearestEnemy = enemiesNear[0].transform;
+		}
 
 		return nearestEnemy;
 	}
@@ -437,7 +441,17 @@ public class PlayerController : MonoBehaviour
 
 							if (target!=null)
 							{
-
+								float targetAngle;
+								//targetAngle = Mathf.Atan2(target.position.x, target.position.z) * Mathf.Rad2Deg;
+								//float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+								//transform.rotation = Quaternion.Euler(0f, angle, 0f);
+								Vector3 direction = target.position - transform.position;
+								direction.y = 0; // Establece la dirección en el eje Y a 0 para mantener al personaje vertical
+								Quaternion rotation = Quaternion.LookRotation(direction);
+								transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+								if (ground) attackMovement = weaponController.combo[comboCounter].attackMovement;
+								else attackMovement = weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
+								moveAttack = true;
 							}
 
 
@@ -449,7 +463,8 @@ public class PlayerController : MonoBehaviour
 								//else targetAngle = Mathf.Atan2(target.position.x, target.position.z) * Mathf.Rad2Deg;
 								float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 								transform.rotation = Quaternion.Euler(0f, angle, 0f);
-								attackMovement = weaponController.combo[comboCounter].attackMovement;
+								if (ground) attackMovement = weaponController.combo[comboCounter].attackMovement;
+								else attackMovement = weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
 								moveAttack = true;
 							}
 
@@ -469,6 +484,8 @@ public class PlayerController : MonoBehaviour
 
 							StartCoroutine(ReactivateObjects());
 							isAttacking = false;
+
+							this.gameObject.transform.DOPunchScale(new Vector3(0.3f, -0.3f, 0.3f), 0.3f).SetRelative(true).SetEase(Ease.OutBack);
 						}
 					}
 				}
@@ -711,6 +728,7 @@ public class PlayerController : MonoBehaviour
 		// Verifica si el objeto que entró tiene la etiqueta "Enemigo".
 		if (other.CompareTag("Enemy"))
 		{
+			Debug.Log("Entra enemigo");
 			enemiesNear.Add(other.gameObject);
 		}
 	}
@@ -720,6 +738,7 @@ public class PlayerController : MonoBehaviour
 		// Verifica si el objeto que entró tiene la etiqueta "Enemigo".
 		if (other.CompareTag("Enemy"))
 		{
+			Debug.Log("Sale enemigo");
 			enemiesNear.Remove(other.gameObject);
 		}
 	}

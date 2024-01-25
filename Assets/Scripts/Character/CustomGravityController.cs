@@ -44,7 +44,11 @@ public class CustomGravityController : MonoBehaviour
 		} else
 		{
 			//m_rb.velocity = new Vector3(m_rb.velocity.x, 0, m_rb.velocity.z);
-			m_rb.AddForce(gravity/1.5f, ForceMode.Acceleration);
+			m_rb.AddForce(gravity, ForceMode.Acceleration);
+			if (m_rb.velocity.y < -1.0f && m_rb.velocity.y > -20.0f)
+			{
+				m_rb.velocity += Vector3.up * gravity.y * (fallMultiplier - 3) * Time.deltaTime;
+			}
 		}
 	}
 }

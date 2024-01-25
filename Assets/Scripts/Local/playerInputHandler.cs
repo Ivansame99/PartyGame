@@ -33,7 +33,7 @@ public class playerInputHandler : MonoBehaviour
         {
             OnMove(obj);
         }
-        if (obj.action.name == inputs.Player.Dodge.name && obj.action.WasPressedThisFrame())
+        if (obj.action.name == inputs.Player.Dodge.name /*&& obj.action.WasPressedThisFrame()*/)
         {
             OnDodge(obj);
         }
@@ -67,7 +67,10 @@ public class playerInputHandler : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (playerController != null)
-            playerController.SetAttack(context.ReadValueAsButton());
+        {
+			playerController.SetAttack(context.ReadValueAsButton());
+		}
+
     }
     public void OnSpecialAttack(InputAction.CallbackContext context)
     {
