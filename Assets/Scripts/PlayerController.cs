@@ -261,7 +261,6 @@ public class PlayerController : MonoBehaviour
 
 	void RemovAttackBuffer()
 	{
-		Debug.Log("Eliminado");
 		attackBuffer.Dequeue();
 	}
 
@@ -395,7 +394,7 @@ public class PlayerController : MonoBehaviour
 			{
 				if (weapon.tag == "Sword")
 				{
-					if (Time.time - lastComboEnd > 0.7f && comboCounter < weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+					if (Time.time - lastComboEnd > 0.6f && comboCounter < weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
 					{
 						if (Time.time - lastClicked >= 0.7f) //Tiempo entre ataques
 						{
