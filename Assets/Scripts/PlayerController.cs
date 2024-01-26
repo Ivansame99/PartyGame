@@ -157,6 +157,8 @@ public class PlayerController : MonoBehaviour
 	private CustomGravityController gravityController;
 
 	private bool nextAttack=false;
+
+	private Queue<bool> attackBuffer = new Queue<bool>();
 	void Start()
 	{
 		slashController = slashCollider.GetComponent<SlashController>();
@@ -181,7 +183,9 @@ public class PlayerController : MonoBehaviour
 	public void SetAttack(bool pressAttack)
 	{
 		//Debug.Log("Entras");
-		isAttacking = pressAttack;
+		//isAttacking = pressAttack;
+		attackBuffer.Enqueue(pressAttack);
+		Invoke(nameof(RemovAttackBuffer), 0.3f);
 	}
 	public void SetSpecialAttack(bool pressSpecialAttack)
 	{
@@ -253,6 +257,12 @@ public class PlayerController : MonoBehaviour
 			jump = true;
 			isJumping = false;
 		}
+	}
+
+	void RemovAttackBuffer()
+	{
+		Debug.Log("Eliminado");
+		attackBuffer.Dequeue();
 	}
 
 	void Roll()
@@ -378,14 +388,14 @@ public class PlayerController : MonoBehaviour
 	private void Attack()
 	{
 		//Forma nueva
-		if (isAttacking && !dodge)
+		if (attackBuffer.Count>=1 && !dodge)
 		{
 			//GreatSword and sword
 			if (weapon != null)
 			{
 				if (weapon.tag == "Sword")
 				{
-					if (Time.time - lastComboEnd > 0.8f && comboCounter < weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
+					if (Time.time - lastComboEnd > 0.7f && comboCounter < weaponController.combo.Count && stamina >= attackStamina) //Tiempo entre combos
 					{
 						if (Time.time - lastClicked >= 0.7f) //Tiempo entre ataques
 						{
@@ -483,7 +493,7 @@ public class PlayerController : MonoBehaviour
 							slashParticle.SetActive(false);
 
 							StartCoroutine(ReactivateObjects());
-							isAttacking = false;
+							//isAttacking = false;
 
 							this.gameObject.transform.DOPunchScale(new Vector3(0.3f, -0.3f, 0.3f), 0.3f).SetRelative(true).SetEase(Ease.OutBack);
 						}
