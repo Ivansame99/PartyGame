@@ -31931,19 +31931,13 @@ MonoBehaviour:
   dodgeSpeed: 20
   turnSmooth: 0.1
   jumpForce: 20
-  maxStamina: 100
-  staminaRegen: 30
-  dodgeStamina: 20
-  attackStamina: 10
-  minBowStamina: 0.2
-  maxBowStamina: 1
-  greatSwordAttackStamina: 55
-  staminaBarC: {fileID: 0}
   dodgeCD: 0
   dodgeInvencibilitySeconds: 0.5
   invencibilityTimer: 0
   maxBowCD: 1
   weapon: {fileID: 6891439088349369807}
+  minChargeBow: 0.2
+  maxChargeBow: 1
   arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
     type: 3}
   arrowLineIndicator: {fileID: 5583219675772255468, guid: ca3ac556a2578c646b21459e86213336,
@@ -32007,7 +32001,6 @@ MonoBehaviour:
   inmuneTime: 0.3
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
-  staminaBar: {fileID: 0}
   powerBar: {fileID: 2847639267803040626}
   camera: {fileID: 0}
   dead: 0
