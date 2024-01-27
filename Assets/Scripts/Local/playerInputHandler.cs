@@ -33,11 +33,11 @@ public class playerInputHandler : MonoBehaviour
         {
             OnMove(obj);
         }
-        if (obj.action.name == inputs.Player.Dodge.name)
+        if (obj.action.name == inputs.Player.Dodge.name /*&& obj.action.WasPressedThisFrame()*/)
         {
             OnDodge(obj);
         }
-        if (obj.action.name == inputs.Player.Attack.name)
+        if (obj.action.name == inputs.Player.Attack.name && obj.action.WasPressedThisFrame())
         {
             OnAttack(obj);
         }
@@ -45,8 +45,12 @@ public class playerInputHandler : MonoBehaviour
         {
             OnSpecialAttack(obj);
         }
+		if (obj.action.name == inputs.Player.Jump.name && obj.action.WasPressedThisFrame())
+		{
+			OnJump(obj);
+		}
 
-    }
+	}
 
     public void OnMove(CallbackContext context)
     {
@@ -63,7 +67,10 @@ public class playerInputHandler : MonoBehaviour
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (playerController != null)
-            playerController.SetAttack(context.ReadValueAsButton());
+        {
+			playerController.SetAttack(context.ReadValueAsButton());
+		}
+
     }
     public void OnSpecialAttack(InputAction.CallbackContext context)
     {
@@ -71,5 +78,11 @@ public class playerInputHandler : MonoBehaviour
             playerController.SetSpecialAttack(context.ReadValueAsButton());
 
     }
+	public void OnJump(CallbackContext context)
+	{
+		if (playerController != null)
+			playerController.SetJump(context.ReadValueAsButton());
+
+	}
 
 }

@@ -256,6 +256,7 @@ public class PlayerHealthController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        //Debug.Log(other.name)
         if (other.CompareTag("SlashEffect") && !playerController.invencibility && !dead)
         {
             cross1.SetActive(false);

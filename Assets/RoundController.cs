@@ -7,7 +7,10 @@ using TMPro;
 
 public class RoundController : MonoBehaviour
 {
-    [SerializeField]
+	[SerializeField]
+	private bool debug;
+
+	[SerializeField]
     private Transform[] spawns;
 
     [System.Serializable]
@@ -61,22 +64,25 @@ public class RoundController : MonoBehaviour
         currentEnemies = new List<GameObject>();
         playersRespawn = this.GetComponent<PlayersRespawn>();
         //Invoke("StartNextRound", secondsBetweenRounds);
-        StartCoroutine(IStartNextRound());
+        if(!debug) StartCoroutine(IStartNextRound());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
-        else
+        if (!debug)
         {
-            if (!finalRound)
+            if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
+            else
             {
-                roundsUIText.text = "Final Round";
-                roundUIAnim.SetTrigger("ChangeRound");
+                if (!finalRound)
+                {
+                    roundsUIText.text = "Final Round";
+                    roundUIAnim.SetTrigger("ChangeRound");
+                }
+                finalRound = true;
+                if (playersCount > 1) CheckEndGame();
             }
-            finalRound = true;
-            if (playersCount > 1) CheckEndGame();
         }
     }
 
