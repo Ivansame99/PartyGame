@@ -494,7 +494,7 @@ public class PlayerController : MonoBehaviour
 							StartCoroutine(ReactivateObjects());
 							//isAttacking = false;
 
-							this.gameObject.transform.DOPunchScale(new Vector3(0.3f, -0.3f, 0.3f), 0.3f).SetRelative(true).SetEase(Ease.OutBack);
+							this.gameObject.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
 						}
 					}
 				}
@@ -681,7 +681,7 @@ public class PlayerController : MonoBehaviour
 
 	private void ExitAttack()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.9f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+		if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
 			//slashCollider.SetActive(false);
 			//slashParticle.SetActive(false);
@@ -690,7 +690,7 @@ public class PlayerController : MonoBehaviour
 			anim.SetTrigger("Attack");
 			ResetVelocity();
 			gravityController.gravityOn = true;
-			Invoke("EndCombo", 0.5f);
+			Invoke("EndCombo", 0.2f);
 		}
 	}
 
