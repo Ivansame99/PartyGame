@@ -159,6 +159,8 @@ public class PlayerController : MonoBehaviour
 	private bool nextAttack=false;
 
 	private Queue<bool> attackBuffer = new Queue<bool>();
+	[SerializeField]
+	private GameObject runParticles;
 	void Start()
 	{
 		slashController = slashCollider.GetComponent<SlashController>();
@@ -207,6 +209,8 @@ public class PlayerController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 			isWalking = true;
+
+			Instantiate(runParticles,new Vector3(transform.position.x, transform.position.y-1, transform.position.z), Quaternion.identity);
 			//if (attacking) EndCombo();
 		}
 		else

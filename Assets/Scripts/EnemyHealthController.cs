@@ -51,6 +51,9 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField] private AudioSource hitSound;
     [SerializeField] private AudioSource deathSound;
 
+
+    [SerializeField] private GameObject DeathParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -128,6 +131,7 @@ public class EnemyHealthController : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("die");
+       
         /*float destroyDelay = Random.value;
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
@@ -139,6 +143,7 @@ public class EnemyHealthController : MonoBehaviour
 
     public void enemyDestroy()
     {
+        Instantiate(DeathParticles, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);

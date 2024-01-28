@@ -32112,6 +32112,7 @@ MonoBehaviour:
   slashParticle: {fileID: 1514139716627689794}
   slashCollider: {fileID: 2408721367011184132}
   arrowConeIndicator: {fileID: 8884825893129624280}
+  runParticles: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
 --- !u!114 &7031974134387891563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32172,6 +32173,9 @@ MonoBehaviour:
   hitSound: {fileID: 7726289190665329266}
   minPitch: 0.5
   maxPitch: 0.8
+  HealParticles: {fileID: 100000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+  DeathParticles: {fileID: 141433446842962269, guid: 69d3b0098c7a4134aae621b226982ad1,
+    type: 3}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -88,6 +88,8 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private float minPitch;
     [SerializeField] private float maxPitch;
 
+    [SerializeField] private GameObject HealParticles;
+    [SerializeField] private GameObject DeathParticles;
     private MultipleTargetCamera mtp;
     // Start is called before the first frame update
     void Start()
@@ -193,6 +195,7 @@ public class PlayerHealthController : MonoBehaviour
 
     void DisablePlayer()
     {
+        Instantiate(DeathParticles, transform.position, Quaternion.identity);
         playerController.enabled = false;
         powerController.enabled = false;
         healthBar.gameObject.SetActive(false);
@@ -278,7 +281,9 @@ public class PlayerHealthController : MonoBehaviour
 
         if (other.gameObject.tag == "Potion")
         {
-            health += 50;
+          // Instantiate(HealParticles, transform.position, Quaternion.identity); //PUTA MIERDA
+        
+        health += 50;
             healthBarC.SetProgress(health / maxHealth, 2);
             playerUIHealth.SetProgress(health / maxHealth, 2);
             Destroy(other.gameObject);
