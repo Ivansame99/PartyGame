@@ -90,6 +90,7 @@ public class PlayerHealthController : MonoBehaviour
 
     [SerializeField] private GameObject HealParticles;
     [SerializeField] private GameObject DeathParticles;
+    [SerializeField] private GameObject BloodParticles;
     private MultipleTargetCamera mtp;
     // Start is called before the first frame update
     void Start()
@@ -147,6 +148,7 @@ public class PlayerHealthController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         StartCoroutine(RedEffect());
+        Instantiate(BloodParticles, transform.position, Quaternion.identity);
         hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         hitSound.Play();
         healthBarAnimator.SetTrigger("Damage");
