@@ -6,52 +6,62 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class EnemyDirector : MonoBehaviour
 {
     public int[] playerTarget;
-    private int currentEnemies;
-    public int currentPlayers;
-    public int splitEnemies;
+    private float currentEnemies;
+    public float currentPlayers;
+    public float splitEnemies;
     public bool[] full;
     public List<Transform> players;
     public GameObject[] jugadoresArray;
     private RoundController roundController;
+
+    private PlayerHealthController[] playerHealth;
+    public int playerDead;
     // Start is called before the first frame update
     void Start()
     {
+
         roundController = this.GetComponent<RoundController>();
-        currentEnemies = roundController.currentEnemies.Count;
-        currentPlayers = roundController.playersCount;
         jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject jugadorObj in jugadoresArray)
         {
             players.Add(jugadorObj.transform);
         }
         playerTarget = new int[jugadoresArray.Length];
+        currentEnemies = roundController.currentEnemies.Count;
+        currentPlayers = jugadoresArray.Length;
         full = new bool[jugadoresArray.Length];
+
+        playerHealth = new PlayerHealthController[jugadoresArray.Length];
+
+        for (int i = 0; i < currentPlayers; i++)
+        {
+            if (players[i].GetComponent<PlayerHealthController>() != null)
+            {
+                playerHealth[i] = players[i].GetComponent<PlayerHealthController>();
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentEnemies = roundController.currentEnemies.Count;
-        currentPlayers = roundController.playersCount;
-        splitEnemies = currentEnemies / currentPlayers;
+        for (int i = 0; i < currentPlayers; i++)
+        {
+            if (playerHealth[i].dead) playerDead++;
+        }
 
+        currentEnemies = roundController.currentEnemies.Count;
         
+        splitEnemies = Mathf.Ceil(currentEnemies / (currentPlayers - playerDead));
+
         for (int i = 0; i < currentPlayers; i++)
         {
             if (playerTarget[i] < splitEnemies) full[i] = false;
             else if(playerTarget[i] >= splitEnemies) full[i] = true;
         }
-        Debug.Log(full[0]);
-        /*
-        for(int i = 0; i < playerTarget.Length; i++)
-        {
-            if (playerTarget[i] > splitEnemies)
-            {
 
-            }
-        }
-        */
-        //Debug.Log(playerTarget[0]);
-        //Debug.Log(playerTarget[1]);
+        playerDead = 0;
     }
+
+
 }

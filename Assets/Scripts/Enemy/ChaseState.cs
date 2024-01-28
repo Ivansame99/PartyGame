@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ChaseState : StateMachineBehaviour
 {
     private NavMeshAgent agent;
-    private Transform player, player2;
+    public Transform player, player2;
     [SerializeField] float triggerDistance = 2.5f;
     [SerializeField] private float deg;
     [SerializeField] private float speed;
@@ -20,12 +21,14 @@ public class ChaseState : StateMachineBehaviour
     private EnemyDirector enemyDirector;
     private bool newTarget;
     private Transform lastTarget;
+    private EnemyHealthController enemyHealth;
     
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
+        enemyHealth = animator.GetComponent<EnemyHealthController>();
         agent = animator.GetComponent<NavMeshAgent>();
 
         agent.speed = speed;
@@ -37,6 +40,7 @@ public class ChaseState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //Rotating();
         if (timerSpecial >= 0)
         {
             timerSpecial -= Time.deltaTime;
@@ -76,6 +80,7 @@ public class ChaseState : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (agent.isActiveAndEnabled) agent.SetDestination(animator.transform.position);
+        player = FindPlayer();
     }
     private Transform FindPlayer()
     {
@@ -99,9 +104,6 @@ public class ChaseState : StateMachineBehaviour
                     minDist = distance;
                     searchPlayer = player;
                 }
-                Debug.Log("entra");
-
-                
             }
         }
         if (!newTarget)
@@ -118,6 +120,14 @@ public class ChaseState : StateMachineBehaviour
             DecreasePlayerTarget(lastTarget.gameObject.name);
             newTarget = false;
         }
+        /*
+        if(enemyHealth.dead == true)
+        {
+            DecreasePlayerTarget(searchPlayer.gameObject.name);
+            newTarget = false;
+        }
+            */
+
         return searchPlayer;
     }
 
