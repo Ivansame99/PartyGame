@@ -1,11 +1,7 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 [SelectionBase]
 public class PlayerController : MonoBehaviour
@@ -35,7 +31,6 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float dodgeInvencibilitySeconds;
 	public float invencibilityTimer = 0;
-	private float greatSwordTimePressed = 0;
 	[SerializeField]
 	private float maxBowCD;
 	private float bowCD;
@@ -56,11 +51,6 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject arrowPrefab;
-	[SerializeField]
-	private GameObject arrowLineIndicator;
-
-	[SerializeField]
-	private GameObject hand;
 
 	private float attackMovement;
 
@@ -92,7 +82,6 @@ public class PlayerController : MonoBehaviour
 	Vector2 moveUniversal;
 	private Vector3 direction;
 	private Vector3 rollDirection;
-	private Vector3 greatSwordAttackDirection = Vector3.zero;
 
 	//Positions&Rotations
 	[SerializeField]
@@ -112,9 +101,6 @@ public class PlayerController : MonoBehaviour
 	private PowerController powerController;
 	private SlashController slashController;
 
-	/*private bool resetLineArrow = true;
-	private bool resetLineArrowAux = true;
-	private float resetTimer=0f;*/
 	private bool chargingBow = false;
 
 	[SerializeField]
@@ -131,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
 	private Queue<bool> attackBuffer = new Queue<bool>();
 
-
+	private bool canAttackNext = true;
 
 	void Start()
 	{
