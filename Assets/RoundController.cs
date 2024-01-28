@@ -29,14 +29,14 @@ public class RoundController : MonoBehaviour
 
     private int roundIndex;
 
-    private List<GameObject> currentEnemies;
+    public List<GameObject> currentEnemies;
 
     private GameObject[] playersInGame;
 
     [SerializeField]
     private Animator coliseumAnimator;
 
-    private int playersCount;
+    public int playersCount;
 
     public bool finalRound;
 

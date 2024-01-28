@@ -46,7 +46,7 @@ public class EnemyHealthController : MonoBehaviour
     public bool invencibility=false;
     [SerializeField] private bool damageAnim;
 
-    private bool dead = false;
+    public bool dead = false;
 
     [SerializeField] private AudioSource hitSound;
     [SerializeField] private AudioSource deathSound;

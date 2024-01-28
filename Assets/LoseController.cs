@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class LoseController : MonoBehaviour
 {
     private PlayerHealthController[] playerHealth;
+    private EnemyDirector enemyDirector;
     private GameObject[] players;
     private int playersCount;
-    private int playersDead;
+    public int playersDead;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,11 @@ public class LoseController : MonoBehaviour
 
             //Si estan todos muertos, game over, sino se reinicia el contador
             if (playersDead == playersCount) SceneManager.LoadScene("GameOver");
-            else playersDead = 0;
+            else
+            {
+                playersDead = 0;
+            }
+
         }
     }
 
