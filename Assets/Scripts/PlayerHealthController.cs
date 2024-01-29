@@ -91,6 +91,7 @@ public class PlayerHealthController : MonoBehaviour
     [SerializeField] private GameObject HealParticles;
     [SerializeField] private GameObject DeathParticles;
     [SerializeField] private GameObject BloodParticles;
+    [SerializeField] private GameObject skullsBounds;
     private MultipleTargetCamera mtp;
     // Start is called before the first frame update
     void Start()
@@ -198,6 +199,7 @@ public class PlayerHealthController : MonoBehaviour
     void DisablePlayer()
     {
         Instantiate(DeathParticles, transform.position, Quaternion.identity);
+        Instantiate(skullsBounds, transform.position, Quaternion.identity);
         playerController.enabled = false;
         powerController.enabled = false;
         healthBar.gameObject.SetActive(false);
