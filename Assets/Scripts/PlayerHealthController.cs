@@ -148,7 +148,7 @@ public class PlayerHealthController : MonoBehaviour
     public void ReceiveDamage(float damage)
     {
         StartCoroutine(RedEffect());
-        Instantiate(BloodParticles, transform.position, Quaternion.identity);
+        Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y+1, transform.position.z), Quaternion.identity);
         hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         hitSound.Play();
         healthBarAnimator.SetTrigger("Damage");
