@@ -106,6 +106,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject arrowConeIndicator;
 
+	private float raycastDistance = 1.2f; // Distancia del Raycast
+	public LayerMask groundLayer; // Capas que representan el suelo
 	private bool ground = true;
 	private bool jump = false;
 
@@ -118,6 +120,8 @@ public class PlayerController : MonoBehaviour
 	private Queue<bool> attackBuffer = new Queue<bool>();
 
 	private bool canAttackNext = true;
+
+	private bool exitAttack=false;
 
 	void Start()
 	{
@@ -170,6 +174,8 @@ public class PlayerController : MonoBehaviour
 			isWalking = false;
 		}
 
+		DetectGround();
+
 		Jump();
 
 		//Voltereta
@@ -199,6 +205,19 @@ public class PlayerController : MonoBehaviour
 		else if (!isWalking)
 		{
 			anim.SetBool("Walking", false);
+		}
+	}
+
+	void DetectGround()
+	{
+		Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
+
+		if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
+		{
+			ground = true;
+		} else
+		{
+			ground = false;
 		}
 	}
 
@@ -265,10 +284,21 @@ public class PlayerController : MonoBehaviour
 	private Transform TryGetNearestEnemy()
 	{
 		Transform nearestEnemy = null;
+		float nearestEnemyDistance=float.MaxValue;
 
 		if (enemiesNear.Count >= 1)
 		{
-			nearestEnemy = enemiesNear[0].transform;
+			foreach(GameObject enemy in enemiesNear)
+			{
+				Vector3 enemyDistanceDiff = enemiesNear[0].transform.position - this.transform.position;
+				float enemyDistance = enemyDistanceDiff.sqrMagnitude;
+
+				if(enemyDistance < nearestEnemyDistance)
+				{
+					nearestEnemyDistance=enemyDistance;
+					nearestEnemy = enemy.transform;
+				}
+			}
 		}
 
 		return nearestEnemy;
@@ -282,7 +312,7 @@ public class PlayerController : MonoBehaviour
 			{
 				if (Time.time - lastComboEnd > 0.4f && comboCounter < weaponController.combo.Count) //Tiempo entre combos
 				{
-					if (Time.time - lastClicked >= 0.7f) //Tiempo entre ataques
+					if (Time.time - lastClicked >= 0.5f) //Tiempo entre ataques
 					{
 						CancelInvoke("EndCombo");
 
@@ -369,6 +399,8 @@ public class PlayerController : MonoBehaviour
 						StartCoroutine(ReactivateObjects());
 
 						this.gameObject.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
+
+						exitAttack = true;
 					}
 				}
 			}
@@ -379,9 +411,6 @@ public class PlayerController : MonoBehaviour
 	IEnumerator ReactivateObjects()
 	{
 		yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
-
-		//slashCollider.SetActive(true);
-		//slashParticle.SetActive(true);
 
 		yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según sea necesario
 		slashCollider.SetActive(false);
@@ -495,12 +524,13 @@ public class PlayerController : MonoBehaviour
 
 	private void ExitAttack()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+		if (exitAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
 			anim.SetTrigger("Attack");
 			ResetVelocity();
 			gravityController.gravityOn = true;
 			Invoke("EndCombo", 0.2f);
+			exitAttack = false;
 		}
 	}
 
@@ -555,22 +585,6 @@ public class PlayerController : MonoBehaviour
 		if (other.CompareTag("Enemy"))
 		{
 			enemiesNear.Remove(other.gameObject);
-		}
-	}
-
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (collision.gameObject.CompareTag("Ground"))
-		{
-			ground = true;
-		}
-	}
-
-	private void OnCollisionExit(Collision collision)
-	{
-		if (collision.gameObject.CompareTag("Ground"))
-		{
-			ground = false;
 		}
 	}
 }

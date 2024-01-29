@@ -31705,12 +31705,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6782306915136003912}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3776886765367191503 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -1552146806139340665, guid: 7f142cd81e67aac42b7d6958b3139914,
-    type: 3}
-  m_PrefabInstance: {fileID: 6782306915136003912}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5723644438340515830 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7966339433572702018, guid: 7f142cd81e67aac42b7d6958b3139914,
@@ -31769,9 +31763,6 @@ MonoBehaviour:
   maxChargeBow: 1
   arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
     type: 3}
-  arrowLineIndicator: {fileID: 5583219675772255468, guid: ca3ac556a2578c646b21459e86213336,
-    type: 3}
-  hand: {fileID: 3776886765367191503}
   swordAttackSound: {fileID: 3698725275848403200}
   bowAttackSound: {fileID: 900408167401546073}
   dodgeSound: {fileID: 4478234274476538080}
@@ -31784,6 +31775,9 @@ MonoBehaviour:
   slashParticle: {fileID: 1514139716627689794}
   slashCollider: {fileID: 2408721367011184132}
   arrowConeIndicator: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &7031974134387891563
 MonoBehaviour:
   m_ObjectHideFlags: 0
