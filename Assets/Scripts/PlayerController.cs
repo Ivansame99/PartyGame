@@ -263,6 +263,7 @@ public class PlayerController : MonoBehaviour
 			isDodging = false;
 		}
 
+		if(dodge) anim.SetTrigger("Roll");
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 	}
 
@@ -273,6 +274,7 @@ public class PlayerController : MonoBehaviour
 
 	public void RollEnded()
 	{
+		anim.ResetTrigger("Roll");
 		dodge = false;
 	}
 
@@ -545,6 +547,8 @@ public class PlayerController : MonoBehaviour
 		anim.ResetTrigger("Attack");
 		//slashCollider.SetActive(false);
 		//slashParticle.SetActive(false);
+		ResetVelocity();
+		gravityController.gravityOn = true;
 		attacking = false;
 		comboCounter = 0;
 		lastComboEnd = Time.time;
