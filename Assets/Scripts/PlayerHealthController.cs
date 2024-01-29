@@ -252,7 +252,7 @@ public class PlayerHealthController : MonoBehaviour
             cross2.SetActive(true);
             glow.SetActive(true);
 
-            lastAttacker = other.transform.parent.parent.gameObject;
+            lastAttacker = other.transform.parent.gameObject;
             SlashController slashController = other.GetComponent<SlashController>();
             attackPosition = other.gameObject.transform.position;
             pushBack = true;

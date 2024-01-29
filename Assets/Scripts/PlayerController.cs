@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour
 
 	void Roll()
 	{
-		if (isDodging && dodgeTimer <= 0 && !dodge)
+		if (isDodging && dodgeTimer <= 0 && !dodge && ground)
 		{
 			if (direction == Vector3.zero)
 			{
@@ -318,7 +318,7 @@ public class PlayerController : MonoBehaviour
 			{
 				if (Time.time - lastComboEnd > 0.4f && comboCounter < weaponController.combo.Count) //Tiempo entre combos
 				{
-					if (Time.time - lastClicked >= 0.5f) //Tiempo entre ataques
+					if (Time.time - lastClicked >= 0.4f) //Tiempo entre ataques
 					{
 						CancelInvoke("EndCombo");
 
