@@ -210,7 +210,7 @@ public class PlayerController : MonoBehaviour
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 			isWalking = true;
 
-			Instantiate(runParticles,new Vector3(transform.position.x, transform.position.y-1, transform.position.z), Quaternion.identity);
+			Instantiate(runParticles,new Vector3(transform.position.x, transform.position.y-1, transform.position.z-1), Quaternion.identity);
 			//if (attacking) EndCombo();
 		}
 		else
