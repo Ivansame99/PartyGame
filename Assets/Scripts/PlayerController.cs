@@ -84,22 +84,22 @@ public class PlayerController : MonoBehaviour
 	private Vector3 rollDirection;
 
 	//Positions&Rotations
-	[SerializeField]
-	private Transform slashDirection;
+	//[SerializeField]
+	//private Transform slashDirection;
+
+	//[SerializeField]
+	//private GameObject slashParticle;
 
 	[SerializeField]
-	private GameObject slashParticle;
+	private SlashController slashCollider;
 
-	[SerializeField]
-	private GameObject slashCollider;
+	//private ParticleSystem slashParticleSystem;
 
-	private ParticleSystem slashParticleSystem;
-
-	private Vector3 savedPosition;
-	private Vector3 savedRotation;
+	//private Vector3 savedPosition;
+	//private Vector3 savedRotation;
 
 	private PowerController powerController;
-	private SlashController slashController;
+	//private SlashController slashController;
 
 	private bool chargingBow = false;
 
@@ -125,12 +125,12 @@ public class PlayerController : MonoBehaviour
 
 	void Start()
 	{
-		slashController = slashCollider.GetComponent<SlashController>();
+		//slashController = slashCollider.GetComponent<SlashController>();
 		powerController = this.GetComponent<PowerController>();
 		if (weapon != null) weaponController = weapon.GetComponent<Weapon>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
-		slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
+		//slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
 		gravityController = this.GetComponent<CustomGravityController>();
 	}
 
@@ -290,7 +290,13 @@ public class PlayerController : MonoBehaviour
 		{
 			foreach(GameObject enemy in enemiesNear)
 			{
-				Vector3 enemyDistanceDiff = enemiesNear[0].transform.position - this.transform.position;
+				if (enemy == null)
+				{
+					enemiesNear.Remove(enemy);
+					continue;
+				}
+
+				Vector3 enemyDistanceDiff = enemy.transform.position - this.transform.position;
 				float enemyDistance = enemyDistanceDiff.sqrMagnitude;
 
 				if(enemyDistance < nearestEnemyDistance)
@@ -318,7 +324,7 @@ public class PlayerController : MonoBehaviour
 
 						ResetVelocity();
 						//Cosas de slash
-						Vector3 savedPosition = slashDirection.position;
+						/*Vector3 savedPosition = slashDirection.position;
 						slashParticle.transform.position = savedPosition;
 						slashCollider.transform.position = savedPosition;
 
@@ -346,20 +352,20 @@ public class PlayerController : MonoBehaviour
 						if (angleInt >= 261 && angleInt <= 280) angleInt = 270;
 						if (angleInt >= 281 && angleInt <= 350) angleInt = 340;
 						if (angleInt >= 351 && angleInt <= 359) angleInt = 360;
-						mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
+						mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);*/
 						//Debug.Log(mainModule.startRotationY.constant);
 
-						mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
+						//mainModule.startRotationY = new ParticleSystem.MinMaxCurve(angleInt);
 
 						attacking = true;
 						anim.runtimeAnimatorController = weaponController.combo[comboCounter].animatorOR;
 						anim.Play("Attack", 0, 0);
 						swordAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 						swordAttackSound.Play();
-						slashController.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 6; //Cambiar escalado poder
-																																				//Debug.Log(slashController.finalDamage);
-																																				//weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
-						slashController.pushForce = weaponController.combo[comboCounter].pushForce;
+						slashCollider.finalDamage = weaponController.combo[comboCounter].damage + powerController.GetCurrentPowerLevel() / 6; //Cambiar escalado poder
+																																			  //Debug.Log(slashController.finalDamage);
+																																			  //weaponController.pushForce = weaponController.combo[comboCounter].pushForce;
+						slashCollider.pushForce = weaponController.combo[comboCounter].pushForce;
 
 						Transform target = TryGetNearestEnemy();
 
@@ -393,10 +399,10 @@ public class PlayerController : MonoBehaviour
 						gravityController.gravityOn = false;
 						lastClicked = Time.time;
 
-						slashCollider.SetActive(false);
-						slashParticle.SetActive(false);
+						//slashCollider.SetActive(false);
+						//slashParticle.SetActive(false);
 
-						StartCoroutine(ReactivateObjects());
+						//StartCoroutine(ReactivateObjects());
 
 						this.gameObject.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
 
@@ -408,14 +414,14 @@ public class PlayerController : MonoBehaviour
 
 	}
 
-	IEnumerator ReactivateObjects()
+	/*IEnumerator ReactivateObjects()
 	{
 		yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
 
 		yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según sea necesario
 		slashCollider.SetActive(false);
 		slashParticle.SetActive(false);
-	}
+	}*/
 
 	private void SpecialAttack()
 	{
@@ -537,8 +543,8 @@ public class PlayerController : MonoBehaviour
 	private void EndCombo()
 	{
 		anim.ResetTrigger("Attack");
-		slashCollider.SetActive(false);
-		slashParticle.SetActive(false);
+		//slashCollider.SetActive(false);
+		//slashParticle.SetActive(false);
 		attacking = false;
 		comboCounter = 0;
 		lastComboEnd = Time.time;

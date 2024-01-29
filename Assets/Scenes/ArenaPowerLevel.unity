@@ -1233,6 +1233,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy1Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8441525135715332434, guid: f235ed66beecb4b42bead9e7db62a921,
         type: 3}
       propertyPath: m_Enabled
@@ -1477,7 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05728e82530b6684c9f1760260e106b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debug: 1
+  debug: 0
   spawns:
   - {fileID: 331183246}
   - {fileID: 393671218}

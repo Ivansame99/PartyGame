@@ -21,9 +21,9 @@ public class SlashController : MonoBehaviour
     private AudioSource hitSound;
     private void Awake()
     {
-        player = transform.parent.parent.gameObject;
+        player = transform.parent.gameObject;
         playerController = player.GetComponent<PlayerController>();
-        enemy1Controller = transform.parent.parent.GetComponent<EnemyHealthController>();
+        enemy1Controller = transform.parent.GetComponent<EnemyHealthController>();
         pushForceParry = 15f;
         hitSound = GetComponent<AudioSource>();
     }
