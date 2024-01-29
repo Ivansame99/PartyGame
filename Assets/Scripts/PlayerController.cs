@@ -161,6 +161,8 @@ public class PlayerController : MonoBehaviour
 	private Queue<bool> attackBuffer = new Queue<bool>();
 	[SerializeField]
 	private GameObject runParticles;
+
+	private int runCounter=0;
 	void Start()
 	{
 		slashController = slashCollider.GetComponent<SlashController>();
@@ -209,9 +211,13 @@ public class PlayerController : MonoBehaviour
 			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 			transform.rotation = Quaternion.Euler(0f, angle, 0f);
 			isWalking = true;
+			runCounter++;
+            if (runCounter >= 50)
+            {
+				Instantiate(runParticles, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z - 1), Quaternion.identity);
+				runCounter = 0;
+			}
 
-			Instantiate(runParticles,new Vector3(transform.position.x, transform.position.y-1, transform.position.z-1), Quaternion.identity);
-			//if (attacking) EndCombo();
 		}
 		else
 		{
