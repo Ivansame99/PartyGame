@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject jumpAttackCollider;
+	private SlashController jumpAttackController;
 
 	//private ParticleSystem slashParticleSystem;
 
@@ -129,6 +130,11 @@ public class PlayerController : MonoBehaviour
 	private float originalGravityScale;
 
 	private bool staticPJ = false;
+
+	[SerializeField]
+	private GameObject fallParticle;
+
+	private bool fallParticleBool = false;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -139,6 +145,7 @@ public class PlayerController : MonoBehaviour
 		//slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
 		gravityController = this.GetComponent<CustomGravityController>();
 		originalGravityScale = gravityController.gravityScale;
+		jumpAttackController = jumpAttackCollider.GetComponent<SlashController>();
 	}
 
 	//Input mando
@@ -445,6 +452,7 @@ public class PlayerController : MonoBehaviour
 		if (!ground && isDodging)
 		{
 			//dodgeTimer = 3f;
+			float particle;
 			StartCoroutine(IJumpAttack());
 		}
 	}
@@ -464,7 +472,15 @@ public class PlayerController : MonoBehaviour
 			yield return null;
 		}
 
+		if (!fallParticleBool)
+		{
+			Instantiate(fallParticle, this.transform.position, fallParticle.transform.rotation);
+			fallParticleBool = true;
+		}
+		//Debug.Log("Entras");
 		//yield return new WaitForSeconds(0.7f);
+		//Hacer que escale con el poder
+		//jumpAttackController.finalDamage = 
 		gravityController.gravityScale = originalGravityScale;
 		jumpAttackCollider.SetActive(true);
 
@@ -472,7 +488,7 @@ public class PlayerController : MonoBehaviour
 		jumpAttackCollider.SetActive(false);
 
 		yield return new WaitForSeconds(1f);
-
+		fallParticleBool = false;
 		staticPJ = false;
 	}
 
