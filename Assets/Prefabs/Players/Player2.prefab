@@ -15869,6 +15869,74 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6678585635447497662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830699287199511906}
+  - component: {fileID: 2083764949089568542}
+  - component: {fileID: 7148719282225363502}
+  m_Layer: 13
+  m_Name: JumpAttackTrigger
+  m_TagString: SlashEffect
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &830699287199511906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678585635447497662}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6455102242564749475}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2083764949089568542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678585635447497662}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7, y: 1.5, z: 7}
+  m_Center: {x: 0.30906224, y: 0.28128296, z: -0.2620921}
+--- !u!114 &7148719282225363502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6678585635447497662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79ffef81eeef43c4b88903952ad30238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalDamage: 30
+  pushForce: 30
 --- !u!1 &6697172654130389621
 GameObject:
   m_ObjectHideFlags: 0
@@ -21884,6 +21952,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4536568919399583972}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 830699287199511906}
     - targetCorrespondingSourceObject: {fileID: -7966339433572702018, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
@@ -22003,6 +22075,7 @@ MonoBehaviour:
   invencibility: 0
   dodge: 0
   slashCollider: {fileID: 3001511228643611567}
+  jumpAttackCollider: {fileID: 6678585635447497662}
   arrowConeIndicator: {fileID: 8884825893129624280}
   groundLayer:
     serializedVersion: 2

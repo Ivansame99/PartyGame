@@ -124,10 +124,11 @@ public class PlayerController : MonoBehaviour
 
 	private bool canAttackNext = true;
 
-	private bool exitAttack=false;
+	private bool exitAttack = false;
 
 	private float originalGravityScale;
 
+	private bool staticPJ = false;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -165,29 +166,7 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		//Movimiento
-		direction = new Vector3(moveUniversal.x, 0f, moveUniversal.y).normalized;
-
-		if (direction.magnitude >= 0.1f && !dodge && !attacking)
-		{
-			float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-			transform.rotation = Quaternion.Euler(0f, angle, 0f);
-			isWalking = true;
-		}
-		else
-		{
-			isWalking = false;
-		}
-
 		DetectGround();
-
-		Jump();
-
-		JumpAttack();
-
-		//Voltereta
-		Roll();
 
 		//Invencibilidad
 		if (invencibilityTimer >= 0)
@@ -196,14 +175,6 @@ public class PlayerController : MonoBehaviour
 			invencibilityTimer -= Time.deltaTime;
 		}
 		else invencibility = false;
-
-
-		Attack();
-		ExitAttack();
-
-		//Arco
-		SpecialAttack();
-		if (bowCD >= 0) bowCD -= Time.deltaTime;
 
 		//Animaciones
 		if (isWalking && !dodge)
@@ -214,6 +185,40 @@ public class PlayerController : MonoBehaviour
 		{
 			anim.SetBool("Walking", false);
 		}
+
+		if (!staticPJ)
+		{
+			//Movimiento
+			direction = new Vector3(moveUniversal.x, 0f, moveUniversal.y).normalized;
+
+			if (direction.magnitude >= 0.1f && !dodge && !attacking)
+			{
+				float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+				float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+				transform.rotation = Quaternion.Euler(0f, angle, 0f);
+				isWalking = true;
+			}
+			else
+			{
+				isWalking = false;
+			}
+
+			Jump();
+
+			JumpAttack();
+
+			//Voltereta
+			Roll();
+
+			Attack();
+			ExitAttack();
+
+			//Arco
+			SpecialAttack();
+			if (bowCD >= 0) bowCD -= Time.deltaTime;
+
+
+		}
 	}
 
 	void DetectGround()
@@ -223,7 +228,8 @@ public class PlayerController : MonoBehaviour
 		if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
 		{
 			ground = true;
-		} else
+		}
+		else
 		{
 			ground = false;
 		}
@@ -271,7 +277,7 @@ public class PlayerController : MonoBehaviour
 			isDodging = false;
 		}
 
-		if(dodge) anim.SetTrigger("Roll");
+		if (dodge) anim.SetTrigger("Roll");
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 	}
 
@@ -294,24 +300,25 @@ public class PlayerController : MonoBehaviour
 	private Transform TryGetNearestEnemy()
 	{
 		Transform nearestEnemy = null;
-		float nearestEnemyDistance=float.MaxValue;
+		float nearestEnemyDistance = float.MaxValue;
 
 		if (enemiesNear.Count >= 1)
 		{
-			foreach(GameObject enemy in enemiesNear)
+			foreach (GameObject enemy in enemiesNear)
 			{
 				if (enemy == null)
 				{
 					enemiesNear.Remove(enemy);
+					if (enemiesNear.Count == 0) return null;
 					continue;
 				}
 
 				Vector3 enemyDistanceDiff = enemy.transform.position - this.transform.position;
 				float enemyDistance = enemyDistanceDiff.sqrMagnitude;
 
-				if(enemyDistance < nearestEnemyDistance)
+				if (enemyDistance < nearestEnemyDistance)
 				{
-					nearestEnemyDistance=enemyDistance;
+					nearestEnemyDistance = enemyDistance;
 					nearestEnemy = enemy.transform;
 				}
 			}
@@ -435,9 +442,9 @@ public class PlayerController : MonoBehaviour
 
 	private void JumpAttack()
 	{
-		if(!ground && isDodging)
+		if (!ground && isDodging)
 		{
-			dodgeTimer = 3f;
+			//dodgeTimer = 3f;
 			StartCoroutine(IJumpAttack());
 		}
 	}
@@ -447,12 +454,26 @@ public class PlayerController : MonoBehaviour
 		gravityController.gravityOn = false;
 		yield return new WaitForSeconds(0.1f);
 		gravityController.gravityOn = true;
-		gravityController.gravityScale = 10f;
+		gravityController.gravityScale = 20f;
+		staticPJ = true;
+		isWalking = false;
+		//bool groundAux = false;
+
+		while (!ground)
+		{
+			yield return null;
+		}
+
+		//yield return new WaitForSeconds(0.7f);
+		gravityController.gravityScale = originalGravityScale;
 		jumpAttackCollider.SetActive(true);
 
-		yield return new WaitForSeconds(0.7f);
-		gravityController.gravityScale = originalGravityScale;
+		yield return new WaitForSeconds(0.2f);
 		jumpAttackCollider.SetActive(false);
+
+		yield return new WaitForSeconds(1f);
+
+		staticPJ = false;
 	}
 
 	private void SpecialAttack()
