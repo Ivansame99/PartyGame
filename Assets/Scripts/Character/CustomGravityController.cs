@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CustomGravityController : MonoBehaviour
 {
-	[SerializeField]
-	private float gravityScale;
+	public float gravityScale;
 	[SerializeField]
 	private static float globalGravity = -9.81f;
 

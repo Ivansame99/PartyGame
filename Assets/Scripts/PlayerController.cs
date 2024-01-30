@@ -93,6 +93,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private SlashController slashCollider;
 
+	[SerializeField]
+	private GameObject jumpAttackCollider;
+
 	//private ParticleSystem slashParticleSystem;
 
 	//private Vector3 savedPosition;
@@ -123,6 +126,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool exitAttack=false;
 
+	private float originalGravityScale;
+
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -132,6 +137,7 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		//slashParticleSystem = slashParticle.GetComponent<ParticleSystem>();
 		gravityController = this.GetComponent<CustomGravityController>();
+		originalGravityScale = gravityController.gravityScale;
 	}
 
 	//Input mando
@@ -177,6 +183,8 @@ public class PlayerController : MonoBehaviour
 		DetectGround();
 
 		Jump();
+
+		JumpAttack();
 
 		//Voltereta
 		Roll();
@@ -425,6 +433,28 @@ public class PlayerController : MonoBehaviour
 		slashParticle.SetActive(false);
 	}*/
 
+	private void JumpAttack()
+	{
+		if(!ground && isDodging)
+		{
+			dodgeTimer = 3f;
+			StartCoroutine(IJumpAttack());
+		}
+	}
+
+	private IEnumerator IJumpAttack()
+	{
+		gravityController.gravityOn = false;
+		yield return new WaitForSeconds(0.1f);
+		gravityController.gravityOn = true;
+		gravityController.gravityScale = 10f;
+		jumpAttackCollider.SetActive(true);
+
+		yield return new WaitForSeconds(0.7f);
+		gravityController.gravityScale = originalGravityScale;
+		jumpAttackCollider.SetActive(false);
+	}
+
 	private void SpecialAttack()
 	{
 		if (isSpecialAttacking && !dodge)
@@ -584,7 +614,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
 		{
 			enemiesNear.Add(other.gameObject);
 		}
@@ -592,7 +622,7 @@ public class PlayerController : MonoBehaviour
 
 	private void OnTriggerExit(Collider other)
 	{
-		if (other.CompareTag("Enemy"))
+		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
 		{
 			enemiesNear.Remove(other.gameObject);
 		}
