@@ -23,9 +23,6 @@ public class PlayerHealthController : MonoBehaviour
     private Animator healthBarAnimator;
 
     [SerializeField]
-    private Transform staminaBar;
-
-    [SerializeField]
     private Transform powerBar;
 
     private float timer = 0;
@@ -96,7 +93,6 @@ public class PlayerHealthController : MonoBehaviour
         camera = Camera.main;
         mtp = camera.GetComponent<MultipleTargetCamera>();
         SetupHealthBar(healBarCanvas, camera);
-        SetupStaminaBar(healBarCanvas, camera);
         health = maxHealth;
         playerController = GetComponent<PlayerController>();
         powerController = GetComponent<PowerController>();
@@ -196,7 +192,6 @@ public class PlayerHealthController : MonoBehaviour
         playerController.enabled = false;
         powerController.enabled = false;
         healthBar.gameObject.SetActive(false);
-        staminaBar.gameObject.SetActive(false);
         powerBar.gameObject.SetActive(false);
         //playerCollider.enabled = false;
     }
@@ -208,7 +203,6 @@ public class PlayerHealthController : MonoBehaviour
         playerController.dodge = false; //Por si estaba rodando cuando murio
         //powerController.SetCurrentPowerLevel(powerController.GetCurrentPowerLevel()/2);
         healthBar.gameObject.SetActive(true);
-        staminaBar.gameObject.SetActive(true);
         powerBar.gameObject.SetActive(true);
         dead = false;
         deadAux = false;
@@ -217,7 +211,6 @@ public class PlayerHealthController : MonoBehaviour
         playerController.invencibilityTimer = 0.5f;
         healthBarC.SetProgress(health / maxHealth, 2);
         playerUIHealth.SetProgress(health / maxHealth, 2);
-        playerController.ResetStamina();
         mtp.Targets.Add(this.transform);
         //anim.enabled = true;
     }
@@ -245,15 +238,6 @@ public class PlayerHealthController : MonoBehaviour
         }*/
     }
 
-    public void SetupStaminaBar(Canvas canvas, Camera camera)
-    {
-        staminaBar.transform.SetParent(canvas.transform);
-        /*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
-        {
-            faceCamera.camera = camera;
-        }*/
-    }
-
     private void OnTriggerStay(Collider other)
     {
         //Debug.Log(other.name)
@@ -268,7 +252,7 @@ public class PlayerHealthController : MonoBehaviour
             cross2.SetActive(true);
             glow.SetActive(true);
 
-            lastAttacker = other.transform.parent.parent.gameObject;
+            lastAttacker = other.transform.parent.gameObject;
             SlashController slashController = other.GetComponent<SlashController>();
             attackPosition = other.gameObject.transform.position;
             pushBack = true;

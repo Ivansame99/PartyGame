@@ -153,7 +153,7 @@ public class EnemyHealthController : MonoBehaviour
     {
         if (other.CompareTag("SlashEffect") && !invencibility && !dead)
         {
-            if (other.gameObject.transform.parent.parent.tag != "Enemy")
+            if (other.gameObject.transform.parent.tag != "Enemy")
             {
                 Cross1.SetActive(false);
                 Cross2.SetActive(false);
@@ -164,7 +164,7 @@ public class EnemyHealthController : MonoBehaviour
                 Cross2.SetActive(true);
                 Glow.SetActive(true);
 
-                lastAttacker = other.transform.parent.parent.gameObject;
+                lastAttacker = other.transform.parent.gameObject;
 
                 SlashController slashController = other.GetComponent<SlashController>();
                 attackPosition = other.gameObject.transform.position;
