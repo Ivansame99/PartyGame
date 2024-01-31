@@ -22077,6 +22077,8 @@ MonoBehaviour:
     m_Bits: 4096
   fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
     type: 3}
+  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
+    type: 3}
 --- !u!114 &7031974134387891563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22136,6 +22138,13 @@ MonoBehaviour:
   hitSound: {fileID: 7322210917187291283}
   minPitch: 0
   maxPitch: 0
+  HealParticles: {fileID: 100000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
+  DeathParticles: {fileID: 141433446842962269, guid: 900b6d7582c595341af43ee3cc8eb7ce,
+    type: 3}
+  BloodParticles: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58,
+    type: 3}
+  skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
+    type: 3}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

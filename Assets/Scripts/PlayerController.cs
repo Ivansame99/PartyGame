@@ -135,6 +135,11 @@ public class PlayerController : MonoBehaviour
 	private GameObject fallParticle;
 
 	private bool fallParticleBool = false;
+
+	[SerializeField]
+	private GameObject runParticles;
+
+	private int runCounter = 0;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -204,6 +209,12 @@ public class PlayerController : MonoBehaviour
 				float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 				transform.rotation = Quaternion.Euler(0f, angle, 0f);
 				isWalking = true;
+				runCounter++;
+				if (runCounter >= 50)
+				{
+					Instantiate(runParticles, new Vector3(this.transform.position.x, this.transform.position.y-1, this.transform.position.z-1), Quaternion.identity);
+					runCounter = 0;
+				}
 			}
 			else
 			{
@@ -439,9 +450,9 @@ public class PlayerController : MonoBehaviour
 
 	/*IEnumerator ReactivateObjects()
 	{
-		yield return new WaitForSeconds(0.05f); // Ajusta el tiempo según sea necesario
+		yield return new WaitForSeconds(0.05f); // Ajusta el tiempo segï¿½n sea necesario
 
-		yield return new WaitForSeconds(0.4f); // Ajusta el tiempo según sea necesario
+		yield return new WaitForSeconds(0.4f); // Ajusta el tiempo segï¿½n sea necesario
 		slashCollider.SetActive(false);
 		slashParticle.SetActive(false);
 	}*/
