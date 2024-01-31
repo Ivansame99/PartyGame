@@ -10394,7 +10394,7 @@ GameObject:
   - component: {fileID: 8561331533150568076}
   - component: {fileID: 6602772149827001717}
   m_Layer: 13
-  m_Name: SlashCoilliderBig
+  m_Name: SpecialAttackTrigger
   m_TagString: SlashEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10407,17 +10407,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232200787539059382}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 2.657501, z: 1}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0.3299999}
+  m_LocalScale: {x: 0.019999998, y: 0.026575005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3778993883866286188}
+  m_Father: {fileID: 8658279207065666515}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -33}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!65 &1264840298344608857
@@ -10626,7 +10626,7 @@ GameObject:
   - component: {fileID: 1254657565476691926}
   - component: {fileID: 4552503213921757526}
   m_Layer: 5
-  m_Name: SpecialAttackTrigger
+  m_Name: SlashParticleBig
   m_TagString: SlashEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10639,12 +10639,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6387946273866085344}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.025999997, y: 0.0129999975, z: 1.3}
+  m_LocalScale: {x: 1.2999998, y: 1.2999998, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8658279207065666515}
+  m_Father: {fileID: 3778993883866286188}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -25478,7 +25478,7 @@ GameObject:
   - component: {fileID: 9003442082855076315}
   - component: {fileID: 8745622981431454892}
   m_Layer: 5
-  m_Name: SlashContainer
+  m_Name: FeedbackReceiveAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25500,7 +25500,7 @@ RectTransform:
   - {fileID: 2140048832545657532}
   - {fileID: 7424147537881685633}
   - {fileID: 2495433415715640143}
-  - {fileID: 1906812830624235581}
+  - {fileID: 8473610195937347654}
   m_Father: {fileID: 8658279207065666515}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -30418,7 +30418,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b036bcb588005d479f383241224e118,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8473610195937347654}
+      addedObject: {fileID: 1906812830624235581}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b036bcb588005d479f383241224e118,
         type: 3}
@@ -30592,9 +30592,9 @@ MonoBehaviour:
   damagePushForce: 10
   slashDirection: {fileID: 0}
   bigSlashParticleSystem: {fileID: 6387946273866085344}
-  slashCollider: {fileID: 0}
+  slashCollider: {fileID: 6468735864739161683}
   bigSlashCollider: {fileID: 6232200787539059382}
-  slashController: {fileID: 0}
+  slashController: {fileID: 2688607971825410345}
 --- !u!195 &1031676779660372435
 NavMeshAgent:
   m_ObjectHideFlags: 0

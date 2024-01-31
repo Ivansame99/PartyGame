@@ -17,8 +17,6 @@ public class Enemy1Controller : MonoBehaviour
 
     //SLASH STUFF
     private PowerController powerController;
-    [SerializeField]
-    private Transform slashDirection;
 
     [SerializeField] 
     private GameObject bigSlashParticleSystem;
