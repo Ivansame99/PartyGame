@@ -139,7 +139,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject runParticles;
 
-	private int runCounter = 0;
+	private float runCounter = 0;
+	private float runCounterRandom;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -151,6 +152,7 @@ public class PlayerController : MonoBehaviour
 		gravityController = this.GetComponent<CustomGravityController>();
 		originalGravityScale = gravityController.gravityScale;
 		jumpAttackController = jumpAttackCollider.GetComponent<SlashController>();
+		runCounterRandom = Random.Range(0.1f, 0.5f);
 	}
 
 	//Input mando
@@ -209,11 +211,13 @@ public class PlayerController : MonoBehaviour
 				float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 				transform.rotation = Quaternion.Euler(0f, angle, 0f);
 				isWalking = true;
-				runCounter++;
-				if (runCounter >= 50)
+				//if(runCounter==0) runCounter
+				runCounter+=Time.deltaTime;
+				if (runCounter >= runCounterRandom)
 				{
 					Instantiate(runParticles, new Vector3(this.transform.position.x, this.transform.position.y-1, this.transform.position.z-1), Quaternion.identity);
 					runCounter = 0;
+					runCounterRandom = Random.Range(0.1f, 0.5f);
 				}
 			}
 			else
