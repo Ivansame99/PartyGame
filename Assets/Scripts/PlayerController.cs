@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject arrowConeIndicator;
 
-	private float raycastDistance = 1.2f; // Distancia del Raycast
+	private float raycastDistance = 1.5f; // Distancia del Raycast
 	public LayerMask groundLayer; // Capas que representan el suelo
 	private bool ground = true;
 	private bool jump = false;
@@ -395,9 +395,8 @@ public class PlayerController : MonoBehaviour
 
 						if (target != null)
 						{
-							float targetAngle;
 							Vector3 direction = target.position - transform.position;
-							direction.y = 0; // Establece la dirección en el eje Y a 0 para mantener al personaje vertical
+							direction.y = 0;
 							Quaternion rotation = Quaternion.LookRotation(direction);
 							transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 							if (ground) attackMovement = weaponController.combo[comboCounter].attackMovement;
@@ -460,7 +459,7 @@ public class PlayerController : MonoBehaviour
 	private IEnumerator IJumpAttack()
 	{
 		gravityController.gravityOn = false;
-		yield return new WaitForSeconds(0.1f);
+		yield return new WaitForSeconds(0.3f);
 		gravityController.gravityOn = true;
 		gravityController.gravityScale = 20f;
 		staticPJ = true;
@@ -487,7 +486,7 @@ public class PlayerController : MonoBehaviour
 		yield return new WaitForSeconds(0.2f);
 		jumpAttackCollider.SetActive(false);
 
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.5f);
 		fallParticleBool = false;
 		staticPJ = false;
 	}
