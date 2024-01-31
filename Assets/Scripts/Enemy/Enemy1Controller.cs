@@ -31,6 +31,8 @@ public class Enemy1Controller : MonoBehaviour
     private GameObject bigSlashCollider;
     public SlashController slashController;
 
+    private bool onlyDamageOnce;
+
     private Vector3 evadeAttackDirection = Vector3.zero;
 
     // Start is called before the first frame update
@@ -60,15 +62,14 @@ public class Enemy1Controller : MonoBehaviour
             agent.enabled = false;
             rb.MovePosition(transform.position + transform.forward * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceAttack = false;
-
-            Debug.Log("muchas");
+            onlyDamageOnce = false;
         }
         
         if (!animator.GetBool("attackOn") && !onlyOnceAttack)
         {
             agent.enabled = true;
             onlyOnceAttack = true;
-            slashCollider.SetActive(false);
+            //slashCollider.SetActive(false);
 
             animator.SetTrigger("attackFinished");
         }
@@ -111,7 +112,6 @@ public class Enemy1Controller : MonoBehaviour
     {
         slashController.finalDamage = enemyBaseDamage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
         slashController.pushForce = enemyBasePushForce;
-        
     }
 
 }
