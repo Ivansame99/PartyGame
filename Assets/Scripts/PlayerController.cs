@@ -327,8 +327,7 @@ public class PlayerController : MonoBehaviour
 				if (enemy == null)
 				{
 					enemiesNear.Remove(enemy);
-					if (enemiesNear.Count == 0) return null;
-					continue;
+					return null;
 				}
 
 				Vector3 enemyDistanceDiff = enemy.transform.position - this.transform.position;
