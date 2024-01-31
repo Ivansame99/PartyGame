@@ -60,6 +60,8 @@ public class Enemy1Controller : MonoBehaviour
             agent.enabled = false;
             rb.MovePosition(transform.position + transform.forward * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceAttack = false;
+
+            Debug.Log("muchas");
         }
         
         if (!animator.GetBool("attackOn") && !onlyOnceAttack)
@@ -103,6 +105,13 @@ public class Enemy1Controller : MonoBehaviour
             onlyOnceDamaged = true;
             //navMeshAgent.isStopped = false;
         }
-
     }
+
+    public void Slash()
+    {
+        slashController.finalDamage = enemyBaseDamage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
+        slashController.pushForce = enemyBasePushForce;
+        
+    }
+
 }
