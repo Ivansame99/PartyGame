@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject arrowConeIndicator;
 
-	private float raycastDistance = 1.5f; // Distancia del Raycast
+	private float raycastDistance = 0.5f; // Distancia del Raycast
 	public LayerMask groundLayer; // Capas que representan el suelo
 	private bool ground = true;
 	private bool jump = false;
@@ -141,6 +141,9 @@ public class PlayerController : MonoBehaviour
 
 	private float runCounter = 0;
 	private float runCounterRandom;
+
+	[SerializeField]
+	private Transform raycastPoint;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -212,12 +215,15 @@ public class PlayerController : MonoBehaviour
 				transform.rotation = Quaternion.Euler(0f, angle, 0f);
 				isWalking = true;
 				//if(runCounter==0) runCounter
-				runCounter+=Time.deltaTime;
-				if (runCounter >= runCounterRandom)
+				if (ground)
 				{
-					Instantiate(runParticles, new Vector3(this.transform.position.x, this.transform.position.y-1, this.transform.position.z-1), Quaternion.identity);
-					runCounter = 0;
-					runCounterRandom = Random.Range(0.1f, 0.5f);
+					runCounter += Time.deltaTime;
+					if (runCounter >= runCounterRandom)
+					{
+						Instantiate(runParticles, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z - 1), Quaternion.identity);
+						runCounter = 0;
+						runCounterRandom = Random.Range(0.1f, 0.5f);
+					}
 				}
 			}
 			else
@@ -245,9 +251,9 @@ public class PlayerController : MonoBehaviour
 
 	void DetectGround()
 	{
-		Debug.DrawRay(transform.position, Vector3.down * raycastDistance, Color.red);
+		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
 
-		if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
+		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
 		{
 			ground = true;
 		}
@@ -465,7 +471,6 @@ public class PlayerController : MonoBehaviour
 		if (!ground && isDodging)
 		{
 			//dodgeTimer = 3f;
-			float particle;
 			StartCoroutine(IJumpAttack());
 		}
 	}
@@ -479,7 +484,7 @@ public class PlayerController : MonoBehaviour
 		staticPJ = true;
 		isWalking = false;
 		//bool groundAux = false;
-
+		jumpAttackCollider.SetActive(true);
 		while (!ground)
 		{
 			yield return null;
@@ -495,7 +500,7 @@ public class PlayerController : MonoBehaviour
 		//Hacer que escale con el poder
 		//jumpAttackController.finalDamage = 
 		gravityController.gravityScale = originalGravityScale;
-		jumpAttackCollider.SetActive(true);
+		
 
 		yield return new WaitForSeconds(0.2f);
 		jumpAttackCollider.SetActive(false);
