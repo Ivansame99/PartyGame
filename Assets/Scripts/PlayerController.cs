@@ -110,10 +110,6 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject arrowConeIndicator;
 
-	private float raycastDistance = 0.5f; // Distancia del Raycast
-	public LayerMask groundLayer; // Capas que representan el suelo
-	public LayerMask EnemiesLayer; // Capas que representan el suelo
-	private bool ground = true;
 	private bool jump = false;
 
 	private List<GameObject> enemiesNear = new List<GameObject>();
@@ -145,8 +141,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool littleMove;
 
-	[SerializeField]
-	private Transform raycastPoint;
+	private GroundCheck groundCheck;
 	void Start()
 	{
 		//slashController = slashCollider.GetComponent<SlashController>();
@@ -159,6 +154,7 @@ public class PlayerController : MonoBehaviour
 		originalGravityScale = gravityController.gravityScale;
 		jumpAttackController = jumpAttackCollider.GetComponent<SlashController>();
 		runCounterRandom = Random.Range(0.1f, 0.5f);
+		groundCheck = this.GetComponent<GroundCheck>();
 	}
 
 	//Input mando
@@ -186,8 +182,6 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		DetectGround();
-
 		//Invencibilidad
 		if (invencibilityTimer >= 0)
 		{
@@ -218,7 +212,7 @@ public class PlayerController : MonoBehaviour
 				transform.rotation = Quaternion.Euler(0f, angle, 0f);
 				isWalking = true;
 				//if(runCounter==0) runCounter
-				if (ground)
+				if (groundCheck.DetectGround())
 				{
 					runCounter += Time.deltaTime;
 					if (runCounter >= runCounterRandom)
@@ -252,35 +246,11 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	void DetectGround()
-	{
-		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
-
-		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, groundLayer))
-		{
-			ground = true;
-		}
-		else
-		{
-			ground = false;
-		}
-
-		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hitEnemy, raycastDistance, EnemiesLayer))
-		{
-			if (hitEnemy.transform.name != this.transform.name)
-			{
-				littleMove = true;
-			}
-		}
-		else
-		{
-			littleMove = false;
-		}
-	}
+	
 
 	void Jump()
 	{
-		if (ground && isJumping && !jump)
+		if (groundCheck.DetectGround() && isJumping && !jump)
 		{
 			this.gameObject.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
 			jump = true;
@@ -295,7 +265,7 @@ public class PlayerController : MonoBehaviour
 
 	void Roll()
 	{
-		if (isDodging && dodgeTimer <= 0 && !dodge && ground)
+		if (isDodging && dodgeTimer <= 0 && !dodge && groundCheck.DetectGround())
 		{
 			if (direction == Vector3.zero)
 			{
@@ -434,7 +404,7 @@ public class PlayerController : MonoBehaviour
 							direction.y = 0;
 							Quaternion rotation = Quaternion.LookRotation(direction);
 							transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-							if (ground) attackMovement = weaponController.combo[comboCounter].attackMovement;
+							if (groundCheck.DetectGround()) attackMovement = weaponController.combo[comboCounter].attackMovement;
 							else attackMovement = weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
 							moveAttack = true;
 						}
@@ -447,7 +417,7 @@ public class PlayerController : MonoBehaviour
 							targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 							float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 							transform.rotation = Quaternion.Euler(0f, angle, 0f);
-							if (ground) attackMovement = weaponController.combo[comboCounter].attackMovement;
+							if (groundCheck.DetectGround()) attackMovement = weaponController.combo[comboCounter].attackMovement;
 							else attackMovement = weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
 							moveAttack = true;
 						}
@@ -483,7 +453,7 @@ public class PlayerController : MonoBehaviour
 
 	private void JumpAttack()
 	{
-		if (!ground && isDodging)
+		if (!groundCheck.DetectGround() && isDodging)
 		{
 			//dodgeTimer = 3f;
 			StartCoroutine(IJumpAttack());
@@ -500,7 +470,7 @@ public class PlayerController : MonoBehaviour
 		isWalking = false;
 		//bool groundAux = false;
 		jumpAttackCollider.SetActive(true);
-		while (!ground)
+		while (!groundCheck.DetectGround())
 		{
 			yield return null;
 		}
@@ -656,7 +626,7 @@ public class PlayerController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (chargingBow && ground)
+		if (chargingBow && groundCheck.DetectGround())
 		{
 			rb.MovePosition(transform.position + direction * speed / 2 * Time.fixedDeltaTime);
 		}
@@ -679,12 +649,6 @@ public class PlayerController : MonoBehaviour
 		{
 			rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
 			moveAttack = false;
-		}
-
-		if (littleMove)
-		{
-			rb.AddForce(transform.forward * 2, ForceMode.Impulse);
-			//moveAttack = false;
 		}
 	}
 
