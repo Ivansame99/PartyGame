@@ -139,6 +139,10 @@ public class PlayerController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject runParticles;
+	[SerializeField]
+	private GameObject jumpParticles;
+	[SerializeField]
+	private GameObject rollParticles;
 
 	private float runCounter = 0;
 	private float runCounterRandom;
@@ -282,6 +286,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (ground && isJumping && !jump)
 		{
+			Instantiate(jumpParticles, new Vector3(this.transform.position.x, this.transform.position.y-1, this.transform.position.z), Quaternion.identity);
 			this.gameObject.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
 			jump = true;
 			isJumping = false;
@@ -303,6 +308,8 @@ public class PlayerController : MonoBehaviour
 			}
 			else
 			{
+
+			
 				rollDirection = direction;
 				float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 				float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
@@ -312,6 +319,7 @@ public class PlayerController : MonoBehaviour
 			dodgeSound.Play();
 			dodge = true;
 			dodgeTimer = dodgeCD;
+			Instantiate(rollParticles, new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity);
 			anim.SetTrigger("Roll");
 			if (attacking) EndCombo();
 			invencibilityTimer = dodgeInvencibilitySeconds;

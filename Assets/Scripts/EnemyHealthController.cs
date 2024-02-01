@@ -53,6 +53,7 @@ public class EnemyHealthController : MonoBehaviour
 
 
     [SerializeField] private GameObject DeathParticles;
+    [SerializeField] private GameObject BloodParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +88,7 @@ public class EnemyHealthController : MonoBehaviour
     public void ReceiveDamageSlash(float damage)
     {
         //Debug.Log(damage);
+        Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         health -= damage;
         timer = inmuneTime;
         if (health <= 0)
@@ -160,6 +162,7 @@ public class EnemyHealthController : MonoBehaviour
         {
             if (other.gameObject.transform.parent.tag != "Enemy")
             {
+                
                 Cross1.SetActive(false);
                 Cross2.SetActive(false);
                 Glow.SetActive(false);
