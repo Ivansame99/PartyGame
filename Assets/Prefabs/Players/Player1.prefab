@@ -22185,7 +22185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed531f6f5e6f71488cc62b7880edc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  states:
+  - {fileID: 11400000, guid: b971fbe9a02f20e4ba8f5e2896f581c4, type: 2}
+  - {fileID: 11400000, guid: edd214bccbafa0242999d4f16b759f07, type: 2}
   dodgeSpeed: 20
   turnSmooth: 0.1
   jumpForce: 30
@@ -22206,6 +22208,7 @@ MonoBehaviour:
   maxPitch: 1.2
   invencibility: 0
   dodge: 0
+  moveUniversal: {x: 0, y: 0}
   slashCollider: {fileID: 5491916191551023080}
   jumpAttackCollider: {fileID: 5332908631118930390}
   arrowConeIndicator: {fileID: 1150728227621411889}
