@@ -112,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
 	private float raycastDistance = 0.5f; // Distancia del Raycast
 	public LayerMask groundLayer; // Capas que representan el suelo
+	public LayerMask EnemiesLayer; // Capas que representan el suelo
 	private bool ground = true;
 	private bool jump = false;
 
@@ -141,6 +142,8 @@ public class PlayerController : MonoBehaviour
 
 	private float runCounter = 0;
 	private float runCounterRandom;
+
+	private bool littleMove;
 
 	[SerializeField]
 	private Transform raycastPoint;
@@ -260,6 +263,18 @@ public class PlayerController : MonoBehaviour
 		else
 		{
 			ground = false;
+		}
+
+		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hitEnemy, raycastDistance, EnemiesLayer))
+		{
+			if (hitEnemy.transform.name != this.transform.name)
+			{
+				littleMove = true;
+			}
+		}
+		else
+		{
+			littleMove = false;
 		}
 	}
 
@@ -664,6 +679,12 @@ public class PlayerController : MonoBehaviour
 		{
 			rb.AddForce(transform.forward * attackMovement, ForceMode.Impulse);
 			moveAttack = false;
+		}
+
+		if (littleMove)
+		{
+			rb.AddForce(transform.forward * 2, ForceMode.Impulse);
+			//moveAttack = false;
 		}
 	}
 

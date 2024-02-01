@@ -30389,6 +30389,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b036bcb588005d479f383241224e118,
         type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1b036bcb588005d479f383241224e118,
+        type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -30590,7 +30595,6 @@ MonoBehaviour:
   enemyBaseDamage: 15
   enemyBasePushForce: 10
   damagePushForce: 10
-  slashDirection: {fileID: 0}
   bigSlashParticleSystem: {fileID: 6387946273866085344}
   slashCollider: {fileID: 6468735864739161683}
   bigSlashCollider: {fileID: 6232200787539059382}
