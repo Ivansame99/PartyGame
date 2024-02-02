@@ -42,6 +42,7 @@ public class PlayerRollState : PlayerState<PlayerController>
 		player.dodgeTimer = dodgeCD;
 		player.anim.SetTrigger("Roll");
 		player.dodgeSound.Play();
+		player.isDodging = false;
 	}
 
 	public override void Exit()

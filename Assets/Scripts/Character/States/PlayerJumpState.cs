@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/Player/Jump")]
-public class PlayerJump : PlayerState<PlayerController>
+public class PlayerJumpState : PlayerState<PlayerController>
 {
 	[SerializeField]
 	private float jumpForce;
@@ -13,6 +13,7 @@ public class PlayerJump : PlayerState<PlayerController>
 	{
 		base.Init(p);
 		player.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
+		player.isJumping = false;
 	}
 
 	public override void Exit()
@@ -23,6 +24,7 @@ public class PlayerJump : PlayerState<PlayerController>
 	public override void FixedUpdate()
 	{
 		player.rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+		player.ChangeState(typeof(PlayerIdleState));
 	}
 
 	public override void Update()

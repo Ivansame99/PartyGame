@@ -22,6 +22,7 @@ public class PlayerIdleState : PlayerState<PlayerController>
 
     public override void Update()
     {
+		//Change to walk
 		if (player.direction.magnitude >= 0.1f)
 		{
 			player.ChangeState(typeof(PlayerWalkState));
@@ -32,6 +33,13 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
 			player.ChangeState(typeof(PlayerRollState));
+			return;
+		}
+
+		//Change to jump
+		if (player.groundCheck.DetectGround() && player.isJumping)
+		{
+			player.ChangeState(typeof(PlayerJumpState));
 			return;
 		}
 	}

@@ -22189,9 +22189,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b971fbe9a02f20e4ba8f5e2896f581c4, type: 2}
   - {fileID: 11400000, guid: edd214bccbafa0242999d4f16b759f07, type: 2}
   - {fileID: 11400000, guid: 8e7026c0c55313e4b964b5e53bdaf393, type: 2}
-  dodgeSpeed: 20
-  jumpForce: 30
-  dodgeCD: 0.8
+  - {fileID: 11400000, guid: 44cb4b8ddcca372428d70794c240ec81, type: 2}
+  dodgeTimer: 0
   dodgeInvencibilitySeconds: 0.5
   invencibilityTimer: 0
   maxBowCD: 1
@@ -22208,7 +22207,12 @@ MonoBehaviour:
   maxPitch: 1.2
   invencibility: 0
   dodge: 0
+  isDodging: 0
+  isAttacking: 0
+  isSpecialAttacking: 0
+  isJumping: 0
   moveUniversal: {x: 0, y: 0}
+  direction: {x: 0, y: 0, z: 0}
   slashCollider: {fileID: 5491916191551023080}
   jumpAttackCollider: {fileID: 5332908631118930390}
   arrowConeIndicator: {fileID: 1150728227621411889}
@@ -22216,6 +22220,9 @@ MonoBehaviour:
     type: 3}
   runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
     type: 3}
+  rb: {fileID: 0}
+  groundCheck: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0

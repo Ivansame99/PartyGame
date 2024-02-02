@@ -49,6 +49,13 @@ public class PlayerWalkState : PlayerState<PlayerController>
 			return;
 		}
 
+		//Change to jump
+		if (player.groundCheck.DetectGround() && player.isJumping)
+		{
+			player.ChangeState(typeof(PlayerJumpState));
+			return;
+		}
+
 		//Walk
 		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
 		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
