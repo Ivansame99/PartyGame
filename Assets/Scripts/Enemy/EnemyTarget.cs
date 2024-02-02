@@ -38,18 +38,15 @@ public class EnemyTarget : MonoBehaviour
 
             if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
             {
-                Debug.Log("x1");
                 if (enemyDirector.full[i] && player == lastTarget)
                 {
                     minDist = distance;
                     searchPlayer = player;
-                    Debug.Log("x2");
                 }
                 if (!enemyDirector.full[i])
                 {
                     minDist = distance;
                     searchPlayer = player;
-                    Debug.Log("x3");
                 }
             }
         }
