@@ -6,21 +6,19 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerController : PlayerStateManager<PlayerController>
 {
-	[SerializeField]
-	private float dodgeSpeed;
+	//[SerializeField]
+	//private float dodgeSpeed;
 
-	[SerializeField]
-	private float jumpForce;
-
-	[Header("Components")]
+	//[Header("Components")]
 	//Components
-	private Rigidbody rb;
-	private Animator anim;
+	//private Rigidbody rb;
+	//private Animator anim;
 
 	[Header("Timers")]
-	[SerializeField]
-	private float dodgeCD;
-	private float dodgeTimer = 0;
+	//[SerializeField]
+	//private float dodgeCD;
+	[HideInInspector]
+	public float dodgeTimer = 0;
 	[SerializeField]
 	private float dodgeInvencibilitySeconds;
 	public float invencibilityTimer = 0;
@@ -48,13 +46,10 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	private float attackMovement;
 
 	[Header("Audio")]
-	//AUDIO
-	[SerializeField]
-	private AudioSource swordAttackSound;
-	[SerializeField]
-	private AudioSource bowAttackSound;
-	[SerializeField] AudioSource dodgeSound;
-	[SerializeField] AudioSource tensingBow;
+	public AudioSource swordAttackSound;
+	public AudioSource bowAttackSound;
+	public AudioSource dodgeSound;
+	public AudioSource tensingBow;
 	[SerializeField] private float minPitch;
 	[SerializeField] private float maxPitch;
 	private bool onlySoundOnce = false;
@@ -65,17 +60,19 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	private bool isWalking = false;
 	private bool attacking = false;
 	private bool moveAttack = false;
-	private int greatSwordAttackState = 0;
+	//private int greatSwordAttackState = 0;
 	private bool isCharging = false;
 
 	//Control
-	private bool isDodging, isAttacking, isSpecialAttacking, isJumping;
+	[HideInInspector]
+	public bool isDodging, isAttacking, isSpecialAttacking, isJumping;
 
 	//Movement
 	[HideInInspector]
 	public Vector2 moveUniversal;
-	private Vector3 direction;
-	private Vector3 rollDirection;
+	[HideInInspector]
+	public Vector3 direction;
+	//private Vector3 rollDirection;
 
 	//Positions&Rotations
 	//[SerializeField]
@@ -103,8 +100,6 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	[SerializeField]
 	private GameObject arrowConeIndicator;
-
-	private bool jump = false;
 
 	private List<GameObject> enemiesNear = new List<GameObject>();
 
@@ -135,11 +130,26 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	private bool littleMove;
 
-	private GroundCheck groundCheck;
+	[HideInInspector]
+	public Rigidbody rb;
+	[HideInInspector]
+	public GroundCheck groundCheck;
+	[HideInInspector]
+	public Animator anim;
 
 	protected override void Awake()
 	{
 		base.Awake();
+		if (rb == null) rb = GetComponent<Rigidbody>();
+		if (groundCheck == null) groundCheck = GetComponent<GroundCheck>();
+		if (anim == null) anim = GetComponent<Animator>();
+	}
+
+	protected override void Update()
+	{
+		base.Update();
+		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
+		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 	}
 
 	//Input mando
