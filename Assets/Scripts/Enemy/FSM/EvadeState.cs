@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class EvadeState : StateMachineBehaviour
 {
     private NavMeshAgent agent;
+    private EnemyTarget enemyTarget;
+
     private Transform player;
     public List<Transform> players;
     [SerializeField] private float speed;
@@ -16,12 +18,9 @@ public class EvadeState : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("isEvading", true);
+        enemyTarget = animator.GetComponent<EnemyTarget>();
         agent = animator.GetComponent<NavMeshAgent>();
-        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject jugadorObj in jugadoresArray)
-        {
-            players.Add(jugadorObj.transform);
-        }
+
         agent.speed = speed;
         agent.acceleration = acceleration;
         agent.angularSpeed = angularSpeed;
@@ -30,7 +29,7 @@ public class EvadeState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = FindPlayer();
+        player = enemyTarget.player;
         if (agent.isActiveAndEnabled && player != null) agent.SetDestination(player.position);
     }
 
@@ -40,23 +39,7 @@ public class EvadeState : StateMachineBehaviour
         animator.SetBool("isEvading", false);
         agent.SetDestination(animator.transform.position);
     }
-    private Transform FindPlayer()
-    {
-        Transform searchPlayer = null;
-        float minDist = float.MaxValue;
 
-        foreach (Transform player in players)
-        {
-            float distance = Vector3.Distance(agent.transform.position, player.position);
-
-            if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
-            {
-                minDist = distance;
-                searchPlayer = player;
-            }
-        }
-        return searchPlayer;
-    }
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{

@@ -53,7 +53,7 @@ public class EnemyDirector : MonoBehaviour
         currentEnemies = roundController.currentEnemies.Count;
         
         splitEnemies = Mathf.Ceil(currentEnemies / (currentPlayers - playerDead));
-
+        
         for (int i = 0; i < currentPlayers; i++)
         {
             if (playerTarget[i] < splitEnemies) full[i] = false;
