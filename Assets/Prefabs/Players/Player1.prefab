@@ -22190,15 +22190,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: edd214bccbafa0242999d4f16b759f07, type: 2}
   - {fileID: 11400000, guid: 8e7026c0c55313e4b964b5e53bdaf393, type: 2}
   - {fileID: 11400000, guid: 44cb4b8ddcca372428d70794c240ec81, type: 2}
+  - {fileID: 11400000, guid: 3fdd61e4196e6ad4989b32df747407b8, type: 2}
   dodgeTimer: 0
   dodgeInvencibilitySeconds: 0.5
   invencibilityTimer: 0
-  maxBowCD: 1
+  bowTimer: 0
   weapon: {fileID: 6891439088349369807}
-  minChargeBow: 0.2
-  maxChargeBow: 1
-  arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
-    type: 3}
   swordAttackSound: {fileID: 4267590517814037703}
   bowAttackSound: {fileID: 6873682153626677111}
   dodgeSound: {fileID: 3901693107126339173}
@@ -22215,7 +22212,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   slashCollider: {fileID: 5491916191551023080}
   jumpAttackCollider: {fileID: 5332908631118930390}
+  powerController: {fileID: 0}
   arrowConeIndicator: {fileID: 1150728227621411889}
+  gravityController: {fileID: 0}
   fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
     type: 3}
   runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,

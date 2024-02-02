@@ -56,6 +56,13 @@ public class PlayerWalkState : PlayerState<PlayerController>
 			return;
 		}
 
+		//Change to shoot arrow
+		if (player.isSpecialAttacking && player.bowTimer <= 0)
+		{
+			player.ChangeState(typeof(PlayerArrowState));
+			return;
+		}
+
 		//Walk
 		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
 		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);

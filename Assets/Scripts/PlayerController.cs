@@ -22,26 +22,26 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[SerializeField]
 	private float dodgeInvencibilitySeconds;
 	public float invencibilityTimer = 0;
-	[SerializeField]
-	private float maxBowCD;
-	private float bowCD;
+
+	[HideInInspector]
+	public float bowTimer;
 
 	[Header("Weapons")]
 	[SerializeField]
 	private GameObject weapon;
 	private Weapon weaponController;
 
-	private float currentChargingBow;
+	/*private float currentChargingBow;
 	[SerializeField] private float minChargeBow;
-	[SerializeField] private float maxChargeBow;
+	[SerializeField] private float maxChargeBow;*/
 
 	private int comboCounter;
 	float attackCoolDownTime = 0.1f;
 	float lastClicked;
 	float lastComboEnd;
 
-	[SerializeField]
-	private GameObject arrowPrefab;
+	//[SerializeField]
+	//private GameObject arrowPrefab;
 
 	private float attackMovement;
 
@@ -92,18 +92,18 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	//private Vector3 savedPosition;
 	//private Vector3 savedRotation;
-
-	private PowerController powerController;
+	[HideInInspector]
+	public PowerController powerController;
 	//private SlashController slashController;
 
 	private bool chargingBow = false;
 
-	[SerializeField]
-	private GameObject arrowConeIndicator;
+	public GameObject arrowConeIndicator;
 
 	private List<GameObject> enemiesNear = new List<GameObject>();
 
-	private CustomGravityController gravityController;
+	[HideInInspector]
+	public CustomGravityController gravityController;
 
 	private bool nextAttack = false;
 
@@ -143,12 +143,15 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		if (rb == null) rb = GetComponent<Rigidbody>();
 		if (groundCheck == null) groundCheck = GetComponent<GroundCheck>();
 		if (anim == null) anim = GetComponent<Animator>();
+		if (gravityController ==null) gravityController = GetComponent<CustomGravityController>();
+		if (powerController == null) powerController = GetComponent<PowerController>();
 	}
 
 	protected override void Update()
 	{
 		base.Update();
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
+		if (bowTimer >= 0) bowTimer -= Time.deltaTime;
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 	}
 
