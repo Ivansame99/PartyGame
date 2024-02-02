@@ -18,17 +18,19 @@ public class ChaseState : StateMachineBehaviour
     [SerializeField] private float normalAttackCooldown;
     private float fieldOfView;
     private float timerAttack, timerSpecial;
+
     private EnemyDirector enemyDirector;
+    private EnemyTarget enemyTarget;
     private bool newTarget;
     private Transform lastTarget;
-    private EnemyHealthController enemyHealth;
+
     
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
-        enemyHealth = animator.GetComponent<EnemyHealthController>();
+        //enemyTarget = agent.GetComponent<EnemyTarget>();
         agent = animator.GetComponent<NavMeshAgent>();
 
         agent.speed = speed;
@@ -62,7 +64,7 @@ public class ChaseState : StateMachineBehaviour
             if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward, dir)) < deg)
             {
                 animator.SetBool("isAttacking", true);
-                timerAttack = normalAttackCooldown;
+                //timerAttack = normalAttackCooldown;
             }
 
             //animator.transform.LookAt(player);
@@ -120,13 +122,6 @@ public class ChaseState : StateMachineBehaviour
             DecreasePlayerTarget(lastTarget.gameObject.name);
             newTarget = false;
         }
-        /*
-        if(enemyHealth.dead == true)
-        {
-            DecreasePlayerTarget(searchPlayer.gameObject.name);
-            newTarget = false;
-        }
-            */
 
         return searchPlayer;
     }
