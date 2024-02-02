@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class SurroundState : StateMachineBehaviour
 {
-    private ChaseState chaseState;
+    private EnemyTarget enemyTarget;
+    private Transform playerPos;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        chaseState = animator.GetBehaviour<ChaseState>();
-
-        // Llama a OnStateExit de ChaseState para actualizar la variable 'player'
-        chaseState.OnStateExit(animator, stateInfo, layerIndex);
+        enemyTarget = animator.GetComponent<EnemyTarget>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        playerPos = enemyTarget.player;
+
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

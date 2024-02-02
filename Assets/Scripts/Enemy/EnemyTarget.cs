@@ -11,7 +11,13 @@ public class EnemyTarget : MonoBehaviour
     private bool newTarget;
     private Transform lastTarget;
 
+    [HideInInspector]
     public Transform player, player2;
+
+    void Start()
+    {
+        enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -32,19 +38,22 @@ public class EnemyTarget : MonoBehaviour
 
             if (distance < minDist && player.GetComponent<PlayerHealthController>().dead == false)
             {
+                Debug.Log("x1");
                 if (enemyDirector.full[i] && player == lastTarget)
                 {
                     minDist = distance;
                     searchPlayer = player;
+                    Debug.Log("x2");
                 }
                 if (!enemyDirector.full[i])
                 {
                     minDist = distance;
                     searchPlayer = player;
+                    Debug.Log("x3");
                 }
             }
         }
-        if (!newTarget)
+        if (!newTarget && searchPlayer != null)
         {
             // Disminuir el contador del objetivo anterior si ya estaba siguiendo a otro jugador
             // Incrementar el contador del nuevo objetivo
@@ -58,13 +67,6 @@ public class EnemyTarget : MonoBehaviour
             DecreasePlayerTarget(lastTarget.gameObject.name);
             newTarget = false;
         }
-        /*
-        if(enemyHealth.dead == true)
-        {
-            DecreasePlayerTarget(searchPlayer.gameObject.name);
-            newTarget = false;
-        }
-            */
 
         return searchPlayer;
     }
@@ -88,7 +90,7 @@ public class EnemyTarget : MonoBehaviour
         }
     }
 
-    private void DecreasePlayerTarget(string playerName)
+    public void DecreasePlayerTarget(string playerName)
     {
         switch (playerName)
         {
