@@ -84,8 +84,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[SerializeField]
 	private SlashController slashCollider;
 
-	[SerializeField]
-	private GameObject jumpAttackCollider;
+	[HideInInspector]
+	public GameObject jumpAttackCollider;
 	private SlashController jumpAttackController;
 
 	//private ParticleSystem slashParticleSystem;
@@ -119,8 +119,6 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	[SerializeField]
 	private GameObject fallParticle;
-
-	private bool fallParticleBool = false;
 
 	[SerializeField]
 	private GameObject runParticles;

@@ -43,6 +43,13 @@ public class PlayerIdleState : PlayerState<PlayerController>
 			return;
 		}
 
+		//Change to drop attack
+		if (player.isJumping && !player.groundCheck.DetectGround())
+		{
+			player.ChangeState(typeof(PlayerDropAttackState));
+			return;
+		}
+
 		//Change to shoot arrow
 		if (player.isSpecialAttacking && player.bowTimer <= 0)
 		{
