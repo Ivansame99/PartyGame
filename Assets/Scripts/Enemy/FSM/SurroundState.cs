@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,12 +10,17 @@ public class SurroundState : StateMachineBehaviour
     private EnemyTarget enemyTarget;
     private Transform posicionJugador;
 
+    [SerializeField] private float normalAttackCooldown;
+    [SerializeField] private float deg;
+
     private Transform jugador;  // Referencia al transform del jugador
 
     [SerializeField] float triggerDistance = 2.5f;
 
     public float radioRodeo = 5f;  // Radio del rodeo
-    public float velocidadRotacion = 2f;
+    [SerializeField] private float velocidadRotacion = 2f;
+
+    private float timerAttack;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -32,12 +38,22 @@ public class SurroundState : StateMachineBehaviour
 
         float distance = Vector3.Distance(posicionJugador.position, animator.transform.position);
         Vector3 dir = posicionJugador.transform.position - animator.transform.position;
+        /*
+        if (timerAttack >= 0)
+        {
+            timerAttack -= Time.deltaTime;
+        }
 
+        if(timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward, dir)) < deg)
+        {
+            animator.SetBool("isSurrounding", true);
+            timerAttack = normalAttackCooldown;
+        }
+        */
         if (distance > triggerDistance)
         {
-            animator.SetBool("isChasing", true);
+            animator.SetBool("isSurrounding", false);
             agent.enabled = true;
-            Debug.Log("entra");
         }
 
         
