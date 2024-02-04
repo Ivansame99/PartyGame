@@ -29,9 +29,6 @@ public class PowerController : MonoBehaviour
 
     private Vector3 originalScale;
 
-    //[SerializeField]
-    //private  healthBarC;
-
     [SerializeField]
     private GameObject powerLevel;
 

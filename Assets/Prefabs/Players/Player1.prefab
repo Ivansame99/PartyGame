@@ -22192,11 +22192,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44cb4b8ddcca372428d70794c240ec81, type: 2}
   - {fileID: 11400000, guid: 3fdd61e4196e6ad4989b32df747407b8, type: 2}
   - {fileID: 11400000, guid: 5a8dbb7c3de552a46ae9f57b5d2706b3, type: 2}
+  - {fileID: 11400000, guid: 29faadcb67e66f6478deed565b94cb4b, type: 2}
   dodgeTimer: 0
   dodgeInvencibilitySeconds: 0.5
   invencibilityTimer: 0
   bowTimer: 0
-  weapon: {fileID: 6891439088349369807}
+  weaponController: {fileID: 5586025376494623341}
   swordAttackSound: {fileID: 4267590517814037703}
   bowAttackSound: {fileID: 6873682153626677111}
   dodgeSound: {fileID: 3901693107126339173}
@@ -22212,9 +22213,11 @@ MonoBehaviour:
   moveUniversal: {x: 0, y: 0}
   direction: {x: 0, y: 0, z: 0}
   slashCollider: {fileID: 5491916191551023080}
+  lastComboTimer: 0
   jumpAttackCollider: {fileID: 5332908631118930390}
   powerController: {fileID: 0}
   arrowConeIndicator: {fileID: 1150728227621411889}
+  enemiesNear: []
   gravityController: {fileID: 0}
   fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
     type: 3}

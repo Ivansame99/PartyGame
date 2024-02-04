@@ -26,19 +26,11 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[HideInInspector]
 	public float bowTimer;
 
-	[Header("Weapons")]
-	[SerializeField]
-	private GameObject weapon;
-	private Weapon weaponController;
+	public Weapon weaponController;
 
 	/*private float currentChargingBow;
 	[SerializeField] private float minChargeBow;
 	[SerializeField] private float maxChargeBow;*/
-
-	private int comboCounter;
-	float attackCoolDownTime = 0.1f;
-	float lastClicked;
-	float lastComboEnd;
 
 	//[SerializeField]
 	//private GameObject arrowPrefab;
@@ -81,8 +73,10 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	//[SerializeField]
 	//private GameObject slashParticle;
 
-	[SerializeField]
-	private SlashController slashCollider;
+	public SlashController slashCollider;
+	
+	[HideInInspector]
+	public float lastComboTimer;
 
 	[HideInInspector]
 	public GameObject jumpAttackCollider;
@@ -100,14 +94,16 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public GameObject arrowConeIndicator;
 
-	private List<GameObject> enemiesNear = new List<GameObject>();
+	[HideInInspector]
+	public List<GameObject> enemiesNear = new List<GameObject>();
 
 	[HideInInspector]
 	public CustomGravityController gravityController;
 
 	private bool nextAttack = false;
-
-	private Queue<bool> attackBuffer = new Queue<bool>();
+	
+	[HideInInspector]
+	public Queue<bool> attackBuffer = new Queue<bool>();
 
 	private bool canAttackNext = true;
 
@@ -150,6 +146,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		base.Update();
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 		if (bowTimer >= 0) bowTimer -= Time.deltaTime;
+		if(lastComboTimer>=0) lastComboTimer -= Time.deltaTime;
+
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 	}
 
@@ -165,7 +163,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public void SetAttack(bool pressAttack)
 	{
 		attackBuffer.Enqueue(pressAttack);
-		//Invoke(nameof(RemovAttackBuffer), 0.3f);
+		Invoke(nameof(RemovAttackBuffer), 0.3f);
 	}
 	public void SetSpecialAttack(bool pressSpecialAttack)
 	{
@@ -174,5 +172,31 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public void SetJump(bool pressJump)
 	{
 		isJumping = pressJump;
+	}
+
+	void RemovAttackBuffer()
+	{
+		attackBuffer.Dequeue();
+	}
+
+	public void EndCombo()
+	{
+		ChangeState(typeof(PlayerIdleState));
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+		{
+			enemiesNear.Add(other.gameObject);
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+		{
+			enemiesNear.Remove(other.gameObject);
+		}
 	}
 }

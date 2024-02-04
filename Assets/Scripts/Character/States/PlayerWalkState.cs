@@ -63,6 +63,13 @@ public class PlayerWalkState : PlayerState<PlayerController>
 			return;
 		}
 
+		//Change to attack
+		if (player.attackBuffer.Count >= 1 && player.lastComboTimer <= 0)
+		{
+			player.ChangeState(typeof(PlayerAttackState));
+			return;
+		}
+
 		//Change to shoot arrow
 		if (player.isSpecialAttacking && player.bowTimer <= 0)
 		{
