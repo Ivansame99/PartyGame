@@ -64,7 +64,6 @@ public class EnemyTarget : MonoBehaviour
             DecreasePlayerTarget(lastTarget.gameObject.name);
             newTarget = false;
         }
-
         return searchPlayer;
     }
 
