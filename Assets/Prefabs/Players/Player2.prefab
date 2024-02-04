@@ -22011,10 +22011,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7031974134387891563}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3514694093690064369}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
@@ -22036,6 +22032,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8270753621171231661}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 342497156127755402}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!4 &1788842633507896409 stripped
 Transform:
@@ -22088,53 +22088,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed531f6f5e6f71488cc62b7880edc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  dodgeSpeed: 20
-  turnSmooth: 0.1
-  jumpForce: 30
-  dodgeCD: 0.8
-  dodgeInvencibilitySeconds: 0.5
+  states:
+  - {fileID: 11400000, guid: f279a32e279795242a80d5cc4ec922f0, type: 2}
+  - {fileID: 11400000, guid: f609cdee8097e44468222f0236eab1b3, type: 2}
+  - {fileID: 11400000, guid: 6b165c6e05b9cc84785ea9030e6843ea, type: 2}
+  - {fileID: 11400000, guid: cb23c76cfea9bf6448694dd0cb62acf7, type: 2}
+  - {fileID: 11400000, guid: 5d1515ad83f0e814a88c5dd2cbec98a8, type: 2}
+  - {fileID: 11400000, guid: 914d574b7b7ee9d49af021b073668f6c, type: 2}
+  - {fileID: 11400000, guid: 43c581ab1d9768f4b92c5095ec32c2c3, type: 2}
   invencibilityTimer: 0
-  maxBowCD: 1
-  weapon: {fileID: 6891439088349369807}
-  minChargeBow: 0.2
-  maxChargeBow: 1
-  arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
-    type: 3}
+  invencibility: 0
+  dodge: 0
+  dodgeTimer: 0
   swordAttackSound: {fileID: 5907450722468059971}
   bowAttackSound: {fileID: 4258002863467335278}
   dodgeSound: {fileID: 1866904361629009253}
   tensingBow: {fileID: 5882704311282570819}
-  minPitch: 0.8
-  maxPitch: 1.2
-  invencibility: 0
-  dodge: 0
-  slashCollider: {fileID: 3001511228643611567}
+  isDodging: 0
+  isAttacking: 0
+  isSpecialAttacking: 0
+  isJumping: 0
+  moveUniversal: {x: 0, y: 0}
+  direction: {x: 0, y: 0, z: 0}
   jumpAttackCollider: {fileID: 6678585635447497662}
   arrowConeIndicator: {fileID: 8884825893129624280}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  EnemiesLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
-    type: 3}
-  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-    type: 3}
-  raycastPoint: {fileID: 3235542828691253567}
---- !u!114 &7031974134387891563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5971476123506598425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5e73e8b7141b04abda88eb2e23efc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  bowTimer: 0
+  enemiesNear: []
+  lastComboTimer: 0
+  weaponController: {fileID: 5586025376494623341}
+  slashCollider: {fileID: 3001511228643611567}
+  rb: {fileID: 0}
+  groundCheck: {fileID: 0}
+  anim: {fileID: 0}
+  powerController: {fileID: 0}
+  gravityController: {fileID: 0}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22265,6 +22252,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityScale: 8
   gravityOn: 1
+--- !u!114 &342497156127755402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522dd7457de0d9f4096d445044bce6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastPoint: {fileID: 3235542828691253567}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  charactersLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

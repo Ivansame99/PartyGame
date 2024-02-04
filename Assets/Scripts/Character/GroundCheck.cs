@@ -55,7 +55,7 @@ public class GroundCheck : MonoBehaviour
 	{
 		if (littleMove)
 		{
-			rb.AddForce(transform.forward * 2, ForceMode.Impulse);
+			rb.AddForce(transform.forward * 3, ForceMode.Impulse);
 		}
 	}
 }
