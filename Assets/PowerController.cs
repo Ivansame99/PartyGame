@@ -40,7 +40,8 @@ public class PowerController : MonoBehaviour
     private TMP_Text playerUIPowerText;
 
     private bool isEnemy=false;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         powerLevelText = powerLevel.GetComponent<TMP_Text>();
@@ -59,7 +60,6 @@ public class PowerController : MonoBehaviour
         SetCurrentPowerLevel(minPowerLevel);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Formula para obtener el escalado del personaje

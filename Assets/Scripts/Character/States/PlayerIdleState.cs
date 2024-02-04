@@ -5,6 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/Player/Idle")]
 public class PlayerIdleState : PlayerState<PlayerController>
 {
+	[SerializeField]
+	private float turnSmooth;
+
+	private float turnSmoothTime;
+
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
@@ -22,11 +27,6 @@ public class PlayerIdleState : PlayerState<PlayerController>
 
     public override void Update()
     {
-		CheckTransitions();
-	}
-
-	void CheckTransitions()
-	{
 		//Change to walk
 		if (player.direction.magnitude >= 0.1f)
 		{

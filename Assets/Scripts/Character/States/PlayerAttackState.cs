@@ -57,20 +57,15 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
-		CheckTransitions();
-
-		Attack();
-		ExitAttack();
-	}
-
-	void CheckTransitions()
-	{
 		//Change to roll
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
 			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
+
+		Attack();
+		ExitAttack();
 	}
 
 	private void Attack()

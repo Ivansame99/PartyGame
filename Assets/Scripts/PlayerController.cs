@@ -5,66 +5,62 @@ using UnityEngine;
 
 [SelectionBase]
 public class PlayerController : PlayerStateManager<PlayerController>
-{
-	[Header("Timers")]
+{	
+	//Invencible
+	public float invencibilityTimer = 0;
+	public bool invencibility = false;
+	public bool dodge = false;
+
+	//Roll
 	[HideInInspector]
 	public float dodgeTimer = 0;
-	public float invencibilityTimer = 0;
 
-	[HideInInspector]
-	public float bowTimer;
-
-	public Weapon weaponController;
-
+	//Audio
 	[Header("Audio")]
 	public AudioSource swordAttackSound;
 	public AudioSource bowAttackSound;
 	public AudioSource dodgeSound;
 	public AudioSource tensingBow;
 
-	//States
-	public bool invencibility = false;
-	public bool dodge = false;
-
-	//Control
+	//Control input
 	[HideInInspector]
 	public bool isDodging, isAttacking, isSpecialAttacking, isJumping;
-
-	//Movement
 	[HideInInspector]
 	public Vector2 moveUniversal;
 	[HideInInspector]
 	public Vector3 direction;
 
-	public SlashController slashCollider;
-	
-	[HideInInspector]
-	public float lastComboTimer;
-
+	//Jump drop attack
 	[HideInInspector]
 	public GameObject jumpAttackCollider;
 	private SlashController jumpAttackController;
 
-	[HideInInspector]
-	public PowerController powerController;
-
+	//Arrow attack
 	public GameObject arrowConeIndicator;
-
 	[HideInInspector]
-	public List<GameObject> enemiesNear = new List<GameObject>();
+	public float bowTimer;
 
-	[HideInInspector]
-	public CustomGravityController gravityController;
-	
+	//Attack
 	[HideInInspector]
 	public Queue<bool> attackBuffer = new Queue<bool>();
+	[HideInInspector]
+	public List<GameObject> enemiesNear = new List<GameObject>();
+	[HideInInspector]
+	public float lastComboTimer;
+	public Weapon weaponController;
+	public SlashController slashCollider;
 
+	//Components
 	[HideInInspector]
 	public Rigidbody rb;
 	[HideInInspector]
 	public GroundCheck groundCheck;
 	[HideInInspector]
 	public Animator anim;
+	[HideInInspector]
+	public PowerController powerController;
+	[HideInInspector]
+	public CustomGravityController gravityController;
 
 	protected override void Awake()
 	{
