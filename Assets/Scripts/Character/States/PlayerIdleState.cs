@@ -22,6 +22,11 @@ public class PlayerIdleState : PlayerState<PlayerController>
 
     public override void Update()
     {
+		CheckTransitions();
+	}
+
+	void CheckTransitions()
+	{
 		//Change to walk
 		if (player.direction.magnitude >= 0.1f)
 		{
@@ -51,7 +56,7 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		}
 
 		//Change to attack
-		if (player.attackBuffer.Count>=1 && player.lastComboTimer<=0)
+		if (player.attackBuffer.Count >= 1 && player.lastComboTimer <= 0)
 		{
 			player.ChangeState(typeof(PlayerAttackState));
 			return;

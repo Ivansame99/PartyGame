@@ -34,7 +34,30 @@ public class PlayerWalkState : PlayerState<PlayerController>
 	}
 
 	public override void Update()
-	{	
+	{
+		CheckTransitions();
+
+		//Walk
+		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
+		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+		player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+		if (player.groundCheck.DetectGround())
+		{
+			runCounter += Time.deltaTime;
+			if (runCounter >= runCounterRandom)
+			{
+				Instantiate(runParticles, new Vector3(player.transform.position.x, player.transform.position.y - 1, player.transform.position.z - 1), Quaternion.identity);
+				runCounter = 0;
+				runCounterRandom = Random.Range(0.1f, 0.5f);
+			}
+		}
+
+		player.anim.SetBool("Walking", true);
+	}
+
+	void CheckTransitions()
+	{
 		//Change to Idle
 		if (player.direction.magnitude < 0.1f)
 		{
@@ -43,7 +66,7 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		}
 
 		//Change to roll
-		if (player.isDodging && player.dodgeTimer<=0)
+		if (player.isDodging && player.dodgeTimer <= 0)
 		{
 			player.ChangeState(typeof(PlayerRollState));
 			return;
@@ -76,20 +99,5 @@ public class PlayerWalkState : PlayerState<PlayerController>
 			player.ChangeState(typeof(PlayerArrowState));
 			return;
 		}
-
-		//Walk
-		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
-		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-		player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-		runCounter += Time.deltaTime;
-		if (runCounter >= runCounterRandom)
-		{
-			Instantiate(runParticles, new Vector3(player.transform.position.x, player.transform.position.y - 1, player.transform.position.z - 1), Quaternion.identity);
-			runCounter = 0;
-			runCounterRandom = Random.Range(0.1f, 0.5f);
-		}
-
-		player.anim.SetBool("Walking", true);
 	}
 }

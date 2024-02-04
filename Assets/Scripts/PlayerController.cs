@@ -6,21 +6,9 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerController : PlayerStateManager<PlayerController>
 {
-	//[SerializeField]
-	//private float dodgeSpeed;
-
-	//[Header("Components")]
-	//Components
-	//private Rigidbody rb;
-	//private Animator anim;
-
 	[Header("Timers")]
-	//[SerializeField]
-	//private float dodgeCD;
 	[HideInInspector]
 	public float dodgeTimer = 0;
-	[SerializeField]
-	private float dodgeInvencibilitySeconds;
 	public float invencibilityTimer = 0;
 
 	[HideInInspector]
@@ -28,32 +16,15 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public Weapon weaponController;
 
-	/*private float currentChargingBow;
-	[SerializeField] private float minChargeBow;
-	[SerializeField] private float maxChargeBow;*/
-
-	//[SerializeField]
-	//private GameObject arrowPrefab;
-
-	private float attackMovement;
-
 	[Header("Audio")]
 	public AudioSource swordAttackSound;
 	public AudioSource bowAttackSound;
 	public AudioSource dodgeSound;
 	public AudioSource tensingBow;
-	[SerializeField] private float minPitch;
-	[SerializeField] private float maxPitch;
-	private bool onlySoundOnce = false;
 
 	//States
 	public bool invencibility = false;
 	public bool dodge = false;
-	private bool isWalking = false;
-	private bool attacking = false;
-	private bool moveAttack = false;
-	//private int greatSwordAttackState = 0;
-	private bool isCharging = false;
 
 	//Control
 	[HideInInspector]
@@ -64,14 +35,6 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public Vector2 moveUniversal;
 	[HideInInspector]
 	public Vector3 direction;
-	//private Vector3 rollDirection;
-
-	//Positions&Rotations
-	//[SerializeField]
-	//private Transform slashDirection;
-
-	//[SerializeField]
-	//private GameObject slashParticle;
 
 	public SlashController slashCollider;
 	
@@ -82,15 +45,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public GameObject jumpAttackCollider;
 	private SlashController jumpAttackController;
 
-	//private ParticleSystem slashParticleSystem;
-
-	//private Vector3 savedPosition;
-	//private Vector3 savedRotation;
 	[HideInInspector]
 	public PowerController powerController;
-	//private SlashController slashController;
-
-	private bool chargingBow = false;
 
 	public GameObject arrowConeIndicator;
 
@@ -99,30 +55,9 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	[HideInInspector]
 	public CustomGravityController gravityController;
-
-	private bool nextAttack = false;
 	
 	[HideInInspector]
 	public Queue<bool> attackBuffer = new Queue<bool>();
-
-	private bool canAttackNext = true;
-
-	private bool exitAttack = false;
-
-	private float originalGravityScale;
-
-	private bool staticPJ = false;
-
-	[SerializeField]
-	private GameObject fallParticle;
-
-	[SerializeField]
-	private GameObject runParticles;
-
-	private float runCounter = 0;
-	private float runCounterRandom;
-
-	private bool littleMove;
 
 	[HideInInspector]
 	public Rigidbody rb;

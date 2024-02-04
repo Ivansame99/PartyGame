@@ -24,12 +24,6 @@ public class GroundCheck : MonoBehaviour
 		rb = this.GetComponent<Rigidbody>();
 	}
 
-	// Update is called once per frame
-	void Update()
-	{
-		//DetectGround();
-	}
-
 	public bool DetectGround()
 	{
 		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);

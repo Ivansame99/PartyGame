@@ -1,7 +1,4 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/Player/Attack")]
@@ -12,6 +9,12 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 	[SerializeField]
 	private float comboCD;
+
+	[SerializeField]
+	private float invokeEndComboTime;
+
+	[SerializeField]
+	private float airFriction;
 
 	[SerializeField]
 	private float turnSmooth;
@@ -33,7 +36,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		base.Init(p);
 		comboCounter = 0;
 		lastClicked = betweenAttacksCD;
-		Debug.Log("Entras a ataque");
 	}
 
 	public override void Exit()
@@ -42,7 +44,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		ResetVelocity();
 		player.gravityController.gravityOn = true;
 		player.lastComboTimer = comboCD;
-		Debug.Log("Sales de ataque");
 	}
 
 	public override void FixedUpdate()
@@ -56,15 +57,20 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
+		CheckTransitions();
+
+		Attack();
+		ExitAttack();
+	}
+
+	void CheckTransitions()
+	{
 		//Change to roll
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
 			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
-
-		Attack();
-		ExitAttack();
 	}
 
 	private void Attack()
@@ -75,7 +81,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 			{
 				if (Time.time - lastClicked >= betweenAttacksCD)
 				{
-					//Logic
 					player.CancelInvoke(nameof(player.EndCombo));
 
 					ResetVelocity();
@@ -103,7 +108,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 						Quaternion rotation = Quaternion.LookRotation(direction);
 						player.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
-						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
+						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
 						moveAttack = true;
 					}
 
@@ -114,7 +119,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 						float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 						player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
-						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * 0.5f; //0.5= friccion aire
+						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
 						moveAttack = true;
 					}
 
@@ -134,8 +139,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 			player.anim.SetTrigger("Attack");
 			ResetVelocity();
 			player.gravityController.gravityOn = true;
-			player.Invoke(nameof(player.EndCombo), 0.2f);
-			//Invoke("EndCombo", 0.2f);
+			player.Invoke(nameof(player.EndCombo), invokeEndComboTime);
 		}
 	}
 
