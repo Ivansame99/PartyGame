@@ -35,17 +35,8 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Animator anim;
 
-	private float deathCD = 2;
-	private float deathTimer = 0;
-
 	public bool dead = false;
 	private bool deadAux = false;
-	private bool restart = false;
-
-	private float respawnTimer;
-
-	[SerializeField]
-	private float respawnCD;
 
 	private GameObject lastAttacker;
 	private float currentPower;
@@ -98,7 +89,7 @@ public class PlayerHealthController : MonoBehaviour
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
 		playersRespawn = FindObjectOfType<PlayersRespawn>();
-		
+
 
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
@@ -115,17 +106,11 @@ public class PlayerHealthController : MonoBehaviour
 			invencibleTimer -= Time.deltaTime;
 		}
 
-		if (deathTimer >= 0)
-		{
-			deathTimer -= Time.deltaTime;
-		}
 		if (dead == true && !deadAux)
 		{
 			deadAux = true;
 			StartCoroutine(SlowMotion());
 		}
-
-		if (restart) Respawn();
 	}
 
 	private void FixedUpdate()
@@ -144,6 +129,14 @@ public class PlayerHealthController : MonoBehaviour
 		//Feedback
 		StartCoroutine(RedEffect());
 		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+
+		cross1.SetActive(false);
+		cross2.SetActive(false);
+		glow.SetActive(false);
+
+		cross1.SetActive(true);
+		cross2.SetActive(true);
+		glow.SetActive(true);
 
 		//Sound
 		hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
@@ -185,22 +178,21 @@ public class PlayerHealthController : MonoBehaviour
 
 		anim.SetTrigger("Death");
 		playersRespawn.NotifyDead();
-		respawnTimer = respawnCD;
+
 		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel() / 2;
-		//Debug.Log(lastAttacker);
+
+		//Power control pass
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
 		GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
+
+
 		DisablePlayer();
 		dead = true;
-		deathTimer = deathCD;
+
 		for (int i = 0; i < mtp.Targets.Count; i++)
 		{
 			if (mtp.Targets[i].name == this.transform.name) mtp.Targets.Remove(mtp.Targets[i]);
 		}
-		/*float destroyDelay = Random.value;
-        Destroy(this.gameObject, destroyDelay);
-        Destroy(healthBar.gameObject, destroyDelay);*/
-		//anim.SetBool("Death", false);
 	}
 
 	void DisablePlayer()
@@ -220,52 +212,22 @@ public class PlayerHealthController : MonoBehaviour
 		powerBar.gameObject.SetActive(true);
 		dead = false;
 		deadAux = false;
-		restart = false;
 		health = maxHealth;
 		invencibleTimer = 0.5f;
 		healthBarC.SetProgress(health / maxHealth, 2);
 		playerUIHealth.SetProgress(health / maxHealth, 2);
 		mtp.Targets.Add(this.transform);
-		//anim.enabled = true;
-	}
-
-	void Respawn()
-	{
-		if (respawnTimer > 0)
-		{
-			respawnTimer -= Time.deltaTime;
-		}
-		else
-		{
-			//this.transform.position = Vector3.zero;
-			playersRespawn.SpawnPlayer(this.gameObject);
-			//EnablePlayer();
-		}
 	}
 
 	public void SetupHealthBar(Canvas canvas, Camera camera)
 	{
 		healthBar.transform.SetParent(canvas.transform);
-		/*if(healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
-        {
-            faceCamera.camera = camera;
-        }*/
 	}
 
 	private void OnTriggerStay(Collider other)
 	{
-		//Debug.Log(other.name)
-		if (other.CompareTag("SlashEffect") && invencibleTimer<=0 && !dead)
+		if (other.CompareTag("SlashEffect") && invencibleTimer <= 0 && !dead)
 		{
-			cross1.SetActive(false);
-			cross2.SetActive(false);
-			glow.SetActive(false);
-
-
-			cross1.SetActive(true);
-			cross2.SetActive(true);
-			glow.SetActive(true);
-
 			lastAttacker = other.transform.parent.gameObject;
 			SlashController slashController = other.GetComponent<SlashController>();
 			attackPosition = other.gameObject.transform.position;
@@ -311,15 +273,11 @@ public class PlayerHealthController : MonoBehaviour
 
 		for (float time = 0; time < duration * 2; time += Time.deltaTime)
 		{
-			//float progress = Mathf.PingPong(time, duration) / duration;
 			transform.localScale = Vector3.Lerp(initialScale, upScale, time);
 			yield return null;
 		}
-		//restart = true;
+
 		anim.SetTrigger("Respawn");
-		//Respawn();
-		//this.transform.position = 
-		//transform.localScale = initialScale;
 	}
 
 	IEnumerator SlowMotion()
@@ -338,7 +296,7 @@ public class PlayerHealthController : MonoBehaviour
 			yield return null;
 		}
 		camera.GetComponent<MultipleTargetCamera>().enabled = true;
-		Time.timeScale = 1f; // Asegúrate de restablecer el tiempo a 1 después de la corutina
+		Time.timeScale = 1f;
 		StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 	}
 }

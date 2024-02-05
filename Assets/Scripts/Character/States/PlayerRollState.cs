@@ -40,7 +40,7 @@ public class PlayerRollState : PlayerState<PlayerController>
 			float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 			player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 		}
-		//ResetVelocity();
+
 		rollTimer = 0;
 		player.anim.SetTrigger("Roll");
 		player.dodgeSound.Play();

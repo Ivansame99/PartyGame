@@ -119,21 +119,21 @@ public class PlayerArrowState : PlayerState<PlayerController>
 
 		ac.finalDamage = ac.baseDamage + player.powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
 		ac.SetSpeed(currentChargingBow * 60);
-		ac.SetPushForce(currentChargingBow * 70);
+		ac.SetPushForce(currentChargingBow * 40);
 		ac.owner = player.gameObject;
 
 		ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
 		ac2.finalDamage = ac2.baseDamage + player.powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
 		ac2.SetSpeed(currentChargingBow * 60);
-		ac2.SetPushForce(currentChargingBow * 70);
+		ac2.SetPushForce(currentChargingBow * 40);
 		ac2.owner = player.gameObject;
 
 		ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
 		ac3.finalDamage = ac3.baseDamage + player.powerController.GetCurrentPowerLevel() / 6; //cambiar escalado de poder
 		ac3.SetSpeed(currentChargingBow * 60);
-		ac3.SetPushForce(currentChargingBow * 70);
+		ac3.SetPushForce(currentChargingBow * 40);
 		ac3.owner = player.gameObject;
 
 		player.arrowConeIndicator.SetActive(false);
