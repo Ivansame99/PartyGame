@@ -9,11 +9,13 @@ public class SurroundState : StateMachineBehaviour
     private NavMeshAgent agent;
     private EnemyTarget enemyTarget;
     private Transform posicionJugador;
+    private Rigidbody rb;
 
     [SerializeField] private float normalAttackCooldown;
     [SerializeField] private float deg;
+    [SerializeField] private float speed;
 
-    private Transform jugador;  // Referencia al transform del jugador
+    private Transform playerPos;  // Referencia al transform del jugador
 
     [SerializeField] float triggerDistance = 2.5f;
 
@@ -25,10 +27,11 @@ public class SurroundState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        rb = animator.GetComponent<Rigidbody>();
         enemyTarget = animator.GetComponent<EnemyTarget>();
         agent = animator.GetComponent<NavMeshAgent>();
         agent.enabled = false;
-        jugador = enemyTarget.player.transform;
+        playerPos = enemyTarget.player.transform;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -37,7 +40,11 @@ public class SurroundState : StateMachineBehaviour
         posicionJugador = enemyTarget.player.transform;
 
         float distance = Vector3.Distance(posicionJugador.position, animator.transform.position);
+
+        animator.transform.LookAt(new Vector3(playerPos.transform.position.x, animator.transform.position.y, playerPos.transform.position.z));
         Vector3 dir = posicionJugador.transform.position - animator.transform.position;
+
+        rb.transform.Translate(rb.position + animator.transform.forward * speed * Time.deltaTime);
         /*
         if (timerAttack >= 0)
         {
@@ -50,13 +57,14 @@ public class SurroundState : StateMachineBehaviour
             timerAttack = normalAttackCooldown;
         }
         */
+
         if (distance > triggerDistance)
         {
             animator.SetBool("isSurrounding", false);
             agent.enabled = true;
         }
 
-        
+        /*
         // Calcular la posición en el círculo alrededor del jugador
         Vector3 posicionRodeo = new Vector3(posicionJugador.position.x + Mathf.Cos(Time.time * velocidadRotacion) * radioRodeo,
                                             0,
@@ -64,7 +72,7 @@ public class SurroundState : StateMachineBehaviour
 
         // Interpolar suavemente la posición actual hacia la posición de rodeo
         animator.transform.position = Vector3.Slerp(animator.transform.position, posicionRodeo, Time.deltaTime);
-
+        */
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -72,7 +80,7 @@ public class SurroundState : StateMachineBehaviour
     {
         agent.enabled = true;    
     }
-
+ 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
