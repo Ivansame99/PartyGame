@@ -5138,6 +5138,73 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &2336984445064613821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9031975185746782644}
+  - component: {fileID: 2573927019490103889}
+  - component: {fileID: 1708322281022373019}
+  m_Layer: 10
+  m_Name: DetectEnemiesTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9031975185746782644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336984445064613821}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6455102242564749475}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2573927019490103889
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336984445064613821}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1708322281022373019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2336984445064613821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48cc31bdd625c241bacc50f245dfd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesNear: []
 --- !u!1 &3315685366549287711
 GameObject:
   m_ObjectHideFlags: 0
@@ -21986,6 +22053,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9196168657306920030}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9031975185746782644}
     - targetCorrespondingSourceObject: {fileID: -7966339433572702018, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
@@ -22091,9 +22162,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4415c1c5d9968ae42baeb1d01e7949b7, type: 2}
   - {fileID: 11400000, guid: e6a040db69c63384481acbbddc4c7395, type: 2}
   - {fileID: 11400000, guid: 2a7f51c45dddab442b2db04a16f1349c, type: 2}
-  invencibilityTimer: 0
-  invencibility: 0
-  dodge: 0
   dodgeTimer: 0
   swordAttackSound: {fileID: 659402625402337986}
   bowAttackSound: {fileID: 6113549625646313265}
@@ -22108,15 +22176,16 @@ MonoBehaviour:
   jumpAttackCollider: {fileID: 5824318637191913170}
   arrowConeIndicator: {fileID: 1210506143761722625}
   bowTimer: 0
-  enemiesNear: []
   lastComboTimer: 0
   weaponController: {fileID: 5586025376494623341}
   slashCollider: {fileID: 469529407021141981}
   rb: {fileID: 0}
   groundCheck: {fileID: 0}
   anim: {fileID: 0}
+  healthController: {fileID: 0}
   powerController: {fileID: 0}
   gravityController: {fileID: 0}
+  detectEnemiesNear: {fileID: 1708322281022373019}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22152,7 +22221,6 @@ MonoBehaviour:
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
-  camera: {fileID: 0}
   dead: 0
   respawnCD: 7
   cross1: {fileID: 2187086775622481420}
@@ -22171,6 +22239,7 @@ MonoBehaviour:
     type: 3}
   skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
     type: 3}
+  invencibleTimer: 0
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

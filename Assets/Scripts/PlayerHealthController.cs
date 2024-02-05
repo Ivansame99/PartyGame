@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -27,7 +28,6 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Canvas healBarCanvas;
 
-	[SerializeField]
 	private Camera camera;
 
 	private PlayerController playerController;
@@ -78,6 +78,11 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject BloodParticles;
 	[SerializeField] private GameObject skullsBounds;
 	private MultipleTargetCamera mtp;
+
+	private Rigidbody rb;
+
+	[HideInInspector]
+	public float invencibleTimer;
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -86,14 +91,16 @@ public class PlayerHealthController : MonoBehaviour
 		mtp = camera.GetComponent<MultipleTargetCamera>();
 		SetupHealthBar(healBarCanvas, camera);
 		health = maxHealth;
+
+		//Components
 		playerController = GetComponent<PlayerController>();
 		powerController = GetComponent<PowerController>();
 		anim = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody>();
 		playersRespawn = FindObjectOfType<PlayersRespawn>();
-		pushBack = false;
-		// originalBaseMap = URPMaterial.GetTexture("_BaseMap");
+		
+
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
-		pushBack = false;
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
 		playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
@@ -103,7 +110,10 @@ public class PlayerHealthController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//Debug.Log(playerController.invencibility);
+		if (invencibleTimer >= 0)
+		{
+			invencibleTimer -= Time.deltaTime;
+		}
 
 		if (deathTimer >= 0)
 		{
@@ -124,28 +134,39 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			Vector3 direction = (this.transform.position - attackPosition).normalized;
 			direction.y = 0;
-			this.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
+			rb.AddForce(direction * pushForce, ForceMode.Impulse);
 			pushBack = false;
 		}
 	}
 
 	public void ReceiveDamage(float damage)
 	{
+		//Feedback
 		StartCoroutine(RedEffect());
 		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+
+		//Sound
 		hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 		hitSound.Play();
+
+		//Animations
 		healthBarAnimator.SetTrigger("Damage");
 		playerUIHealthAnimator.SetTrigger("Damage");
+
+		//Logic
 		health -= damage;
+
 		if (healthBarC != null)
 		{
 			playerUIHealth.SetProgress(health / maxHealth, 2);
 			healthBarC.SetProgress(health / maxHealth, 2);
 		}
+
 		if (health <= 0) Die();
-		playerController.invencibilityTimer = inmuneTime;
+
+		invencibleTimer = inmuneTime;
 	}
+
 	IEnumerator RedEffect()
 	{
 		for (int i = 0; i < 5; i++)
@@ -159,6 +180,9 @@ public class PlayerHealthController : MonoBehaviour
 
 	void Die()
 	{
+		Instantiate(DeathParticles, transform.position, Quaternion.identity);
+		Instantiate(skullsBounds, transform.position, Quaternion.identity);
+
 		anim.SetTrigger("Death");
 		playersRespawn.NotifyDead();
 		respawnTimer = respawnCD;
@@ -181,8 +205,6 @@ public class PlayerHealthController : MonoBehaviour
 
 	void DisablePlayer()
 	{
-		Instantiate(DeathParticles, transform.position, Quaternion.identity);
-		Instantiate(skullsBounds, transform.position, Quaternion.identity);
 		playerController.enabled = false;
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
@@ -193,14 +215,14 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		powerController.enabled = true;
 		playerController.enabled = true;
-		playerController.dodge = false; //Por si estaba rodando cuando murio
+		//playerController.dodge = false; //Por si estaba rodando cuando murio
 		healthBar.gameObject.SetActive(true);
 		powerBar.gameObject.SetActive(true);
 		dead = false;
 		deadAux = false;
 		restart = false;
 		health = maxHealth;
-		playerController.invencibilityTimer = 0.5f;
+		invencibleTimer = 0.5f;
 		healthBarC.SetProgress(health / maxHealth, 2);
 		playerUIHealth.SetProgress(health / maxHealth, 2);
 		mtp.Targets.Add(this.transform);
@@ -233,7 +255,7 @@ public class PlayerHealthController : MonoBehaviour
 	private void OnTriggerStay(Collider other)
 	{
 		//Debug.Log(other.name)
-		if (other.CompareTag("SlashEffect") && !playerController.invencibility && !dead)
+		if (other.CompareTag("SlashEffect") && invencibleTimer<=0 && !dead)
 		{
 			cross1.SetActive(false);
 			cross2.SetActive(false);
@@ -263,7 +285,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Arrow" && !playerController.invencibility && !dead)
+		if (collision.gameObject.tag == "Arrow" && invencibleTimer <= 0 && !dead)
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
 			if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)

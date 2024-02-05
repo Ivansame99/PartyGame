@@ -94,6 +94,17 @@ public class PlayerAttackState : PlayerState<PlayerController>
 					player.slashCollider.pushForce = player.weaponController.combo[comboCounter].pushForce;
 
 					//Move player when attack
+					if (player.direction.magnitude >= 0.1f)
+					{
+						float targetAngle;
+						targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
+						float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+						player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
+						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
+						moveAttack = true;
+					}
+
 					Transform target = TryGetNearestEnemy();
 
 					if (target != null)
@@ -107,16 +118,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 						moveAttack = true;
 					}
 
-					if (player.direction.magnitude >= 0.1f)
-					{
-						float targetAngle;
-						targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
-						float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-						player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
-						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
-						moveAttack = true;
-					}
 
 					comboCounter++;
 
@@ -148,13 +149,13 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		Transform nearestEnemy = null;
 		float nearestEnemyDistance = float.MaxValue;
 
-		if (player.enemiesNear.Count >= 1)
+		if (player.detectEnemiesNear.enemiesNear.Count >= 1)
 		{
-			foreach (GameObject enemy in player.enemiesNear)
+			foreach (GameObject enemy in player.detectEnemiesNear.enemiesNear)
 			{
 				if (enemy == null)
 				{
-					player.enemiesNear.Remove(enemy);
+					player.detectEnemiesNear.enemiesNear.Remove(enemy);
 					return null;
 				}
 

@@ -5559,6 +5559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1230228082446147015}
   - component: {fileID: 1543894638361367896}
+  - component: {fileID: 8363520183100929824}
   m_Layer: 10
   m_Name: DetectEnemiesTrigger
   m_TagString: Untagged
@@ -5602,6 +5603,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8363520183100929824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938018256930669439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48cc31bdd625c241bacc50f245dfd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesNear: []
 --- !u!1 &4149807985443987564
 GameObject:
   m_ObjectHideFlags: 0
@@ -22194,38 +22208,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5a8dbb7c3de552a46ae9f57b5d2706b3, type: 2}
   - {fileID: 11400000, guid: 29faadcb67e66f6478deed565b94cb4b, type: 2}
   dodgeTimer: 0
-  dodgeInvencibilitySeconds: 0.5
-  invencibilityTimer: 0
-  bowTimer: 0
-  weaponController: {fileID: 5586025376494623341}
   swordAttackSound: {fileID: 4267590517814037703}
   bowAttackSound: {fileID: 6873682153626677111}
   dodgeSound: {fileID: 3901693107126339173}
   tensingBow: {fileID: 1767769023669441959}
-  minPitch: 0.8
-  maxPitch: 1.2
-  invencibility: 0
-  dodge: 0
   isDodging: 0
   isAttacking: 0
   isSpecialAttacking: 0
   isJumping: 0
   moveUniversal: {x: 0, y: 0}
   direction: {x: 0, y: 0, z: 0}
-  slashCollider: {fileID: 5491916191551023080}
-  lastComboTimer: 0
   jumpAttackCollider: {fileID: 5332908631118930390}
-  powerController: {fileID: 0}
   arrowConeIndicator: {fileID: 1150728227621411889}
-  enemiesNear: []
-  gravityController: {fileID: 0}
-  fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
-    type: 3}
-  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-    type: 3}
+  bowTimer: 0
+  lastComboTimer: 0
+  weaponController: {fileID: 5586025376494623341}
+  slashCollider: {fileID: 5491916191551023080}
   rb: {fileID: 0}
   groundCheck: {fileID: 0}
   anim: {fileID: 0}
+  healthController: {fileID: 0}
+  powerController: {fileID: 0}
+  gravityController: {fileID: 0}
+  detectEnemiesNear: {fileID: 8363520183100929824}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22261,7 +22266,6 @@ MonoBehaviour:
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
-  camera: {fileID: 0}
   dead: 0
   respawnCD: 7
   cross1: {fileID: 2187086775622481420}
@@ -22280,6 +22284,7 @@ MonoBehaviour:
     type: 3}
   skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
     type: 3}
+  invencibleTimer: 0
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

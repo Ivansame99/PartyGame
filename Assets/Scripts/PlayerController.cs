@@ -5,12 +5,7 @@ using UnityEngine;
 
 [SelectionBase]
 public class PlayerController : PlayerStateManager<PlayerController>
-{	
-	//Invencible
-	public float invencibilityTimer = 0;
-	public bool invencibility = false;
-	public bool dodge = false;
-
+{
 	//Roll
 	[HideInInspector]
 	public float dodgeTimer = 0;
@@ -36,6 +31,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	private SlashController jumpAttackController;
 
 	//Arrow attack
+	[Header("Arrow")]
 	public GameObject arrowConeIndicator;
 	[HideInInspector]
 	public float bowTimer;
@@ -44,9 +40,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[HideInInspector]
 	public Queue<bool> attackBuffer = new Queue<bool>();
 	[HideInInspector]
-	public List<GameObject> enemiesNear = new List<GameObject>();
-	[HideInInspector]
 	public float lastComboTimer;
+	[Header("Attack")]
 	public Weapon weaponController;
 	public SlashController slashCollider;
 
@@ -58,9 +53,13 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[HideInInspector]
 	public Animator anim;
 	[HideInInspector]
+	public PlayerHealthController healthController;
+	[HideInInspector]
 	public PowerController powerController;
 	[HideInInspector]
 	public CustomGravityController gravityController;
+
+	public DetectEnemiesNear detectEnemiesNear;
 
 	protected override void Awake()
 	{
@@ -68,7 +67,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		if (rb == null) rb = GetComponent<Rigidbody>();
 		if (groundCheck == null) groundCheck = GetComponent<GroundCheck>();
 		if (anim == null) anim = GetComponent<Animator>();
-		if (gravityController ==null) gravityController = GetComponent<CustomGravityController>();
+		if (gravityController == null) gravityController = GetComponent<CustomGravityController>();
+		if (healthController == null) healthController = GetComponent<PlayerHealthController>();
 		if (powerController == null) powerController = GetComponent<PowerController>();
 	}
 
@@ -77,7 +77,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		base.Update();
 		if (dodgeTimer >= 0) dodgeTimer -= Time.deltaTime;
 		if (bowTimer >= 0) bowTimer -= Time.deltaTime;
-		if(lastComboTimer>=0) lastComboTimer -= Time.deltaTime;
+		if (lastComboTimer >= 0) lastComboTimer -= Time.deltaTime;
 
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 	}
@@ -113,21 +113,5 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public void EndCombo()
 	{
 		ChangeState(typeof(PlayerIdleState));
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
-		{
-			enemiesNear.Add(other.gameObject);
-		}
-	}
-
-	private void OnTriggerExit(Collider other)
-	{
-		if (other.CompareTag("Enemy") || other.CompareTag("Player"))
-		{
-			enemiesNear.Remove(other.gameObject);
-		}
 	}
 }
