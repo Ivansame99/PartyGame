@@ -44,7 +44,7 @@ public class SurroundState : StateMachineBehaviour
         animator.transform.LookAt(new Vector3(playerPos.transform.position.x, animator.transform.position.y, playerPos.transform.position.z));
         Vector3 dir = posicionJugador.transform.position - animator.transform.position;
 
-        rb.transform.Translate(rb.position + animator.transform.forward * speed * Time.deltaTime);
+        //animator.transform.Translate(rb.position + animator.transform.forward * speed * Time.deltaTime);
         /*
         if (timerAttack >= 0)
         {

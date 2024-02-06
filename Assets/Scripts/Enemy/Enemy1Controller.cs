@@ -12,6 +12,7 @@ public class Enemy1Controller : MonoBehaviour
     [SerializeField] private float damagePushForce;
     private Rigidbody rb;
     private Animator animator;
+    private EnemyTarget enemyTarget;
     private bool onlyOnceSpecial,onlyOnceAttack,onlyOnceDamaged;
     NavMeshAgent agent;
 
@@ -29,9 +30,14 @@ public class Enemy1Controller : MonoBehaviour
     private GameObject bigSlashCollider;
     public SlashController slashController;
 
-    private bool onlyDamageOnce;
+    private bool surroundFlag;
 
     private Vector3 evadeAttackDirection = Vector3.zero;
+    private Transform playerPos;
+    [SerializeField] private float tooClose;
+
+    private float timer;
+    private int xd;
 
     // Start is called before the first frame update
     void Start()
@@ -45,12 +51,20 @@ public class Enemy1Controller : MonoBehaviour
         slashController = slashCollider.GetComponent<SlashController>();
         slashControllerBig = bigSlashCollider.GetComponent<SlashController>();
         powerController = GetComponent<PowerController>();
+        enemyTarget = GetComponent<EnemyTarget>();
+        xd = Random.Range(0, 2);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        playerPos = enemyTarget.player;
+        timer += Time.deltaTime;
+        if(timer >= 5)
+        {
+            xd = Random.Range(0, 2);
+            timer = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -60,7 +74,7 @@ public class Enemy1Controller : MonoBehaviour
             agent.enabled = false;
             rb.MovePosition(transform.position + transform.forward * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceAttack = false;
-            onlyDamageOnce = false;
+            surroundFlag = false;
         }
         
         if (!animator.GetBool("attackOn") && !onlyOnceAttack)
@@ -102,8 +116,25 @@ public class Enemy1Controller : MonoBehaviour
         {
             agent.enabled = true;
             onlyOnceDamaged = true;
-            //navMeshAgent.isStopped = false;
         }
+        /*
+        if (animator.GetBool("isSurrounding"))
+        {
+            agent.enabled = false;
+            float distance = Vector3.Distance(transform.position, enemyTarget.player.position);
+
+            if(distance > 8) rb.MovePosition(transform.position + playerPos.forward * 1f * Time.fixedDeltaTime);
+            else if(distance <8) rb.MovePosition(transform.position + -playerPos.forward * 1f * Time.fixedDeltaTime);
+            //SI ESTA DEMASIADO LEJOS
+            if(xd == 0) rb.MovePosition(transform.position + playerPos.right * 2f * Time.fixedDeltaTime);
+            else if(xd == 1) rb.MovePosition(transform.position + -playerPos.right * 2f * Time.fixedDeltaTime);
+        }
+        if (!animator.GetBool("isSurrounding") && !surroundFlag)
+        {
+            agent.enabled = true;
+            surroundFlag = true;
+        }
+        */
     }
 
     public void Slash()

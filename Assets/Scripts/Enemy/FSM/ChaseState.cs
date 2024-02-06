@@ -24,7 +24,7 @@ public class ChaseState : StateMachineBehaviour
     private bool newTarget;
     private Transform lastTarget;
 
-    
+
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -62,7 +62,7 @@ public class ChaseState : StateMachineBehaviour
 
             if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward, dir)) < deg)
             {
-                animator.SetBool("isSurrounding", true);
+                animator.SetBool("isAttacking", true);
                 //timerAttack = normalAttackCooldown;
             }
 
