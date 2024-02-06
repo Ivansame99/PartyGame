@@ -803,10 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626a99009f66a3c44b5dabba7d210f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Targets:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  targets: []
   offset: {x: 0, y: 113.6, z: -101}
   smoothTime: 2
   minZoom: 11.08
@@ -1506,13 +1503,15 @@ MonoBehaviour:
     - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
     - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
     - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+  - enemiesInRound:
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+  - enemiesInRound:
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
   secondsBetweenRounds: 5
   secondsBetweenEnemySpawn: 1
   currentEnemies: []
   coliseumAnimator: {fileID: 6100059491172163795}
-  playersCount: 0
   finalRound: 0
-  playersDied: 0
   roundsUI: {fileID: 1222882966}
   roundsUIText: {fileID: 1377760256}
 --- !u!114 &1339110354
