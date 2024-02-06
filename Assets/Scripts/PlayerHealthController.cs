@@ -7,6 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PlayerHealthController : MonoBehaviour
 {
+	[Header("Logic")]
 	private float health;
 
 	[SerializeField]
@@ -15,6 +16,23 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField]
 	private float inmuneTime;
 
+	[HideInInspector]
+	public bool dead = false;
+	private bool deadAux = false;
+
+	private GameObject lastAttacker;
+	private float currentPower;
+
+	private PlayersRespawn playersRespawn;
+
+	private bool pushBack;
+	private Vector3 attackPosition;
+	private float pushForce;
+
+	[HideInInspector]
+	public float invencibleTimer;
+
+	[Header("UI")]
 	[SerializeField]
 	private HealthBarController healthBarC;
 
@@ -30,56 +48,39 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Camera camera;
 
-	private PlayerController playerController;
-	private PowerController powerController;
-
-	private Animator anim;
-
-	public bool dead = false;
-	private bool deadAux = false;
-
-	private GameObject lastAttacker;
-	private float currentPower;
-
-	private PlayersRespawn playersRespawn;
-
-	private bool pushBack;
-	private Vector3 attackPosition;
-	private float pushForce;
-
-	[SerializeField]
-	private GameObject cross1, cross2, glow;
-
-	public Material URPMaterial;
-
-	public Texture baseMapParpadeo;
-	public Texture baseMapOriginal;
-
 	private GameObject playerUI;
 	private HealthBarController playerUIHealth;
 	private Animator playerUIHealthAnimator;
+
+	[Header("Components")]
+	private PlayerController playerController;
+	private PowerController powerController;
+	private Animator anim;
+	private Rigidbody rb;
+
+	public Material URPMaterial;
+	public Texture baseMapParpadeo;
+	public Texture baseMapOriginal;
 
 	[SerializeField]
 	private AudioSource hitSound;
 	[SerializeField] private float minPitch;
 	[SerializeField] private float maxPitch;
 
+	[Header("Feedback")]
+	[SerializeField] private GameObject cross1;
+	[SerializeField] private GameObject cross2;
+	[SerializeField] private GameObject glow;
+
 	[SerializeField] private GameObject HealParticles;
 	[SerializeField] private GameObject DeathParticles;
 	[SerializeField] private GameObject BloodParticles;
 	[SerializeField] private GameObject skullsBounds;
-	private MultipleTargetCamera mtp;
 
-	private Rigidbody rb;
-
-	[HideInInspector]
-	public float invencibleTimer;
-	// Start is called before the first frame update
 	void Start()
 	{
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		camera = Camera.main;
-		mtp = camera.GetComponent<MultipleTargetCamera>();
 		SetupHealthBar(healBarCanvas, camera);
 		health = maxHealth;
 
@@ -90,7 +91,6 @@ public class PlayerHealthController : MonoBehaviour
 		rb = GetComponent<Rigidbody>();
 		playersRespawn = FindObjectOfType<PlayersRespawn>();
 
-
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
@@ -98,7 +98,6 @@ public class PlayerHealthController : MonoBehaviour
 		playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (invencibleTimer >= 0)
@@ -109,7 +108,7 @@ public class PlayerHealthController : MonoBehaviour
 		if (dead == true && !deadAux)
 		{
 			deadAux = true;
-			StartCoroutine(SlowMotion());
+			StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 		}
 	}
 
@@ -160,6 +159,64 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 	}
 
+	private void Die()
+	{
+		//Feedback
+		Instantiate(DeathParticles, transform.position, Quaternion.identity);
+		Instantiate(skullsBounds, transform.position, Quaternion.identity);
+		anim.SetTrigger("Death");
+
+		//Power control pass
+		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel() / 2;
+		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+		GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
+
+		//Logic
+		playersRespawn.NotifyDead(this.gameObject.transform);
+		dead = true;
+		DisablePlayer();
+	}
+
+	private void DisablePlayer()
+	{
+		playerController.enabled = false;
+		powerController.enabled = false;
+		healthBar.gameObject.SetActive(false);
+		powerBar.gameObject.SetActive(false);
+	}
+
+	private void SetupHealthBar(Canvas canvas, Camera camera)
+	{
+		healthBar.transform.SetParent(canvas.transform);
+	}
+
+	public void EnablePlayer()
+	{
+		powerController.enabled = true;
+		playerController.enabled = true;
+		healthBar.gameObject.SetActive(true);
+		powerBar.gameObject.SetActive(true);
+		dead = false;
+		deadAux = false;
+		health = maxHealth;
+		invencibleTimer = 0.5f;
+		healthBarC.SetProgress(health / maxHealth, 2);
+		playerUIHealth.SetProgress(health / maxHealth, 2);
+	}
+
+	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)
+	{
+		Vector3 initialScale = transform.localScale;
+
+		for (float time = 0; time < duration * 2; time += Time.deltaTime)
+		{
+			transform.localScale = Vector3.Lerp(initialScale, upScale, time);
+			yield return null;
+		}
+
+		anim.SetTrigger("Respawn");
+	}
+
 	IEnumerator RedEffect()
 	{
 		for (int i = 0; i < 5; i++)
@@ -169,59 +226,6 @@ public class PlayerHealthController : MonoBehaviour
 			URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 			yield return new WaitForSeconds(0.1f);
 		}
-	}
-
-	void Die()
-	{
-		Instantiate(DeathParticles, transform.position, Quaternion.identity);
-		Instantiate(skullsBounds, transform.position, Quaternion.identity);
-
-		anim.SetTrigger("Death");
-		playersRespawn.NotifyDead();
-
-		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel() / 2;
-
-		//Power control pass
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
-		GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
-
-
-		DisablePlayer();
-		dead = true;
-
-		for (int i = 0; i < mtp.Targets.Count; i++)
-		{
-			if (mtp.Targets[i].name == this.transform.name) mtp.Targets.Remove(mtp.Targets[i]);
-		}
-	}
-
-	void DisablePlayer()
-	{
-		playerController.enabled = false;
-		powerController.enabled = false;
-		healthBar.gameObject.SetActive(false);
-		powerBar.gameObject.SetActive(false);
-	}
-
-	public void EnablePlayer()
-	{
-		powerController.enabled = true;
-		playerController.enabled = true;
-		//playerController.dodge = false; //Por si estaba rodando cuando murio
-		healthBar.gameObject.SetActive(true);
-		powerBar.gameObject.SetActive(true);
-		dead = false;
-		deadAux = false;
-		health = maxHealth;
-		invencibleTimer = 0.5f;
-		healthBarC.SetProgress(health / maxHealth, 2);
-		playerUIHealth.SetProgress(health / maxHealth, 2);
-		mtp.Targets.Add(this.transform);
-	}
-
-	public void SetupHealthBar(Canvas canvas, Camera camera)
-	{
-		healthBar.transform.SetParent(canvas.transform);
 	}
 
 	private void OnTriggerStay(Collider other)
@@ -265,38 +269,5 @@ public class PlayerHealthController : MonoBehaviour
 				Destroy(collision.gameObject);
 			}
 		}
-	}
-
-	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)
-	{
-		Vector3 initialScale = transform.localScale;
-
-		for (float time = 0; time < duration * 2; time += Time.deltaTime)
-		{
-			transform.localScale = Vector3.Lerp(initialScale, upScale, time);
-			yield return null;
-		}
-
-		anim.SetTrigger("Respawn");
-	}
-
-	IEnumerator SlowMotion()
-	{
-		float slowdownFactor = 0.2f;
-		float slowdownDuration = 1f;
-
-		Time.timeScale = slowdownFactor;
-		camera.GetComponent<MultipleTargetCamera>().enabled = false;
-		camera.transform.LookAt(this.gameObject.transform);
-		camera.transform.position = this.transform.position - camera.transform.forward * 120;
-		while (Time.timeScale < 1f)
-		{
-			Time.timeScale += (1f / slowdownDuration) * Time.unscaledDeltaTime;
-			Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
-			yield return null;
-		}
-		camera.GetComponent<MultipleTargetCamera>().enabled = true;
-		Time.timeScale = 1f;
-		StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 	}
 }

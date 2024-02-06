@@ -9,52 +9,48 @@ public class PlayersRespawn : MonoBehaviour
 
     private RoundController roundController;
 
-    private bool onlyOnce=false;
-
     private PlayerHealthController[] playerHealth;
     private GameObject[] players;
     private int playersCount;
 
-    // Start is called before the first frame update
-    void Start()
+	private Camera camera;
+	private MultipleTargetCamera mtp;
+
+	// Start is called before the first frame update
+	void Start()
     {
         roundController = GetComponent<RoundController>();
+        camera = Camera.main;
+        mtp = camera.GetComponent<MultipleTargetCamera>();
         Invoke("GetPlayers", 1f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        /*if(!onlyOnce && roundController.finalRound)
-        {
-            for (int i = 0; i < playersCount; i++)
-            {
-                if (playerHealth[i].dead)
-                {
-                    SpawnPlayer(players[i]);
-                }
-            }
-            onlyOnce = true;
-        }*/
     }
 
     public void SpawnPlayer(GameObject player)
     {
-        if (!roundController.finalRound || !onlyOnce)
+        if (!roundController.finalRound)
         {
             int randomSpawn = Random.Range(0, spawns.Length);
             player.transform.position = spawns[randomSpawn].position;
             player.GetComponent<PlayerHealthController>().EnablePlayer();
-        }
+			mtp.Targets.Add(player.transform);
+		}
     }
 
-    public void NotifyDead()
+    public void NotifyDead(Transform player)
     {
         if (roundController.finalRound)
         {
             roundController.playersDied++;
         }
-    }
+
+		StartCoroutine(SlowMotion(player));
+
+		//Deactivate the camera to follow the player
+		for (int i = 0; i < mtp.Targets.Count; i++)
+		{
+			if (mtp.Targets[i].name == player.name) mtp.Targets.Remove(mtp.Targets[i]);
+		}
+	}
 
     void GetPlayers()
     {
@@ -81,5 +77,28 @@ public class PlayersRespawn : MonoBehaviour
             }
         }
     }
+
+	IEnumerator SlowMotion(Transform player)
+	{
+		float slowdownFactor = 0.2f;
+		float slowdownDuration = 1f;
+
+		Time.timeScale = slowdownFactor;
+		mtp.enabled = false;
+		camera.transform.LookAt(player);
+
+        float zoomDistance = 120;
+		camera.transform.position = player.position - camera.transform.forward * zoomDistance;
+
+		while (Time.timeScale < 1f)
+		{
+			Time.timeScale += (1f / slowdownDuration) * Time.unscaledDeltaTime;
+			Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);
+			yield return null;
+		}
+
+		mtp.enabled = true;
+		Time.timeScale = 1f;
+	}
 
 }
