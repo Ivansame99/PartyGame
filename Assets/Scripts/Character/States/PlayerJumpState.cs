@@ -9,11 +9,15 @@ public class PlayerJumpState : PlayerState<PlayerController>
 	[SerializeField]
 	private float jumpForce;
 
+	[SerializeField]
+	private GameObject jumpParticles;
+
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
 		player.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
 		player.isJumping = false;
+		Instantiate(jumpParticles, player.transform.position, jumpParticles.transform.rotation);
 	}
 
 	public override void Exit()

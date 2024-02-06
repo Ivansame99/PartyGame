@@ -20,6 +20,9 @@ public class PlayerRollState : PlayerState<PlayerController>
 	[SerializeField]
 	private float inmuneTime;
 
+	[SerializeField]
+	private GameObject rollParticle;
+
 	private Vector3 rollDirection;
 	private float turnSmoothTime;
 
@@ -46,6 +49,7 @@ public class PlayerRollState : PlayerState<PlayerController>
 		player.dodgeSound.Play();
 		player.isDodging = false;
 		player.healthController.invencibleTimer = inmuneTime;
+		Instantiate(rollParticle, player.transform.position, rollParticle.transform.rotation);
 	}
 
 	public override void Exit()
