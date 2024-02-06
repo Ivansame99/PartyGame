@@ -15962,8 +15962,6 @@ GameObject:
   - component: {fileID: 6397499004782816648}
   - component: {fileID: 3474602964040072005}
   - component: {fileID: 5586025376494623341}
-  - component: {fileID: 4922955019855771852}
-  - component: {fileID: 5830272807966337433}
   m_Layer: 6
   m_Name: Sword
   m_TagString: Sword
@@ -15985,10 +15983,6 @@ Transform:
   m_Children:
   - {fileID: 2138226177106311938}
   - {fileID: 5030321883889555464}
-  - {fileID: 3980837663112036648}
-  - {fileID: 186457198228901713}
-  - {fileID: 2978083707685930896}
-  - {fileID: 7078003061726237901}
   m_Father: {fileID: 1788842633507896409}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22140,6 +22134,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5675147312831698023}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1537784056734734152}
     - targetCorrespondingSourceObject: {fileID: -7966339433572702018, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
@@ -22301,20 +22299,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   inmuneTime: 0.3
+  dead: 0
+  invencibleTimer: 0
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
-  dead: 0
-  respawnCD: 7
-  cross1: {fileID: 2187086775622481420}
-  cross2: {fileID: 6085800573928801362}
-  glow: {fileID: 4313605478303797485}
   URPMaterial: {fileID: 2100000, guid: 648df2068131c4f43b74b6e6460a4018, type: 2}
   baseMapParpadeo: {fileID: 2800000, guid: 5f2c10db8b01b604d8c003516908871b, type: 3}
   baseMapOriginal: {fileID: 2800000, guid: 3d137c6ed79a96040a74827cab76f01c, type: 3}
   hitSound: {fileID: 95356360677306556}
   minPitch: 0.5
   maxPitch: 0.8
+  cross1: {fileID: 2187086775622481420}
+  cross2: {fileID: 6085800573928801362}
+  glow: {fileID: 4313605478303797485}
   HealParticles: {fileID: 100000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
   DeathParticles: {fileID: 141433446842962269, guid: 4672a6b76de0f204999cc1a3cd6ac166,
     type: 3}
@@ -22322,7 +22320,6 @@ MonoBehaviour:
     type: 3}
   skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
     type: 3}
-  invencibleTimer: 0
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22436,6 +22433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WeaponParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 185358500231128192, guid: 055d6c8f43429724d8781f47408075f4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8399149878079674783, guid: 055d6c8f43429724d8781f47408075f4,
         type: 3}
