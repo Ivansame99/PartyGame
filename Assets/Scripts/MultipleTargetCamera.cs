@@ -6,29 +6,32 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MultipleTargetCamera : MonoBehaviour
 {
-    public List<Transform> Targets;
-    public Vector3 offset;
-    private Vector3 velocity;
-    public float smoothTime = 0.5f;
-    public float minZoom = 40f;
-    public float maxZoom = 10f;
-    public float zoomLimiter = 50f;
-    private Camera cam;
+    [HideInInspector]
+    public List<Transform> targets;
 
-    private void Start()
+    [SerializeField] private Vector3 offset;
+	[SerializeField] private float smoothTime = 0.5f;
+	[SerializeField] private float minZoom = 40f;
+	[SerializeField] private float maxZoom = 10f;
+	[SerializeField] private float zoomLimiter = 50f;
+
+    private Camera cam;
+	private Vector3 velocity;
+
+	private void Start()
     {
-        Targets.Clear();
+        targets.Clear();
         cam = GetComponent<Camera>();
-        GameObject[] jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject jugadorObj in jugadoresArray)
+        GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject player in playersArray)
         {
-            Targets.Add(jugadorObj.transform);
+            targets.Add(player.transform);
         }
     }
 
     private void LateUpdate()
     {
-        if (Targets.Count == 0)
+        if (targets.Count == 0)
         {
             return;
         }
@@ -51,17 +54,17 @@ public class MultipleTargetCamera : MonoBehaviour
 
     private float GetGreatestDistance()
     {
-        if (Targets.Count == 0)
+        if (targets.Count == 0)
         {
             return 0;
         }
 
-        var bounds = new Bounds(Targets[0].position, Vector3.zero);
-        for (int i = 0; i < Targets.Count; i++)
+        var bounds = new Bounds(targets[0].position, Vector3.zero);
+        for (int i = 0; i < targets.Count; i++)
         {
-            if (Targets[i] != null)
+            if (targets[i] != null)
             {
-                bounds.Encapsulate(Targets[i].position);
+                bounds.Encapsulate(targets[i].position);
             }
         }
         return bounds.size.x;
@@ -69,17 +72,17 @@ public class MultipleTargetCamera : MonoBehaviour
 
     private Vector3 GetCenterPoint()
     {
-        if (Targets.Count == 0)
+        if (targets.Count == 0)
         {
             return Vector3.zero;
         }
 
-        var bounds = new Bounds(Targets[0].position, Vector3.zero);
-        for (int i = 0; i < Targets.Count; i++)
+        var bounds = new Bounds(targets[0].position, Vector3.zero);
+        for (int i = 0; i < targets.Count; i++)
         {
-            if (Targets[i] != null)
+            if (targets[i] != null)
             {
-                bounds.Encapsulate(Targets[i].position);
+                bounds.Encapsulate(targets[i].position);
             }
         }
 

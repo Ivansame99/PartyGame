@@ -29,18 +29,14 @@ public class RoundController : MonoBehaviour
 
     private int roundIndex;
 
+    [HideInInspector]
     public List<GameObject> currentEnemies;
-
-    private GameObject[] playersInGame;
 
     [SerializeField]
     private Animator coliseumAnimator;
 
-    public int playersCount;
-
+    [HideInInspector]
     public bool finalRound;
-
-    public int playersDied;
 
     [SerializeField]
     private GameObject roundsUI;
@@ -51,20 +47,17 @@ public class RoundController : MonoBehaviour
     private TMP_Text roundsUIText;
 
     private PlayersRespawn playersRespawn;
+
     // Start is called before the first frame update
     void Start()
     {
         roundUIAnim = roundsUI.GetComponent<Animator>();
-        playersDied = 0;
         finalRound = false;
-        playersInGame = GameObject.FindGameObjectsWithTag("Player");
-        playersCount = playersInGame.Length;
-        //Invoke("GetPlayers",0.5f);        
         roundIndex = 0;
         currentEnemies = new List<GameObject>();
         playersRespawn = this.GetComponent<PlayersRespawn>();
-        //Invoke("StartNextRound", secondsBetweenRounds);
-        if(!debug) StartCoroutine(IStartNextRound());
+
+		if (!debug) StartCoroutine(IStartNextRound());
     }
 
     // Update is called once per frame
@@ -81,31 +74,9 @@ public class RoundController : MonoBehaviour
                     roundUIAnim.SetTrigger("ChangeRound");
                 }
                 finalRound = true;
-                if (playersCount > 1) CheckEndGame();
             }
         }
     }
-
-    /*void GetPlayers()
-    {
-        playersInGame = GameObject.FindGameObjectsWithTag("Player");
-        playersCount = playersInGame.Length;
-    }*/
-
-    /*void StartNextRound()
-    {
-
-        int enemyNumberInCurrentRound = enemiesInRound[roundIndex];
-
-        for (int i = 0; i < enemyNumberInCurrentRound; i++)
-        {
-            int randomSpawn = Random.Range(0, spawns.Length);
-            currentEnemies.Add(Instantiate(enemy1Prefab, spawns[randomSpawn].position, enemy1Prefab.transform.rotation));
-
-        }
-
-        roundIndex++;
-    }*/
 
     IEnumerator IStartNextRound()
     {
@@ -116,18 +87,13 @@ public class RoundController : MonoBehaviour
         coliseumAnimator.SetBool("DoorOpen", true);
         yield return new WaitForSeconds(1);
 
-        //int enemyNumberInCurrentRound = enemiesInRound[roundIndex] + playersCount;
-
         int enemyNumberInCurrentRound = rounds[roundIndex].enemiesInRound.Length;
 
         for (int i = 0; i < enemyNumberInCurrentRound; i++)
         {
             int randomSpawn = Random.Range(0, spawns.Length);
-            //int randomEnemy1Variant = Random.Range(0, enemy1Variants.Length);
             yield return new WaitForSeconds(secondsBetweenEnemySpawn);
             currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i], spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].transform.rotation));
-            //if (roundIndex == 1) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
-            //if (roundIndex == 2) currentEnemies.Add(Instantiate(enemy1Variants[0], spawns[randomSpawn].position, enemy1Variants[0].transform.rotation));
         }
         coliseumAnimator.SetBool("DoorOpen", false);
         roundIndex++;
@@ -139,39 +105,20 @@ public class RoundController : MonoBehaviour
 
         for (int i = 0; i < currentEnemies.Count; i++)
         {
-            if (currentEnemies[i] != null) return; //Si hay alguno que no sea null, para de mirar el resto
+            if (currentEnemies[i] != null) return; //Check if there is at least one enemy remaining
         }
 
-        //Si todos son null
-
+        //If all enemies dead
         currentEnemies.Clear();
         playersRespawn.RespawnDeadPlayers();
-        //Invoke("StartNextRound", secondsBetweenRounds);
 
+        //Next round
         if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
         else if (roundIndex == rounds.Length) roundIndex++;
-
-        //if()
-        //Debug.Log(currentEnemies[0]);
-    }
-
-    void CheckEndGame()
-    {
-        if (playersDied == playersCount - 1) //Solo queda uno en pie
-        {
-            Debug.Log("Has ganado!!");
-            Invoke("EndMatch", 5f);
-        }
-    }
-
-    void EndMatch()
-    {
-        SceneManager.LoadScene("Win");
     }
 
     // Integer to Roman numerals - mgear - http://unitycoder.com/blog/
     // Unity3D version converted from this: http://rosettacode.org/wiki/Roman_numerals/Encode
-
     string ToRoman(int number)
     {
         if (number < 1) return string.Empty;
@@ -189,6 +136,5 @@ public class RoundController : MonoBehaviour
         if (number >= 4) return "IV" + ToRoman(number - 4);
         if (number >= 1) return "I" + ToRoman(number - 1);
         return "Impossible state reached";
-        //throw new UnreachableException("Impossible state reached");
     }
 }

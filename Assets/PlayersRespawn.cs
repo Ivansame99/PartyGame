@@ -4,79 +4,79 @@ using UnityEngine;
 
 public class PlayersRespawn : MonoBehaviour
 {
-    [SerializeField]
-    private Transform[] spawns;
+	[SerializeField]
+	private Transform[] spawns;
 
-    private RoundController roundController;
+	private RoundController roundController;
+	private EndGameController endGameController;
 
-    private PlayerHealthController[] playerHealth;
-    private GameObject[] players;
-    private int playersCount;
+	private PlayerHealthController[] playerHealth;
+	private GameObject[] players;
+	private int playersCount;
 
 	private Camera camera;
 	private MultipleTargetCamera mtp;
 
 	// Start is called before the first frame update
 	void Start()
-    {
-        roundController = GetComponent<RoundController>();
-        camera = Camera.main;
-        mtp = camera.GetComponent<MultipleTargetCamera>();
-        Invoke("GetPlayers", 1f);
-    }
+	{
+		roundController = GetComponent<RoundController>();
+		endGameController = GetComponent<EndGameController>();
+		camera = Camera.main;
+		mtp = camera.GetComponent<MultipleTargetCamera>();
+		Invoke("GetPlayers", 1f);
+	}
 
-    public void SpawnPlayer(GameObject player)
-    {
-        if (!roundController.finalRound)
-        {
-            int randomSpawn = Random.Range(0, spawns.Length);
-            player.transform.position = spawns[randomSpawn].position;
-            player.GetComponent<PlayerHealthController>().EnablePlayer();
-			mtp.Targets.Add(player.transform);
+	public void SpawnPlayer(GameObject player)
+	{
+		if (!roundController.finalRound)
+		{
+			int randomSpawn = Random.Range(0, spawns.Length);
+			player.transform.position = spawns[randomSpawn].position;
+			player.GetComponent<PlayerHealthController>().EnablePlayer();
+			mtp.targets.Add(player.transform);
 		}
-    }
+	}
 
-    public void NotifyDead(Transform player)
-    {
-        if (roundController.finalRound)
-        {
-            roundController.playersDied++;
-        }
+	public void NotifyDead(Transform player)
+	{
+		endGameController.PlayerDead();
 
 		StartCoroutine(SlowMotion(player));
 
 		//Deactivate the camera to follow the player
-		for (int i = 0; i < mtp.Targets.Count; i++)
+		for (int i = 0; i < mtp.targets.Count; i++)
 		{
-			if (mtp.Targets[i].name == player.name) mtp.Targets.Remove(mtp.Targets[i]);
+			if (mtp.targets[i].name == player.name) mtp.targets.Remove(mtp.targets[i]);
 		}
 	}
 
-    void GetPlayers()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        playersCount = players.Length;
-        playerHealth = new PlayerHealthController[playersCount];
+	void GetPlayers()
+	{
+		players = GameObject.FindGameObjectsWithTag("Player");
+		playersCount = players.Length;
+		playerHealth = new PlayerHealthController[playersCount];
 
-        for (int i = 0; i < playersCount; i++)
-        {
-            if (players[i].GetComponent<PlayerHealthController>() != null)
-            {
-                playerHealth[i] = players[i].GetComponent<PlayerHealthController>();
-            }
-        }
-    }
+		for (int i = 0; i < playersCount; i++)
+		{
+			if (players[i].GetComponent<PlayerHealthController>() != null)
+			{
+				playerHealth[i] = players[i].GetComponent<PlayerHealthController>();
+			}
+		}
+	}
 
-    public void RespawnDeadPlayers()
-    {
-        for (int i = 0; i < playersCount; i++)
-        {
-            if (playerHealth[i].dead)
-            {
-                SpawnPlayer(players[i]);
-            }
-        }
-    }
+	public void RespawnDeadPlayers()
+	{
+		for (int i = 0; i < playersCount; i++)
+		{
+			if (playerHealth[i].dead)
+			{
+				SpawnPlayer(players[i]);
+			}
+		}
+		endGameController.ResetPlayersDead();
+	}
 
 	IEnumerator SlowMotion(Transform player)
 	{
@@ -87,7 +87,7 @@ public class PlayersRespawn : MonoBehaviour
 		mtp.enabled = false;
 		camera.transform.LookAt(player);
 
-        float zoomDistance = 120;
+		float zoomDistance = 120;
 		camera.transform.position = player.position - camera.transform.forward * zoomDistance;
 
 		while (Time.timeScale < 1f)
