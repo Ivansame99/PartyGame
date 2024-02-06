@@ -14,7 +14,7 @@ public class SlashController : MonoBehaviour
 
     private GameObject player;
 
-    private PlayerController playerController;
+    private PlayerHealthController playerController;
 
     private EnemyHealthController enemy1Controller;
 
@@ -22,7 +22,7 @@ public class SlashController : MonoBehaviour
     private void Awake()
     {
         player = transform.parent.gameObject;
-        playerController = player.GetComponent<PlayerController>();
+        playerController = player.GetComponent<PlayerHealthController>();
         enemy1Controller = transform.GetComponent<EnemyHealthController>();
         pushForceParry = 15f;
         hitSound = GetComponent<AudioSource>();
@@ -36,8 +36,8 @@ public class SlashController : MonoBehaviour
             attackPosition = other.transform.position;
             if (playerController != null)
             {
-                playerController.invencibilityTimer = 1f; //Para que no se hagan daño cuando pase esto
-                playerController.invencibility = true;
+                playerController.invencibleTimer = 1f; //Para que no se hagan daño cuando pase esto
+                //playerController.invencibility = true;
             }
 
             if (enemy1Controller)

@@ -19,13 +19,13 @@ public class PlayersRespawn : MonoBehaviour
     void Start()
     {
         roundController = GetComponent<RoundController>();
-        Invoke("GetPlayers", 2f);
+        Invoke("GetPlayers", 1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!onlyOnce && roundController.finalRound)
+        /*if(!onlyOnce && roundController.finalRound)
         {
             for (int i = 0; i < playersCount; i++)
             {
@@ -35,7 +35,7 @@ public class PlayersRespawn : MonoBehaviour
                 }
             }
             onlyOnce = true;
-        }
+        }*/
     }
 
     public void SpawnPlayer(GameObject player)

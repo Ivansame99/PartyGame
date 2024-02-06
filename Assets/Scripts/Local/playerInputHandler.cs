@@ -45,7 +45,7 @@ public class playerInputHandler : MonoBehaviour
         {
             OnSpecialAttack(obj);
         }
-		if (obj.action.name == inputs.Player.Jump.name && obj.action.WasPressedThisFrame())
+		if (obj.action.name == inputs.Player.Jump.name /*&& obj.action.WasPressedThisFrame()*/)
 		{
 			OnJump(obj);
 		}

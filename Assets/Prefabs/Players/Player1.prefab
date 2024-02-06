@@ -5559,6 +5559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1230228082446147015}
   - component: {fileID: 1543894638361367896}
+  - component: {fileID: 8363520183100929824}
   m_Layer: 10
   m_Name: DetectEnemiesTrigger
   m_TagString: Untagged
@@ -5602,6 +5603,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8363520183100929824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938018256930669439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48cc31bdd625c241bacc50f245dfd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesNear: []
 --- !u!1 &4149807985443987564
 GameObject:
   m_ObjectHideFlags: 0
@@ -22129,6 +22143,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 867484332925351801}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6167451931468503731}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!4 &1788842633507896409 stripped
 Transform:
@@ -22181,41 +22199,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed531f6f5e6f71488cc62b7880edc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  dodgeSpeed: 20
-  turnSmooth: 0.1
-  jumpForce: 30
-  dodgeCD: 0.8
-  dodgeInvencibilitySeconds: 0.5
-  invencibilityTimer: 0
-  maxBowCD: 1
-  weapon: {fileID: 6891439088349369807}
-  minChargeBow: 0.2
-  maxChargeBow: 1
-  arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
-    type: 3}
+  states:
+  - {fileID: 11400000, guid: b971fbe9a02f20e4ba8f5e2896f581c4, type: 2}
+  - {fileID: 11400000, guid: edd214bccbafa0242999d4f16b759f07, type: 2}
+  - {fileID: 11400000, guid: 8e7026c0c55313e4b964b5e53bdaf393, type: 2}
+  - {fileID: 11400000, guid: 44cb4b8ddcca372428d70794c240ec81, type: 2}
+  - {fileID: 11400000, guid: 3fdd61e4196e6ad4989b32df747407b8, type: 2}
+  - {fileID: 11400000, guid: 5a8dbb7c3de552a46ae9f57b5d2706b3, type: 2}
+  - {fileID: 11400000, guid: 29faadcb67e66f6478deed565b94cb4b, type: 2}
+  dodgeTimer: 0
   swordAttackSound: {fileID: 4267590517814037703}
   bowAttackSound: {fileID: 6873682153626677111}
   dodgeSound: {fileID: 3901693107126339173}
   tensingBow: {fileID: 1767769023669441959}
-  minPitch: 0.8
-  maxPitch: 1.2
-  invencibility: 0
-  dodge: 0
-  slashCollider: {fileID: 5491916191551023080}
+  isDodging: 0
+  isAttacking: 0
+  isSpecialAttacking: 0
+  isJumping: 0
+  moveUniversal: {x: 0, y: 0}
+  direction: {x: 0, y: 0, z: 0}
   jumpAttackCollider: {fileID: 5332908631118930390}
   arrowConeIndicator: {fileID: 1150728227621411889}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  EnemiesLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
-    type: 3}
-  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-    type: 3}
-  raycastPoint: {fileID: 5675147312831698023}
+  bowTimer: 0
+  lastComboTimer: 0
+  weaponController: {fileID: 5586025376494623341}
+  slashCollider: {fileID: 5491916191551023080}
+  rb: {fileID: 0}
+  groundCheck: {fileID: 0}
+  anim: {fileID: 0}
+  healthController: {fileID: 0}
+  powerController: {fileID: 0}
+  gravityController: {fileID: 0}
+  detectEnemiesNear: {fileID: 8363520183100929824}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22251,7 +22266,6 @@ MonoBehaviour:
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
-  camera: {fileID: 0}
   dead: 0
   respawnCD: 7
   cross1: {fileID: 2187086775622481420}
@@ -22270,6 +22284,7 @@ MonoBehaviour:
     type: 3}
   skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
     type: 3}
+  invencibleTimer: 0
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22346,6 +22361,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityScale: 8
   gravityOn: 1
+--- !u!114 &6167451931468503731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522dd7457de0d9f4096d445044bce6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastPoint: {fileID: 5675147312831698023}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  charactersLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

@@ -5186,6 +5186,73 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 30
   pushForce: 30
+--- !u!1 &3354676665611159689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4255605792197036024}
+  - component: {fileID: 7209127398872610020}
+  - component: {fileID: 4180265624507161040}
+  m_Layer: 10
+  m_Name: DetectEnemiesTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4255605792197036024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354676665611159689}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6455102242564749475}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7209127398872610020
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354676665611159689}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4180265624507161040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354676665611159689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48cc31bdd625c241bacc50f245dfd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesNear: []
 --- !u!1 &3997680898820804787
 GameObject:
   m_ObjectHideFlags: 0
@@ -21986,6 +22053,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3065391257785032988}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4255605792197036024}
     - targetCorrespondingSourceObject: {fileID: -7966339433572702018, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
@@ -22003,10 +22074,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2386716707898749970}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7031974134387891563}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
@@ -22031,6 +22098,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4504416413345522974}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7782395964641905314}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!4 &1788842633507896409 stripped
 Transform:
@@ -22083,53 +22154,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed531f6f5e6f71488cc62b7880edc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  dodgeSpeed: 20
-  turnSmooth: 0.1
-  jumpForce: 30
-  dodgeCD: 0.8
-  dodgeInvencibilitySeconds: 0.5
-  invencibilityTimer: 0
-  maxBowCD: 1
-  weapon: {fileID: 6891439088349369807}
-  minChargeBow: 0.2
-  maxChargeBow: 1
-  arrowPrefab: {fileID: 3821197064708906095, guid: d223bed2b4cdfa342a7165cbe4ff1738,
-    type: 3}
+  states:
+  - {fileID: 11400000, guid: 2f1a0974d1739ef4aa1d39724e31e847, type: 2}
+  - {fileID: 11400000, guid: f2ced6f00438b11469a801714ebec87a, type: 2}
+  - {fileID: 11400000, guid: b51bcfc77becc8c4bbeb82e7e7ce9512, type: 2}
+  - {fileID: 11400000, guid: 5908641fff0942b4082dba8d2b5e9a41, type: 2}
+  - {fileID: 11400000, guid: d456a7b3a6fd75c4a959dd718b2406fc, type: 2}
+  - {fileID: 11400000, guid: e59c6d13853ebb049afa963805ce0ef3, type: 2}
+  - {fileID: 11400000, guid: d40124cb16c65dc4f9b5326c3a026d54, type: 2}
+  dodgeTimer: 0
   swordAttackSound: {fileID: 3698725275848403200}
   bowAttackSound: {fileID: 900408167401546073}
   dodgeSound: {fileID: 4478234274476538080}
   tensingBow: {fileID: 8458321349284628271}
-  minPitch: 0.8
-  maxPitch: 1.2
-  invencibility: 0
-  dodge: 0
-  slashCollider: {fileID: 8387158679259438243}
+  isDodging: 0
+  isAttacking: 0
+  isSpecialAttacking: 0
+  isJumping: 0
+  moveUniversal: {x: 0, y: 0}
+  direction: {x: 0, y: 0, z: 0}
   jumpAttackCollider: {fileID: 3001834054662941068}
   arrowConeIndicator: {fileID: 3997680898820804787}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  EnemiesLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  fallParticle: {fileID: 3432958286849152088, guid: ec97ab090d2f7c948a3a03634aa56784,
-    type: 3}
-  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-    type: 3}
-  raycastPoint: {fileID: 3065391257785032988}
---- !u!114 &7031974134387891563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5971476123506598425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c5e73e8b7141b04abda88eb2e23efc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  bowTimer: 0
+  lastComboTimer: 0
+  weaponController: {fileID: 5586025376494623341}
+  slashCollider: {fileID: 8387158679259438243}
+  rb: {fileID: 0}
+  groundCheck: {fileID: 0}
+  anim: {fileID: 0}
+  healthController: {fileID: 0}
+  powerController: {fileID: 0}
+  gravityController: {fileID: 0}
+  detectEnemiesNear: {fileID: 4180265624507161040}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22165,7 +22221,6 @@ MonoBehaviour:
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
-  camera: {fileID: 0}
   dead: 0
   respawnCD: 7
   cross1: {fileID: 2187086775622481420}
@@ -22184,6 +22239,7 @@ MonoBehaviour:
     type: 3}
   skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
     type: 3}
+  invencibleTimer: 0
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22260,6 +22316,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravityScale: 8
   gravityOn: 1
+--- !u!114 &7782395964641905314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 522dd7457de0d9f4096d445044bce6cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastPoint: {fileID: 3065391257785032988}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  charactersLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
