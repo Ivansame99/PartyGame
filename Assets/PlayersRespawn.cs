@@ -85,7 +85,6 @@ public class PlayersRespawn : MonoBehaviour
 
 		Time.timeScale = slowdownFactor;
 		mtp.enabled = false;
-		camera.transform.LookAt(player);
 
 		float zoomDistance = 120;
 		camera.transform.position = player.position - camera.transform.forward * zoomDistance;
