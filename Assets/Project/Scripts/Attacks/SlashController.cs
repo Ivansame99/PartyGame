@@ -5,7 +5,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class SlashController : MonoBehaviour
 {
+    [HideInInspector]
     public float finalDamage;
+
     public float pushForce;
 
     private bool pushBack;

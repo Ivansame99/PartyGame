@@ -6,6 +6,9 @@ using UnityEngine;
 public class PlayerDropAttackState : PlayerState<PlayerController>
 {
 	[SerializeField]
+	private float dropAttackBaseDamage;
+
+	[SerializeField]
 	private GameObject dropAttackParticle;
 
 	[SerializeField]
@@ -26,6 +29,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 	private bool fallParticleOn;
 	private float originalGravityScale;
+	private SlashController jumpAttackController;
 
 	public override void Init(PlayerController p)
 	{
@@ -36,6 +40,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		timerattackFreeze = 0;
 		fallParticleOn = false;
 		originalGravityScale = player.gravityController.gravityScale;
+		jumpAttackController = player.jumpAttackCollider.GetComponent<SlashController>();
 	}
 
 	public override void Exit()
@@ -54,11 +59,13 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		{
 			player.gravityController.gravityOn = true;
 			player.gravityController.gravityScale = fallSped;
-			player.jumpAttackCollider.SetActive(true);
 			if (!player.groundCheck.DetectGround())
 			{
 				return;
 			}
+
+			jumpAttackController.finalDamage = dropAttackBaseDamage + player.powerController.PowerDamage();
+			player.jumpAttackCollider.SetActive(true);
 
 			if (!fallParticleOn)
 			{
