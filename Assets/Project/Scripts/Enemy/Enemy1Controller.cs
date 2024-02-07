@@ -38,7 +38,8 @@ public class Enemy1Controller : MonoBehaviour
 
     private float timer;
     private int xd;
-
+    public float surroundSpeed;
+    private Vector3 moveDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -121,13 +122,10 @@ public class Enemy1Controller : MonoBehaviour
         if (animator.GetBool("isSurrounding"))
         {
             agent.enabled = false;
-            float distance = Vector3.Distance(transform.position, enemyTarget.player.position);
-
-            if(distance > 8) rb.MovePosition(transform.position + playerPos.forward * 1f * Time.fixedDeltaTime);
-            else if(distance <8) rb.MovePosition(transform.position + -playerPos.forward * 1f * Time.fixedDeltaTime);
-            //SI ESTA DEMASIADO LEJOS
-            if(xd == 0) rb.MovePosition(transform.position + playerPos.right * 2f * Time.fixedDeltaTime);
-            else if(xd == 1) rb.MovePosition(transform.position + -playerPos.right * 2f * Time.fixedDeltaTime);
+            if (xd == 0) moveDirection = Vector3.right;
+            else if (xd == 1) moveDirection = Vector3.left;
+            Debug.Log(xd);
+            EnemySurround(moveDirection);
         }
         if (!animator.GetBool("isSurrounding") && !surroundFlag)
         {
@@ -137,6 +135,31 @@ public class Enemy1Controller : MonoBehaviour
         
     }
 
+    public void EnemySurround(Vector3 direction)
+    {
+        float distance = Vector3.Distance(transform.position, enemyTarget.player.position);
+        Vector3 dir = (playerPos.transform.position - transform.position).normalized;
+        Vector3 pDir = Quaternion.AngleAxis(90, Vector3.up) * dir; //Vector perpendicular to direction
+        Vector3 movedir = Vector3.zero;
+
+        Vector3 finalDirection = Vector3.zero;
+
+        //if (distance > 8) moveDirection = Vector3.forward;
+        //else if (distance < 8) moveDirection = -Vector3.forward;
+        //SI ESTA DEMASIADO LEJOS
+
+
+        if (direction == Vector3.forward)
+            finalDirection = dir;
+        if (direction == Vector3.right || direction == Vector3.left)
+            finalDirection = (pDir * direction.normalized.x);
+        if (direction == -Vector3.forward)
+            finalDirection = -transform.forward;
+
+        rb.MovePosition(transform.position + finalDirection * surroundSpeed * Time.fixedDeltaTime);
+
+
+    }
     public void Slash()
     {
         slashController.finalDamage = enemyBaseDamage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
