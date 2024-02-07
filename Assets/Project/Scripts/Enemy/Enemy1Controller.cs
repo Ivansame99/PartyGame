@@ -117,7 +117,7 @@ public class Enemy1Controller : MonoBehaviour
             agent.enabled = true;
             onlyOnceDamaged = true;
         }
-        /*
+        
         if (animator.GetBool("isSurrounding"))
         {
             agent.enabled = false;
@@ -134,7 +134,7 @@ public class Enemy1Controller : MonoBehaviour
             agent.enabled = true;
             surroundFlag = true;
         }
-        */
+        
     }
 
     public void Slash()
