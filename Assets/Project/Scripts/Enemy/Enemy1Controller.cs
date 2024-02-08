@@ -39,9 +39,12 @@ public class Enemy1Controller : MonoBehaviour
     private float timer;
     private int xd;
 
+    public GameObject redRectangle;
+
     // Start is called before the first frame update
     void Start()
     {
+        redRectangle.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
