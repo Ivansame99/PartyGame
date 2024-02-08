@@ -90,7 +90,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 					player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
 
 					//Insert damage and pushforce
-					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + player.powerController.GetCurrentPowerLevel() / 6; //Cambiar escalado poder
+					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + +player.powerController.PowerDamage(); //Cambiar escalado poder
 					player.slashCollider.pushForce = player.weaponController.combo[comboCounter].pushForce;
 
 					//Move player when attack

@@ -26,7 +26,6 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public Vector3 direction;
 
 	//Jump drop attack
-	[HideInInspector]
 	public GameObject jumpAttackCollider;
 	private SlashController jumpAttackController;
 

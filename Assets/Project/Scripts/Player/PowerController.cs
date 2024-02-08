@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 public class PowerController : MonoBehaviour
 {
     //Variables de poder
-    [SerializeField]
     private float currentPowerLevel;
 
     [SerializeField]
@@ -17,6 +16,9 @@ public class PowerController : MonoBehaviour
 
     [SerializeField]
     private float maxPowerLevel = 300; //Habra que hacer pruebas
+
+    [SerializeField]
+    private float powerScale; //Reduce it to more damage
 
     //Variables de escalado
     private float scaleMultiplayer;
@@ -100,6 +102,11 @@ public class PowerController : MonoBehaviour
         powerLevelText.SetText(currentPowerLevel.ToString());
         if(!isEnemy) playerUIPowerText.SetText(currentPowerLevel.ToString());
     }
+
+    public float PowerDamage()
+    {
+        return currentPowerLevel / powerScale;
+	}
 
     IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
     {

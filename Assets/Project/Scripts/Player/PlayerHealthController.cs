@@ -228,6 +228,19 @@ public class PlayerHealthController : MonoBehaviour
 		}
 	}
 
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("JumpAttack") && !dead)
+		{
+			lastAttacker = other.transform.parent.gameObject;
+			SlashController slashController = other.GetComponent<SlashController>();
+			attackPosition = other.gameObject.transform.position;
+			pushBack = true;
+			pushForce = slashController.pushForce;
+			ReceiveDamage(slashController.finalDamage);
+		}
+	}
+
 	private void OnTriggerStay(Collider other)
 	{
 		if (other.CompareTag("SlashEffect") && invencibleTimer <= 0 && !dead)

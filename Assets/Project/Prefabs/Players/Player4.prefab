@@ -5100,7 +5100,7 @@ GameObject:
   - component: {fileID: 4181141016048393871}
   m_Layer: 13
   m_Name: JumpAttackTrigger
-  m_TagString: SlashEffect
+  m_TagString: JumpAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5139,8 +5139,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 1.5, z: 7}
-  m_Center: {x: 0.30906224, y: 0.28128296, z: -0.2620921}
+  m_Size: {x: 7, y: 0.6041897, z: 7}
+  m_Center: {x: 0.30906224, y: -0.16662201, z: -0.2620921}
 --- !u!114 &4181141016048393871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5153,7 +5153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ffef81eeef43c4b88903952ad30238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalDamage: 30
+  finalDamage: 0
   pushForce: 30
 --- !u!1 &3354676665611159689
 GameObject:
@@ -22058,9 +22058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1808271e317de54d8d1c7e458f20ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPowerLevel: 0
   minPowerLevel: 10
   maxPowerLevel: 150
+  powerScale: 6
   maxScaleMultiplier: 1.6
   minScaleMultiplier: 1
   powerLevel: {fileID: 4149807985443987564}

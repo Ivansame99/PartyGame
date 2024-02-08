@@ -158,11 +158,10 @@ public class EnemyHealthController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("SlashEffect") && !invencibility && !dead)
+        if ((other.CompareTag("SlashEffect") || other.CompareTag("JumpAttack")) && !invencibility && !dead)
         {
             if (other.gameObject.transform.parent.tag != "Enemy")
             {
-                
                 Cross1.SetActive(false);
                 Cross2.SetActive(false);
                 Glow.SetActive(false);
