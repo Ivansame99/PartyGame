@@ -1,6 +1,17 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class GameEvent : ScriptableObject
 {
-	public abstract void TriggerEvent();
+	public bool eventFinished = false;
+
+	public abstract void EventStart();
+
+	public abstract void EventUpdate();
+
+	public virtual void EventExit()
+	{
+		eventFinished = true;
+	}
+
 }

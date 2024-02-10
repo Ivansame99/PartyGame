@@ -17,6 +17,8 @@ public class EventsController : MonoBehaviour
 
 	private float timer;
 
+	private int eventIndex;
+
 	void Start()
     {
 		timer = 0;
@@ -24,15 +26,26 @@ public class EventsController : MonoBehaviour
 
     void Update()
     {
-		if (timer == 0) randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-
-		timer += Time.deltaTime;
+		if (timer == 0)
+		{
+			eventIndex = Random.Range(0, randomEvents.Count);
+			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
+			randomEvents[eventIndex].EventStart();
+		}
 
 		if (timer >= randomTimeToSpawn)
 		{
-			int eventIndex = Random.Range(0, randomEvents.Count);
-			randomEvents[eventIndex].TriggerEvent();
-			timer = 0;
+			if (!randomEvents[eventIndex].eventFinished)
+			{
+				randomEvents[eventIndex].EventUpdate();
+			}
+			else
+			{
+				timer = 0;
+			}
+		} else
+		{
+			timer += Time.deltaTime;
 		}
 	}
 }

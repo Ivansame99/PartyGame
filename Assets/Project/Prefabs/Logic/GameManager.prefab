@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8785760671137338243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2805138501441062883}
+  - component: {fileID: 7806798369090360513}
+  - component: {fileID: 552776905513233568}
+  - component: {fileID: 3105006490199567253}
+  - component: {fileID: 7782028682868204939}
+  - component: {fileID: 5348037645612716601}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2805138501441062883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.993296, y: -28.326889, z: 61.692703}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7806798369090360513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b20456816d84143a43d7dac4e0af28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersDead: 0
+--- !u!114 &552776905513233568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05728e82530b6684c9f1760260e106b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debug: 0
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rounds:
+  - enemiesInRound:
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+  - enemiesInRound:
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+  - enemiesInRound:
+    - {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921, type: 3}
+  secondsBetweenRounds: 5
+  secondsBetweenEnemySpawn: 1
+  currentEnemies: []
+  coliseumAnimator: {fileID: 0}
+  finalRound: 0
+  roundsUI: {fileID: 0}
+  roundsUIText: {fileID: 0}
+--- !u!114 &3105006490199567253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fac22953920d77469b1b627a5960b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &7782028682868204939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79a0a4c40081dd419a0de5b5295ca1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTarget: 
+  currentPlayers: 0
+  splitEnemies: 0
+  full: 
+  players: []
+  jugadoresArray: []
+  playerDead: 0
+--- !u!114 &5348037645612716601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8785760671137338243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76acf750e627c0e499ab4bca2c40db4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomEvents:
+  - {fileID: 11400000, guid: f8abf7f9f5fa376449082f193e2d8ca1, type: 2}
+  - {fileID: 11400000, guid: 4166fdf18bd2f4a4ea7bf1f988373dc8, type: 2}
+  maxTimeToSpawn: 30
+  minTimeToSpawn: 60

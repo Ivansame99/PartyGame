@@ -14,11 +14,17 @@ public class RandomPotionEvent : GameEvent
 	private float zPosMin = -9f;
 	private float yPos = 50f;
 
-	public override void TriggerEvent()
+	public override void EventStart()
+	{
+		eventFinished = false;
+	}
+
+	public override void EventUpdate()
 	{
 		float randomXPos = Random.Range(xPosMin, xPosMax);
 		float randomZPos = Random.Range(zPosMin, zPosMax);
 
 		Instantiate(potionPrefab, new Vector3(randomXPos, yPos, randomZPos), potionPrefab.transform.rotation);
+		eventFinished = true;
 	}
 }
