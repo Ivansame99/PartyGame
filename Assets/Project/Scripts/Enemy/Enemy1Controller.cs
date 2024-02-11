@@ -39,9 +39,12 @@ public class Enemy1Controller : MonoBehaviour
     private float timer;
     private int xd;
 
+    public GameObject redRectangle;
+
     // Start is called before the first frame update
     void Start()
     {
+        redRectangle.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -141,6 +144,15 @@ public class Enemy1Controller : MonoBehaviour
     {
         slashController.finalDamage = enemyBaseDamage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
         slashController.pushForce = enemyBasePushForce;
+    }
+
+    public void enableFeedback()
+    {
+        redRectangle.SetActive(true);
+    }
+    public void disableFeedback()
+    {
+        redRectangle.SetActive(false);
     }
 
 }

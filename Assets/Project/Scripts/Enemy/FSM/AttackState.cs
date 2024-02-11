@@ -5,13 +5,15 @@ using UnityEngine.AI;
 
 public class AttackState : StateMachineBehaviour
 {
-
+    Enemy1Controller enemy1Controller;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        //enemy1Controller = animator.GetComponent<Enemy1Controller>();
 
+        //enemy1Controller.redRectangle.SetActive(true);
 
-    //}
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,6 +24,7 @@ public class AttackState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //enemy1Controller.redRectangle.SetActive(false);
         animator.SetBool("isAttacking", false);
     }
 
