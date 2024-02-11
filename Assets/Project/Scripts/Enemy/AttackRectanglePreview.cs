@@ -21,7 +21,7 @@ public class AttackRectanglePreview : MonoBehaviour
     {
         if (scaleAmmount < 1)
         {
-            this.transform.localScale = new Vector3(scaleAmmount, scaleAmmount, 1);
+            this.transform.localScale = new Vector3(0.75f, scaleAmmount, 1);
             scaleAmmount += Time.deltaTime;
         }
     }
