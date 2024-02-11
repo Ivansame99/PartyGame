@@ -47,6 +47,8 @@ public class RandomThundersEvent : GameEvent
 	{
 		if (!instanciateCoroutines)
 		{
+			LightIntensity.ChangeIntensityOverTime(0, 0.5f);
+
 			for (int i = 0; i < thundersNumber; i++)
 			{
 				float preViewDelay = Random.Range(minPreViewDelay, maxPreViewDelay);
@@ -75,6 +77,7 @@ public class RandomThundersEvent : GameEvent
 		if (index == thundersNumber - 1)
 		{
 			eventFinished = true;
+			LightIntensity.ChangeIntensityOverTime(0.81f, 2f);
 		}
 	}
 }
