@@ -10624,14 +10624,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2987202864745624722}
   - component: {fileID: 7307146129217389267}
-  - component: {fileID: 172398626935614253}
+  - component: {fileID: 7513537858080362215}
   m_Layer: 0
   m_Name: RedRectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2987202864745624722
 Transform:
   m_ObjectHideFlags: 0
@@ -10699,27 +10699,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &172398626935614253
-Animator:
-  serializedVersion: 5
+--- !u!114 &7513537858080362215
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6062149186305044265}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b638fede679efc446a007ef69cd22ce5, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d082fb5bfdd3a489cfb7796592d001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleAmmount: 1.2
 --- !u!1 &6387946273866085344
 GameObject:
   m_ObjectHideFlags: 0

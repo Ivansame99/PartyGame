@@ -146,4 +146,13 @@ public class Enemy1Controller : MonoBehaviour
         slashController.pushForce = enemyBasePushForce;
     }
 
+    public void enableFeedback()
+    {
+        redRectangle.SetActive(true);
+    }
+    public void disableFeedback()
+    {
+        redRectangle.SetActive(false);
+    }
+
 }

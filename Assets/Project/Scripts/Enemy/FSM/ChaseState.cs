@@ -63,7 +63,8 @@ public class ChaseState : StateMachineBehaviour
             if (distance < triggerDistance && timerAttack <= 0 && Math.Abs(Vector3.Angle(animator.transform.forward, dir)) < deg)
             {
                 animator.SetBool("isAttacking", true);
-                //timerAttack = normalAttackCooldown;
+                timerAttack = normalAttackCooldown;
+                agent.enabled = false;
             }
 
             //animator.transform.LookAt(player);

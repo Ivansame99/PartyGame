@@ -9,9 +9,9 @@ public class AttackState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy1Controller = animator.GetComponent<Enemy1Controller>();
+        //enemy1Controller = animator.GetComponent<Enemy1Controller>();
 
-        enemy1Controller.redRectangle.SetActive(true);
+        //enemy1Controller.redRectangle.SetActive(true);
 
     }
 
@@ -24,7 +24,7 @@ public class AttackState : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemy1Controller.redRectangle.SetActive(false);
+        //enemy1Controller.redRectangle.SetActive(false);
         animator.SetBool("isAttacking", false);
     }
 
