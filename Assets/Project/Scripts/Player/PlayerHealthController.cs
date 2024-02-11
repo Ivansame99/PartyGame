@@ -150,13 +150,19 @@ public class PlayerHealthController : MonoBehaviour
 
 		if (healthBarC != null)
 		{
-			playerUIHealth.SetProgress(health / maxHealth, 2);
-			healthBarC.SetProgress(health / maxHealth, 2);
+			ChangeUI();
 		}
 
 		if (health <= 0) Die();
 
 		invencibleTimer = inmuneTime;
+	}
+
+	void RestoreHealth(float healthAmmount)
+	{
+		health += healthAmmount;
+		if (health >= maxHealth) health = maxHealth;
+		ChangeUI();
 	}
 
 	private void Die()
@@ -190,6 +196,12 @@ public class PlayerHealthController : MonoBehaviour
 		healthBar.transform.SetParent(canvas.transform);
 	}
 
+	void ChangeUI()
+	{
+		healthBarC.SetProgress(health / maxHealth, 2);
+		playerUIHealth.SetProgress(health / maxHealth, 2);
+	}
+
 	public void EnablePlayer()
 	{
 		powerController.enabled = true;
@@ -200,8 +212,7 @@ public class PlayerHealthController : MonoBehaviour
 		deadAux = false;
 		health = maxHealth;
 		invencibleTimer = 0.5f;
-		healthBarC.SetProgress(health / maxHealth, 2);
-		playerUIHealth.SetProgress(health / maxHealth, 2);
+		ChangeUI();
 	}
 
 	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)
@@ -239,6 +250,17 @@ public class PlayerHealthController : MonoBehaviour
 			pushForce = slashController.pushForce;
 			ReceiveDamage(slashController.finalDamage);
 		}
+
+		if (other.CompareTag("Potion"))
+		{
+			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmount);
+			Destroy(other.gameObject);
+		}
+
+		if (other.CompareTag("EventDamage"))
+		{
+			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
+		}
 	}
 
 	private void OnTriggerStay(Collider other)
@@ -251,14 +273,6 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = true;
 			pushForce = slashController.pushForce;
 			ReceiveDamage(slashController.finalDamage);
-		}
-
-		if (other.gameObject.tag == "Potion")
-		{
-			health += 50;
-			healthBarC.SetProgress(health / maxHealth, 2);
-			playerUIHealth.SetProgress(health / maxHealth, 2);
-			Destroy(other.gameObject);
 		}
 	}
 

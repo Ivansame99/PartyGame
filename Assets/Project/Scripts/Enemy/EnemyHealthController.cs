@@ -87,9 +87,19 @@ public class EnemyHealthController : MonoBehaviour
 
     public void ReceiveDamageSlash(float damage)
     {
-        //Debug.Log(damage);
+        //Feedback
         Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
-        health -= damage;
+		Cross1.SetActive(false);
+		Cross2.SetActive(false);
+		Glow.SetActive(false);
+
+
+		Cross1.SetActive(true);
+		Cross2.SetActive(true);
+		Glow.SetActive(true);
+
+        //Logic
+		health -= damage;
         timer = inmuneTime;
         if (health <= 0)
         {
@@ -162,15 +172,6 @@ public class EnemyHealthController : MonoBehaviour
         {
             if (other.gameObject.transform.parent.tag != "Enemy")
             {
-                Cross1.SetActive(false);
-                Cross2.SetActive(false);
-                Glow.SetActive(false);
-
-
-                Cross1.SetActive(true);
-                Cross2.SetActive(true);
-                Glow.SetActive(true);
-
                 lastAttacker = other.transform.parent.gameObject;
 
                 SlashController slashController = other.GetComponent<SlashController>();
@@ -181,7 +182,12 @@ public class EnemyHealthController : MonoBehaviour
                 ReceiveDamageSlash(slashController.finalDamage);
             }
         }
-    }
+
+		if (other.CompareTag("EventDamage"))
+		{
+			ReceiveDamageSlash(other.GetComponent<DealDamageEvent>().damageAmmount);
+		}
+	}
 
     private void OnCollisionEnter(Collision collision)
     {

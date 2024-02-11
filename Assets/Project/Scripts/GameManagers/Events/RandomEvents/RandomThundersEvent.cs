@@ -15,9 +15,16 @@ public class RandomThundersEvent : GameEvent
 	private int thundersNumber;
 
 	[SerializeField]
-	private float timeBetweenPreviewAndAttack;
+	private float minPreViewDelay;
 
-	private List<Vector3> thunderPos = new List<Vector3>();
+	[SerializeField]
+	private float maxPreViewDelay;
+
+	[SerializeField]
+	private float minAttackDelay;
+
+	[SerializeField]
+	private float maxAttackDelay;
 
 	private float xPosMax = 18f;
 	private float xPosMin = -19f;
@@ -26,51 +33,41 @@ public class RandomThundersEvent : GameEvent
 	private float previewYPos = 0.9f;
 	private float attackYPos = 10f;
 
-	private bool allThundersFalled = false;
+	private CoroutineManager coroutineManager;
 
-	private float timer;
-
-	private bool preview = false;
 	public override void EventStart()
 	{
-		thunderPos.Clear();
 		eventFinished = false;
-		allThundersFalled = false;
-		preview = false;
-		timer = 0;
+		if (coroutineManager == null) coroutineManager = CoroutineManager.Instance;
 	}
 
 	public override void EventUpdate()
-    {
+	{
 		if (!eventFinished)
 		{
-			if (!preview)
+			for (int i = 0; i < thundersNumber; i++)
 			{
-				for (int i = 0; i < thundersNumber; i++)
-				{
-					float randomXPos = Random.Range(xPosMin, xPosMax);
-					float randomZPos = Random.Range(zPosMin, zPosMax);
+				float preViewDelay = Random.Range(minPreViewDelay, maxPreViewDelay);
 
-					thunderPos.Add(new Vector3(randomXPos, previewYPos, randomZPos));
+				float randomXPos = Random.Range(xPosMin, xPosMax);
+				float randomZPos = Random.Range(zPosMin, zPosMax);
 
-					Instantiate(previewAttack, thunderPos[i], previewAttack.transform.rotation);
-				}
-				preview = true;
+				Vector3 position = new Vector3(randomXPos, previewYPos, randomZPos);
+
+				float attackDelay = Random.Range(minAttackDelay, maxAttackDelay);
+
+				coroutineManager.StartCoroutineFromScriptableObject(SpawnThunder(preViewDelay, position, attackDelay));
 			}
-			else
-			{
-				if(timer>= timeBetweenPreviewAndAttack)
-				{
-					for (int i = 0; i < thundersNumber; i++)
-					{
-						Vector3 pos = new Vector3(thunderPos[i].x, attackYPos, thunderPos[i].z);
-						//thunderPos[i].y = attackYPos;
-						Destroy(Instantiate(thunderAttack, pos, thunderAttack.transform.rotation), 1f);
-					}
-
-					eventFinished = true;
-				} else timer += Time.deltaTime;
-			}	
+			eventFinished = true;
 		}
+	}
+
+	private IEnumerator SpawnThunder(float preViewDelay, Vector3 pos, float attackDelay)
+	{
+		yield return new WaitForSeconds(preViewDelay);
+		Instantiate(previewAttack, pos, previewAttack.transform.rotation);
+		yield return new WaitForSeconds(attackDelay);
+		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
+		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), 0.5f);
 	}
 }
