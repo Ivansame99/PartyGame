@@ -34,16 +34,18 @@ public class RandomThundersEvent : GameEvent
 	private float attackYPos = 10f;
 
 	private CoroutineManager coroutineManager;
+	private bool instanciateCoroutines;
 
 	public override void EventStart()
 	{
 		eventFinished = false;
+		instanciateCoroutines = false;
 		if (coroutineManager == null) coroutineManager = CoroutineManager.Instance;
 	}
 
 	public override void EventUpdate()
 	{
-		if (!eventFinished)
+		if (!instanciateCoroutines)
 		{
 			for (int i = 0; i < thundersNumber; i++)
 			{
@@ -56,18 +58,23 @@ public class RandomThundersEvent : GameEvent
 
 				float attackDelay = Random.Range(minAttackDelay, maxAttackDelay);
 
-				coroutineManager.StartCoroutineFromScriptableObject(SpawnThunder(preViewDelay, position, attackDelay));
+				coroutineManager.StartCoroutineFromScriptableObject(SpawnThunder(i, preViewDelay, position, attackDelay));
 			}
-			eventFinished = true;
+			instanciateCoroutines = true;
 		}
 	}
 
-	private IEnumerator SpawnThunder(float preViewDelay, Vector3 pos, float attackDelay)
+	private IEnumerator SpawnThunder(int index, float preViewDelay, Vector3 pos, float attackDelay)
 	{
 		yield return new WaitForSeconds(preViewDelay);
 		Instantiate(previewAttack, pos, previewAttack.transform.rotation);
 		yield return new WaitForSeconds(attackDelay);
 		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
+		CameraShake.Shake(0.5f,0.3f);
 		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), 0.5f);
+		if (index == thundersNumber - 1)
+		{
+			eventFinished = true;
+		}
 	}
 }
