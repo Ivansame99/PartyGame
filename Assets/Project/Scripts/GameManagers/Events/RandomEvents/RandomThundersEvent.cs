@@ -31,7 +31,7 @@ public class RandomThundersEvent : GameEvent
 	private float zPosMax = 19f;
 	private float zPosMin = -9f;
 	private float previewYPos = 0.9f;
-	private float attackYPos = 10f;
+	private float attackYPos = 23f;
 
 	private CoroutineManager coroutineManager;
 	private bool instanciateCoroutines;
