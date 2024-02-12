@@ -60,9 +60,11 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public DetectEnemiesNear detectEnemiesNear;
 
+
 	protected override void Awake()
 	{
 		base.Awake();
+	
 		if (rb == null) rb = GetComponent<Rigidbody>();
 		if (groundCheck == null) groundCheck = GetComponent<GroundCheck>();
 		if (anim == null) anim = GetComponent<Animator>();
@@ -93,6 +95,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public void SetAttack(bool pressAttack)
 	{
 		attackBuffer.Enqueue(pressAttack);
+		
 		Invoke(nameof(RemovAttackBuffer), 0.3f);
 	}
 	public void SetSpecialAttack(bool pressSpecialAttack)
@@ -111,6 +114,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public void EndCombo()
 	{
+		
 		ChangeState(typeof(PlayerIdleState));
 	}
 }
