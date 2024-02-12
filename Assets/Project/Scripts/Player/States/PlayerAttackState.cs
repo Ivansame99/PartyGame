@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/Player/Attack")]
@@ -31,6 +32,13 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	float lastClicked;
 	private float turnSmoothTime;
 
+	Dictionary<int, Color> colorTrail = new Dictionary<int, Color>()
+{
+	{0, Color.green},
+	{1, Color.yellow},
+	{2, Color.red},
+};
+
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
@@ -40,6 +48,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 	public override void Exit()
 	{
+		player.weaponController.trailParent.SetActive(false);
 		player.anim.ResetTrigger("Attack");
 		ResetVelocity();
 		player.gravityController.gravityOn = true;
@@ -89,6 +98,22 @@ public class PlayerAttackState : PlayerState<PlayerController>
 					player.swordAttackSound.Play();
 					player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
 
+					//Sword trail
+					player.weaponController.trailParent.SetActive(true);
+
+					// A simple 2 color gradient with a fixed alpha of 1.0f.
+					float alpha = 1.0f;
+					Gradient gradient = new Gradient();
+					gradient.SetKeys(
+						new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(colorTrail[comboCounter], 0.3f) },
+						new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+					);
+
+					for (int i = 0; i < player.weaponController.trails.Length; i++)
+					{
+						player.weaponController.trails[i].colorGradient = gradient;
+					}
+
 					//Insert damage and pushforce
 					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + +player.powerController.PowerDamage(); //Cambiar escalado poder
 					player.slashCollider.pushForce = player.weaponController.combo[comboCounter].pushForce;
@@ -132,6 +157,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	{
 		if (player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
+			player.weaponController.trailParent.SetActive(false);
 			player.anim.SetTrigger("Attack");
 			ResetVelocity();
 			player.gravityController.gravityOn = true;

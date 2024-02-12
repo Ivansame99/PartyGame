@@ -14,4 +14,7 @@ public class Weapon : MonoBehaviour
     private bool attack;
 
     public GameObject arrow;
+
+	public GameObject trailParent;
+	public TrailRenderer[] trails;
 }
