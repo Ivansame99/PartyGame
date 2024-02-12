@@ -61,12 +61,11 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public DetectEnemiesNear detectEnemiesNear;
 
-	public GameObject Trail;
 
 	protected override void Awake()
 	{
 		base.Awake();
-		Trail.SetActive(false);
+	
 		if (rb == null) rb = GetComponent<Rigidbody>();
 		if (groundCheck == null) groundCheck = GetComponent<GroundCheck>();
 		if (anim == null) anim = GetComponent<Animator>();
@@ -97,7 +96,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public void SetAttack(bool pressAttack)
 	{
 		attackBuffer.Enqueue(pressAttack);
-		Trail.SetActive(true);
+		
 		Invoke(nameof(RemovAttackBuffer), 0.3f);
 	}
 	public void SetSpecialAttack(bool pressSpecialAttack)
@@ -116,7 +115,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public void EndCombo()
 	{
-		Trail.SetActive(false);
+		
 		ChangeState(typeof(PlayerIdleState));
 	}
 }

@@ -30877,6 +30877,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 20.348328
       objectReference: {fileID: 0}
+    - target: {fileID: 5844622625683270731, guid: 1b036bcb588005d479f383241224e118,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5878876139492944976, guid: 1b036bcb588005d479f383241224e118,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -30906,6 +30911,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -28.848883
+      objectReference: {fileID: 0}
+    - target: {fileID: 6086471936633425818, guid: 1b036bcb588005d479f383241224e118,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6907883046185961875, guid: 1b036bcb588005d479f383241224e118,
         type: 3}
@@ -31235,6 +31245,7 @@ MonoBehaviour:
   slashCollider: {fileID: 9174231344691150708}
   bigSlashCollider: {fileID: 3413143057448396564}
   slashController: {fileID: 4202059012486751910}
+  tooClose: 0
 --- !u!195 &1031676779660372435
 NavMeshAgent:
   m_ObjectHideFlags: 0
