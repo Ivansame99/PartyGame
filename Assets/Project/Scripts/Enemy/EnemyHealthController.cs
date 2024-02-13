@@ -10,6 +10,8 @@ public class EnemyHealthController : MonoBehaviour
     private float health;
 
     [SerializeField]
+    private float maxHealthBase;
+
     private float maxHealth;
 
     [SerializeField]
@@ -55,14 +57,22 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField] private GameObject DeathParticles;
     [SerializeField] private GameObject BloodParticles;
 
+    private PowerController powerController;
+
     // Start is called before the first frame update
     void Start()
     {
-        healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
+		powerController=GetComponent<PowerController>();
+		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, camera);
-        health = maxHealth;
         animator = GetComponent<Animator>();
-    }
+		maxHealth = maxHealthBase + powerController.PowerHealth();
+		if (powerController != null)
+		{
+			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+		}
+		health = maxHealth;
+	}
 
     // Update is called once per frame
     void Update()
@@ -148,7 +158,7 @@ public class EnemyHealthController : MonoBehaviour
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
+        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
         dead = true;
         Invoke("enemyDestroy", 2.0f);
     }
@@ -166,7 +176,12 @@ public class EnemyHealthController : MonoBehaviour
         healthBar.transform.SetParent(canvas.transform);
     }
 
-    private void OnTriggerEnter(Collider other)
+	private void HandleCurrentPowerChanged(float newValue)
+	{
+		maxHealth = maxHealthBase + powerController.PowerHealth();
+	}
+
+	private void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("SlashEffect") || other.CompareTag("JumpAttack")) && !invencibility && !dead)
         {

@@ -22929,7 +22929,6 @@ MonoBehaviour:
   powerController: {fileID: 0}
   gravityController: {fileID: 0}
   detectEnemiesNear: {fileID: 8241916074344113874}
-  Trail: {fileID: 0}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22945,6 +22944,7 @@ MonoBehaviour:
   minPowerLevel: 10
   maxPowerLevel: 150
   powerScale: 6
+  healthScale: 4
   maxScaleMultiplier: 1.6
   minScaleMultiplier: 1
   powerLevel: {fileID: 4149807985443987564}
@@ -22960,7 +22960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664342bf7784ece40a224e3f9a0d411b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealthBase: 0
   inmuneTime: 0.3
   dead: 0
   invencibleTimer: 0

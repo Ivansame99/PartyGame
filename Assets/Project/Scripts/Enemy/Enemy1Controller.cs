@@ -95,7 +95,7 @@ public class Enemy1Controller : MonoBehaviour
             //METE SLASH ESPECIAL
             bigSlashParticleSystem.SetActive(true);
             bigSlashCollider.SetActive(true);
-            slashControllerBig.finalDamage = enemyBaseDamage/3 + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
+            slashControllerBig.finalDamage = enemyBaseDamage / 3 + (powerController.PowerDamage() / 2); //Cambiar escalado poder
             slashControllerBig.pushForce = enemyBasePushForce;
             //rb.MovePosition(transform.position + evadeAttackDirection * normalAttackSpeed * Time.fixedDeltaTime);
             onlyOnceSpecial = false;
@@ -142,7 +142,7 @@ public class Enemy1Controller : MonoBehaviour
 
     public void Slash()
     {
-        slashController.finalDamage = enemyBaseDamage + powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
+        slashController.finalDamage = enemyBaseDamage + powerController.PowerDamage();
         slashController.pushForce = enemyBasePushForce;
     }
 
