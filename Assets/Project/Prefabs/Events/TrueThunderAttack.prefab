@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 7359092090879078710}
   - component: {fileID: 3656218689901246421}
   - component: {fileID: 5229659748730265885}
-  m_Layer: 0
+  - component: {fileID: 5638701342437786602}
+  m_Layer: 11
   m_Name: TrueThunderAttack
-  m_TagString: Untagged
+  m_TagString: EventDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,5 +132,18 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.0049977, y: 4.96007, z: 41.190002}
-  m_Center: {x: -0.008661509, y: 1.4014223, z: 18.546152}
+  m_Size: {x: 2.9604144, y: 1.8877358, z: 143.35371}
+  m_Center: {x: -0.025857627, y: -0.13474512, z: 69.62801}
+--- !u!114 &5638701342437786602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5583676348804075296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c46ca9135895e4581229d0c7192a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmmount: 50
