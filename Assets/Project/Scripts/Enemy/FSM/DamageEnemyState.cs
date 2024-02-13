@@ -5,10 +5,17 @@ using UnityEngine.AI;
 
 public class DamageEnemyState : StateMachineBehaviour
 {
+    private Enemy1Controller enemy1Controller;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(enemy1Controller == null)
+        {
+            enemy1Controller = animator.GetComponent<Enemy1Controller>();
+        }
         animator.SetBool("isDamaged",true);
+        enemy1Controller.redRectangle.SetActive(false);
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
