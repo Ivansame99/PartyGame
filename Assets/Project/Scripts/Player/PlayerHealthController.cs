@@ -119,7 +119,6 @@ public class PlayerHealthController : MonoBehaviour
 			deadAux = true;
 			StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 		}
-		Debug.Log(maxHealth);
 	}
 
 	private void FixedUpdate()
