@@ -11,6 +11,8 @@ public class PlayerHealthController : MonoBehaviour
 	private float health;
 
 	[SerializeField]
+	private float maxHealthBase;
+
 	private float maxHealth;
 
 	[SerializeField]
@@ -82,7 +84,6 @@ public class PlayerHealthController : MonoBehaviour
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		camera = Camera.main;
 		SetupHealthBar(healBarCanvas, camera);
-		health = maxHealth;
 
 		//Components
 		playerController = GetComponent<PlayerController>();
@@ -96,6 +97,14 @@ public class PlayerHealthController : MonoBehaviour
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
 		playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
 		playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
+
+		maxHealth = maxHealthBase + powerController.PowerHealth();
+
+		if (powerController != null)
+		{
+			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+		}
+		health = maxHealth;
 	}
 
 	void Update()
@@ -110,6 +119,7 @@ public class PlayerHealthController : MonoBehaviour
 			deadAux = true;
 			StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 		}
+		Debug.Log(maxHealth);
 	}
 
 	private void FixedUpdate()
@@ -173,9 +183,9 @@ public class PlayerHealthController : MonoBehaviour
 		anim.SetTrigger("Death");
 
 		//Power control pass
-		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel() / 2;
+		currentPower = powerController.GetCurrentPowerLevel() / 2;
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
-		GetComponent<PowerController>().OnDieSetCurrentPowerLevel();
+		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
 		playersRespawn.NotifyDead(this.gameObject.transform);
@@ -213,6 +223,11 @@ public class PlayerHealthController : MonoBehaviour
 		health = maxHealth;
 		invencibleTimer = 0.5f;
 		ChangeUI();
+	}
+
+	private void HandleCurrentPowerChanged(float newValue)
+	{
+		maxHealth = maxHealthBase + powerController.PowerHealth();
 	}
 
 	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)

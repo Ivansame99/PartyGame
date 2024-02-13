@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using static UnityEngine.UI.Image;
 using TMPro;
 using Unity.VisualScripting;
+using System;
 
 public class PowerController : MonoBehaviour
 {
@@ -20,8 +21,11 @@ public class PowerController : MonoBehaviour
     [SerializeField]
     private float powerScale; //Reduce it to more damage
 
-    //Variables de escalado
-    private float scaleMultiplayer;
+	[SerializeField]
+	private float healthScale; //Reduce it to more health scale
+
+	//Variables de escalado
+	private float scaleMultiplayer;
 
     [SerializeField]
     private float maxScaleMultiplier = 2;
@@ -43,8 +47,9 @@ public class PowerController : MonoBehaviour
 
     private bool isEnemy=false;
 
+	public Action<float> OnCurrentPowerChanged;
 
-    void Start()
+	void Start()
     {
         powerLevelText = powerLevel.GetComponent<TMP_Text>();
         canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -87,14 +92,16 @@ public class PowerController : MonoBehaviour
     public void SetCurrentPowerLevel(float value)
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
-        ChangeUIText();
+		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
+		ChangeUIText();
     }
 
     public void OnDieSetCurrentPowerLevel()
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
         if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
-        ChangeUIText();
+		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
+		ChangeUIText();
     }
 
     private void ChangeUIText()
@@ -108,7 +115,12 @@ public class PowerController : MonoBehaviour
         return currentPowerLevel / powerScale;
 	}
 
-    IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
+	public float PowerHealth()
+	{
+		return currentPowerLevel / healthScale;
+	}
+
+	IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
     {
         //Vector3 initialScale = transform.localScale;
 
