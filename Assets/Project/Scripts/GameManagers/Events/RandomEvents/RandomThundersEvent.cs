@@ -26,10 +26,10 @@ public class RandomThundersEvent : GameEvent
 	[SerializeField]
 	private float maxAttackDelay;
 
-	private float xPosMax = 18f;
-	private float xPosMin = -19f;
-	private float zPosMax = 19f;
-	private float zPosMin = -9f;
+	private float xPosMax = 23f;
+	private float xPosMin = -22.5f;
+	private float zPosMax = 22f;
+	private float zPosMin = -12.5f;
 	private float previewYPos = 0.9f;
 	private float attackYPos = 10f;
 

@@ -437,6 +437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8826411759631066546}
+  - component: {fileID: 2850950150823930931}
   m_Layer: 0
   m_Name: MetalicDoor
   m_TagString: Untagged
@@ -464,8 +465,29 @@ Transform:
   - {fileID: 8597426616893688954}
   - {fileID: 3160126405505825676}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 18.409, z: 0}
+--- !u!65 &2850950150823930931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4327975686678237080}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.39486, y: 32.878075, z: 31.995302}
+  m_Center: {x: 1.4869773, y: -3.7134001, z: 17.382841}
 --- !u!1 &5118692581667460957
 GameObject:
   m_ObjectHideFlags: 0
