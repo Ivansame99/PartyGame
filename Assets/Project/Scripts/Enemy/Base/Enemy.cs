@@ -9,12 +9,43 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     public float CurrentHealth { get; set; }
     public NavMeshAgent agent { get; set; }
     public Rigidbody rb { get; set; }
+    public EnemyTarget target { get; set; }
 
+
+
+    #region State Machine Variables
+    public EnemyStateMachine stateMachine { get; set; }
+    public EnemyChaseState chaseState { get; set; }
+    public EnemyAttackState attackState { get; set; }
+    #endregion
+
+    #region Chase Variables
+    public float deg;
+    public float speed;
+    public float acceleration;
+    public float angularSpeed;
+    #endregion
+    void Awake()
+    {
+        //Initialize State Machine
+        stateMachine = new EnemyStateMachine();
+
+        chaseState = new EnemyChaseState(this, stateMachine);
+        attackState = new EnemyAttackState(this, stateMachine);
+    }
     void Start()
     {
+        //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        target = GetComponent<EnemyTarget>();
+
+        //Initialize Health
         CurrentHealth = MaxHealth;
+
+        //Initialize State Machine
+        stateMachine.Initialize(chaseState);
+        Debug.Log("Enemy State Machine Initialized");
     }
     #region Health/Damage
     public void Damage(float damageAmount)
@@ -45,11 +76,26 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     }
     #endregion
 
-    // Update is called once per frame
-    void Update()
+    #region Animation Triggers
+    private void AnimationTriggerEvent(AnimationTriggerType triggerType)
     {
-        
+        stateMachine.CurrentEnemyState.AnimationTriggerEvent(triggerType);
+    }
+    public enum AnimationTriggerType
+    {
+        EnemyDamaged,
+        PlayFootstepSound,
+    }
+    #endregion
+
+    private void Update()
+    {
+        stateMachine.CurrentEnemyState.FrameUpdate();
     }
 
+    private void FixedUpdate()
+    {
+        stateMachine.CurrentEnemyState.PhysicUpdate();
+    }
 
 }

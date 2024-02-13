@@ -12,15 +12,10 @@ public class EnemyState
         this.enemy = enemy;
         this.stateMachine = stateMachine;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public virtual void EnterState() { }
+    public virtual void ExitState() { }
+    public virtual void FrameUpdate() { }
+    public virtual void PhysicUpdate() { }
+    public virtual void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType) { }
 }
