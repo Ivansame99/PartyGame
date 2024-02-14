@@ -30,14 +30,14 @@ public class EventsController : MonoBehaviour
 		{
 			eventIndex = Random.Range(0, randomEvents.Count);
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-			randomEvents[1].EventStart();
+			randomEvents[eventIndex].EventStart();
 		}
 
 		if (timer >= randomTimeToSpawn)
 		{
-			if (!randomEvents[1].eventFinished)
+			if (!randomEvents[eventIndex].eventFinished)
 			{
-				randomEvents[1].EventUpdate();
+				randomEvents[eventIndex].EventUpdate();
 			}
 			else
 			{
