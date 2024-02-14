@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyState
 {
-    private Transform _playerPos;
+    private Vector3 _playerPos;
     public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine) : base(enemy, stateMachine)
     {
  
@@ -14,7 +14,8 @@ public class EnemyChaseState : EnemyState
     {
         base.EnterState();
 
-        
+        //enemy.MoveEnemy(enemy.playerPos.position);
+
     }
 
     public override void ExitState()
@@ -24,10 +25,13 @@ public class EnemyChaseState : EnemyState
 
     public override void FrameUpdate()
     {
+        
         base.FrameUpdate();
-        Debug.Log("Chase State");
-        _playerPos = enemy.target.player;
-        enemy.agent.SetDestination(_playerPos.position);
+        Debug.Log(enemy.playerPos);
+        //playerPos = enemy.target.player.position;
+
+        enemy.MoveEnemy(enemy.playerPos.position);
+
     }
 
     public override void PhysicUpdate()

@@ -9,7 +9,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     public float CurrentHealth { get; set; }
     public NavMeshAgent agent { get; set; }
     public Rigidbody rb { get; set; }
-    public EnemyTarget target { get; set; }
+    public bool state { get; set; }
+    public Transform playerPos { get; set; }
+    public Transform playerPos2 { get; set; }
+    public EnemyTarget enemyTarget { get; set; }
 
 
 
@@ -38,7 +41,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
         //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        target = GetComponent<EnemyTarget>();
 
         //Initialize Health
         CurrentHealth = MaxHealth;
@@ -46,6 +48,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
         Debug.Log("Enemy State Machine Initialized");
+        
+        
     }
     #region Health/Damage
     public void Damage(float damageAmount)
@@ -64,10 +68,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     #endregion
 
     #region Movement Functions
-    public void MoveEnemy(Vector3 destination, float speed)
+    public void MoveEnemy(Vector3 position)
     {
-        agent.speed = speed;
-        agent.SetDestination(destination);
+        agent.SetDestination(position);
     }
 
     public void AgentState(bool state)
