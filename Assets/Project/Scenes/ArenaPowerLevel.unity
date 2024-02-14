@@ -1114,8 +1114,8 @@ MonoBehaviour:
   targets: []
   offset: {x: 0, y: 113.6, z: -101}
   smoothTime: 2
-  minZoom: 11.08
-  maxZoom: 15
+  minZoom: 50
+  maxZoom: 10
   zoomLimiter: 50
 --- !u!114 &330585551
 MonoBehaviour:
@@ -2009,7 +2009,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 665433121}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 6d1f77e9ef43375448dd28664bb4d7a6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6272,7 +6272,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: debug
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
