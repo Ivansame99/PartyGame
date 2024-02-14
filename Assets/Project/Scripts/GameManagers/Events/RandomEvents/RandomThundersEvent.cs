@@ -31,7 +31,7 @@ public class RandomThundersEvent : GameEvent
 	private float zPosMax = 22f;
 	private float zPosMin = -12.5f;
 	private float previewYPos = 0.9f;
-	private float attackYPos = 10f;
+	private float attackYPos = 98f;
 
 	private CoroutineManager coroutineManager;
 	private bool instanciateCoroutines;
@@ -73,7 +73,7 @@ public class RandomThundersEvent : GameEvent
 		yield return new WaitForSeconds(attackDelay);
 		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
 		CameraShake.Shake(0.5f,0.3f);
-		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), 0.5f);
+		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), 1f);
 		if (index == thundersNumber - 1)
 		{
 			eventFinished = true;
