@@ -75,11 +75,11 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		}
 
 		Attack();
-
-		if (player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && flag)
+		if(player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && comboCounter==2) Debug.Log(player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+		if (player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f && player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
-			player.weaponController.trailParent.SetActive(false);
-			flag = false;
+			if(flag) flag = false;
+			else player.weaponController.trailParent.SetActive(false);
 		}
 
 		ExitAttack();
