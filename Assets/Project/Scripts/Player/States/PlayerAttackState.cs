@@ -31,6 +31,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	private int comboCounter;
 	float lastClicked;
 	private float turnSmoothTime;
+	private bool flag = false;
 
 	Dictionary<int, Color> colorTrail = new Dictionary<int, Color>()
 {
@@ -74,6 +75,13 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		}
 
 		Attack();
+
+		if (player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && flag)
+		{
+			player.weaponController.trailParent.SetActive(false);
+			flag = false;
+		}
+
 		ExitAttack();
 	}
 
@@ -89,6 +97,22 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 					ResetVelocity();
 
+					//Sword trail
+					player.weaponController.trailParent.SetActive(true);
+
+					// A simple 2 color gradient with a fixed alpha of 1.0f.
+					float alpha = 1.0f;
+					Gradient gradient = new Gradient();
+					gradient.SetKeys(
+						new GradientColorKey[] { new GradientColorKey(colorTrail[comboCounter], 0.0f), new GradientColorKey(colorTrail[comboCounter], 0.3f) },
+						new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
+					);
+
+					for (int i = 0; i < player.weaponController.trails.Length; i++)
+					{
+						player.weaponController.trails[i].colorGradient = gradient;
+					}
+
 					//Sound
 					player.anim.runtimeAnimatorController = player.weaponController.combo[comboCounter].animatorOR;
 					player.anim.Play("Attack", 0, 0);
@@ -97,22 +121,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 					//Animation
 					player.swordAttackSound.Play();
 					player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
-
-					//Sword trail
-					player.weaponController.trailParent.SetActive(true);
-
-					// A simple 2 color gradient with a fixed alpha of 1.0f.
-					float alpha = 1.0f;
-					Gradient gradient = new Gradient();
-					gradient.SetKeys(
-						new GradientColorKey[] { new GradientColorKey(Color.white, 0.0f), new GradientColorKey(colorTrail[comboCounter], 0.3f) },
-						new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
-					);
-
-					for (int i = 0; i < player.weaponController.trails.Length; i++)
-					{
-						player.weaponController.trails[i].colorGradient = gradient;
-					}
 
 					//Insert damage and pushforce
 					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + +player.powerController.PowerDamage(); //Cambiar escalado poder
@@ -148,6 +156,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 					player.gravityController.gravityOn = false;
 					lastClicked = Time.time;
+					flag = true;
 				}
 			}
 		}
