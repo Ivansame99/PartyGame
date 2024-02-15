@@ -41,6 +41,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		fallParticleOn = false;
 		originalGravityScale = player.gravityController.gravityScale;
 		jumpAttackController = player.jumpAttackCollider.GetComponent<SlashController>();
+		player.anim.SetTrigger("JumpDrop");
 	}
 
 	public override void Exit()
