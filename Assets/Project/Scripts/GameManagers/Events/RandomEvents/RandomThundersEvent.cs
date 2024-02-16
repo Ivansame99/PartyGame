@@ -29,7 +29,7 @@ public class RandomThundersEvent : GameEvent
 	private float xPosMax = 23f;
 	private float xPosMin = -22.5f;
 	private float zPosMax = 22f;
-	private float zPosMin = -12.5f;
+	private float zPosMin = -10.5f;
 	private float previewYPos = 0.9f;
 	private float attackYPos = 98f;
 
