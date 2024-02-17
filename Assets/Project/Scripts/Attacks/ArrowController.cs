@@ -19,47 +19,31 @@ public class ArrowController : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject owner; //Tiene que ser publico
+	public Vector3 ownerPos; //Tiene que ser publico
 
-    private bool ground;
+	private bool ground;
 
     private float invencibilityTimerOnSpawn = 0.1f;
     public float invencibilityTimerOnSpawnOwner = 0.3f;
 
     private Vector3 arrowDirection;
-    // Start is called before the first frame update
+
     void Start()
     {
-        //gravityScale = 0.1f;
         rb = GetComponent<Rigidbody>();
-        //this.GetComponent<BoxCollider>().enabled = false;
         arrowDirection = transform.forward;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (invencibilityTimerOnSpawnOwner >= 0)
         {
             invencibilityTimerOnSpawnOwner -= Time.deltaTime;
-
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        /*if ((collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Player"))
-        {
-            if (collision.gameObject == owner && invencibilityTimerOnSpawnOwner > 0)
-            {
-                //Debug.Log("Te has pegado a ti mismo");
-                //Para que no colisione el jugador que ha lanzado la flecha al spawnear
-            }
-            else
-            {
-                target = collision.gameObject;
-                attack = true;
-            }
-        }*/
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
             this.GetComponent<BoxCollider>().enabled = false;
@@ -74,22 +58,7 @@ public class ArrowController : MonoBehaviour
     {
         if (!ground)
         {
-            /*if (attack && target != null)
-            {
-                Vector3 direction = (target.transform.position - transform.position).normalized;
-                direction.y = 0;
-                target.gameObject.GetComponent<Rigidbody>().AddForce(direction * pushForce, ForceMode.Impulse);
-                attack = false;
-            }*/
-
             rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
-            //rb.velocity = transform.forward * speed;
-            //Debug.Log(rb.velocity);
-
-            /*if (rb.velocity != Vector3.zero)
-                rb.rotation = Quaternion.LookRotation(rb.velocity/1000);*/
-
-            //CustomGravity();
         }
     }
 
@@ -103,13 +72,11 @@ public class ArrowController : MonoBehaviour
     {
         speed = s;
         gravityScale = s / 10;
-        //Debug.Log(s);
     }
 
     public void SetPushForce(float s)
     {
         pushForce = s;
-        //Debug.Log(s);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -124,7 +91,7 @@ public class ArrowController : MonoBehaviour
 
             speed += 5;
             owner = other.transform.parent.gameObject;
-            //arrowDirection = Vector3.Reflect(arrowDirection, Random.onUnitSphere);
-        }
+            ownerPos = other.transform.parent.gameObject.transform.position;
+		}
     }
 }

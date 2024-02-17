@@ -209,7 +209,7 @@ public class EnemyHealthController : MonoBehaviour
         if (collision.gameObject.tag == "Arrow" && !invencibility && !dead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-            attackPosition = collision.gameObject.transform.position;
+            attackPosition = ac.ownerPos;
             pushBack = true;
             pushForce = ac.pushForce;
             lastAttacker = ac.owner;

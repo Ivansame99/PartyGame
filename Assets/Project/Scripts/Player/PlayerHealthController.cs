@@ -307,7 +307,7 @@ public class PlayerHealthController : MonoBehaviour
 			else
 			{
 				lastAttacker = ac.owner;
-				attackPosition = collision.gameObject.transform.position;
+				attackPosition = ac.ownerPos;
 				pushBack = true;
 				pushForce = ac.pushForce;
 
