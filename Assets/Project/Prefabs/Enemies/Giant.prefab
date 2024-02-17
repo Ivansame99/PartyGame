@@ -126,10 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 32
-  deg: 40
-  speed: 7
-  acceleration: 15
-  angularSpeed: 500
+  enemyChaseBase: {fileID: 11400000, guid: 8790452154143ba4b8acdebef1696a85, type: 2}
+  enemyAttackBase: {fileID: 11400000, guid: c66fd7e43f030cb45bb21d964ffbc22c, type: 2}
 --- !u!195 &4016709583628931770
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -290,4 +288,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643ab6f62d43fc049866953613b42652, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerDistance: 12
+  triggerDistance: 8

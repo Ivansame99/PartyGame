@@ -16,23 +16,24 @@ public class EnemyAttackState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log("Attack State Entered");
+        enemy.enemyAttackBaseInstance.DoEnterLogic();
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        enemy.enemyAttackBaseInstance.DoExitLogic();
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-
-        enemy.AgentState(false);
+        enemy.enemyAttackBaseInstance.DoFrameUpdateLogic();
     }
 
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+        enemy.enemyAttackBaseInstance.DoPhysicsLogic();
     }
 }

@@ -27,14 +27,23 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyAttackState attackState { get; set; }
     #endregion
 
+    #region SO Variables
+    [SerializeField] private EnemyChaseSOBase enemyChaseBase;
+    [SerializeField] private EnemyAttackSOBase enemyAttackBase;
+
+    public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
+    public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
+    #endregion
+
     #region Chase Variables
-    public float deg;
-    public float speed;
-    public float acceleration;
-    public float angularSpeed;
+
     #endregion
     void Awake()
     {
+        //Initialize SO
+        enemyChaseBaseInstance = Instantiate(enemyChaseBase);
+        enemyAttackBaseInstance = Instantiate(enemyAttackBase);
+        //enemyAttackBaseInstance = Instantiate(enemyAttackBase);
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
@@ -43,12 +52,16 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     }
     void Start()
     {
+        //Initialize Health
+        CurrentHealth = MaxHealth;
+
         //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
 
-        //Initialize Health
-        CurrentHealth = MaxHealth;
+        //Initialize SO
+        enemyChaseBaseInstance.Init(gameObject, this);
+        enemyAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
