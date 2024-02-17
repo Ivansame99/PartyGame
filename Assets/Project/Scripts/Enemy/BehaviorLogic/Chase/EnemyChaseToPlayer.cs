@@ -17,9 +17,9 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
     {
         base.DoEnterLogic();
         enemy.agent.isStopped = false;
-        enemy.agent.speed = speed;
-        enemy.agent.acceleration = acceleration;
-        enemy.agent.angularSpeed = angularSpeed;
+        //enemy.agent.speed = speed;
+       // enemy.agent.acceleration = acceleration;
+        //enemy.agent.angularSpeed = angularSpeed;
 
     }
     public override void DoFrameUpdateLogic()
@@ -29,8 +29,9 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
+        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 
-        enemy.MoveEnemy(enemy.playerPos.position);
+
         //Debug.Log("Sigo");
     }
 
@@ -38,6 +39,8 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
     {
         base.DoExitLogic();
         enemy.agent.isStopped = true;
+        //enemy.MoveEnemy(transform.position);
+        
     }
     public override void DoPhysicsLogic()
     {
@@ -52,17 +55,5 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
     public override void ResetValues()
     {
         base.ResetValues();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

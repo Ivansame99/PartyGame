@@ -64,10 +64,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         enemyAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
-        stateMachine.Initialize(chaseState);
-        Debug.Log("Enemy State Machine Initialized");
-        
-        
+        stateMachine.Initialize(chaseState);        
     }
     #region Health/Damage
     public void Damage(float damageAmount)
