@@ -30,7 +30,7 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 	public override void FixedUpdate()
 	{
-		player.rb.MovePosition(player.transform.position + player.direction * speed * Time.fixedDeltaTime);
+		player.rb.velocity = player.direction * speed;
 	}
 
 	public override void Update()
