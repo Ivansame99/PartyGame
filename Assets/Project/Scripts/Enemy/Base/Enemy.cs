@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
+public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeable
 {
+    //HEALTH INTERFACE
     [field: SerializeField] public float MaxHealth { get; set; } = 100f;
     public float CurrentHealth { get; set; }
+
+    //MOVEMENT INTERFACE
     public NavMeshAgent agent { get; set; }
     public Rigidbody rb { get; set; }
     public bool state { get; set; }
@@ -14,7 +17,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     public Transform playerPos2 { get; set; }
     public EnemyTarget enemyTarget { get; set; }
 
-
+    //AGGRO INTERFACE
+    public bool IsAggreed { get; set; }
+    public bool IsWithStrikingDistance { get; set; }
 
     #region State Machine Variables
     public EnemyStateMachine stateMachine { get; set; }
@@ -91,6 +96,18 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     }
     #endregion
 
+    #region Distance Checks
+    public void SetAggroStatus(bool isAggreed)
+    {
+        IsAggreed = isAggreed;
+    }
+
+    public void SetStrikingDistanceBool(bool isWithStrikingDistance)
+    {
+        IsWithStrikingDistance = isWithStrikingDistance;
+    }
+    #endregion
+
     private void Update()
     {
         stateMachine.CurrentEnemyState.FrameUpdate();
@@ -100,5 +117,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable
     {
         stateMachine.CurrentEnemyState.PhysicUpdate();
     }
+
 
 }

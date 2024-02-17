@@ -25,13 +25,15 @@ public class EnemyChaseState : EnemyState
 
     public override void FrameUpdate()
     {
-        
         base.FrameUpdate();
-        Debug.Log(enemy.playerPos);
-        //playerPos = enemy.target.player.position;
 
+        if (enemy.IsAggreed)
+        {
+            enemy.stateMachine.ChangeState(enemy.attackState);
+        }
         enemy.MoveEnemy(enemy.playerPos.position);
 
+        //enemy.stateMachine.ChangeState(enemy.attackState);
     }
 
     public override void PhysicUpdate()
