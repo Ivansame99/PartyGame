@@ -36,23 +36,11 @@ public class PracticeDummyHealthController : MonoBehaviour
 	[SerializeField]
 	private GameObject Cross1, Cross2, Glow;
 
-	private bool pushBack;
 	private Vector3 attackPosition;
-	private float pushForce;
-
-	private Animator animator;
 
 	public bool invencibility = false;
-	[SerializeField] private bool damageAnim;
 
 	public bool dead = false;
-
-	[SerializeField] private AudioSource hitSound;
-	[SerializeField] private AudioSource deathSound;
-
-
-	[SerializeField] private GameObject DeathParticles;
-	[SerializeField] private GameObject BloodParticles;
 
 	private PowerController powerController;
 
@@ -62,7 +50,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 		powerController = GetComponent<PowerController>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupHealthBar(healBarCanvas, camera);
-		animator = GetComponent<Animator>();
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 		if (powerController != null)
 		{
@@ -80,7 +67,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 	public void ReceiveDamageSlash(float damage)
 	{
 		//Feedback
-		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
 		Cross1.SetActive(false);
 		Cross2.SetActive(false);
 		Glow.SetActive(false);
@@ -93,21 +79,15 @@ public class PracticeDummyHealthController : MonoBehaviour
 		//Logic
 		health -= damage;
 		timer = inmuneTime;
+
 		if (health <= 0)
 		{
 			Die();
-			deathSound.pitch = UnityEngine.Random.Range(1.2f, 1.5f);
-			deathSound.Play();
 		}
+
 		if (healthBarC != null)
 		{
 			healthBarC.SetProgress(health / maxHealth, 5f);
-			if (health >= 0 && !damageAnim && !animator.GetBool("isEvading"))
-			{
-				animator.SetTrigger("damage");
-				hitSound.pitch = UnityEngine.Random.Range(1f, 1.2f);
-				hitSound.Play();
-			}
 		}
 	}
 
@@ -117,28 +97,16 @@ public class PracticeDummyHealthController : MonoBehaviour
 		if (healthBarC != null)
 		{
 			healthBarC.SetProgress(health / maxHealth, 5f);
-			if (health >= 0 && damageAnim && !animator.GetBool("isEvading"))
-			{
-				animator.SetTrigger("damage");
-				hitSound.pitch = UnityEngine.Random.Range(1f, 1.2f);
-				hitSound.Play();
-			}
 		}
+
 		if (health <= 0)
 		{
 			Die();
-			deathSound.pitch = UnityEngine.Random.Range(1.2f, 1.5f);
-			deathSound.Play();
 		}
 	}
 
 	void Die()
 	{
-		animator.SetTrigger("die");
-
-		/*float destroyDelay = Random.value;
-        Destroy(this.gameObject, destroyDelay);
-        Destroy(healthBar.gameObject, destroyDelay);*/
 		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
 		dead = true;
@@ -147,7 +115,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	public void enemyDestroy()
 	{
-		Instantiate(DeathParticles, transform.position, Quaternion.identity);
 		Destroy(this.gameObject);
 		Destroy(healthBar.gameObject);
 		Destroy(powerLevelGameObject.gameObject);
@@ -173,8 +140,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 				SlashController slashController = other.GetComponent<SlashController>();
 				attackPosition = other.gameObject.transform.position;
-				pushBack = true;
-				pushForce = slashController.pushForce;
 
 				ReceiveDamageSlash(slashController.finalDamage);
 			}
@@ -192,8 +157,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
 			attackPosition = collision.gameObject.transform.position;
-			pushBack = true;
-			pushForce = ac.pushForce;
 			lastAttacker = ac.owner;
 			ReceiveDamageArrow(ac.finalDamage);
 			Destroy(collision.gameObject);

@@ -19915,7 +19915,7 @@ GameObject:
   - component: {fileID: 6610913120430995555}
   - component: {fileID: 3016040106730580343}
   m_Layer: 0
-  m_Name: HealthBar
+  m_Name: PracticeDollHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19993,7 +19993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8518027558917819816}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 4, z: 0}
 --- !u!114 &3016040106730580343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29758,7 +29758,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7158468482713559330}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.0034798533, y: 0.005219781, z: 0.0034798533}
   m_ConstrainProportionsScale: 0
@@ -29829,8 +29829,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -29884,7 +29884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8518027558917819816}
-  offset: {x: 0, y: 3.9, z: 0}
+  offset: {x: 0, y: 5, z: 0}
 --- !u!114 &210158173155086757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29944,7 +29944,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -29954,7 +29954,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -29969,7 +29969,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -30014,7 +30014,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7942447436477112534}
+      addedObject: {fileID: 6056267827878608299}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       insertIndex: -1
@@ -30040,7 +30040,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8195607469648882243}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7942447436477112534
+--- !u!114 &6056267827878608299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -30049,7 +30049,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9042608217900226322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54bc150f1efed68448357c26a9e0c048, type: 3}
+  m_Script: {fileID: 11500000, guid: 0503f337db41d23419e623eaf5953a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealthBase: 100
@@ -30063,14 +30063,7 @@ MonoBehaviour:
   Cross2: {fileID: 3701808972935927134}
   Glow: {fileID: 2899380193890572886}
   invencibility: 0
-  damageAnim: 0
   dead: 0
-  hitSound: {fileID: 3443398627956608111}
-  deathSound: {fileID: 6906976717640472196}
-  DeathParticles: {fileID: 141433446842962269, guid: 9fe8f8b3288e45a44af36ff8aa04486e,
-    type: 3}
-  BloodParticles: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58,
-    type: 3}
 --- !u!54 &5220432774162993826
 Rigidbody:
   m_ObjectHideFlags: 0
