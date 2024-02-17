@@ -7453,7 +7453,7 @@ PrefabInstance:
     - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: textSpeed
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -7463,12 +7463,22 @@ PrefabInstance:
     - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: lines.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: lines.Array.data[0]
-      value: Welcome to the COLISSEEUM!!!
+      value: Welcome to the...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: lines.Array.data[1]
+      value: COLISSEUM!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: secondsBetweenTexts
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

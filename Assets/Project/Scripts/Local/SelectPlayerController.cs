@@ -37,11 +37,12 @@ public class SelectPlayerController : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogError("Te has olvidado de inciar el juego en la escena PlayerJoin");
-            //  Block of code to handle errors
-            //GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
-            //player1.transform.parent = character.transform;
-            //player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[0]);
-        }   
+            //Debug.LogError("Te has olvidado de inciar el juego en la escena PlayerJoin");
+            SceneManager.LoadScene("PlayerJoin");
+			//  Block of code to handle errors
+			//GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
+			//player1.transform.parent = character.transform;
+			//player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[0]);
+		}   
     }
 }

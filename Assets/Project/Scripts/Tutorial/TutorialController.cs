@@ -12,6 +12,9 @@ public class TutorialController : MonoBehaviour
     private float textSpeed;
 
 	[SerializeField]
+	private float secondsBetweenTexts;
+
+	[SerializeField]
 	private string[] lines;
 
     private int index=0;
@@ -39,10 +42,16 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in lines[index].ToCharArray())
+		yield return new WaitForSeconds(secondsBetweenTexts);
+		dialogBoxText.text = string.Empty;
+        
+		foreach (char c in lines[index].ToCharArray())
         {
             dialogBoxText.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
-    }
+		
+        index++;
+        if (index < lines.Length) StartCoroutine(TypeLine());
+	}
 }
