@@ -30,7 +30,16 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 	public override void FixedUpdate()
 	{
-		player.rb.MovePosition(player.transform.position + player.direction * speed * Time.fixedDeltaTime);
+		Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+		if (currentVelocity.magnitude > speed)
+		{
+			currentVelocity = currentVelocity.normalized * speed;
+		}
+
+		Vector3 targetVelocity = player.direction * speed;
+		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+		player.rb.AddForce(force, ForceMode.Acceleration);
 	}
 
 	public override void Update()
