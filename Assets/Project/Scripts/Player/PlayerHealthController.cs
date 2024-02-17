@@ -197,7 +197,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
 		powerBar.gameObject.SetActive(false);
-		Invoke(nameof(MoveDeadPlayer), 2f);
+		Invoke(nameof(MoveDeadPlayer), 1f);
 	}
 
 	private void MoveDeadPlayer()
@@ -218,6 +218,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	public void EnablePlayer()
 	{
+		CancelInvoke(nameof(MoveDeadPlayer));
 		powerController.enabled = true;
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
