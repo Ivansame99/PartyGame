@@ -26,6 +26,7 @@ public class PlayerWalkState : PlayerState<PlayerController>
 	public override void Exit()
 	{
 		player.anim.SetBool("Walking", false);
+		ResetVelocity();
 	}
 
 	public override void FixedUpdate()
@@ -102,5 +103,10 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		}
 
 		player.anim.SetBool("Walking", true);
+	}
+
+	private void ResetVelocity()
+	{
+		player.rb.velocity = new Vector3(0, player.rb.velocity.y, 0);
 	}
 }
