@@ -41,6 +41,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		fallParticleOn = false;
 		originalGravityScale = player.gravityController.gravityScale;
 		jumpAttackController = player.jumpAttackCollider.GetComponent<SlashController>();
+		ResetVelocity();
 	}
 
 	public override void Exit()
@@ -100,5 +101,10 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		{
 			timerPrepareAttack += Time.deltaTime;
 		}
+	}
+
+	private void ResetVelocity()
+	{
+		player.rb.velocity = new Vector3(0, player.rb.velocity.y, 0);
 	}
 }

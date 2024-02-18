@@ -56,7 +56,16 @@ public class PlayerArrowState : PlayerState<PlayerController>
 		//If its in ground, player can move
 		if (player.groundCheck.DetectGround())
 		{
-			player.rb.MovePosition(player.transform.position + player.direction * moveSpeed * Time.fixedDeltaTime);
+			Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+			if (currentVelocity.magnitude > moveSpeed)
+			{
+				currentVelocity = currentVelocity.normalized * moveSpeed;
+			}
+
+			Vector3 targetVelocity = player.direction * moveSpeed;
+			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+			player.rb.AddForce(force, ForceMode.Acceleration);
 		}
 	}
 

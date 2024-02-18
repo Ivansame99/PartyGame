@@ -55,11 +55,21 @@ public class PlayerRollState : PlayerState<PlayerController>
 	public override void Exit()
 	{
 		player.dodgeTimer = dodgeCD;
+		ResetVelocity();
 	}
 
 	public override void FixedUpdate()
 	{
-		player.rb.MovePosition(player.transform.position + rollDirection * dodgeSpeed * Time.fixedDeltaTime);
+		Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+		if (currentVelocity.magnitude > dodgeSpeed)
+		{
+			currentVelocity = currentVelocity.normalized * dodgeSpeed;
+		}
+
+		Vector3 targetVelocity = rollDirection * dodgeSpeed;
+		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+		player.rb.AddForce(force, ForceMode.Acceleration);
 	}
 
 	public override void Update()

@@ -26,11 +26,21 @@ public class PlayerWalkState : PlayerState<PlayerController>
 	public override void Exit()
 	{
 		player.anim.SetBool("Walking", false);
+		ResetVelocity();
 	}
 
 	public override void FixedUpdate()
 	{
-		player.rb.MovePosition(player.transform.position + player.direction * speed * Time.fixedDeltaTime);
+		Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+		if (currentVelocity.magnitude > speed)
+		{
+			currentVelocity = currentVelocity.normalized * speed;
+		}
+
+		Vector3 targetVelocity = player.direction * speed;
+		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+		player.rb.AddForce(force, ForceMode.Acceleration);
 	}
 
 	public override void Update()
@@ -93,5 +103,10 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		}
 
 		player.anim.SetBool("Walking", true);
+	}
+
+	private void ResetVelocity()
+	{
+		player.rb.velocity = new Vector3(0, player.rb.velocity.y, 0);
 	}
 }
