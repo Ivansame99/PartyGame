@@ -25,6 +25,10 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private Transform healthBar;
 
+    [SerializeField]
+    private GameObject powerLevelGameObject;
+    private float currentPower;
+
     private GameObject lastAttacker;
     private Vector3 attackPosition;
     private bool pushBack;
@@ -57,8 +61,40 @@ public class EnemyHealth : MonoBehaviour
         {
             healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
         }
+        if(enemy.currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
+    public void ReceiveDamageArrow(float damage)
+    {
+        health -= damage;
+        if (healthBarC != null)
+        {
+            healthBarC.SetProgress(health / maxHealth, 5f);
+        }
+        if (enemy.currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        /*float destroyDelay = Random.value;
+        Destroy(this.gameObject, destroyDelay);
+        Destroy(healthBar.gameObject, destroyDelay);*/
+        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
+        enemy.isDead = true;
+        Invoke("enemyDestroy", 2.0f);
+    }
+    public void enemyDestroy()
+    {
+        Destroy(this.gameObject);
+        Destroy(healthBar.gameObject);
+        Destroy(powerLevelGameObject.gameObject);
+    }
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);
@@ -84,6 +120,20 @@ public class EnemyHealth : MonoBehaviour
         if (other.CompareTag("EventDamage"))
         {
             ReceiveDamageSlash(other.GetComponent<DealDamageEvent>().damageAmmount);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Arrow" && !invencibility && !enemy.isDead)
+        {
+            ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
+            attackPosition = collision.gameObject.transform.position;
+            pushBack = true;
+            pushForce = ac.pushForce;
+            lastAttacker = ac.owner;
+            ReceiveDamageArrow(ac.finalDamage);
+            Destroy(collision.gameObject);
         }
     }
 }
