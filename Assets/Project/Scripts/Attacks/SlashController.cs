@@ -20,12 +20,15 @@ public class SlashController : MonoBehaviour
 
     private EnemyHealthController2 enemy1Controller;
 
+    private EnemyHealth enemy;
+
     private AudioSource hitSound;
     private void Awake()
     {
         player = transform.parent.gameObject;
 		playerHealthController = player.GetComponent<PlayerHealthController>();
         enemy1Controller = transform.GetComponent<EnemyHealthController2>();
+        enemy = transform.GetComponent<EnemyHealth>();
         pushForceParry = 15f;
         hitSound = GetComponent<AudioSource>();
     }
@@ -49,6 +52,11 @@ public class SlashController : MonoBehaviour
                 enemy1Controller.invencibility = true;
             }
 
+            if (enemy)
+            {
+                enemy.timer = 1f;
+                enemy.invencibility = true;
+            }
             if (hitSound != null)
             {
                 hitSound.Play();

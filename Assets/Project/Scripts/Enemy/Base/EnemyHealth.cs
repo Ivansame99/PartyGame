@@ -13,8 +13,8 @@ public class EnemyHealth : MonoBehaviour
     private float maxHealth;
 
     //Inmune time
-    private bool invencibility;
-    private float timer;
+    public bool invencibility;
+    public float timer;
 
     //Health UI
     private Canvas healBarCanvas;

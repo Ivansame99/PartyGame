@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeable
+public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeable,ICombat
 {
     //HEALTH INTERFACE
     [field: Header("Health parameters")]
@@ -25,6 +25,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
     public bool IsWithStrikingDistance { get; set; }
+    public bool IsImpact { get; set; }
+
+    //COMBAT INTERFICE
+    public PowerController powerController { get; set; }
+    [field: SerializeField] public SlashController slashController { get; set; }
 
     #region State Machine Variables
     public EnemyStateMachine stateMachine { get; set; }
@@ -39,6 +44,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
 
     public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
+
 
     #endregion
 
@@ -63,6 +69,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        powerController = GetComponent<PowerController>();
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
@@ -108,6 +115,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         EnemyDamaged,
         PlayFootstepSound,
         EnemyAttack,
+        EnemyAttackFinished,
     }
     #endregion
 
@@ -120,6 +128,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public void SetStrikingDistanceBool(bool isWithStrikingDistance)
     {
         IsWithStrikingDistance = isWithStrikingDistance;
+    }
+    
+    public void SetImpactStatus(bool isImpact)
+    {
+        IsImpact = isImpact;
     }
     #endregion
 
