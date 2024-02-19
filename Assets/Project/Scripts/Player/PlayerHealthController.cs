@@ -184,14 +184,13 @@ public class PlayerHealthController : MonoBehaviour
 		//Feedback
 		Instantiate(DeathParticles, transform.position, Quaternion.identity);
 		Instantiate(skullsBounds, transform.position, Quaternion.identity);
-		anim.SetTrigger("Death");
+
 		//Power control pass
 		currentPower = powerController.GetCurrentPowerLevel() / 2;
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
-		playersRespawn.NotifyDead(this.gameObject.transform);
 		dead = true;
 		DisablePlayer();
 	}
@@ -202,12 +201,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
 		powerBar.gameObject.SetActive(false);
-		Invoke(nameof(MoveDeadPlayer), 2f);
-	}
-
-	private void MoveDeadPlayer()
-	{
-		this.transform.position = new Vector3(100, 10, 0); //To hide from interact with other characters
+		playersRespawn.NotifyDead(this.gameObject.transform);
 	}
 
 	private void SetupHealthBar(Canvas canvas, Camera camera)
