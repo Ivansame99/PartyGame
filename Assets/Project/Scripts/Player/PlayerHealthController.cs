@@ -95,8 +95,12 @@ public class PlayerHealthController : MonoBehaviour
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-		playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-		playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
+
+		if (playerUI != null)
+		{
+			playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
+		}
 
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 
@@ -152,7 +156,8 @@ public class PlayerHealthController : MonoBehaviour
 
 		//Animations
 		healthBarAnimator.SetTrigger("Damage");
-		playerUIHealthAnimator.SetTrigger("Damage");
+		if (playerUI != null)
+			playerUIHealthAnimator.SetTrigger("Damage");
 
 		//Logic
 		health -= damage;
@@ -213,7 +218,8 @@ public class PlayerHealthController : MonoBehaviour
 	void ChangeUI()
 	{
 		healthBarC.SetProgress(health / maxHealth, 2);
-		playerUIHealth.SetProgress(health / maxHealth, 2);
+		if (playerUI != null)
+			playerUIHealth.SetProgress(health / maxHealth, 2);
 	}
 
 	public void EnablePlayer()

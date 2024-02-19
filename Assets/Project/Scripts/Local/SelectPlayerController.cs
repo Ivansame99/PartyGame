@@ -14,8 +14,6 @@ public class SelectPlayerController : MonoBehaviour
     public GameObject[] prefabPlayers;
     [SerializeField]
     public GameObject[] playersUI;
-    [SerializeField]
-    public GameObject character;
 
     // Start is called before the first frame update
     void Awake()
@@ -31,18 +29,12 @@ public class SelectPlayerController : MonoBehaviour
                 playerPos[i].SetActive(false);
                 GameObject player = Instantiate(prefabPlayers[i], playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
                 player.name = prefabPlayers[i].name;
-                //player1.transform.parent = character.transform;
-                player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[i]);
+                player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
             }
         }
         catch (Exception e)
         {
-            //Debug.LogError("Te has olvidado de inciar el juego en la escena PlayerJoin");
             SceneManager.LoadScene("PlayerJoin");
-			//  Block of code to handle errors
-			//GameObject player = Instantiate(prefabPlayer, playerPos[0].transform.position, playerPos[0].transform.rotation) as GameObject;
-			//player1.transform.parent = character.transform;
-			//player.GetComponent<playerInputHandler>().InitializePlayer(playerConfigs[0]);
 		}   
     }
 }
