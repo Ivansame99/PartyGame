@@ -8,11 +8,6 @@ public class EnemyAttackState : EnemyState
     {
     }
 
-    public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
-    {
-        base.AnimationTriggerEvent(triggerType);
-    }
-
     public override void EnterState()
     {
         base.EnterState();
@@ -35,5 +30,11 @@ public class EnemyAttackState : EnemyState
     {
         base.PhysicUpdate();
         enemy.enemyAttackBaseInstance.DoPhysicsLogic();
+    }
+
+    public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
+    {
+        base.AnimationTriggerEvent(triggerType);
+        enemy.enemyAttackBaseInstance.DoAnimationTriggerEventLogic(triggerType);
     }
 }

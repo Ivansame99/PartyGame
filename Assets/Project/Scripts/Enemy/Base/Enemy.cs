@@ -6,8 +6,12 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeable
 {
     //HEALTH INTERFACE
-    [field: SerializeField] public float MaxHealth { get; set; } = 100f;
-    public float CurrentHealth { get; set; }
+    [field: Header("Health parameters")]
+    [field: SerializeField] public float maxHealth { get; set; } = 100f;
+    [field: SerializeField] public float inmuneTime { get; set; }
+    public float currentHealth { get; set; }
+    public bool isDead { get; set; }
+
 
     //MOVEMENT INTERFACE
     public NavMeshAgent agent { get; set; }
@@ -16,6 +20,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public Transform playerPos { get; set; }
     public Transform playerPos2 { get; set; }
     public EnemyTarget enemyTarget { get; set; }
+    public Animator animator { get; set; }
 
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
@@ -28,16 +33,15 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     #endregion
 
     #region SO Variables
+    [Header("Enemy States")]
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
 
     public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
-    #endregion
-
-    #region Chase Variables
 
     #endregion
+
     void Awake()
     {
         //Initialize SO
@@ -53,12 +57,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     void Start()
     {
         //Initialize Health
-        CurrentHealth = MaxHealth;
+        currentHealth = maxHealth;
 
         //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-
+        animator = GetComponent<Animator>();
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
@@ -69,9 +73,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     #region Health/Damage
     public void Damage(float damageAmount)
     {
-        CurrentHealth -= damageAmount;
+        currentHealth -= damageAmount;
 
-        if (CurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -103,6 +107,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     {
         EnemyDamaged,
         PlayFootstepSound,
+        EnemyAttack,
     }
     #endregion
 

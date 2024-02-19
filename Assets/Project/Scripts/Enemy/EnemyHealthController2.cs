@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-public class EnemyHealthController : MonoBehaviour
+public class EnemyHealthController2 : MonoBehaviour
 {
-
     private float health;
 
     [SerializeField]
@@ -26,7 +25,6 @@ public class EnemyHealthController : MonoBehaviour
     //Variables que iran donde se spawneen los pjs
     private Canvas healBarCanvas;
 
-    [SerializeField]
     private Camera camera;
 
     [SerializeField]

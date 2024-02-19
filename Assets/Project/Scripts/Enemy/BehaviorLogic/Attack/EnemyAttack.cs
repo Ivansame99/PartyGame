@@ -5,13 +5,20 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyAttack", menuName = "Enemy Logic/Attack Logic/Enemy Attack")]
 public class EnemyAttack : EnemyAttackSOBase
 {
+    [SerializeField] ParticleSystem areaAttackParticles;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+
+        if(triggerType == Enemy.AnimationTriggerType.EnemyAttack)
+        {
+            Attack();
+        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        enemy.animator.SetTrigger("Attack");
         //enemy.AgentState(false);
     }
     public override void DoExitLogic()
@@ -37,6 +44,11 @@ public class EnemyAttack : EnemyAttackSOBase
     public override void ResetValues()
     {
         base.ResetValues();
+    }
+
+    private void Attack()
+    {
+        Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
     }
 }
 
