@@ -5,156 +5,102 @@ using UnityEngine.InputSystem;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
-    private List<PlayerConfiguration> playerConfigs;
+	private List<PlayerConfiguration> playerConfigs;
 
-    [SerializeField]
-    public GameObject[] playerText;
+	[SerializeField]
+	private GameObject[] playerText;
 
-    [SerializeField]
-    private int MaxPlayers;
-    private int playerIndex=0;
+	[SerializeField]
+	private TMP_Text readyPlatformText;
 
-    [Header("Level names")]
-    [SerializeField]
-    public string firstLevel,levelName;
+	[SerializeField]
+	private int maxPlayers;
+	private int playerIndex = 0;
 
-    [Header("Circle Transition")]
-    [SerializeField]
-    private Material transitionMaterial;
-    [SerializeField]
-    private float transitionTime = 3f;
-    [SerializeField]
-    private string propertyName = "_Progress";
+	[Header("Level names")]
+	[SerializeField]
+	private string levelName;
 
-    [Header("Loading")]
-    [SerializeField]
-    private GameObject loadingCanvas;
+	[SerializeField]
+	private GameObject[] playerPos;
+	[SerializeField]
+	private GameObject[] prefabPlayers;
 
-    [SerializeField]
-    private TextMeshProUGUI loadingNumber;
+	public int playersReady;
 
-    public static PlayerConfigurationManager Instance { get; private set; }
-    private int firstLevelFinished;
+	public static PlayerConfigurationManager Instance { get; private set; }
 
-    public bool goToPlay = false;
+	public void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+			DontDestroyOnLoad(Instance);
+			playerConfigs = new List<PlayerConfiguration>();
+		}
+	}
 
-    public void Awake()
-    {
-        if (Instance != null)
-        {
-            //Debug.Log("olis");
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
-            playerConfigs = new List<PlayerConfiguration>();
-        }
-       // transitionMaterial.SetFloat(propertyName, 1);
-    }
+	public List<PlayerConfiguration> GetPlayerConfigs()
+	{
+		return playerConfigs;
+	}
 
-    public List<PlayerConfiguration> GetPlayerConfigs()
-    {
-        return playerConfigs;
-    }
+	public void ReadyPlayer()
+	{
+		readyPlatformText.text = playersReady.ToString() + " / " + playerConfigs.Count.ToString();
+		if (playerConfigs.Count == playersReady)
+		{
+			Invoke(nameof(ChangeScene), 1.0f);
+		}
+	}
 
-    public void setPlayerColor(int index, Material color)
-    {
-        playerConfigs[index].PlayerMaterial = color;
-    }
+	void ChangeScene()
+	{
+		SceneManager.LoadScene(levelName);
+	}
 
-    public void ReadyPlayer(int index)
-    {
-        playerConfigs[index].IsReady = true;
-        if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.IsReady == true))
-        {
-            //StartCoroutine(CloseTranition());
-            //Invoke("ChangeScene", 2.0f);
-            //ChangeScene();
-        }
-    }
+	public void HandlePlayerJoin(PlayerInput pi)
+	{
+		if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+		{
+			playerText[playerIndex].GetComponent<Animator>().SetTrigger("Ready");
 
-    public void HandlePlayerJoin(PlayerInput pi)
-    {
-        if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
-        {
-            for(int i = 0; i < playerIndex; i++)
-            {
-                if (playerIndex < playerText.Length)
-                {
-                    //Debug.Log("AAA");
-                    playerText[playerIndex].SetActive(false);
-                }
-            }
-            pi.transform.SetParent(transform);
-            playerConfigs.Add(new PlayerConfiguration(pi));
-        }
-    }
+			pi.transform.SetParent(transform);
 
-    public void ChangeScene()
-    {
-        SceneManager.LoadScene(firstLevel);
-        //loadingCanvas.SetActive(true);
-        //if (firstLevelFinished == 0) StartCoroutine(LoadYourAsyncScene(firstLevel));
-        //else StartCoroutine(LoadYourAsyncScene(levelName));
+			PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
 
-        /*if (firstLevelFinished == 0) SceneManager.LoadScene(firstLevel);
-        else SceneManager.LoadScene(levelName);
-        StartCoroutine(LoadYourAsyncScene(firstLevel));*/
-    }
+			playerConfigs.Add(playerConfig);
+			SpawnPlayer(playerConfig);
+			playerIndex++;
+			readyPlatformText.text = playersReady.ToString() + " / " + playerConfigs.Count.ToString();
+		}
+	}
 
-    private IEnumerator CloseTranition()
-    {
-        float currentTime = transitionTime;
-        while (currentTime > 0)
-        {
-            currentTime -= Time.deltaTime;
-            transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
-            yield return null;
-        }
-        ChangeScene();
-        
-        //StartCoroutine(LoadYourAsyncScene(firstLevel));
-    }
-
-    
-    IEnumerator LoadYourAsyncScene(string sceneName)
-    {
-        // The Application loads the Scene in the background as the current Scene runs.
-        // This is particularly good for creating loading screens.
-        // You could also load the Scene by using sceneBuildIndex. In this case Scene2 has
-        // a sceneBuildIndex of 1 as shown in Build Settings.
-        
-        
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-        
-
-        // Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            //loadingCanvas.SetActive(true);
-            float progressValue = Mathf.Clamp01(asyncLoad.progress/0.9f);
-            int progressInt = (int)progressValue * 100;
-            loadingNumber.text = progressInt.ToString() + "%";
-            yield return null;
-        }
-    }
+	private void SpawnPlayer(PlayerConfiguration pc)
+	{
+		playerPos[pc.PlayerIndex].SetActive(false);
+		GameObject player = Instantiate(prefabPlayers[pc.PlayerIndex], playerPos[pc.PlayerIndex].transform.position, playerPos[pc.PlayerIndex].transform.rotation) as GameObject;
+		player.name = prefabPlayers[pc.PlayerIndex].name;
+		PlayerInputHandler pih = player.GetComponent<PlayerInputHandler>();
+		pih.InitializePlayer(pc);
+	}
 }
 
 public class PlayerConfiguration
 {
-    public PlayerConfiguration(PlayerInput pi)
-    {
-        PlayerIndex = pi.playerIndex;
-        Input = pi;
-    }
-    public PlayerInput Input { get; set; }
-    public int PlayerIndex { get; set; }
-    public bool IsReady { get; set; }
-    public Material PlayerMaterial { get; set; }
+	public PlayerConfiguration(PlayerInput pi)
+	{
+		PlayerIndex = pi.playerIndex;
+		Input = pi;
+	}
+	public PlayerInput Input { get; set; }
+	public int PlayerIndex { get; set; }
+	public bool IsReady { get; set; }
+	public Material PlayerMaterial { get; set; }
 }
 
 

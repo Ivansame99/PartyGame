@@ -5458,6 +5458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  owner: {fileID: 0}
 --- !u!65 &7170931887851053603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10640,7 +10641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6062149186305044265}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30306,6 +30307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  owner: {fileID: 0}
 --- !u!82 &6237304546354830881
 AudioSource:
   m_ObjectHideFlags: 0

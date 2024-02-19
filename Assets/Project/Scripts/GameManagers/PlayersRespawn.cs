@@ -17,6 +17,9 @@ public class PlayersRespawn : MonoBehaviour
 	private Camera camera;
 	private MultipleTargetCamera mtp;
 
+	[SerializeField]
+	private bool onHub;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -29,6 +32,14 @@ public class PlayersRespawn : MonoBehaviour
 
 	public void SpawnPlayer(GameObject player)
 	{
+		if (onHub)
+		{
+			int randomSpawn = Random.Range(0, spawns.Length);
+			player.transform.position = spawns[randomSpawn].position;
+			player.GetComponent<PlayerHealthController>().EnablePlayer();
+			return;
+		}
+
 		if (!roundController.finalRound)
 		{
 			int randomSpawn = Random.Range(0, spawns.Length);
@@ -40,6 +51,13 @@ public class PlayersRespawn : MonoBehaviour
 
 	public void NotifyDead(Transform player)
 	{
+
+		if (onHub)
+		{
+			SpawnPlayer(player.gameObject);
+			return;
+		}
+		
 		endGameController.PlayerDead();
 
 		StartCoroutine(SlowMotion(player));
@@ -49,6 +67,8 @@ public class PlayersRespawn : MonoBehaviour
 		{
 			if (mtp.targets[i].name == player.name) mtp.targets.Remove(mtp.targets[i]);
 		}
+
+		player.transform.position = new Vector3(100, 10, 0);
 	}
 
 	void GetPlayers()

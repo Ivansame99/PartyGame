@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class SlashController : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class SlashController : MonoBehaviour
     public float finalDamage;
 
     public float pushForce;
+
+	[HideInInspector]
+	public GameObject owner;
 
     private bool pushBack;
     private Vector3 attackPosition;
@@ -24,8 +28,9 @@ public class SlashController : MonoBehaviour
     private void Awake()
     {
         player = transform.parent.gameObject;
+        owner = player;
 		playerHealthController = player.GetComponent<PlayerHealthController>();
-        enemy1Controller = transform.GetComponent<EnemyHealthController>();
+        enemy1Controller = transform.parent.GetComponent<EnemyHealthController>();
         pushForceParry = 15f;
         hitSound = GetComponent<AudioSource>();
     }

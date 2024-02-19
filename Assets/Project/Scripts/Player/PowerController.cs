@@ -60,8 +60,7 @@ public class PowerController : MonoBehaviour
         if (!isEnemy)
         {
             playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-            GameObject gm = playerUI.transform.GetChild(0).GetChild(1).gameObject;
-            playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+            if(playerUI!=null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         }
 
         SetCurrentPowerLevel(minPowerLevel);
@@ -107,7 +106,7 @@ public class PowerController : MonoBehaviour
     private void ChangeUIText()
     {
         powerLevelText.SetText(currentPowerLevel.ToString());
-        if(!isEnemy) playerUIPowerText.SetText(currentPowerLevel.ToString());
+        if(!isEnemy && playerUI!=null) playerUIPowerText.SetText(currentPowerLevel.ToString());
     }
 
     public float PowerDamage()

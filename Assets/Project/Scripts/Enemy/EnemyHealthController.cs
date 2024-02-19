@@ -187,11 +187,10 @@ public class EnemyHealthController : MonoBehaviour
         {
             if (other.gameObject.transform.parent.tag != "Enemy")
             {
-                lastAttacker = other.transform.parent.gameObject;
-
                 SlashController slashController = other.GetComponent<SlashController>();
-                attackPosition = other.gameObject.transform.position;
-                pushBack = true;
+				lastAttacker = slashController.owner;
+				attackPosition = slashController.owner.transform.position;
+				pushBack = true;
                 pushForce = slashController.pushForce;
 
                 ReceiveDamageSlash(slashController.finalDamage);

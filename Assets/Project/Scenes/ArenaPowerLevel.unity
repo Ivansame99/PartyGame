@@ -3194,7 +3194,7 @@ GameObject:
   - component: {fileID: 976504691}
   m_Layer: 0
   m_Name: Limit3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3218,8 +3218,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5752102, y: 1, z: 1.0000001}
+  m_Center: {x: 0.15668114, y: 0, z: 0.0000007702563}
 --- !u!23 &976504692
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3283,7 +3283,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 25.279, z: 0}
 --- !u!1 &996743039
 GameObject:
@@ -3592,7 +3592,6 @@ MonoBehaviour:
   - {fileID: 2745598609333794032}
   - {fileID: 2745598609333794031}
   - {fileID: 2745598609333794030}
-  character: {fileID: 0}
 --- !u!4 &1202747127
 Transform:
   m_ObjectHideFlags: 0
@@ -3886,7 +3885,7 @@ GameObject:
   - component: {fileID: 1254371499}
   m_Layer: 0
   m_Name: Limit2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3910,8 +3909,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5411491, y: 1, z: 1}
+  m_Center: {x: -0.02031837, y: 0, z: 0.000011437385}
 --- !u!23 &1254371500
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3975,7 +3974,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: -33.036, z: 0}
 --- !u!1 &1312441101
 GameObject:
@@ -4798,7 +4797,7 @@ GameObject:
   - component: {fileID: 1430526021}
   m_Layer: 0
   m_Name: Limit1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4822,8 +4821,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5550644, y: 1, z: 1}
+  m_Center: {x: 0.0021169076, y: 0, z: 0}
 --- !u!23 &1430526022
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7125,56 +7124,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: rounds.Array.data[1].enemiesInRound.Array.size
-      value: 4
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.size
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[2].enemiesInRound.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[1].enemiesInRound.Array.data[1]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[1].enemiesInRound.Array.data[2]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[1].enemiesInRound.Array.data[3]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[2].enemiesInRound.Array.data[1]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[2].enemiesInRound.Array.data[2]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[2].enemiesInRound.Array.data[3]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[2].enemiesInRound.Array.data[4]
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
     - target: {fileID: 2805138501441062883, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_RootOrder
@@ -7300,20 +7252,10 @@ PrefabInstance:
       propertyPath: minTimeToSpawn
       value: 60
       objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+    - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: randomEvents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[1]
-      value: 
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

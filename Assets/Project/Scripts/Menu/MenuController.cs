@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 
     public void PlayButton()
     {
-        SceneManager.LoadScene("PlayerJoin");
+        SceneManager.LoadScene("HUB");
     }
 
     public void ExitButton()

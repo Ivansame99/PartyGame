@@ -95,8 +95,12 @@ public class PlayerHealthController : MonoBehaviour
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-		playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-		playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
+
+		if (playerUI != null)
+		{
+			playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
+			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
+		}
 
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 
@@ -152,7 +156,8 @@ public class PlayerHealthController : MonoBehaviour
 
 		//Animations
 		healthBarAnimator.SetTrigger("Damage");
-		playerUIHealthAnimator.SetTrigger("Damage");
+		if (playerUI != null)
+			playerUIHealthAnimator.SetTrigger("Damage");
 
 		//Logic
 		health -= damage;
@@ -179,14 +184,13 @@ public class PlayerHealthController : MonoBehaviour
 		//Feedback
 		Instantiate(DeathParticles, transform.position, Quaternion.identity);
 		Instantiate(skullsBounds, transform.position, Quaternion.identity);
-		anim.SetTrigger("Death");
+
 		//Power control pass
 		currentPower = powerController.GetCurrentPowerLevel() / 2;
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
-		playersRespawn.NotifyDead(this.gameObject.transform);
 		dead = true;
 		DisablePlayer();
 	}
@@ -197,12 +201,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
 		powerBar.gameObject.SetActive(false);
-		Invoke(nameof(MoveDeadPlayer), 1f);
-	}
-
-	private void MoveDeadPlayer()
-	{
-		this.transform.position = new Vector3(100, 10, 0); //To hide from interact with other characters
+		playersRespawn.NotifyDead(this.gameObject.transform);
 	}
 
 	private void SetupHealthBar(Canvas canvas, Camera camera)
@@ -213,12 +212,12 @@ public class PlayerHealthController : MonoBehaviour
 	void ChangeUI()
 	{
 		healthBarC.SetProgress(health / maxHealth, 2);
-		playerUIHealth.SetProgress(health / maxHealth, 2);
+		if (playerUI != null)
+			playerUIHealth.SetProgress(health / maxHealth, 2);
 	}
 
 	public void EnablePlayer()
 	{
-		CancelInvoke(nameof(MoveDeadPlayer));
 		powerController.enabled = true;
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
@@ -287,9 +286,9 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		if (other.CompareTag("SlashEffect") && invencibleTimer <= 0 && !dead)
 		{
-			lastAttacker = other.transform.parent.gameObject;
 			SlashController slashController = other.GetComponent<SlashController>();
-			attackPosition = other.gameObject.transform.position;
+			lastAttacker = slashController.owner;
+			attackPosition = slashController.owner.transform.position;
 			pushBack = true;
 			pushForce = slashController.pushForce;
 			ReceiveDamage(slashController.finalDamage);
