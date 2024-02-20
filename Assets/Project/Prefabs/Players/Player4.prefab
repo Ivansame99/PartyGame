@@ -69,6 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  owner: {fileID: 0}
 --- !u!82 &6464944345416924497
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5309,6 +5310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 30
+  owner: {fileID: 0}
 --- !u!1 &3354676665611159689
 GameObject:
   m_ObjectHideFlags: 0
@@ -27706,8 +27708,24 @@ MonoBehaviour:
     type: 3}
   BloodParticles: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58,
     type: 3}
-  skullsBounds: {fileID: 2980243853070682260, guid: e180dc0e17e62694694517742ab1cc1b,
-    type: 3}
+  helmetPrefabs:
+  - prefab: {fileID: 9034744252602175310, guid: 0cc4e7a6bb14f9a40bc09c29f81cc332,
+      type: 3}
+    spawnChance: 0.1
+  - prefab: {fileID: 9034744252602175310, guid: 735fb026a59e89e4491eb4b7d1f26b95,
+      type: 3}
+    spawnChance: 0.1
+  - prefab: {fileID: 9034744252602175310, guid: 0f30874f4e9b152468d17666b5088356,
+      type: 3}
+    spawnChance: 0.1
+  - prefab: {fileID: 9034744252602175310, guid: 697d65cf7eaacfa429cd97d86d2662ec,
+      type: 3}
+    spawnChance: 0.1
+  - prefab: {fileID: 9034744252602175310, guid: 5408e44f9610e074b80a70ce8e6edea6,
+      type: 3}
+    spawnChance: 0.1
+  minForce: 5
+  maxForce: 10
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
