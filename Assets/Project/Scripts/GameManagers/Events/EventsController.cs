@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EventsController : MonoBehaviour
 {
-    [SerializeField]
+	[SerializeField]
+	private Animator eventsCanvas;
+
+	[SerializeField]
+	private TMP_Text eventNameText;
+
+	[SerializeField]
+	private float timeToShowUI;
+
+	[SerializeField]
 	private List<GameEvent> randomEvents;
 
 	[SerializeField]
@@ -19,6 +29,8 @@ public class EventsController : MonoBehaviour
 
 	private int eventIndex;
 
+	private bool anim=false;
+
 	void Start()
     {
 		timer = 0;
@@ -31,12 +43,19 @@ public class EventsController : MonoBehaviour
 			eventIndex = Random.Range(0, randomEvents.Count);
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
 			randomEvents[eventIndex].EventStart();
+			eventNameText.text = randomEvents[eventIndex].eventName;
+			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
 		if (timer >= randomTimeToSpawn)
 		{
 			if (!randomEvents[eventIndex].eventFinished)
 			{
+				if(anim)
+				{
+					anim = false;
+					eventsCanvas.SetBool("NewEvent", false);
+				}
 				randomEvents[eventIndex].EventUpdate();
 			}
 			else
@@ -47,5 +66,11 @@ public class EventsController : MonoBehaviour
 		{
 			timer += Time.deltaTime;
 		}
+	}
+
+	void ShowUIEvent()
+	{
+		eventsCanvas.SetBool("NewEvent", true);
+		anim = true;
 	}
 }

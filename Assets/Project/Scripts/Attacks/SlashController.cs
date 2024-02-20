@@ -31,7 +31,7 @@ public class SlashController : MonoBehaviour
         owner = player;
 		playerHealthController = player.GetComponent<PlayerHealthController>();
         enemy1Controller = transform.parent.GetComponent<EnemyHealthController>();
-        pushForceParry = 15f;
+        pushForceParry = 30f;
         hitSound = GetComponent<AudioSource>();
     }
 
@@ -40,12 +40,11 @@ public class SlashController : MonoBehaviour
         if (other.gameObject.tag == "SlashEffect")
         {
             pushBack = true;
-            attackPosition = other.transform.position;
-
+            attackPosition = other.GetComponent<SlashController>().owner.transform.position;
+            Debug.Log("Entras");
             if (playerHealthController != null)
             {
 				playerHealthController.invencibleTimer = 1f; //Para que no se hagan daño cuando pase esto
-                //playerController.invencibility = true;
             }
 
             if (enemy1Controller)
