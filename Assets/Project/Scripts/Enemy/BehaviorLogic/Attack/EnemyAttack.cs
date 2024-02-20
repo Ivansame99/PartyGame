@@ -11,18 +11,17 @@ public class EnemyAttack : EnemyAttackSOBase
 
     [SerializeField] private float enemyBaseDamage;
     [SerializeField] private float enemyBasePushForce;
+    
 
-    [SerializeField] float normalAttackCooldown;
-
-    private float timerAttack;
     private float randomAttack;
+    private bool isAttacking;
 
-    private bool isAttacking,attackStarted;
-
+    //COOLDOWN ATTACKS
+    private float attackTimer;
+    [SerializeField] private float attackCooldown;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-
         switch (triggerType)
         {
             case Enemy.AnimationTriggerType.EnemyAttack:
@@ -32,15 +31,12 @@ public class EnemyAttack : EnemyAttackSOBase
                 AttackFinished();
                 break;
         }
-        if(triggerType == Enemy.AnimationTriggerType.EnemyAttack)
-        {
-            Attack();
-        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Attack");
+        attackTimer = 0;
+        
         //enemy.AgentState(false);
     }
     public override void DoExitLogic()
@@ -51,10 +47,33 @@ public class EnemyAttack : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        if (!enemy.IsAggreed)
+        if (!enemy.IsAggreed && !isAttacking)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
         }
+
+        if (attackTimer <= 0 && !isAttacking)
+        {
+            isAttacking = true;
+            randomAttack = Random.Range(1,1);
+            
+        }
+        else
+        {
+            attackTimer -= Time.deltaTime;
+        }
+
+        if (isAttacking)
+        {
+            switch (randomAttack)
+            {
+                case 1:
+                    enemy.animator.SetInteger("AttackType", 1);
+                    break;
+            }
+
+        }
+
     }
     public override void DoPhysicsLogic()
     {
@@ -81,7 +100,10 @@ public class EnemyAttack : EnemyAttackSOBase
 
     private void AttackFinished()
     {
-
+        enemy.animator.SetInteger("AttackType", 0);
+        attackTimer = attackCooldown;
+        randomAttack = 0;
+        isAttacking = false;
     }
     public void Slash()
     {

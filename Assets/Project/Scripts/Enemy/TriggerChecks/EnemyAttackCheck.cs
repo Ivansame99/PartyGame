@@ -5,20 +5,21 @@ using UnityEngine;
 public class EnemyAttackCheck : MonoBehaviour
 {
     [SerializeField] private Enemy _enemy;
-
+    /*
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.transform.parent.CompareTag("Player") && other != null)
+        if (other.gameObject.transform.parent.CompareTag("Player"))
         {
-            _enemy.SetImpactStatus(true);
+            //_enemy.SetImpactStatus(true);
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.transform.parent.CompareTag("Player") && other != null)
+        if (other.gameObject.transform.parent.CompareTag("Player"))
         {
-            _enemy.SetImpactStatus(false);
+            //_enemy.SetImpactStatus(false);
         }
     }
+    */
 }
