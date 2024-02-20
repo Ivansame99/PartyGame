@@ -5,6 +5,9 @@ using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
+
+
+
 public class PlayerHealthController : MonoBehaviour
 {
 	[Header("Logic")]
@@ -77,7 +80,11 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject HealParticles;
 	[SerializeField] private GameObject DeathParticles;
 	[SerializeField] private GameObject BloodParticles;
-	[SerializeField] private GameObject skullsBounds;
+
+	[SerializeField] private HelmetPrefab[] helmetPrefabs;
+
+	[SerializeField] private float minForce = 5f;
+	[SerializeField] private float maxForce = 10f;
 
 	void Start()
 	{
@@ -182,8 +189,26 @@ public class PlayerHealthController : MonoBehaviour
 	private void Die()
 	{
 		//Feedback
+		foreach (var helmetPrefab in helmetPrefabs)
+		{
+			if (Random.value <= helmetPrefab.spawnChance)
+			{
+				// Desplaza ligeramente la posición de origen del casco
+				Vector3 spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
+				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
+				Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
+				if (helmetRigidbody != null)
+				{
+					// Genera una fuerza aleatoria en una dirección aleatoria
+					Vector3 randomDirection = Random.onUnitSphere;
+					float randomForce = Random.Range(minForce, maxForce);
+					helmetRigidbody.AddForce(randomDirection * randomForce, ForceMode.Impulse);
+				}
+			}
+		}
+
 		Instantiate(DeathParticles, transform.position, Quaternion.identity);
-		Instantiate(skullsBounds, transform.position, Quaternion.identity);
+
 
 		//Power control pass
 		currentPower = powerController.GetCurrentPowerLevel() / 2;

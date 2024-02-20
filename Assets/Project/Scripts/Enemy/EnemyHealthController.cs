@@ -4,6 +4,15 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
+[System.Serializable]
+public class HelmetPrefab
+{
+    public GameObject prefab;
+    [Range(0, 1)]
+    public float spawnChance;
+}
+
+
 public class EnemyHealthController : MonoBehaviour
 {
 
@@ -57,7 +66,15 @@ public class EnemyHealthController : MonoBehaviour
     [SerializeField] private GameObject DeathParticles;
     [SerializeField] private GameObject BloodParticles;
 
+    //[SerializeField] private GameObject Helmet1;
+    //[SerializeField] private GameObject Helmet2;
+   // [SerializeField] private GameObject Helmet3;
+   // [SerializeField] private GameObject Helmet4;
+   // [SerializeField] private GameObject Helmet5;
+    public HelmetPrefab[] helmetPrefabs;
     private PowerController powerController;
+    public float minForce = 1f;
+    public float maxForce = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -165,6 +182,31 @@ public class EnemyHealthController : MonoBehaviour
 
     public void enemyDestroy()
     {
+        // Instantiate(Helmet1, transform.position, Quaternion.identity);
+        //Instantiate(Helmet2, transform.position, Quaternion.identity);
+        // Instantiate(Helmet3, transform.position, Quaternion.identity);
+        // Instantiate(Helmet4, transform.position, Quaternion.identity);
+        // Instantiate(Helmet5, transform.position, Quaternion.identity);
+
+        foreach (var helmetPrefab in helmetPrefabs)
+        {
+            if (Random.value <= helmetPrefab.spawnChance)
+            {
+                // Desplaza ligeramente la posición de origen del casco
+                Vector3 spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
+                GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
+                Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
+                if (helmetRigidbody != null)
+                {
+                    // Genera una fuerza aleatoria en una dirección aleatoria
+                    Vector3 randomDirection = Random.onUnitSphere;
+                    float randomForce = Random.Range(minForce, maxForce);
+                    helmetRigidbody.AddForce(randomDirection * randomForce, ForceMode.Impulse);
+                }
+            }
+        }
+
+
         Instantiate(DeathParticles, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
         Destroy(healthBar.gameObject);
