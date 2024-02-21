@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -11,7 +12,9 @@ public class EnemyAttack : EnemyAttackSOBase
 
     [SerializeField] private float enemyBaseDamage;
     [SerializeField] private float enemyBasePushForce;
-    
+    private Vector3 playerLastPoint;
+    private Vector3 playerDir;
+    private Vector3 lookDir;
 
     private float randomAttack;
     private bool isAttacking;
@@ -35,8 +38,10 @@ public class EnemyAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        attackTimer = 0;
-        
+        var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
+        rotation.y = 0;
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
+
         //enemy.AgentState(false);
     }
     public override void DoExitLogic()
@@ -56,12 +61,30 @@ public class EnemyAttack : EnemyAttackSOBase
         {
             isAttacking = true;
             randomAttack = Random.Range(1,1);
-            
+
+            playerDir = (enemy.playerPos.position - transform.position).normalized;
+
+
+
+
+
+
+
         }
         else
         {
+
+
+
             attackTimer -= Time.deltaTime;
         }
+
+
+
+    }
+    public override void DoPhysicsLogic()
+    {
+        base.DoPhysicsLogic();
 
         if (isAttacking)
         {
@@ -70,14 +93,13 @@ public class EnemyAttack : EnemyAttackSOBase
                 case 1:
                     enemy.animator.SetInteger("AttackType", 1);
                     break;
+                case 2:
+                    ChargeAttack();
+                    break;
+
             }
 
         }
-
-    }
-    public override void DoPhysicsLogic()
-    {
-        base.DoPhysicsLogic();
     }
     public override void Init(GameObject gameObject, Enemy enemy)
     {
@@ -90,12 +112,25 @@ public class EnemyAttack : EnemyAttackSOBase
 
     private void Attack()
     {
-        Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
-        if(enemy.IsImpact)
+        if (randomAttack == 1)
         {
-            Debug.Log("menos 10 de vida");
-            Slash();
+            Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+            if (enemy.IsImpact)
+            {
+                Debug.Log("menos 10 de vida");
+                Slash();
+            }
         }
+
+    }
+
+    private void ChargeAttack()
+    {
+        enemy.rb.MovePosition(transform.position + playerDir * 20f * Time.fixedDeltaTime);
+
+
+        //AttackFinished();
+        
     }
 
     private void AttackFinished()
