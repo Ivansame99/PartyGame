@@ -182,7 +182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3328405486016163164
 Transform:
   m_ObjectHideFlags: 0
@@ -190,12 +190,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026747655107899491}
-  m_LocalRotation: {x: -0.49374712, y: -0.2527166, z: 0.02728197, w: 0.8316273}
-  m_LocalPosition: {x: 0.00012, y: -0.00099, z: 0.01896}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalRotation: {x: -0.601667, y: -0.15383841, z: -0.16074471, w: 0.76713216}
+  m_LocalPosition: {x: 0.22709408, y: -0.09280195, z: 0.34379235}
+  m_LocalScale: {x: 11.500002, y: 11.500001, z: 11.500006}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7294343568290249767}
+  m_Father: {fileID: 6455102242564749475}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -53.846, y: -49.301, z: 29.995}
 --- !u!96 &6184708697651652091
@@ -219,7 +219,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: daedbca3d89ee8640bed0c051d176ff9, type: 2}
+  - {fileID: 2100000, guid: 906ae4d407ec09644b01a6902dbb9ea6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,11 +240,11 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.15
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -289,14 +289,14 @@ TrailRenderer:
       key6: {r: 0, g: 0.2465775, b: 1, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 22166
+      ctime1: 54163
       ctime2: 65535
       ctime3: 65535
       ctime4: 65535
       ctime5: 65535
       ctime6: 65535
       ctime7: 0
-      atime0: 0
+      atime0: 386
       atime1: 65535
       atime2: 65535
       atime3: 0
@@ -312,7 +312,7 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 0.5, y: 0.5}
+    textureScale: {x: 0.1, y: 0.1}
     shadowBias: 1
     generateLightingData: 0
   m_MinVertexDistance: 0.3
@@ -15519,7 +15519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4137965784506208094
 Transform:
   m_ObjectHideFlags: 0
@@ -26232,7 +26232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7402304692014945799
 Transform:
   m_ObjectHideFlags: 0
@@ -26532,10 +26532,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7402304692014945799}
-    - targetCorrespondingSourceObject: {fileID: 8433729924550558578, guid: d8c77f9cc0451794fa39f1e7f5278ebc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3328405486016163164}
     - targetCorrespondingSourceObject: {fileID: 8433729924550558578, guid: d8c77f9cc0451794fa39f1e7f5278ebc,
         type: 3}
       insertIndex: -1
@@ -27475,6 +27471,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 3328405486016163164}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
         type: 3}
       insertIndex: -1
