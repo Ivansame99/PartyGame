@@ -87,7 +87,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 					//Animation
 					player.swordAttackSound.Play();
-					player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
+					//player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
 
 					//Insert damage and pushforce
 					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + player.powerController.PowerDamage(); //Cambiar escalado poder
