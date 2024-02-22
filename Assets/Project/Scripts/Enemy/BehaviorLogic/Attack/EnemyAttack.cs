@@ -9,6 +9,8 @@ using static UnityEngine.GraphicsBuffer;
 public class EnemyAttack : EnemyAttackSOBase
 {
     [SerializeField] ParticleSystem areaAttackParticles;
+    [SerializeField] GameObject expansiveWave;
+    [SerializeField] float expansiveScale;
 
     [SerializeField] private float enemyBaseDamage;
     [SerializeField] private float enemyBasePushForce;
@@ -62,10 +64,8 @@ public class EnemyAttack : EnemyAttackSOBase
             isAttacking = true;
             randomAttack = Random.Range(1,1);
 
+            
             playerDir = (enemy.playerPos.position - transform.position).normalized;
-
-
-
 
 
 
@@ -115,6 +115,13 @@ public class EnemyAttack : EnemyAttackSOBase
         if (randomAttack == 1)
         {
             Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+            GameObject waveAttack = Instantiate(expansiveWave, enemy.transform.position, Quaternion.identity);
+            
+            if(waveAttack != null)
+            {
+                waveAttack.transform.localScale += new Vector3(expansiveScale,0, expansiveScale);
+                Destroy(waveAttack, 2f);
+            }
             if (enemy.IsImpact)
             {
                 Debug.Log("menos 10 de vida");
