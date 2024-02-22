@@ -40,6 +40,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 		timerattackFreeze = 0;
 		fallParticleOn = false;
 		originalGravityScale = player.gravityController.gravityScale;
+		player.anim.SetTrigger("JumpDrop");
 		jumpAttackController = player.jumpAttackCollider.GetComponent<SlashController>();
 		ResetVelocity();
 	}
