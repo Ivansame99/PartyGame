@@ -6,10 +6,12 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using UnityEditor.ShaderGraph.Internal;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
-	private List<PlayerConfiguration> playerConfigs;
+	[HideInInspector]
+	public List<PlayerConfiguration> playerConfigs;
 
 	[SerializeField]
 	private GameObject[] playerText;
@@ -20,10 +22,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 	[SerializeField]
 	private int maxPlayers;
 	private int playerIndex = 0;
-
-	[Header("Level names")]
-	[SerializeField]
-	private string levelName;
 
 	[SerializeField]
 	private GameObject[] playerPos;
@@ -52,15 +50,6 @@ public class PlayerConfigurationManager : MonoBehaviour
 	public void ReadyPlayer()
 	{
 		readyPlatformText.text = playersReady.ToString() + " / " + playerConfigs.Count.ToString();
-		if (playerConfigs.Count == playersReady)
-		{
-			Invoke(nameof(ChangeScene), 1.0f);
-		}
-	}
-
-	void ChangeScene()
-	{
-		SceneManager.LoadScene(levelName);
 	}
 
 	public void HandlePlayerJoin(PlayerInput pi)
