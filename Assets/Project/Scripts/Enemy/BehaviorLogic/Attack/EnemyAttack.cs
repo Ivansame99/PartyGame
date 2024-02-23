@@ -10,7 +10,9 @@ public class EnemyAttack : EnemyAttackSOBase
 {
     [SerializeField] ParticleSystem areaAttackParticles;
     [SerializeField] GameObject expansiveWave;
-    [SerializeField] float expansiveScale;
+    [SerializeField] float waveSpeed;
+    [SerializeField] float waveTimeLife;
+    private GameObject waveAttack;
 
     [SerializeField] private float enemyBaseDamage;
     [SerializeField] private float enemyBasePushForce;
@@ -66,10 +68,6 @@ public class EnemyAttack : EnemyAttackSOBase
 
             
             playerDir = (enemy.playerPos.position - transform.position).normalized;
-
-
-
-
         }
         else
         {
@@ -79,9 +77,14 @@ public class EnemyAttack : EnemyAttackSOBase
             attackTimer -= Time.deltaTime;
         }
 
+        if (waveAttack != null)
+        {
+            waveAttack.transform.localScale += new Vector3(waveSpeed, 0, waveSpeed);
+
+        }
 
 
-    }
+        }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
@@ -115,13 +118,9 @@ public class EnemyAttack : EnemyAttackSOBase
         if (randomAttack == 1)
         {
             Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
-            GameObject waveAttack = Instantiate(expansiveWave, enemy.transform.position, Quaternion.identity);
-            
-            if(waveAttack != null)
-            {
-                waveAttack.transform.localScale += new Vector3(expansiveScale,0, expansiveScale);
-                Destroy(waveAttack, 2f);
-            }
+            waveAttack = Instantiate(expansiveWave, enemy.transform.position, Quaternion.identity);
+            Destroy(waveAttack, waveTimeLife);
+
             if (enemy.IsImpact)
             {
                 Debug.Log("menos 10 de vida");

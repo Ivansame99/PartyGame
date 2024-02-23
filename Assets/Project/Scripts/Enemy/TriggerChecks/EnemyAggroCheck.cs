@@ -19,7 +19,7 @@ public class EnemyAggroCheck : MonoBehaviour
         float distance = Vector3.Distance(_enemy.playerPos.position,transform.position);
         //Vector3 dir = _enemy.playerPos.transform.position - this.transform.position;
 
-        if (distance < triggerDistanceClose || distance > triggerDistanceFar)
+        if (distance < triggerDistanceClose /*|| distance > triggerDistanceFar*/)
         {
             _enemy.SetAggroStatus(true);
         }
