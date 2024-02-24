@@ -5,7 +5,7 @@ using UnityEngine;
 public interface ITriggerCheckeable
 {
     bool IsAggreed { get; set; }
-    bool IsWithStrikingDistance { get; set; }
+    bool IsSpecialAggro { get; set; }
     void SetAggroStatus(bool isAggreed);
-    void SetImpactStatus(bool isImpact);
+    void SetSpecialAggroStatus(bool isImpact);
 }

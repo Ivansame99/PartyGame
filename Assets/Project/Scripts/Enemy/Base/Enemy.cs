@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
 
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
-    public bool IsWithStrikingDistance { get; set; }
+    public bool IsSpecialAggro { get; set; }
     public bool IsImpact { get; set; }
 
     //COMBAT INTERFICE
@@ -35,15 +35,18 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyStateMachine stateMachine { get; set; }
     public EnemyChaseState chaseState { get; set; }
     public EnemyAttackState attackState { get; set; }
+    public EnemySpecialAttackState specialAttackState { get; set; }
     #endregion
 
     #region SO Variables
     [Header("Enemy States")]
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
+    [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
 
     public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
+    public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
 
 
     #endregion
@@ -53,12 +56,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         //Initialize SO
         enemyChaseBaseInstance = Instantiate(enemyChaseBase);
         enemyAttackBaseInstance = Instantiate(enemyAttackBase);
-        //enemyAttackBaseInstance = Instantiate(enemyAttackBase);
+        enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
         chaseState = new EnemyChaseState(this, stateMachine);
         attackState = new EnemyAttackState(this, stateMachine);
+        specialAttackState = new EnemySpecialAttackState(this, stateMachine);
     }
     void Start()
     {
@@ -73,6 +77,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
+        enemySpecialAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
         stateMachine.Initialize(chaseState);        
@@ -125,9 +130,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         IsAggreed = isAggreed;
     }
 
-    public void SetStrikingDistanceBool(bool isWithStrikingDistance)
+    public void SetSpecialAggroStatus(bool isSpecialAggro)
     {
-        IsWithStrikingDistance = isWithStrikingDistance;
+        IsSpecialAggro = isSpecialAggro;
     }
     
     public void SetImpactStatus(bool isImpact)

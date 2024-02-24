@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Chase To Player", menuName = "Enemy Logic/Chase Logic/Chase To Player")]
+[CreateAssetMenu(fileName = "Chase To Player", menuName = "Enemy Logic/Giant/Chase Logic/Chase To Player")]
 public class EnemyChaseToPlayer : EnemyChaseSOBase
 {
     [SerializeField] private float speed;
@@ -25,9 +25,15 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+
         if (enemy.IsAggreed)
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
+        }
+
+        if(enemy.IsSpecialAggro)
+        {
+            enemy.stateMachine.ChangeState(enemy.specialAttackState);
         }
         if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 

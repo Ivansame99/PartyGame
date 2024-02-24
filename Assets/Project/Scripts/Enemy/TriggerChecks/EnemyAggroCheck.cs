@@ -7,8 +7,10 @@ public class EnemyAggroCheck : MonoBehaviour
 {
     [SerializeField] private float triggerDistanceClose;
     [SerializeField] private float triggerDistanceFar;
-    private Enemy _enemy;
 
+    private Ray hit;
+    private Enemy _enemy;
+    private float distance;
     private void Awake()
     {
         _enemy = GetComponentInParent<Enemy>();
@@ -16,10 +18,11 @@ public class EnemyAggroCheck : MonoBehaviour
 
     void Update()
     {
-        float distance = Vector3.Distance(_enemy.playerPos.position,transform.position);
-        //Vector3 dir = _enemy.playerPos.transform.position - this.transform.position;
+        //CALCULATE DISTANCE BETWEEN ENEMY AND PLAYER
+        if(_enemy.playerPos != null) distance = Vector3.Distance(_enemy.playerPos.position,transform.position);
 
-        if (distance < triggerDistanceClose /*|| distance > triggerDistanceFar*/)
+        //NORMAL AGGRO STATUS
+        if (distance < triggerDistanceClose)
         {
             _enemy.SetAggroStatus(true);
         }
@@ -27,14 +30,16 @@ public class EnemyAggroCheck : MonoBehaviour
         {
             _enemy.SetAggroStatus(false);
         }
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Wall"))
+        //SPECIAL AGGRO STATUS
+        if(distance > triggerDistanceFar)
         {
-            _enemy.SetAggroStatus(false);
-            Debug.Log("entra");
+            _enemy.SetSpecialAggroStatus(true);
+
+        }
+        else
+        {
+            _enemy.SetSpecialAggroStatus(false);
         }
     }
 }

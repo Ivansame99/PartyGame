@@ -261,7 +261,8 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
-	}
+
+    }
 
 	private void OnTriggerStay(Collider other)
 	{
@@ -296,5 +297,12 @@ public class PlayerHealthController : MonoBehaviour
 				Destroy(collision.gameObject);
 			}
 		}
-	}
+
+        if (collision.gameObject.tag == "TorusAtk" && invencibleTimer <= 0 && !dead)
+        {
+            Torus torus = collision.gameObject.GetComponent<Torus>();
+            ReceiveDamage(torus.torusDamage);
+
+        }
+    }
 }

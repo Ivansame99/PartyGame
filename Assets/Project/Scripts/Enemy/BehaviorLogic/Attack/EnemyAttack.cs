@@ -3,24 +3,22 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
-[CreateAssetMenu(fileName = "EnemyAttack", menuName = "Enemy Logic/Attack Logic/Enemy Attack")]
+[CreateAssetMenu(fileName = "EnemyAttack", menuName = "Enemy Logic/Giant/Attack Logic/Enemy Attack")]
 public class EnemyAttack : EnemyAttackSOBase
 {
+    [Header("Wave prefabs")]
     [SerializeField] ParticleSystem areaAttackParticles;
     [SerializeField] GameObject expansiveWave;
+
+    [Header("Wave Attack parameters")]
     [SerializeField] float waveSpeed;
     [SerializeField] float waveTimeLife;
+
+    //Gameobject to instantiate
     private GameObject waveAttack;
-
-    [SerializeField] private float enemyBaseDamage;
-    [SerializeField] private float enemyBasePushForce;
-    private Vector3 playerLastPoint;
-    private Vector3 playerDir;
-    private Vector3 lookDir;
-
-    private float randomAttack;
+    
+    //Attack flag
     private bool isAttacking;
 
     //COOLDOWN ATTACKS
@@ -64,45 +62,23 @@ public class EnemyAttack : EnemyAttackSOBase
         if (attackTimer <= 0 && !isAttacking)
         {
             isAttacking = true;
-            randomAttack = Random.Range(1,1);
-
-            
-            playerDir = (enemy.playerPos.position - transform.position).normalized;
+            enemy.animator.SetInteger("AttackType", 1);
         }
         else
         {
-
-
-
             attackTimer -= Time.deltaTime;
         }
 
         if (waveAttack != null)
         {
             waveAttack.transform.localScale += new Vector3(waveSpeed, 0, waveSpeed);
-
         }
 
 
-        }
+    }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
-
-        if (isAttacking)
-        {
-            switch (randomAttack)
-            {
-                case 1:
-                    enemy.animator.SetInteger("AttackType", 1);
-                    break;
-                case 2:
-                    ChargeAttack();
-                    break;
-
-            }
-
-        }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
     {
@@ -115,41 +91,15 @@ public class EnemyAttack : EnemyAttackSOBase
 
     private void Attack()
     {
-        if (randomAttack == 1)
-        {
-            Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
-            waveAttack = Instantiate(expansiveWave, enemy.transform.position, Quaternion.identity);
-            Destroy(waveAttack, waveTimeLife);
-
-            if (enemy.IsImpact)
-            {
-                Debug.Log("menos 10 de vida");
-                Slash();
-            }
-        }
-
+        Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+        waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y - 2f, enemy.transform.position.z), Quaternion.identity);
+        Destroy(waveAttack, waveTimeLife);
     }
-
-    private void ChargeAttack()
-    {
-        enemy.rb.MovePosition(transform.position + playerDir * 20f * Time.fixedDeltaTime);
-
-
-        //AttackFinished();
-        
-    }
-
     private void AttackFinished()
     {
         enemy.animator.SetInteger("AttackType", 0);
         attackTimer = attackCooldown;
-        randomAttack = 0;
         isAttacking = false;
-    }
-    public void Slash()
-    {
-        enemy.slashController.finalDamage = enemyBaseDamage + enemy.powerController.GetCurrentPowerLevel() / 5; //Cambiar escalado poder
-        enemy.slashController.pushForce = enemyBasePushForce;
     }
 }
 
