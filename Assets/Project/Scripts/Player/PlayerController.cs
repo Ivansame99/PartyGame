@@ -107,6 +107,11 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		isJumping = pressJump;
 	}
 
+	public void SetPause(bool pause)
+	{
+		
+	}
+
 	void RemovAttackBuffer()
 	{
 		attackBuffer.Dequeue();

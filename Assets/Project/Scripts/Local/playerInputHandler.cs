@@ -98,8 +98,8 @@ public class PlayerInputHandler : MonoBehaviour
 
 	public void OnPause(CallbackContext context)
 	{
-		//if (playerController != null)
-		//playerController.SetJump(context.ReadValueAsButton());
+		if (playerController != null)
+		playerController.SetPause(context.ReadValueAsButton());
 	}
 
 }
