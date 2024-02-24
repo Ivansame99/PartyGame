@@ -15,6 +15,14 @@ public class ReadyPlatformController : MonoBehaviour
 	[SerializeField]
 	private string levelName;
 
+	[Header("Circle Transition")]
+	[SerializeField]
+	private Material transitionMaterial;
+	[SerializeField]
+	private float transitionTime = 3f;
+	[SerializeField]
+	private string propertyName = "_Progress";
+
 	private float changeSceneTimer;
 
 	private void Start()
@@ -35,7 +43,7 @@ public class ReadyPlatformController : MonoBehaviour
 
 		if (changeSceneTimer <= 0)
 		{
-			ChangeScene();
+			StartCoroutine(CloseTranition());
 		}
 	}
 
@@ -54,5 +62,18 @@ public class ReadyPlatformController : MonoBehaviour
 	{
 		if (other.CompareTag("Player")) playerConfigurationManager.playersReady--;
 		playerConfigurationManager.ReadyPlayer();
+	}
+
+	private IEnumerator CloseTranition()
+	{
+		float currentTime = transitionTime;
+		while (currentTime > 0)
+		{
+			currentTime -= Time.deltaTime;
+			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+			yield return null;
+		}
+
+		ChangeScene();
 	}
 }

@@ -12,7 +12,15 @@ public class EndGameController : MonoBehaviour
     [HideInInspector]
     public int playersDead;
 
-    void Start()
+	[Header("Circle Transition")]
+	[SerializeField]
+	private Material transitionMaterial;
+	[SerializeField]
+	private float transitionTime = 2f;
+	[SerializeField]
+	private string propertyName = "_Progress";
+
+	void Start()
     {
         roundController = GetComponent<RoundController>();
         Invoke("GetPlayers", 1f);
@@ -34,12 +42,12 @@ public class EndGameController : MonoBehaviour
 		if (roundController.finalRound && playersDead == playersCount - 1) //Solo queda uno en pie
 		{
 			Debug.Log("Has ganado!!");
-			Invoke(nameof(EndMatch), 5f);
+			StartCoroutine(CloseTranitionToWin());
 		}
 
         if(playersDead >= playersCount)
         {
-			SceneManager.LoadScene("GameOver");
+			StartCoroutine(CloseTranitionToGameOver());
 		}
 	}
 
@@ -52,14 +60,31 @@ public class EndGameController : MonoBehaviour
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         playersCount = players.Length;
-        /*playerHealth = new PlayerHealthController[playersCount];
-
-        for (int i = 0; i < playersCount; i++)
-        {
-            if (players[i].GetComponent<PlayerHealthController>() != null)
-            {
-                playerHealth[i] = players[i].GetComponent<PlayerHealthController>();
-            }
-        }*/
     }
+
+	private IEnumerator CloseTranitionToWin()
+	{
+		float currentTime = transitionTime;
+		while (currentTime > 0)
+		{
+			currentTime -= Time.deltaTime;
+			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+			yield return null;
+		}
+
+		SceneManager.LoadScene("Win");
+	}
+
+	private IEnumerator CloseTranitionToGameOver()
+	{
+		float currentTime = transitionTime;
+		while (currentTime > 0)
+		{
+			currentTime -= Time.deltaTime;
+			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+			yield return null;
+		}
+
+		SceneManager.LoadScene("GameOver");
+	}
 }

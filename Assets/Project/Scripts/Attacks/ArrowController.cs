@@ -28,6 +28,8 @@ public class ArrowController : MonoBehaviour
 
     private Vector3 arrowDirection;
 
+    private float destroyTime=10f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,7 +52,7 @@ public class ArrowController : MonoBehaviour
             invencibilityTimerOnSpawn = 50;
             ground = true;
             rb.isKinematic = true;
-            Destroy(this.gameObject, 2f);
+            Destroy(this.gameObject, destroyTime);
         }
     }
 
