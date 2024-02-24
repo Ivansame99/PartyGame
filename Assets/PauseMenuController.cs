@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using static System.TimeZoneInfo;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -36,8 +37,8 @@ public class PauseMenuController : MonoBehaviour
 
     void Start()
     {
-        
-    }
+
+	}
 
     void Update()
     {
@@ -45,13 +46,15 @@ public class PauseMenuController : MonoBehaviour
 		{
             if (pause)
             {
-				Time.timeScale = 1.0f;
+				//Time.timeScale = 1.0f;
 				pause = false;
 				anim.SetBool("PauseAppear", false);
+				StartCoroutine(SetTimeNormal());
 			} else
             {
 				eventSystem.SetSelectedGameObject(defaultButton);
-				cursor.transform.position = defaultButton.GetComponent<ButtonCursorPos>().cursorPos.position;
+				lastButtonSelected = defaultButton;
+				StartCoroutine(SetStartCursosPos());
 				Time.timeScale = 0.0f;
                 pause = true;
 				anim.SetBool("PauseAppear", true);
@@ -79,7 +82,7 @@ public class PauseMenuController : MonoBehaviour
     {
 		pause = false;
 		anim.SetBool("PauseAppear", false);
-		Time.timeScale = 1.0f;
+		StartCoroutine(SetTimeNormal());
 	}
 
 	public void UiSettingsButton()
@@ -105,5 +108,17 @@ public class PauseMenuController : MonoBehaviour
 
 		Time.timeScale = 1.0f;
 		SceneManager.LoadScene("Menu");
+	}
+
+	private IEnumerator SetStartCursosPos()
+	{
+		yield return new WaitForSecondsRealtime(0.8f);
+		cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
+	}
+
+	private IEnumerator SetTimeNormal()
+	{
+		yield return new WaitForSecondsRealtime(0.5f);
+		Time.timeScale = 1;
 	}
 }

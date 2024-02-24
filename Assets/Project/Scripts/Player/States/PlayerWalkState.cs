@@ -89,7 +89,11 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
 		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-		player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
+		if (!float.IsNaN(angle))
+		{
+			var rotation = Quaternion.Euler(0f, angle, 0f);
+			player.transform.rotation = rotation;
+		}
 
 		if (player.groundCheck.DetectGround())
 		{
