@@ -24,6 +24,8 @@ public class SlashController : MonoBehaviour
 
     private EnemyHealthController enemy1Controller;
 
+    private EnemyHealth enemy;
+
     private AudioSource hitSound;
     private void Awake()
     {
@@ -44,15 +46,20 @@ public class SlashController : MonoBehaviour
             Debug.Log("Entras");
             if (playerHealthController != null)
             {
-				playerHealthController.invencibleTimer = 1f; //Para que no se hagan daño cuando pase esto
+				playerHealthController.invencibleTimer = 1f; //Para que no se hagan daï¿½o cuando pase esto
             }
 
             if (enemy1Controller)
             {
-                enemy1Controller.timer = 1f; //Para que no se hagan daño cuando pase esto
+                enemy1Controller.timer = 1f; //Para que no se hagan daï¿½o cuando pase esto
                 enemy1Controller.invencibility = true;
             }
 
+            if (enemy)
+            {
+                enemy.timer = 1f;
+                enemy.invencibility = true;
+            }
             if (hitSound != null)
             {
                 hitSound.Play();

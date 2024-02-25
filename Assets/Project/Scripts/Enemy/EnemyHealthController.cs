@@ -15,7 +15,6 @@ public class HelmetPrefab
 
 public class EnemyHealthController : MonoBehaviour
 {
-
     private float health;
 
     [SerializeField]
@@ -192,13 +191,13 @@ public class EnemyHealthController : MonoBehaviour
         {
             if (Random.value <= helmetPrefab.spawnChance)
             {
-                // Desplaza ligeramente la posición de origen del casco
+                // Desplaza ligeramente la posiciï¿½n de origen del casco
                 Vector3 spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
                 GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
                 Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
                 if (helmetRigidbody != null)
                 {
-                    // Genera una fuerza aleatoria en una dirección aleatoria
+                    // Genera una fuerza aleatoria en una direcciï¿½n aleatoria
                     Vector3 randomDirection = Random.onUnitSphere;
                     float randomForce = Random.Range(minForce, maxForce);
                     helmetRigidbody.AddForce(randomDirection * randomForce, ForceMode.Impulse);

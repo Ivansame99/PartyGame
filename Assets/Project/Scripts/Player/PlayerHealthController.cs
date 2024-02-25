@@ -303,7 +303,18 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
-	}
+        if (other.gameObject.tag == "EnemyCharge" && invencibleTimer <= 0 && !dead)
+        {
+            Charge charge = other.gameObject.GetComponent<Charge>();
+            lastAttacker = charge.owner;
+            attackPosition = charge.owner.transform.position;
+            pushBack = true;
+            pushForce = charge.pushForce;
+            ReceiveDamage(charge.finalDamage);
+			Debug.Log("ocurre");
+        }
+
+    }
 
 	private void OnTriggerStay(Collider other)
 	{
@@ -324,7 +335,7 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
 			if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)
-			{
+			{	
 				//Se pega contra si mismo al principio, no hace nada
 			}
 			else
@@ -338,5 +349,15 @@ public class PlayerHealthController : MonoBehaviour
 				Destroy(collision.gameObject);
 			}
 		}
-	}
+
+        if (collision.gameObject.tag == "TorusAtk" && invencibleTimer <= 0 && !dead)
+        {
+            Torus torus = collision.gameObject.GetComponent<Torus>();
+			lastAttacker = torus.owner;
+            attackPosition = torus.owner.transform.position;
+            pushBack = true;
+			pushForce = torus.pushForce;
+            ReceiveDamage(torus.finalDamage);
+        }
+    }
 }

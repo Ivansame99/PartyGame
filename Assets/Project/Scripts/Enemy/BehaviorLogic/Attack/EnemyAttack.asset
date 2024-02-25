@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8efef1b0ebd5de43931f31b64626e81, type: 3}
+  m_Name: EnemyAttack
+  m_EditorClassIdentifier: 
+  areaAttackParticles: {fileID: 198499209413112314, guid: 6f523f87a323d3c4cb433450b8534226,
+    type: 3}
+  expansiveWave: {fileID: 3421386657705837947, guid: 65e8e2225a7147648851e630bcd2ec09,
+    type: 3}
+  waveSpeed: 0.04
+  waveTimeLife: 1
+  enemyBaseDamage: 10
+  enemyBasePushForce: 10
+  attackCooldown: 0.4
