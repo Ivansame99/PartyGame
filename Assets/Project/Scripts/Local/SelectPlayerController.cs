@@ -32,7 +32,7 @@ public class SelectPlayerController : MonoBehaviour
                 player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             SceneManager.LoadScene("HUB");
 		}   

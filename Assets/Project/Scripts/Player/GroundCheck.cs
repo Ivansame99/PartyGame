@@ -15,9 +15,7 @@ public class GroundCheck : MonoBehaviour
 
 	private Rigidbody rb;
 
-	private bool ground = true;
 	private float raycastDistance = 0.5f;
-	private bool littleMove = false;
 
 	void Start()
 	{
