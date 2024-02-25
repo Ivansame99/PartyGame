@@ -11,6 +11,10 @@ public class CameraEntryCinematicController : MonoBehaviour
     private Animator anim;
 
     private bool onlyOnce=true;
+
+    [SerializeField]
+    private bool skipAnim;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -19,12 +23,20 @@ public class CameraEntryCinematicController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.SetActive(false);    
+        gameManager.SetActive(false);
+
+        if (skipAnim)
+        {
+			gameManager.SetActive(true);
+			this.anim.enabled = false;
+		}
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (skipAnim) return;
+
 		if (!AnimatorIsPlaying("EntryAnimation") && onlyOnce)
         {
             gameManager.SetActive(true);
