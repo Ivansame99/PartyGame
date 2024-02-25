@@ -29,7 +29,7 @@ public class ChaseState : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (agent == null) { agent = animator.GetComponent<NavMeshAgent>(); Debug.Log("entra"); }
+        if (agent == null) { agent = animator.GetComponent<NavMeshAgent>(); }
         enemyTarget = animator.GetComponent<EnemyTarget>();
         //agent = animator.GetComponent<NavMeshAgent>();
 

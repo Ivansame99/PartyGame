@@ -26,7 +26,7 @@ public class PlayersRespawn : MonoBehaviour
 		roundController = GetComponent<RoundController>();
 		endGameController = GetComponent<EndGameController>();
 		cameraMain = Camera.main;
-		mtp = cameraMain.GetComponent<MultipleTargetCamera>();
+		mtp = this.GetComponent<MultipleTargetCamera>();
 		Invoke("GetPlayers", 1f);
 	}
 
