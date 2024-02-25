@@ -42,4 +42,5 @@ public class EnemyAggroCheck : MonoBehaviour
             _enemy.SetSpecialAggroStatus(false);
         }
     }
+
 }

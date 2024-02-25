@@ -8,5 +8,5 @@ public interface ICombat
     PowerController powerController { get; set; }
     SlashController slashController { get; set; }
 
-
+    public float GetPowerDamage();
 }

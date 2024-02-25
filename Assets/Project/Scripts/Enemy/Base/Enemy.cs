@@ -141,6 +141,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     }
     #endregion
 
+    #region Combat Functions
+    public float GetPowerDamage()
+    {
+        return powerController.PowerDamage();
+    }
+    #endregion
+
     private void Update()
     {
         stateMachine.CurrentEnemyState.FrameUpdate();

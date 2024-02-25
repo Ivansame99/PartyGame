@@ -43,7 +43,6 @@ public class EnemyAttack : EnemyAttackSOBase
         var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
         rotation.y = 0;
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
-
         //enemy.AgentState(false);
     }
     public override void DoExitLogic()
@@ -93,6 +92,12 @@ public class EnemyAttack : EnemyAttackSOBase
     {
         Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
         waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y - 2f, enemy.transform.position.z), Quaternion.identity);
+
+        Torus torus = waveAttack.GetComponent<Torus>();
+        torus.finalDamage = torus.baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
+        torus.SetPushForce(torus.pushForce);
+        torus.owner = enemy.gameObject;
+
         Destroy(waveAttack, waveTimeLife);
     }
     private void AttackFinished()

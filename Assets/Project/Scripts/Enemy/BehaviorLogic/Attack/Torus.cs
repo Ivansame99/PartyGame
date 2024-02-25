@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Torus : MonoBehaviour
 {
-    public float torusDamage;
+    public float baseDamage;
+    public float finalDamage;
 
-    private void OnTriggerEnter(Collider other)
+    public float pushForce;
+
+    [HideInInspector]
+    public GameObject owner;
+
+    public void SetPushForce(float s)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            //other.gameObject.GetComponent<PlayerHealthController>().TakeDamage(torusDamage);
-        }
+        pushForce = s;
     }
 }

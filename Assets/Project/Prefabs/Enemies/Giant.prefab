@@ -29,13 +29,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6309458811711285537, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
+      propertyPath: m_Radius
+      value: 0.5462542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309458811711285537, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6309458811711285537, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
+      propertyPath: m_Center.x
+      value: 0.0032624602
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309458811711285537, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
       propertyPath: m_Center.y
       value: 2.6317148
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309458811711285537, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.023973107
       objectReference: {fileID: 0}
     - target: {fileID: 7254013775423901812, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
@@ -92,6 +107,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7865524446369408516, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: offset.y
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8061654117059054286, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
       propertyPath: m_Name
@@ -105,12 +125,27 @@ PrefabInstance:
     - target: {fileID: 8572941629875772004, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8572941629875772004, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
       propertyPath: m_Center.y
       value: 0.86322856
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: powerScale
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: maxPowerLevel
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: minPowerLevel
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6089506664582424880, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}

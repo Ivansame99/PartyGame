@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -81,8 +82,8 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
                 isAttacking = false;
                 // Apply force impulse
                 Vector3 backwardForce = -transform.forward * impulseForce;
-                enemy.rb.AddForce(backwardForce, ForceMode.Impulse);
-                //enemy.stateMachine.ChangeState(enemy.chaseState);
+                //enemy.rb.AddForce(backwardForce, ForceMode.Impulse);
+                enemy.stateMachine.ChangeState(enemy.chaseState);
             }
         }
     }
@@ -102,4 +103,5 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
         isAttacking = true;
         enemy.animator.SetInteger("AttackType", 0);
     }
+
 }

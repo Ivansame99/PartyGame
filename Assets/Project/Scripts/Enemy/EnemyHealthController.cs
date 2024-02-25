@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
-public class EnemyHealthController2 : MonoBehaviour
+public class EnemyHealthController : MonoBehaviour
 {
     private float health;
 
