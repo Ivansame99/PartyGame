@@ -28,6 +28,7 @@ public class CameraEntryCinematicController : MonoBehaviour
 		if (!AnimatorIsPlaying("EntryAnimation") && onlyOnce)
         {
             gameManager.SetActive(true);
+            this.anim.enabled = false;
 			onlyOnce=false;
         }
 
