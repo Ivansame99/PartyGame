@@ -19,6 +19,9 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
 
     [SerializeField] float timeToStun;
     private float timer;
+
+
+    private TrailRenderer trailRenderer;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -34,13 +37,16 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
-   
+        if(trailRenderer == null) trailRenderer = enemy.GetComponentInChildren<TrailRenderer>();
+
+
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
         enemy.IsSpecialAggro = false;
+        enemy.animator.SetInteger("AttackType", 0);
     }
 
     public override void DoFrameUpdateLogic()
@@ -53,8 +59,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             playerDir = (enemy.playerPos.position - transform.position).normalized;
             playerDir.y = 0;
         }
-
-
     }
 
     public override void DoPhysicsLogic()
@@ -80,10 +84,11 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             if (hit.collider.CompareTag("Wall"))
             {
                 isAttacking = false;
-                // Apply force impulse
-                Vector3 backwardForce = -transform.forward * impulseForce;
-                //enemy.rb.AddForce(backwardForce, ForceMode.Impulse);
+                enemy.SetGeneralBooleanStatus(false);
+                trailRenderer.enabled = false;
+                
                 enemy.stateMachine.ChangeState(enemy.chaseState);
+                
             }
         }
     }
@@ -101,7 +106,8 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     private void ChargeAttack()
     {
         isAttacking = true;
-        enemy.animator.SetInteger("AttackType", 0);
+        trailRenderer.enabled = true;
+        enemy.animator.SetInteger("AttackType", 3);
     }
 
 }

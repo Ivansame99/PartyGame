@@ -24,6 +24,7 @@ public class EnemyAttack : EnemyAttackSOBase
     //COOLDOWN ATTACKS
     private float attackTimer;
     [SerializeField] private float attackCooldown;
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);

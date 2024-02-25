@@ -6,6 +6,8 @@ public interface ITriggerCheckeable
 {
     bool IsAggreed { get; set; }
     bool IsSpecialAggro { get; set; }
+    bool IsGeneralBoolean { get; set; }
     void SetAggroStatus(bool isAggreed);
     void SetSpecialAggroStatus(bool isImpact);
+    void SetGeneralBooleanStatus(bool isGeneralBoolean);
 }

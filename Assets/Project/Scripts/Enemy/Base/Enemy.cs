@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
     public bool IsSpecialAggro { get; set; }
-    public bool IsImpact { get; set; }
+    public bool IsGeneralBoolean { get; set; }
 
     //COMBAT INTERFICE
     public PowerController powerController { get; set; }
@@ -135,9 +135,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         IsSpecialAggro = isSpecialAggro;
     }
     
-    public void SetImpactStatus(bool isImpact)
+    public void SetGeneralBooleanStatus(bool isGeneralBoolean)
     {
-        IsImpact = isImpact;
+        IsGeneralBoolean = isGeneralBoolean;
     }
     #endregion
 

@@ -261,6 +261,16 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
+        if (other.gameObject.tag == "EnemyCharge" && invencibleTimer <= 0 && !dead)
+        {
+            Charge charge = other.gameObject.GetComponent<Charge>();
+            lastAttacker = charge.owner;
+            attackPosition = charge.owner.transform.position;
+            pushBack = true;
+            pushForce = charge.pushForce;
+            ReceiveDamage(charge.finalDamage);
+			Debug.Log("ocurre");
+        }
 
     }
 
@@ -306,7 +316,6 @@ public class PlayerHealthController : MonoBehaviour
             pushBack = true;
 			pushForce = torus.pushForce;
             ReceiveDamage(torus.finalDamage);
-
         }
     }
 }
