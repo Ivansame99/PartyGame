@@ -49,7 +49,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Canvas healBarCanvas;
 
-	private Camera camera;
+	private Camera cameraMain;
 
 	private GameObject playerUI;
 	private HealthBarController playerUIHealth;
@@ -87,8 +87,8 @@ public class PlayerHealthController : MonoBehaviour
 	void Start()
 	{
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		camera = Camera.main;
-		SetupHealthBar(healBarCanvas, camera);
+		cameraMain = Camera.main;
+		SetupHealthBar(healBarCanvas, cameraMain);
 
 		//Components
 		playerController = GetComponent<PlayerController>();

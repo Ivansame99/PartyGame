@@ -38,7 +38,7 @@ public class EnemyHealthController : MonoBehaviour
     private Canvas healBarCanvas;
 
     [SerializeField]
-    private Camera camera;
+    private Camera cameraMain;
 
     [SerializeField]
     private GameObject powerLevelGameObject;
@@ -81,7 +81,7 @@ public class EnemyHealthController : MonoBehaviour
     {
 		powerController=GetComponent<PowerController>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-        SetupHealthBar(healBarCanvas, camera);
+        SetupHealthBar(healBarCanvas, cameraMain);
         animator = GetComponent<Animator>();
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 		if (powerController != null)

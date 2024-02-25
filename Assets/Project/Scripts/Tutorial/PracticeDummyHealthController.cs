@@ -26,7 +26,7 @@ public class PracticeDummyHealthController : MonoBehaviour
 	private Canvas healBarCanvas;
 
 	[SerializeField]
-	private Camera camera;
+	private Camera cameraMain;
 
 	[SerializeField]
 	private GameObject powerLevelGameObject;
@@ -49,7 +49,7 @@ public class PracticeDummyHealthController : MonoBehaviour
     {
 		powerController = GetComponent<PowerController>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		SetupHealthBar(healBarCanvas, camera);
+		SetupHealthBar(healBarCanvas, cameraMain);
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 		if (powerController != null)
 		{

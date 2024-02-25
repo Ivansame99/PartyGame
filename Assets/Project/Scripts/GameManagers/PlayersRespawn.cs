@@ -14,7 +14,7 @@ public class PlayersRespawn : MonoBehaviour
 	private GameObject[] players;
 	private int playersCount;
 
-	private Camera camera;
+	private Camera cameraMain;
 	private MultipleTargetCamera mtp;
 
 	[SerializeField]
@@ -25,8 +25,8 @@ public class PlayersRespawn : MonoBehaviour
 	{
 		roundController = GetComponent<RoundController>();
 		endGameController = GetComponent<EndGameController>();
-		camera = Camera.main;
-		mtp = camera.GetComponent<MultipleTargetCamera>();
+		cameraMain = Camera.main;
+		mtp = cameraMain.GetComponent<MultipleTargetCamera>();
 		Invoke("GetPlayers", 1f);
 	}
 
@@ -107,7 +107,7 @@ public class PlayersRespawn : MonoBehaviour
 		mtp.enabled = false;
 
 		float zoomDistance = 120;
-		camera.transform.position = player.position - camera.transform.forward * zoomDistance;
+		cameraMain.transform.position = player.position - cameraMain.transform.forward * zoomDistance;
 
 		while (Time.timeScale < 1f)
 		{
