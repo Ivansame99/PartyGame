@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class MultipleTargetCamera : MonoBehaviour
 {
     [HideInInspector]
@@ -21,7 +20,7 @@ public class MultipleTargetCamera : MonoBehaviour
 	private void Start()
     {
         targets.Clear();
-        cam = GetComponent<Camera>();
+        cam = Camera.main;
         GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in playersArray)
         {

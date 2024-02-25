@@ -23,17 +23,13 @@ public class ArrowController : MonoBehaviour
 
 	private bool ground;
 
-    private float invencibilityTimerOnSpawn = 0.1f;
     public float invencibilityTimerOnSpawnOwner = 0.3f;
-
-    private Vector3 arrowDirection;
 
     private float destroyTime=10f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        arrowDirection = transform.forward;
     }
 
     void Update()
@@ -49,7 +45,6 @@ public class ArrowController : MonoBehaviour
         if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Wall")
         {
             this.GetComponent<BoxCollider>().enabled = false;
-            invencibilityTimerOnSpawn = 50;
             ground = true;
             rb.isKinematic = true;
             Destroy(this.gameObject, destroyTime);
