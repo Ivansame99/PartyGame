@@ -3,10 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class MultipleTargetCamera : MonoBehaviour
 {
-    [HideInInspector]
     public List<Transform> targets;
 
     [SerializeField] private Vector3 offset;
@@ -21,7 +19,7 @@ public class MultipleTargetCamera : MonoBehaviour
 	private void Start()
     {
         targets.Clear();
-        cam = GetComponent<Camera>();
+        cam = Camera.main;
         GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in playersArray)
         {
@@ -49,7 +47,7 @@ public class MultipleTargetCamera : MonoBehaviour
     {
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPosition = centerPoint + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
+		cam.transform.position = Vector3.SmoothDamp(cam.transform.position, newPosition, ref velocity, smoothTime);
     }
 
     private float GetGreatestDistance()

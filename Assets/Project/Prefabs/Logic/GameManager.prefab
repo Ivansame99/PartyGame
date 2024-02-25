@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3105006490199567253}
   - component: {fileID: 7782028682868204939}
   - component: {fileID: 5348037645612716601}
-  - component: {fileID: 8659138193795396399}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,6 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playersDead: 0
+  transitionMaterial: {fileID: 0}
+  transitionTime: 2
+  propertyName: _Progress
 --- !u!114 &552776905513233568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +115,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  onHub: 0
 --- !u!114 &7782028682868204939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,20 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76acf750e627c0e499ab4bca2c40db4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventsCanvas: {fileID: 0}
+  eventNameText: {fileID: 0}
+  timeToShowUI: 0
   randomEvents:
   - {fileID: 11400000, guid: f8abf7f9f5fa376449082f193e2d8ca1, type: 2}
   - {fileID: 11400000, guid: 4166fdf18bd2f4a4ea7bf1f988373dc8, type: 2}
   maxTimeToSpawn: 30
   minTimeToSpawn: 60
---- !u!114 &8659138193795396399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8785760671137338243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3303a05337277444ba312dc6c8f43d7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
