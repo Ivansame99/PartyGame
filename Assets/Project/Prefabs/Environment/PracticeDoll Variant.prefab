@@ -19928,7 +19928,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4944779623281029229}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.006959707, y: 0.0069597075, z: 0.34798545}
   m_ConstrainProportionsScale: 0
@@ -19936,7 +19936,7 @@ RectTransform:
   - {fileID: 7697686807876201760}
   m_Father: {fileID: 8518027558917819816}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 1.32}
@@ -19993,7 +19993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8518027558917819816}
-  offset: {x: 0, y: 4, z: 0}
+  offset: {x: 0, y: 5, z: 0}
 --- !u!114 &3016040106730580343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20001,7 +20001,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4944779623281029229}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c143794910ed09c49999090aae3f665d, type: 3}
   m_Name: 
@@ -29884,7 +29884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8518027558917819816}
-  offset: {x: 0, y: 5.2, z: 0}
+  offset: {x: 0, y: 7, z: 0}
 --- !u!114 &210158173155086757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30027,6 +30027,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2063153611046873339}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 301a8d2edc810dd4495446e35655feef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2755322983777911617}
   m_SourcePrefab: {fileID: 100100000, guid: 301a8d2edc810dd4495446e35655feef, type: 3}
 --- !u!4 &8518027558917819816 stripped
 Transform:
@@ -30057,7 +30061,7 @@ MonoBehaviour:
   healthBarC: {fileID: 570643773452806354}
   healthBar: {fileID: 7011657926138814564}
   timer: 0
-  camera: {fileID: 0}
+  cameraMain: {fileID: 0}
   powerLevelGameObject: {fileID: 7158468482713559330}
   Cross1: {fileID: 5415374250520260011}
   Cross2: {fileID: 3701808972935927134}
@@ -30133,3 +30137,24 @@ MonoBehaviour:
   maxScaleMultiplier: 2
   minScaleMultiplier: 1
   powerLevel: {fileID: 7158468482713559330}
+--- !u!95 &2755322983777911617
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042608217900226322}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 482ecc32fcc842b4eb95e8c344df6521, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

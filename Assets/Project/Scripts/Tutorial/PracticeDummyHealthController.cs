@@ -44,6 +44,12 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	private PowerController powerController;
 
+	private Animator anim;
+
+	private void Awake()
+	{
+		anim = GetComponent<Animator>();
+	}
 	// Start is called before the first frame update
 	void Start()
     {
@@ -76,6 +82,8 @@ public class PracticeDummyHealthController : MonoBehaviour
 		Cross2.SetActive(true);
 		Glow.SetActive(true);
 
+		//anim.SetTrigger("Damage");
+
 		//Logic
 		health -= damage;
 		timer = inmuneTime;
@@ -93,6 +101,7 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	public void ReceiveDamageArrow(float damage)
 	{
+		//anim.SetTrigger("Damage");
 		health -= damage;
 		if (healthBarC != null)
 		{
