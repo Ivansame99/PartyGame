@@ -16,6 +16,9 @@ public class MenuController : MonoBehaviour
 	[SerializeField]
 	private Sprite buttonPressedSprite;
 
+	[SerializeField]
+	private SettingsController settingsController;
+
 	[Header("Circle Transition")]
 	[SerializeField]
 	private Material transitionMaterial;
@@ -41,6 +44,8 @@ public class MenuController : MonoBehaviour
 
 	private void Update()
 	{
+		if (settingsController.setingsOn) return;
+
 		CheckIfAnyButtonSelected();
 		if (eventSystem.currentSelectedGameObject != lastButtonSelected)
 		{
@@ -64,7 +69,7 @@ public class MenuController : MonoBehaviour
 
 	public void UiSettingsButton()
 	{
-		Debug.Log("To do");
+		settingsController.Show();
 	}
 
 	public void UiCreditsButton()
