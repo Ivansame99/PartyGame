@@ -15,9 +15,14 @@ public class SelectPlayerController : MonoBehaviour
     [SerializeField]
     public GameObject[] playersUI;
 
+    [SerializeField]
+    MultipleTargetCamera targetCamera;
+
     // Start is called before the first frame update
     void Awake()
     {
+
+        targetCamera = this.GetComponent<MultipleTargetCamera>();
         Time.timeScale = 1f;
 
         try
@@ -30,7 +35,12 @@ public class SelectPlayerController : MonoBehaviour
                 GameObject player = Instantiate(prefabPlayers[i], playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
                 player.name = prefabPlayers[i].name;
                 player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
-            }
+				if (targetCamera != null)
+                {
+                    targetCamera.AddPlayer(player.transform);
+                }
+
+			}
         }
         catch (Exception)
         {

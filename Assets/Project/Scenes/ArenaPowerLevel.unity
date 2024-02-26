@@ -348,7 +348,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.2
+  m_fontSize: 34.8
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 3743270676613228139}
-  skipAnim: 1
+  skipAnim: 0
 --- !u!1 &331183245
 GameObject:
   m_ObjectHideFlags: 0
@@ -10253,6 +10253,7 @@ MonoBehaviour:
   - {fileID: 2745598609333794032}
   - {fileID: 2745598609333794031}
   - {fileID: 2745598609333794030}
+  targetCamera: {fileID: 0}
 --- !u!114 &3743270676613228142
 MonoBehaviour:
   m_ObjectHideFlags: 0

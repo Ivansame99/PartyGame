@@ -16,15 +16,20 @@ public class MultipleTargetCamera : MonoBehaviour
     private Camera cam;
 	private Vector3 velocity;
 
-	private void Start()
+    private void Awake()
     {
-        targets.Clear();
-        cam = Camera.main;
-        GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in playersArray)
-        {
-            targets.Add(player.transform);
-        }
+		cam = Camera.main;
+	}
+
+    private void Start()
+    {
+        //targets.Clear();
+
+        //GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
+        //foreach (GameObject player in playersArray)
+        //{
+            //targets.Add(player.transform);
+        //}
     }
 
     private void LateUpdate()
@@ -86,4 +91,9 @@ public class MultipleTargetCamera : MonoBehaviour
 
         return bounds.center;
     }
+
+    public void AddPlayer(Transform player)
+    {
+		targets.Add(player);
+	}
 }

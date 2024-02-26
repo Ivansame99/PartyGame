@@ -30,6 +30,9 @@ public class PlayerConfigurationManager : MonoBehaviour
 
 	public int playersReady;
 
+	[SerializeField]
+	MultipleTargetCamera targetCamera;
+
 	public static PlayerConfigurationManager Instance { get; private set; }
 
 	public void Awake()
@@ -76,6 +79,10 @@ public class PlayerConfigurationManager : MonoBehaviour
 		player.name = prefabPlayers[pc.PlayerIndex].name;
 		PlayerInputHandler pih = player.GetComponent<PlayerInputHandler>();
 		pih.InitializePlayer(pc);
+		if (targetCamera != null)
+		{
+			targetCamera.AddPlayer(player.transform);
+		}
 	}
 }
 
