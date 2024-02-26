@@ -69,7 +69,7 @@ public class MenuController : MonoBehaviour
 
 	public void UiCreditsButton()
 	{
-		Debug.Log("To do");
+		SceneManager.LoadScene("Credits");
 	}
 
 	public void UiExitButton()
