@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class MultipleTargetCamera : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public List<Transform> targets;
 
     [SerializeField] private Vector3 offset;
