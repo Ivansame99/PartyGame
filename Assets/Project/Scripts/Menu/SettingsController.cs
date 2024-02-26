@@ -50,13 +50,12 @@ public class SettingsController : MonoBehaviour
 
 	void CheckIfAnyButtonSelected()
 	{
-		Debug.Log(eventSystem.currentSelectedGameObject);
 		if (eventSystem.currentSelectedGameObject == null) eventSystem.SetSelectedGameObject(defaultButton);
 	}
 
 	public void UiChangeGraphicsQuality(int value)
     {
-        QualitySettings.SetQualityLevel(QualitySettings.GetQualityLevel());
+		QualitySettings.SetQualityLevel(QualitySettings.GetQualityLevel());
     }
 
     public void Show()
