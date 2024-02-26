@@ -20,8 +20,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     [SerializeField] float timeToStun;
     private float timer;
 
-
-    private TrailRenderer trailRenderer;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -37,7 +35,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
-        if(trailRenderer == null) trailRenderer = enemy.GetComponentInChildren<TrailRenderer>();
 
 
     }
@@ -85,8 +82,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             {
                 isAttacking = false;
                 enemy.SetGeneralBooleanStatus(false);
-                trailRenderer.enabled = false;
-                
                 enemy.stateMachine.ChangeState(enemy.chaseState);
                 
             }
@@ -106,7 +101,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     private void ChargeAttack()
     {
         isAttacking = true;
-        trailRenderer.enabled = true;
         enemy.animator.SetInteger("AttackType", 3);
     }
 
