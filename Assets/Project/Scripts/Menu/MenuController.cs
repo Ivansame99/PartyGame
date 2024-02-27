@@ -47,6 +47,7 @@ public class MenuController : MonoBehaviour
 		if (settingsController.setingsOn) return;
 
 		CheckIfAnyButtonSelected();
+
 		if (eventSystem.currentSelectedGameObject != lastButtonSelected)
 		{
 			lastButtonSelected = eventSystem.currentSelectedGameObject;
