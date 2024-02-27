@@ -11,130 +11,137 @@ public class RoundController : MonoBehaviour
 	private bool debug;
 
 	[SerializeField]
-    private Transform[] spawns;
+	private Transform[] spawns;
 
-    [System.Serializable]
-    public class Round
-    {
-        public GameObject[] enemiesInRound;
-    }
+	[System.Serializable]
+	public struct EnemyWithPower
+	{
+		public GameObject enemy;
+		public int power;
+	}
 
-    public Round[] rounds;
+	[System.Serializable]
+	public class Round
+	{
+		public EnemyWithPower[] enemiesInRound;
+	}
 
-    [SerializeField]
-    private float secondsBetweenRounds;
+	public Round[] rounds;
 
-    [SerializeField]
-    private float secondsBetweenEnemySpawn;
+	[SerializeField]
+	private float secondsBetweenRounds;
 
-    private int roundIndex;
+	[SerializeField]
+	private float secondsBetweenEnemySpawn;
 
-    [HideInInspector]
-    public List<GameObject> currentEnemies;
+	private int roundIndex;
 
-    [SerializeField]
-    private Animator coliseumAnimator;
+	[HideInInspector]
+	public List<GameObject> currentEnemies;
 
-    [HideInInspector]
-    public bool finalRound;
+	[SerializeField]
+	private Animator coliseumAnimator;
 
-    [SerializeField]
-    private GameObject roundsUI;
+	[HideInInspector]
+	public bool finalRound;
 
-    private Animator roundUIAnim;
+	[SerializeField]
+	private GameObject roundsUI;
 
-    [SerializeField]
-    private TMP_Text roundsUIText;
+	private Animator roundUIAnim;
 
-    private PlayersRespawn playersRespawn;
+	[SerializeField]
+	private TMP_Text roundsUIText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        roundUIAnim = roundsUI.GetComponent<Animator>();
-        finalRound = false;
-        roundIndex = 0;
-        currentEnemies = new List<GameObject>();
-        playersRespawn = this.GetComponent<PlayersRespawn>();
+	private PlayersRespawn playersRespawn;
+
+	// Start is called before the first frame update
+	void Start()
+	{
+		roundUIAnim = roundsUI.GetComponent<Animator>();
+		finalRound = false;
+		roundIndex = 0;
+		currentEnemies = new List<GameObject>();
+		playersRespawn = this.GetComponent<PlayersRespawn>();
 
 		if (!debug) StartCoroutine(IStartNextRound());
-    }
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!debug)
-        {
-            if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
-            else
-            {
-                if (!finalRound)
-                {
-                    roundsUIText.text = "Final Round";
-                    roundUIAnim.SetTrigger("ChangeRound");
-                }
-                finalRound = true;
-            }
-        }
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		if (!debug)
+		{
+			if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
+			else
+			{
+				if (!finalRound)
+				{
+					roundsUIText.text = "Final Round";
+					roundUIAnim.SetTrigger("ChangeRound");
+				}
+				finalRound = true;
+			}
+		}
+	}
 
-    IEnumerator IStartNextRound()
-    {
-        roundsUIText.text = "Round " + ToRoman(roundIndex+1);
-        roundUIAnim.SetTrigger("ChangeRound");
-        yield return new WaitForSeconds(secondsBetweenRounds);
+	IEnumerator IStartNextRound()
+	{
+		roundsUIText.text = "Round " + ToRoman(roundIndex + 1);
+		roundUIAnim.SetTrigger("ChangeRound");
+		yield return new WaitForSeconds(secondsBetweenRounds);
 
-        coliseumAnimator.SetBool("DoorOpen", true);
-        yield return new WaitForSeconds(1);
+		coliseumAnimator.SetBool("DoorOpen", true);
+		yield return new WaitForSeconds(1);
 
-        int enemyNumberInCurrentRound = rounds[roundIndex].enemiesInRound.Length;
+		int enemyNumberInCurrentRound = rounds[roundIndex].enemiesInRound.Length;
 
-        for (int i = 0; i < enemyNumberInCurrentRound; i++)
-        {
-            int randomSpawn = Random.Range(0, spawns.Length);
-            yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-            currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i], spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].transform.rotation));
-        }
-        coliseumAnimator.SetBool("DoorOpen", false);
-        roundIndex++;
-    }
+		for (int i = 0; i < enemyNumberInCurrentRound; i++)
+		{
+			int randomSpawn = Random.Range(0, spawns.Length);
+			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
+			currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+		}
+		coliseumAnimator.SetBool("DoorOpen", false);
+		roundIndex++;
+	}
 
-    void CheckCurrentEnemiesDeath()
-    {
-        if (currentEnemies.Count == 0) return;
+	void CheckCurrentEnemiesDeath()
+	{
+		if (currentEnemies.Count == 0) return;
 
-        for (int i = 0; i < currentEnemies.Count; i++)
-        {
-            if (currentEnemies[i] != null) return; //Check if there is at least one enemy remaining
-        }
+		for (int i = 0; i < currentEnemies.Count; i++)
+		{
+			if (currentEnemies[i] != null) return; //Check if there is at least one enemy remaining
+		}
 
-        //If all enemies dead
-        currentEnemies.Clear();
-        playersRespawn.RespawnDeadPlayers();
+		//If all enemies dead
+		currentEnemies.Clear();
+		playersRespawn.RespawnDeadPlayers();
 
-        //Next round
-        if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
-        else if (roundIndex == rounds.Length) roundIndex++;
-    }
+		//Next round
+		if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
+		else if (roundIndex == rounds.Length) roundIndex++;
+	}
 
-    // Integer to Roman numerals - mgear - http://unitycoder.com/blog/
-    // Unity3D version converted from this: http://rosettacode.org/wiki/Roman_numerals/Encode
-    string ToRoman(int number)
-    {
-        if (number < 1) return string.Empty;
-        if (number >= 1000) return "M" + ToRoman(number - 1000);
-        if (number >= 900) return "CM" + ToRoman(number - 900);
-        if (number >= 500) return "D" + ToRoman(number - 500);
-        if (number >= 400) return "CD" + ToRoman(number - 400);
-        if (number >= 100) return "C" + ToRoman(number - 100);
-        if (number >= 90) return "XC" + ToRoman(number - 90);
-        if (number >= 50) return "L" + ToRoman(number - 50);
-        if (number >= 40) return "XL" + ToRoman(number - 40);
-        if (number >= 10) return "X" + ToRoman(number - 10);
-        if (number >= 9) return "IX" + ToRoman(number - 9);
-        if (number >= 5) return "V" + ToRoman(number - 5);
-        if (number >= 4) return "IV" + ToRoman(number - 4);
-        if (number >= 1) return "I" + ToRoman(number - 1);
-        return "Impossible state reached";
-    }
+	// Integer to Roman numerals - mgear - http://unitycoder.com/blog/
+	// Unity3D version converted from this: http://rosettacode.org/wiki/Roman_numerals/Encode
+	string ToRoman(int number)
+	{
+		if (number < 1) return string.Empty;
+		if (number >= 1000) return "M" + ToRoman(number - 1000);
+		if (number >= 900) return "CM" + ToRoman(number - 900);
+		if (number >= 500) return "D" + ToRoman(number - 500);
+		if (number >= 400) return "CD" + ToRoman(number - 400);
+		if (number >= 100) return "C" + ToRoman(number - 100);
+		if (number >= 90) return "XC" + ToRoman(number - 90);
+		if (number >= 50) return "L" + ToRoman(number - 50);
+		if (number >= 40) return "XL" + ToRoman(number - 40);
+		if (number >= 10) return "X" + ToRoman(number - 10);
+		if (number >= 9) return "IX" + ToRoman(number - 9);
+		if (number >= 5) return "V" + ToRoman(number - 5);
+		if (number >= 4) return "IV" + ToRoman(number - 4);
+		if (number >= 1) return "I" + ToRoman(number - 1);
+		return "Impossible state reached";
+	}
 }
