@@ -15,6 +15,9 @@ public class PauseMenuController : MonoBehaviour
 	private GameObject defaultButton;
 
 	[SerializeField]
+	private SettingsController settingsController;
+
+	[SerializeField]
 	private GameObject cursor;
 
 	[Header("Circle Transition")]
@@ -35,13 +38,10 @@ public class PauseMenuController : MonoBehaviour
 		eventSystem = EventSystem.current;
 	}
 
-    void Start()
-    {
-
-	}
-
     void Update()
     {
+		if (settingsController.setingsOn) return;
+
 		if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
 		{
             if (pause)
@@ -87,7 +87,7 @@ public class PauseMenuController : MonoBehaviour
 
 	public void UiSettingsButton()
 	{
-        Debug.Log("To do");
+		settingsController.Show();
 	}
 
 	public void UiExitButton()
