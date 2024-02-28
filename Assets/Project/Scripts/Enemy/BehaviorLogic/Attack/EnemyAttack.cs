@@ -92,7 +92,7 @@ public class EnemyAttack : EnemyAttackSOBase
     private void Attack()
     {
         Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
-        waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y - 1.7f, enemy.transform.position.z), Quaternion.identity);
+        waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
 
         Torus torus = waveAttack.GetComponent<Torus>();
         torus.finalDamage = torus.baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
