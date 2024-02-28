@@ -348,7 +348,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.55
+  m_fontSize: 45.35
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 3743270676613228139}
-  skipAnim: 1
+  skipAnim: 0
 --- !u!1 &331183245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,7 +2379,6 @@ GameObject:
   m_Component:
   - component: {fileID: 342459477}
   - component: {fileID: 342459476}
-  - component: {fileID: 342459475}
   - component: {fileID: 342459474}
   m_Layer: 0
   m_Name: Camera (1)
@@ -2432,14 +2431,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!81 &342459475
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342459473}
-  m_Enabled: 1
 --- !u!20 &342459476
 Camera:
   m_ObjectHideFlags: 0
@@ -11571,7 +11562,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 500
+      value: 590
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
         type: 3}
@@ -11581,7 +11572,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 500
+      value: 590
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
         type: 3}
@@ -11774,7 +11765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 116}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!95 &1222882968
@@ -15351,7 +15342,7 @@ Camera:
   far clip plane: 1.78
   field of view: 60
   orthographic: 1
-  orthographic size: 49.69
+  orthographic size: 59.12
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
