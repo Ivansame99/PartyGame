@@ -23,6 +23,9 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float attackFreezeTime;
 
+	[SerializeField]
+	private float turnSmooth;
+
 	private float timerPrepareAttack;
 	private float timerattackCollider;
 	private float timerattackFreeze;
@@ -30,6 +33,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 	private bool fallParticleOn;
 	private float originalGravityScale;
 	private SlashController jumpAttackController;
+	private float turnSmoothTime;
 
 	public override void Init(PlayerController p)
 	{
@@ -52,11 +56,28 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 	public override void FixedUpdate()
 	{
-		
+		Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+		if (currentVelocity.magnitude > 10)
+		{
+			currentVelocity = currentVelocity.normalized * 10;
+		}
+
+		Vector3 targetVelocity = player.direction * 10;
+		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+		player.rb.AddForce(force, ForceMode.Acceleration);
 	}
 
 	public override void Update()
 	{
+		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
+		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+		if (!float.IsNaN(angle))
+		{
+			var rotation = Quaternion.Euler(0f, angle, 0f);
+			player.transform.rotation = rotation;
+		}
+
 		if (timerPrepareAttack >= prepareAttackTime)
 		{
 			player.gravityController.gravityOn = true;
