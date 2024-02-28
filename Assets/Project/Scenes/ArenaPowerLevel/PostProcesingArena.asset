@@ -75,12 +75,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
   m_Name: ShadowsMidtonesHighlights
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.91878814, z: 0.98362523, w: 0.30249113}
+    m_Value: {x: 1, y: 0.8065586, z: 0.95556647, w: 0.08116322}
   midtones:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {x: 1, y: 0.9718346, z: 0.9095104, w: 0.03558705}
   highlights:
     m_OverrideState: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   active: 0
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   neutralHDRRangeReductionMode:
     m_OverrideState: 0
     m_Value: 2
@@ -227,8 +227,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   intensity:
-    m_OverrideState: 0
-    m_Value: 0.439
+    m_OverrideState: 1
+    m_Value: 0
   smoothness:
     m_OverrideState: 0
     m_Value: 0.01
@@ -249,14 +249,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   shadows:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 0.1462264, b: 0.1462264, a: 1}
   highlights:
     m_OverrideState: 0
     m_Value: {r: 1, g: 0, b: 0, a: 1}
   balance:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 28
 --- !u!114 &6756487999771274304
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -269,18 +269,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
   threshold:
-    m_OverrideState: 0
-    m_Value: 11.79
+    m_OverrideState: 1
+    m_Value: 1
   intensity:
-    m_OverrideState: 0
-    m_Value: 33.7
+    m_OverrideState: 1
+    m_Value: 0.009
   scatter:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.7
   clamp:
     m_OverrideState: 0
@@ -319,19 +319,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 0.1
   contrast:
     m_OverrideState: 1
-    m_Value: 20.5
+    m_Value: 19.4
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 1}
+    m_Value: {r: 0.8980392, g: 0.8980392, b: 0.8980392, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 67
   saturation:
     m_OverrideState: 1
-    m_Value: -2.2
+    m_Value: 10
 --- !u!114 &8604779635574103070
 MonoBehaviour:
   m_ObjectHideFlags: 3
