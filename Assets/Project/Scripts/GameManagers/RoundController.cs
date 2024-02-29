@@ -55,6 +55,8 @@ public class RoundController : MonoBehaviour
 
 	private PlayersRespawn playersRespawn;
 
+	private int numPlayers;
+
 	// Start is called before the first frame update
 	void Start()
 	{
