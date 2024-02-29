@@ -63,7 +63,7 @@ public class PowerController : MonoBehaviour
             if(playerUI!=null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         }
 
-        SetCurrentPowerLevel(minPowerLevel);
+		InitializePowerLevel(minPowerLevel);
     }
 
     void Update()
@@ -95,7 +95,13 @@ public class PowerController : MonoBehaviour
 		ChangeUIText();
     }
 
-    public void OnDieSetCurrentPowerLevel()
+	public void InitializePowerLevel(float value)
+	{
+        currentPowerLevel = value;
+		ChangeUIText();
+	}
+
+	public void OnDieSetCurrentPowerLevel()
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
         if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
