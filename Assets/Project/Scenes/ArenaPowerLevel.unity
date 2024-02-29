@@ -348,7 +348,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 39.45
+  m_fontSize: 47.5
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 3743270676613228139}
-  skipAnim: 0
+  skipAnim: 1
 --- !u!1 &331183245
 GameObject:
   m_ObjectHideFlags: 0
@@ -14120,12 +14120,51 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: rounds.Array.data[0].enemiesInRound.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
+      value: 
+      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 2
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
+      value: 
+      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[1].power
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
+      value: 
+      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[2].power
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[3].enemy
+      value: 
+      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[3].power
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2805138501441062883, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

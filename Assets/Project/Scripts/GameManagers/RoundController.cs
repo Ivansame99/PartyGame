@@ -101,6 +101,7 @@ public class RoundController : MonoBehaviour
 			int randomSpawn = Random.Range(0, spawns.Length);
 			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
 			currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+			StartCoroutine(ChangePowerLevel(roundIndex, i));
 		}
 		coliseumAnimator.SetBool("DoorOpen", false);
 		roundIndex++;
@@ -123,6 +124,13 @@ public class RoundController : MonoBehaviour
 		if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
 		else if (roundIndex == rounds.Length) roundIndex++;
 	}
+
+	IEnumerator ChangePowerLevel(int roundIndexParameter, int indexEnemy)
+	{
+		yield return new WaitForSeconds(0.1f); //Time between spawn the enemy and change his power
+		currentEnemies[indexEnemy].GetComponent<PowerController>().InitializePowerLevel(rounds[roundIndexParameter].enemiesInRound[indexEnemy].power);
+	}
+
 
 	// Integer to Roman numerals - mgear - http://unitycoder.com/blog/
 	// Unity3D version converted from this: http://rosettacode.org/wiki/Roman_numerals/Encode
