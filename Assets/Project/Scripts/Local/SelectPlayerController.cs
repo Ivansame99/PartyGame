@@ -18,8 +18,10 @@ public class SelectPlayerController : MonoBehaviour
     [SerializeField]
     MultipleTargetCamera targetCamera;
 
-    // Start is called before the first frame update
-    void Awake()
+    [HideInInspector]
+    public int numPlayers;
+	// Start is called before the first frame update
+	void Awake()
     {
 
         targetCamera = this.GetComponent<MultipleTargetCamera>();
@@ -28,6 +30,7 @@ public class SelectPlayerController : MonoBehaviour
         try
         {
             var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
+            numPlayers = playerConfigs.Length;
             for (int i = 0; i < playerConfigs.Length; i++)
             {
                 playersUI[i].SetActive(true);

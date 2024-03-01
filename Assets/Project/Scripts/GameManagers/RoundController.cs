@@ -26,7 +26,15 @@ public class RoundController : MonoBehaviour
 		public EnemyWithPower[] enemiesInRound;
 	}
 
-	public Round[] rounds;
+	[System.Serializable]
+	public class PlayersNumber
+	{
+		public string name;
+		public Round[] rounds;
+	}
+
+	[SerializeField]
+	private PlayersNumber[] numberOfPlayers;
 
 	[SerializeField]
 	private float secondsBetweenRounds;
@@ -55,7 +63,7 @@ public class RoundController : MonoBehaviour
 
 	private PlayersRespawn playersRespawn;
 
-	private int numPlayers;
+	private int playersIndex;
 
 	// Start is called before the first frame update
 	void Start()
@@ -67,6 +75,8 @@ public class RoundController : MonoBehaviour
 		playersRespawn = this.GetComponent<PlayersRespawn>();
 
 		if (!debug) StartCoroutine(IStartNextRound());
+		playersIndex = GetComponent<SelectPlayerController>().numPlayers-1;
+		if(playersIndex<0) playersIndex = 0;
 	}
 
 	// Update is called once per frame
@@ -74,7 +84,7 @@ public class RoundController : MonoBehaviour
 	{
 		if (!debug)
 		{
-			if (roundIndex <= rounds.Length) CheckCurrentEnemiesDeath();
+			if (roundIndex <= numberOfPlayers[playersIndex].rounds.Length) CheckCurrentEnemiesDeath();
 			else
 			{
 				if (!finalRound)
@@ -96,13 +106,13 @@ public class RoundController : MonoBehaviour
 		coliseumAnimator.SetBool("DoorOpen", true);
 		yield return new WaitForSeconds(1);
 
-		int enemyNumberInCurrentRound = rounds[roundIndex].enemiesInRound.Length;
+		int enemyNumberInCurrentRound = numberOfPlayers[playersIndex].rounds[roundIndex].enemiesInRound.Length;
 
 		for (int i = 0; i < enemyNumberInCurrentRound; i++)
 		{
 			int randomSpawn = Random.Range(0, spawns.Length);
 			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-			currentEnemies.Add(Instantiate(rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+			currentEnemies.Add(Instantiate(numberOfPlayers[playersIndex].rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, numberOfPlayers[playersIndex].rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
 			StartCoroutine(ChangePowerLevel(roundIndex, i));
 		}
 		coliseumAnimator.SetBool("DoorOpen", false);
@@ -123,14 +133,14 @@ public class RoundController : MonoBehaviour
 		playersRespawn.RespawnDeadPlayers();
 
 		//Next round
-		if (roundIndex < rounds.Length) StartCoroutine(IStartNextRound());
-		else if (roundIndex == rounds.Length) roundIndex++;
+		if (roundIndex < numberOfPlayers[playersIndex].rounds.Length) StartCoroutine(IStartNextRound());
+		else if (roundIndex == numberOfPlayers[playersIndex].rounds.Length) roundIndex++;
 	}
 
 	IEnumerator ChangePowerLevel(int roundIndexParameter, int indexEnemy)
 	{
 		yield return new WaitForSeconds(0.1f); //Time between spawn the enemy and change his power
-		currentEnemies[indexEnemy].GetComponent<PowerController>().InitializePowerLevel(rounds[roundIndexParameter].enemiesInRound[indexEnemy].power);
+		currentEnemies[indexEnemy].GetComponent<PowerController>().InitializePowerLevel(numberOfPlayers[playersIndex].rounds[roundIndexParameter].enemiesInRound[indexEnemy].power);
 	}
 
 
