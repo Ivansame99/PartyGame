@@ -36,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
-        enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, GetComponent<Camera>());
     }
@@ -69,7 +69,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void ReceiveDamageArrow(float damage)
     {
-        health -= damage;
+        enemy.currentHealth -= damage;
         if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
@@ -81,9 +81,6 @@ public class EnemyHealth : MonoBehaviour
     }
     void Die()
     {
-        /*float destroyDelay = Random.value;
-        Destroy(this.gameObject, destroyDelay);
-        Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
         enemy.isDead = true;
@@ -106,7 +103,6 @@ public class EnemyHealth : MonoBehaviour
         {
             if (other.gameObject.transform.parent.tag != "Enemy")
             {
-                Debug.Log("entra");
                 lastAttacker = other.transform.parent.gameObject;
                 SlashController slashController = other.GetComponent<SlashController>();
                 attackPosition = other.gameObject.transform.position;
