@@ -311,7 +311,6 @@ public class PlayerHealthController : MonoBehaviour
             pushBack = true;
             pushForce = charge.pushForce;
             ReceiveDamage(charge.finalDamage);
-			Debug.Log("ocurre");
         }
 
     }

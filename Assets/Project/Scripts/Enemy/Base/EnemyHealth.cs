@@ -36,7 +36,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Awake()
     {
-        enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, GetComponent<Camera>());
     }
