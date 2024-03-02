@@ -25,13 +25,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
     public bool IsSpecialAggro { get; set; }
-    public bool IsGeneralBoolean { get; set; }
 
     //COMBAT INTERFICE
     public PowerController powerController { get; set; }
-    [field: SerializeField] public SlashController slashController { get; set; }
 
     #region State Machine Variables
+    //GENERAL COMUN STATES
     public EnemyStateMachine stateMachine { get; set; }
     public EnemyChaseState chaseState { get; set; }
     public EnemyAttackState attackState { get; set; }
@@ -39,11 +38,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     #endregion
 
     #region SO Variables
-    [Header("Enemy States")]
-    [SerializeField] private EnemyChaseSOBase enemyChaseBase;
-    [SerializeField] private EnemyAttackSOBase enemyAttackBase;
-    [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
 
+    //GENERAL COMUN STATES
     public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
     public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
@@ -51,37 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
 
     #endregion
 
-    void Awake()
-    {
-        //Initialize SO
-        enemyChaseBaseInstance = Instantiate(enemyChaseBase);
-        enemyAttackBaseInstance = Instantiate(enemyAttackBase);
-        enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
-        //Initialize State Machine
-        stateMachine = new EnemyStateMachine();
 
-        chaseState = new EnemyChaseState(this, stateMachine);
-        attackState = new EnemyAttackState(this, stateMachine);
-        specialAttackState = new EnemySpecialAttackState(this, stateMachine);
-    }
-    void Start()
-    {
-        //Initialize Health
-        currentHealth = maxHealth;
-
-        //Get Components
-        agent = GetComponent<NavMeshAgent>();
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-        powerController = GetComponent<PowerController>();
-        //Initialize SO
-        enemyChaseBaseInstance.Init(gameObject, this);
-        enemyAttackBaseInstance.Init(gameObject, this);
-        enemySpecialAttackBaseInstance.Init(gameObject, this);
-
-        //Initialize State Machine
-        stateMachine.Initialize(chaseState);        
-    }
     #region Health/Damage
     public void Damage(float damageAmount)
     {
@@ -135,10 +101,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
         IsSpecialAggro = isSpecialAggro;
     }
     
-    public void SetGeneralBooleanStatus(bool isGeneralBoolean)
-    {
-        IsGeneralBoolean = isGeneralBoolean;
-    }
     #endregion
 
     #region Combat Functions
