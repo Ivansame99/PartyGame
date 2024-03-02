@@ -154,7 +154,7 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		//Feedback
 		StartCoroutine(RedEffect());
-		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
 
 		cross1.SetActive(false);
 		cross2.SetActive(false);
