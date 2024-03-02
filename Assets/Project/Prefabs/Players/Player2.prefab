@@ -5508,7 +5508,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0.82725763, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5525,8 +5525,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 140
-  m_fontSizeBase: 140
+  m_fontSize: 170
+  m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5580,7 +5580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6455102242564749475}
-  offset: {x: 0, y: 4.3, z: 0}
+  offset: {x: 0, y: 4.6, z: 0}
 --- !u!114 &6451965015277410919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27701,6 +27701,8 @@ MonoBehaviour:
   DeathParticles: {fileID: 141433446842962269, guid: 69d3b0098c7a4134aae621b226982ad1,
     type: 3}
   BloodParticles: {fileID: 6823200998282874702, guid: 8f8fe12323625f5499b2853dd2ad3e58,
+    type: 3}
+  floatingDamageText: {fileID: 8703725455407415189, guid: 7e2d6ce9b1556694aaf3135b7d38eb33,
     type: 3}
   helmetPrefabs:
   - prefab: {fileID: 9034744252602175310, guid: 0cc4e7a6bb14f9a40bc09c29f81cc332,

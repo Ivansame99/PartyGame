@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -78,6 +79,7 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject HealParticles;
 	[SerializeField] private GameObject DeathParticles;
 	[SerializeField] private GameObject BloodParticles;
+	[SerializeField] private GameObject floatingDamageText;
 
 	[SerializeField] private HelmetPrefab[] helmetPrefabs;
 
@@ -155,6 +157,8 @@ public class PlayerHealthController : MonoBehaviour
 		cross2.SetActive(true);
 		glow.SetActive(true);
 
+		if(floatingDamageText != null) ShowDamageText(damage);
+
 		//Sound
 		hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 		hitSound.Play();
@@ -175,6 +179,12 @@ public class PlayerHealthController : MonoBehaviour
 		if (health <= 0) Die();
 
 		invencibleTimer = inmuneTime;
+	}
+
+	void ShowDamageText(float damage)
+	{
+		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
+		text.text = ((int)damage).ToString();
 	}
 
 	void RestoreHealth(float healthAmmount)
