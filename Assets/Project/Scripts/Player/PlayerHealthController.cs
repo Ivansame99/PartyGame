@@ -4,9 +4,6 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
-
-
 public class PlayerHealthController : MonoBehaviour
 {
 	[Header("Logic")]
@@ -266,6 +263,7 @@ public class PlayerHealthController : MonoBehaviour
 			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
 			Destroy(ghost,0.5f);
 		}
+
 		powerController.enabled = true;
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
