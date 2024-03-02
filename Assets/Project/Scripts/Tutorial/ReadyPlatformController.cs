@@ -43,6 +43,7 @@ public class ReadyPlatformController : MonoBehaviour
 
 		if (changeSceneTimer <= 0)
 		{
+			playerConfigurationManager.onHub = false;
 			StartCoroutine(CloseTranition());
 		}
 	}

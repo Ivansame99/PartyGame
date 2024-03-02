@@ -20,6 +20,9 @@ public class PlayerConfigurationManager : MonoBehaviour
 	private TMP_Text readyPlatformText;
 
 	[SerializeField]
+	private GameObject controlsPanel;
+
+	[SerializeField]
 	private int maxPlayers;
 	private int playerIndex = 0;
 
@@ -32,6 +35,9 @@ public class PlayerConfigurationManager : MonoBehaviour
 
 	[SerializeField]
 	MultipleTargetCamera targetCamera;
+	
+	[HideInInspector]
+	public bool onHub=true;
 
 	public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -57,9 +63,10 @@ public class PlayerConfigurationManager : MonoBehaviour
 
 	public void HandlePlayerJoin(PlayerInput pi)
 	{
-		if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+		if (!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex) && onHub)
 		{
 			playerText[playerIndex].GetComponent<Animator>().SetTrigger("Ready");
+			controlsPanel.SetActive(true);
 
 			pi.transform.SetParent(transform);
 
