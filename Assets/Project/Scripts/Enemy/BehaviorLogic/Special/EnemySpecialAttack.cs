@@ -81,7 +81,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             if (hit.collider.CompareTag("Wall"))
             {
                 isAttacking = false;
-                enemy.SetGeneralBooleanStatus(false);
                 enemy.stateMachine.ChangeState(enemy.chaseState);
                 
             }
