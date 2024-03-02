@@ -261,7 +261,11 @@ public class PlayerHealthController : MonoBehaviour
 
 	public void EnablePlayer()
 	{
-		if (ghost != null) Destroy(ghost);
+		if (ghost != null)
+		{
+			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
+			Destroy(ghost,0.5f);
+		}
 		powerController.enabled = true;
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
