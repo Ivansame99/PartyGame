@@ -11,7 +11,8 @@ using static UnityEngine.InputSystem.InputAction;
 public class PlayerInputHandler : MonoBehaviour
 {
 	private bool canStart = false;
-	private PlayerConfiguration playerConfig;
+	[HideInInspector]
+	public PlayerConfiguration playerConfig;
 	private PlayerController playerController;
 
 	private Inputs inputs;

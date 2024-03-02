@@ -82,9 +82,14 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject floatingDamageText;
 
 	[SerializeField] private HelmetPrefab[] helmetPrefabs;
+	[SerializeField] private GameObject ghostPrefab;
 
 	[SerializeField] private float minForce = 5f;
 	[SerializeField] private float maxForce = 10f;
+
+	private PlayerConfiguration playerConfig;
+
+	private GameObject ghost;
 
 	void Start()
 	{
@@ -116,6 +121,8 @@ public class PlayerHealthController : MonoBehaviour
 			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
 		}
 		health = maxHealth;
+
+		playerConfig = this.GetComponent<PlayerInputHandler>().playerConfig;
 	}
 
 	void Update()
@@ -217,6 +224,9 @@ public class PlayerHealthController : MonoBehaviour
 
 		Instantiate(DeathParticles, transform.position, Quaternion.identity);
 
+		//Ghost
+		ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+		ghost.GetComponent<GhostInputHandler>().InitializeGhost(playerConfig);
 
 		//Power control pass
 		currentPower = powerController.GetCurrentPowerLevel() / 2;
@@ -260,6 +270,7 @@ public class PlayerHealthController : MonoBehaviour
 		health = maxHealth;
 		invencibleTimer = 0.5f;
 		ChangeUI();
+		if (ghost != null) Destroy(ghost);
 	}
 
 	private void HandleCurrentPowerChanged(float newValue)
