@@ -261,6 +261,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	public void EnablePlayer()
 	{
+		if (ghost != null) Destroy(ghost);
 		powerController.enabled = true;
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
@@ -270,7 +271,6 @@ public class PlayerHealthController : MonoBehaviour
 		health = maxHealth;
 		invencibleTimer = 0.5f;
 		ChangeUI();
-		if (ghost != null) Destroy(ghost);
 	}
 
 	private void HandleCurrentPowerChanged(float newValue)

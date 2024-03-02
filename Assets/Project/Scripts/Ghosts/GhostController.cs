@@ -27,6 +27,11 @@ public class GhostController : MonoBehaviour
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 		float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 		float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+		if (!float.IsNaN(angle))
+		{
+			var rotation = Quaternion.Euler(0f, angle, 0f);
+			this.transform.rotation = rotation;
+		}
 	}
 
 	void FixedUpdate()
