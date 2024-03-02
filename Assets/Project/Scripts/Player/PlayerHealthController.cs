@@ -183,7 +183,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	void ShowDamageText(float damage)
 	{
-		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity, transform).GetComponent<TMP_Text>();
+		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
 		text.text = ((int)damage).ToString();
 	}
 

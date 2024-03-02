@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PracticeDummyHealthController : MonoBehaviour
@@ -46,6 +47,8 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	private Animator anim;
 
+	[SerializeField] private GameObject floatingDamageText;
+
 	private void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -82,6 +85,8 @@ public class PracticeDummyHealthController : MonoBehaviour
 		Cross2.SetActive(true);
 		Glow.SetActive(true);
 
+		if (floatingDamageText != null) ShowDamageText(damage);
+
 		//anim.SetTrigger("Damage");
 
 		//Logic
@@ -99,10 +104,19 @@ public class PracticeDummyHealthController : MonoBehaviour
 		}
 	}
 
+	void ShowDamageText(float damage)
+	{
+		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
+		text.text = ((int)damage).ToString();
+	}
+
 	public void ReceiveDamageArrow(float damage)
 	{
 		//anim.SetTrigger("Damage");
 		health -= damage;
+
+		if (floatingDamageText != null) ShowDamageText(damage);
+
 		if (healthBarC != null)
 		{
 			healthBarC.SetProgress(health / maxHealth, 5f);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
@@ -64,13 +65,14 @@ public class EnemyHealthController : MonoBehaviour
 
     [SerializeField] private GameObject DeathParticles;
     [SerializeField] private GameObject BloodParticles;
+	[SerializeField] private GameObject floatingDamageText;
 
-    //[SerializeField] private GameObject Helmet1;
-    //[SerializeField] private GameObject Helmet2;
-   // [SerializeField] private GameObject Helmet3;
-   // [SerializeField] private GameObject Helmet4;
-   // [SerializeField] private GameObject Helmet5;
-    public HelmetPrefab[] helmetPrefabs;
+	//[SerializeField] private GameObject Helmet1;
+	//[SerializeField] private GameObject Helmet2;
+	// [SerializeField] private GameObject Helmet3;
+	// [SerializeField] private GameObject Helmet4;
+	// [SerializeField] private GameObject Helmet5;
+	public HelmetPrefab[] helmetPrefabs;
     private PowerController powerController;
     public float minForce = 1f;
     public float maxForce = 5f;
@@ -124,7 +126,9 @@ public class EnemyHealthController : MonoBehaviour
 		Cross2.SetActive(true);
 		Glow.SetActive(true);
 
-        //Logic
+		if (floatingDamageText != null) ShowDamageText(damage);
+
+		//Logic
 		health -= damage;
         timer = inmuneTime;
         if (health <= 0)
@@ -148,7 +152,10 @@ public class EnemyHealthController : MonoBehaviour
     public void ReceiveDamageArrow(float damage)
     {
         health -= damage;
-        if (healthBarC != null)
+
+		if (floatingDamageText != null) ShowDamageText(damage);
+
+		if (healthBarC != null)
         {
             healthBarC.SetProgress(health / maxHealth, 5f);
             if (health >= 0 && damageAnim && !animator.GetBool("isEvading"))
@@ -166,7 +173,13 @@ public class EnemyHealthController : MonoBehaviour
         }
     }
 
-    void Die()
+	void ShowDamageText(float damage)
+	{
+		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
+		text.text = ((int)damage).ToString();
+	}
+
+	void Die()
     {
         animator.SetTrigger("die");
        

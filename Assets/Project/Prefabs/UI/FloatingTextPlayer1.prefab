@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8551384008492134556, guid: dcfe7b00c24253747a6f95f940794113, type: 2}
+  - {fileID: 2100000, guid: 17bc7fc57e3fd7649a2986003fb7ac5f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,14 +105,13 @@ MonoBehaviour:
   m_text: Prueba
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dcfe7b00c24253747a6f95f940794113, type: 2}
-  m_sharedMaterial: {fileID: -8551384008492134556, guid: dcfe7b00c24253747a6f95f940794113,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 17bc7fc57e3fd7649a2986003fb7ac5f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4294918656
   m_fontColor: {r: 0, g: 0.2589929, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -188,8 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 1
-  offset: {x: 0, y: 4, z: 0}
-  randomizePos: {x: 3, y: 0.5, z: 0}
+  offset: {x: 2, y: 4, z: 0}
+  randomizePos: {x: 0.1, y: 0.5, z: 0}
+  randomZRotation: 30
 --- !u!95 &6601250554331722877
 Animator:
   serializedVersion: 5
