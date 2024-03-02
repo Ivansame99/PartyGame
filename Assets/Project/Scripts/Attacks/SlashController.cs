@@ -43,7 +43,6 @@ public class SlashController : MonoBehaviour
         {
             pushBack = true;
             attackPosition = other.GetComponent<SlashController>().owner.transform.position;
-            Debug.Log("Entras");
             if (playerHealthController != null)
             {
 				playerHealthController.invencibleTimer = 1f; //Para que no se hagan da�o cuando pase esto
