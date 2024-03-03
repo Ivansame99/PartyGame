@@ -261,7 +261,7 @@ public class PlayerHealthController : MonoBehaviour
 		if (ghost != null)
 		{
 			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
-			Destroy(ghost,0.5f);
+			Destroy(ghost,1f);
 		}
 
 		powerController.enabled = true;
