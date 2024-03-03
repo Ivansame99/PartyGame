@@ -6,6 +6,7 @@ public class AttackRectanglePreview : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] float scaleAmmount = 1.5f;
+    [SerializeField] float maxScale;
 
     private void Start()
     {
@@ -19,9 +20,9 @@ public class AttackRectanglePreview : MonoBehaviour
 
     private void Update()
     {
-        if (scaleAmmount < 1)
+        if (scaleAmmount < maxScale)
         {
-            this.transform.localScale = new Vector3(0.75f, scaleAmmount, 1);
+            this.transform.localScale = new Vector3(0.25f, scaleAmmount, 0.5f);
             scaleAmmount += Time.deltaTime;
         }
     }

@@ -33,7 +33,7 @@ public class SecutorAttack : EnemyAttackSOBase
         base.DoEnterLogic();
         isFinished = false;
         enemy.animator.SetInteger("AnimationType", 1);
-        //feedback = Instantiate(feedbackAttack,enemy.transform);
+        feedback = Instantiate(feedbackAttack,enemy.transform);
     }
     public override void DoExitLogic()
     {
@@ -78,7 +78,7 @@ public class SecutorAttack : EnemyAttackSOBase
 
     private void Attack()
     {
-        //Destroy(feedback);
+        Destroy(feedback);
         isAttacking = true;
         
     }
@@ -86,6 +86,5 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         attackTimer = attackCooldown;
         isFinished = true;
-        Debug.Log("acabo");
     }
 }
