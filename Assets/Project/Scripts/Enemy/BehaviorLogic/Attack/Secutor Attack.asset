@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c9bdae2fce51e4f8a4852d1d0b11c1, type: 3}
-  m_Name: Secutor Chase
+  m_Script: {fileID: 11500000, guid: 21d8bca4fa05db244bd48827f72eaa77, type: 3}
+  m_Name: Secutor Attack
   m_EditorClassIdentifier: 
-  speed: 30
-  acceleration: 15
-  angularSpeed: 500
+  attackSpeed: 50
+  feedbackAttack: {fileID: 7908628978502343965, guid: f2bc62d8421dd2c4ebf3689ac80e24a2,
+    type: 3}
+  attackCooldown: 4

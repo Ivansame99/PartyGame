@@ -35,7 +35,7 @@ public class ChaseState : StateMachineBehaviour
 
         agent.speed = speed;
         agent.acceleration = acceleration;
-        agent.angularSpeed = angularSpeed;
+        //agent.angularSpeed = angularSpeed;
 
     }
 
