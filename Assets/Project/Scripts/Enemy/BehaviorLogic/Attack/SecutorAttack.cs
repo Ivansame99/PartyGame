@@ -9,7 +9,7 @@ public class SecutorAttack : EnemyAttackSOBase
     [SerializeField] GameObject feedbackAttack;
     private GameObject feedback;
 
-    private bool isAttacking,isStarted;
+    private bool isAttacking,isFinished;
 
     //COOLDOWN ATTACKS
     private float attackTimer;
@@ -31,7 +31,9 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        feedback = Instantiate(feedbackAttack,enemy.transform);
+        isFinished = false;
+        enemy.animator.SetInteger("AnimationType", 1);
+        //feedback = Instantiate(feedbackAttack,enemy.transform);
     }
     public override void DoExitLogic()
     {
@@ -40,22 +42,20 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if (!enemy.IsAggreed && !isAttacking)
-        {
-            enemy.stateMachine.ChangeState(enemy.chaseState);
-        }
 
-        if (attackTimer <= 0 && !isStarted)
+        //A BIT OF COOLDOWN WHEN ATTACK FINISHED
+        if (isFinished)
         {
-            enemy.animator.SetTrigger("Attack");
-            isStarted = true;
+            if (attackTimer <= 0)
+            {
+                isFinished = false;
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
+            }
         }
-        else
-        {
-            attackTimer -= Time.deltaTime;
-        }
-
-
     }
     public override void DoPhysicsLogic()
     {
@@ -78,14 +78,14 @@ public class SecutorAttack : EnemyAttackSOBase
 
     private void Attack()
     {
-        Destroy(feedback);
+        //Destroy(feedback);
         isAttacking = true;
         
     }
     private void AttackFinished()
     {
-        isStarted = false;
         attackTimer = attackCooldown;
+        isFinished = true;
         Debug.Log("acabo");
     }
 }

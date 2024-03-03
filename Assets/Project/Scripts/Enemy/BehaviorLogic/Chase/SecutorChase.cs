@@ -21,7 +21,7 @@ public class SecutorChase : EnemyChaseSOBase
         base.DoEnterLogic();
         //Set chase animation
         enemy.agent.isStopped = false;
-        enemy.animator.SetTrigger("Run");
+        enemy.animator.SetInteger("AnimationType",0);
         //enemy.animator.SetInteger("AnimationType", 0);
 
         //Agent configuration
