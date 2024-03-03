@@ -14,11 +14,13 @@ public class EnemySlash : MonoBehaviour
     {
         slashController = GetComponent<SlashController>();
         _enemy = GetComponentInParent<Enemy>();
+        Slash();
     }
 
     public void Slash()
     {
         slashController.finalDamage = damage + _enemy.GetPowerDamage();
         slashController.pushForce = pushForce;
+        Debug.Log(slashController.finalDamage);
     }
 }
