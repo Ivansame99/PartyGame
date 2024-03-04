@@ -21,6 +21,5 @@ public class EnemySlash : MonoBehaviour
     {
         slashController.finalDamage = damage + _enemy.GetPowerDamage();
         slashController.pushForce = pushForce;
-        Debug.Log(slashController.finalDamage);
     }
 }
