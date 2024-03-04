@@ -35,8 +35,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
-
-
     }
 
     public override void DoExitLogic()
@@ -69,7 +67,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             {
                 currentVelocity = currentVelocity.normalized * chargeSpeed;
             }
-
             Vector3 targetVelocity = playerDir * chargeSpeed;
             Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
             enemy.rb.AddForce(force, ForceMode.Acceleration);
@@ -82,7 +79,6 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             {
                 isAttacking = false;
                 enemy.stateMachine.ChangeState(enemy.chaseState);
-                
             }
         }
     }
