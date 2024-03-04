@@ -21,9 +21,11 @@ public class SecuterAggroCheck : MonoBehaviour
     void Update()
     {
         //CALCULATE DISTANCE BETWEEN ENEMY AND PLAYER
-        if (_enemy.playerPos != null) distance = Vector3.Distance(_enemy.playerPos.position, transform.position);
-        direction = _enemy.playerPos.transform.position - _enemy.transform.position;
-
+        if (_enemy.playerPos != null)
+        {
+            distance = Vector3.Distance(_enemy.playerPos.position, transform.position);
+            direction = _enemy.playerPos.transform.position - _enemy.transform.position;
+        }
         //NORMAL AGGRO STATUS
         if (distance < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
         {
