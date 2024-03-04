@@ -17,6 +17,7 @@ public class GhostController : MonoBehaviour
 
 	private Rigidbody rb;
 
+	private bool move;
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -25,31 +26,47 @@ public class GhostController : MonoBehaviour
 	private void Update()
 	{
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
-		float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-		float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-		if (!float.IsNaN(angle))
+		if (direction != Vector3.zero)
 		{
-			var rotation = Quaternion.Euler(0f, angle, 0f);
-			this.transform.rotation = rotation;
+			float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+			float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+			if (!float.IsNaN(angle))
+			{
+				var rotation = Quaternion.Euler(0f, angle, 0f);
+				this.transform.rotation = rotation;
+			}
+			move = true;
+		} else
+		{
+			move = false;
 		}
 	}
 
 	void FixedUpdate()
 	{
-		Vector3 currentVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-		if (currentVelocity.magnitude > speed)
+		if (move)
 		{
-			currentVelocity = currentVelocity.normalized * speed;
-		}
+			Vector3 currentVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-		Vector3 targetVelocity = direction * speed;
-		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
-		rb.AddForce(force, ForceMode.Acceleration);
+			if (currentVelocity.magnitude > speed)
+			{
+				currentVelocity = currentVelocity.normalized * speed;
+			}
+
+			Vector3 targetVelocity = direction * speed;
+			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+			rb.AddForce(force, ForceMode.Acceleration);
+		}
+		else ResetVelocity();
 	}
 
 	public void SetInputVector(Vector2 direction)
 	{
 		moveUniversal = direction;
+	}
+
+	private void ResetVelocity()
+	{
+		rb.velocity = new Vector3(0, 0, 0);
 	}
 }
