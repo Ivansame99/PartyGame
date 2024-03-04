@@ -47,6 +47,7 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	private Animator anim;
 
+	[SerializeField] private GameObject deathParticles;
 	[SerializeField] private GameObject floatingDamageText;
 
 	private void Awake()
@@ -66,12 +67,6 @@ public class PracticeDummyHealthController : MonoBehaviour
 		}
 		health = maxHealth;
 	}
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
 	public void ReceiveDamageSlash(float damage)
 	{
@@ -130,13 +125,15 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	void Die()
 	{
+		Vector3 particlesPos = new Vector3(transform.position.x, transform.position.y+1f, transform.position.z);
+		Instantiate(deathParticles, particlesPos, Quaternion.identity);
 		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
 		dead = true;
-		Invoke("enemyDestroy", 2.0f);
+		EnemyDestroy();
 	}
 
-	public void enemyDestroy()
+	public void EnemyDestroy()
 	{
 		Destroy(this.gameObject);
 		Destroy(healthBar.gameObject);

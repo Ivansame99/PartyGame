@@ -18,8 +18,11 @@ public class ArrowController : MonoBehaviour
 
     private Rigidbody rb;
 
-    public GameObject owner; //Tiene que ser publico
-	public Vector3 ownerPos; //Tiene que ser publico
+    [HideInInspector]
+    public GameObject owner;
+
+    [HideInInspector]
+	public Vector3 ownerPos;
 
 	private bool ground;
 
