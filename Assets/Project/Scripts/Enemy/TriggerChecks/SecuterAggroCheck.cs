@@ -37,7 +37,7 @@ public class SecuterAggroCheck : MonoBehaviour
             _enemy.SetAggroStatus(false);
         }
 
-        if ((distancePlayer1 < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg) && distancePlayer2 < triggerDistanceClose)
+        if (distancePlayer2 < triggerDistanceClose)
         {
             _enemy.SetSpecialAggroStatus(true);
         }

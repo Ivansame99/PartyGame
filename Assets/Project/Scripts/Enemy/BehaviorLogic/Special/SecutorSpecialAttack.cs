@@ -19,7 +19,7 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        Debug.Log("Secutor Special Attack");
+        enemy.animator.SetInteger("AnimationType", 3);
     }
 
     public override void DoExitLogic()
