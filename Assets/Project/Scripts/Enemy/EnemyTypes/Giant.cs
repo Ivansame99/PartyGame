@@ -33,6 +33,7 @@ public class Giant : Enemy
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         powerController = GetComponent<PowerController>();
+
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
@@ -40,9 +41,5 @@ public class Giant : Enemy
 
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
-    }
-    public void ComunStart()
-    {
-
     }
 }
