@@ -6,13 +6,18 @@ using UnityEngine;
 public class SecutorSpecialAttack : EnemySpecialAttackSOBase
 {
     [SerializeField] private ParticleSystem areaAttackParticles;
+    [SerializeField] private float scaleAttackParticles;
+    private Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
+    Vector3 scale = new Vector3(4f, 4f, 4f);
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
         switch (triggerType)
         {
             case Enemy.AnimationTriggerType.EnemyAttack:
-                Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+                ParticleSystem instantiatedObject = Instantiate(areaAttackParticles,enemy.transform.position, rotation);
+                instantiatedObject.transform.localScale = scale;
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
                 Debug.Log("Attack Finished");
