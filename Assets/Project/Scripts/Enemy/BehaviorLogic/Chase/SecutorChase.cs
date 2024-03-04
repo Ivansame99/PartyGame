@@ -30,6 +30,8 @@ public class SecutorChase : EnemyChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
+
         if (enemy.IsSpecialAggro)
         {
             enemy.stateMachine.ChangeState(enemy.specialAttackState);
@@ -39,13 +41,6 @@ public class SecutorChase : EnemyChaseSOBase
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
-
-
-
-        //if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-
-        //enemy.transform.LookAt(enemy.playerPos);
-        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 
     }
 

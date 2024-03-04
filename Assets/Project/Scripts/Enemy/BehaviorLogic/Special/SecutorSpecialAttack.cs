@@ -5,12 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemySpecialAttack", menuName = "Enemy Logic/Secutor/Attack Logic/Secutor Special Attack")]
 public class SecutorSpecialAttack : EnemySpecialAttackSOBase
 {
+    [SerializeField] private ParticleSystem areaAttackParticles;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
         switch (triggerType)
         {
             case Enemy.AnimationTriggerType.EnemyAttack:
+                Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+                break;
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                Debug.Log("Attack Finished");
                 
                 break;
         }
