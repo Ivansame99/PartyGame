@@ -70,9 +70,10 @@ public class EnemyHealth : MonoBehaviour
     public void ReceiveDamageArrow(float damage)
     {
         enemy.currentHealth -= damage;
+        timer = enemy.inmuneTime;
         if (healthBarC != null)
         {
-            healthBarC.SetProgress(health / maxHealth, 5f);
+            healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
         }
         if (enemy.currentHealth <= 0)
         {
