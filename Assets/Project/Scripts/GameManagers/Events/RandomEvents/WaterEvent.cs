@@ -7,9 +7,13 @@ using UnityEngine.Rendering;
 public class WaterEvent : GameEvent
 {
 	[SerializeField]
+	private GameObject waterFountainPrefab;
+	[SerializeField]
 	private GameObject waterPrefab;
 	[SerializeField]
-	private Vector3 startPosition;
+	private Vector3 startPositionFountain;
+	[SerializeField]
+	private Vector3 startPositionWater;
 	[SerializeField]
 	private float maxScale;
 	[SerializeField]
@@ -31,20 +35,29 @@ public class WaterEvent : GameEvent
 
 	private float waterTimer;
 
+	private bool fountainInstanciated;
+
 	public override void EventStart()
     {
 		eventFinished = false;
 		if (coroutineManager == null) coroutineManager = CoroutineManager.Instance;
-		water = Instantiate(waterPrefab, startPosition, Quaternion.identity);
+		water = Instantiate(waterPrefab, startPositionWater, Quaternion.identity);
 		water.transform.localScale = Vector3.zero;
 		timer = 0;
 		waterTimer = 0;
 		waterExpanding=true;
 		waterRetract = false;
+		fountainInstanciated = false;
 	}
 
     public override void EventUpdate()
     {
+		if (!fountainInstanciated)
+		{
+			Instantiate(waterFountainPrefab, startPositionFountain, waterFountainPrefab.transform.rotation);
+			fountainInstanciated = true;
+		}
+
 		if (waterExpanding)
 		{
 			water.transform.localScale = new Vector3(timer, yScale, timer);

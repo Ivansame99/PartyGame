@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerWalkState : PlayerState<PlayerController>
 {
-	[SerializeField]
-	private float speed;
+	public float speed;
 
 	[SerializeField]
 	private float turnSmooth;

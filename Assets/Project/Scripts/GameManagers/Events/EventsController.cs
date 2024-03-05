@@ -42,8 +42,8 @@ public class EventsController : MonoBehaviour
 		{
 			eventIndex = Random.Range(0, randomEvents.Count);
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-			randomEvents[2].EventStart();
 			eventNameText.text = randomEvents[2].eventName;
+			randomEvents[2].EventStart();
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
