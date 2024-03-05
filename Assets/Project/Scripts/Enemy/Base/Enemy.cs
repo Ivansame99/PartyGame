@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyChaseState chaseState { get; set; }
     public EnemyAttackState attackState { get; set; }
     public EnemySpecialAttackState specialAttackState { get; set; }
+    public EnemyStunnedState stunnedState { get; set; }
     #endregion
 
     #region SO Variables
@@ -43,7 +44,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
     public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
-
+    public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }
+    
 
     #endregion
 

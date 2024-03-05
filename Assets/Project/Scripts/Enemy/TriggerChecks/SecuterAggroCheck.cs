@@ -9,7 +9,7 @@ public class SecuterAggroCheck : MonoBehaviour
     [SerializeField] private float deg;
 
     private Enemy _enemy;
-    private float distance;
+    private float distancePlayer1,distancePlayer2;
     private Vector3 direction;
 
     private void Awake()
@@ -23,17 +23,27 @@ public class SecuterAggroCheck : MonoBehaviour
         //CALCULATE DISTANCE BETWEEN ENEMY AND PLAYER
         if (_enemy.playerPos != null)
         {
-            distance = Vector3.Distance(_enemy.playerPos.position, transform.position);
+            distancePlayer1 = Vector3.Distance(_enemy.playerPos.position, transform.position);
+            distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
             direction = _enemy.playerPos.transform.position - _enemy.transform.position;
         }
         //NORMAL AGGRO STATUS
-        if (distance < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
+        if (distancePlayer1 < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
         {
             _enemy.SetAggroStatus(true);
         }
         else
         {
             _enemy.SetAggroStatus(false);
+        }
+
+        if (distancePlayer2 < triggerDistanceClose)
+        {
+            _enemy.SetSpecialAggroStatus(true);
+        }
+        else
+        {
+            _enemy.SetSpecialAggroStatus(false);
         }
     }
 }
