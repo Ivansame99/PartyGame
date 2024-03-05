@@ -9,6 +9,7 @@ public class Giant : Enemy
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
+    [SerializeField] private EnemyDeathSOBase enemyDeathBase;
 
     void Awake()
     {
@@ -16,12 +17,14 @@ public class Giant : Enemy
         enemyChaseBaseInstance = Instantiate(enemyChaseBase);
         enemyAttackBaseInstance = Instantiate(enemyAttackBase);
         enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
+        enemyDeathBaseInstance = Instantiate(enemyDeathBase);
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
         chaseState = new EnemyChaseState(this, stateMachine);
         attackState = new EnemyAttackState(this, stateMachine);
         specialAttackState = new EnemySpecialAttackState(this, stateMachine);
+        deathState = new EnemyDeathState(this, stateMachine);
     }
     void Start()
     {
@@ -38,6 +41,7 @@ public class Giant : Enemy
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
         enemySpecialAttackBaseInstance.Init(gameObject, this);
+        enemyDeathBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
         stateMachine.Initialize(chaseState);

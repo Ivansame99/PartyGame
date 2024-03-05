@@ -36,12 +36,12 @@ public class SecutorChase : EnemyChaseSOBase
 
             if (enemy.IsSpecialAggro)
             {
-                //enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                enemy.stateMachine.ChangeState(enemy.specialAttackState);
             }
 
             if (enemy.IsAggreed)
             {
-                //enemy.stateMachine.ChangeState(enemy.attackState);
+                enemy.stateMachine.ChangeState(enemy.attackState);
             }
         }
         else

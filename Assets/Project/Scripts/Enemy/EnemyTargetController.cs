@@ -25,7 +25,7 @@ public class EnemyTargetController : MonoBehaviour
     void Update()
     {
         enemy.playerPos = FindPlayer();
-        enemy.playerPos2 = FindSecondClosestPlayer(player);
+        enemy.playerPos2 = FindSecondClosestPlayer(enemy.playerPos2);
     }
 
     private Transform FindPlayer()

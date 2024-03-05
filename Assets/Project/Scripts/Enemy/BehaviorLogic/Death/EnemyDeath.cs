@@ -20,7 +20,6 @@ public class EnemyDeath : EnemyDeathSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Die");
-        Debug.Log("entra");
     }
 
     void Death()

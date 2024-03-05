@@ -38,6 +38,7 @@ public class Secutor : Enemy
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         powerController = GetComponent<PowerController>();
+        enemyTarget = GetComponent<EnemyTarget>();
 
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);

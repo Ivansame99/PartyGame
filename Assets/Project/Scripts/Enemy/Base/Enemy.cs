@@ -112,6 +112,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     {
         return powerController.PowerDamage();
     }
+
     #endregion
 
     private void Update()

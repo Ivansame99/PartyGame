@@ -41,6 +41,10 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        if(enemy.isDead)
+        {
+            enemy.stateMachine.ChangeState(enemy.deathState);
+        }
     }
 
     public override void DoPhysicsLogic()
