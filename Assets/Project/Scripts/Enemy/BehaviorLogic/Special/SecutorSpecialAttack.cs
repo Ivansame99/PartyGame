@@ -9,6 +9,7 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     [SerializeField] private float scaleAttackParticles;
     private Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
     private Vector3 scale = new Vector3(4f, 4f, 4f);
+    private bool changeState;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -16,11 +17,12 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
         switch (triggerType)
         {
             case Enemy.AnimationTriggerType.EnemyAttack:
-                ParticleSystem instantiatedObject = Instantiate(areaAttackParticles,enemy.transform.position, rotation);
-                instantiatedObject.transform.localScale = scale;
+                CreateParticles();
+                Debug.Log("ataca");
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
-                enemy.stateMachine.ChangeState(enemy.stunnedState);
+                Stunned();
+                Debug.Log("finaliza");
                 break;
         }
     }
@@ -55,6 +57,15 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void ResetValues()
     {
         base.ResetValues();
+    }
+    private void CreateParticles()
+    {
+        ParticleSystem instantiatedObject = Instantiate(areaAttackParticles, enemy.transform.position, rotation);
+        instantiatedObject.transform.localScale = scale;
+    }
+    private void Stunned()
+    {
+        enemy.stateMachine.ChangeState(enemy.stunnedState);
     }
 
 }

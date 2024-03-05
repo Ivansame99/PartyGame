@@ -11,30 +11,30 @@ public class EnemyStunnedState : EnemyState
     public override void EnterState()
     {
         base.EnterState();
-        enemy.enemySpecialAttackBaseInstance.DoEnterLogic();
+        enemy.enemyStunedBaseInstance.DoEnterLogic();
     }
 
     public override void ExitState()
     {
         base.ExitState();
-        enemy.enemySpecialAttackBaseInstance.DoExitLogic();
+        enemy.enemyStunedBaseInstance.DoExitLogic();
     }
 
     public override void FrameUpdate()
     {
         base.FrameUpdate();
-        enemy.enemySpecialAttackBaseInstance.DoFrameUpdateLogic();
+        enemy.enemyStunedBaseInstance.DoFrameUpdateLogic();
     }
 
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
-        enemy.enemySpecialAttackBaseInstance.DoPhysicsLogic();
+        enemy.enemyStunedBaseInstance.DoPhysicsLogic();
     }
 
     public override void AnimationTriggerEvent(Enemy.AnimationTriggerType triggerType)
     {
         base.AnimationTriggerEvent(triggerType);
-        enemy.enemySpecialAttackBaseInstance.DoAnimationTriggerEventLogic(triggerType);
+        enemy.enemyStunedBaseInstance.DoAnimationTriggerEventLogic(triggerType);
     }
 }
