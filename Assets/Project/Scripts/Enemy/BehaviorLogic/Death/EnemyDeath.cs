@@ -25,7 +25,7 @@ public class EnemyDeath : EnemyDeathSOBase
 
     void Death()
     {
-        //enemyTarget.DecreasePlayerTarget(enemyTarget.player.name);
+        enemy.enemyTarget.DecreasePlayerTarget(enemy.enemyTarget.player.name);
         Destroy(gameObject);
     }
     public override void DoExitLogic()
