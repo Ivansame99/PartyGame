@@ -46,6 +46,6 @@ public class Secutor : Enemy
         enemyStunedBaseInstance.Init(gameObject, this);
         enemyDeathBaseInstance.Init(gameObject, this);
         //Initialize State Machine
-        stateMachine.Initialize(deathState);
+        stateMachine.Initialize(chaseState);
     }
 }

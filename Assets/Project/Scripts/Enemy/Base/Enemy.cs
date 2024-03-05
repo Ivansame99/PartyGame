@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public enum AnimationTriggerType
     {
         EnemyDamaged,
-        PlayFootstepSound,
+        Death,
         EnemyAttack,
         EnemyAttackFinished,
     }

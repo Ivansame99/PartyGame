@@ -8,14 +8,26 @@ public class EnemyDeath : EnemyDeathSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.Death:
+                Death();
+                break;
+        }
     }
 
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        enemy.animator.SetTrigger("Die");
         Debug.Log("entra");
     }
 
+    void Death()
+    {
+        //enemyTarget.DecreasePlayerTarget(enemyTarget.player.name);
+        Destroy(gameObject);
+    }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
