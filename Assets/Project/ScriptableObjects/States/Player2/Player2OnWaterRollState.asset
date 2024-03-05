@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e198aecdefd844d4cbfdc0810a4f719a, type: 3}
-  m_Name: Player1WalkState
+  m_Script: {fileID: 11500000, guid: 0c88876a267fb064ab448bcc279c2ebc, type: 3}
+  m_Name: Player2OnWaterRollState
   m_EditorClassIdentifier: 
-  speed: 10
-  turnSmooth: 4.513397
-  runParticles: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-    type: 3}
+  dodgeSpeed: 10
+  dodgeCD: 0.8
+  turnSmooth: 0.1
+  rollDuration: 0.5
+  inmuneTime: 0.7
+  rollParticle: {fileID: 100000, guid: 35b07122b3bd2db418fef64ddc9b30d4, type: 3}

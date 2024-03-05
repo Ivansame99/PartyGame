@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8ffe0b21a20f4498a4cd70e10afc90, type: 3}
-  m_Name: Player4AttackState
+  m_Script: {fileID: 11500000, guid: 0b58ae12d6df54440be170d0a16116e4, type: 3}
+  m_Name: Player3OnWaterAttackState
   m_EditorClassIdentifier: 
-  animationSpeed: 1.3
-  attackMovement: 10
-  betweenAttacksCD: 0.4
-  comboCD: 0.4
+  animationMultiplierSpeed: 0.7
+  attackMovement: 5
+  betweenAttacksCD: 0.6
+  comboCD: 0.6
   invokeEndComboTime: 0.2
   airFriction: 0.5
-  turnSmooth: 46.69292
+  turnSmooth: 0
   minPitch: 0.8
   maxPitch: 1.2

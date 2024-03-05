@@ -4,24 +4,14 @@ using UnityEngine;
 
 public class WaterDetection : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerWalkState walkState;
+	[HideInInspector]
+	public bool onWater;
 
-	[SerializeField]
-	private float speedOnWater;
-
-	private float originalSpeed;
-
-    private void Awake()
-    {
-        originalSpeed = walkState.speed;
-    }
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Water"))
         {
-            walkState.speed = speedOnWater;
+			onWater = true;
 		}
     }
 
@@ -29,7 +19,7 @@ public class WaterDetection : MonoBehaviour
     {
 		if (other.CompareTag("Water"))
 		{
-			walkState.speed = originalSpeed;
+			onWater = false;
 		}
 	}
 }

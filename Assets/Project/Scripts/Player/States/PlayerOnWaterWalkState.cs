@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "States/Player/Walk")]
+[CreateAssetMenu(menuName = "States/Player/OnWater/Walk")]
 
-public class PlayerWalkState : PlayerState<PlayerController>
+public class PlayerOnWaterWalkState : PlayerState<PlayerController>
 {
 	[SerializeField]
 	private float speed;
@@ -45,9 +45,9 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
-		if (player.waterDetection.onWater)
+		if (!player.waterDetection.onWater)
 		{
-			player.ChangeState(typeof(PlayerOnWaterWalkState));
+			player.ChangeState(typeof(PlayerWalkState));
 			return;
 		}
 

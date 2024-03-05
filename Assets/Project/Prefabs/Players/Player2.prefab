@@ -27630,6 +27630,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5d1515ad83f0e814a88c5dd2cbec98a8, type: 2}
   - {fileID: 11400000, guid: 914d574b7b7ee9d49af021b073668f6c, type: 2}
   - {fileID: 11400000, guid: 43c581ab1d9768f4b92c5095ec32c2c3, type: 2}
+  - {fileID: 11400000, guid: f3a89fdc2ebcc574ab61d138d0f5069d, type: 2}
+  - {fileID: 11400000, guid: b95d494e90087e446965b7f3632481fd, type: 2}
+  - {fileID: 11400000, guid: 478a6e68fce4bc446a007e8d75acffb7, type: 2}
   dodgeTimer: 0
   swordAttackSound: {fileID: 5907450722468059971}
   bowAttackSound: {fileID: 4258002863467335278}
@@ -27653,6 +27656,7 @@ MonoBehaviour:
   healthController: {fileID: 0}
   powerController: {fileID: 0}
   gravityController: {fileID: 0}
+  waterDetection: {fileID: 0}
   detectEnemiesNear: {fileID: 8241916074344113874}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
@@ -27835,8 +27839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95346870ff74654f8a7759b4f5bcda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkState: {fileID: 11400000, guid: 43c581ab1d9768f4b92c5095ec32c2c3, type: 2}
-  speedOnWater: 5
+  onWater: 0
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

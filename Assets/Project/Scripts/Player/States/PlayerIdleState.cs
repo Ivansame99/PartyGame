@@ -30,6 +30,11 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		//Change to walk
 		if (player.direction.magnitude >= 0.1f)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterWalkState));
+				return;
+			}
 			player.ChangeState(typeof(PlayerWalkState));
 			return;
 		}
@@ -37,6 +42,12 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		//Change to roll
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterRollState));
+				return;
+			}
+
 			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
@@ -58,6 +69,12 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		//Change to attack
 		if (player.attackBuffer.Count >= 1 && player.lastComboTimer <= 0)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterAttackState));
+				return;
+			}
+
 			player.ChangeState(typeof(PlayerAttackState));
 			return;
 		}

@@ -1,8 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "States/Player/Attack")]
-public class PlayerAttackState : PlayerState<PlayerController>
+[CreateAssetMenu(menuName = "States/Player/OnWater/Attack")]
+public class PlayerOnWaterAttackState : PlayerState<PlayerController>
 {
 	[SerializeField]
 	private float animationMultiplierSpeed=1.0f;

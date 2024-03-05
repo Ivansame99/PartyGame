@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8ffe0b21a20f4498a4cd70e10afc90, type: 3}
   m_Name: Player1AttackState
   m_EditorClassIdentifier: 
+  animationMultiplierSpeed: 1
+  attackMovement: 10
   betweenAttacksCD: 0.4
   comboCD: 0.4
   invokeEndComboTime: 0.2
   airFriction: 0.5
-  turnSmooth: 46.69292
+  turnSmooth: 0
   minPitch: 0.8
   maxPitch: 1.2
