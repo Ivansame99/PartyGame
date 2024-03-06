@@ -18,12 +18,11 @@ public class RandomPotionEvent : GameEvent
 	private float xPosMin = -22.5f;
 	private float zPosMax = 22f;
 	private float zPosMin = -8.5f;
-	private float yPos = 50f;
+	private float yPos = 3f;
+	private float yPosIni = 16f;
 
-	private Vector3 initialPos;
-
-	bool instancedPotion;
 	private GameObject potion;
+	private Rigidbody potionRb;
 
 	float randomXPosInit;
 	float randomZPosInit;
@@ -33,11 +32,14 @@ public class RandomPotionEvent : GameEvent
 
 	float speed;
 
+	Vector3 initialPosition;
+
 	public override void EventStart()
 	{
+		fixedUpdate = true;
 		eventFinished = false;
-		instancedPotion = false;
-		potion=null;
+		potion = null;
+		initialPosition = new Vector3(-37.5f, yPosIni, 0f);
 		randomXPosFinal = Random.Range(xPosMin, xPosMax);
 		randomZPosFinal = Random.Range(zPosMin, zPosMax);
 		speed = Random.Range(speedMin, speedMax);
@@ -45,17 +47,11 @@ public class RandomPotionEvent : GameEvent
 
 	public override void EventUpdate()
 	{
-		if (!instancedPotion)
-		{
-			potion = Instantiate(potionPrefab, new Vector3(-33, 16f, 0f), potionPrefab.transform.rotation);
-			instancedPotion = true;
-		} else
-		{
-			potion.transform.position = Vector3.MoveTowards(potion.transform.position, new Vector3(randomXPosFinal, 2f, randomZPosFinal), speed * Time.deltaTime);
-			if (potion.transform.position == new Vector3(randomXPosFinal, 2f, randomZPosFinal))
-			{
-				eventFinished = true;
-			}
-		}
+		potion = Instantiate(potionPrefab, initialPosition, potionPrefab.transform.rotation);
+		potionRb = potion.GetComponent<Rigidbody>();
+		Vector3 direction = (new Vector3(randomXPosFinal, yPos, randomZPosFinal) - potion.transform.position).normalized;
+
+		potionRb.AddForce(direction * speed, ForceMode.Impulse);
+		eventFinished = true;
 	}
 }

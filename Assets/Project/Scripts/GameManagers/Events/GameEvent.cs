@@ -3,7 +3,8 @@ using UnityEngine.Events;
 
 public abstract class GameEvent : ScriptableObject
 {
-	public bool eventFinished = false;
+	internal bool eventFinished = false;
+	internal bool fixedUpdate = false;
 
 	[SerializeField]
 	public string eventName = "No name";

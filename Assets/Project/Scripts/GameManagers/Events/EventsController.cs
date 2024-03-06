@@ -31,6 +31,8 @@ public class EventsController : MonoBehaviour
 
 	private bool anim=false;
 
+	private bool onFixedUpdate;
+
 	void Start()
     {
 		timer = 0;
@@ -44,6 +46,7 @@ public class EventsController : MonoBehaviour
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
 			eventNameText.text = randomEvents[0].eventName;
 			randomEvents[0].EventStart();
+			if (randomEvents[0].fixedUpdate) onFixedUpdate = true;
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
@@ -66,6 +69,11 @@ public class EventsController : MonoBehaviour
 		{
 			timer += Time.deltaTime;
 		}
+	}
+
+	private void FixedUpdate()
+	{
+		if()
 	}
 
 	void ShowUIEvent()
