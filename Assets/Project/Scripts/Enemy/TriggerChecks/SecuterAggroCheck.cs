@@ -24,9 +24,10 @@ public class SecuterAggroCheck : MonoBehaviour
         if (_enemy.playerPos != null)
         {
             distancePlayer1 = Vector3.Distance(_enemy.playerPos.position, transform.position);
-            distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
             direction = _enemy.playerPos.transform.position - _enemy.transform.position;
         }
+        
+
         //NORMAL AGGRO STATUS
         if (distancePlayer1 < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
         {
@@ -37,13 +38,17 @@ public class SecuterAggroCheck : MonoBehaviour
             _enemy.SetAggroStatus(false);
         }
 
-        if (distancePlayer2 < triggerDistanceClose)
+        if (distancePlayer2 != null)
         {
-            _enemy.SetSpecialAggroStatus(true);
-        }
-        else
-        {
-            _enemy.SetSpecialAggroStatus(false);
+            distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
+            if (distancePlayer2 < triggerDistanceClose)
+            {
+                _enemy.SetSpecialAggroStatus(true);
+            }
+            else
+            {
+                _enemy.SetSpecialAggroStatus(false);
+            }
         }
     }
 }

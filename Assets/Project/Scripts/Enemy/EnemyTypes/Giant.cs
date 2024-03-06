@@ -36,6 +36,7 @@ public class Giant : Enemy
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         powerController = GetComponent<PowerController>();
+        enemyTargetController = GetComponent<EnemyTargetController>();
 
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);

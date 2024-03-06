@@ -456,6 +456,7 @@ PrefabInstance:
     - {fileID: 6089506664582424880, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1765166532221133267, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}
+    - {fileID: 2770434703607058074, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7254013775423901812, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
@@ -470,6 +471,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -1378012658294170158}
+    - targetCorrespondingSourceObject: {fileID: 8061654117059054286, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3605178458035218860}
   m_SourcePrefab: {fileID: 100100000, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}
 --- !u!1 &2833928545811715665 stripped
 GameObject:
@@ -590,6 +595,20 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &3605178458035218860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833928545811715665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d337fc3add99f9347913057c04ed429a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  player2: {fileID: 0}
 --- !u!4 &3179526304424922347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7254013775423901812, guid: aef0b1bf09a88e74093f5ba9d483e2c8,

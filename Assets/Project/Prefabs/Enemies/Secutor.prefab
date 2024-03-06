@@ -459,52 +459,6 @@ Transform:
   m_Father: {fileID: 3811560686789398410}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -2.251074, y: 18.361929, z: -10.249777}
---- !u!1 &3416133557097402511
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9063004064422089491}
-  - component: {fileID: 3032472926831279786}
-  m_Layer: 6
-  m_Name: PlayerTarget
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9063004064422089491
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3416133557097402511}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3791331516194572419}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3032472926831279786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3416133557097402511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d337fc3add99f9347913057c04ed429a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  player2: {fileID: 0}
 --- !u!1 &3765415663698853555
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +793,7 @@ GameObject:
   - component: {fileID: 4384596235160721706}
   - component: {fileID: 8554667382553994390}
   - component: {fileID: 4832270962182322353}
+  - component: {fileID: 5045293651482485403}
   m_Layer: 6
   m_Name: Secutor
   m_TagString: Enemy
@@ -860,7 +815,6 @@ Transform:
   m_Children:
   - {fileID: 4907700746748964880}
   - {fileID: 3811560686789398410}
-  - {fileID: 9063004064422089491}
   - {fileID: 300750129807517095}
   - {fileID: 324671669482108369}
   - {fileID: 5273886076484750147}
@@ -1033,6 +987,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   pushForce: 10
+--- !u!114 &5045293651482485403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4599955610764907065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d337fc3add99f9347913057c04ed429a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  player2: {fileID: 0}
 --- !u!1 &4629221617331044534
 GameObject:
   m_ObjectHideFlags: 0

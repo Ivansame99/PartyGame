@@ -18,7 +18,7 @@ public class EnemyTargetController : MonoBehaviour
     void Start()
     {
         enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
-        enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame

@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public bool state { get; set; }
     public Transform playerPos { get; set; }
     public Transform playerPos2 { get; set; }
-    public EnemyTarget enemyTarget { get; set; }
+    public EnemyTargetController enemyTargetController { get; set; }
     public Animator animator { get; set; }
 
     //AGGRO INTERFACE
