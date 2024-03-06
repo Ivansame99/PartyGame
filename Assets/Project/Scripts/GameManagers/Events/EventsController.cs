@@ -42,21 +42,21 @@ public class EventsController : MonoBehaviour
 		{
 			eventIndex = Random.Range(0, randomEvents.Count);
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-			eventNameText.text = randomEvents[eventIndex].eventName;
-			randomEvents[eventIndex].EventStart();
+			eventNameText.text = randomEvents[0].eventName;
+			randomEvents[0].EventStart();
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
 		if (timer >= randomTimeToSpawn)
 		{
-			if (!randomEvents[eventIndex].eventFinished)
+			if (!randomEvents[0].eventFinished)
 			{
 				if(anim)
 				{
 					anim = false;
 					eventsCanvas.SetBool("NewEvent", false);
 				}
-				randomEvents[eventIndex].EventUpdate();
+				randomEvents[0].EventUpdate();
 			}
 			else
 			{
