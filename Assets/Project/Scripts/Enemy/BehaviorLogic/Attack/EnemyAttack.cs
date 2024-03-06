@@ -24,6 +24,7 @@ public class EnemyAttack : EnemyAttackSOBase
     //COOLDOWN ATTACKS
     private float attackTimer;
     [SerializeField] private float attackCooldown;
+    private bool animMirror;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -49,6 +50,9 @@ public class EnemyAttack : EnemyAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        if (animMirror) animMirror = false;
+        else animMirror = true;
+        
     }
     public override void DoFrameUpdateLogic()
     {
@@ -65,7 +69,9 @@ public class EnemyAttack : EnemyAttackSOBase
             if (attackTimer <= 0 && !isAttacking)
             {
                 isAttacking = true;
-                enemy.animator.SetInteger("AttackType", 1);
+                float randomValor = Random.Range(0, 2);
+                if (randomValor == 0) enemy.animator.SetInteger("AttackType", 1);
+                if(randomValor == 1) enemy.animator.SetInteger("AttackType", 4);
             }
             else
             {
