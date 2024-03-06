@@ -18,11 +18,9 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
         {
             case Enemy.AnimationTriggerType.EnemyAttack:
                 CreateParticles();
-                Debug.Log("ataca");
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
                 Stunned();
-                Debug.Log("finaliza");
                 break;
         }
     }

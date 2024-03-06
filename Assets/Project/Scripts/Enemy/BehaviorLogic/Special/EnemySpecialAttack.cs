@@ -7,9 +7,9 @@ using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu(fileName = "EnemySpecialAttack", menuName = "Enemy Logic/Giant/Attack Logic/Enemy Special Attack")]
 public class EnemySpecialAttack : EnemySpecialAttackSOBase
 {
-    [SerializeField] private float chargeSpeed;
-    [SerializeField] private float impulseForce;
-    private float colisionDistance = 0.1f;
+    [SerializeField] private float chargeSpeed = 35f;
+    [SerializeField] private float impulseForce = 50f;
+    [SerializeField] private float colisionDistance = 1.5f;
 
     private bool isAttacking;
     private bool isStunned;
@@ -72,7 +72,7 @@ public class EnemySpecialAttack : EnemySpecialAttackSOBase
             enemy.rb.AddForce(force, ForceMode.Acceleration);
         }
 
-        if (isAttacking && Physics.Raycast(transform.position, transform.forward, out hit, 1.5f))
+        if (isAttacking && Physics.Raycast(transform.position, transform.forward, out hit, colisionDistance))
         {
             // Verificar si el objeto golpeado tiene el tag "Wall"
             if (hit.collider.CompareTag("Wall"))

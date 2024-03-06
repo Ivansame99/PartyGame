@@ -22,7 +22,7 @@ public class SecutorStuned : EnemyStunedSOBase
         base.DoEnterLogic();
         enemy.animator.SetInteger("AnimationType", 4);
         stunedTimer = stunTime;
-        starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), Quaternion.identity);
+        //starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), Quaternion.identity,this.enemy.transform);
     }
 
     public override void DoExitLogic()
@@ -38,7 +38,7 @@ public class SecutorStuned : EnemyStunedSOBase
             if (stunedTimer <= 0)
             {
                 enemy.stateMachine.ChangeState(enemy.chaseState);
-                Destroy(starStunClone);
+                //Destroy(starStunClone);
             }
             else
             {
