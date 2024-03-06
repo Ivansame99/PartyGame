@@ -26,17 +26,24 @@ public class EnemyChaseToPlayer : EnemyChaseSOBase
     {
         base.DoFrameUpdateLogic();
 
-        if (enemy.IsAggreed)
+        if (!enemy.isDead)
         {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
+            if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 
-        if(enemy.IsSpecialAggro)
+            if (enemy.IsAggreed)
+            {
+                enemy.stateMachine.ChangeState(enemy.attackState);
+            }
+
+            if (enemy.IsSpecialAggro)
+            {
+                enemy.stateMachine.ChangeState(enemy.specialAttackState);
+            }
+        }
+        else
         {
-            enemy.stateMachine.ChangeState(enemy.specialAttackState);
+            enemy.stateMachine.ChangeState(enemy.deathState);
         }
-        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-
 
         //Debug.Log("Sigo");
     }

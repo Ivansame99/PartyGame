@@ -30,17 +30,25 @@ public class SecutorChase : EnemyChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-
-        if (enemy.IsSpecialAggro)
+        if(!enemy.isDead)
         {
-            enemy.stateMachine.ChangeState(enemy.specialAttackState);
+            if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
+
+            if (enemy.IsSpecialAggro)
+            {
+                enemy.stateMachine.ChangeState(enemy.specialAttackState);
+            }
+
+            if (enemy.IsAggreed)
+            {
+                enemy.stateMachine.ChangeState(enemy.attackState);
+            }
+        }
+        else
+        {
+            enemy.stateMachine.ChangeState(enemy.deathState);
         }
 
-        if (enemy.IsAggreed)
-        {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
 
     }
 

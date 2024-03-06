@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public bool state { get; set; }
     public Transform playerPos { get; set; }
     public Transform playerPos2 { get; set; }
-    public EnemyTarget enemyTarget { get; set; }
+    public EnemyTargetController enemyTargetController { get; set; }
     public Animator animator { get; set; }
 
     //AGGRO INTERFACE
@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyAttackState attackState { get; set; }
     public EnemySpecialAttackState specialAttackState { get; set; }
     public EnemyStunnedState stunnedState { get; set; }
+    public EnemyDeathState deathState { get; set; }
     #endregion
 
     #region SO Variables
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
     public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
     public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }
+    public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
     
 
     #endregion
@@ -86,7 +88,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public enum AnimationTriggerType
     {
         EnemyDamaged,
-        PlayFootstepSound,
+        Death,
         EnemyAttack,
         EnemyAttackFinished,
     }
@@ -110,6 +112,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     {
         return powerController.PowerDamage();
     }
+
     #endregion
 
     private void Update()

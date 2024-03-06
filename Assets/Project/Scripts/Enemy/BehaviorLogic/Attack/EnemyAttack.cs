@@ -54,26 +54,33 @@ public class EnemyAttack : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        if (!enemy.IsAggreed && !isAttacking)
-        {
-            enemy.stateMachine.ChangeState(enemy.chaseState);
-        }
 
-        if (attackTimer <= 0 && !isAttacking)
+        if (!enemy.isDead)
         {
-            isAttacking = true;
-            enemy.animator.SetInteger("AttackType", 1);
+            if (!enemy.IsAggreed && !isAttacking)
+            {
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+
+            if (attackTimer <= 0 && !isAttacking)
+            {
+                isAttacking = true;
+                enemy.animator.SetInteger("AttackType", 1);
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
+            }
+
+            if (waveAttack != null)
+            {
+                waveAttack.transform.localScale += new Vector3(waveSpeed, 0, waveSpeed);
+            }
         }
         else
         {
-            attackTimer -= Time.deltaTime;
+            enemy.stateMachine.ChangeState(enemy.deathState);
         }
-
-        if (waveAttack != null)
-        {
-            waveAttack.transform.localScale += new Vector3(waveSpeed, 0, waveSpeed);
-        }
-
 
     }
     public override void DoPhysicsLogic()

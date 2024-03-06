@@ -44,19 +44,27 @@ public class SecutorAttack : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
 
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
-        if (isFinished)
+        if(!enemy.isDead)
         {
-            if (attackTimer <= 0)
+            if (isFinished)
             {
-                isFinished = false;
-                enemy.rb.velocity = Vector3.zero;
-                enemy.stateMachine.ChangeState(enemy.chaseState);
-            }
-            else
-            {
-                attackTimer -= Time.deltaTime;
+                if (attackTimer <= 0)
+                {
+                    isFinished = false;
+                    enemy.rb.velocity = Vector3.zero;
+                    enemy.stateMachine.ChangeState(enemy.chaseState);
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
             }
         }
+        else
+        {
+            enemy.stateMachine.ChangeState(enemy.deathState);
+        }
+
     }
     public override void DoPhysicsLogic()
     {

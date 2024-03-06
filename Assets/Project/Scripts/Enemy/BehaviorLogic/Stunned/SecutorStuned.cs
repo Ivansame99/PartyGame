@@ -33,15 +33,23 @@ public class SecutorStuned : EnemyStunedSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if (stunedTimer <= 0)
+        if(!enemy.isDead)
         {
-            enemy.stateMachine.ChangeState(enemy.chaseState);
-            Destroy(starStunClone);
+            if (stunedTimer <= 0)
+            {
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+                Destroy(starStunClone);
+            }
+            else
+            {
+                stunedTimer -= Time.deltaTime;
+            }
         }
         else
         {
-            stunedTimer -= Time.deltaTime;
+            enemy.stateMachine.ChangeState(enemy.chaseState);
         }
+
     }
 
     public override void DoPhysicsLogic()

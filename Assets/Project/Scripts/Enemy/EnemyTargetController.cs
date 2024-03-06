@@ -18,14 +18,14 @@ public class EnemyTargetController : MonoBehaviour
     void Start()
     {
         enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
-        enemy = GetComponentInParent<Enemy>();
+        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
         enemy.playerPos = FindPlayer();
-        enemy.playerPos2 = FindSecondClosestPlayer(player);
+        enemy.playerPos2 = FindSecondClosestPlayer(enemy.playerPos2);
     }
 
     private Transform FindPlayer()
