@@ -6,9 +6,9 @@ using static UnityEngine.GraphicsBuffer;
 [CreateAssetMenu(fileName = "Secutor Chase", menuName = "Enemy Logic/Secutor/Chase Logic/Chase To Player")]
 public class SecutorChase : EnemyChaseSOBase
 {
-    [SerializeField] private float speed;
-    [SerializeField] private float acceleration;
-    [SerializeField] private float angularSpeed;
+    [SerializeField] private float speed = 3.5f;
+    [SerializeField] private float acceleration = 8f;
+    [SerializeField] private float angularSpeed = 120f;
 
     Vector3 playerDir;
 
@@ -22,10 +22,11 @@ public class SecutorChase : EnemyChaseSOBase
         //Set chase animation
         enemy.agent.isStopped = false;
         enemy.animator.SetInteger("AnimationType",0);
-        //enemy.animator.SetInteger("AnimationType", 0);
 
         //Agent configuration
-        //enemy.agent.isStopped = false;
+        enemy.agent.speed = speed;
+        enemy.agent.acceleration = acceleration;
+        enemy.agent.angularSpeed = angularSpeed;
     }
     public override void DoFrameUpdateLogic()
     {
