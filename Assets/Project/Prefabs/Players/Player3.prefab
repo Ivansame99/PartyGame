@@ -27985,6 +27985,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5330821443307011988}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6871066834352037715}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!4 &1788842633507896409 stripped
 Transform:
@@ -28045,6 +28049,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4415c1c5d9968ae42baeb1d01e7949b7, type: 2}
   - {fileID: 11400000, guid: e6a040db69c63384481acbbddc4c7395, type: 2}
   - {fileID: 11400000, guid: 2a7f51c45dddab442b2db04a16f1349c, type: 2}
+  - {fileID: 11400000, guid: 01d1b33b74f216a45ac78a5786e0f933, type: 2}
+  - {fileID: 11400000, guid: 94321cf91cdcc974c91fc8cf6dc32dd0, type: 2}
+  - {fileID: 11400000, guid: 2615fbd090609e9439f144e6620227d0, type: 2}
   dodgeTimer: 0
   swordAttackSound: {fileID: 659402625402337986}
   bowAttackSound: {fileID: 6113549625646313265}
@@ -28068,6 +28075,7 @@ MonoBehaviour:
   healthController: {fileID: 0}
   powerController: {fileID: 0}
   gravityController: {fileID: 0}
+  waterDetection: {fileID: 0}
   detectEnemiesNear: {fileID: 1708322281022373019}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
@@ -28238,6 +28246,19 @@ MonoBehaviour:
   charactersLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &6871066834352037715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95346870ff74654f8a7759b4f5bcda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onWater: 0
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

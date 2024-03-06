@@ -45,6 +45,12 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
+		if (player.waterDetection.onWater)
+		{
+			player.ChangeState(typeof(PlayerOnWaterWalkState));
+			return;
+		}
+
 		//Change to Idle
 		if (player.direction.magnitude < 0.1f)
 		{
@@ -55,6 +61,12 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		//Change to roll
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterRollState));
+				return;
+			}
+
 			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
@@ -76,6 +88,12 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		//Change to attack
 		if (player.attackBuffer.Count >= 1 && player.lastComboTimer <= 0)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterAttackState));
+				return;
+			}
+
 			player.ChangeState(typeof(PlayerAttackState));
 			return;
 		}

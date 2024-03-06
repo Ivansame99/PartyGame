@@ -57,6 +57,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public PowerController powerController;
 	[HideInInspector]
 	public CustomGravityController gravityController;
+	[HideInInspector]
+	public WaterDetection waterDetection;
 
 	public DetectEnemiesNear detectEnemiesNear;
 
@@ -71,6 +73,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		if (gravityController == null) gravityController = GetComponent<CustomGravityController>();
 		if (healthController == null) healthController = GetComponent<PlayerHealthController>();
 		if (powerController == null) powerController = GetComponent<PowerController>();
+		if (waterDetection == null) waterDetection = GetComponent<WaterDetection>();
 	}
 
 	protected override void Update()

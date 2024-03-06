@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795a4bdb822b0f8439c1dc7a0c3882fc, type: 3}
+  m_Name: WaterEvent
+  m_EditorClassIdentifier: 
+  eventFinished: 0
+  eventName: Pipe's issues
+  waterFountainPrefab: {fileID: 4651164951890192333, guid: 26bee4806d90dd34fa2d7911d6ae91a9,
+    type: 3}
+  waterPrefab: {fileID: 8003313072389319992, guid: 7ea32e79111bfcd47b9264d3f8aba59b,
+    type: 3}
+  startPositionFountain: {x: 0, y: 2, z: 3}
+  startPositionWater: {x: 0, y: 1.8, z: 3}
+  maxScale: 75
+  yScale: 1
+  waterExpandingSpeed: 15
+  waterDuration: 15

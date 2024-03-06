@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerAttackState : PlayerState<PlayerController>
 {
 	[SerializeField]
+	private float animationMultiplierSpeed=1.0f;
+	
+	[SerializeField]
+	private float attackMovement;
+
+	[SerializeField]
 	private float betweenAttacksCD;
 
 	[SerializeField]
@@ -25,8 +31,9 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float maxPitch;
 
+	private float attackMovementAux;
+
 	private bool moveAttack;
-	private float attackMovement;
 	private int comboCounter;
 	float lastClicked;
 	private float turnSmoothTime;
@@ -50,7 +57,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	{
 		if (moveAttack)
 		{
-			player.rb.AddForce(player.transform.forward * attackMovement, ForceMode.Impulse);
+			player.rb.AddForce(player.transform.forward * attackMovementAux, ForceMode.Impulse);
 			moveAttack = false;
 		}
 	}
@@ -60,6 +67,12 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		//Change to roll
 		if (player.isDodging && player.dodgeTimer <= 0)
 		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterRollState));
+				return;
+			}
+
 			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
@@ -82,6 +95,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 					//Sound
 					player.anim.runtimeAnimatorController = player.weaponController.combo[comboCounter].animatorOR;
+					player.anim.SetFloat("AttackSpeed", animationMultiplierSpeed);
 					player.anim.Play("Attack", 0, 0);
 					player.swordAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 
@@ -100,8 +114,8 @@ public class PlayerAttackState : PlayerState<PlayerController>
 						targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
 						float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
 						player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
-						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
+						if (player.groundCheck.DetectGround()) attackMovementAux = attackMovement;
+						else attackMovementAux = attackMovement * airFriction;
 						moveAttack = true;
 					}
 
@@ -113,8 +127,8 @@ public class PlayerAttackState : PlayerState<PlayerController>
 						direction.y = 0;
 						Quaternion rotation = Quaternion.LookRotation(direction);
 						player.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-						if (player.groundCheck.DetectGround()) attackMovement = player.weaponController.combo[comboCounter].attackMovement;
-						else attackMovement = player.weaponController.combo[comboCounter].attackMovement * airFriction;
+						if (player.groundCheck.DetectGround()) attackMovementAux = attackMovement;
+						else attackMovementAux = attackMovement * airFriction;
 						moveAttack = true;
 					}
 
