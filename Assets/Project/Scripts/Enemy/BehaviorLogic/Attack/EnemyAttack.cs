@@ -11,9 +11,6 @@ public class EnemyAttack : EnemyAttackSOBase
     [SerializeField] ParticleSystem areaAttackParticles;
     [SerializeField] GameObject expansiveWave;
 
-    [Header("Wave Attack parameters")]
-    [SerializeField] float waveSpeed;
-    [SerializeField] float waveTimeLife;
 
     //Gameobject to instantiate
     private GameObject waveAttack;
@@ -77,11 +74,6 @@ public class EnemyAttack : EnemyAttackSOBase
             {
                 attackTimer -= Time.deltaTime;
             }
-
-            if (waveAttack != null)
-            {
-                waveAttack.transform.localScale += new Vector3(waveSpeed, 0, waveSpeed);
-            }
         }
         else
         {
@@ -105,14 +97,13 @@ public class EnemyAttack : EnemyAttackSOBase
     private void Attack()
     {
         Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
-        waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
+        Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
 
         Torus torus = waveAttack.GetComponent<Torus>();
         torus.finalDamage = torus.baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
         torus.SetPushForce(torus.pushForce);
         torus.owner = enemy.gameObject;
 
-        Destroy(waveAttack, waveTimeLife);
     }
     private void AttackFinished()
     {
