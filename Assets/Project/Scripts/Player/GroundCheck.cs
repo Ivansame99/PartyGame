@@ -22,6 +22,20 @@ public class GroundCheck : MonoBehaviour
 		rb = this.GetComponent<Rigidbody>();
 	}
 
+	private void Update()
+	{
+		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
+
+		//Check if it's on ground
+		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, charactersLayer))
+		{
+			Vector3 slideValue;
+			slideValue = Random.onUnitSphere * 10f;
+			slideValue.y = rb.velocity.y;
+			rb.velocity = slideValue;
+		}
+	}
+
 	public bool DetectGround()
 	{
 		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
