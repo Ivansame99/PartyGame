@@ -4,12 +4,11 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(float damageAmount);
-    void Die();
+    void SetDamagedStatus(bool isDamaged);
 
     public float maxHealth { get; set; }
     float currentHealth { get; set; }
     public float inmuneTime { get; set; }
     bool isDead { get; set; }
-
+    bool IsDamaged { get; set; }
 }

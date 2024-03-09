@@ -46,6 +46,10 @@ public class SecutorAttack : EnemyAttackSOBase
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
         if(!enemy.isDead)
         {
+            if(enemy.IsDamaged)
+            {
+                enemy.stateMachine.ChangeState(enemy.damageState);
+            }
             if (isFinished)
             {
                 if (attackTimer <= 0)

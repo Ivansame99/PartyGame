@@ -35,6 +35,11 @@ public class SecutorChase : EnemyChaseSOBase
         {
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 
+            if (enemy.IsDamaged)
+            {
+                enemy.stateMachine.ChangeState(enemy.damageState);
+            }
+
             if (enemy.IsSpecialAggro)
             {
                 enemy.stateMachine.ChangeState(enemy.specialAttackState);
