@@ -38,7 +38,7 @@ public class SecuterAggroCheck : MonoBehaviour
             _enemy.SetAggroStatus(false);
         }
 
-        if (_enemy.playerPos2.position != null)
+        if (_enemy.playerPos2 != null)
         {
             distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
             if (distancePlayer2 < triggerDistanceClose)
