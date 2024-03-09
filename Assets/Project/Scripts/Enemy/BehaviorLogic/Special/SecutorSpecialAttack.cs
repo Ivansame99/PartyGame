@@ -6,7 +6,6 @@ using UnityEngine;
 public class SecutorSpecialAttack : EnemySpecialAttackSOBase
 {
     [SerializeField] private ParticleSystem areaAttackParticles;
-    [SerializeField] private float scaleAttackParticles;
     private Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
     private Vector3 scale = new Vector3(4f, 4f, 4f);
     private bool changeState;
@@ -28,7 +27,7 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetInteger("AnimationType", 3);
+        enemy.animator.SetTrigger("Special");
     }
 
     public override void DoExitLogic()

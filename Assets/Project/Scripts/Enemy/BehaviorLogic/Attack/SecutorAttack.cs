@@ -32,7 +32,8 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         base.DoEnterLogic();
         isFinished = false;
-        enemy.animator.SetInteger("AnimationType", 1);
+        //enemy.animator.SetInteger("AnimationType", 1);
+        enemy.animator.SetTrigger("Attack");
         feedback = Instantiate(feedbackAttack,enemy.transform);
     }
     public override void DoExitLogic()

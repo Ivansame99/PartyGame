@@ -22,10 +22,11 @@ public class SecutorChase : EnemyChaseSOBase
         //Set chase animation
         enemy.agent.isStopped = false;
 
+        enemy.animator.SetTrigger("Chase");
         CheckingStates();
 
         //Set animation
-        enemy.animator.SetInteger("AnimationType",0);
+        //enemy.animator.SetInteger("AnimationType",0);
 
         //Agent configuration
         enemy.agent.speed = speed;

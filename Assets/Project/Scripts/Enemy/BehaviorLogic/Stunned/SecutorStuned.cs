@@ -20,7 +20,7 @@ public class SecutorStuned : EnemyStunedSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetInteger("AnimationType", 4);
+        enemy.animator.SetTrigger("Stun");
         stunedTimer = stunTime;
         //starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), Quaternion.identity,this.enemy.transform);
     }
