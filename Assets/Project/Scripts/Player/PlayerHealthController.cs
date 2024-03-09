@@ -206,7 +206,9 @@ public class PlayerHealthController : MonoBehaviour
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
 				// Desplaza ligeramente la posición de origen del casco
-				Vector3 spawnPosition = transform.position + Random.insideUnitSphere * 0.5f;
+				float yOffset = 2f;
+				Vector3 playerUpPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
+				Vector3 spawnPosition = playerUpPos + Random.insideUnitSphere;
 				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
 				Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
 				if (helmetRigidbody != null)
