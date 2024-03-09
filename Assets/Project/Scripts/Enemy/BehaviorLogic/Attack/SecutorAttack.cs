@@ -38,6 +38,9 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        attackTimer = attackCooldown;
+        isFinished = true;
+        Destroy(feedback);
     }
     public override void DoFrameUpdateLogic()
     {

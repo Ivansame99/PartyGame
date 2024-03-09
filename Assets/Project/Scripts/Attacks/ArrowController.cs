@@ -58,6 +58,7 @@ public class ArrowController : MonoBehaviour
     {
         if (!ground)
         {
+            //rb.AddForce(transform.position + transform.forward * speed, ForceMode.Impulse);
             rb.MovePosition(transform.position + transform.forward * speed * Time.fixedDeltaTime);
         }
     }
