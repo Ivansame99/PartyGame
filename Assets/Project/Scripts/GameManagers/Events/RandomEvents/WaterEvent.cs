@@ -41,8 +41,6 @@ public class WaterEvent : GameEvent
     {
 		eventFinished = false;
 		if (coroutineManager == null) coroutineManager = CoroutineManager.Instance;
-		water = Instantiate(waterPrefab, startPositionWater, Quaternion.identity);
-		water.transform.localScale = Vector3.zero;
 		timer = 0;
 		waterTimer = 0;
 		waterExpanding=true;
@@ -56,6 +54,8 @@ public class WaterEvent : GameEvent
 		{
 			Instantiate(waterFountainPrefab, startPositionFountain, waterFountainPrefab.transform.rotation);
 			fountainInstanciated = true;
+			water = Instantiate(waterPrefab, startPositionWater, Quaternion.identity);
+			water.transform.localScale = Vector3.zero;
 		}
 
 		if (waterExpanding)
