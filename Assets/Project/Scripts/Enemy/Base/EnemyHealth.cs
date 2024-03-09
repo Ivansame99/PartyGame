@@ -9,35 +9,41 @@ public class EnemyHealth : MonoBehaviour
     //Enemy
     private Enemy enemy;
 
-    //Health
-    private float health;
-    private float maxHealth;
-
-    //Inmune time
-    public bool invencibility;
-    public float timer;
+    //Inmune time after hit
+    [HideInInspector] public bool invencibility;
+    [HideInInspector] public float timer;
 
     //Health UI
     private Canvas healBarCanvas;
     private Camera cameraHealthBar;
 
-    [SerializeField]
-    private HealthBarController healthBarC;
-    [SerializeField]
-    private Transform healthBar;
+    //Health Bar
+    [Header("Health Bar")]
+    [SerializeField] private HealthBarController healthBarC;
+    [SerializeField] private Transform healthBar;
 
+    //Power Level
+    [Header("Power Level")]
     [SerializeField]
     private GameObject powerLevelGameObject;
     private float currentPower;
 
+    //Attackers info
     private GameObject lastAttacker;
     private Vector3 attackPosition;
     private bool pushBack;
     private float pushForce;
 
+    //Damage Feedback
+    [Header("Damage Feedback")]
 	[SerializeField] private GameObject floatingDamageText;
+    [SerializeField] private GameObject bloodParticles;
+    [SerializeField] private GameObject crossRight,crossLeft;
+    [SerializeField] private GameObject glow;
+    [SerializeField] private GameObject deathParticles;
+    //[SerializeField] private HelmetPrefab[] helmetPrefabs;
 
-	void Awake()
+    void Awake()
     {
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -75,6 +81,7 @@ public class EnemyHealth : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
+            DamageFeedback();
             enemy.SetDamagedStatus(true);
         }
         if(enemy.currentHealth <= 0)
@@ -83,6 +90,18 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
+    void DamageFeedback()
+    {
+        Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        crossRight.SetActive(false);
+        crossLeft.SetActive(false);
+        glow.SetActive(false);
+
+
+        crossRight.SetActive(true);
+        crossLeft.SetActive(true);
+        glow.SetActive(true);
+    }
 	void ShowDamageText(float damage)
 	{
 		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
@@ -91,15 +110,15 @@ public class EnemyHealth : MonoBehaviour
 
 	void Die()
     {
-        currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
+        currentPower = enemy.GetPowerDamage();
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
 
         enemyDestroy();
-        //Invoke("enemyDestroy", 2.0f);
     }
     public void enemyDestroy()
     {
-        //Destroy(this.gameObject);
+        Instantiate(deathParticles, transform.position, Quaternion.identity);
+
         enemy.isDead = true;
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
