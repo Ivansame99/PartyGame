@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39966118, g: 0.4227935, b: 0.41563395, a: 1}
+  m_IndirectSpecularColor: {r: 0.39966118, g: 0.42279354, b: 0.41563395, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32.3
+  m_fontSize: 47.7
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4571,7 +4571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 3743270676613228139}
-  skipAnim: 0
+  skipAnim: 1
 --- !u!1 &331183245
 GameObject:
   m_ObjectHideFlags: 0
@@ -29495,7 +29495,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29730,7 +29730,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: numberOfPlayers.Array.data[0].rounds.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29789,12 +29789,12 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29846,7 +29846,7 @@ PrefabInstance:
         type: 3}
       propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
       value: 
-      objectReference: {fileID: 2833928545811715665, guid: d4a597fdc78a2964ea1fb48f914541e4,
+      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29873,6 +29873,39 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[3].power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[4].enemy
+      value: 
+      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[4].power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[5].enemy
+      value: 
+      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[5].power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[6].enemy
+      value: 
+      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[6].power
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
