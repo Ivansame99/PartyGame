@@ -33,6 +33,8 @@ public class EventsController : MonoBehaviour
 
 	private bool onFixedUpdate;
 
+	private bool startUpdate = false;
+
 	void Start()
     {
 		timer = 0;
@@ -44,36 +46,45 @@ public class EventsController : MonoBehaviour
 		{
 			eventIndex = Random.Range(0, randomEvents.Count);
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-			eventNameText.text = randomEvents[0].eventName;
-			randomEvents[0].EventStart();
-			if (randomEvents[0].fixedUpdate) onFixedUpdate = true;
+			eventNameText.text = randomEvents[eventIndex].eventName;
+			randomEvents[eventIndex].EventStart();
+			if (randomEvents[eventIndex].fixedUpdate) onFixedUpdate = true;
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
 		if (timer >= randomTimeToSpawn)
 		{
-			if (!randomEvents[0].eventFinished)
+			if (!randomEvents[eventIndex].eventFinished)
 			{
 				if(anim)
 				{
 					anim = false;
 					eventsCanvas.SetBool("NewEvent", false);
+					startUpdate = true;
 				}
-				randomEvents[0].EventUpdate();
 			}
 			else
 			{
+				startUpdate = false;
 				timer = 0;
 			}
 		} else
 		{
 			timer += Time.deltaTime;
 		}
+
+		if(startUpdate && !randomEvents[eventIndex].fixedUpdate)
+		{
+			randomEvents[eventIndex].EventUpdate();
+		}
 	}
 
 	private void FixedUpdate()
 	{
-		if()
+		if (startUpdate && randomEvents[eventIndex].fixedUpdate)
+		{
+			randomEvents[eventIndex].EventUpdate();
+		}
 	}
 
 	void ShowUIEvent()
