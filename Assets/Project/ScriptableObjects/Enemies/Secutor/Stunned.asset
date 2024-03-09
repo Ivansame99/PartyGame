@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cf7886948556414987f5b2c0e81cef6, type: 3}
-  m_Name: EnemySpecialAttack
+  m_Script: {fileID: 11500000, guid: fbce0833f4d07e74184a58addbed9c7e, type: 3}
+  m_Name: Stunned
   m_EditorClassIdentifier: 
-  chargeSpeed: 35
-  impulseForce: 50
-  colisionDistance: 2
-  timeToStun: 4
+  stunTime: 2
+  starStun: {fileID: 5513112601214264685, guid: 05aaa9e7a3d8aff458a75607b194d1d5,
+    type: 3}
+  stunYPosition: 3

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Secutor Attack", menuName = "Enemy Logic/Secutor/Attack Logic/Secutor Attack")]
+[CreateAssetMenu(fileName = "Secutor Attack", menuName = "Enemy Logic/Secutor/Attack Logic/Attack")]
 public class SecutorAttack : EnemyAttackSOBase
 {
     [SerializeField] private float attackSpeed;

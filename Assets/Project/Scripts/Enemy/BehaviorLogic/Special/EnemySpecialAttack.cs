@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-[CreateAssetMenu(fileName = "EnemySpecialAttack", menuName = "Enemy Logic/Giant/Attack Logic/Enemy Special Attack")]
+[CreateAssetMenu(fileName = "EnemySpecialAttack", menuName = "Enemy Logic/Giant/Attack Logic/Special Attack")]
 public class EnemySpecialAttack : EnemySpecialAttackSOBase
 {
     [SerializeField] private float chargeSpeed = 35f;

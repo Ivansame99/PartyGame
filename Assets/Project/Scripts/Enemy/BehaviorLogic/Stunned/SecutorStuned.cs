@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemySecutorStuned", menuName = "Enemy Logic/Secutor/Status Logic/Secutor Stuned")]
+[CreateAssetMenu(fileName = "EnemySecutorStuned", menuName = "Enemy Logic/Secutor/Status Logic/Stuned")]
 public class SecutorStuned : EnemyStunedSOBase
 {
 

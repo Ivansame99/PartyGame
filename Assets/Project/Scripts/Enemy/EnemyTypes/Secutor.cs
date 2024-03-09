@@ -11,6 +11,7 @@ public class Secutor : Enemy
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
     [SerializeField] private EnemyStunedSOBase enemyStunedBase;
     [SerializeField] private EnemyDeathSOBase enemyDeathBase;
+    [SerializeField] private EnemyDamageSOBase enemyDamageBase;
     void Awake()
     {
         //Initialize SO
@@ -19,6 +20,7 @@ public class Secutor : Enemy
         enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
         enemyStunedBaseInstance = Instantiate(enemyStunedBase);
         enemyDeathBaseInstance = Instantiate(enemyDeathBase);
+        enemyDamageBaseInstance = Instantiate(enemyDamageBase);
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
@@ -27,6 +29,7 @@ public class Secutor : Enemy
         specialAttackState = new EnemySpecialAttackState(this, stateMachine);
         stunnedState = new EnemyStunnedState(this, stateMachine);
         deathState = new EnemyDeathState(this, stateMachine);
+        damageState = new EnemyDamageState(this, stateMachine);
     }
     void Start()
     {
@@ -46,6 +49,7 @@ public class Secutor : Enemy
         enemySpecialAttackBaseInstance.Init(gameObject, this);
         enemyStunedBaseInstance.Init(gameObject, this);
         enemyDeathBaseInstance.Init(gameObject, this);
+        enemyDamageBaseInstance.Init(gameObject, this);
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
     }

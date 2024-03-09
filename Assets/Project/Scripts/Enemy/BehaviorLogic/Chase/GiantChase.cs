@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Chase To Player", menuName = "Enemy Logic/Giant/Chase Logic/Chase To Player")]
-public class EnemyChaseToPlayer : EnemyChaseSOBase
+[CreateAssetMenu(fileName = "Giant Chase", menuName = "Enemy Logic/Giant/Chase Logic/Chase To Player")]
+public class GiantChase : EnemyChaseSOBase
 {
     [SerializeField] private float speed;
     [SerializeField] private float acceleration;
