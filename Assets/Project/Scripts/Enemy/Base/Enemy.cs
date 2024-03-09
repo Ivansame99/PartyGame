@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     [field: SerializeField] public float inmuneTime { get; set; }
     public float currentHealth { get; set; }
     public bool isDead { get; set; }
+    public bool IsDamaged { get; set; }
 
 
     //MOVEMENT INTERFACE
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public Transform playerPos2 { get; set; }
     public EnemyTargetController enemyTargetController { get; set; }
     public Animator animator { get; set; }
+
 
     //AGGRO INTERFACE
     public bool IsAggreed { get; set; }
@@ -36,6 +38,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyAttackState attackState { get; set; }
     public EnemySpecialAttackState specialAttackState { get; set; }
     public EnemyStunnedState stunnedState { get; set; }
+    public EnemyDamageState damageState { get; set; }
     public EnemyDeathState deathState { get; set; }
     #endregion
 
@@ -46,6 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
     public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
     public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
     public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }
+    public EnemyDamageSOBase enemyDamageBaseInstance { get; set; }
     public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
     
 
@@ -53,18 +57,9 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable,ITriggerCheckeab
 
 
     #region Health/Damage
-    public void Damage(float damageAmount)
+    public void SetDamagedStatus(bool isDamaged)
     {
-        currentHealth -= damageAmount;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    public void Die()
-    {
-        Destroy(gameObject);
+        IsDamaged = isDamaged;
     }
     #endregion
 

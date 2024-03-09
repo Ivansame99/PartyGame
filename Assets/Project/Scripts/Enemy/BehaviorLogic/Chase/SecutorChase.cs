@@ -21,7 +21,12 @@ public class SecutorChase : EnemyChaseSOBase
         base.DoEnterLogic();
         //Set chase animation
         enemy.agent.isStopped = false;
-        enemy.animator.SetInteger("AnimationType",0);
+
+        enemy.animator.SetTrigger("Chase");
+        CheckingStates();
+
+        //Set animation
+        //enemy.animator.SetInteger("AnimationType",0);
 
         //Agent configuration
         enemy.agent.speed = speed;
@@ -34,25 +39,30 @@ public class SecutorChase : EnemyChaseSOBase
         if(!enemy.isDead)
         {
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-
-            if (enemy.IsSpecialAggro)
-            {
-                enemy.stateMachine.ChangeState(enemy.specialAttackState);
-            }
-
-            if (enemy.IsAggreed)
-            {
-                enemy.stateMachine.ChangeState(enemy.attackState);
-            }
+            CheckingStates();
         }
         else
         {
             enemy.stateMachine.ChangeState(enemy.deathState);
         }
-
-
     }
+    void CheckingStates()
+    {
+        if (enemy.IsDamaged)
+        {
+            enemy.stateMachine.ChangeState(enemy.damageState);
+        }
 
+        if (enemy.IsSpecialAggro)
+        {
+            enemy.stateMachine.ChangeState(enemy.specialAttackState);
+        }
+
+        if (enemy.IsAggreed)
+        {
+            enemy.stateMachine.ChangeState(enemy.attackState);
+        }
+    }
     public override void DoExitLogic()
     {
         base.DoExitLogic();

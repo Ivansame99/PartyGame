@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Secutor Attack", menuName = "Enemy Logic/Secutor/Attack Logic/Secutor Attack")]
+[CreateAssetMenu(fileName = "Secutor Attack", menuName = "Enemy Logic/Secutor/Attack Logic/Attack")]
 public class SecutorAttack : EnemyAttackSOBase
 {
     [SerializeField] private float attackSpeed;
@@ -32,7 +32,8 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         base.DoEnterLogic();
         isFinished = false;
-        enemy.animator.SetInteger("AnimationType", 1);
+        //enemy.animator.SetInteger("AnimationType", 1);
+        enemy.animator.SetTrigger("Attack");
         feedback = Instantiate(feedbackAttack,enemy.transform);
     }
     public override void DoExitLogic()
@@ -46,6 +47,13 @@ public class SecutorAttack : EnemyAttackSOBase
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
         if(!enemy.isDead)
         {
+            if(enemy.IsDamaged)
+            {
+                if(feedback != null) Destroy(feedback);
+                isFinished = false;
+                enemy.stateMachine.ChangeState(enemy.damageState);
+                
+            }
             if (isFinished)
             {
                 if (attackTimer <= 0)

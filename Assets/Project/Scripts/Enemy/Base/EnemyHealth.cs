@@ -50,8 +50,17 @@ public class EnemyHealth : MonoBehaviour
         }
         else invencibility = false;
     }
-
-    public void ReceiveDamageSlash(float damage)
+    private void FixedUpdate()
+    {
+        if (pushBack)
+        {
+            Vector3 direction = (this.transform.position - attackPosition).normalized;
+            direction.y = 0;
+            enemy.rb.AddForce(direction * pushForce, ForceMode.Impulse);
+            pushBack = false;
+        }
+    }
+    public void ReceiveDamage(float damage)
     {
         //Logic
         enemy.currentHealth -= damage;
@@ -60,22 +69,9 @@ public class EnemyHealth : MonoBehaviour
         if (healthBarC != null)
         {
             healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
+            enemy.SetDamagedStatus(true);
         }
         if(enemy.currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    public void ReceiveDamageArrow(float damage)
-    {
-        enemy.currentHealth -= damage;
-        timer = enemy.inmuneTime;
-        if (healthBarC != null)
-        {
-            healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
-        }
-        if (enemy.currentHealth <= 0)
         {
             Die();
         }
@@ -112,13 +108,13 @@ public class EnemyHealth : MonoBehaviour
                 pushBack = true;
                 pushForce = slashController.pushForce;
 
-                ReceiveDamageSlash(slashController.finalDamage);
+                ReceiveDamage(slashController.finalDamage);
             }
         }
 
         if (other.CompareTag("EventDamage"))
         {
-            ReceiveDamageSlash(other.GetComponent<DealDamageEvent>().damageAmmount);
+            ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
         }
     }
 
@@ -131,7 +127,7 @@ public class EnemyHealth : MonoBehaviour
             pushBack = true;
             pushForce = ac.pushForce;
             lastAttacker = ac.owner;
-            ReceiveDamageArrow(ac.finalDamage);
+            ReceiveDamage(ac.finalDamage);
             Destroy(collision.gameObject);
         }
     }

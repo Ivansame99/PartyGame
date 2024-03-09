@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d5758a9e8802ba48b983e22f8a192a4, type: 3}
-  m_Name: Chase To Player
+  m_Script: {fileID: 11500000, guid: 4cf7886948556414987f5b2c0e81cef6, type: 3}
+  m_Name: Special
   m_EditorClassIdentifier: 
-  speed: 7
-  acceleration: 20
-  angularSpeed: 1000
+  chargeSpeed: 35
+  impulseForce: 50
+  colisionDistance: 2
+  timeToStun: 4

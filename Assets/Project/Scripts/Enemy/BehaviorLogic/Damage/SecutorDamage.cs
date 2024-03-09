@@ -2,56 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemySecutorStuned", menuName = "Enemy Logic/Secutor/Status Logic/Stuned")]
-public class SecutorStuned : EnemyStunedSOBase
+[CreateAssetMenu(fileName = "Secutor Take Damage", menuName = "Enemy Logic/Secutor/Status Logic/Damage")]
+public class SecutorDamage : EnemyDamageSOBase
 {
-
-    //COOLDOWN STUNED
     private float stunedTimer;
     [SerializeField] private float stunTime;
-    [SerializeField] private ParticleSystem starStun;
-    [SerializeField] private float stunYPosition;
-    private ParticleSystem starStunClone;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+        switch (triggerType)
+        {
+ 
+        }
     }
-
+    public void ChangeState()
+    {
+        enemy.stateMachine.ChangeState(enemy.chaseState);
+    }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Stun");
+        enemy.animator.SetTrigger("Damaged");
         stunedTimer = stunTime;
-        //starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), Quaternion.identity,this.enemy.transform);
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        enemy.rb.velocity = Vector3.zero;
     }
 
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if(!enemy.isDead)
+        if (stunedTimer <= 0)
         {
-            if (stunedTimer <= 0)
-            {
-                enemy.stateMachine.ChangeState(enemy.chaseState);
-                //Destroy(starStunClone);
-            }
-            else
-            {
-                stunedTimer -= Time.deltaTime;
-            }
+            enemy.SetDamagedStatus(false);
+            CheckingStates();    
         }
         else
         {
-            enemy.stateMachine.ChangeState(enemy.chaseState);
+            stunedTimer -= Time.deltaTime;
+        }
+    }
+    void CheckingStates()
+    {
+
+        if (enemy.IsSpecialAggro)
+        {
+            enemy.stateMachine.ChangeState(enemy.specialAttackState);
         }
 
+        else if (enemy.IsAggreed)
+        {
+            enemy.stateMachine.ChangeState(enemy.attackState);
+        }
+        else { enemy.stateMachine.ChangeState(enemy.chaseState); }
     }
-
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
@@ -66,7 +73,4 @@ public class SecutorStuned : EnemyStunedSOBase
     {
         base.ResetValues();
     }
-
 }
-
-

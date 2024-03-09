@@ -4,8 +4,8 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyAttack", menuName = "Enemy Logic/Giant/Attack Logic/Enemy Attack")]
-public class EnemyAttack : EnemyAttackSOBase
+[CreateAssetMenu(fileName = "Giant Attack", menuName = "Enemy Logic/Giant/Attack Logic/Attack")]
+public class GiantAttack : EnemyAttackSOBase
 {
     [Header("Wave prefabs")]
     [SerializeField] ParticleSystem areaAttackParticles;
