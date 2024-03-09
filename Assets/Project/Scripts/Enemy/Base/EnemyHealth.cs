@@ -50,7 +50,16 @@ public class EnemyHealth : MonoBehaviour
         }
         else invencibility = false;
     }
-
+    private void FixedUpdate()
+    {
+        if (pushBack)
+        {
+            Vector3 direction = (this.transform.position - attackPosition).normalized;
+            direction.y = 0;
+            enemy.rb.AddForce(direction * pushForce, ForceMode.Impulse);
+            pushBack = false;
+        }
+    }
     public void ReceiveDamage(float damage)
     {
         //Logic

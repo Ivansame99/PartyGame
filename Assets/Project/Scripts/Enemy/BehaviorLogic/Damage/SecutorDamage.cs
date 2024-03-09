@@ -5,21 +5,48 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Secutor Take Damage", menuName = "Enemy Logic/Secutor/Status Logic/Damage")]
 public class SecutorDamage : EnemyDamageSOBase
 {
-    [SerializeField] private float pushForce;
+    private float stunedTimer;
+    [SerializeField] private float stunTime;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
         switch (triggerType)
         {
-            case Enemy.AnimationTriggerType.EnemyAttackFinished:
-                ChangeState();
-                break;
+ 
         }
     }
     public void ChangeState()
     {
-        enemy.SetDamagedStatus(false);
-        enemy.animator.SetBool("Damage", false);
+        enemy.stateMachine.ChangeState(enemy.chaseState);
+    }
+    public override void DoEnterLogic()
+    {
+        base.DoEnterLogic();
+        enemy.animator.SetTrigger("Damaged");
+        stunedTimer = stunTime;
+    }
+
+    public override void DoExitLogic()
+    {
+        base.DoExitLogic();
+        enemy.rb.velocity = Vector3.zero;
+    }
+
+    public override void DoFrameUpdateLogic()
+    {
+        base.DoFrameUpdateLogic();
+        if (stunedTimer <= 0)
+        {
+            enemy.SetDamagedStatus(false);
+            CheckingStates();    
+        }
+        else
+        {
+            stunedTimer -= Time.deltaTime;
+        }
+    }
+    void CheckingStates()
+    {
 
         if (enemy.IsSpecialAggro)
         {
@@ -30,27 +57,8 @@ public class SecutorDamage : EnemyDamageSOBase
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
-        else
-        {
-            enemy.stateMachine.ChangeState(enemy.chaseState);
-        }
+        else { enemy.stateMachine.ChangeState(enemy.chaseState); }
     }
-    public override void DoEnterLogic()
-    {
-        base.DoEnterLogic();
-        enemy.animator.SetBool("Damage",true);
-    }
-
-    public override void DoExitLogic()
-    {
-        base.DoExitLogic();
-    }
-
-    public override void DoFrameUpdateLogic()
-    {
-        base.DoFrameUpdateLogic();
-    }
-
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();

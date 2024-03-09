@@ -38,9 +38,6 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        attackTimer = attackCooldown;
-        isFinished = true;
-        Destroy(feedback);
     }
     public override void DoFrameUpdateLogic()
     {
@@ -49,9 +46,13 @@ public class SecutorAttack : EnemyAttackSOBase
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
         if(!enemy.isDead)
         {
+            Debug.Log("1");
             if(enemy.IsDamaged)
             {
+                if(feedback != null) Destroy(feedback);
+                isFinished = false;
                 enemy.stateMachine.ChangeState(enemy.damageState);
+                
             }
             if (isFinished)
             {
@@ -59,6 +60,7 @@ public class SecutorAttack : EnemyAttackSOBase
                 {
                     isFinished = false;
                     enemy.rb.velocity = Vector3.zero;
+                    Debug.Log("2");
                     enemy.stateMachine.ChangeState(enemy.chaseState);
                 }
                 else
