@@ -900,7 +900,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4599955610764907065}
-  m_Material: {fileID: 13400000, guid: 5f5305ab881236145a04d0b95e86f111, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -955,6 +955,8 @@ MonoBehaviour:
   healthBarC: {fileID: 9007092775933760061}
   healthBar: {fileID: 324671669482108369}
   powerLevelGameObject: {fileID: 9213241676706322452}
+  floatingDamageText: {fileID: 8703725455407415189, guid: 66b9f0c30a5de9c4783390300516fa8a,
+    type: 3}
 --- !u!114 &8554667382553994390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6970,15 +6972,14 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dcfe7b00c24253747a6f95f940794113, type: 2}
-  m_sharedMaterial: {fileID: -8551384008492134556, guid: dcfe7b00c24253747a6f95f940794113,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 0537617438729a2408fe5b7fee1bb1b2, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6995,8 +6996,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 170
+  m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

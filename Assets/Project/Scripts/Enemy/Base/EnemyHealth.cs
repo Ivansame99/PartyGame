@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -34,7 +35,9 @@ public class EnemyHealth : MonoBehaviour
     private bool pushBack;
     private float pushForce;
 
-    void Awake()
+	[SerializeField] private GameObject floatingDamageText;
+
+	void Awake()
     {
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -62,8 +65,11 @@ public class EnemyHealth : MonoBehaviour
     }
     public void ReceiveDamage(float damage)
     {
-        //Logic
-        enemy.currentHealth -= damage;
+		//Feedback
+		if (floatingDamageText != null) ShowDamageText(damage);
+
+		//Logic
+		enemy.currentHealth -= damage;
         timer = enemy.inmuneTime;
 
         if (healthBarC != null)
@@ -76,7 +82,14 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-    void Die()
+
+	void ShowDamageText(float damage)
+	{
+		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
+		text.text = ((int)damage).ToString();
+	}
+
+	void Die()
     {
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
         if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
