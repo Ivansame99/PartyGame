@@ -1,53 +1,50 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Drunk Chase", menuName = "Enemy Logic/Drunk/Chase Logic/Chase To Player")]
-public class DrunkChase : EnemyChaseSOBase
+[CreateAssetMenu(fileName = "Drunk Attack", menuName = "Enemy Logic/Drunk/Attack Logic/Attack")]
+public class DrunkAttack : EnemyAttackSOBase
 {
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+        switch (triggerType)
+        {
+
+        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.agent.isStopped = false;
-    }
-    public override void DoFrameUpdateLogic()
-    {
-        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-        if (!enemy.isDead)
-        {
-            if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
-            CheckingStates();
-        }
-    }
-    void CheckingStates()
-    {
-        if (enemy.IsAggreed)
-        {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
+        Debug.Log("Drunk Attack Enter");
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        enemy.agent.isStopped = true;
     }
-
+    public override void DoFrameUpdateLogic()
+    {
+        base.DoFrameUpdateLogic();
+        if (!enemy.isDead)
+        {
+            if (!enemy.IsAggreed)
+            {
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+        }
+        else
+        {
+            enemy.stateMachine.ChangeState(enemy.deathState);
+        }
+        }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
-        
     }
-
     public override void Init(GameObject gameObject, Enemy enemy)
     {
         base.Init(gameObject, enemy);
     }
-
     public override void ResetValues()
     {
         base.ResetValues();
