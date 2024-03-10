@@ -355,7 +355,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Arrow" && invencibleTimer <= 0 && !dead)
+		if (collision.transform.CompareTag("Arrow") && invencibleTimer <= 0 && !dead)
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
 			if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)
@@ -374,7 +374,7 @@ public class PlayerHealthController : MonoBehaviour
 			}
 		}
 
-        if (collision.gameObject.tag == "TorusAtk" && invencibleTimer <= 0 && !dead)
+        if (collision.transform.CompareTag("TorusAtk") && invencibleTimer <= 0 && !dead)
         {
             Torus torus = collision.gameObject.GetComponent<Torus>();
 			lastAttacker = torus.owner;
@@ -383,5 +383,15 @@ public class PlayerHealthController : MonoBehaviour
 			pushForce = torus.pushForce;
             ReceiveDamage(torus.finalDamage);
         }
-    }
+
+		if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
+		{
+			RockEvent rock = collision.gameObject.GetComponent<RockEvent>();
+			lastAttacker = null;
+			attackPosition = rock.originalPosition;
+			pushBack = true;
+			pushForce = rock.pushForce;
+			ReceiveDamage(rock.damage);
+		}
+	}
 }
