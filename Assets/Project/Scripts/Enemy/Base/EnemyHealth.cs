@@ -42,6 +42,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject glow;
     [SerializeField] private GameObject deathParticles;
     //[SerializeField] private HelmetPrefab[] helmetPrefabs;
+    [SerializeField] private GameObject PowerParticle;
 
     void Awake()
     {
@@ -117,7 +118,9 @@ public class EnemyHealth : MonoBehaviour
     }
     public void enemyDestroy()
     {
+        Quaternion Rotation = Quaternion.Euler(-90f, 0f, 0f);
         Instantiate(deathParticles, transform.position, Quaternion.identity);
+        Instantiate(PowerParticle, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), Rotation);
 
         enemy.isDead = true;
         Destroy(healthBar.gameObject);
