@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 59566029565060179}
   - component: {fileID: 6953026058108875381}
   - component: {fileID: 7065636246141266086}
+  - component: {fileID: 3934044522881353569}
   m_Layer: 0
   m_Name: PowerParicles
   m_TagString: Untagged
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &6953026058108875381
 ParticleSystem:
@@ -41,7 +42,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8295707845433484386}
   serializedVersion: 8
-  lengthInSec: 10
+  lengthInSec: 30
   simulationSpeed: 1.5
   stopAction: 0
   cullingMode: 0
@@ -3742,7 +3743,7 @@ ParticleSystem:
     m_Bounce:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4886,3 +4887,21 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3934044522881353569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8295707845433484386}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c12bdd49f19ca14aba03bb3c5adb9eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerParticleSystem: {fileID: 6953026058108875381}
+  moveSpeed: 30
+  attractionRadius: 0.5
+  particleAttractionStrength: 10
+  gatherRadius: 0.5
+  destroyDistanceThreshold: 1
