@@ -152,7 +152,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Arrow" && !invencibility && !enemy.isDead)
+        if (collision.transform.CompareTag("Arrow") && !invencibility && !enemy.isDead)
         {
             ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
             attackPosition = collision.gameObject.transform.position;
@@ -162,5 +162,15 @@ public class EnemyHealth : MonoBehaviour
             ReceiveDamage(ac.finalDamage);
             Destroy(collision.gameObject);
         }
-    }
+
+		if (collision.transform.CompareTag("Stone") && !invencibility && !enemy.isDead)
+		{
+			RockEvent rock = collision.gameObject.GetComponent<RockEvent>();
+			lastAttacker = null;
+			attackPosition = rock.originalPosition;
+			pushBack = true;
+			pushForce = rock.pushForce;
+			ReceiveDamage(rock.damage);
+		}
+	}
 }

@@ -14,8 +14,18 @@ public class EventsController : MonoBehaviour
 	[SerializeField]
 	private float timeToShowUI;
 
+	[System.Serializable]
+	public struct RandomEvents
+	{
+		public GameEvent randomEvent;
+		[Range(0, 1)]
+		public float probability;
+	}
+
 	[SerializeField]
-	private List<GameEvent> randomEvents;
+	private List<RandomEvents> randomEvents;
+
+	private GameEvent currentEvent;
 
 	[SerializeField]
 	private float maxTimeToSpawn;
@@ -42,19 +52,25 @@ public class EventsController : MonoBehaviour
 
     void Update()
     {
+		if (randomEvents == null || randomEvents.Count == 0)
+		{
+			Debug.LogError("No events");
+			return;
+		}
+
 		if (timer == 0)
 		{
-			eventIndex = Random.Range(0, randomEvents.Count);
+			SelectNewEvent();
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-			eventNameText.text = randomEvents[eventIndex].eventName;
-			randomEvents[eventIndex].EventStart();
-			if (randomEvents[eventIndex].fixedUpdate) onFixedUpdate = true;
+			eventNameText.text = currentEvent.eventName;
+			currentEvent.EventStart();
+			if (currentEvent.fixedUpdate) onFixedUpdate = true;
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
 		if (timer >= randomTimeToSpawn)
 		{
-			if (!randomEvents[eventIndex].eventFinished)
+			if (!currentEvent.eventFinished)
 			{
 				if(anim)
 				{
@@ -73,17 +89,38 @@ public class EventsController : MonoBehaviour
 			timer += Time.deltaTime;
 		}
 
-		if(startUpdate && !randomEvents[eventIndex].fixedUpdate)
+		if(startUpdate && !currentEvent.fixedUpdate)
 		{
-			randomEvents[eventIndex].EventUpdate();
+			currentEvent.EventUpdate();
 		}
 	}
 
 	private void FixedUpdate()
 	{
-		if (startUpdate && randomEvents[eventIndex].fixedUpdate)
+		if (startUpdate && currentEvent.fixedUpdate)
 		{
-			randomEvents[eventIndex].EventUpdate();
+			currentEvent.EventUpdate();
+		}
+	}
+
+	private void SelectNewEvent()
+	{
+		float totalProbability = 0f;
+		foreach (var ev in randomEvents)
+		{
+			totalProbability += ev.probability;
+		}
+
+		float randomValue = Random.Range(0f, totalProbability);
+
+		foreach (var ev in randomEvents)
+		{
+			randomValue -= ev.probability;
+			if (randomValue <= 0)
+			{
+				currentEvent = ev.randomEvent;
+				return;
+			}
 		}
 	}
 

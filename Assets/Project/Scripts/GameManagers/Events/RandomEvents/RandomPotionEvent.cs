@@ -6,7 +6,9 @@ using UnityEngine;
 public class RandomPotionEvent : GameEvent
 {
 	[SerializeField]
-	private GameObject potionPrefab;
+	private GameObject[] objectThrowed;
+
+	private GameObject currentObject;
 
 	[SerializeField]
 	private float speedMin;
@@ -42,6 +44,9 @@ public class RandomPotionEvent : GameEvent
 
 	public override void EventStart()
 	{
+		int randomObjectIndex = Random.Range(0, objectThrowed.Length);
+		currentObject = objectThrowed[randomObjectIndex];
+
 		xPosMaxIni = 37f;
 		xPosMinIni = -37f;
 
@@ -75,7 +80,7 @@ public class RandomPotionEvent : GameEvent
 
 	public override void EventUpdate()
 	{
-		potion = Instantiate(potionPrefab, initialPosition, potionPrefab.transform.rotation);
+		potion = Instantiate(currentObject, initialPosition, currentObject.transform.rotation);
 		potionRb = potion.GetComponent<Rigidbody>();
 		float distanceToTarget = Vector3.Distance(potion.transform.position, finalPosition);
 		float initialSpeed = Mathf.Sqrt(2 * distanceToTarget * speed);
