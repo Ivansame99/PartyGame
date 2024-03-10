@@ -26,7 +26,6 @@ public class GroundCheck : MonoBehaviour
 	{
 		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
 
-		//Check if it's on ground
 		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, charactersLayer))
 		{
 			Vector3 slideValue;
