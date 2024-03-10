@@ -101,7 +101,7 @@ public class PlayersRespawn : MonoBehaviour
 	IEnumerator SlowMotion(Transform player)
 	{
 		float slowdownFactor = 0.2f;
-		float slowdownDuration = 1f;
+		float slowdownDuration = 0.5f;
 
 		Time.timeScale = slowdownFactor;
 		mtp.enabled = false;
