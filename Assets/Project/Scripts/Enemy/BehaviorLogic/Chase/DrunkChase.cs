@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,20 +13,22 @@ public class DrunkChase : EnemyChaseSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        Debug.Log("Drunk Chase Enter");
+        enemy.agent.isStopped = false;
     }
     public override void DoFrameUpdateLogic()
     {
-
+        if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        enemy.agent.isStopped = true;
     }
 
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
+        
     }
 
     public override void Init(GameObject gameObject, Enemy enemy)
