@@ -137,10 +137,10 @@ public class EnemyHealth : MonoBehaviour
                 lastAttacker = other.transform.parent.gameObject;
                 SlashController slashController = other.GetComponent<SlashController>();
                 attackPosition = other.gameObject.transform.position;
-                pushBack = true;
                 pushForce = slashController.pushForce;
+				pushBack = true;
 
-                ReceiveDamage(slashController.finalDamage);
+				ReceiveDamage(slashController.finalDamage);
             }
         }
 

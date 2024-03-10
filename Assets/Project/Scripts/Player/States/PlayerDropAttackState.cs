@@ -70,12 +70,15 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
-		float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
-		float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
-		if (!float.IsNaN(angle))
+		if (player.direction != Vector3.zero)
 		{
-			var rotation = Quaternion.Euler(0f, angle, 0f);
-			player.transform.rotation = rotation;
+			float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
+			float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);
+			if (!float.IsNaN(angle))
+			{
+				var rotation = Quaternion.Euler(0f, angle, 0f);
+				player.transform.rotation = rotation;
+			}
 		}
 
 		if (timerPrepareAttack >= prepareAttackTime)
