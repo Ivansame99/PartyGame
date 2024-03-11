@@ -98,7 +98,7 @@ public class PowerController : MonoBehaviour
             // maxPowerParticlesInstance.transform.localPosition = new Vector3(0, yOffset, zOffset);
             //  maxPowerParticlesInstance.transform.localScale = this.transform.localScale * 0.2f;  //esto esta fatal hecho
 
-            //  maxPowerParticlesSpawned = true;
+              maxPowerParticlesSpawned = true;
 
         }
         if (currentPowerLevel < maxPowerLevel && maxPowerParticlesSpawned)
