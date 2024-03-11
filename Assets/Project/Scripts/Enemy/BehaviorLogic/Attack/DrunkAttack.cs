@@ -20,8 +20,9 @@ public class DrunkAttack : EnemyAttackSOBase
         //Vector3 enemyPosition = new Vector3(enemy.transform.position.x,enemy.transform.position.y + 4f,enemy.transform.position.z);
 
         // Instancia la botella en la posición del enemigo
-        //bottle = Instantiate(bottlePrefab, enemyPosition, Quaternion.identity);
-        //bottleRigidbody = bottle.GetComponent<Rigidbody>();
+        bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
+        bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
+        bottle.GetComponent<DrunkProjectile>()._FirePoint = enemy.transform;
     }
     public override void DoExitLogic()
     {

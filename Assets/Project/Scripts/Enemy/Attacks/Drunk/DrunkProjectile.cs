@@ -8,22 +8,20 @@ public class DrunkProjectile : MonoBehaviour
     //public Transform finalPos;
     [SerializeField] LineRenderer _Line;
     [SerializeField] float _Step;
-    [SerializeField] Transform _FirePoint;
+    public Transform _FirePoint;
 
     private Camera _cam;
 
-    private Enemy enemy;
-
+    public Transform finalPosition;
+    private bool start = false;
 
     private void Start()
     {
-        //_Line = GetComponent<LineRenderer>();
-        enemy = GetComponentInParent<Enemy>();
         _cam = Camera.main;
     }
     private void Update()
     {
-        Ray ray = new Ray(_cam.transform.position, enemy.playerPos.position - _cam.transform.position);
+        Ray ray = new Ray(_cam.transform.position, finalPosition.position - _cam.transform.position);
         //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit))
@@ -40,10 +38,11 @@ public class DrunkProjectile : MonoBehaviour
 
             DrawPath(groundDirection.normalized,v0, angle, time, _Step);
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!start)
             {
                 StopAllCoroutines();
                 StartCoroutine(Coroutine_Movement(groundDirection.normalized,v0, angle, time));
+                start = true;
             }
         }
     }
