@@ -21,11 +21,11 @@ public class PowerController : MonoBehaviour
     [SerializeField]
     private float powerScale; //Reduce it to more damage
 
-	[SerializeField]
-	private float healthScale; //Reduce it to more health scale
+    [SerializeField]
+    private float healthScale; //Reduce it to more health scale
 
-	//Variables de escalado
-	private float scaleMultiplayer;
+    //Variables de escalado
+    private float scaleMultiplayer;
 
     [SerializeField]
     private float maxScaleMultiplier = 2;
@@ -38,6 +38,15 @@ public class PowerController : MonoBehaviour
     [SerializeField]
     private GameObject powerLevel;
 
+    [SerializeField]
+    private GameObject maxPowerParticles;
+    [SerializeField]
+    private float yOffset = 2;
+    [SerializeField]
+    private float zOffset = 2;
+    private GameObject maxPowerParticlesInstance;
+    [SerializeField]
+    private GameObject smoke;
     private TMP_Text powerLevelText;
 
     private Canvas canvas;
@@ -45,36 +54,68 @@ public class PowerController : MonoBehaviour
     private GameObject playerUI;
     private TMP_Text playerUIPowerText;
 
-    private bool isEnemy=false;
+    private bool isEnemy = false;
+    private bool maxPowerParticlesSpawned = false;
 
-	public Action<float> OnCurrentPowerChanged;
+    public Action<float> OnCurrentPowerChanged;
 
-	void Start()
+    void Start()
     {
         powerLevelText = powerLevel.GetComponent<TMP_Text>();
         canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupPowerLevelCanvas();
         originalScale = transform.localScale;
-        if(this.gameObject.tag=="Enemy") isEnemy = true;
+        if (this.gameObject.tag == "Enemy") isEnemy = true;
 
         if (!isEnemy)
         {
             playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-            if(playerUI!=null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+            if (playerUI != null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
         }
 
-		InitializePowerLevel(minPowerLevel);
+        InitializePowerLevel(minPowerLevel);
     }
 
     void Update()
     {
+        if (currentPowerLevel >= maxPowerLevel && !maxPowerParticlesSpawned)
+        {
+            Debug.Log("Entras a poder");
+
+            smoke.SetActive(true);
+
+           // Vector3 newPosition = new Vector3(this.transform.position.x, this.transform.position.y + yOffset, this.transform.position.z + zOffset);
+
+
+            // Quaternion newRotation = this.transform.rotation;
+
+
+            // newRotation *= Quaternion.Euler(-90, 0, 0);
+
+
+
+            // maxPowerParticlesInstance = Instantiate(maxPowerParticles, this.transform.position, maxPowerParticles.transform.rotation, this.transform);
+            // maxPowerParticlesInstance.transform.localPosition = new Vector3(0, yOffset, zOffset);
+            //  maxPowerParticlesInstance.transform.localScale = this.transform.localScale * 0.2f;  //esto esta fatal hecho
+
+              maxPowerParticlesSpawned = true;
+
+        }
+        if (currentPowerLevel < maxPowerLevel && maxPowerParticlesSpawned)
+        {
+            //Destroy(maxPowerParticlesInstance);
+
+            smoke.SetActive(false);
+            maxPowerParticlesSpawned = false;
+        }
         //Formula para obtener el escalado del personaje
         float totalRange = maxPowerLevel - minPowerLevel;
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
-        
+
         scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
 
         this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
+
         //StartCoroutine(ChangeScale, this.gameObject.transform, originalScale);
     }
 
@@ -91,41 +132,41 @@ public class PowerController : MonoBehaviour
     public void SetCurrentPowerLevel(float value)
     {
         currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
-		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
-		ChangeUIText();
+        if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
+        ChangeUIText();
     }
 
-	public void InitializePowerLevel(float value)
-	{
-        currentPowerLevel = value;
-		ChangeUIText();
-	}
-
-	public void OnDieSetCurrentPowerLevel()
+    public void InitializePowerLevel(float value)
     {
-        currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel/2);
+        currentPowerLevel = value;
+        ChangeUIText();
+    }
+
+    public void OnDieSetCurrentPowerLevel()
+    {
+        currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel / 2);
         if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
-		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
-		ChangeUIText();
+        if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
+        ChangeUIText();
     }
 
     private void ChangeUIText()
     {
         powerLevelText.SetText(currentPowerLevel.ToString());
-        if(!isEnemy && playerUI!=null) playerUIPowerText.SetText(currentPowerLevel.ToString());
+        if (!isEnemy && playerUI != null) playerUIPowerText.SetText(currentPowerLevel.ToString());
     }
 
     public float PowerDamage()
     {
         return currentPowerLevel / powerScale;
-	}
+    }
 
-	public float PowerHealth()
-	{
-		return currentPowerLevel / healthScale;
-	}
+    public float PowerHealth()
+    {
+        return currentPowerLevel / healthScale;
+    }
 
-	IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
+    IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
     {
         //Vector3 initialScale = transform.localScale;
 
@@ -136,7 +177,7 @@ public class PowerController : MonoBehaviour
         }
     }
 
-	/*string ToRoman(int number)
+    /*string ToRoman(int number)
 	{
 		if (number < 1) return string.Empty;
 		if (number >= 1000) return "M" + ToRoman(number - 1000);
