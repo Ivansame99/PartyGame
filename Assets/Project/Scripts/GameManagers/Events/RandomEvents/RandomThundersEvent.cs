@@ -80,4 +80,9 @@ public class RandomThundersEvent : GameEvent
 			LightIntensity.ChangeIntensityOverTime(0.81f, 2f);
 		}
 	}
+
+	public override void EventDestroy()
+	{
+		eventFinished = true;
+	}
 }

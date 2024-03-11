@@ -443,8 +443,8 @@ MonoBehaviour:
   - {fileID: 761747502}
   - {fileID: 494676437}
   - {fileID: 2049264121}
-  minSimultaneousJumpAmount: 30
-  maxSimultaneousJumpAmount: 40
+  minSimultaneousJumpAmount: 10
+  maxSimultaneousJumpAmount: 30
   minIntervalBetweenJumps: 1
   maxIntervalBetweenJumps: 2
   minHeight: 1
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.75
+  m_fontSize: 43.45
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -29614,7 +29614,7 @@ PrefabInstance:
         type: 3}
       propertyPath: roundsSO.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: e86dddbcdc2b2d94299825dd8bc016c6,
+      objectReference: {fileID: 11400000, guid: efb8bb4c760e4944eb912112d4bb3c05,
         type: 2}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -30446,9 +30446,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: rateCoin
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a,
+        type: 3}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: publicAnim
+      value: 
+      objectReference: {fileID: 33536539}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: fireworkPrefab
@@ -30469,6 +30485,11 @@ PrefabInstance:
         type: 3}
       propertyPath: minTimeFirework
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: totalCoinsAmmount
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

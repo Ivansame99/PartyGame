@@ -45,6 +45,8 @@ public class EventsController : MonoBehaviour
 
 	private bool startUpdate = false;
 
+	private bool stopEvents = false;
+
 	void Start()
     {
 		timer = 0;
@@ -52,9 +54,8 @@ public class EventsController : MonoBehaviour
 
     void Update()
     {
-		if (randomEvents == null || randomEvents.Count == 0)
+		if (randomEvents == null || randomEvents.Count == 0 || stopEvents)
 		{
-			Debug.LogError("No events");
 			return;
 		}
 
@@ -128,5 +129,12 @@ public class EventsController : MonoBehaviour
 	{
 		eventsCanvas.SetBool("NewEvent", true);
 		anim = true;
+	}
+
+	public void StopEvents()
+	{
+		stopEvents = true;
+		eventsCanvas.gameObject.SetActive(false);
+		currentEvent.EventDestroy();
 	}
 }
