@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Drunk Attack", menuName = "Enemy Logic/Drunk/Attack Logic/Attack")]
 public class DrunkAttack : EnemyAttackSOBase
 {
+    [SerializeField] private GameObject bottlePrefab;
+    private GameObject bottle;
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
-
-        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        Debug.Log("Drunk Attack Enter");
+        
+        //Vector3 enemyPosition = new Vector3(enemy.transform.position.x,enemy.transform.position.y + 4f,enemy.transform.position.z);
+
+        // Instancia la botella en la posición del enemigo
+        //bottle = Instantiate(bottlePrefab, enemyPosition, Quaternion.identity);
+        //bottleRigidbody = bottle.GetComponent<Rigidbody>();
     }
     public override void DoExitLogic()
     {
@@ -40,6 +45,9 @@ public class DrunkAttack : EnemyAttackSOBase
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
+        if(bottlePrefab != null)
+        {
+        }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
     {
