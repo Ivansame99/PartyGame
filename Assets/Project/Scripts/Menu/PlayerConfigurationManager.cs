@@ -6,7 +6,6 @@ using System.Linq;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
-using UnityEditor.ShaderGraph.Internal;
 
 public class PlayerConfigurationManager : MonoBehaviour
 {
