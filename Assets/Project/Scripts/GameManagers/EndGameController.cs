@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class EndGameController : MonoBehaviour
 {
-    //private PlayerHealthController[] playerHealth;
-    private RoundController roundController;
+	//private PlayerHealthController[] playerHealth;
+	[SerializeField]
+	private GameObject fireworkPrefab;
+
+	[SerializeField]
+	private int maxFireworksInstanced;
+
+	[SerializeField]
+	private float minTimeFirework;
+
+	[SerializeField]
+	private float maxTimeFirework;
+
+	private RoundController roundController;
     private GameObject[] players;
     private int playersCount;
     [HideInInspector]
@@ -42,7 +55,7 @@ public class EndGameController : MonoBehaviour
 		if (roundController.finalRound && playersDead == playersCount - 1) //Solo queda uno en pie
 		{
 			Debug.Log("Has ganado!!");
-			StartCoroutine(CloseTranitionToWin());
+			StartCoroutine(StartFireworks());
 		}
 
         if(playersDead >= playersCount)
@@ -61,6 +74,20 @@ public class EndGameController : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         playersCount = players.Length;
     }
+
+	private IEnumerator StartFireworks()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(Random.Range(minTimeFirework, maxTimeFirework));
+			int randomFirework = Random.Range(1, maxFireworksInstanced);
+			for(int i=0;i< randomFirework; i++)
+			{
+				Vector3 randomPos = new Vector3(Random.Range(-30f, 30f), 0f, Random.Range(-30f, 30f));
+				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
+			}
+		}
+	}
 
 	private IEnumerator CloseTranitionToWin()
 	{
