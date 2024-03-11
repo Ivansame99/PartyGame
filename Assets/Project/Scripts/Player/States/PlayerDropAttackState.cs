@@ -26,6 +26,9 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float turnSmooth;
 
+	[SerializeField]
+	private ParticleSystem groundHit;
+
 	private float timerPrepareAttack;
 	private float timerattackCollider;
 	private float timerattackFreeze;
@@ -95,6 +98,8 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 			if (!fallParticleOn)
 			{
+				Instantiate(groundHit, player.transform.position, groundHit.transform.rotation);
+				//groundHit.Play();
 				Instantiate(dropAttackParticle, player.transform.position, dropAttackParticle.transform.rotation);
 				fallParticleOn = true;
 			}

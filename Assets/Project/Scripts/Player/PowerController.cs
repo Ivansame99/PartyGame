@@ -38,6 +38,13 @@ public class PowerController : MonoBehaviour
     [SerializeField]
     private GameObject powerLevel;
 
+    [SerializeField]
+    private GameObject maxPowerParticles;
+    [SerializeField]
+    private float yOffset = 2;
+    [SerializeField]
+    private float zOffset = 2;
+
     private TMP_Text powerLevelText;
 
     private Canvas canvas;
@@ -46,8 +53,9 @@ public class PowerController : MonoBehaviour
     private TMP_Text playerUIPowerText;
 
     private bool isEnemy=false;
+    private bool  maxPowerParticlesSpawned = false;
 
-	public Action<float> OnCurrentPowerChanged;
+    public Action<float> OnCurrentPowerChanged;
 
 	void Start()
     {
@@ -68,6 +76,21 @@ public class PowerController : MonoBehaviour
 
     void Update()
     {
+        if (currentPowerLevel >= maxPowerLevel && !maxPowerParticlesSpawned)
+        {
+            Debug.Log("Entras a poder");
+
+            Vector3 newPosition = new Vector3(this.transform.position.x, this.transform.position.y + yOffset, this.transform.position.z + zOffset);
+
+            Quaternion newRotation = this.transform.rotation; 
+
+        
+            newRotation *= Quaternion.Euler(-90, 0, 0);
+
+   
+            Instantiate(maxPowerParticles, newPosition, newRotation, this.transform);
+            maxPowerParticlesSpawned = true;
+        }
         //Formula para obtener el escalado del personaje
         float totalRange = maxPowerLevel - minPowerLevel;
         float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
@@ -75,6 +98,7 @@ public class PowerController : MonoBehaviour
         scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
 
         this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
+     
         //StartCoroutine(ChangeScale, this.gameObject.transform, originalScale);
     }
 
