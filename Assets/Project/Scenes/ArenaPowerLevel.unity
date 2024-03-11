@@ -443,8 +443,8 @@ MonoBehaviour:
   - {fileID: 761747502}
   - {fileID: 494676437}
   - {fileID: 2049264121}
-  minSimultaneousJumpAmount: 30
-  maxSimultaneousJumpAmount: 40
+  minSimultaneousJumpAmount: 10
+  maxSimultaneousJumpAmount: 30
   minIntervalBetweenJumps: 1
   maxIntervalBetweenJumps: 2
   minHeight: 1
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.75
+  m_fontSize: 43.45
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -13926,7 +13926,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.1, y: 0.1}
   m_AnchorMax: {x: 0.9, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1208}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &811007709
@@ -29396,7 +29396,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29608,13 +29608,13 @@ PrefabInstance:
         type: 3}
       propertyPath: roundsSO.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 682ae5d62fa861b4c82b55817224c549,
+      objectReference: {fileID: 11400000, guid: ba7361207e4b78b4089b6cbf9a061d07,
         type: 2}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: roundsSO.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: e86dddbcdc2b2d94299825dd8bc016c6,
+      objectReference: {fileID: 11400000, guid: efb8bb4c760e4944eb912112d4bb3c05,
         type: 2}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -30446,9 +30446,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: rateCoin
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: coinPrefab
+      value: 
+      objectReference: {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a,
+        type: 3}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: publicAnim
+      value: 
+      objectReference: {fileID: 33536539}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: fireworkPrefab
+      value: 
+      objectReference: {fileID: 1978689737715041617, guid: afa54037ffe627545886e2741abb365d,
+        type: 3}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: transitionTime
@@ -30456,9 +30478,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: maxTimeFirework
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: minTimeFirework
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: totalCoinsAmmount
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       propertyPath: transitionMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: maxFireworksInstanced
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_Enabled

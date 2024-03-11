@@ -84,4 +84,10 @@ public class WaterEvent : GameEvent
 			}
 		}
 	}
+
+	public override void EventDestroy()
+	{
+		if(water!=null) Destroy(water);
+		eventFinished = true;
+	}
 }

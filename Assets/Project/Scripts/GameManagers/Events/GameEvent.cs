@@ -12,6 +12,8 @@ public abstract class GameEvent : ScriptableObject
 
 	public abstract void EventUpdate();
 
+	public abstract void EventDestroy();
+
 	public virtual void EventExit()
 	{
 		eventFinished = true;

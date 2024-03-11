@@ -89,4 +89,10 @@ public class RandomPotionEvent : GameEvent
 		potionRb.velocity = direction * initialSpeed;
 		eventFinished = true;
 	}
+
+	public override void EventDestroy()
+	{
+		eventFinished = true;
+		if(potion!=null) Destroy(potion);
+	}
 }
