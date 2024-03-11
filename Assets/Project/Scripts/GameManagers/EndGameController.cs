@@ -55,7 +55,6 @@ public class EndGameController : MonoBehaviour
 		eventsController = GetComponent<EventsController>();
 		roundController = GetComponent<RoundController>();
         Invoke("GetPlayers", 1f);
-		InstantiateCoinsPool();
 	}
 
     public void PlayerDead()
@@ -79,9 +78,10 @@ public class EndGameController : MonoBehaviour
 				publicAnim.maxSimultaneousJumpAmount = publicAnim.prefabs.Length;
 			}
 			eventsController.StopEvents();
-			//sInstantiateCoinsPool();
+			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
+			StartCoroutine(CloseTranitionToWin());
 		}
 
         if(playersDead >= playersCount)
@@ -158,6 +158,7 @@ public class EndGameController : MonoBehaviour
 
 	private IEnumerator CloseTranitionToWin()
 	{
+		yield return new WaitForSeconds(15f);
 		float currentTime = transitionTime;
 		while (currentTime > 0)
 		{
@@ -166,7 +167,7 @@ public class EndGameController : MonoBehaviour
 			yield return null;
 		}
 
-		SceneManager.LoadScene("Win");
+		SceneManager.LoadScene("Menu");
 	}
 
 	private IEnumerator CloseTranitionToGameOver()
