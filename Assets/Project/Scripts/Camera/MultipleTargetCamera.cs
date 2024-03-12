@@ -13,13 +13,13 @@ public class MultipleTargetCamera : MonoBehaviour
 	[SerializeField] private float maxZoom = 10f;
 	[SerializeField] private float zoomLimiter = 50f;
 
-    private Camera cam;
-	private Vector3 velocity;
+    [SerializeField]
+    private Camera mainCamera;
 
-    private void Awake()
-    {
-		cam = Camera.main;
-	}
+	[SerializeField]
+	private Camera guiCamera;
+
+	private Vector3 velocity;
 
     private void Start()
     {
@@ -45,14 +45,16 @@ public class MultipleTargetCamera : MonoBehaviour
     private void Zoom()
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
-    }
+		mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
+		guiCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
+
+	}
 
     private void Move()
     {
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPosition = centerPoint + offset;
-		cam.transform.position = Vector3.SmoothDamp(cam.transform.position, newPosition, ref velocity, smoothTime);
+		mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, newPosition, ref velocity, smoothTime);
     }
 
     private float GetGreatestDistance()

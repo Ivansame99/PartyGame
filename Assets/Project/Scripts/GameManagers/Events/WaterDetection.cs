@@ -7,19 +7,36 @@ public class WaterDetection : MonoBehaviour
 	[HideInInspector]
 	public bool onWater;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Water"))
-        {
-			onWater = true;
-		}
-    }
+	private float triggerTimeout = 0f;
 
-    private void OnTriggerExit(Collider other)
-    {
-		if (other.CompareTag("Water"))
+	private void Update()
+	{
+		if (triggerTimeout > 0)
 		{
-			onWater = false;
+			triggerTimeout -= Time.deltaTime;
+
+			if (triggerTimeout <= 0)
+			{
+				triggerTimeout = 0f;
+				onWater = false;
+			}
 		}
 	}
+
+	private void OnTriggerStay(Collider other)
+	{
+		if (other.CompareTag("Water"))
+		{
+			onWater = true;
+			triggerTimeout = 0.1f;
+		}
+	}
+
+	//   private void OnTriggerExit(Collider other)
+	//   {
+	//	if (other.CompareTag("Water"))
+	//	{
+	//		onWater = false;
+	//	}
+	//}
 }
