@@ -7,6 +7,8 @@ public class GiantAttack : EnemyAttackSOBase
 {
     [Header("Wave prefabs")]
     [SerializeField] ParticleSystem areaAttackParticles;
+    [SerializeField] ParticleSystem FeedbackParticles;
+    [SerializeField] ParticleSystem groundHit;
     [SerializeField] GameObject expansiveWave;
 
     [Header("Wave Attack parameters")]
@@ -96,9 +98,11 @@ public class GiantAttack : EnemyAttackSOBase
 
     private void Attack()
     {
-        Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+     //   Instantiate(areaAttackParticles, enemy.transform.position, Quaternion.identity);
+       
         waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
-
+        Instantiate(FeedbackParticles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.5f, enemy.transform.position.z), Quaternion.identity);
+        Instantiate(groundHit, enemy.transform.position, groundHit.transform.rotation);
         Torus torus = waveAttack.GetComponent<Torus>();
         torus.finalDamage = torus.baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
         torus.SetPushForce(torus.pushForce);
