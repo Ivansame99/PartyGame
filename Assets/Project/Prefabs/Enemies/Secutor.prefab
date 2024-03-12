@@ -20358,16 +20358,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1808271e317de54d8d1c7e458f20ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPowerLevel: 25
+  initialPowerLevel: 25
+  minPowerLevel: 20
   maxPowerLevel: 300
-  powerScale: 7
+  powerScale: 10
   healthScale: 2
-  maxScaleMultiplier: 2
-  minScaleMultiplier: 1
+  maxScaleMultiplier: 7
+  minScaleMultiplier: 3
   powerLevel: {fileID: 9213241676706322452}
-  maxPowerParticles: {fileID: 0}
-  yOffset: 2
-  zOffset: 2
   smoke: {fileID: 6182903487699182042}
 --- !u!54 &8370849175989515781
 Rigidbody:

@@ -13,10 +13,13 @@ public class PowerController : MonoBehaviour
 	private float currentPowerLevel;
 
 	[SerializeField]
-	private float minPowerLevel = 10;
+	private float initialPowerLevel;
 
 	[SerializeField]
-	private float maxPowerLevel = 300; //Habra que hacer pruebas
+	private float minPowerLevel;
+
+	[SerializeField]
+	private float maxPowerLevel; //Habra que hacer pruebas
 
 	[SerializeField]
 	private float powerScale; //Reduce it to more damage
@@ -31,20 +34,13 @@ public class PowerController : MonoBehaviour
 	private float maxScaleMultiplier = 2;
 
 	[SerializeField]
-	private float minScaleMultiplier = 1;
+	private float minScaleMultiplier = 0.7f;
 
 	private Vector3 originalScale;
 
 	[SerializeField]
 	private GameObject powerLevel;
 
-	[SerializeField]
-	private GameObject maxPowerParticles;
-	[SerializeField]
-	private float yOffset = 2;
-	[SerializeField]
-	private float zOffset = 2;
-	private GameObject maxPowerParticlesInstance;
 	[SerializeField]
 	private GameObject smoke;
 	private TMP_Text powerLevelText;
@@ -73,7 +69,7 @@ public class PowerController : MonoBehaviour
 			if (playerUI != null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
 		}
 
-		InitializePowerLevel(minPowerLevel);
+		InitializePowerLevel(initialPowerLevel);
 	}
 
 	void Update()
@@ -90,16 +86,20 @@ public class PowerController : MonoBehaviour
 			smoke.SetActive(false);
 			maxPowerParticlesSpawned = false;
 		}
+	}
 
+	private void ChangeScale()
+	{
 		//Formula para obtener el escalado del personaje
-		float totalRange = maxPowerLevel - minPowerLevel;
+		/*float totalRange = maxPowerLevel - minPowerLevel;
 		float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
 
 		scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
 
-		this.gameObject.transform.localScale = originalScale * scaleMultiplayer;
-
-		//StartCoroutine(ChangeScale, this.gameObject.transform, originalScale);
+		this.gameObject.transform.localScale = originalScale * scaleMultiplayer;*/
+		float scale = MapValues(currentPowerLevel, minPowerLevel, maxPowerLevel, minScaleMultiplier, maxScaleMultiplier);
+		float scaleClamped = Mathf.Clamp(scale, minScaleMultiplier, maxScaleMultiplier);
+		this.gameObject.transform.localScale = new Vector3(scaleClamped, scaleClamped, scaleClamped);
 	}
 
 	private void SetupPowerLevelCanvas()
@@ -117,12 +117,14 @@ public class PowerController : MonoBehaviour
 		currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
 		ChangeUIText();
+		ChangeScale();
 	}
 
 	public void InitializePowerLevel(float value)
 	{
 		currentPowerLevel = value;
 		ChangeUIText();
+		ChangeScale();
 	}
 
 	public void OnDieSetCurrentPowerLevel()
@@ -131,6 +133,7 @@ public class PowerController : MonoBehaviour
 		if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
 		ChangeUIText();
+		ChangeScale();
 	}
 
 	private void ChangeUIText()
@@ -149,14 +152,8 @@ public class PowerController : MonoBehaviour
 		return currentPowerLevel / healthScale;
 	}
 
-	IEnumerator ChangeScale(Transform transform, Vector3 originalScale, Vector3 upScale, float duration)
+	private float MapValues(float s, float a1, float a2, float b1, float b2)
 	{
-		//Vector3 initialScale = transform.localScale;
-
-		for (float time = 0; time < duration * 2; time += Time.deltaTime)
-		{
-			transform.localScale = Vector3.Lerp(originalScale, upScale, time);
-			yield return null;
-		}
+		return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
 	}
 }

@@ -571,7 +571,7 @@ PrefabInstance:
     - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
       propertyPath: powerScale
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
@@ -586,7 +586,22 @@ PrefabInstance:
     - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
         type: 3}
       propertyPath: minPowerLevel
-      value: 25
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: initialPowerLevel
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: maxScaleMultiplier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8756962596703424101, guid: aef0b1bf09a88e74093f5ba9d483e2c8,
+        type: 3}
+      propertyPath: minScaleMultiplier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6089506664582424880, guid: aef0b1bf09a88e74093f5ba9d483e2c8, type: 3}
