@@ -19,7 +19,7 @@ public class EnemySlash : MonoBehaviour
 
     public void Slash()
     {
-        slashController.finalDamage = damage + _enemy.GetPowerDamage();
+        slashController.finalDamage = damage + _enemy.GetPowerDamageScale();
         slashController.pushForce = pushForce;
     }
 }

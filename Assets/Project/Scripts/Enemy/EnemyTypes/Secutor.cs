@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public class Secutor : Enemy
 {
-    [Header("Enemy States")]
+	//public GameObject stunParticles;
+
+	[Header("Enemy States")]
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
@@ -34,12 +36,13 @@ public class Secutor : Enemy
     void Start()
     {
         //Initialize Health
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
 
         //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
 

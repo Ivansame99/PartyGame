@@ -100,7 +100,7 @@ public class GiantAttack : EnemyAttackSOBase
         waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
 
         Torus torus = waveAttack.GetComponent<Torus>();
-        torus.finalDamage = torus.baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
+        torus.finalDamage = torus.baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
         torus.SetPushForce(torus.pushForce);
         torus.owner = enemy.gameObject;
 

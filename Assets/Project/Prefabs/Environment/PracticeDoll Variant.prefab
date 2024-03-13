@@ -30018,17 +30018,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.8736837
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.8736837
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.8736837
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 301a8d2edc810dd4495446e35655feef,
         type: 3}
@@ -30242,12 +30242,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1808271e317de54d8d1c7e458f20ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPowerLevel: 1
   minPowerLevel: 1
   maxPowerLevel: 300
   powerScale: 6
-  healthScale: 4
-  maxScaleMultiplier: 2
-  minScaleMultiplier: 1
+  healthScale: 2
+  maxScaleMultiplier: 6
+  minScaleMultiplier: 4
   powerLevel: {fileID: 7158468482713559330}
   maxPowerParticles: {fileID: 0}
   yOffset: 2

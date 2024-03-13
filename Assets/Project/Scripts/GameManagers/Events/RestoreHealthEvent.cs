@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class RestoreHealthEvent : MonoBehaviour
 {
-	public float recoverAmmount;
+	public float recoverAmmountMultiplier;
 }

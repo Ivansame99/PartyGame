@@ -30286,17 +30286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1808271e317de54d8d1c7e458f20ed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minPowerLevel: 10
+  initialPowerLevel: 20
+  minPowerLevel: 20
   maxPowerLevel: 300
-  powerScale: 6
-  healthScale: 3
-  maxScaleMultiplier: 1.6
-  minScaleMultiplier: 1
+  powerScale: 10
+  healthScale: 2
+  maxScaleMultiplier: 7
+  minScaleMultiplier: 4
   powerLevel: {fileID: 4149807985443987564}
-  maxPowerParticles: {fileID: 2649598335648864636, guid: 6697d7d2ba60109449aa9d4295ad3478,
-    type: 3}
-  yOffset: -0.05
-  zOffset: -0.2
   smoke: {fileID: 5305884722892060772}
 --- !u!114 &9002697528634392084
 MonoBehaviour:

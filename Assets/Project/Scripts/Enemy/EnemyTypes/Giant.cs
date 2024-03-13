@@ -29,12 +29,13 @@ public class Giant : Enemy
     void Start()
     {
         //Initialize Health
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
 
         //Get Components
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
 

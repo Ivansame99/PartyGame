@@ -9,9 +9,9 @@ public class SecutorStuned : EnemyStunedSOBase
     //COOLDOWN STUNED
     private float stunedTimer;
     [SerializeField] private float stunTime;
-    [SerializeField] private ParticleSystem starStun;
+    [SerializeField] private GameObject starStun;
     [SerializeField] private float stunYPosition;
-    private ParticleSystem starStunClone;
+    private GameObject starStunClone;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -22,7 +22,10 @@ public class SecutorStuned : EnemyStunedSOBase
         base.DoEnterLogic();
         enemy.animator.SetBool("Stun", true);
         stunedTimer = stunTime;
-        //starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), Quaternion.identity,this.enemy.transform);
+        starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), starStun.transform.rotation, this.enemy.transform);
+        //enemy.stunParticles.SetActive(true);
+
+		Debug.Log("Stuneado");
     }
 
     public override void DoExitLogic()
@@ -39,7 +42,7 @@ public class SecutorStuned : EnemyStunedSOBase
             if (stunedTimer <= 0)
             {
                 enemy.stateMachine.ChangeState(enemy.chaseState);
-                //Destroy(starStunClone);
+                Destroy(starStunClone);
             }
             else
             {

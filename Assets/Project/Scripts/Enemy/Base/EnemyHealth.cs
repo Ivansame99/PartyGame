@@ -27,6 +27,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private GameObject powerLevelGameObject;
     private float currentPower;
+    [SerializeField]
+    private float maxHealthBase;
 
     //Attackers info
     private GameObject lastAttacker;
@@ -40,15 +42,20 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject bloodParticles;
     [SerializeField] private GameObject crossRight,crossLeft;
     [SerializeField] private GameObject glow;
-    [SerializeField] private GameObject deathParticles;
-    //[SerializeField] private HelmetPrefab[] helmetPrefabs;
 
-    void Awake()
+	
+
+    private void Start()
     {
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, GetComponent<Camera>());
-    }
+        //Invoke(nameof(LoadMaxHealth), 0.1f);
+		if (enemy.powerController != null)
+		{
+			enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+		}
+	}
 
     void Update()
     {
@@ -69,6 +76,14 @@ public class EnemyHealth : MonoBehaviour
             pushBack = false;
         }
     }
+
+    private void LoadMaxHealth()
+    {
+		enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
+		
+	}
+
+
     public void ReceiveDamage(float damage)
     {
 		//Feedback
@@ -102,27 +117,41 @@ public class EnemyHealth : MonoBehaviour
         crossLeft.SetActive(true);
         glow.SetActive(true);
     }
+
 	void ShowDamageText(float damage)
 	{
 		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
 		text.text = ((int)damage).ToString();
 	}
 
-	void Die()
+    private void HandleCurrentPowerChanged(float newValue)
     {
-        currentPower = enemy.GetPowerDamage();
-        if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
+        enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
+        if(enemy.currentHealth == 0) enemy.currentHealth = enemy.maxHealth; //First time when enemy is instanciated
+	}
 
-        enemyDestroy();
+    void Die()
+    {
+		//currentPower = enemy.GetPowerDamage();
+		//if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
+		currentPower = enemy.GetPoweLevel() / 2;
+		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower);
+
+		enemyDestroy();
     }
-    public void enemyDestroy()
-    {
-        Instantiate(deathParticles, transform.position, Quaternion.identity);
 
-        enemy.isDead = true;
+	//private void HandleCurrentPowerChanged(float newValue)
+	//{
+	//	maxHealth = maxHealthBase + powerController.PowerHealth();
+	//}
+
+	public void enemyDestroy()
+    {
+		enemy.isDead = true;
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
     }
+
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);

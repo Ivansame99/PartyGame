@@ -7,5 +7,6 @@ public interface ICombat
 {
     PowerController powerController { get; set; }
 
-    public float GetPowerDamage();
+    public float GetPowerDamageScale();
+    public float GetPoweLevel();
 }

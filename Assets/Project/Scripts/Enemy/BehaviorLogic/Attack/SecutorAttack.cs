@@ -59,9 +59,8 @@ public class SecutorAttack : EnemyAttackSOBase
                 if (attackTimer <= 0)
                 {
                     isFinished = false;
-                    enemy.rb.velocity = Vector3.zero;
                     enemy.stateMachine.ChangeState(enemy.chaseState);
-                }
+				}
                 else
                 {
                     attackTimer -= Time.deltaTime;
@@ -103,5 +102,6 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         attackTimer = attackCooldown;
         isFinished = true;
-    }
+		enemy.rb.velocity = Vector3.zero;
+	}
 }

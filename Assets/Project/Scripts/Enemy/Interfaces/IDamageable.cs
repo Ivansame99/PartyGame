@@ -5,8 +5,8 @@ using UnityEngine;
 public interface IDamageable
 {
     void SetDamagedStatus(bool isDamaged);
-
-    public float maxHealth { get; set; }
+    EnemyHealth enemyHealthController { get; set; }
+	public float maxHealth { get; set; }
     float currentHealth { get; set; }
     public float inmuneTime { get; set; }
     bool isDead { get; set; }
