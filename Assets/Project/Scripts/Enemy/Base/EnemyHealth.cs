@@ -27,6 +27,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private GameObject powerLevelGameObject;
     private float currentPower;
+    [SerializeField]
+    private float maxHealthBase;
 
     //Attackers info
     private GameObject lastAttacker;
@@ -46,6 +48,11 @@ public class EnemyHealth : MonoBehaviour
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, GetComponent<Camera>());
+        enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
+        if (enemy.powerController != null)
+        {
+            enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+        }
     }
 
     void Update()
@@ -107,7 +114,11 @@ public class EnemyHealth : MonoBehaviour
 		text.text = ((int)damage).ToString();
 	}
 
-	void Die()
+    private void HandleCurrentPowerChanged(float newValue)
+    {
+        enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
+    }
+    void Die()
     {
 		//currentPower = enemy.GetPowerDamage();
 		//if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
