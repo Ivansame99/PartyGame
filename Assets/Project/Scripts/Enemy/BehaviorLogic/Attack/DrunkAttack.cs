@@ -9,6 +9,10 @@ public class DrunkAttack : EnemyAttackSOBase
     [SerializeField] private GameObject bottlePrefab;
     private GameObject bottle;
 
+    //COOLDOWN ATTACKS
+    private float attackTimer;
+    [SerializeField] private float attackCooldown;
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -20,9 +24,7 @@ public class DrunkAttack : EnemyAttackSOBase
         //Vector3 enemyPosition = new Vector3(enemy.transform.position.x,enemy.transform.position.y + 4f,enemy.transform.position.z);
 
         // Instancia la botella en la posición del enemigo
-        bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
-        bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
-        bottle.GetComponent<DrunkProjectile>()._FirePoint = enemy.transform;
+
     }
     public override void DoExitLogic()
     {
@@ -36,6 +38,18 @@ public class DrunkAttack : EnemyAttackSOBase
             if (!enemy.IsAggreed)
             {
                 enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+
+            if (attackTimer <= 0)
+            {
+                attackTimer = attackCooldown;
+                bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
+                bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
+                bottle.GetComponent<DrunkProjectile>()._FirePoint = enemy.transform;
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
             }
         }
         else

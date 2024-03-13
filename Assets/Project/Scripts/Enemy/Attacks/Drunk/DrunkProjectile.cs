@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,37 +14,63 @@ public class DrunkProjectile : MonoBehaviour
     private Camera _cam;
 
     public Transform finalPosition;
+
     private bool start = false;
 
+    [SerializeField] GameObject projectileFeedback;
+
+    Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
+
+    private GameObject projectile;
+    private Vector3 fPos;
     private void Start()
     {
         _cam = Camera.main;
+        fPos = new Vector3(finalPosition.position.x,finalPosition.position.y-1,finalPosition.position.z);
+
+        Ray ray = new Ray(_cam.transform.position, fPos - _cam.transform.position);
+        //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (!start)
+            {
+                Vector3 direction = hit.point - _FirePoint.position;
+                Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
+                Vector3 targetPos = new Vector3(groundDirection.magnitude, direction.y, 0);
+                float height = targetPos.y + targetPos.magnitude / 2f;
+                height = Mathf.Max(0.01f, height);
+                float angle;
+                float v0;
+                float time;
+
+                CalculatePathWithHeight(targetPos, height, out v0, out angle, out time);
+                DrawPath(groundDirection.normalized, v0, angle, time, _Step);
+                start = true;
+                if (start)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(Coroutine_Movement(groundDirection.normalized, v0, angle, time));
+                    projectile = Instantiate(projectileFeedback, fPos, rotation);
+                }
+            }
+            /*
+            Debug.Log(Vector3.Distance(finalPosition.position, transform.position));
+            if(Vector3.Distance(finalPosition.position,transform.position) < 0.5f)
+            {
+                Destroy(projectileFeedback);
+                Destroy(gameObject);
+            }
+            */
+        }
     }
     private void Update()
     {
-        Ray ray = new Ray(_cam.transform.position, finalPosition.position - _cam.transform.position);
-        //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit))
+
+        if (Vector3.Distance(finalPosition.position, transform.position) < 0.5f)
         {
-            Vector3 direction = hit.point - _FirePoint.position;
-            Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
-            Vector3 targetPos = new Vector3(groundDirection.magnitude, direction.y, 0);
-            float height = targetPos.y + targetPos.magnitude / 2f;
-            height = Mathf.Max(0.01f, height);
-            float angle;
-            float v0;
-            float time;
-            CalculatePathWithHeight(targetPos, height, out v0, out angle, out time);
-
-            DrawPath(groundDirection.normalized,v0, angle, time, _Step);
-
-            if (!start)
-            {
-                StopAllCoroutines();
-                StartCoroutine(Coroutine_Movement(groundDirection.normalized,v0, angle, time));
-                start = true;
-            }
+            Destroy(projectileFeedback);
+            Destroy(gameObject);
         }
     }
 
@@ -84,19 +111,6 @@ public class DrunkProjectile : MonoBehaviour
 
         angle = Mathf.Atan(b * time / xt);
         v0 = b / Mathf.Sin(angle);
-    }
-    private void CalculatePath(Vector3 targetPos,float angle, out float v0, out float time)
-    {
-        float xt = targetPos.x;
-        float yt = targetPos.y;
-        float g = -Physics.gravity.y;
-
-        float v1 = Mathf.Pow(xt, 2) * g;
-        float v2 = 2 * xt * Mathf.Tan(angle) * Mathf.Cos(angle);
-        float v3 = 2 * yt * Mathf.Pow(Mathf.Cos(angle), 2);
-        v0 = Mathf.Sqrt(v1 / (v2 - v3));
-
-        time = xt/ (v0 * Mathf.Cos(angle));
     }
     IEnumerator Coroutine_Movement(Vector3 direction, float v0, float angle,float time)
     {
