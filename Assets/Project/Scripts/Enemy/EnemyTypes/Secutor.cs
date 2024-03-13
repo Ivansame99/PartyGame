@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public class Secutor : Enemy
 {
-    [Header("Enemy States")]
+	//public GameObject stunParticles;
+
+	[Header("Enemy States")]
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;

@@ -5,10 +5,14 @@ using UnityEngine;
 public class ArrowController : MonoBehaviour
 {
     public float baseDamage;
-    public float finalDamage;
 
-    public float pushForce;
-    [SerializeField]
+    [HideInInspector]
+    public float finalDamage;
+	
+    [HideInInspector]
+	public float pushForce;
+
+    //[SerializeField]
     private float speed;
 
     private float gravityScale;

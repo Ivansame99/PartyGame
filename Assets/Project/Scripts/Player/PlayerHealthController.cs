@@ -189,7 +189,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	void RestoreHealth(float healthAmmount)
 	{
-		health += healthAmmount;
+		health *= healthAmmount;
 		if (health >= maxHealth) health = maxHealth;
 		ChangeUI();
 	}
@@ -315,7 +315,7 @@ public class PlayerHealthController : MonoBehaviour
 
 		if (other.CompareTag("Potion"))
 		{
-			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmount);
+			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmountMultiplier);
 			Destroy(other.gameObject);
 		}
 
