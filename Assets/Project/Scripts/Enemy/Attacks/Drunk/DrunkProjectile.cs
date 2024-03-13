@@ -35,7 +35,7 @@ public class DrunkProjectile : MonoBehaviour
         {
             if (!start)
             {
-                Vector3 direction = hit.point - _FirePoint.position;
+                Vector3 direction = fPos - _FirePoint.position;
                 Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
                 Vector3 targetPos = new Vector3(groundDirection.magnitude, direction.y, 0);
                 float height = targetPos.y + targetPos.magnitude / 2f;
@@ -67,9 +67,9 @@ public class DrunkProjectile : MonoBehaviour
     private void Update()
     {
 
-        if (Vector3.Distance(finalPosition.position, transform.position) < 0.5f)
+        if (Vector3.Distance(fPos, transform.position) < 3f)
         {
-            Destroy(projectileFeedback);
+            Destroy(projectile);
             Destroy(gameObject);
         }
     }
