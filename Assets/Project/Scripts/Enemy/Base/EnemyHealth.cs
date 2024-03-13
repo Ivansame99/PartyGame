@@ -43,7 +43,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject crossRight,crossLeft;
     [SerializeField] private GameObject glow;
 
-	void Awake()
+	
+
+    private void Start()
     {
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();

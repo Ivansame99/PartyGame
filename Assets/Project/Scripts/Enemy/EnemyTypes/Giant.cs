@@ -35,6 +35,7 @@ public class Giant : Enemy
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
 

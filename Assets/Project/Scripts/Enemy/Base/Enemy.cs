@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	//MOVEMENT INTERFACE
 	public NavMeshAgent agent { get; set; }
 	public Rigidbody rb { get; set; }
+	public EnemyHealth enemyHealthController { get; set; }
 	public bool state { get; set; }
 	public Transform playerPos { get; set; }
 	public Transform playerPos2 { get; set; }
@@ -112,10 +113,14 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	{
 		return powerController.GetCurrentPowerLevel();
 	}
+	public float GetPowerHealth()
+	{
+		return powerController.PowerHealth();
+	}
 
-	#endregion
+    #endregion
 
-	private void Update()
+    private void Update()
 	{
 		stateMachine.CurrentEnemyState.FrameUpdate();
 	}

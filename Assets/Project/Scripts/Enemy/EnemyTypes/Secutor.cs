@@ -40,6 +40,7 @@ public class Secutor : Enemy
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
 
