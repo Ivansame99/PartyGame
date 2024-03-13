@@ -59,21 +59,24 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 	public override void FixedUpdate()
 	{
-		Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
-
-		if (currentVelocity.magnitude > 10)
+		if (!player.groundCheck.DetectGround())
 		{
-			currentVelocity = currentVelocity.normalized * 10;
-		}
+			Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
 
-		Vector3 targetVelocity = player.direction * 10;
-		Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
-		player.rb.AddForce(force, ForceMode.Acceleration);
+			if (currentVelocity.magnitude > 10)
+			{
+				currentVelocity = currentVelocity.normalized * 10;
+			}
+
+			Vector3 targetVelocity = player.direction * 10;
+			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+			player.rb.AddForce(force, ForceMode.Acceleration);
+		}
 	}
 
 	public override void Update()
 	{
-		if (player.direction != Vector3.zero)
+		if (player.direction != Vector3.zero && !player.groundCheck.DetectGround())
 		{
 			float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
 			float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref turnSmooth, turnSmoothTime);

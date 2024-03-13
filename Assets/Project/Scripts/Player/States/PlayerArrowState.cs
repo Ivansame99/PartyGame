@@ -16,6 +16,15 @@ public class PlayerArrowState : PlayerState<PlayerController>
 	private float maxChargeBow;
 
 	[SerializeField]
+	private float arrowSpeedMultiplier;
+
+	[SerializeField]
+	private float arrowPushForceMultiplier;
+
+	[SerializeField]
+	private float arrowDistances;
+
+	[SerializeField]
 	private float bowCD;
 
 	[SerializeField]
@@ -115,8 +124,8 @@ public class PlayerArrowState : PlayerState<PlayerController>
 
 		GameObject arrow1 = Instantiate(arrowPrefab, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), player.transform.rotation);
 
-		Vector3 cone1 = rot.eulerAngles + new Vector3(0, 5, 0);
-		Vector3 cone2 = rot.eulerAngles + new Vector3(0, -5, 0);
+		Vector3 cone1 = rot.eulerAngles + new Vector3(0, arrowDistances, 0);
+		Vector3 cone2 = rot.eulerAngles + new Vector3(0, -arrowDistances, 0);
 
 		GameObject arrow2 = Instantiate(arrowPrefab, new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z), rot);
 		arrow2.transform.eulerAngles = cone1;
@@ -127,24 +136,24 @@ public class PlayerArrowState : PlayerState<PlayerController>
 		ArrowController ac = arrow1.GetComponent<ArrowController>();
 
 		ac.finalDamage = ac.baseDamage + player.powerController.PowerDamage();
-		ac.SetSpeed(currentChargingBow * 60);
-		ac.SetPushForce(currentChargingBow * 30);
+		ac.SetSpeed(currentChargingBow * arrowSpeedMultiplier);
+		ac.SetPushForce(currentChargingBow * arrowPushForceMultiplier);
 		ac.owner = player.gameObject;
 		ac.ownerPos = player.gameObject.transform.position;
 
 		ArrowController ac2 = arrow2.GetComponent<ArrowController>();
 
 		ac2.finalDamage = ac2.baseDamage + player.powerController.PowerDamage();
-		ac2.SetSpeed(currentChargingBow * 60);
-		ac2.SetPushForce(currentChargingBow * 30);
+		ac2.SetSpeed(currentChargingBow * arrowSpeedMultiplier);
+		ac2.SetPushForce(currentChargingBow * arrowPushForceMultiplier);
 		ac2.owner = player.gameObject;
 		ac2.ownerPos = player.gameObject.transform.position;
 
 		ArrowController ac3 = arrow3.GetComponent<ArrowController>();
 
 		ac3.finalDamage = ac3.baseDamage + player.powerController.PowerDamage();
-		ac3.SetSpeed(currentChargingBow * 60);
-		ac3.SetPushForce(currentChargingBow * 30);
+		ac3.SetSpeed(currentChargingBow * arrowSpeedMultiplier);
+		ac3.SetPushForce(currentChargingBow * arrowPushForceMultiplier);
 		ac3.owner = player.gameObject;
 		ac3.ownerPos = player.gameObject.transform.position;
 

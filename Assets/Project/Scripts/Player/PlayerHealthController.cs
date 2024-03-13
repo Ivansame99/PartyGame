@@ -202,7 +202,6 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
-				// Desplaza ligeramente la posición de origen del casco
 				float yOffset = 2f;
 				Vector3 playerUpPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
 				Vector3 spawnPosition = playerUpPos + Random.insideUnitSphere;
@@ -210,7 +209,6 @@ public class PlayerHealthController : MonoBehaviour
 				Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
 				if (helmetRigidbody != null)
 				{
-					// Genera una fuerza aleatoria en una dirección aleatoria
 					Vector3 randomDirection = Random.onUnitSphere;
 					float randomForce = Random.Range(minForce, maxForce);
 					helmetRigidbody.AddForce(randomDirection * randomForce, ForceMode.Impulse);
@@ -226,7 +224,7 @@ public class PlayerHealthController : MonoBehaviour
 
 		//Power control pass
 		currentPower = powerController.GetCurrentPowerLevel() / 2;
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
@@ -264,6 +262,7 @@ public class PlayerHealthController : MonoBehaviour
 		}
 
 		powerController.enabled = true;
+		powerController.ChangeScale();
 		playerController.enabled = true;
 		healthBar.gameObject.SetActive(true);
 		powerBar.gameObject.SetActive(true);

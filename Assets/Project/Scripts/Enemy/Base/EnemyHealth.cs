@@ -40,10 +40,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject bloodParticles;
     [SerializeField] private GameObject crossRight,crossLeft;
     [SerializeField] private GameObject glow;
-    [SerializeField] private GameObject deathParticles;
-    //[SerializeField] private HelmetPrefab[] helmetPrefabs;
 
-    void Awake()
+	void Awake()
     {
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -102,6 +100,7 @@ public class EnemyHealth : MonoBehaviour
         crossLeft.SetActive(true);
         glow.SetActive(true);
     }
+
 	void ShowDamageText(float damage)
 	{
 		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
@@ -110,19 +109,26 @@ public class EnemyHealth : MonoBehaviour
 
 	void Die()
     {
-        currentPower = enemy.GetPowerDamage();
-        if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo       
+		//currentPower = enemy.GetPowerDamage();
+		//if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
+		currentPower = enemy.GetPoweLevel() / 2;
+		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower);
 
-        enemyDestroy();
+		enemyDestroy();
     }
-    public void enemyDestroy()
-    {
-        Instantiate(deathParticles, transform.position, Quaternion.identity);
 
-        enemy.isDead = true;
+	//private void HandleCurrentPowerChanged(float newValue)
+	//{
+	//	maxHealth = maxHealthBase + powerController.PowerHealth();
+	//}
+
+	public void enemyDestroy()
+    {
+		enemy.isDead = true;
         Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
     }
+
     public void SetupHealthBar(Canvas canvas, Camera camera)
     {
         healthBar.transform.SetParent(canvas.transform);

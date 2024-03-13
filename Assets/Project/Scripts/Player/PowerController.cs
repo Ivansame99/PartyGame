@@ -88,7 +88,7 @@ public class PowerController : MonoBehaviour
 		}
 	}
 
-	private void ChangeScale()
+	public void ChangeScale()
 	{
 		//Formula para obtener el escalado del personaje
 		/*float totalRange = maxPowerLevel - minPowerLevel;
@@ -112,7 +112,7 @@ public class PowerController : MonoBehaviour
 		return currentPowerLevel;
 	}
 
-	public void SetCurrentPowerLevel(float value)
+	public void AddPowerLevel(float value)
 	{
 		currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);

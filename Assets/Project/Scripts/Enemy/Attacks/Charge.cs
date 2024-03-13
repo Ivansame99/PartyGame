@@ -19,7 +19,7 @@ public class Charge : MonoBehaviour
     {
         enemy = GetComponentInParent<Enemy>();
 
-        finalDamage = baseDamage + enemy.GetPowerDamage(); //cambiar escalado de poder
+        finalDamage = baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
         SetPushForce(pushForce);
         owner = enemy.gameObject;
     }

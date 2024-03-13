@@ -187,7 +187,7 @@ public class EnemyHealthController : MonoBehaviour
         Destroy(this.gameObject, destroyDelay);
         Destroy(healthBar.gameObject, destroyDelay);*/
         currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
-        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
+        if(lastAttacker!=null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
         dead = true;
         Invoke("enemyDestroy", 2.0f);
     }
