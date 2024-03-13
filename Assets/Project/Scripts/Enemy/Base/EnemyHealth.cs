@@ -50,12 +50,12 @@ public class EnemyHealth : MonoBehaviour
         enemy = GetComponent<Enemy>();
         healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
         SetupHealthBar(healBarCanvas, GetComponent<Camera>());
-        enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
-        if (enemy.powerController != null)
-        {
-            enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
-        }
-    }
+        //Invoke(nameof(LoadMaxHealth), 0.1f);
+		if (enemy.powerController != null)
+		{
+			enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+		}
+	}
 
     void Update()
     {
@@ -76,6 +76,14 @@ public class EnemyHealth : MonoBehaviour
             pushBack = false;
         }
     }
+
+    private void LoadMaxHealth()
+    {
+		enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
+		
+	}
+
+
     public void ReceiveDamage(float damage)
     {
 		//Feedback
@@ -119,7 +127,9 @@ public class EnemyHealth : MonoBehaviour
     private void HandleCurrentPowerChanged(float newValue)
     {
         enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
-    }
+        if(enemy.currentHealth == 0) enemy.currentHealth = enemy.maxHealth; //First time when enemy is instanciated
+	}
+
     void Die()
     {
 		//currentPower = enemy.GetPowerDamage();

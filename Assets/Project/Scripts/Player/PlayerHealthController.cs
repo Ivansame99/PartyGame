@@ -108,8 +108,7 @@ public class PlayerHealthController : MonoBehaviour
 			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
 		}
 
-		maxHealth = maxHealthBase + powerController.PowerHealth();
-
+		maxHealth = maxHealthBase + powerController.PowerHealth();;
 		if (powerController != null)
 		{
 			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;

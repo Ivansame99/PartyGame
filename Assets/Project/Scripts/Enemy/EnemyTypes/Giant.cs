@@ -29,7 +29,7 @@ public class Giant : Enemy
     void Start()
     {
         //Initialize Health
-        currentHealth = maxHealth;
+        //currentHealth = maxHealth;
 
         //Get Components
         agent = GetComponent<NavMeshAgent>();

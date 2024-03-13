@@ -6,6 +6,7 @@ using static UnityEngine.UI.Image;
 using TMPro;
 using Unity.VisualScripting;
 using System;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PowerController : MonoBehaviour
 {
@@ -55,6 +56,9 @@ public class PowerController : MonoBehaviour
 
 	public Action<float> OnCurrentPowerChanged;
 
+	[SerializeField]
+	private bool instanciatedEnemy = false;
+
 	void Start()
 	{
 		powerLevelText = powerLevel.GetComponent<TMP_Text>();
@@ -69,7 +73,7 @@ public class PowerController : MonoBehaviour
 			if (playerUI != null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
 		}
 
-		InitializePowerLevel(initialPowerLevel);
+		if(!instanciatedEnemy) InitializePowerLevel(initialPowerLevel);
 	}
 
 	void Update()
@@ -125,6 +129,7 @@ public class PowerController : MonoBehaviour
 		currentPowerLevel = value;
 		ChangeUIText();
 		ChangeScale();
+		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
 	}
 
 	public void OnDieSetCurrentPowerLevel()
@@ -149,6 +154,7 @@ public class PowerController : MonoBehaviour
 
 	public float PowerHealth()
 	{
+		//Debug.Log(currentPowerLevel);
 		return currentPowerLevel / healthScale;
 	}
 
