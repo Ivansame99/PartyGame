@@ -8,18 +8,21 @@ public class Drunk : Enemy
     [Header("Enemy States")]
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
+    [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
 
     void Awake()
     {
         //Initialize SO
         enemyChaseBaseInstance = Instantiate(enemyChaseBase);
         enemyAttackBaseInstance = Instantiate(enemyAttackBase);
+        enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
 
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
         chaseState = new EnemyChaseState(this, stateMachine);
         attackState = new EnemyAttackState(this, stateMachine);
+        specialAttackState = new EnemySpecialAttackState(this, stateMachine);
     }
 
     void Start()
@@ -36,6 +39,7 @@ public class Drunk : Enemy
         //Initialize SO
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
+        enemySpecialAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
