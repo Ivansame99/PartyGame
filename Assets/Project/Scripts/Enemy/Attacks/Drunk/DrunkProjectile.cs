@@ -6,27 +6,37 @@ using UnityEngine.UIElements;
 
 public class DrunkProjectile : MonoBehaviour
 {
-    //public Transform finalPos;
-    [SerializeField] LineRenderer _Line;
-    [SerializeField] float _Step;
-    public Transform _FirePoint;
+    //Linea de trayectoria
+    [Header("Line Renderer")]
+    [SerializeField] LineRenderer line;
 
+    //Variables para el cálculo de la trayectoria
+    private float step;
     private Camera _cam;
 
-    public Transform finalPosition;
+    //Posiciones
+    [HideInInspector] public Transform firePoint;
+    [HideInInspector] public Transform finalPosition;
 
+    //Prefabs
+    [Header("Prefabs")]
+    [SerializeField] GameObject projectileFeedback;
+    [SerializeField] GameObject explosionParticles;
+
+    //Prefabs Clones
+    private GameObject projectile;
+
+    //Variables de legibilidad
+    private Vector3 fPos;
+    Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
     private bool start = false;
 
-    [SerializeField] GameObject projectileFeedback;
 
-    Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
-
-    private GameObject projectile;
-    private Vector3 fPos;
     private void Start()
     {
         _cam = Camera.main;
-        fPos = new Vector3(finalPosition.position.x,finalPosition.position.y-1,finalPosition.position.z);
+        fPos = new Vector3(finalPosition.position.x,finalPosition.position.y-0.9f,finalPosition.position.z);
+        step = 0.1f;
 
         Ray ray = new Ray(_cam.transform.position, fPos - _cam.transform.position);
         //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
@@ -35,7 +45,7 @@ public class DrunkProjectile : MonoBehaviour
         {
             if (!start)
             {
-                Vector3 direction = fPos - _FirePoint.position;
+                Vector3 direction = fPos - firePoint.position;
                 Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
                 Vector3 targetPos = new Vector3(groundDirection.magnitude, direction.y, 0);
                 float height = targetPos.y + targetPos.magnitude / 2f;
@@ -45,7 +55,7 @@ public class DrunkProjectile : MonoBehaviour
                 float time;
 
                 CalculatePathWithHeight(targetPos, height, out v0, out angle, out time);
-                DrawPath(groundDirection.normalized, v0, angle, time, _Step);
+                DrawPath(groundDirection.normalized, v0, angle, time, step);
                 start = true;
                 if (start)
                 {
@@ -54,14 +64,6 @@ public class DrunkProjectile : MonoBehaviour
                     projectile = Instantiate(projectileFeedback, fPos, rotation);
                 }
             }
-            /*
-            Debug.Log(Vector3.Distance(finalPosition.position, transform.position));
-            if(Vector3.Distance(finalPosition.position,transform.position) < 0.5f)
-            {
-                Destroy(projectileFeedback);
-                Destroy(gameObject);
-            }
-            */
         }
     }
     private void Update()
@@ -70,6 +72,7 @@ public class DrunkProjectile : MonoBehaviour
         if (Vector3.Distance(fPos, transform.position) < 3f)
         {
             Destroy(projectile);
+            Instantiate(explosionParticles, fPos, rotation);
             Destroy(gameObject);
         }
     }
@@ -77,18 +80,18 @@ public class DrunkProjectile : MonoBehaviour
     private void DrawPath(Vector3 direction, float v0, float angle, float time, float step)
     {
         step = Mathf.Max(0.01f, step);
-        _Line.positionCount = (int)(time / step) + 2;
+        line.positionCount = (int)(time / step) + 2;
         int count = 0;
         for (float i = 0; i < time; i += step)
         {
             float x = v0 * i * Mathf.Cos(angle);
             float y = v0 * i * Mathf.Sin(angle) - 0.5f * -Physics.gravity.y * Mathf.Pow(i,2);
-            _Line.SetPosition(count, _FirePoint.position + direction*x + Vector3.up*y);
+            line.SetPosition(count, firePoint.position + direction*x + Vector3.up*y);
             count++;
         }
         float xfinal = v0 * time * Mathf.Cos(angle);
         float yfinal = v0 * time * Mathf.Sin(angle) - 0.5f * -Physics.gravity.y * Mathf.Pow(time, 2);
-        _Line.SetPosition(count, _FirePoint.position + direction * xfinal + Vector3.up * yfinal);
+        line.SetPosition(count, firePoint.position + direction * xfinal + Vector3.up * yfinal);
     }
 
     private float QuadraticEquation(float a, float b, float c, int sign)
@@ -120,7 +123,7 @@ public class DrunkProjectile : MonoBehaviour
             t += Time.deltaTime;
             float x = v0 * Mathf.Cos(angle) * t;
             float y = v0 * Mathf.Sin(angle) * t - 0.5f * 9.8f * t * t;
-            transform.position = _FirePoint.position + direction * x + Vector3.up * y;
+            transform.position = firePoint.position + direction * x + Vector3.up * y;
             yield return null;
         }
     }

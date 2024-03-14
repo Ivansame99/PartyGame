@@ -45,7 +45,7 @@ public class DrunkAttack : EnemyAttackSOBase
                 attackTimer = attackCooldown;
                 bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
                 bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
-                bottle.GetComponent<DrunkProjectile>()._FirePoint = enemy.transform;
+                bottle.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
             }
             else
             {
