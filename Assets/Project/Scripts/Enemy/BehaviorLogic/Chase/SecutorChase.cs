@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 [CreateAssetMenu(fileName = "Secutor Chase", menuName = "Enemy Logic/Secutor/Chase Logic/Chase To Player")]
 public class SecutorChase : EnemyChaseSOBase
