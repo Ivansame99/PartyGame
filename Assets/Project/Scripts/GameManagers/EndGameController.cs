@@ -90,11 +90,6 @@ public class EndGameController : MonoBehaviour
 		}
 	}
 
-	void EndMatch()
-	{
-		SceneManager.LoadScene("Win");
-	}
-
 	void GetPlayers()
     {
         players = GameObject.FindGameObjectsWithTag("Player");

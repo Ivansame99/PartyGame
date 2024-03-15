@@ -47,7 +47,18 @@ public class RoundController : MonoBehaviour
 
 	private int playersIndex;
 
-	// Start is called before the first frame update
+	[SerializeField]
+	private GameObject rainPrefab;
+
+	[SerializeField]
+	private GameObject godRay;
+
+	[SerializeField]
+	private GameObject godRay2;
+
+	private GameObject[] players;
+	private PlayerHealthController[] playersHealth;
+
 	void Start()
 	{
 		roundUIAnim = roundsUI.GetComponent<Animator>();
@@ -58,9 +69,9 @@ public class RoundController : MonoBehaviour
 
 		if (!debug) StartCoroutine(IStartNextRound());
 		SelectCurrentRounds();
+		GetPlayers();
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (!debug)
@@ -72,6 +83,10 @@ public class RoundController : MonoBehaviour
 				{
 					roundsUIText.text = "Final Round";
 					roundUIAnim.SetTrigger("ChangeRound");
+					Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
+					LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
+					godRay.SetActive(false);
+					godRay2.SetActive(false);
 				}
 				finalRound = true;
 			}
@@ -112,6 +127,11 @@ public class RoundController : MonoBehaviour
 		//If all enemies dead
 		currentEnemies.Clear();
 		playersRespawn.RespawnDeadPlayers();
+		for(int i= 0;i< playersHealth.Length; i++)
+		{
+			playersHealth[i].RestoreHealthAfterRound();
+		}
+	
 
 		//Next round
 		if (roundIndex < currentRound.rounds.Length) StartCoroutine(IStartNextRound());
@@ -160,5 +180,16 @@ public class RoundController : MonoBehaviour
 		if (number >= 4) return "IV" + ToRoman(number - 4);
 		if (number >= 1) return "I" + ToRoman(number - 1);
 		return "Impossible state reached";
+	}
+
+	void GetPlayers()
+	{
+		players = GameObject.FindGameObjectsWithTag("Player");
+		playersHealth = new PlayerHealthController[players.Length];
+
+		for(int i=0;i< players.Length; i++)
+		{
+			playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
+		}
 	}
 }

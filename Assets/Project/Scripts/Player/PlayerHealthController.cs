@@ -189,7 +189,16 @@ public class PlayerHealthController : MonoBehaviour
 
 	void RestoreHealth(float healthAmmount)
 	{
-		health *= healthAmmount;
+		float totalHealth = maxHealth * healthAmmount;
+		health += totalHealth;
+		if (health >= maxHealth) health = maxHealth;
+		ChangeUI();
+	}
+
+	public void RestoreHealthAfterRound()
+	{
+		float totalHealth = maxHealth * 0.5f;
+		health += totalHealth;
 		if (health >= maxHealth) health = maxHealth;
 		ChangeUI();
 	}
