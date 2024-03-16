@@ -10,10 +10,6 @@ public class SecutorDamage : EnemyDamageSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
- 
-        }
     }
     public void ChangeState()
     {

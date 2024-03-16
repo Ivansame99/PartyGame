@@ -9,7 +9,7 @@ public class SecutorAttack : EnemyAttackSOBase
     [SerializeField] GameObject feedbackAttack;
     private GameObject feedback;
 
-    private bool isAttacking,isFinished;
+    private bool isAttacking, isFinished;
 
     //COOLDOWN ATTACKS
     private float attackTimer;
@@ -23,9 +23,6 @@ public class SecutorAttack : EnemyAttackSOBase
             case Enemy.AnimationTriggerType.EnemyAttack:
                 Attack();
                 break;
-            case Enemy.AnimationTriggerType.EnemyAttackFinished:
-                AttackFinished();
-                break;
         }
     }
     public override void DoEnterLogic()
@@ -34,7 +31,7 @@ public class SecutorAttack : EnemyAttackSOBase
         isFinished = false;
         //enemy.animator.SetInteger("AnimationType", 1);
         enemy.animator.SetTrigger("Attack");
-        feedback = Instantiate(feedbackAttack,enemy.transform);
+        feedback = Instantiate(feedbackAttack, enemy.transform);
     }
     public override void DoExitLogic()
     {
@@ -45,14 +42,18 @@ public class SecutorAttack : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
 
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
-        if(!enemy.isDead)
+        if (!enemy.isDead)
         {
-            if(enemy.IsDamaged)
+            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                if(feedback != null) Destroy(feedback);
+                AttackFinished();
+            }
+            if (enemy.IsDamaged)
+            {
+                if (feedback != null) Destroy(feedback);
                 isFinished = false;
                 enemy.stateMachine.ChangeState(enemy.damageState);
-                
+
             }
             if (isFinished)
             {
@@ -60,7 +61,7 @@ public class SecutorAttack : EnemyAttackSOBase
                 {
                     isFinished = false;
                     enemy.stateMachine.ChangeState(enemy.chaseState);
-				}
+                }
                 else
                 {
                     attackTimer -= Time.deltaTime;
@@ -96,12 +97,12 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         Destroy(feedback);
         isAttacking = true;
-        
+
     }
     private void AttackFinished()
     {
         attackTimer = attackCooldown;
         isFinished = true;
-		enemy.rb.velocity = Vector3.zero;
-	}
+        enemy.rb.velocity = Vector3.zero;
+    }
 }
