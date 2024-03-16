@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3970693576373775690}
   - component: {fileID: 617432790068638880}
   - component: {fileID: 7176718959872030509}
+  - component: {fileID: 7196490787158382667}
   m_Layer: 0
   m_Name: Chalice
   m_TagString: Untagged
@@ -103,6 +104,27 @@ MonoBehaviour:
   projectileFeedback: {fileID: 5540612250851445786, guid: 82584b1840da84248a5ce4747a5f1b5a,
     type: 3}
   explosionParticles: {fileID: 100000, guid: f9d6185463566cc488a0632e674a481b, type: 3}
+--- !u!135 &7196490787158382667
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917567757001349630}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.05
+  m_Center: {x: 0.000032670097, y: -6.9849204e-10, z: 0.0036903366}
 --- !u!1 &8695181001076745622
 GameObject:
   m_ObjectHideFlags: 0
