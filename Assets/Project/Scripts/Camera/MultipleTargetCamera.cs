@@ -13,23 +13,15 @@ public class MultipleTargetCamera : MonoBehaviour
 	[SerializeField] private float maxZoom = 10f;
 	[SerializeField] private float zoomLimiter = 50f;
 
-    [SerializeField]
-    private Camera mainCamera;
-
 	[SerializeField]
 	private Camera guiCamera;
 
+	private Camera mainCamera;
 	private Vector3 velocity;
 
-    private void Start()
+    private void Awake()
     {
-        //targets.Clear();
-
-        //GameObject[] playersArray = GameObject.FindGameObjectsWithTag("Player");
-        //foreach (GameObject player in playersArray)
-        //{
-            //targets.Add(player.transform);
-        //}
+        mainCamera = Camera.main;    
     }
 
     private void LateUpdate()
@@ -47,7 +39,6 @@ public class MultipleTargetCamera : MonoBehaviour
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
 		mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
 		guiCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
-
 	}
 
     private void Move()
@@ -97,5 +88,13 @@ public class MultipleTargetCamera : MonoBehaviour
     public void AddPlayer(Transform player)
     {
 		targets.Add(player);
+	}
+
+	public void RemovePlayer(Transform player)
+	{
+		for (int i = 0; i < targets.Count; i++)
+		{
+			if (targets[i] == player) targets.Remove(targets[i]);
+		}
 	}
 }

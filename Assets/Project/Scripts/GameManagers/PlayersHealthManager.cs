@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlayersHealthManager : MonoBehaviour
 {
+	#region Inspector Variables
 	[SerializeField]
 	private Transform[] playersSpawns;
+	#endregion
 
-	[SerializeField]
-	private bool onHub;
-
+	#region Variables
 	private GameManager gameManager;
 	private MultipleTargetCamera mtp;
 
@@ -19,7 +19,10 @@ public class PlayersHealthManager : MonoBehaviour
 	private int playersCount;
 
 	private Camera cameraMain;
+	private bool onHub;
+	#endregion
 
+	#region Life Cycle
 	private void Awake()
 	{
 		cameraMain = Camera.main;
@@ -29,8 +32,10 @@ public class PlayersHealthManager : MonoBehaviour
 	{
 		gameManager = GameManager.Instance;
 		mtp = gameManager.multipleTargetCamera;
+		onHub = gameManager.gmSceneManager.isHubScene();
 		if (!onHub) GetPlayersHealths();
 	}
+	#endregion
 
 	public void SpawnPlayer(GameObject player)
 	{
@@ -64,11 +69,7 @@ public class PlayersHealthManager : MonoBehaviour
 
 		StartCoroutine(SlowMotion(player));
 
-		//Deactivate the camera to follow the player
-		for (int i = 0; i < mtp.targets.Count; i++)
-		{
-			if (mtp.targets[i].name == player.name) mtp.targets.Remove(mtp.targets[i]);
-		}
+		mtp.RemovePlayer(player);
 
 		player.transform.position = new Vector3(100, 10, 0);
 	}

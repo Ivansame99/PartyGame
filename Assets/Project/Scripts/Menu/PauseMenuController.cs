@@ -94,6 +94,7 @@ public class PauseMenuController : MonoBehaviour
 	{
 		eventSystem.enabled = false;
 		StartCoroutine(CloseTranition());
+		//GameManager.Instance.gmSceneManager.ChangeSceneToMenu(true);
 	}
 
 	private IEnumerator CloseTranition()

@@ -9,6 +9,9 @@ public class EndGameController : MonoBehaviour
 	#region Inspector Variables
 	[Header("Win Properties")]
 	[SerializeField]
+	private float winAnimDuration=15f;
+
+	[SerializeField]
 	private GameObject fireworkPrefab;
 
 	[SerializeField]
@@ -31,14 +34,6 @@ public class EndGameController : MonoBehaviour
 
 	[SerializeField]
 	private IdleAnimation publicAnim;
-
-	[Header("Circle Transition")]
-	[SerializeField]
-	private Material transitionMaterial;
-	[SerializeField]
-	private float transitionTime = 2f;
-	[SerializeField]
-	private string propertyName = "_Progress";
 	#endregion
 
 	#region Variables
@@ -85,13 +80,13 @@ public class EndGameController : MonoBehaviour
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
-			StartCoroutine(CloseTranitionToWin());
+			gameManager.gmSceneManager.ChangeSceneToMenu(true, winAnimDuration);
 		}
 
 		//Check lose
 		if (playersDead >= playersCount)
         {
-			StartCoroutine(CloseTranitionToGameOver());
+			gameManager.gmSceneManager.ChangeSceneToGameOver(true);
 		}
 	}
 
@@ -150,33 +145,6 @@ public class EndGameController : MonoBehaviour
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
 			}
 		}
-	}
-
-	private IEnumerator CloseTranitionToWin()
-	{
-		yield return new WaitForSeconds(15f);
-		float currentTime = transitionTime;
-		while (currentTime > 0)
-		{
-			currentTime -= Time.deltaTime;
-			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
-			yield return null;
-		}
-
-		SceneManager.LoadScene("Menu");
-	}
-
-	private IEnumerator CloseTranitionToGameOver()
-	{
-		float currentTime = transitionTime;
-		while (currentTime > 0)
-		{
-			currentTime -= Time.deltaTime;
-			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
-			yield return null;
-		}
-
-		SceneManager.LoadScene("GameOver");
 	}
 	#endregion
 }
