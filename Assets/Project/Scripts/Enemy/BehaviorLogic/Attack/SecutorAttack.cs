@@ -77,7 +77,6 @@ public class SecutorAttack : EnemyAttackSOBase
         {
             enemy.rb.AddForce(enemy.transform.forward * attackSpeed, ForceMode.Impulse);
             isAttacking = false;
-            Debug.Log("IsAttack");
         }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
