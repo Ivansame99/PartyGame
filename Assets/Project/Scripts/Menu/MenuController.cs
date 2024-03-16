@@ -31,28 +31,35 @@ public class MenuController : MonoBehaviour
 
 	private GameObject lastButtonSelected;
 
+	bool start;
 	private void Awake()
 	{
 		eventSystem = EventSystem.current;
 	}
 
-	public void Start()
+	private IEnumerator Start()
 	{
+		yield return new WaitForSeconds(0.2f);
 		transitionMaterial.SetFloat(propertyName, 1);
 		Destroy(GameObject.Find("PlayerMultiManager"));
+		cursor.transform.position = defaultButton.GetComponent<ButtonCursorPos>().cursorPos.position;
+		start = true;
 	}
 
 	private void Update()
 	{
 		if (settingsController.setingsOn) return;
 
-		CheckIfAnyButtonSelected();
-
-		if (eventSystem.currentSelectedGameObject != lastButtonSelected)
+		if (start)
 		{
-			lastButtonSelected = eventSystem.currentSelectedGameObject;
+			CheckIfAnyButtonSelected();
 
-			cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
+			if (eventSystem.currentSelectedGameObject != lastButtonSelected)
+			{
+				lastButtonSelected = eventSystem.currentSelectedGameObject;
+
+				cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
+			}
 		}
 	}
 
