@@ -6,8 +6,7 @@ using UnityEngine;
 public class SecutorAttack : EnemyAttackSOBase
 {
     [SerializeField] private float attackSpeed;
-    [SerializeField] GameObject feedbackAttack;
-    private GameObject feedback;
+
 
     private bool isAttacking, isFinished;
 
@@ -18,24 +17,18 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
-            case Enemy.AnimationTriggerType.EnemyAttack:
-                Attack();
-                break;
-        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        isFinished = false;
-        //enemy.animator.SetInteger("AnimationType", 1);
         enemy.animator.SetTrigger("Attack");
-        feedback = Instantiate(feedbackAttack, enemy.transform);
+        isAttacking = true;
+        attackTimer = attackCooldown;
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        
     }
     public override void DoFrameUpdateLogic()
     {
@@ -46,32 +39,34 @@ public class SecutorAttack : EnemyAttackSOBase
         {
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                AttackFinished();
+                //enemy.stateMachine.ChangeState(enemy.chaseState);
+                enemy.rb.velocity = Vector3.zero;
+            }
+            if(!enemy.IsAggreed)
+            {
+                //enemy.stateMachine.ChangeState(enemy.chaseState);
             }
             if (enemy.IsDamaged)
             {
-                if (feedback != null) Destroy(feedback);
-                isFinished = false;
                 enemy.stateMachine.ChangeState(enemy.damageState);
-
             }
-            if (isFinished)
+            
+            if (!isAttacking)
             {
                 if (attackTimer <= 0)
                 {
-                    isFinished = false;
                     enemy.stateMachine.ChangeState(enemy.chaseState);
+
                 }
                 else
                 {
                     attackTimer -= Time.deltaTime;
+
                 }
             }
         }
-        else
-        {
-            enemy.stateMachine.ChangeState(enemy.deathState);
-        }
+        else enemy.stateMachine.ChangeState(enemy.deathState);
+        
 
     }
     public override void DoPhysicsLogic()
@@ -82,6 +77,7 @@ public class SecutorAttack : EnemyAttackSOBase
         {
             enemy.rb.AddForce(enemy.transform.forward * attackSpeed, ForceMode.Impulse);
             isAttacking = false;
+            Debug.Log("IsAttack");
         }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
@@ -91,18 +87,5 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void ResetValues()
     {
         base.ResetValues();
-    }
-
-    private void Attack()
-    {
-        Destroy(feedback);
-        isAttacking = true;
-
-    }
-    private void AttackFinished()
-    {
-        attackTimer = attackCooldown;
-        isFinished = true;
-        enemy.rb.velocity = Vector3.zero;
     }
 }

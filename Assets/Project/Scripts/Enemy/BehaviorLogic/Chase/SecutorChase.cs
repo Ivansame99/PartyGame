@@ -59,7 +59,7 @@ public class SecutorChase : EnemyChaseSOBase
 
         if (enemy.IsAggreed)
         {
-            enemy.stateMachine.ChangeState(enemy.attackState);
+            enemy.stateMachine.ChangeState(enemy.preAttackState);
         }
     }
     public override void DoExitLogic()

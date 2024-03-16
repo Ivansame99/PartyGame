@@ -127,7 +127,6 @@ public class RoundController : MonoBehaviour
 	private void SelectCurrentRounds()
 	{
 		int numplayers = GetComponent<SelectPlayerController>().numPlayers;
-		Debug.Log(numplayers);
 		for (int i = 0; i < roundsSO.Length; i++)
 		{
 			if ((int)roundsSO[i].players == numplayers)
