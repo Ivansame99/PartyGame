@@ -1,49 +1,51 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayersRespawn : MonoBehaviour
+public class PlayersHealthManager : MonoBehaviour
 {
 	[SerializeField]
-	private Transform[] spawns;
-
-	private RoundController roundController;
-	private EndGameController endGameController;
-
-	private PlayerHealthController[] playerHealth;
-	private GameObject[] players;
-	private int playersCount;
-
-	private Camera cameraMain;
-	private MultipleTargetCamera mtp;
+	private Transform[] playersSpawns;
 
 	[SerializeField]
 	private bool onHub;
 
-	// Start is called before the first frame update
+	private GameManager gameManager;
+	private MultipleTargetCamera mtp;
+
+	private PlayerHealthController[] playersHealth;
+	private GameObject[] players;
+	private int playersCount;
+
+	private Camera cameraMain;
+
+	private void Awake()
+	{
+		cameraMain = Camera.main;
+	}
+
 	void Start()
 	{
-		roundController = GetComponent<RoundController>();
-		endGameController = GetComponent<EndGameController>();
-		cameraMain = Camera.main;
-		mtp = this.GetComponent<MultipleTargetCamera>();
-		Invoke("GetPlayers", 1f);
+		gameManager = GameManager.Instance;
+		mtp = gameManager.multipleTargetCamera;
+		if (!onHub) GetPlayersHealths();
 	}
 
 	public void SpawnPlayer(GameObject player)
 	{
 		if (onHub)
 		{
-			int randomSpawn = Random.Range(0, spawns.Length);
-			player.transform.position = spawns[randomSpawn].position;
+			int randomSpawn = Random.Range(0, playersSpawns.Length);
+			player.transform.position = playersSpawns[randomSpawn].position;
 			player.GetComponent<PlayerHealthController>().EnablePlayer();
 			return;
 		}
 
-		if (!roundController.finalRound)
+		if (!gameManager.roundController.isFinalRound())
 		{
-			int randomSpawn = Random.Range(0, spawns.Length);
-			player.transform.position = spawns[randomSpawn].position;
+			int randomSpawn = Random.Range(0, playersSpawns.Length);
+			player.transform.position = playersSpawns[randomSpawn].position;
 			player.GetComponent<PlayerHealthController>().EnablePlayer();
 			mtp.AddPlayer(player.transform);
 		}
@@ -57,8 +59,8 @@ public class PlayersRespawn : MonoBehaviour
 			SpawnPlayer(player.gameObject);
 			return;
 		}
-		
-		endGameController.PlayerDead();
+
+		gameManager.endGameController.PlayerDead();
 
 		StartCoroutine(SlowMotion(player));
 
@@ -71,33 +73,37 @@ public class PlayersRespawn : MonoBehaviour
 		player.transform.position = new Vector3(100, 10, 0);
 	}
 
-	void GetPlayers()
-	{
-		players = GameObject.FindGameObjectsWithTag("Player");
-		playersCount = players.Length;
-		playerHealth = new PlayerHealthController[playersCount];
-
-		for (int i = 0; i < playersCount; i++)
-		{
-			if (players[i].GetComponent<PlayerHealthController>() != null)
-			{
-				playerHealth[i] = players[i].GetComponent<PlayerHealthController>();
-			}
-		}
-	}
-
 	public void RespawnDeadPlayers()
 	{
 		for (int i = 0; i < playersCount; i++)
 		{
-			if (playerHealth[i].dead)
+			if (playersHealth[i].dead)
 			{
 				SpawnPlayer(players[i]);
 			}
 		}
-		endGameController.ResetPlayersDead();
+		gameManager.endGameController.ResetPlayersDead();
 	}
 
+	void GetPlayersHealths()
+	{
+		players = gameManager.selectPlayerController.GetPlayers();
+		playersCount = players.Length;
+		playersHealth = new PlayerHealthController[playersCount];
+		for (int i = 0; i < players.Length; i++)
+		{
+			playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
+		}
+	}
+
+	#region Getters
+	public Transform[] GetPlayersSpawns()
+	{
+		return playersSpawns;
+	}
+	#endregion
+
+	#region Coroutines
 	IEnumerator SlowMotion(Transform player)
 	{
 		float slowdownFactor = 0.2f;
@@ -119,5 +125,5 @@ public class PlayersRespawn : MonoBehaviour
 		mtp.enabled = true;
 		Time.timeScale = 1f;
 	}
-
+	#endregion
 }

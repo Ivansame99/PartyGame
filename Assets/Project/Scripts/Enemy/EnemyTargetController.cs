@@ -17,7 +17,7 @@ public class EnemyTargetController : MonoBehaviour
 
     void Start()
     {
-        enemyDirector = GameObject.Find("GameManager").GetComponent<EnemyDirector>();
+        enemyDirector = GameManager.Instance.enemyDirector;
         enemy = GetComponent<Enemy>();
     }
 

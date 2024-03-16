@@ -7,16 +7,16 @@ using TMPro;
 
 public class RoundController : MonoBehaviour
 {
+	#region Inspector Variables
 	[SerializeField]
 	private bool debug;
 
+	[Header("Logic")]
 	[SerializeField]
 	private Transform[] spawns;
 
 	[SerializeField]
 	private Rounds[] roundsSO;
-
-	private Rounds currentRound;
 
 	[SerializeField]
 	private float secondsBetweenRounds;
@@ -24,28 +24,15 @@ public class RoundController : MonoBehaviour
 	[SerializeField]
 	private float secondsBetweenEnemySpawn;
 
-	private int roundIndex;
-
-	[HideInInspector]
-	public List<GameObject> currentEnemies;
-
+	[Header("Visual feedback")]
 	[SerializeField]
 	private Animator coliseumAnimator;
-
-	[HideInInspector]
-	public bool finalRound;
 
 	[SerializeField]
 	private GameObject roundsUI;
 
-	private Animator roundUIAnim;
-
 	[SerializeField]
 	private TMP_Text roundsUIText;
-
-	private PlayersRespawn playersRespawn;
-
-	private int playersIndex;
 
 	[SerializeField]
 	private GameObject rainPrefab;
@@ -55,20 +42,31 @@ public class RoundController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject godRay2;
+	#endregion
 
+	internal List<GameObject> currentEnemies;
+	private bool finalRound;
+	private Rounds currentRound;
+	private int roundIndex;
 	private GameObject[] players;
 	private PlayerHealthController[] playersHealth;
+	private Animator roundUIAnim;
+	private PlayersHealthManager playersHealthManager;
+
+	private void Awake()
+	{
+		roundUIAnim = roundsUI.GetComponent<Animator>();
+		playersHealthManager = GameManager.Instance.playersHealthManager;
+	}
 
 	void Start()
 	{
-		roundUIAnim = roundsUI.GetComponent<Animator>();
 		finalRound = false;
 		roundIndex = 0;
 		currentEnemies = new List<GameObject>();
-		playersRespawn = this.GetComponent<PlayersRespawn>();
 
+		SelectCurrentRoundDifficulty();
 		if (!debug) StartCoroutine(IStartNextRound());
-		SelectCurrentRounds();
 		GetPlayers();
 	}
 
@@ -81,38 +79,11 @@ public class RoundController : MonoBehaviour
 			{
 				if (!finalRound)
 				{
-					roundsUIText.text = "Final Round";
-					roundUIAnim.SetTrigger("ChangeRound");
-					Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
-					LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
-					godRay.SetActive(false);
-					godRay2.SetActive(false);
+					SetFinalRound();
+					finalRound = true;
 				}
-				finalRound = true;
 			}
 		}
-	}
-
-	IEnumerator IStartNextRound()
-	{
-		roundsUIText.text = "Round " + ToRoman(roundIndex + 1);
-		roundUIAnim.SetTrigger("ChangeRound");
-		yield return new WaitForSeconds(secondsBetweenRounds);
-
-		coliseumAnimator.SetBool("DoorOpen", true);
-		yield return new WaitForSeconds(1);
-
-		int enemyNumberInCurrentRound = currentRound.rounds[roundIndex].enemiesInRound.Length;
-
-		for (int i = 0; i < enemyNumberInCurrentRound; i++)
-		{
-			int randomSpawn = Random.Range(0, spawns.Length);
-			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-			currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
-			StartCoroutine(ChangePowerLevel(roundIndex, i));
-		}
-		coliseumAnimator.SetBool("DoorOpen", false);
-		roundIndex++;
 	}
 
 	void CheckCurrentEnemiesDeath()
@@ -126,25 +97,18 @@ public class RoundController : MonoBehaviour
 
 		//If all enemies dead
 		currentEnemies.Clear();
-		playersRespawn.RespawnDeadPlayers();
+		playersHealthManager.RespawnDeadPlayers();
 		for(int i= 0;i< playersHealth.Length; i++)
 		{
 			playersHealth[i].RestoreHealthAfterRound();
 		}
-	
 
 		//Next round
 		if (roundIndex < currentRound.rounds.Length) StartCoroutine(IStartNextRound());
 		else if (roundIndex == currentRound.rounds.Length) roundIndex++;
 	}
 
-	IEnumerator ChangePowerLevel(int roundIndexParameter, int indexEnemy)
-	{
-		yield return new WaitForSeconds(0.1f); //Time between spawn the enemy and change his power
-		currentEnemies[indexEnemy].GetComponent<PowerController>().InitializePowerLevel(currentRound.rounds[roundIndexParameter].enemiesInRound[indexEnemy].power);
-	}
-
-	private void SelectCurrentRounds()
+	private void SelectCurrentRoundDifficulty()
 	{
 		int numplayers = GameManager.Instance.selectPlayerController.GetNumPlayers();
 		for (int i = 0; i < roundsSO.Length; i++)
@@ -157,7 +121,17 @@ public class RoundController : MonoBehaviour
 			}
 		}
 		currentRound = roundsSO[0];
-		Debug.Log("Default Difficulty: " + currentRound.players.ToString());
+		Debug.LogError("Default Difficulty set: " + currentRound.players.ToString());
+	}
+
+	void SetFinalRound()
+	{
+		roundsUIText.text = "Final Round";
+		roundUIAnim.SetTrigger("ChangeRound");
+		Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
+		LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
+		godRay.SetActive(false);
+		godRay2.SetActive(false);
 	}
 
 	// Integer to Roman numerals - mgear - http://unitycoder.com/blog/
@@ -191,4 +165,41 @@ public class RoundController : MonoBehaviour
 			playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
 		}
 	}
+
+	#region Getters
+	public bool isFinalRound()
+	{
+		return finalRound;
+	}
+	#endregion
+
+	#region Coroutines
+	IEnumerator IStartNextRound()
+	{
+		roundsUIText.text = "Round " + ToRoman(roundIndex + 1);
+		roundUIAnim.SetTrigger("ChangeRound");
+		yield return new WaitForSeconds(secondsBetweenRounds);
+
+		coliseumAnimator.SetBool("DoorOpen", true);
+		yield return new WaitForSeconds(1);
+
+		int enemyNumberInCurrentRound = currentRound.rounds[roundIndex].enemiesInRound.Length;
+
+		for (int i = 0; i < enemyNumberInCurrentRound; i++)
+		{
+			int randomSpawn = Random.Range(0, spawns.Length);
+			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
+			currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+			StartCoroutine(ChangePowerLevel(roundIndex, i));
+		}
+		coliseumAnimator.SetBool("DoorOpen", false);
+		roundIndex++;
+	}
+
+	IEnumerator ChangePowerLevel(int roundIndexParameter, int indexEnemy)
+	{
+		yield return new WaitForSeconds(0.1f); //Time between spawn the enemy and change his power
+		currentEnemies[indexEnemy].GetComponent<PowerController>().InitializePowerLevel(currentRound.rounds[roundIndexParameter].enemiesInRound[indexEnemy].power);
+	}
+	#endregion
 }

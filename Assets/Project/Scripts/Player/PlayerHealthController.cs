@@ -24,7 +24,7 @@ public class PlayerHealthController : MonoBehaviour
 	private GameObject lastAttacker;
 	private float currentPower;
 
-	private PlayersRespawn playersRespawn;
+	private PlayersHealthManager playersHealthManager;
 
 	private bool pushBack;
 	private Vector3 attackPosition;
@@ -98,7 +98,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController = GetComponent<PowerController>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
-		playersRespawn = GameManager.Instance.playersRespawn;
+		playersHealthManager = GameManager.Instance.playersHealthManager;
 
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
@@ -249,7 +249,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
 		powerBar.gameObject.SetActive(false);
-		playersRespawn.NotifyDead(this.gameObject.transform);
+		playersHealthManager.NotifyDead(this.gameObject.transform);
 	}
 
 	private void SetupHealthBar(Canvas canvas)

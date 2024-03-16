@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,13 +9,15 @@ public class GameManager : MonoBehaviour
 
     public EndGameController endGameController;
     public RoundController roundController;
-    public PlayersRespawn playersRespawn;
+	public EnemyDirector enemyDirector;
+	public PlayersHealthManager playersHealthManager;
     public EventsController eventsController;
     public MultipleTargetCamera multipleTargetCamera;
     public SelectPlayerController selectPlayerController;
+	public GMSceneManager gmSceneManager;
+	public AudioManager audioManager;
 
-
-    private void Awake()
+	private void Awake()
     {
         if(Instance == null) Instance = this;
         else

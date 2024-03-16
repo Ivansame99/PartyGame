@@ -6,8 +6,6 @@ public class SelectPlayerController : MonoBehaviour
 {
 	#region Inspector Variables
 	[SerializeField]
-	private GameObject[] playerPos;
-	[SerializeField]
 	private GameObject[] prefabPlayers;
 	[SerializeField]
 	private GameObject[] playersUI;
@@ -16,6 +14,7 @@ public class SelectPlayerController : MonoBehaviour
 	#region Variables
 	private int numPlayers;
 	private GameObject[] players;
+	private Transform[] playersSpawns;
 	#endregion
 
 	#region Life Cycle
@@ -28,10 +27,11 @@ public class SelectPlayerController : MonoBehaviour
 			var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
 			numPlayers = playerConfigs.Length;
 			players = new GameObject[numPlayers];
+			playersSpawns = GameManager.Instance.playersHealthManager.GetPlayersSpawns();
 			for (int i = 0; i < playerConfigs.Length; i++)
 			{
 				playersUI[i].SetActive(true);
-				GameObject player = Instantiate(prefabPlayers[i], playerPos[i].transform.position, playerPos[i].transform.rotation) as GameObject;
+				GameObject player = Instantiate(prefabPlayers[i], playersSpawns[i].position, playersSpawns[i].rotation) as GameObject;
 				player.name = prefabPlayers[i].name;
 				player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 				players[i] = player;
