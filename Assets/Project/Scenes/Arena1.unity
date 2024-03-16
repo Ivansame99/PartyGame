@@ -1953,37 +1953,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 93323597}
   m_CullTransparentMesh: 1
---- !u!1 &112400566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 112400567}
-  m_Layer: 0
-  m_Name: Spawn (22)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &112400567
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 112400566}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.93, y: 1.5, z: -4.23}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 245008288}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &114930641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2428,7 +2397,7 @@ GameObject:
   m_Component:
   - component: {fileID: 140526204}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Respawn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3799,7 +3768,6 @@ Transform:
   - {fileID: 1642035937}
   - {fileID: 160823737}
   - {fileID: 403692658}
-  - {fileID: 112400567}
   - {fileID: 1228378713}
   - {fileID: 1426686432}
   - {fileID: 1054629836}
@@ -5478,7 +5446,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466498985}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Respawn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5492,7 +5460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466498984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.9, y: 2.453342, z: -10.52}
+  m_LocalPosition: {x: -16.9, y: 2.453342, z: -9.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6423,7 +6391,7 @@ Transform:
   m_GameObject: {fileID: 603900560}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 259.28033, y: -158.55219, z: -52.230804}
-  m_LocalScale: {x: 200, y: 27.079931, z: 200}
+  m_LocalScale: {x: 165.47122, y: 27.079931, z: 160.72617}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1525534768}
@@ -6545,78 +6513,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 612233831}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 612233830}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 612233829}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb0599212221d5a43bf1df600382910f, type: 3}
---- !u!1 &612233828 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-    type: 3}
-  m_PrefabInstance: {fileID: 612233827}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &612233829
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612233828}
-  m_Material: {fileID: 13400000, guid: bcba2407d1573294c904a558527850ae, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -462981019419857548, guid: bb0599212221d5a43bf1df600382910f, type: 3}
---- !u!45 &612233830
-Skybox:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612233828}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 0}
---- !u!65 &612233831
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612233828}
-  m_Material: {fileID: 13400000, guid: bcba2407d1573294c904a558527850ae, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.8186937, z: 1.1178641}
-  m_Center: {x: 0, y: -0.41700897, z: 0.05893225}
 --- !u!4 &612233832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
@@ -16085,14 +15983,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976504690}
-  m_LocalRotation: {x: -0, y: -0.9757657, z: -0, w: 0.21881795}
-  m_LocalPosition: {x: 0.32690948, y: -0.39882922, z: 1.1718837}
+  m_LocalRotation: {x: 0, y: -0.9757643, z: 0, w: 0.21882454}
+  m_LocalPosition: {x: 0.326, y: -0.39, z: 1.17}
   m_LocalScale: {x: 2.0499074, y: 0.58063513, z: 0.042291004}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1704364320}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 25.279, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -154.72, z: 0}
 --- !u!1001 &979497483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18562,14 +18460,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1210274217}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1210274219}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb0599212221d5a43bf1df600382910f,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1210274218}
   m_SourcePrefab: {fileID: 100100000, guid: bb0599212221d5a43bf1df600382910f, type: 3}
 --- !u!1 &1210274216 stripped
@@ -18578,27 +18468,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1210274215}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1210274217
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210274216}
-  m_Material: {fileID: 13400000, guid: bcba2407d1573294c904a558527850ae, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.8186937, z: 1.1178641}
-  m_Center: {x: 0, y: -0.41700897, z: 0.05893225}
 --- !u!64 &1210274218
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -18621,15 +18490,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: bb0599212221d5a43bf1df600382910f, type: 3}
---- !u!45 &1210274219
-Skybox:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210274216}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 0}
 --- !u!4 &1210274220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb0599212221d5a43bf1df600382910f,
@@ -20576,7 +20436,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: d0c52df31353e3b47a194f1a622ccb3d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 0e93416f8ffd95b4ba9b069382a1f960, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &1359026993
 Transform:
@@ -25891,7 +25751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1844502554}
   m_Layer: 0
-  m_Name: GameObject (3)
+  m_Name: Respawn4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28366,7 +28226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080604901}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: Respawn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29467,11 +29327,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: debug
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: godRay
       value: 
       objectReference: {fileID: 888670785}
@@ -29487,16 +29342,6 @@ PrefabInstance:
       objectReference: {fileID: 1222882966}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rainPrefab
-      value: 
-      objectReference: {fileID: 100002, guid: ffe1e86e37ee68043b84a7b4c2deb193, type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: roundsUIText
       value: 
       objectReference: {fileID: 1377760256}
@@ -29507,23 +29352,8 @@ PrefabInstance:
       objectReference: {fileID: 665433123}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: faces.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: spawns.Array.size
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: roundsSO.Array.size
-      value: 4
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29574,764 +29404,62 @@ PrefabInstance:
         type: 3}
       propertyPath: spawns.Array.data[9]
       value: 
-      objectReference: {fileID: 112400567}
+      objectReference: {fileID: 1228378713}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[10]
       value: 
-      objectReference: {fileID: 1228378713}
+      objectReference: {fileID: 1426686432}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[11]
       value: 
-      objectReference: {fileID: 1426686432}
+      objectReference: {fileID: 1054629836}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[12]
       value: 
-      objectReference: {fileID: 1054629836}
+      objectReference: {fileID: 823122065}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[13]
       value: 
-      objectReference: {fileID: 823122065}
+      objectReference: {fileID: 1312441102}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[14]
       value: 
-      objectReference: {fileID: 1312441102}
+      objectReference: {fileID: 1443342121}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[15]
       value: 
-      objectReference: {fileID: 1443342121}
+      objectReference: {fileID: 620061992}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[16]
       value: 
-      objectReference: {fileID: 620061992}
+      objectReference: {fileID: 688576531}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: spawns.Array.data[17]
       value: 
       objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: spawns.Array.data[18]
+      propertyPath: guiCamera
       value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 925351425}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: spawns.Array.data[19]
+      propertyPath: mainCamera
       value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 330585545}
+    - target: {fileID: 1697052631678738525, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: spawns.Array.data[20]
+      propertyPath: transitionMaterial
       value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[21]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[22]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[23]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[24]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[25]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[26]
-      value: 
-      objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[27]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[28]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[29]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[30]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[31]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: roundsSO.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 33db6cd6768b7774ba9f75b0dcd33699,
-        type: 2}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: roundsSO.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 682ae5d62fa861b4c82b55817224c549,
-        type: 2}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: roundsSO.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 68a4a43bc69a9684cadff8c42097f5fc,
-        type: 2}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: roundsSO.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 6d907941c1a3f434bb243aa20d5e00f7,
-        type: 2}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].name
-      value: 1 Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].name
-      value: 2 Players
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].name
-      value: 3 Players
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].name
-      value: 4 Players
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemyPower.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[0]
-      value: 
-      objectReference: {fileID: 2833928545811715665, guid: d4a597fdc78a2964ea1fb48f914541e4,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 2833928545811715665, guid: d4a597fdc78a2964ea1fb48f914541e4,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[1].power
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rounds.Array.data[0].enemiesInRound.Array.data[2].power
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[1].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[2].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[3].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[4].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[4].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[5].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[5].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[6].enemy
-      value: 
-      objectReference: {fileID: 2833928545811715665, guid: d4a597fdc78a2964ea1fb48f914541e4,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[0].enemiesInRound.Array.data[6].power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.data[0].power
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[0].rounds.Array.data[1].enemiesInRound.Array.data[1].power
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 4599955610764907065, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[1].power
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[0].enemiesInRound.Array.data[2].power
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[0].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[1].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[2].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[1].rounds.Array.data[1].enemiesInRound.Array.data[3].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[1].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[2].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[0].enemiesInRound.Array.data[3].power
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[0].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[1].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[2].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[3].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[4].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[1].enemiesInRound.Array.data[4].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[0].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[1].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[2].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[3].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[4].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[2].rounds.Array.data[2].enemiesInRound.Array.data[4].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[0].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[1].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[2].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[3].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[4].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[4].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[5].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[0].enemiesInRound.Array.data[5].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[0].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[0].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[1].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[1].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[2].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[2].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[3].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[3].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[4].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[4].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[5].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[5].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[6].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[6].power
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[7].enemy
-      value: 
-      objectReference: {fileID: 8314686957862820201, guid: f235ed66beecb4b42bead9e7db62a921,
-        type: 3}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: numberOfPlayers.Array.data[3].rounds.Array.data[1].enemiesInRound.Array.data[7].power
-      value: 50
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
     - target: {fileID: 2805138501441062883, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_RootOrder
@@ -30387,76 +29515,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[0]
-      value: 
-      objectReference: {fileID: 466498985}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[1]
-      value: 
-      objectReference: {fileID: 140526204}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[2]
-      value: 
-      objectReference: {fileID: 2080604901}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[3]
-      value: 
-      objectReference: {fileID: 1844502554}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[4]
-      value: 
-      objectReference: {fileID: 475202458}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[5]
-      value: 
-      objectReference: {fileID: 2061087976}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[6]
-      value: 
-      objectReference: {fileID: 1642035937}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[7]
-      value: 
-      objectReference: {fileID: 160823737}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[8]
-      value: 
-      objectReference: {fileID: 403692658}
-    - target: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[9]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: EventsCanvas
-      value: 
-      objectReference: {fileID: 1392949306}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: eventsCanvas
@@ -30464,161 +29522,133 @@ PrefabInstance:
       objectReference: {fileID: 1392949306}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: timeToShowUI
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: eventNameText
       value: 
       objectReference: {fileID: 93323599}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: maxTimeToSpawn
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: minTimeToSpawn
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[2]
+      propertyPath: playerPos.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 91297dd5f9124314890c4f602b5adcf3,
-        type: 2}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 466498984}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: randomEvents.Array.data[0].probability
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[0].randomEvent
+      propertyPath: playerPos.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: f8abf7f9f5fa376449082f193e2d8ca1,
-        type: 2}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 1844502553}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: randomEvents.Array.data[1].probability
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[1].randomEvent
+      propertyPath: playerPos.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 4166fdf18bd2f4a4ea7bf1f988373dc8,
-        type: 2}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 2080604900}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: randomEvents.Array.data[2].probability
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: randomEvents.Array.data[2].randomEvent
+      propertyPath: playerPos.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 91297dd5f9124314890c4f602b5adcf3,
-        type: 2}
-    - target: {fileID: 7782028682868204939, guid: 5e6f1646701d3024d87a928af154219a,
+      objectReference: {fileID: 140526203}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: rateCoin
-      value: 0.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: coinPrefab
+      propertyPath: playersUI.Array.data[0]
       value: 
-      objectReference: {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a,
+      objectReference: {fileID: 2745598609333794033}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: playersUI.Array.data[1]
+      value: 
+      objectReference: {fileID: 2745598609333794032}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersUI.Array.data[2]
+      value: 
+      objectReference: {fileID: 2745598609333794031}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersUI.Array.data[3]
+      value: 
+      objectReference: {fileID: 2745598609333794030}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 466498985}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[1]
+      value: 
+      objectReference: {fileID: 140526204}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 2080604901}
+    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[3]
+      value: 
+      objectReference: {fileID: 1844502554}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: publicAnim
       value: 
       objectReference: {fileID: 33536539}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: fireworkPrefab
-      value: 
-      objectReference: {fileID: 1978689737715041617, guid: afa54037ffe627545886e2741abb365d,
-        type: 3}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: transitionTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: maxTimeFirework
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: minTimeFirework
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: totalCoinsAmmount
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: transitionMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: maxFireworksInstanced
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659138193795396399, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_Name
-      value: GameManager
+      value: ArenaGameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: spawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 466498985}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: spawns.Array.data[1]
+      value: 
+      objectReference: {fileID: 140526204}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: spawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 2080604901}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: spawns.Array.data[3]
+      value: 
+      objectReference: {fileID: 1844502554}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.size
+      value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[0]
+      value: 
+      objectReference: {fileID: 466498985}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[1]
+      value: 
+      objectReference: {fileID: 140526204}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 2080604901}
+    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: playersSpawns.Array.data[3]
+      value: 
+      objectReference: {fileID: 1844502554}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3743270676613228140}
-    - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3743270676613228141}
-    - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3743270676613228142}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6f1646701d3024d87a928af154219a, type: 3}
 --- !u!1 &3743270676613228139 stripped
 GameObject:
@@ -30626,64 +29656,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3743270676613228138}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3743270676613228140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3743270676613228139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eb06aa3d309eb64b922348b8a58014d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3743270676613228141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3743270676613228139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bab95e10b2ac48488ade53008b7118e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPos:
-  - {fileID: 466498984}
-  - {fileID: 1844502553}
-  - {fileID: 2080604900}
-  - {fileID: 140526203}
-  prefabPlayers:
-  - {fileID: 5971476123506598425, guid: 455664bb3d2451e4280f2d51d5c5e2cd, type: 3}
-  - {fileID: 5971476123506598425, guid: 146f3b91353ffc64798b7b3163a3063d, type: 3}
-  - {fileID: 5971476123506598425, guid: 869aaeec595365f46bfdc98aa533b237, type: 3}
-  - {fileID: 5971476123506598425, guid: 8be3c8297ec799446a12dd3ea94dddad, type: 3}
-  playersUI:
-  - {fileID: 2745598609333794033}
-  - {fileID: 2745598609333794032}
-  - {fileID: 2745598609333794031}
-  - {fileID: 2745598609333794030}
-  targetCamera: {fileID: 0}
-  numPlayers: 0
---- !u!114 &3743270676613228142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3743270676613228139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 626a99009f66a3c44b5dabba7d210f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets: []
-  offset: {x: 0, y: 113.6, z: -101}
-  smoothTime: 2
-  minZoom: 20
-  maxZoom: 15
-  zoomLimiter: 60
-  mainCamera: {fileID: 330585545}
-  guiCamera: {fileID: 925351425}

@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7160878019381886714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2747833497175656843}
+  - component: {fileID: 8294130093430387338}
+  - component: {fileID: 7949998844788695218}
+  - component: {fileID: 8054557132717212860}
+  - component: {fileID: 5575104868054993643}
+  - component: {fileID: 5431917027258988609}
+  - component: {fileID: 7106848059210055835}
+  m_Layer: 0
+  m_Name: HubGameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2747833497175656843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -19.993296, y: -28.326889, z: 61.692703}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8294130093430387338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5896ca19d6addba4fb1b0be9d251a145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGameController: {fileID: 7949998844788695218}
+  roundController: {fileID: 0}
+  playersHealthManager: {fileID: 8054557132717212860}
+  eventsController: {fileID: 0}
+  multipleTargetCamera: {fileID: 5575104868054993643}
+  selectPlayerController: {fileID: 0}
+  gmSceneManager: {fileID: 5431917027258988609}
+  audioManager: {fileID: 7106848059210055835}
+--- !u!114 &7949998844788695218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b20456816d84143a43d7dac4e0af28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireworkPrefab: {fileID: 0}
+  maxFireworksInstanced: 0
+  minTimeFirework: 0
+  maxTimeFirework: 0
+  coinPrefab: {fileID: 0}
+  rateCoin: 0
+  totalCoinsAmmount: 0
+  publicAnim: {fileID: 0}
+  transitionMaterial: {fileID: 0}
+  transitionTime: 2
+  propertyName: _Progress
+--- !u!114 &8054557132717212860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fac22953920d77469b1b627a5960b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playersSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  onHub: 1
+--- !u!114 &5575104868054993643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626a99009f66a3c44b5dabba7d210f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  offset: {x: 0, y: 113.6, z: -110}
+  smoothTime: 1
+  minZoom: 30
+  maxZoom: 20
+  zoomLimiter: 60
+  mainCamera: {fileID: 0}
+  guiCamera: {fileID: 0}
+--- !u!114 &5431917027258988609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef3d1ad55fc1604488344e59ba9510f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7106848059210055835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160878019381886714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f1779f03226d541a01d273c5cfe9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

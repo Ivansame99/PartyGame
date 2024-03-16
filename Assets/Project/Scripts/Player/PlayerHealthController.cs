@@ -1,8 +1,8 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerHealthController : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class PlayerHealthController : MonoBehaviour
 	private GameObject lastAttacker;
 	private float currentPower;
 
-	private PlayersRespawn playersRespawn;
+	private PlayersHealthManager playersHealthManager;
 
 	private bool pushBack;
 	private Vector3 attackPosition;
@@ -86,6 +86,8 @@ public class PlayerHealthController : MonoBehaviour
 
 	private GameObject ghost;
 
+	//public Action<Transform> OnPlayerDie;
+
 	void Start()
 	{
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
@@ -96,7 +98,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController = GetComponent<PowerController>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
-		playersRespawn = FindObjectOfType<PlayersRespawn>();
+		playersHealthManager = GameManager.Instance.playersHealthManager;
 
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
@@ -108,7 +110,7 @@ public class PlayerHealthController : MonoBehaviour
 			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
 		}
 
-		maxHealth = maxHealthBase + powerController.PowerHealth();;
+		maxHealth = maxHealthBase + powerController.PowerHealth(); ;
 		if (powerController != null)
 		{
 			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
@@ -157,7 +159,7 @@ public class PlayerHealthController : MonoBehaviour
 		cross2.SetActive(true);
 		glow.SetActive(true);
 
-		if(floatingDamageText != null) ShowDamageText(damage);
+		if (floatingDamageText != null) ShowDamageText(damage);
 
 		//Sound
 		hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
@@ -236,6 +238,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
+		//OnPlayerDie(this.transform);
 		dead = true;
 		DisablePlayer();
 	}
@@ -246,7 +249,7 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.enabled = false;
 		healthBar.gameObject.SetActive(false);
 		powerBar.gameObject.SetActive(false);
-		playersRespawn.NotifyDead(this.gameObject.transform);
+		playersHealthManager.NotifyDead(this.gameObject.transform);
 	}
 
 	private void SetupHealthBar(Canvas canvas)
@@ -266,7 +269,7 @@ public class PlayerHealthController : MonoBehaviour
 		if (ghost != null)
 		{
 			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
-			Destroy(ghost,0.5f);
+			Destroy(ghost, 0.5f);
 		}
 
 		powerController.enabled = true;
@@ -332,17 +335,17 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
-        if (other.gameObject.tag == "EnemyCharge" && invencibleTimer <= 0 && !dead)
-        {
-            Charge charge = other.gameObject.GetComponent<Charge>();
-            lastAttacker = charge.owner;
-            attackPosition = charge.owner.transform.position;
-            pushBack = true;
-            pushForce = charge.pushForce;
-            ReceiveDamage(charge.finalDamage);
-        }
+		if (other.gameObject.tag == "EnemyCharge" && invencibleTimer <= 0 && !dead)
+		{
+			Charge charge = other.gameObject.GetComponent<Charge>();
+			lastAttacker = charge.owner;
+			attackPosition = charge.owner.transform.position;
+			pushBack = true;
+			pushForce = charge.pushForce;
+			ReceiveDamage(charge.finalDamage);
+		}
 
-    }
+	}
 
 	private void OnTriggerStay(Collider other)
 	{
@@ -363,7 +366,7 @@ public class PlayerHealthController : MonoBehaviour
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
 			if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)
-			{	
+			{
 				//Se pega contra si mismo al principio, no hace nada
 			}
 			else
@@ -378,15 +381,15 @@ public class PlayerHealthController : MonoBehaviour
 			}
 		}
 
-        if (collision.transform.CompareTag("TorusAtk") && invencibleTimer <= 0 && !dead)
-        {
-            Torus torus = collision.gameObject.GetComponent<Torus>();
+		if (collision.transform.CompareTag("TorusAtk") && invencibleTimer <= 0 && !dead)
+		{
+			Torus torus = collision.gameObject.GetComponent<Torus>();
 			lastAttacker = torus.owner;
-            attackPosition = torus.owner.transform.position;
-            pushBack = true;
+			attackPosition = torus.owner.transform.position;
+			pushBack = true;
 			pushForce = torus.pushForce;
-            ReceiveDamage(torus.finalDamage);
-        }
+			ReceiveDamage(torus.finalDamage);
+		}
 
 		if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
 		{

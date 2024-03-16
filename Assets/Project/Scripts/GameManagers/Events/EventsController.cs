@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EventsController : MonoBehaviour
 {
+	#region Inspector Variables
 	[SerializeField]
 	private Animator eventsCanvas;
 
@@ -25,28 +26,28 @@ public class EventsController : MonoBehaviour
 	[SerializeField]
 	private List<RandomEvents> randomEvents;
 
-	private GameEvent currentEvent;
-
 	[SerializeField]
 	private float maxTimeToSpawn;
 
 	[SerializeField]
 	private float minTimeToSpawn;
+	#endregion
+
+	#region Variables
+	private GameEvent currentEvent;
 
 	private float randomTimeToSpawn;
 
 	private float timer;
 
-	private int eventIndex;
-
 	private bool anim=false;
-
-	private bool onFixedUpdate;
 
 	private bool startUpdate = false;
 
 	private bool stopEvents = false;
+	#endregion
 
+	#region Life Cycle
 	void Start()
     {
 		timer = 0;
@@ -65,7 +66,6 @@ public class EventsController : MonoBehaviour
 			randomTimeToSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
 			eventNameText.text = currentEvent.eventName;
 			currentEvent.EventStart();
-			if (currentEvent.fixedUpdate) onFixedUpdate = true;
 			Invoke(nameof(ShowUIEvent), randomTimeToSpawn - timeToShowUI);
 		}
 
@@ -103,7 +103,18 @@ public class EventsController : MonoBehaviour
 			currentEvent.EventUpdate();
 		}
 	}
+	#endregion
 
+	#region Public Methods
+	public void StopEvents()
+	{
+		stopEvents = true;
+		eventsCanvas.gameObject.SetActive(false);
+		currentEvent.EventDestroy();
+	}
+	#endregion
+
+	#region Private Methods
 	private void SelectNewEvent()
 	{
 		float totalProbability = 0f;
@@ -130,11 +141,6 @@ public class EventsController : MonoBehaviour
 		eventsCanvas.SetBool("NewEvent", true);
 		anim = true;
 	}
+	#endregion
 
-	public void StopEvents()
-	{
-		stopEvents = true;
-		eventsCanvas.gameObject.SetActive(false);
-		currentEvent.EventDestroy();
-	}
 }

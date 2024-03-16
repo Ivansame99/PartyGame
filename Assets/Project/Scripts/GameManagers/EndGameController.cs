@@ -6,6 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class EndGameController : MonoBehaviour
 {
+	#region Inspector Variables
+	[Header("Win Properties")]
+	[SerializeField]
+	private float winAnimDuration=15f;
+
 	[SerializeField]
 	private GameObject fireworkPrefab;
 
@@ -29,35 +34,24 @@ public class EndGameController : MonoBehaviour
 
 	[SerializeField]
 	private IdleAnimation publicAnim;
+	#endregion
 
-	private RoundController roundController;
-	private EventsController eventsController;
-    private GameObject[] players;
-    private int playersCount;
-    [HideInInspector]
-    public int playersDead;
-
+	#region Variables
+	internal int playersDead;
 	private List<GameObject> coinsPool = new List<GameObject>();
-
 	private float arenaLimitMin = -30f;
 	private float arenaLimitMax = 30f;
+	private GameManager gameManager;
+	#endregion
 
-	[Header("Circle Transition")]
-	[SerializeField]
-	private Material transitionMaterial;
-	[SerializeField]
-	private float transitionTime = 2f;
-	[SerializeField]
-	private string propertyName = "_Progress";
-
-	void Start()
-    {
-		eventsController = GetComponent<EventsController>();
-		roundController = GetComponent<RoundController>();
-        Invoke("GetPlayers", 1f);
+	#region Life Cycle
+	private void Awake()
+	{
+		gameManager = GameManager.Instance;	
 	}
+	#endregion
 
-    public void PlayerDead()
+	public void PlayerDead()
     {
         playersDead++;
         CheckEndGame();
@@ -68,33 +62,33 @@ public class EndGameController : MonoBehaviour
         playersDead = 0;
     }
 
+	#region Methods
 	void CheckEndGame()
 	{
-		if (roundController.finalRound && playersDead == playersCount - 1) //Solo queda uno en pie
+		int playersCount = GameManager.Instance.selectPlayerController.GetNumPlayers();
+
+		//Check win
+		if (gameManager.roundController.isFinalRound() && playersDead == playersCount - 1) //Only one survivor
 		{
 			if (publicAnim != null)
 			{
 				publicAnim.minSimultaneousJumpAmount = publicAnim.prefabs.Length;
 				publicAnim.maxSimultaneousJumpAmount = publicAnim.prefabs.Length;
 			}
-			eventsController.StopEvents();
+
+			gameManager.eventsController.StopEvents();
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
-			StartCoroutine(CloseTranitionToWin());
+			gameManager.gmSceneManager.ChangeSceneToMenu(true, winAnimDuration);
 		}
 
-        if(playersDead >= playersCount)
+		//Check lose
+		if (playersDead >= playersCount)
         {
-			StartCoroutine(CloseTranitionToGameOver());
+			gameManager.gmSceneManager.ChangeSceneToGameOver(true);
 		}
 	}
-
-	void GetPlayers()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        playersCount = players.Length;
-    }
 
 	void InstantiateCoinsPool()
 	{
@@ -127,7 +121,9 @@ public class EndGameController : MonoBehaviour
 		coinsPool.Remove(firstCoint);
 		coinsPool.Add(firstCoint);
 	}
+	#endregion
 
+	#region Coroutines
 	private IEnumerator StartCoins()
 	{
 		while (true)
@@ -150,31 +146,5 @@ public class EndGameController : MonoBehaviour
 			}
 		}
 	}
-
-	private IEnumerator CloseTranitionToWin()
-	{
-		yield return new WaitForSeconds(15f);
-		float currentTime = transitionTime;
-		while (currentTime > 0)
-		{
-			currentTime -= Time.deltaTime;
-			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
-			yield return null;
-		}
-
-		SceneManager.LoadScene("Menu");
-	}
-
-	private IEnumerator CloseTranitionToGameOver()
-	{
-		float currentTime = transitionTime;
-		while (currentTime > 0)
-		{
-			currentTime -= Time.deltaTime;
-			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
-			yield return null;
-		}
-
-		SceneManager.LoadScene("GameOver");
-	}
+	#endregion
 }
