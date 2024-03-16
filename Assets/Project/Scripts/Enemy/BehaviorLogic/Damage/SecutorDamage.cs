@@ -10,14 +10,6 @@ public class SecutorDamage : EnemyDamageSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
- 
-        }
-    }
-    public void ChangeState()
-    {
-        enemy.stateMachine.ChangeState(enemy.chaseState);
     }
     public override void DoEnterLogic()
     {
@@ -38,27 +30,14 @@ public class SecutorDamage : EnemyDamageSOBase
         if (stunedTimer <= 0)
         {
             enemy.SetDamagedStatus(false);
-            CheckingStates();    
+            enemy.stateMachine.ChangeState(enemy.chaseState);
         }
         else
         {
             stunedTimer -= Time.deltaTime;
         }
     }
-    void CheckingStates()
-    {
 
-        if (enemy.IsSpecialAggro)
-        {
-            enemy.stateMachine.ChangeState(enemy.specialAttackState);
-        }
-
-        else if (enemy.IsAggreed)
-        {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
-        else { enemy.stateMachine.ChangeState(enemy.chaseState); }
-    }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();

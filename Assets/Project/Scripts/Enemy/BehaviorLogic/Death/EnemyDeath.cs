@@ -13,12 +13,6 @@ public class EnemyDeath : EnemyDeathSOBase
 	public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
-            case Enemy.AnimationTriggerType.Death:
-                Death();
-                break;
-        }
     }
 
     public override void DoEnterLogic()
@@ -60,6 +54,10 @@ public class EnemyDeath : EnemyDeathSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
+        {
+            Death();
+        }
     }
 
     public override void DoPhysicsLogic()

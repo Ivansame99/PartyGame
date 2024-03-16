@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	//GENERAL COMUN STATES
 	public EnemyStateMachine stateMachine { get; set; }
 	public EnemyChaseState chaseState { get; set; }
+	public EnemyPreAttackState preAttackState { get; set; }
 	public EnemyAttackState attackState { get; set; }
 	public EnemySpecialAttackState specialAttackState { get; set; }
 	public EnemyStunnedState stunnedState { get; set; }
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 
 	//GENERAL COMUN STATES
 	public EnemyChaseSOBase enemyChaseBaseInstance { get; set; }
+	public EnemyPreAttackSOBase enemyPreAttackBaseInstance { get; set; }
 	public EnemyAttackSOBase enemyAttackBaseInstance { get; set; }
 	public EnemySpecialAttackSOBase enemySpecialAttackBaseInstance { get; set; }
 	public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }

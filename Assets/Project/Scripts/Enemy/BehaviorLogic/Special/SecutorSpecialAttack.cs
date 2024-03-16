@@ -18,9 +18,6 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
             case Enemy.AnimationTriggerType.EnemyAttack:
                 CreateParticles();
                 break;
-            case Enemy.AnimationTriggerType.EnemyAttackFinished:
-                Stunned();
-                break;
         }
     }
 
@@ -38,7 +35,11 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if(enemy.isDead)
+        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
+        {
+            Stunned();
+        }
+        if (enemy.isDead)
         {
             enemy.stateMachine.ChangeState(enemy.deathState);
         }
