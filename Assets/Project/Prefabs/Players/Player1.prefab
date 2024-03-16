@@ -17796,7 +17796,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114527022465191761}
   serializedVersion: 8
-  lengthInSec: 10000
+  lengthInSec: 0.1
   simulationSpeed: 5
   stopAction: 0
   cullingMode: 0
@@ -17871,7 +17871,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 70
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -18359,7 +18359,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 15000
+    maxNumParticles: 5000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -22524,7 +22524,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 2
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -30301,6 +30301,7 @@ MonoBehaviour:
   minScaleMultiplier: 4
   powerLevel: {fileID: 4149807985443987564}
   smoke: {fileID: 5305884722892060772}
+  instanciatedEnemy: 0
 --- !u!114 &9002697528634392084
 MonoBehaviour:
   m_ObjectHideFlags: 0

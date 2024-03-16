@@ -126,17 +126,17 @@ QualitySettings:
     realtimeReflectionProbes: 1
     billboardsFaceCameraPosition: 1
     useLegacyDetailDistribution: 1
-    vSyncCount: 1
+    vSyncCount: 2
     lodBias: 2
     maximumLODLevel: 0
     enableLODCrossFade: 1
     streamingMipmapsActive: 1
     streamingMipmapsAddAllCameras: 1
-    streamingMipmapsMemoryBudget: 1024
-    streamingMipmapsRenderersPerFrame: 1024
-    streamingMipmapsMaxLevelReduction: 2
-    streamingMipmapsMaxFileIORequests: 1024
-    particleRaycastBudget: 10000
+    streamingMipmapsMemoryBudget: 2048
+    streamingMipmapsRenderersPerFrame: 2048
+    streamingMipmapsMaxLevelReduction: 5
+    streamingMipmapsMaxFileIORequests: 2048
+    particleRaycastBudget: 1000000
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1

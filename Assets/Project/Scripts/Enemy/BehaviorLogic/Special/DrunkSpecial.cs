@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.FilePathAttribute;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemySpecialAttack", menuName = "Enemy Logic/Drunk/Attack Logic/Special Attack")]
