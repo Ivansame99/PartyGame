@@ -43,8 +43,6 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject crossRight,crossLeft;
     [SerializeField] private GameObject glow;
 
-	
-
     private void Start()
     {
         enemy = GetComponent<Enemy>();
@@ -66,6 +64,7 @@ public class EnemyHealth : MonoBehaviour
         }
         else invencibility = false;
     }
+
     private void FixedUpdate()
     {
         if (pushBack)
@@ -80,9 +79,7 @@ public class EnemyHealth : MonoBehaviour
     private void LoadMaxHealth()
     {
 		enemy.maxHealth = maxHealthBase + enemy.powerController.PowerHealth();
-		
 	}
-
 
     public void ReceiveDamage(float damage)
     {
