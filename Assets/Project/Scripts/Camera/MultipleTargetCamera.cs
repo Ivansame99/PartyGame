@@ -16,7 +16,7 @@ public class MultipleTargetCamera : MonoBehaviour
 	#endregion
 
 	#region Variables
-	private List<Transform> targets;
+	private List<Transform> targets = new List<Transform>();
 	private Camera mainCamera;
 	private Vector3 velocity;
 	#endregion
