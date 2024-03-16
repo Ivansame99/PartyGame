@@ -1,12 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.UI.Image;
 using TMPro;
-using Unity.VisualScripting;
 using System;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PowerController : MonoBehaviour
 {

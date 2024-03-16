@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 using UnityEngine.SceneManagement;
-using System.Linq;
 using System;
 
 public class SelectPlayerController : MonoBehaviour
 {
+	#region Inspector Variables
 	[SerializeField]
 	private GameObject[] playerPos;
 	[SerializeField]
 	private GameObject[] prefabPlayers;
 	[SerializeField]
 	private GameObject[] playersUI;
+	#endregion
 
+	#region Variables
 	private int numPlayers;
 	private GameObject[] players;
+	#endregion
 
+	#region Life Cycle
 	void Awake()
 	{
 		Time.timeScale = 1f;
@@ -42,7 +43,9 @@ public class SelectPlayerController : MonoBehaviour
 			SceneManager.LoadScene("HUB");
 		}
 	}
+	#endregion
 
+	#region Getters
 	public int GetNumPlayers()
 	{
 		return numPlayers;
@@ -52,4 +55,5 @@ public class SelectPlayerController : MonoBehaviour
 	{
 		return players;
 	}
+	#endregion
 }

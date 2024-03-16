@@ -67,6 +67,7 @@ public class EndGameController : MonoBehaviour
         playersDead = 0;
     }
 
+	#region Methods
 	void CheckEndGame()
 	{
 		int playersCount = GameManager.Instance.selectPlayerController.GetNumPlayers();
@@ -125,6 +126,7 @@ public class EndGameController : MonoBehaviour
 		coinsPool.Remove(firstCoint);
 		coinsPool.Add(firstCoint);
 	}
+	#endregion
 
 	#region Coroutines
 	private IEnumerator StartCoins()
