@@ -16,7 +16,6 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Feedback");
         feedback = Instantiate(feedbackAttack, enemy.transform);
-        Debug.Log("Hello PreAttack");
     }
     public override void DoExitLogic()
     {

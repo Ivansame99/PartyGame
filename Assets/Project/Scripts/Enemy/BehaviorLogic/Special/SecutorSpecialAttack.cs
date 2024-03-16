@@ -24,12 +24,13 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Special");
+        enemy.animator.SetBool("Special",true);
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        enemy.animator.SetBool("Special", false);
     }
 
     public override void DoFrameUpdateLogic()

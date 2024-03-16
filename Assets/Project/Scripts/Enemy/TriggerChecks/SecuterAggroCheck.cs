@@ -29,7 +29,7 @@ public class SecuterAggroCheck : MonoBehaviour
         
 
         //NORMAL AGGRO STATUS
-        if (distancePlayer1 < triggerDistanceClose && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
+        if ((distancePlayer1 < triggerDistanceClose && EnemyVision(deg)) || distancePlayer1 < 2f && EnemyVision(65f))
         {
             _enemy.SetAggroStatus(true);
         }
@@ -41,7 +41,7 @@ public class SecuterAggroCheck : MonoBehaviour
         if (_enemy.playerPos2 != null)
         {
             distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
-            if (distancePlayer2 < triggerDistanceClose)
+            if (distancePlayer1 < triggerDistanceClose && distancePlayer2 < triggerDistanceClose)
             {
                 _enemy.SetSpecialAggroStatus(true);
             }
@@ -50,5 +50,13 @@ public class SecuterAggroCheck : MonoBehaviour
                 _enemy.SetSpecialAggroStatus(false);
             }
         }
+    }
+    private bool EnemyVision(float vision)
+    {
+        if (Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < vision)
+        {
+            return true;
+        } else { return false; }
+
     }
 }
