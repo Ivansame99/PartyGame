@@ -83,6 +83,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: bow_01 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77464618b369247459c1ba0ac03bc19d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 77464618b369247459c1ba0ac03bc19d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -90,11 +100,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77464618b369247459c1ba0ac03bc19d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6356797926625869412}
+      addedObject: {fileID: 1793}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77464618b369247459c1ba0ac03bc19d,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1628627576430252802}
+      addedObject: {fileID: 1910}
   m_SourcePrefab: {fileID: 100100000, guid: 77464618b369247459c1ba0ac03bc19d, type: 3}
 --- !u!1 &5739960698836056263 stripped
 GameObject:
@@ -102,7 +112,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4857420312760698262}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &6356797926625869412
+--- !u!54 &1793
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +139,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &1628627576430252802
+--- !u!136 &1910
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
