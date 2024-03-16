@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class MultipleTargetCamera : MonoBehaviour
 {
-    public List<Transform> targets;
-
-    [SerializeField] private Vector3 offset;
+	#region Inspector Variables
+	[SerializeField] private Vector3 offset;
 	[SerializeField] private float smoothTime = 0.5f;
 	[SerializeField] private float minZoom = 40f;
 	[SerializeField] private float maxZoom = 10f;
 	[SerializeField] private float zoomLimiter = 50f;
-
 	[SerializeField]
 	private Camera guiCamera;
+	#endregion
 
+	#region Variables
+	private List<Transform> targets;
 	private Camera mainCamera;
 	private Vector3 velocity;
+	#endregion
 
-    private void Awake()
+	#region Life Cycle
+	private void Awake()
     {
         mainCamera = Camera.main;    
     }
@@ -33,8 +36,26 @@ public class MultipleTargetCamera : MonoBehaviour
         Move();
         Zoom();
     }
+	#endregion
 
-    private void Zoom()
+	#region Public Methods
+	public void AddPlayer(Transform player)
+	{
+		targets.Add(player);
+	}
+
+	public void RemovePlayer(Transform player)
+	{
+		for (int i = 0; i < targets.Count; i++)
+		{
+			if (targets[i] == player) targets.Remove(targets[i]);
+		}
+	}
+
+	#endregion
+
+	#region Private Methods
+	private void Zoom()
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
 		mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
@@ -84,17 +105,5 @@ public class MultipleTargetCamera : MonoBehaviour
 
         return bounds.center;
     }
-
-    public void AddPlayer(Transform player)
-    {
-		targets.Add(player);
-	}
-
-	public void RemovePlayer(Transform player)
-	{
-		for (int i = 0; i < targets.Count; i++)
-		{
-			if (targets[i] == player) targets.Remove(targets[i]);
-		}
-	}
+	#endregion
 }

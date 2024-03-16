@@ -12,6 +12,7 @@ public class PlayersHealthManager : MonoBehaviour
 
 	#region Variables
 	private GameManager gameManager;
+	private RoundController roundController;
 	private MultipleTargetCamera mtp;
 
 	private PlayerHealthController[] playersHealth;
@@ -33,11 +34,33 @@ public class PlayersHealthManager : MonoBehaviour
 		gameManager = GameManager.Instance;
 		mtp = gameManager.multipleTargetCamera;
 		onHub = gameManager.gmSceneManager.isHubScene();
-		if (!onHub) GetPlayersHealths();
+		if (!onHub)
+		{
+			roundController = gameManager.roundController;
+			roundController.OnRoundFinish += HandlePlayersWhenRoundFinish;
+			GetPlayersHealths();
+		}
 	}
 	#endregion
 
-	public void SpawnPlayer(GameObject player)
+	public void NotifyDead(Transform player)
+	{
+		if (onHub)
+		{
+			SpawnPlayer(player.gameObject);
+			return;
+		}
+
+		StartCoroutine(SlowMotion(player));
+
+		gameManager.endGameController.PlayerDead();
+		mtp.RemovePlayer(player);
+
+		player.transform.position = new Vector3(100, 10, 0);
+	}
+
+	#region Methods
+	private void SpawnPlayer(GameObject player)
 	{
 		if (onHub)
 		{
@@ -56,25 +79,7 @@ public class PlayersHealthManager : MonoBehaviour
 		}
 	}
 
-	public void NotifyDead(Transform player)
-	{
-
-		if (onHub)
-		{
-			SpawnPlayer(player.gameObject);
-			return;
-		}
-
-		gameManager.endGameController.PlayerDead();
-
-		StartCoroutine(SlowMotion(player));
-
-		mtp.RemovePlayer(player);
-
-		player.transform.position = new Vector3(100, 10, 0);
-	}
-
-	public void RespawnDeadPlayers()
+	private void RespawnDeadPlayers()
 	{
 		for (int i = 0; i < playersCount; i++)
 		{
@@ -89,13 +94,27 @@ public class PlayersHealthManager : MonoBehaviour
 	void GetPlayersHealths()
 	{
 		players = gameManager.selectPlayerController.GetPlayers();
-		playersCount = players.Length;
-		playersHealth = new PlayerHealthController[playersCount];
-		for (int i = 0; i < players.Length; i++)
+		if (players != null)
 		{
-			playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
+			playersCount = players.Length;
+			playersHealth = new PlayerHealthController[playersCount];
+			for (int i = 0; i < players.Length; i++)
+			{
+				playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
+			}
 		}
 	}
+
+	private void HandlePlayersWhenRoundFinish()
+	{
+		RespawnDeadPlayers();
+		for (int i = 0; i < playersHealth.Length; i++)
+		{
+			playersHealth[i].RestoreHealthAfterRound();
+		}
+		
+	}
+	#endregion
 
 	#region Getters
 	public Transform[] GetPlayersSpawns()

@@ -15,10 +15,9 @@ public class EnemyDirector : MonoBehaviour
 
     private PlayerHealthController[] playerHealth;
     public int playerDead;
-    // Start is called before the first frame update
+
     void Start()
     {
-
         roundController = this.GetComponent<RoundController>();
         jugadoresArray = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject jugadorObj in jugadoresArray)
@@ -41,7 +40,6 @@ public class EnemyDirector : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         for (int i = 0; i < currentPlayers; i++)
@@ -61,6 +59,4 @@ public class EnemyDirector : MonoBehaviour
 
         playerDead = 0;
     }
-
-
 }

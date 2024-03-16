@@ -22,16 +22,11 @@ public class PowerController : MonoBehaviour
 	[SerializeField]
 	private float healthScale; //Reduce it to more health scale
 
-	//Variables de escalado
-	private float scaleMultiplayer;
-
 	[SerializeField]
 	private float maxScaleMultiplier = 2;
 
 	[SerializeField]
 	private float minScaleMultiplier = 0.7f;
-
-	private Vector3 originalScale;
 
 	[SerializeField]
 	private GameObject powerLevel;
@@ -58,7 +53,6 @@ public class PowerController : MonoBehaviour
 		powerLevelText = powerLevel.GetComponent<TMP_Text>();
 		canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupPowerLevelCanvas();
-		originalScale = transform.localScale;
 		if (this.gameObject.tag == "Enemy") isEnemy = true;
 
 		if (!isEnemy)
@@ -88,13 +82,6 @@ public class PowerController : MonoBehaviour
 
 	public void ChangeScale()
 	{
-		//Formula para obtener el escalado del personaje
-		/*float totalRange = maxPowerLevel - minPowerLevel;
-		float scaleMultiplayer = ((currentPowerLevel - minPowerLevel) / totalRange) * (maxScaleMultiplier - minScaleMultiplier) + minScaleMultiplier;
-
-		scaleMultiplayer = Mathf.Clamp(scaleMultiplayer, minScaleMultiplier, maxScaleMultiplier);
-
-		this.gameObject.transform.localScale = originalScale * scaleMultiplayer;*/
 		float scale = MapValues(currentPowerLevel, minPowerLevel, maxPowerLevel, minScaleMultiplier, maxScaleMultiplier);
 		float scaleClamped = Mathf.Clamp(scale, minScaleMultiplier, maxScaleMultiplier);
 		this.gameObject.transform.localScale = new Vector3(scaleClamped, scaleClamped, scaleClamped);
@@ -148,7 +135,6 @@ public class PowerController : MonoBehaviour
 
 	public float PowerHealth()
 	{
-		//Debug.Log(currentPowerLevel);
 		return currentPowerLevel / healthScale;
 	}
 

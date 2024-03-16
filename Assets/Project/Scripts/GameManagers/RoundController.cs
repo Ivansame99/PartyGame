@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
-
+using System;
+using Random = UnityEngine.Random;
 
 public class RoundController : MonoBehaviour
 {
@@ -44,19 +44,20 @@ public class RoundController : MonoBehaviour
 	private GameObject godRay2;
 	#endregion
 
+	#region Variables
 	internal List<GameObject> currentEnemies;
 	private bool finalRound;
 	private Rounds currentRound;
 	private int roundIndex;
-	private GameObject[] players;
-	private PlayerHealthController[] playersHealth;
 	private Animator roundUIAnim;
-	private PlayersHealthManager playersHealthManager;
 
+	public Action OnRoundFinish;
+	#endregion
+
+	#region Life Cycle
 	private void Awake()
 	{
 		roundUIAnim = roundsUI.GetComponent<Animator>();
-		playersHealthManager = GameManager.Instance.playersHealthManager;
 	}
 
 	void Start()
@@ -67,7 +68,6 @@ public class RoundController : MonoBehaviour
 
 		SelectCurrentRoundDifficulty();
 		if (!debug) StartCoroutine(IStartNextRound());
-		GetPlayers();
 	}
 
 	void Update()
@@ -85,7 +85,9 @@ public class RoundController : MonoBehaviour
 			}
 		}
 	}
+	#endregion
 
+	#region Methods
 	void CheckCurrentEnemiesDeath()
 	{
 		if (currentEnemies.Count == 0) return;
@@ -97,11 +99,7 @@ public class RoundController : MonoBehaviour
 
 		//If all enemies dead
 		currentEnemies.Clear();
-		playersHealthManager.RespawnDeadPlayers();
-		for(int i= 0;i< playersHealth.Length; i++)
-		{
-			playersHealth[i].RestoreHealthAfterRound();
-		}
+		OnRoundFinish();
 
 		//Next round
 		if (roundIndex < currentRound.rounds.Length) StartCoroutine(IStartNextRound());
@@ -134,8 +132,6 @@ public class RoundController : MonoBehaviour
 		godRay2.SetActive(false);
 	}
 
-	// Integer to Roman numerals - mgear - http://unitycoder.com/blog/
-	// Unity3D version converted from this: http://rosettacode.org/wiki/Roman_numerals/Encode
 	string ToRoman(int number)
 	{
 		if (number < 1) return string.Empty;
@@ -154,17 +150,7 @@ public class RoundController : MonoBehaviour
 		if (number >= 1) return "I" + ToRoman(number - 1);
 		return "Impossible state reached";
 	}
-
-	void GetPlayers()
-	{
-		players = GameObject.FindGameObjectsWithTag("Player");
-		playersHealth = new PlayerHealthController[players.Length];
-
-		for(int i=0;i< players.Length; i++)
-		{
-			playersHealth[i] = players[i].GetComponent<PlayerHealthController>();
-		}
-	}
+	#endregion
 
 	#region Getters
 	public bool isFinalRound()
