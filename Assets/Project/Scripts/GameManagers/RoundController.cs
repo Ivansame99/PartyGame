@@ -146,7 +146,7 @@ public class RoundController : MonoBehaviour
 
 	private void SelectCurrentRounds()
 	{
-		int numplayers = GetComponent<SelectPlayerController>().numPlayers;
+		int numplayers = GameManager.Instance.selectPlayerController.GetNumPlayers();
 		Debug.Log(numplayers);
 		for (int i = 0; i < roundsSO.Length; i++)
 		{

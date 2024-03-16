@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class EndGameController : MonoBehaviour
 {
+	#region Inspector Variables
+	[Header("Win Properties")]
 	[SerializeField]
 	private GameObject fireworkPrefab;
 
@@ -30,18 +32,6 @@ public class EndGameController : MonoBehaviour
 	[SerializeField]
 	private IdleAnimation publicAnim;
 
-	private RoundController roundController;
-	private EventsController eventsController;
-    private GameObject[] players;
-    private int playersCount;
-    [HideInInspector]
-    public int playersDead;
-
-	private List<GameObject> coinsPool = new List<GameObject>();
-
-	private float arenaLimitMin = -30f;
-	private float arenaLimitMax = 30f;
-
 	[Header("Circle Transition")]
 	[SerializeField]
 	private Material transitionMaterial;
@@ -49,15 +39,24 @@ public class EndGameController : MonoBehaviour
 	private float transitionTime = 2f;
 	[SerializeField]
 	private string propertyName = "_Progress";
+	#endregion
 
-	void Start()
-    {
-		eventsController = GetComponent<EventsController>();
-		roundController = GetComponent<RoundController>();
-        Invoke("GetPlayers", 1f);
+	#region Variables
+	internal int playersDead;
+	private List<GameObject> coinsPool = new List<GameObject>();
+	private float arenaLimitMin = -30f;
+	private float arenaLimitMax = 30f;
+	private GameManager gameManager;
+	#endregion
+
+	#region Life Cycle
+	private void Awake()
+	{
+		gameManager = GameManager.Instance;	
 	}
+	#endregion
 
-    public void PlayerDead()
+	public void PlayerDead()
     {
         playersDead++;
         CheckEndGame();
@@ -70,31 +69,30 @@ public class EndGameController : MonoBehaviour
 
 	void CheckEndGame()
 	{
-		if (roundController.finalRound && playersDead == playersCount - 1) //Solo queda uno en pie
+		int playersCount = GameManager.Instance.selectPlayerController.GetNumPlayers();
+
+		//Check win
+		if (gameManager.roundController.finalRound && playersDead == playersCount - 1) //Only one survivor
 		{
 			if (publicAnim != null)
 			{
 				publicAnim.minSimultaneousJumpAmount = publicAnim.prefabs.Length;
 				publicAnim.maxSimultaneousJumpAmount = publicAnim.prefabs.Length;
 			}
-			eventsController.StopEvents();
+
+			gameManager.eventsController.StopEvents();
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
 			StartCoroutine(CloseTranitionToWin());
 		}
 
-        if(playersDead >= playersCount)
+		//Check lose
+		if (playersDead >= playersCount)
         {
 			StartCoroutine(CloseTranitionToGameOver());
 		}
 	}
-
-	void GetPlayers()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-        playersCount = players.Length;
-    }
 
 	void InstantiateCoinsPool()
 	{
@@ -128,6 +126,7 @@ public class EndGameController : MonoBehaviour
 		coinsPool.Add(firstCoint);
 	}
 
+	#region Coroutines
 	private IEnumerator StartCoins()
 	{
 		while (true)
@@ -177,4 +176,5 @@ public class EndGameController : MonoBehaviour
 
 		SceneManager.LoadScene("GameOver");
 	}
+	#endregion
 }

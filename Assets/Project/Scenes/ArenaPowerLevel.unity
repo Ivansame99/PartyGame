@@ -30526,6 +30526,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 91297dd5f9124314890c4f602b5adcf3,
         type: 2}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[0].randomEvent.gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: f8abf7f9f5fa376449082f193e2d8ca1,
+        type: 2}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[1].randomEvent.gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 4166fdf18bd2f4a4ea7bf1f988373dc8,
+        type: 2}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[2].randomEvent.gameEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 91297dd5f9124314890c4f602b5adcf3,
+        type: 2}
     - target: {fileID: 7782028682868204939, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_Enabled
@@ -30609,6 +30627,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 3743270676613228149}
+    - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 3743270676613228140}
     - targetCorrespondingSourceObject: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
@@ -30665,8 +30687,6 @@ MonoBehaviour:
   - {fileID: 2745598609333794032}
   - {fileID: 2745598609333794031}
   - {fileID: 2745598609333794030}
-  targetCamera: {fileID: 0}
-  numPlayers: 0
 --- !u!114 &3743270676613228142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30687,3 +30707,69 @@ MonoBehaviour:
   zoomLimiter: 60
   mainCamera: {fileID: 330585545}
   guiCamera: {fileID: 925351425}
+--- !u!114 &3743270676613228143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3743270676613228138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743270676613228139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76acf750e627c0e499ab4bca2c40db4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3743270676613228145 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3105006490199567253, guid: 5e6f1646701d3024d87a928af154219a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3743270676613228138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743270676613228139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fac22953920d77469b1b627a5960b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3743270676613228146 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3743270676613228138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743270676613228139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05728e82530b6684c9f1760260e106b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3743270676613228147 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3743270676613228138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743270676613228139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b20456816d84143a43d7dac4e0af28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3743270676613228149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3743270676613228139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5896ca19d6addba4fb1b0be9d251a145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGameController: {fileID: 3743270676613228147}
+  roundController: {fileID: 3743270676613228146}
+  playersRespawn: {fileID: 3743270676613228145}
+  eventsController: {fileID: 3743270676613228143}
+  multipleTargetCamera: {fileID: 3743270676613228142}
+  selectPlayerController: {fileID: 3743270676613228141}

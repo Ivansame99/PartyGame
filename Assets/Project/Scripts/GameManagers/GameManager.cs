@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public RoundController roundController;
     public PlayersRespawn playersRespawn;
     public EventsController eventsController;
+    public MultipleTargetCamera multipleTargetCamera;
+    public SelectPlayerController selectPlayerController;
+
 
     private void Awake()
     {
