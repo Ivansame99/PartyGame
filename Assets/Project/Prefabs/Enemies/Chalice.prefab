@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5719343313227081890}
+  - component: {fileID: 7176718959872030509}
   - component: {fileID: 3970693576373775690}
   - component: {fileID: 617432790068638880}
-  - component: {fileID: 7176718959872030509}
   - component: {fileID: 7196490787158382667}
   m_Layer: 0
   m_Name: Chalice
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,6 +36,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
+--- !u!114 &7176718959872030509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917567757001349630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53fbc0e2fad6f904c93eca2892833b7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  line: {fileID: 298475071783615352}
+  lineTimeLife: 1
+  firePoint: {fileID: 0}
+  finalPosition: {fileID: 0}
+  projectileFeedback: {fileID: 6453061654074407770, guid: ed51b043b5bc4cd4c9db1a3c9406c0d2,
+    type: 3}
+  explosionParticles: {fileID: 100000, guid: f9d6185463566cc488a0632e674a481b, type: 3}
+  baseDamage: 10
+  finalDamage: 10
+  pushForce: 25
+  owner: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!33 &3970693576373775690
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -86,28 +110,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7176718959872030509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6917567757001349630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53fbc0e2fad6f904c93eca2892833b7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  line: {fileID: 298475071783615352}
-  firePoint: {fileID: 0}
-  finalPosition: {fileID: 0}
-  projectileFeedback: {fileID: 6453061654074407770, guid: ed51b043b5bc4cd4c9db1a3c9406c0d2,
-    type: 3}
-  explosionParticles: {fileID: 100000, guid: f9d6185463566cc488a0632e674a481b, type: 3}
-  baseDamage: 0
-  finalDamage: 0
-  pushForce: 0
-  owner: {fileID: 0}
 --- !u!135 &7196490787158382667
 SphereCollider:
   m_ObjectHideFlags: 0

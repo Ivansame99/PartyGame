@@ -330,8 +330,17 @@ public class PlayerHealthController : MonoBehaviour
 			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmountMultiplier);
 			Destroy(other.gameObject);
 		}
-
-		if (other.CompareTag("EventDamage"))
+        if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)
+        {
+            DrunkProjectile projectile = other.gameObject.GetComponent<DrunkProjectile>();
+            lastAttacker = projectile.owner;
+            attackPosition = projectile.owner.transform.position;
+            pushBack = true;
+            pushForce = projectile.pushForce;
+            ReceiveDamage(projectile.finalDamage);
+			Debug.Log("Recibiendo daño");
+        }
+        if (other.CompareTag("EventDamage"))
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
@@ -391,7 +400,7 @@ public class PlayerHealthController : MonoBehaviour
 			ReceiveDamage(torus.finalDamage);
 		}
 
-		if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
+        if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
 		{
 			RockEvent rock = collision.gameObject.GetComponent<RockEvent>();
 			lastAttacker = null;
