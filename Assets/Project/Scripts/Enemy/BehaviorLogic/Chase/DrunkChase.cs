@@ -18,10 +18,15 @@ public class DrunkChase : EnemyChaseSOBase
     public override void DoFrameUpdateLogic()
     {
         if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
+
         if (!enemy.isDead)
         {
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
             CheckingStates();
+        }
+        else
+        {
+            enemy.stateMachine.ChangeState(enemy.deathState);
         }
     }
     void CheckingStates()
@@ -30,6 +35,7 @@ public class DrunkChase : EnemyChaseSOBase
         {
             enemy.stateMachine.ChangeState(enemy.attackState);
         }
+
     }
     public override void DoExitLogic()
     {
@@ -40,7 +46,7 @@ public class DrunkChase : EnemyChaseSOBase
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
-        
+
     }
 
     public override void Init(GameObject gameObject, Enemy enemy)

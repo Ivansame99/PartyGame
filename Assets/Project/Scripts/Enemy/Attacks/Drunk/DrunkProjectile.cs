@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,6 +10,8 @@ public class DrunkProjectile : MonoBehaviour
     //Linea de trayectoria
     [Header("Line Renderer")]
     [SerializeField] LineRenderer line;
+    [SerializeField] private float lineTimeLife = 0.5f;
+    private SphereCollider collider;
 
     //Variables para el cálculo de la trayectoria
     private float step;
@@ -23,27 +26,46 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] GameObject projectileFeedback;
     [SerializeField] GameObject explosionParticles;
 
+    [Header("Stats")]
+    public float baseDamage;
+    public float finalDamage;
+    public float pushForce;
+
     //Prefabs Clones
     private GameObject projectile;
+
+    [HideInInspector] public GameObject owner;
+    [HideInInspector] public Enemy enemy;
 
     //Variables de legibilidad
     private Vector3 fPos;
     Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
     private bool start = false;
+    private float yHitPos;
 
+    public void SetPushForce(float s)
+    {
+        pushForce = s;
+    }
 
     private void Start()
     {
+        ProjectileDamage();
+        collider = GetComponent<SphereCollider>();
+        collider.enabled = false;
         _cam = Camera.main;
-        fPos = new Vector3(finalPosition.position.x,finalPosition.position.y-0.9f,finalPosition.position.z);
+        
         step = 0.1f;
 
         Ray ray = new Ray(_cam.transform.position, fPos - _cam.transform.position);
         //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(transform.position,-transform.up, out hit,0.3f))
         {
-            if (!start)
+            yHitPos = hit.point.y;
+            if(finalPosition != null) fPos = new Vector3(finalPosition.position.x, yHitPos + 0.1f, finalPosition.position.z);
+        }
+        if (!start)
             {
                 Vector3 direction = fPos - firePoint.position;
                 Vector3 groundDirection = new Vector3(direction.x, 0, direction.z);
@@ -64,16 +86,17 @@ public class DrunkProjectile : MonoBehaviour
                     projectile = Instantiate(projectileFeedback, fPos, rotation);
                 }
             }
-        }
+        
     }
     private void Update()
     {
-
+        if(line != null) Destroy(line, lineTimeLife);
         if (Vector3.Distance(fPos, transform.position) < 3f)
         {
             Destroy(projectile);
+            collider.enabled = true;
             Instantiate(explosionParticles, fPos, rotation);
-            Destroy(gameObject);
+            Destroy(gameObject,0.1f);
         }
     }
 
@@ -126,5 +149,12 @@ public class DrunkProjectile : MonoBehaviour
             transform.position = firePoint.position + direction * x + Vector3.up * y;
             yield return null;
         }
+    }
+
+    void ProjectileDamage()
+    {
+        finalDamage = baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
+        SetPushForce(pushForce);
+        owner = enemy.gameObject;
     }
 }

@@ -46,16 +46,15 @@ public class DrunkAttack : EnemyAttackSOBase
                 bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
                 bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
                 bottle.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
+                bottle.GetComponent<DrunkProjectile>().enemy = enemy;
             }
             else
             {
                 attackTimer -= Time.deltaTime;
             }
         }
-        else
-        {
-            enemy.stateMachine.ChangeState(enemy.deathState);
-        }
+        else enemy.stateMachine.ChangeState(enemy.deathState);
+
         }
     public override void DoPhysicsLogic()
     {
