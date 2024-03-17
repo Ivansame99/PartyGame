@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Drunk : Enemy
 {
     [Header("Enemy States")]
+    [SerializeField] private EnemyIdleSOBase enemyIdleBase;
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyAttackSOBase enemyAttackBase;
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
@@ -14,6 +15,7 @@ public class Drunk : Enemy
     void Awake()
     {
         //Initialize SO
+        enemyIdleBaseInstance = Instantiate(enemyIdleBase);
         enemyChaseBaseInstance = Instantiate(enemyChaseBase);
         enemyAttackBaseInstance = Instantiate(enemyAttackBase);
         enemySpecialAttackBaseInstance = Instantiate(enemySpecialAttackBase);
@@ -22,6 +24,7 @@ public class Drunk : Enemy
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
+        idleState = new EnemyIdleState(this, stateMachine);
         chaseState = new EnemyChaseState(this, stateMachine);
         attackState = new EnemyAttackState(this, stateMachine);
         specialAttackState = new EnemySpecialAttackState(this, stateMachine);
@@ -46,6 +49,6 @@ public class Drunk : Enemy
         enemyDeathBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
-        stateMachine.Initialize(chaseState);
+        stateMachine.Initialize(idleState);
     }
 }
