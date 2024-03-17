@@ -4178,7 +4178,7 @@
     "m_SourceType": 1,
     "m_FunctionName": "CalculateHeight",
     "m_FunctionSource": "",
-    "m_FunctionBody": "float mean_height;\r\nfor(int i =-1; i<=1;i++){\r\n\tfor(int j=-1;j<=1;j++){\r\n\r\nmean_height+=SAMPLE_TEXTURE2D_LOD(TrailMap,SS,float2(TexCoord.x+i*BlurSize,TexCoord.y+j*BlurSize),1).r;\r\n\r\n}\r\n\r\n}\r\n\r\nHeightPos = saturate(mean_height) * HeightMultiplier;\r\n\r\n"
+    "m_FunctionBody": "float mean_height = 0.0;\r\n\r\nfloat2 offset = float2(BlurSize, BlurSize);\r\n\r\nfor(int i = -1; i <= 1; i++) {\r\n    for(int j = -1; j <= 1; j++) {\r\n        mean_height += SAMPLE_TEXTURE2D_LOD(TrailMap, SS, TexCoord + float2(i, j) * offset, 0).r;\r\n    }\r\n}\r\n\r\nHeightPos = saturate(mean_height / 9.0) * HeightMultiplier;"
 }
 
 {
