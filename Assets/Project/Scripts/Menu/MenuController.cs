@@ -39,7 +39,7 @@ public class MenuController : MonoBehaviour
 
 	private IEnumerator Start()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(0.1f);
 		transitionMaterial.SetFloat(propertyName, 1);
 		Destroy(GameObject.Find("PlayerMultiManager"));
 		cursor.transform.position = defaultButton.GetComponent<ButtonCursorPos>().cursorPos.position;
