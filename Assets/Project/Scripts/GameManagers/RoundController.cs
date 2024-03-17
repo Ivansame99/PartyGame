@@ -58,13 +58,13 @@ public class RoundController : MonoBehaviour
 	private void Awake()
 	{
 		roundUIAnim = roundsUI.GetComponent<Animator>();
+		currentEnemies = new List<GameObject>();
 	}
 
 	void Start()
 	{
 		finalRound = false;
 		roundIndex = 0;
-		currentEnemies = new List<GameObject>();
 
 		SelectCurrentRoundDifficulty();
 		if (!debug) StartCoroutine(IStartNextRound());
