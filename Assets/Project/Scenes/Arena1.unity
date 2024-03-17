@@ -18793,9 +18793,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8062887433062117248, guid: 9505f40a0daaa154d9d21cf074b089fd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5232208b33fd5e14cbfdc3cfbf4715c4, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27368,7 +27368,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2915029312892322458, guid: 9505f40a0daaa154d9d21cf074b089fd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e110d6b3b3b195642a75db2313254c2f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.1
   m_Pitch: 1
@@ -29792,6 +29792,76 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: music.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[0].name
+      value: Public
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[1].name
+      value: ChargeBow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[2].name
+      value: BowRelease
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[3].name
+      value: Roll
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: sfx.Array.data[4].name
+      value: PlayerAttacks
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: music.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e110d6b3b3b195642a75db2313254c2f, type: 3}
+    - target: {fileID: 3350440727890617509, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: music.Array.data[0].name
+      value: BackgroundMusic
       objectReference: {fileID: 0}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
