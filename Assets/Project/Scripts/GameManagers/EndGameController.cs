@@ -24,7 +24,7 @@ public class EndGameController : MonoBehaviour
 	private float maxTimeFirework;
 
 	[SerializeField]
-	private GameObject coinPrefab;
+	private GameObject[] coinsPrefab;
 
 	[SerializeField]
 	private float rateCoin;
@@ -94,7 +94,8 @@ public class EndGameController : MonoBehaviour
 	{
 		for (int i = 0; i < totalCoinsAmmount; i++)
 		{
-			GameObject moneda = Instantiate(coinPrefab, new Vector3(0, 25f, 0), Quaternion.identity);
+			int randomNumber = Random.Range(0, coinsPrefab.Length);
+			GameObject moneda = Instantiate(coinsPrefab[randomNumber], new Vector3(0, 25f, 0), Quaternion.identity);
 			moneda.SetActive(false);
 			coinsPool.Add(moneda);
 		}
