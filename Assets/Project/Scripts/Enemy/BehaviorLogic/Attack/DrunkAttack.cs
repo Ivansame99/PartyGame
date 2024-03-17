@@ -52,10 +52,8 @@ public class DrunkAttack : EnemyAttackSOBase
                 attackTimer -= Time.deltaTime;
             }
         }
-        else
-        {
-            enemy.stateMachine.ChangeState(enemy.deathState);
-        }
+        else enemy.stateMachine.ChangeState(enemy.deathState);
+
         }
     public override void DoPhysicsLogic()
     {

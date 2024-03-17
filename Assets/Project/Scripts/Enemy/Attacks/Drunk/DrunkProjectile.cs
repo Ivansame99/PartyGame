@@ -23,6 +23,18 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] GameObject projectileFeedback;
     [SerializeField] GameObject explosionParticles;
 
+    [Header("Stats")]
+    public float baseDamage;
+    public float finalDamage;
+    public float pushForce;
+
+    [HideInInspector]
+    public GameObject owner;
+
+    public void SetPushForce(float s)
+    {
+        pushForce = s;
+    }
     //Prefabs Clones
     private GameObject projectile;
 
