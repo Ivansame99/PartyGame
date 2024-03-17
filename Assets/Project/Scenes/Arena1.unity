@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.25
+  m_fontSize: 45.2
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15924,8 +15924,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5752102, y: 1, z: 1.0000001}
-  m_Center: {x: 0.15668114, y: 0, z: 0.0000007702563}
+  m_Size: {x: 1.5752101, y: 1.4969612, z: 1.0000001}
+  m_Center: {x: 0.15668112, y: 0.24848062, z: 0.0000007761331}
 --- !u!23 &976504692
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -18945,8 +18945,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5411491, y: 1, z: 1}
-  m_Center: {x: -0.02031837, y: 0, z: 0.000011437385}
+  m_Size: {x: 1.5411491, y: 1.5166112, z: 1}
+  m_Center: {x: -0.020318331, y: 0.25830582, z: 0.0000114439235}
 --- !u!23 &1254371500
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22551,8 +22551,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5550644, y: 1, z: 1}
-  m_Center: {x: 0.0021169076, y: 0, z: 0}
+  m_Size: {x: 1.5550644, y: 1.6221466, z: 1}
+  m_Center: {x: 0.0021168683, y: 0.31107372, z: 0}
 --- !u!23 &1430526022
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29525,6 +29525,16 @@ PrefabInstance:
       propertyPath: eventNameText
       value: 
       objectReference: {fileID: 93323599}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[1].probability
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[2].probability
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: playerPos.Array.data[0]

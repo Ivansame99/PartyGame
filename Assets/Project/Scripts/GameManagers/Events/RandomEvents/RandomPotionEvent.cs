@@ -20,7 +20,7 @@ public class RandomPotionEvent : GameEvent
 	private float xPosMinIni = -37f;
 
 	private float zPosMaxIni = 27f;
-	private float zPosMinIni = -10f;
+	private float zPosMinIni = -5f;
 	private float yPosIni = 20;
 
 	private float xPosMaxFinal = 23f;
