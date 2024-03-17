@@ -27,6 +27,7 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] GameObject explosionParticles;
 
     [Header("Stats")]
+    [SerializeField] private float speedMultiplier = 2f;
     public float baseDamage;
     public float finalDamage;
     public float pushForce;
@@ -42,7 +43,7 @@ public class DrunkProjectile : MonoBehaviour
     Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
     private bool start = false;
     private float yHitPos;
-
+    
     public void SetPushForce(float s)
     {
         pushForce = s;
@@ -82,7 +83,7 @@ public class DrunkProjectile : MonoBehaviour
                 if (start)
                 {
                     StopAllCoroutines();
-                    StartCoroutine(Coroutine_Movement(groundDirection.normalized, v0, angle, time));
+                    StartCoroutine(Coroutine_Movement(groundDirection.normalized, v0, angle, time, speedMultiplier));
                     projectile = Instantiate(projectileFeedback, fPos, rotation);
                 }
             }
@@ -138,12 +139,12 @@ public class DrunkProjectile : MonoBehaviour
         angle = Mathf.Atan(b * time / xt);
         v0 = b / Mathf.Sin(angle);
     }
-    IEnumerator Coroutine_Movement(Vector3 direction, float v0, float angle,float time)
+    IEnumerator Coroutine_Movement(Vector3 direction, float v0, float angle, float time, float speedMultiplier)
     {
         float t = 0;
         while (t < time)
         {
-            t += Time.deltaTime;
+            t += Time.deltaTime * speedMultiplier; // Ajusta el tiempo de acuerdo al multiplicador de velocidad
             float x = v0 * Mathf.Cos(angle) * t;
             float y = v0 * Mathf.Sin(angle) * t - 0.5f * 9.8f * t * t;
             transform.position = firePoint.position + direction * x + Vector3.up * y;
