@@ -35,6 +35,9 @@ public class RoundController : MonoBehaviour
 	private TMP_Text roundsUIText;
 
 	[SerializeField]
+	private TMP_Text roundsUIText2;
+
+	[SerializeField]
 	private GameObject rainPrefab;
 
 	[SerializeField]
@@ -124,7 +127,7 @@ public class RoundController : MonoBehaviour
 
 	void SetFinalRound()
 	{
-		roundsUIText.text = "Final Round";
+		ChangeUIText("Final Round");
 		roundUIAnim.SetTrigger("ChangeRound");
 		Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
 		LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
@@ -150,6 +153,12 @@ public class RoundController : MonoBehaviour
 		if (number >= 1) return "I" + ToRoman(number - 1);
 		return "Impossible state reached";
 	}
+
+	void ChangeUIText(string text)
+	{
+		roundsUIText.text = text;
+		roundsUIText2.text = text;
+	}
 	#endregion
 
 	#region Getters
@@ -162,7 +171,7 @@ public class RoundController : MonoBehaviour
 	#region Coroutines
 	IEnumerator IStartNextRound()
 	{
-		roundsUIText.text = "Round " + ToRoman(roundIndex + 1);
+		ChangeUIText("Round: " + ToRoman(roundIndex + 1) + " / " + ToRoman(currentRound.rounds.Length));
 		roundUIAnim.SetTrigger("ChangeRound");
 		yield return new WaitForSeconds(secondsBetweenRounds);
 
