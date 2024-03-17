@@ -6,6 +6,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Drunk Chase", menuName = "Enemy Logic/Drunk/Chase Logic/Chase To Player")]
 public class DrunkChase : EnemyChaseSOBase
 {
+
+    void CheckingStates()
+    {
+        if (enemy.IsAggreed)
+        {
+            enemy.stateMachine.ChangeState(enemy.idleState);
+        }
+
+    }
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -21,21 +30,13 @@ public class DrunkChase : EnemyChaseSOBase
 
         if (!enemy.isDead)
         {
-            if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
             CheckingStates();
+            if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
         }
         else
         {
             enemy.stateMachine.ChangeState(enemy.deathState);
         }
-    }
-    void CheckingStates()
-    {
-        if (enemy.IsAggreed)
-        {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
-
     }
     public override void DoExitLogic()
     {

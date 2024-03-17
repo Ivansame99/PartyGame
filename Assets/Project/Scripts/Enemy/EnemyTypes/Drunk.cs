@@ -43,6 +43,7 @@ public class Drunk : Enemy
         enemyTargetController = GetComponent<EnemyTargetController>();
 
         //Initialize SO
+        enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
         enemySpecialAttackBaseInstance.Init(gameObject, this);

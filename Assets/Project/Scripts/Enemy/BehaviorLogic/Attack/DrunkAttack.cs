@@ -8,10 +8,8 @@ public class DrunkAttack : EnemyAttackSOBase
 {
     [SerializeField] private GameObject bottlePrefab;
     private GameObject bottle;
+    private bool once;
 
-    //COOLDOWN ATTACKS
-    private float attackTimer;
-    [SerializeField] private float attackCooldown;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -20,11 +18,7 @@ public class DrunkAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        
-        //Vector3 enemyPosition = new Vector3(enemy.transform.position.x,enemy.transform.position.y + 4f,enemy.transform.position.z);
-
-        // Instancia la botella en la posición del enemigo
-
+        enemy.animator.SetTrigger("Attack");
     }
     public override void DoExitLogic()
     {
@@ -35,33 +29,25 @@ public class DrunkAttack : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
-            if (!enemy.IsAggreed)
+            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                enemy.stateMachine.ChangeState(enemy.chaseState);
-            }
-
-            if (attackTimer <= 0)
-            {
-                attackTimer = attackCooldown;
-                bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
-                bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
-                bottle.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
-                bottle.GetComponent<DrunkProjectile>().enemy = enemy;
-            }
-            else
-            {
-                attackTimer -= Time.deltaTime;
+                ThrowBottle();
+                enemy.stateMachine.ChangeState(enemy.idleState);
             }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
 
-        }
+    }
+    void ThrowBottle()
+    {
+        bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
+        bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
+        bottle.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
+        bottle.GetComponent<DrunkProjectile>().enemy = enemy;
+    }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();
-        if(bottlePrefab != null)
-        {
-        }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
     {
