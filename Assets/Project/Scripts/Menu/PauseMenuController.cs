@@ -55,7 +55,7 @@ public class PauseMenuController : MonoBehaviour
 				eventSystem.SetSelectedGameObject(defaultButton);
 				lastButtonSelected = defaultButton;
 				StartCoroutine(SetStartCursosPos());
-				Time.timeScale = 0.0f;
+				Time.timeScale = 0.00001f;
                 pause = true;
 				anim.SetBool("PauseAppear", true);
 			}

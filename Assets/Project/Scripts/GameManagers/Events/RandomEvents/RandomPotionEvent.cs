@@ -16,6 +16,9 @@ public class RandomPotionEvent : GameEvent
 	[SerializeField]
 	private float speedMax;
 
+	[SerializeField]
+	private float destroyTime;
+
 	private float xPosMaxIni = 37f;
 	private float xPosMinIni = -37f;
 
@@ -81,6 +84,7 @@ public class RandomPotionEvent : GameEvent
 	public override void EventUpdate()
 	{
 		potion = Instantiate(currentObject, initialPosition, currentObject.transform.rotation);
+		Destroy(potion, destroyTime);
 		potionRb = potion.GetComponent<Rigidbody>();
 		float distanceToTarget = Vector3.Distance(potion.transform.position, finalPosition);
 		float initialSpeed = Mathf.Sqrt(2 * distanceToTarget * speed);

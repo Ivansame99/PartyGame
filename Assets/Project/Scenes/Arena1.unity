@@ -15898,7 +15898,7 @@ GameObject:
   - component: {fileID: 976504693}
   - component: {fileID: 976504692}
   - component: {fileID: 976504691}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Limit3
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18919,7 +18919,7 @@ GameObject:
   - component: {fileID: 1254371501}
   - component: {fileID: 1254371500}
   - component: {fileID: 1254371499}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Limit2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22525,7 +22525,7 @@ GameObject:
   - component: {fileID: 1430526023}
   - component: {fileID: 1430526022}
   - component: {fileID: 1430526021}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Limit1
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -29525,6 +29525,16 @@ PrefabInstance:
       propertyPath: eventNameText
       value: 
       objectReference: {fileID: 93323599}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: minTimeToSpawn
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[0].probability
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: randomEvents.Array.data[1].probability
