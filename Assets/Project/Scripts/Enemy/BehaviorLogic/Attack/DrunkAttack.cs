@@ -16,17 +16,19 @@ public class DrunkAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Attack");
+        enemy.animator.SetBool("Attack",true);
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        enemy.animator.SetBool("Attack", false);
     }
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
+
             enemy.rb.velocity = Vector3.zero;
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {

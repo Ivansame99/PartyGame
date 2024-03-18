@@ -27,15 +27,19 @@ public class DrunkDamage : EnemyDamageSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if (stunedTimer <= 0)
+        if (!enemy.isDead)
         {
-            enemy.SetDamagedStatus(false);
-            enemy.stateMachine.ChangeState(enemy.idleState);
-        }
-        else
-        {
-            stunedTimer -= Time.deltaTime;
-        }
+            if (stunedTimer <= 0)
+            {
+                enemy.SetDamagedStatus(false);
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+            else
+            {
+                stunedTimer -= Time.deltaTime;
+            }
+        }else enemy.stateMachine.ChangeState(enemy.deathState);
+
     }
 
     public override void DoPhysicsLogic()
