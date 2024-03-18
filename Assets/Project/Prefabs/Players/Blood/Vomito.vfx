@@ -17,10 +17,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 127
-    y: -190
-    width: 2427
-    height: 2741
+    x: -10
+    y: -272
+    width: 2564
+    height: 2823
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -681,7 +681,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Vector, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"vector":{"x":-0.3330000042915344,"y":0.20000000298023225,"z":10.0}}'
+      m_SerializableObject: '{"vector":{"x":-0.3330000042915344,"y":0.20000000298023225,"z":20.0}}'
     m_Space: 0
   m_Property:
     name: A
@@ -1716,7 +1716,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.5
+      m_SerializableObject: 0
     m_Space: 2147483647
   m_Property:
     name: Delay
@@ -1803,7 +1803,7 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661614613}
     - outputSlot: {fileID: 8926484042661614611}
       inputSlot: {fileID: 8926484042661614620}
-    position: {x: 436, y: -80}
+    position: {x: 84, y: -272}
     expandedSlots: []
     expanded: 1
 --- !u!114 &8926484042661614611
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 577, y: -76}
+  m_UIPosition: {x: 225, y: -268}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2051,14 +2051,14 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661614614}
     - outputSlot: {fileID: 8926484042661614618}
       inputSlot: {fileID: 8926484042661614622}
-    position: {x: 342, y: 53}
+    position: {x: -10, y: -139}
     expandedSlots: []
     expanded: 0
   - m_Id: 1
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614618}
       inputSlot: {fileID: 8926484042661614607}
-    position: {x: 736.8875, y: 63.317497}
+    position: {x: 785, y: 71}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614618
@@ -2113,7 +2113,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 577, y: 74}
+  m_UIPosition: {x: 225, y: -118}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -3833,7 +3833,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 50
+      m_SerializableObject: 15
     m_Space: 2147483647
   m_Property:
     name: A
@@ -3867,7 +3867,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 50
+      m_SerializableObject: 15
     m_Space: 2147483647
   m_Property:
     name: B
@@ -4130,7 +4130,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":600.0,"y":100.0,"z":600.0}}'
+      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":600.0,"y":0.0,"z":600.0}}'
     m_Space: 1
   m_Property:
     name: box
@@ -5855,7 +5855,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 80
+      m_SerializableObject: 30
     m_Space: 2147483647
   m_Property:
     name: A
@@ -5889,7 +5889,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 100
+      m_SerializableObject: 35
     m_Space: 2147483647
   m_Property:
     name: B
@@ -6788,7 +6788,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 200
+      m_SerializableObject: 100
     m_Space: 2147483647
   m_Property:
     name: min
@@ -6822,7 +6822,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 200
+      m_SerializableObject: 100
     m_Space: 2147483647
   m_Property:
     name: max
