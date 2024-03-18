@@ -16,13 +16,6 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField]
 	private float inmuneTime;
 
-	[SerializeField]
-	private Material URPMaterial;
-	[SerializeField]
-	private Texture baseMapParpadeo;
-	[SerializeField]
-	private Texture baseMapOriginal;
-
 	[Header("Feedback")]
 	[SerializeField] private GameObject cross1;
 	[SerializeField] private GameObject cross2;
@@ -32,10 +25,14 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject bloodParticles;
 
 	[SerializeField] private HelmetPrefab[] dieDrops;
-
 	[SerializeField] private float minForce = 5f;
 	[SerializeField] private float maxForce = 10f;
+
 	[SerializeField] private GameObject ghostPrefab;
+
+	[SerializeField] private Material redMaterial;
+	[SerializeField] private Renderer helmet;
+	[SerializeField] private Renderer body;
 	#endregion
 
 	#region Variables
@@ -63,6 +60,9 @@ public class PlayerHealthController : MonoBehaviour
 
 	internal bool dead = false;
 	internal float invencibleTimer;
+
+	private Material originalHelmetMaterial;
+	private Material originalBodyMaterial;
 	#endregion
 
 	#region Life Cycle
@@ -81,7 +81,8 @@ public class PlayerHealthController : MonoBehaviour
 		playersHealthManager = GameManager.Instance.playersHealthManager;
 		playerConfig = this.GetComponent<PlayerInputHandler>().playerConfig;
 
-		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
+		originalHelmetMaterial = helmet.material;
+		originalBodyMaterial = body.material;
 
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 		powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
@@ -348,12 +349,16 @@ public class PlayerHealthController : MonoBehaviour
 
 	IEnumerator RedEffect()
 	{
-		for (int i = 0; i < 5; i++)
+		int numTimes = 5;
+		float delay = 0.1f;
+		for (int i = 0; i < numTimes; i++)
 		{
-			URPMaterial.SetTexture("_BaseMap", baseMapParpadeo);
-			yield return new WaitForSeconds(0.1f);
-			URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
-			yield return new WaitForSeconds(0.1f);
+			helmet.material = redMaterial;
+			body.material = redMaterial;
+			yield return new WaitForSeconds(delay);
+			helmet.material = originalHelmetMaterial;
+			body.material = originalBodyMaterial;
+			yield return new WaitForSeconds(delay);
 		}
 	}
 	#endregion
