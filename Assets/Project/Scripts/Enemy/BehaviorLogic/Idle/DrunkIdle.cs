@@ -38,7 +38,8 @@ public class DrunkIdle : EnemyIdleSOBase
 
             if (attackTimer <= 0)
             {
-                enemy.stateMachine.ChangeState(enemy.attackState);
+                if (enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                if (enemy.IsAggreed && !enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.attackState);
             }
             else
             {
@@ -49,11 +50,8 @@ public class DrunkIdle : EnemyIdleSOBase
     }
     void CheckingStates()
     {
-        if(enemy.IsSpecialAggro)
-        {
-            //enemy.stateMachine.ChangeState(enemy.specialAttackState);
-        }
-        if (!enemy.IsAggreed)
+
+        if (!enemy.IsAggreed && !enemy.IsSpecialAggro)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
         }

@@ -32,15 +32,12 @@ public class DrunkChase : EnemyChaseSOBase
     }
     void CheckingStates()
     {
-        if (enemy.IsAggreed)
-        {
-            enemy.stateMachine.ChangeState(enemy.attackState);
-        }
+        if (enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.specialAttackState);
 
-        if (enemy.IsDamaged)
-        {
-            enemy.stateMachine.ChangeState(enemy.damageState);
-        }
+        if (enemy.IsAggreed && !enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.attackState);
+
+        if (enemy.IsDamaged) enemy.stateMachine.ChangeState(enemy.damageState);
+
     }
     public override void DoExitLogic()
     {

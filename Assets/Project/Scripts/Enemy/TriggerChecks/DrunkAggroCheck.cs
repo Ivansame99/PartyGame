@@ -31,11 +31,15 @@ public class DrunkAggroCheck : MonoBehaviour
             distancePlayer2 = Vector3.Distance(_enemy.playerPos2.position, transform.position);
         }
 
-        if(distancePlayer1 < triggerCloseAttack || distancePlayer2 < triggerCloseAttack)
+        if(distancePlayer1 < triggerCloseAttack)
         {
             _enemy.SetSpecialAggroStatus(true);
         }
-        if (distancePlayer1 < triggerDistanceAttack && Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
+        else
+        {
+            _enemy.SetSpecialAggroStatus(false);
+        }
+        if (distancePlayer1 < triggerDistanceAttack && distancePlayer1 > triggerCloseAttack &&Math.Abs(Vector3.Angle(_enemy.transform.forward, direction)) < deg)
         {
             _enemy.SetAggroStatus(true);
         }
