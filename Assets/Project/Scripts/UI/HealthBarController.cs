@@ -53,7 +53,7 @@ public class HealthBarController : MonoBehaviour
                 StopCoroutine(AnimationCoroutine);
             }
 
-            AnimationCoroutine = StartCoroutine(AnimateProgress(Progress, Speed));
+            if(this.gameObject.activeInHierarchy) AnimationCoroutine = StartCoroutine(AnimateProgress(Progress, Speed));
         }
     }
 

@@ -44,12 +44,18 @@ public class PlayerHudController : MonoBehaviour
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		SetupHealthBar();
 
-		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
+		if (GameManager.Instance.selectPlayerController != null)
+		{
+			int hudIndex = GetComponent<PlayerController>().GetPlayerId() - 1;
+			playerUI = GameManager.Instance.selectPlayerController.GetPlayersHud()[hudIndex];
+		}
+		
 		if (playerUI != null)
 		{
-			playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
-			playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+			PlayerHud playerHud = playerUI.GetComponent<PlayerHud>();
+			playerUIHealthAnimator = playerHud.animator;
+			playerUIHealth = playerHud.healthBarController;
+			playerUIPowerText = playerHud.powerText;
 		}
 	}
 	#endregion

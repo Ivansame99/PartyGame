@@ -55,5 +55,10 @@ public class SelectPlayerController : MonoBehaviour
 	{
 		return players;
 	}
+
+	public GameObject[] GetPlayersHud()
+	{
+		return playersUI;
+	}
 	#endregion
 }
