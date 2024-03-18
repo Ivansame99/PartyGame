@@ -30,7 +30,7 @@ public class DrunkDamage : EnemyDamageSOBase
         if (stunedTimer <= 0)
         {
             enemy.SetDamagedStatus(false);
-            enemy.stateMachine.ChangeState(enemy.idleState);
+            enemy.stateMachine.ChangeState(enemy.chaseState);
         }
         else
         {

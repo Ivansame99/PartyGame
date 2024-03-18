@@ -18,12 +18,11 @@ public class DrunkIdle : EnemyIdleSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Idle");
-        
+        attackTimer = attackCooldown;
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        attackTimer = attackCooldown;
     }
 
     public override void DoFrameUpdateLogic()
@@ -32,7 +31,10 @@ public class DrunkIdle : EnemyIdleSOBase
         if (!enemy.isDead)
         {
             CheckingStates();
-            if(!enemy.playerPos) enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
+            Vector3 lookVector = enemy.playerPos.transform.position - transform.position;
+            lookVector.y = transform.position.y;
+            Quaternion rot = Quaternion.LookRotation(lookVector);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
 
             if (attackTimer <= 0)
             {
@@ -47,13 +49,17 @@ public class DrunkIdle : EnemyIdleSOBase
     }
     void CheckingStates()
     {
-        if(enemy.IsDamaged)
+        if(enemy.IsSpecialAggro)
         {
-            enemy.stateMachine.ChangeState(enemy.damageState);
+            //enemy.stateMachine.ChangeState(enemy.specialAttackState);
         }
         if (!enemy.IsAggreed)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
+        }
+        if (enemy.IsDamaged)
+        {
+            enemy.stateMachine.ChangeState(enemy.damageState);
         }
     }
     public override void DoPhysicsLogic()
