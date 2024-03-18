@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.2
+  m_fontSize: 41.25
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18795,7 +18795,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27370,7 +27370,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e110d6b3b3b195642a75db2313254c2f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -29783,6 +29783,21 @@ PrefabInstance:
       propertyPath: eventNameText
       value: 
       objectReference: {fileID: 93323599}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[0].probability
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[1].probability
+      value: 0.267
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[2].probability
+      value: 0.293
+      objectReference: {fileID: 0}
     - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: playersUI.Array.data[0]

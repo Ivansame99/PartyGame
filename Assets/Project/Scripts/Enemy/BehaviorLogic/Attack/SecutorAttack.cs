@@ -22,6 +22,7 @@ public class SecutorAttack : EnemyAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Attack");
+        enemy.secutorAudioManager.PlaySwordWhoosh();
         isAttacking = true;
         attackTimer = attackCooldown;
     }
