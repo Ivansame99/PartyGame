@@ -6,19 +6,53 @@ using Random = UnityEngine.Random;
 
 public class PlayerHealthController : MonoBehaviour
 {
+	#region Inspector Variables
 	[Header("Logic")]
 	private float health;
 
 	[SerializeField]
 	private float maxHealthBase;
 
-	private float maxHealth;
-
 	[SerializeField]
 	private float inmuneTime;
 
-	[HideInInspector]
-	public bool dead = false;
+	[Header("UI")]
+	[SerializeField]
+	private HealthBarController healthBarC;
+
+	[SerializeField]
+	private Transform healthBar;
+
+	[SerializeField]
+	private Transform powerBar;
+
+	[SerializeField]
+	private Material URPMaterial;
+	[SerializeField]
+	private Texture baseMapParpadeo;
+	[SerializeField]
+	private Texture baseMapOriginal;
+
+	[Header("Feedback")]
+	[SerializeField] private GameObject cross1;
+	[SerializeField] private GameObject cross2;
+	[SerializeField] private GameObject glow;
+
+	[SerializeField] private GameObject deathParticles;
+	[SerializeField] private GameObject bloodParticles;
+	[SerializeField] private GameObject floatingDamageText;
+
+	[SerializeField] private HelmetPrefab[] dieDrops;
+
+	[SerializeField] private float minForce = 5f;
+	[SerializeField] private float maxForce = 10f;
+	[SerializeField] private GameObject ghostPrefab;
+	#endregion
+
+	private PlayerConfiguration playerConfig;
+	private GameObject ghost;
+	private float maxHealth;
+	internal bool dead = false;
 	private bool deadAux = false;
 
 	private GameObject lastAttacker;
@@ -30,89 +64,48 @@ public class PlayerHealthController : MonoBehaviour
 	private Vector3 attackPosition;
 	private float pushForce;
 
-	[HideInInspector]
-	public float invencibleTimer;
-
-	[Header("UI")]
-	[SerializeField]
-	private HealthBarController healthBarC;
-
-	[SerializeField]
-	private Transform healthBar;
-
+	internal float invencibleTimer;
 	private Animator healthBarAnimator;
-
-	[SerializeField]
-	private Transform powerBar;
-
 	private Canvas healBarCanvas;
 
 	private GameObject playerUI;
 	private HealthBarController playerUIHealth;
 	private Animator playerUIHealthAnimator;
 
-	[Header("Components")]
 	private PlayerController playerController;
 	private PowerController powerController;
 	private Animator anim;
 	private Rigidbody rb;
 
-	public Material URPMaterial;
-	public Texture baseMapParpadeo;
-	public Texture baseMapOriginal;
-
-	[Header("Feedback")]
-	[SerializeField] private GameObject cross1;
-	[SerializeField] private GameObject cross2;
-	[SerializeField] private GameObject glow;
-
-	[SerializeField] private GameObject HealParticles;
-	[SerializeField] private GameObject DeathParticles;
-	[SerializeField] private GameObject BloodParticles;
-	[SerializeField] private GameObject floatingDamageText;
-
-	[SerializeField] private HelmetPrefab[] helmetPrefabs;
-	[SerializeField] private GameObject ghostPrefab;
-
-	[SerializeField] private float minForce = 5f;
-	[SerializeField] private float maxForce = 10f;
-
-	private PlayerConfiguration playerConfig;
-
-	private GameObject ghost;
-
-	//public Action<Transform> OnPlayerDie;
-
-	void Start()
+	private void Awake()
 	{
-		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		SetupHealthBar(healBarCanvas);
-
 		//Components
 		playerController = GetComponent<PlayerController>();
 		powerController = GetComponent<PowerController>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
-		playersHealthManager = GameManager.Instance.playersHealthManager;
+	}
 
-		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
+	void Start()
+	{
+		playersHealthManager = GameManager.Instance.playersHealthManager;
+		playerConfig = this.GetComponent<PlayerInputHandler>().playerConfig;
+
+		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
+		SetupHealthBar(healBarCanvas);
 		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
 		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-
 		if (playerUI != null)
 		{
 			playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
 			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
 		}
 
-		maxHealth = maxHealthBase + powerController.PowerHealth(); ;
-		if (powerController != null)
-		{
-			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
-		}
-		health = maxHealth;
+		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 
-		playerConfig = this.GetComponent<PlayerInputHandler>().playerConfig;
+		maxHealth = maxHealthBase + powerController.PowerHealth();
+		powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
+		health = maxHealth;
 	}
 
 	void Update()
@@ -144,7 +137,7 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		//Feedback
 		StartCoroutine(RedEffect());
-		Instantiate(BloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
 
 		cross1.SetActive(false);
 		cross2.SetActive(false);
@@ -202,7 +195,7 @@ public class PlayerHealthController : MonoBehaviour
 	private void Die()
 	{
 		//Feedback
-		foreach (var helmetPrefab in helmetPrefabs)
+		foreach (var helmetPrefab in dieDrops)
 		{
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
@@ -220,7 +213,7 @@ public class PlayerHealthController : MonoBehaviour
 			}
 		}
 
-		Instantiate(DeathParticles, transform.position, Quaternion.identity);
+		Instantiate(deathParticles, transform.position, Quaternion.identity);
 
 		//Sound
 		playerController.playerAudioManager.PlayDeath();
@@ -327,17 +320,17 @@ public class PlayerHealthController : MonoBehaviour
 			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmountMultiplier);
 			Destroy(other.gameObject);
 		}
-        if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)
-        {
-            DrunkProjectile projectile = other.gameObject.GetComponent<DrunkProjectile>();
-            lastAttacker = projectile.owner;
-            attackPosition = projectile.owner.transform.position;
-            pushBack = true;
-            pushForce = projectile.pushForce;
-            ReceiveDamage(projectile.finalDamage);
+		if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)
+		{
+			DrunkProjectile projectile = other.gameObject.GetComponent<DrunkProjectile>();
+			lastAttacker = projectile.owner;
+			attackPosition = projectile.owner.transform.position;
+			pushBack = true;
+			pushForce = projectile.pushForce;
+			ReceiveDamage(projectile.finalDamage);
 			Debug.Log("Recibiendo daño");
-        }
-        if (other.CompareTag("EventDamage"))
+		}
+		if (other.CompareTag("EventDamage"))
 		{
 			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
 		}
@@ -397,7 +390,7 @@ public class PlayerHealthController : MonoBehaviour
 			ReceiveDamage(torus.finalDamage);
 		}
 
-        if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
+		if (collision.transform.CompareTag("Stone") && invencibleTimer <= 0 && !dead)
 		{
 			RockEvent rock = collision.gameObject.GetComponent<RockEvent>();
 			lastAttacker = null;

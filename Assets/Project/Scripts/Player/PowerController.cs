@@ -14,13 +14,13 @@ public class PowerController : MonoBehaviour
 	private float minPowerLevel;
 
 	[SerializeField]
-	private float maxPowerLevel; //Habra que hacer pruebas
+	private float maxPowerLevel;
 
 	[SerializeField]
-	private float powerScale; //Reduce it to more damage
+	private float powerScale;
 
 	[SerializeField]
-	private float healthScale; //Reduce it to more health scale
+	private float healthScale;
 
 	[SerializeField]
 	private float maxScaleMultiplier = 2;
@@ -33,6 +33,7 @@ public class PowerController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject smoke;
+
 	private TMP_Text powerLevelText;
 
 	private Canvas canvas;

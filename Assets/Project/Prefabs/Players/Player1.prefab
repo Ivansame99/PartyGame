@@ -30554,26 +30554,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 03bdb10395168be4cad967d62908752e, type: 2}
   - {fileID: 11400000, guid: c4c038f6a243ef54b97088b3f02264b3, type: 2}
   - {fileID: 11400000, guid: dbbd4d8fb5184e94fa2b36e517355958, type: 2}
-  dodgeTimer: 0
-  isDodging: 0
-  isAttacking: 0
-  isSpecialAttacking: 0
-  isJumping: 0
-  moveUniversal: {x: 0, y: 0}
-  direction: {x: 0, y: 0, z: 0}
+  playerId: 1
   jumpAttackCollider: {fileID: 5332908631118930390}
   arrowConeIndicator: {fileID: 1150728227621411889}
-  bowTimer: 0
-  lastComboTimer: 0
   weaponController: {fileID: 3169315981861497612}
   slashCollider: {fileID: 5491916191551023080}
-  rb: {fileID: 0}
-  groundCheck: {fileID: 0}
-  anim: {fileID: 0}
-  healthController: {fileID: 0}
-  powerController: {fileID: 0}
-  gravityController: {fileID: 0}
-  waterDetection: {fileID: 0}
   detectEnemiesNear: {fileID: 8363520183100929824}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
@@ -30611,8 +30596,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthBase: 100
   inmuneTime: 0.3
-  dead: 0
-  invencibleTimer: 0
   healthBarC: {fileID: 7797326253054462551}
   healthBar: {fileID: 7568593133114853395}
   powerBar: {fileID: 2847639267803040626}
@@ -30622,30 +30605,29 @@ MonoBehaviour:
   cross1: {fileID: 2187086775622481420}
   cross2: {fileID: 6085800573928801362}
   glow: {fileID: 4313605478303797485}
-  HealParticles: {fileID: 100000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
-  DeathParticles: {fileID: 141433446842962269, guid: 4672a6b76de0f204999cc1a3cd6ac166,
+  deathParticles: {fileID: 141433446842962269, guid: 4672a6b76de0f204999cc1a3cd6ac166,
     type: 3}
-  BloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
+  bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
     type: 3}
   floatingDamageText: {fileID: 8703725455407415189, guid: d7586728160998243b6b812e34606dd1,
     type: 3}
-  helmetPrefabs:
-  - prefab: {fileID: 2097220012618991600, guid: 73f34ad2a97eb9c45a9c2e2ff9b2b7e7,
+  dieDrops:
+  - prefab: {fileID: 8672530925873175708, guid: ed1d3744e3307b2438c52b46940c578f,
       type: 3}
     spawnChance: 1
   - prefab: {fileID: 6505563898143396405, guid: 7dbf81acb11270545892431579b934e2,
       type: 3}
     spawnChance: 1
-  - prefab: {fileID: 8672530925873175708, guid: ed1d3744e3307b2438c52b46940c578f,
+  - prefab: {fileID: 2097220012618991600, guid: 73f34ad2a97eb9c45a9c2e2ff9b2b7e7,
       type: 3}
     spawnChance: 1
   - prefab: {fileID: 5739960698836056263, guid: 9fc6f4711d4d7f5409cd155024513f30,
       type: 3}
     spawnChance: 1
-  ghostPrefab: {fileID: 3750043356882051321, guid: 52c7d83f20feb80489d57432f3018ade,
-    type: 3}
   minForce: 2
   maxForce: 5
+  ghostPrefab: {fileID: 3750043356882051321, guid: 52c7d83f20feb80489d57432f3018ade,
+    type: 3}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
