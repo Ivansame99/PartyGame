@@ -57,6 +57,8 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyDamageSOBase enemyDamageBaseInstance { get; set; }
 	public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
 
+	public SecutorAudioManager secutorAudioManager;
+	public GiantAudioManager giantAudioManager;
 	#endregion
 
 

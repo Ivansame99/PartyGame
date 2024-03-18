@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     public MultipleTargetCamera multipleTargetCamera;
     public SelectPlayerController selectPlayerController;
 	public GMSceneManager gmSceneManager;
-	public AudioManager audioManager;
 
 	private void Awake()
     {

@@ -15,6 +15,7 @@ public class SecutorDamage : EnemyDamageSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Damaged");
+        enemy.secutorAudioManager.PlayDamage();
         stunedTimer = stunTime;
     }
 

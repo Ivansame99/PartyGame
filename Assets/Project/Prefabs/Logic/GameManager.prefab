@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 5726284098889303312}
   - component: {fileID: 862325205299733610}
   - component: {fileID: 1697052631678738525}
-  - component: {fileID: 3350440727890617509}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -40,7 +39,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2315801244191024909
 MonoBehaviour:
@@ -62,7 +61,6 @@ MonoBehaviour:
   multipleTargetCamera: {fileID: 862325205299733610}
   selectPlayerController: {fileID: 5726284098889303312}
   gmSceneManager: {fileID: 1697052631678738525}
-  audioManager: {fileID: 3350440727890617509}
 --- !u!114 &7806798369090360513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,19 +73,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b20456816d84143a43d7dac4e0af28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winAnimDuration: 15
   fireworkPrefab: {fileID: 1978689737715041617, guid: afa54037ffe627545886e2741abb365d,
     type: 3}
   maxFireworksInstanced: 20
   minTimeFirework: 0.5
   maxTimeFirework: 1
-  coinPrefab: {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a,
-    type: 3}
+  coinsPrefab:
+  - {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a, type: 3}
+  - {fileID: 4605368680721465263, guid: 874b540a701c4be429a0ed49fab26a46, type: 3}
+  - {fileID: 4605368680721465263, guid: dd68c87d10f8f1743ab0ce65a3b11566, type: 3}
   rateCoin: 0.02
   totalCoinsAmmount: 700
   publicAnim: {fileID: 0}
-  transitionMaterial: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
-  transitionTime: 2
-  propertyName: _Progress
 --- !u!114 &552776905513233568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +117,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   roundsSO:
   - {fileID: 11400000, guid: 33db6cd6768b7774ba9f75b0dcd33699, type: 2}
   - {fileID: 11400000, guid: 682ae5d62fa861b4c82b55817224c549, type: 2}
@@ -130,6 +127,7 @@ MonoBehaviour:
   coliseumAnimator: {fileID: 0}
   roundsUI: {fileID: 0}
   roundsUIText: {fileID: 0}
+  roundsUIText2: {fileID: 0}
   rainPrefab: {fileID: 100002, guid: ffe1e86e37ee68043b84a7b4c2deb193, type: 3}
   godRay: {fileID: 0}
   godRay2: {fileID: 0}
@@ -164,8 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fac22953920d77469b1b627a5960b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersSpawns: []
-  onHub: 0
+  playersSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5348037645612716601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,13 +237,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626a99009f66a3c44b5dabba7d210f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: []
   offset: {x: 0, y: 113.6, z: -101}
   smoothTime: 2
   minZoom: 20
   maxZoom: 15
   zoomLimiter: 60
-  mainCamera: {fileID: 0}
   guiCamera: {fileID: 0}
 --- !u!114 &1697052631678738525
 MonoBehaviour:
@@ -256,15 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef3d1ad55fc1604488344e59ba9510f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3350440727890617509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8785760671137338243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63f1779f03226d541a01d273c5cfe9da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  transitionMaterial: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
+  transitionTime: 2
+  propertyName: _Progress

@@ -19,6 +19,7 @@ public class EnemyDeath : EnemyDeathSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Die");
+        //enemy.secutorAudioManager.PlayDeath();
     }
 
     void Death()

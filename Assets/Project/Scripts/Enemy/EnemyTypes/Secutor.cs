@@ -48,9 +48,10 @@ public class Secutor : Enemy
         enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
+		secutorAudioManager = GetComponent<SecutorAudioManager>();
 
-        //Initialize SO
-        enemyChaseBaseInstance.Init(gameObject, this);
+		//Initialize SO
+		enemyChaseBaseInstance.Init(gameObject, this);
         enemyPreAttackBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
         enemySpecialAttackBaseInstance.Init(gameObject, this);

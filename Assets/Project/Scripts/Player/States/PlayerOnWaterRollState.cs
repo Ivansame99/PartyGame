@@ -46,7 +46,7 @@ public class PlayerOnWaterRollState : PlayerState<PlayerController>
 
 		rollTimer = 0;
 		player.anim.SetTrigger("Roll");
-		player.dodgeSound.Play();
+		player.playerAudioManager.PlayRoll();
 		player.isDodging = false;
 		player.healthController.invencibleTimer = inmuneTime;
 		Instantiate(rollParticle, player.transform.position, rollParticle.transform.rotation);

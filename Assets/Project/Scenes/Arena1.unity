@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.05
+  m_fontSize: 41.25
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -18776,7 +18776,7 @@ GameObject:
   - component: {fileID: 1228852727}
   - component: {fileID: 1228852726}
   m_Layer: 0
-  m_Name: SFX
+  m_Name: Public
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18793,11 +18793,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8062887433062117248, guid: 9505f40a0daaa154d9d21cf074b089fd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5232208b33fd5e14cbfdc3cfbf4715c4, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_audioClip: {fileID: 8300000, guid: 36460eb23958ee5479b4dfc5b8890d4a, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.05
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -18887,7 +18887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228852725}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 571.5279, y: 330.98953, z: 5.890827}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27370,7 +27370,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e110d6b3b3b195642a75db2313254c2f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -27462,7 +27462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967730610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -28.210543, y: 17.682482, z: 9.432499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29630,11 +29630,6 @@ PrefabInstance:
       objectReference: {fileID: 665433123}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: spawns.Array.size
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: spawns.Array.data[0]
       value: 
       objectReference: {fileID: 331183246}
@@ -29718,26 +29713,11 @@ PrefabInstance:
       propertyPath: spawns.Array.data[16]
       value: 
       objectReference: {fileID: 688576531}
-    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[17]
-      value: 
-      objectReference: {fileID: 688576531}
     - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: guiCamera
       value: 
       objectReference: {fileID: 925351425}
-    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 330585545}
-    - target: {fileID: 1697052631678738525, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: transitionMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
     - target: {fileID: 2805138501441062883, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_RootOrder
@@ -29805,44 +29785,19 @@ PrefabInstance:
       objectReference: {fileID: 93323599}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
-      propertyPath: minTimeToSpawn
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
       propertyPath: randomEvents.Array.data[0].probability
-      value: 0.9
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: randomEvents.Array.data[1].probability
-      value: 0.2
+      value: 0.267
       objectReference: {fileID: 0}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: randomEvents.Array.data[2].probability
-      value: 0.1
+      value: 0.293
       objectReference: {fileID: 0}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playerPos.Array.data[0]
-      value: 
-      objectReference: {fileID: 466498984}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playerPos.Array.data[1]
-      value: 
-      objectReference: {fileID: 1844502553}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playerPos.Array.data[2]
-      value: 
-      objectReference: {fileID: 2080604900}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playerPos.Array.data[3]
-      value: 
-      objectReference: {fileID: 140526203}
     - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: playersUI.Array.data[0]
@@ -29863,88 +29818,15 @@ PrefabInstance:
       propertyPath: playersUI.Array.data[3]
       value: 
       objectReference: {fileID: 2745598609333794030}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.data[0]
-      value: 
-      objectReference: {fileID: 466498985}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.data[1]
-      value: 
-      objectReference: {fileID: 140526204}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.data[2]
-      value: 
-      objectReference: {fileID: 2080604901}
-    - target: {fileID: 5726284098889303312, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.data[3]
-      value: 
-      objectReference: {fileID: 1844502554}
     - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: publicAnim
       value: 
       objectReference: {fileID: 33536539}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: coinsPrefab.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: coinsPrefab.Array.data[0]
-      value: 
-      objectReference: {fileID: 4605368680721465263, guid: ba879573f2f4a7244857f99cbd93d88a,
-        type: 3}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: coinsPrefab.Array.data[1]
-      value: 
-      objectReference: {fileID: 4605368680721465263, guid: 874b540a701c4be429a0ed49fab26a46,
-        type: 3}
-    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: coinsPrefab.Array.data[2]
-      value: 
-      objectReference: {fileID: 4605368680721465263, guid: dd68c87d10f8f1743ab0ce65a3b11566,
-        type: 3}
     - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_Name
       value: ArenaGameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[0]
-      value: 
-      objectReference: {fileID: 466498985}
-    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[1]
-      value: 
-      objectReference: {fileID: 140526204}
-    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[2]
-      value: 
-      objectReference: {fileID: 2080604901}
-    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: spawns.Array.data[3]
-      value: 
-      objectReference: {fileID: 1844502554}
-    - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
-        type: 3}
-      propertyPath: playersSpawns.Array.size
-      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9218745437867547617, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

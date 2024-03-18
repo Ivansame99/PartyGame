@@ -59,8 +59,8 @@ public class SlashController : MonoBehaviour
             }
             if (hitSound != null)
             {
-                hitSound.Play();
-                hitSound.pitch = UnityEngine.Random.Range(0.5f, 0.8f);
+				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+				hitSound.Play();
             }
         }
     }

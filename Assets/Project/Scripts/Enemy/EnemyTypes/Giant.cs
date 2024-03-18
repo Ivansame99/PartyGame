@@ -38,9 +38,10 @@ public class Giant : Enemy
         enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
+		giantAudioManager = GetComponent<GiantAudioManager>();
 
-        //Initialize SO
-        enemyChaseBaseInstance.Init(gameObject, this);
+		//Initialize SO
+		enemyChaseBaseInstance.Init(gameObject, this);
         enemyAttackBaseInstance.Init(gameObject, this);
         enemySpecialAttackBaseInstance.Init(gameObject, this);
         enemyDeathBaseInstance.Init(gameObject, this);

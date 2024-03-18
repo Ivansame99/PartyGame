@@ -10,13 +10,6 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[HideInInspector]
 	public float dodgeTimer = 0;
 
-	//Audio
-	[Header("Audio")]
-	public AudioSource swordAttackSound;
-	public AudioSource bowAttackSound;
-	public AudioSource dodgeSound;
-	public AudioSource tensingBow;
-
 	//Control input
 	[HideInInspector]
 	public bool isDodging, isAttacking, isSpecialAttacking, isJumping;
@@ -60,6 +53,8 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	[HideInInspector]
 	public WaterDetection waterDetection;
 
+	internal PlayerAudioManager playerAudioManager;
+
 	public DetectEnemiesNear detectEnemiesNear;
 
 
@@ -74,6 +69,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		if (healthController == null) healthController = GetComponent<PlayerHealthController>();
 		if (powerController == null) powerController = GetComponent<PowerController>();
 		if (waterDetection == null) waterDetection = GetComponent<WaterDetection>();
+		if(playerAudioManager == null) playerAudioManager = GetComponent<PlayerAudioManager>();
 	}
 
 	protected override void Update()

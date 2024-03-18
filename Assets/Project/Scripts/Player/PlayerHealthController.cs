@@ -61,11 +61,6 @@ public class PlayerHealthController : MonoBehaviour
 	public Texture baseMapParpadeo;
 	public Texture baseMapOriginal;
 
-	[SerializeField]
-	private AudioSource hitSound;
-	[SerializeField] private float minPitch;
-	[SerializeField] private float maxPitch;
-
 	[Header("Feedback")]
 	[SerializeField] private GameObject cross1;
 	[SerializeField] private GameObject cross2;
@@ -162,8 +157,7 @@ public class PlayerHealthController : MonoBehaviour
 		if (floatingDamageText != null) ShowDamageText(damage);
 
 		//Sound
-		hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		hitSound.Play();
+		playerController.playerAudioManager.PlayDamage();
 
 		//Animations
 		healthBarAnimator.SetTrigger("Damage");
@@ -227,6 +221,9 @@ public class PlayerHealthController : MonoBehaviour
 		}
 
 		Instantiate(DeathParticles, transform.position, Quaternion.identity);
+
+		//Sound
+		playerController.playerAudioManager.PlayDeath();
 
 		//Ghost
 		ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);

@@ -25,12 +25,6 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float turnSmooth;
 
-	[SerializeField]
-	private float minPitch;
-
-	[SerializeField]
-	private float maxPitch;
-
 	private float attackMovementAux;
 
 	private bool moveAttack;
@@ -93,15 +87,13 @@ public class PlayerAttackState : PlayerState<PlayerController>
 
 					ResetVelocity();
 
-					//Sound
+					//Animation
 					player.anim.runtimeAnimatorController = player.weaponController.combo[comboCounter].animatorOR;
 					player.anim.SetFloat("AttackSpeed", animationMultiplierSpeed);
 					player.anim.Play("Attack", 0, 0);
-					player.swordAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 
-					//Animation
-					player.swordAttackSound.Play();
-					//player.transform.DOPunchScale(new Vector3(0.6f, -0.6f, 0.6f), 0.6f).SetRelative(true).SetEase(Ease.OutBack);
+					//Sound
+					player.playerAudioManager.PlaySwordWhoosh();
 
 					//Insert damage and pushforce
 					player.slashCollider.finalDamage = player.weaponController.combo[comboCounter].damage + player.powerController.PowerDamage(); //Cambiar escalado poder
