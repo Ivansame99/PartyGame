@@ -8,8 +8,6 @@ public class DrunkAttack : EnemyAttackSOBase
 {
     [SerializeField] private GameObject bottlePrefab;
     private GameObject bottle;
-    private bool once;
-
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -29,6 +27,7 @@ public class DrunkAttack : EnemyAttackSOBase
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
+            enemy.rb.velocity = Vector3.zero;
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 ThrowBottle();
@@ -36,7 +35,6 @@ public class DrunkAttack : EnemyAttackSOBase
             }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
-
     }
     void ThrowBottle()
     {

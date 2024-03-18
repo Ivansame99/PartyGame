@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Drunk Idle", menuName = "Enemy Logic/Drunk/Idle")]
+[CreateAssetMenu(fileName = "Drunk Idle", menuName = "Enemy Logic/Drunk/Status Logic/Idle")]
 public class DrunkIdle : EnemyIdleSOBase
 {
     //COOLDOWN ATTACKS
@@ -32,7 +32,7 @@ public class DrunkIdle : EnemyIdleSOBase
         if (!enemy.isDead)
         {
             CheckingStates();
-            enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
+            if(!enemy.playerPos) enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
 
             if (attackTimer <= 0)
             {
@@ -47,6 +47,10 @@ public class DrunkIdle : EnemyIdleSOBase
     }
     void CheckingStates()
     {
+        if(enemy.IsDamaged)
+        {
+            enemy.stateMachine.ChangeState(enemy.damageState);
+        }
         if (!enemy.IsAggreed)
         {
             enemy.stateMachine.ChangeState(enemy.chaseState);
