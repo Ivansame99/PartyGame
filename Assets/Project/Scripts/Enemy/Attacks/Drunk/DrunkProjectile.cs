@@ -43,7 +43,10 @@ public class DrunkProjectile : MonoBehaviour
     Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
     private bool start = false;
     private float yHitPos;
-    
+
+    //COOLDOWN ATTACKS
+    [SerializeField] private float selfDestruction;
+
     public void SetPushForce(float s)
     {
         pushForce = s;
@@ -85,7 +88,9 @@ public class DrunkProjectile : MonoBehaviour
                     StopAllCoroutines();
                     StartCoroutine(Coroutine_Movement(groundDirection.normalized, v0, angle, time, speedMultiplier));
                     projectile = Instantiate(projectileFeedback, fPos, rotation);
-                }
+                    if(projectile != null) Destroy(projectile, selfDestruction);
+                    if(gameObject != null) Destroy(gameObject, selfDestruction);
+            }
             }
         
     }
@@ -99,6 +104,8 @@ public class DrunkProjectile : MonoBehaviour
             Instantiate(explosionParticles, fPos, rotation);
             Destroy(gameObject,0.1f);
         }
+
+        
     }
 
     private void DrawPath(Vector3 direction, float v0, float angle, float time, float step)
