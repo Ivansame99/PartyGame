@@ -20247,6 +20247,7 @@ GameObject:
   - component: {fileID: 406417372396380036}
   - component: {fileID: 4832270962182322353}
   - component: {fileID: 5045293651482485403}
+  - component: {fileID: 8670346714660492623}
   m_Layer: 6
   m_Name: Drunk
   m_TagString: Enemy
@@ -20314,6 +20315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <maxHealth>k__BackingField: 100
   <inmuneTime>k__BackingField: 0.01
+  secutorAudioManager: {fileID: 0}
+  giantAudioManager: {fileID: 0}
   enemyIdleBase: {fileID: 11400000, guid: 5a71c6ba89f2aa644ba6d38a06a76448, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: fb4a55b339ced7340ab4bb19b6b8985d, type: 2}
   enemyAttackBase: {fileID: 11400000, guid: 1543fecc5139f7a4ebf069c364d1b41e, type: 2}
@@ -20365,7 +20368,6 @@ MonoBehaviour:
   healthScale: 2
   maxScaleMultiplier: 6
   minScaleMultiplier: 4
-  powerLevel: {fileID: 9213241676706322452}
   smoke: {fileID: 5829193608126893563}
   instanciatedEnemy: 1
 --- !u!54 &8370849175989515781
@@ -20468,6 +20470,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   player2: {fileID: 0}
+--- !u!114 &8670346714660492623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4599955610764907065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf02663a48ff24a9f4c645f657e92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerLevel: {fileID: 9213241676706322452}
 --- !u!1 &4629221617331044534
 GameObject:
   m_ObjectHideFlags: 0

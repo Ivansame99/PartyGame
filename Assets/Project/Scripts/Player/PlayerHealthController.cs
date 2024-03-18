@@ -16,16 +16,6 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField]
 	private float inmuneTime;
 
-	[Header("UI")]
-	[SerializeField]
-	private HealthBarController healthBarC;
-
-	[SerializeField]
-	private Transform healthBar;
-
-	[SerializeField]
-	private Transform powerBar;
-
 	[SerializeField]
 	private Material URPMaterial;
 	[SerializeField]
@@ -40,7 +30,6 @@ public class PlayerHealthController : MonoBehaviour
 
 	[SerializeField] private GameObject deathParticles;
 	[SerializeField] private GameObject bloodParticles;
-	[SerializeField] private GameObject floatingDamageText;
 
 	[SerializeField] private HelmetPrefab[] dieDrops;
 
@@ -49,10 +38,11 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField] private GameObject ghostPrefab;
 	#endregion
 
+	#region Variables
 	private PlayerConfiguration playerConfig;
 	private GameObject ghost;
 	private float maxHealth;
-	internal bool dead = false;
+
 	private bool deadAux = false;
 
 	private GameObject lastAttacker;
@@ -64,24 +54,24 @@ public class PlayerHealthController : MonoBehaviour
 	private Vector3 attackPosition;
 	private float pushForce;
 
-	internal float invencibleTimer;
-	private Animator healthBarAnimator;
-	private Canvas healBarCanvas;
-
-	private GameObject playerUI;
-	private HealthBarController playerUIHealth;
-	private Animator playerUIHealthAnimator;
-
 	private PlayerController playerController;
 	private PowerController powerController;
+	private PlayerHudController playerHudController;
+
 	private Animator anim;
 	private Rigidbody rb;
 
+	internal bool dead = false;
+	internal float invencibleTimer;
+	#endregion
+
+	#region Life Cycle
 	private void Awake()
 	{
 		//Components
 		playerController = GetComponent<PlayerController>();
 		powerController = GetComponent<PowerController>();
+		playerHudController = GetComponent<PlayerHudController>();
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody>();
 	}
@@ -90,16 +80,6 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		playersHealthManager = GameManager.Instance.playersHealthManager;
 		playerConfig = this.GetComponent<PlayerInputHandler>().playerConfig;
-
-		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		SetupHealthBar(healBarCanvas);
-		healthBarAnimator = healthBar.gameObject.GetComponent<Animator>();
-		playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-		if (playerUI != null)
-		{
-			playerUIHealthAnimator = playerUI.transform.GetChild(0).GetChild(0).GetComponent<Animator>();
-			playerUIHealth = playerUI.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<HealthBarController>();
-		}
 
 		URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
 
@@ -132,7 +112,9 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = false;
 		}
 	}
+	#endregion
 
+	#region Public Methods
 	public void ReceiveDamage(float damage)
 	{
 		//Feedback
@@ -147,51 +129,47 @@ public class PlayerHealthController : MonoBehaviour
 		cross2.SetActive(true);
 		glow.SetActive(true);
 
-		if (floatingDamageText != null) ShowDamageText(damage);
-
 		//Sound
 		playerController.playerAudioManager.PlayDamage();
 
-		//Animations
-		healthBarAnimator.SetTrigger("Damage");
-		if (playerUI != null)
-			playerUIHealthAnimator.SetTrigger("Damage");
-
 		//Logic
 		health -= damage;
-
-		if (healthBarC != null)
-		{
-			ChangeUI();
-		}
-
 		if (health <= 0) Die();
-
 		invencibleTimer = inmuneTime;
-	}
 
-	void ShowDamageText(float damage)
-	{
-		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
-		text.text = ((int)damage).ToString();
-	}
-
-	void RestoreHealth(float healthAmmount)
-	{
-		float totalHealth = maxHealth * healthAmmount;
-		health += totalHealth;
-		if (health >= maxHealth) health = maxHealth;
-		ChangeUI();
+		playerHudController.ReceivedDamage(damage, health, maxHealth);
 	}
 
 	public void RestoreHealthAfterRound()
 	{
-		float totalHealth = maxHealth * 0.5f;
+		float roundHealthAmmount = 0.5f;
+		float totalHealth = maxHealth * roundHealthAmmount;
 		health += totalHealth;
 		if (health >= maxHealth) health = maxHealth;
-		ChangeUI();
+		playerHudController.ChangeUIHealth(health, maxHealth);
 	}
 
+	public void EnablePlayer()
+	{
+		if (ghost != null)
+		{
+			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
+			Destroy(ghost, 0.5f);
+		}
+
+		powerController.enabled = true;
+		powerController.ChangeScale();
+		playerController.enabled = true;
+		playerHudController.EnableHud();
+		dead = false;
+		deadAux = false;
+		health = maxHealth;
+		invencibleTimer = 0.5f;
+		playerHudController.ChangeUIHealth(health, maxHealth);
+	}
+	#endregion
+
+	#region Private Methods
 	private void Die()
 	{
 		//Feedback
@@ -228,7 +206,6 @@ public class PlayerHealthController : MonoBehaviour
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
-		//OnPlayerDie(this.transform);
 		dead = true;
 		DisablePlayer();
 	}
@@ -237,72 +214,25 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		playerController.enabled = false;
 		powerController.enabled = false;
-		healthBar.gameObject.SetActive(false);
-		powerBar.gameObject.SetActive(false);
+		playerHudController.DisableHud();
 		playersHealthManager.NotifyDead(this.gameObject.transform);
 	}
 
-	private void SetupHealthBar(Canvas canvas)
+	private void RestoreHealth(float healthAmmount)
 	{
-		healthBar.transform.SetParent(canvas.transform);
-	}
-
-	void ChangeUI()
-	{
-		healthBarC.SetProgress(health / maxHealth, 2);
-		if (playerUI != null)
-			playerUIHealth.SetProgress(health / maxHealth, 2);
-	}
-
-	public void EnablePlayer()
-	{
-		if (ghost != null)
-		{
-			ghost.GetComponent<Animator>().SetTrigger("GhostDeath");
-			Destroy(ghost, 0.5f);
-		}
-
-		powerController.enabled = true;
-		powerController.ChangeScale();
-		playerController.enabled = true;
-		healthBar.gameObject.SetActive(true);
-		powerBar.gameObject.SetActive(true);
-		dead = false;
-		deadAux = false;
-		health = maxHealth;
-		invencibleTimer = 0.5f;
-		ChangeUI();
+		float totalHealth = maxHealth * healthAmmount;
+		health += totalHealth;
+		if (health >= maxHealth) health = maxHealth;
+		playerHudController.ChangeUIHealth(health, maxHealth);
 	}
 
 	private void HandleCurrentPowerChanged(float newValue)
 	{
 		maxHealth = maxHealthBase + powerController.PowerHealth();
 	}
+	#endregion
 
-	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)
-	{
-		Vector3 initialScale = transform.localScale;
-
-		for (float time = 0; time < duration * 2; time += Time.deltaTime)
-		{
-			transform.localScale = Vector3.Lerp(initialScale, upScale, time);
-			yield return null;
-		}
-
-		anim.SetTrigger("Respawn");
-	}
-
-	IEnumerator RedEffect()
-	{
-		for (int i = 0; i < 5; i++)
-		{
-			URPMaterial.SetTexture("_BaseMap", baseMapParpadeo);
-			yield return new WaitForSeconds(0.1f);
-			URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
-			yield return new WaitForSeconds(0.1f);
-		}
-	}
-
+	#region Collisions and Triggers
 	private void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("JumpAttack") && !dead)
@@ -400,4 +330,31 @@ public class PlayerHealthController : MonoBehaviour
 			ReceiveDamage(rock.damage);
 		}
 	}
+	#endregion
+
+	#region Coroutines
+	IEnumerator ScaleUpAndDown(Transform transform, Vector3 upScale, float duration)
+	{
+		Vector3 initialScale = transform.localScale;
+
+		for (float time = 0; time < duration * 2; time += Time.deltaTime)
+		{
+			transform.localScale = Vector3.Lerp(initialScale, upScale, time);
+			yield return null;
+		}
+
+		anim.SetTrigger("Respawn");
+	}
+
+	IEnumerator RedEffect()
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			URPMaterial.SetTexture("_BaseMap", baseMapParpadeo);
+			yield return new WaitForSeconds(0.1f);
+			URPMaterial.SetTexture("_BaseMap", baseMapOriginal);
+			yield return new WaitForSeconds(0.1f);
+		}
+	}
+	#endregion
 }

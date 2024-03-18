@@ -30104,6 +30104,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 654842776774846048}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3239827681709826218}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!1 &5971476123506598425 stripped
 GameObject:
@@ -30180,7 +30184,6 @@ MonoBehaviour:
   healthScale: 2
   maxScaleMultiplier: 7
   minScaleMultiplier: 5
-  powerLevel: {fileID: 4149807985443987564}
   smoke: {fileID: 6456176340039318752}
   instanciatedEnemy: 0
 --- !u!114 &9002697528634392084
@@ -30197,9 +30200,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthBase: 100
   inmuneTime: 0.3
-  healthBarC: {fileID: 7797326253054462551}
-  healthBar: {fileID: 7568593133114853395}
-  powerBar: {fileID: 2847639267803040626}
   URPMaterial: {fileID: 2100000, guid: d65e1cdacc61ab447b6aa09add35c083, type: 2}
   baseMapParpadeo: {fileID: 2800000, guid: 5f2c10db8b01b604d8c003516908871b, type: 3}
   baseMapOriginal: {fileID: 2800000, guid: a2eedf50f61ee1c48a8f10a6b4ea944b, type: 3}
@@ -30209,8 +30209,6 @@ MonoBehaviour:
   deathParticles: {fileID: 141433446842962269, guid: 69d3b0098c7a4134aae621b226982ad1,
     type: 3}
   bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
-    type: 3}
-  floatingDamageText: {fileID: 8703725455407415189, guid: 7e2d6ce9b1556694aaf3135b7d38eb33,
     type: 3}
   dieDrops:
   - prefab: {fileID: 8672530925873175708, guid: 47716a554f356bf4e9bd7a3387dee9fa,
@@ -30359,6 +30357,23 @@ MonoBehaviour:
   stomp: {fileID: 4988313289461777262}
   swordWhoosh: {fileID: 8552393285250276615}
   roll: {fileID: 4663734904965884988}
+--- !u!114 &3239827681709826218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e05c4ea4b3454f9ba638334a2d3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarC: {fileID: 7797326253054462551}
+  healthBar: {fileID: 5056411082193721453}
+  powerLevel: {fileID: 4149807985443987564}
+  floatingDamageText: {fileID: 8703725455407415189, guid: 7e2d6ce9b1556694aaf3135b7d38eb33,
+    type: 3}
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
