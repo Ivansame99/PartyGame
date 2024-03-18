@@ -99,7 +99,7 @@ public class PlayerHealthController : MonoBehaviour
 		if (dead == true && !deadAux)
 		{
 			deadAux = true;
-			StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
+			//StartCoroutine(ScaleUpAndDown(this.transform, new Vector3(0f, 0f, 0f), 1f));
 		}
 	}
 
@@ -159,7 +159,6 @@ public class PlayerHealthController : MonoBehaviour
 		}
 
 		powerController.enabled = true;
-		powerController.ChangeScale();
 		playerController.enabled = true;
 		playerHudController.EnableHud();
 		dead = false;
@@ -167,6 +166,7 @@ public class PlayerHealthController : MonoBehaviour
 		health = maxHealth;
 		invencibleTimer = 0.5f;
 		playerHudController.ChangeUIHealth(health, maxHealth);
+		powerController.ChangeScale();
 	}
 	#endregion
 
@@ -344,7 +344,7 @@ public class PlayerHealthController : MonoBehaviour
 			yield return null;
 		}
 
-		anim.SetTrigger("Respawn");
+		//anim.SetTrigger("Respawn");
 	}
 
 	IEnumerator RedEffect()

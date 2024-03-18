@@ -45,7 +45,7 @@ public class PlayersHealthManager : MonoBehaviour
 
 	public void NotifyDead(Transform player)
 	{
-		if (onHub)
+		if (onHub || roundController.IsBetweeenRounds())
 		{
 			SpawnPlayer(player.gameObject);
 			return;
@@ -70,7 +70,7 @@ public class PlayersHealthManager : MonoBehaviour
 			return;
 		}
 
-		if (!gameManager.roundController.isFinalRound())
+		if (!gameManager.roundController.IsFinalRound())
 		{
 			int randomSpawn = Random.Range(0, playersSpawns.Length);
 			player.transform.position = playersSpawns[randomSpawn].position;

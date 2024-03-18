@@ -68,7 +68,7 @@ public class EndGameController : MonoBehaviour
 		int playersCount = GameManager.Instance.selectPlayerController.GetNumPlayers();
 
 		//Check win
-		if (gameManager.roundController.isFinalRound() && playersDead == playersCount - 1) //Only one survivor
+		if (gameManager.roundController.IsFinalRound() && playersDead == playersCount - 1) //Only one survivor
 		{
 			if (publicAnim != null)
 			{

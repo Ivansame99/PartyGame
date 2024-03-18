@@ -23,9 +23,6 @@ public class SecutorStuned : EnemyStunedSOBase
         enemy.animator.SetBool("Stun", true);
         stunedTimer = stunTime;
         starStunClone = Instantiate(starStun, new Vector3(enemy.transform.position.x, enemy.transform.position.y + stunYPosition, enemy.transform.position.z), starStun.transform.rotation, this.enemy.transform);
-        //enemy.stunParticles.SetActive(true);
-
-		Debug.Log("Stuneado");
     }
 
     public override void DoExitLogic()

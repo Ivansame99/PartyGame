@@ -50,6 +50,7 @@ public class RoundController : MonoBehaviour
 	#region Variables
 	internal List<GameObject> currentEnemies;
 	private bool finalRound;
+	private bool betweenRounds=true;
 	private Rounds currentRound;
 	private int roundIndex;
 	private Animator roundUIAnim;
@@ -103,7 +104,7 @@ public class RoundController : MonoBehaviour
 		//If all enemies dead
 		currentEnemies.Clear();
 		OnRoundFinish();
-
+		betweenRounds = true;
 		//Next round
 		if (roundIndex < currentRound.rounds.Length) StartCoroutine(IStartNextRound());
 		else if (roundIndex == currentRound.rounds.Length) roundIndex++;
@@ -162,9 +163,14 @@ public class RoundController : MonoBehaviour
 	#endregion
 
 	#region Getters
-	public bool isFinalRound()
+	public bool IsFinalRound()
 	{
 		return finalRound;
+	}
+
+	public bool IsBetweeenRounds()
+	{
+		return betweenRounds;
 	}
 	#endregion
 
@@ -179,7 +185,7 @@ public class RoundController : MonoBehaviour
 		yield return new WaitForSeconds(1);
 
 		int enemyNumberInCurrentRound = currentRound.rounds[roundIndex].enemiesInRound.Length;
-
+		betweenRounds = false;
 		for (int i = 0; i < enemyNumberInCurrentRound; i++)
 		{
 			int randomSpawn = Random.Range(0, spawns.Length);

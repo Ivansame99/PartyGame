@@ -53,7 +53,7 @@ public class GameOverController : MonoBehaviour
 
 	public void UiRestartButton()
     {
-		StartCoroutine(CloseTranition("ArenaPowerLevel"));
+		StartCoroutine(CloseTranition("Arena1"));
     }
 
     public void UiExitMenu()
