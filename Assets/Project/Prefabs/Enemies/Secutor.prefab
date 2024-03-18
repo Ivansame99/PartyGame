@@ -21099,6 +21099,7 @@ GameObject:
   - component: {fileID: 4832270962182322353}
   - component: {fileID: 5045293651482485403}
   - component: {fileID: 6944344427791876321}
+  - component: {fileID: 2002351498835295003}
   m_Layer: 8
   m_Name: Secutor
   m_TagString: Enemy
@@ -21222,7 +21223,6 @@ MonoBehaviour:
   healthScale: 2
   maxScaleMultiplier: 7
   minScaleMultiplier: 3
-  powerLevel: {fileID: 9213241676706322452}
   smoke: {fileID: 6182903487699182042}
   instanciatedEnemy: 1
 --- !u!54 &8370849175989515781
@@ -21342,6 +21342,19 @@ MonoBehaviour:
   damage: {fileID: 9188245424345872778}
   death: {fileID: 2393665358309079873}
   swordWhoosh: {fileID: 7850083449537289412}
+--- !u!114 &2002351498835295003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4599955610764907065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf02663a48ff24a9f4c645f657e92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerLevel: {fileID: 9213241676706322452}
 --- !u!1 &4629221617331044534
 GameObject:
   m_ObjectHideFlags: 0

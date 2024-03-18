@@ -30095,6 +30095,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4986266948046142378}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5418213473540360719}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!1 &5971476123506598425 stripped
 GameObject:
@@ -30146,26 +30150,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 01d1b33b74f216a45ac78a5786e0f933, type: 2}
   - {fileID: 11400000, guid: 94321cf91cdcc974c91fc8cf6dc32dd0, type: 2}
   - {fileID: 11400000, guid: 2615fbd090609e9439f144e6620227d0, type: 2}
-  dodgeTimer: 0
-  isDodging: 0
-  isAttacking: 0
-  isSpecialAttacking: 0
-  isJumping: 0
-  moveUniversal: {x: 0, y: 0}
-  direction: {x: 0, y: 0, z: 0}
+  playerId: 3
   jumpAttackCollider: {fileID: 5824318637191913170}
   arrowConeIndicator: {fileID: 1210506143761722625}
-  bowTimer: 0
-  lastComboTimer: 0
   weaponController: {fileID: 4902238763697687135}
   slashCollider: {fileID: 469529407021141981}
-  rb: {fileID: 0}
-  groundCheck: {fileID: 0}
-  anim: {fileID: 0}
-  healthController: {fileID: 0}
-  powerController: {fileID: 0}
-  gravityController: {fileID: 0}
-  waterDetection: {fileID: 0}
   detectEnemiesNear: {fileID: 1708322281022373019}
 --- !u!114 &3514694093690064369
 MonoBehaviour:
@@ -30186,7 +30175,6 @@ MonoBehaviour:
   healthScale: 2
   maxScaleMultiplier: 7
   minScaleMultiplier: 5
-  powerLevel: {fileID: 4149807985443987564}
   smoke: {fileID: 7507554991370066587}
   instanciatedEnemy: 0
 --- !u!114 &9002697528634392084
@@ -30203,41 +30191,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealthBase: 100
   inmuneTime: 0.3
-  dead: 0
-  invencibleTimer: 0
-  healthBarC: {fileID: 7797326253054462551}
-  healthBar: {fileID: 7568593133114853395}
-  powerBar: {fileID: 2847639267803040626}
   URPMaterial: {fileID: 2100000, guid: 18a6cd324148a234bb32f8744f6b0301, type: 2}
   baseMapParpadeo: {fileID: 2800000, guid: 5f2c10db8b01b604d8c003516908871b, type: 3}
   baseMapOriginal: {fileID: 2800000, guid: 62d9a4e6111dd1f4687eb94a8359b358, type: 3}
   cross1: {fileID: 2187086775622481420}
   cross2: {fileID: 6085800573928801362}
   glow: {fileID: 4313605478303797485}
-  HealParticles: {fileID: 100000, guid: ada5d62ffe762ce4fbccc70dcdbc9022, type: 3}
-  DeathParticles: {fileID: 141433446842962269, guid: 900b6d7582c595341af43ee3cc8eb7ce,
+  deathParticles: {fileID: 141433446842962269, guid: 900b6d7582c595341af43ee3cc8eb7ce,
     type: 3}
-  BloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
+  bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
     type: 3}
-  floatingDamageText: {fileID: 8703725455407415189, guid: 578368413e9941447b1acc0a09d9ee99,
-    type: 3}
-  helmetPrefabs:
-  - prefab: {fileID: 2097220012618991600, guid: 73f34ad2a97eb9c45a9c2e2ff9b2b7e7,
+  dieDrops:
+  - prefab: {fileID: 8672530925873175708, guid: 4d2c96dfa9491564486629b846bd8ec0,
       type: 3}
     spawnChance: 1
   - prefab: {fileID: 6505563898143396405, guid: 7dbf81acb11270545892431579b934e2,
       type: 3}
     spawnChance: 1
-  - prefab: {fileID: 8672530925873175708, guid: 4d2c96dfa9491564486629b846bd8ec0,
+  - prefab: {fileID: 2097220012618991600, guid: 73f34ad2a97eb9c45a9c2e2ff9b2b7e7,
       type: 3}
     spawnChance: 1
   - prefab: {fileID: 5739960698836056263, guid: 9fc6f4711d4d7f5409cd155024513f30,
       type: 3}
     spawnChance: 1
-  ghostPrefab: {fileID: 3361422596178500275, guid: 4346a68ced596294caed8bad749abb04,
-    type: 3}
   minForce: 2
   maxForce: 5
+  ghostPrefab: {fileID: 3361422596178500275, guid: 4346a68ced596294caed8bad749abb04,
+    type: 3}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30368,6 +30348,23 @@ MonoBehaviour:
   stomp: {fileID: 4434945136332276835}
   swordWhoosh: {fileID: 4962167422700456280}
   roll: {fileID: 3774252770513781697}
+--- !u!114 &5418213473540360719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73e05c4ea4b3454f9ba638334a2d3c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarC: {fileID: 7797326253054462551}
+  healthBar: {fileID: 5056411082193721453}
+  powerLevel: {fileID: 4149807985443987564}
+  floatingDamageText: {fileID: 8703725455407415189, guid: 578368413e9941447b1acc0a09d9ee99,
+    type: 3}
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,

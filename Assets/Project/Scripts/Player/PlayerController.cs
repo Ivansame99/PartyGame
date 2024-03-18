@@ -6,58 +6,48 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerController : PlayerStateManager<PlayerController>
 {
-	//Roll
-	[HideInInspector]
-	public float dodgeTimer = 0;
+	#region Inspector Variables
+	[SerializeField]
+	private int playerId;
 
-	//Control input
-	[HideInInspector]
-	public bool isDodging, isAttacking, isSpecialAttacking, isJumping;
-	[HideInInspector]
-	public Vector2 moveUniversal;
-	[HideInInspector]
-	public Vector3 direction;
-
-	//Jump drop attack
 	public GameObject jumpAttackCollider;
-	private SlashController jumpAttackController;
 
-	//Arrow attack
-	[Header("Arrow")]
 	public GameObject arrowConeIndicator;
-	[HideInInspector]
-	public float bowTimer;
 
-	//Attack
-	[HideInInspector]
-	public Queue<bool> attackBuffer = new Queue<bool>();
-	[HideInInspector]
-	public float lastComboTimer;
-	[Header("Attack")]
 	public Weapon weaponController;
+
 	public SlashController slashCollider;
 
-	//Components
-	[HideInInspector]
-	public Rigidbody rb;
-	[HideInInspector]
-	public GroundCheck groundCheck;
-	[HideInInspector]
-	public Animator anim;
-	[HideInInspector]
-	public PlayerHealthController healthController;
-	[HideInInspector]
-	public PowerController powerController;
-	[HideInInspector]
-	public CustomGravityController gravityController;
-	[HideInInspector]
-	public WaterDetection waterDetection;
+	public DetectEnemiesNear detectEnemiesNear;
+	#endregion
 
+	#region Variables
+	//Components
+	internal Rigidbody rb;
+	internal GroundCheck groundCheck;
+	internal Animator anim;
+	internal PlayerHealthController healthController;
+	internal PowerController powerController;
+	internal CustomGravityController gravityController;
+	internal WaterDetection waterDetection;
+
+	//Timers
+	internal float dodgeTimer = 0;
+	internal float bowTimer;
+	internal float lastComboTimer;
+
+	//Control input
+	internal bool isDodging, isAttacking, isSpecialAttacking, isJumping;
+	internal Vector2 moveUniversal;
+	internal Vector3 direction;
 	internal PlayerAudioManager playerAudioManager;
 
-	public DetectEnemiesNear detectEnemiesNear;
+	//Logic
+	internal Queue<bool> attackBuffer = new Queue<bool>();
+	#endregion
 
 
+	#region Life Cycle
 	protected override void Awake()
 	{
 		base.Awake();
@@ -81,7 +71,16 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 		direction = new Vector3(this.moveUniversal.x, 0f, this.moveUniversal.y).normalized;
 	}
+	#endregion
 
+	#region Private Methods
+	void RemovAttackBuffer()
+	{
+		attackBuffer.Dequeue();
+	}
+	#endregion
+
+	#region Public Methods
 	//Input mando
 	public void SetInputVector(Vector2 direction)
 	{
@@ -108,17 +107,17 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	public void SetPause(bool pause)
 	{
-		
-	}
-
-	void RemovAttackBuffer()
-	{
-		attackBuffer.Dequeue();
+		return;
 	}
 
 	public void EndCombo()
 	{
-		
 		ChangeState(typeof(PlayerIdleState));
 	}
+
+	public int GetPlayerId()
+	{
+		return playerId;
+	}
+	#endregion
 }

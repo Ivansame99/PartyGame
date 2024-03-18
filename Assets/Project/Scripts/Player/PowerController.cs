@@ -4,9 +4,7 @@ using System;
 
 public class PowerController : MonoBehaviour
 {
-	//Variables de poder
-	private float currentPowerLevel;
-
+	#region Inspector Variables
 	[SerializeField]
 	private float initialPowerLevel;
 
@@ -14,13 +12,13 @@ public class PowerController : MonoBehaviour
 	private float minPowerLevel;
 
 	[SerializeField]
-	private float maxPowerLevel; //Habra que hacer pruebas
+	private float maxPowerLevel;
 
 	[SerializeField]
-	private float powerScale; //Reduce it to more damage
+	private float powerScale;
 
 	[SerializeField]
-	private float healthScale; //Reduce it to more health scale
+	private float healthScale;
 
 	[SerializeField]
 	private float maxScaleMultiplier = 2;
@@ -29,55 +27,38 @@ public class PowerController : MonoBehaviour
 	private float minScaleMultiplier = 0.7f;
 
 	[SerializeField]
-	private GameObject powerLevel;
-
-	[SerializeField]
 	private GameObject smoke;
-	private TMP_Text powerLevelText;
-
-	private Canvas canvas;
-
-	private GameObject playerUI;
-	private TMP_Text playerUIPowerText;
-
-	private bool isEnemy = false;
-	private bool maxPowerParticlesSpawned = false;
-
-	public Action<float> OnCurrentPowerChanged;
 
 	[SerializeField]
 	private bool instanciatedEnemy = false;
+	#endregion
+
+	#region Variables
+	private PlayerHudController playerHudController;
+	private EnemyHudController enemyHudController;
+
+	private float currentPowerLevel;
+	private bool isEnemy = false;
+	private bool maxPowerParticlesSpawned = false;
+	#endregion
+
+	#region Actions
+	public Action<float> OnCurrentPowerChanged;
+	#endregion
 
 	void Start()
 	{
-		powerLevelText = powerLevel.GetComponent<TMP_Text>();
-		canvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		SetupPowerLevelCanvas();
-		if (this.gameObject.tag == "Enemy") isEnemy = true;
+		if (this.gameObject.CompareTag("Enemy")) isEnemy = true;
 
 		if (!isEnemy)
 		{
-			playerUI = GameObject.FindGameObjectWithTag("UI" + this.gameObject.name);
-			if (playerUI != null) playerUIPowerText = playerUI.transform.GetChild(0).GetChild(1).GetComponent<TMP_Text>();
+			playerHudController = this.GetComponent<PlayerHudController>();
+		} else
+		{
+			enemyHudController = this.GetComponent<EnemyHudController>();
 		}
 
 		if(!instanciatedEnemy) InitializePowerLevel(initialPowerLevel);
-	}
-
-	void Update()
-	{
-		if (currentPowerLevel >= maxPowerLevel && !maxPowerParticlesSpawned)
-		{
-			smoke.SetActive(true);
-			maxPowerParticlesSpawned = true;
-
-		}
-
-		if (currentPowerLevel < maxPowerLevel && maxPowerParticlesSpawned)
-		{
-			smoke.SetActive(false);
-			maxPowerParticlesSpawned = false;
-		}
 	}
 
 	public void ChangeScale()
@@ -87,29 +68,17 @@ public class PowerController : MonoBehaviour
 		this.gameObject.transform.localScale = new Vector3(scaleClamped, scaleClamped, scaleClamped);
 	}
 
-	private void SetupPowerLevelCanvas()
-	{
-		powerLevel.transform.SetParent(canvas.transform);
-	}
-
-	public float GetCurrentPowerLevel()
-	{
-		return currentPowerLevel;
-	}
-
 	public void AddPowerLevel(float value)
 	{
 		currentPowerLevel = Mathf.RoundToInt(currentPowerLevel += value);
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
-		ChangeUIText();
-		ChangeScale();
+		Feedback();
 	}
 
 	public void InitializePowerLevel(float value)
 	{
 		currentPowerLevel = value;
-		ChangeUIText();
-		ChangeScale();
+		Feedback();
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
 	}
 
@@ -118,14 +87,7 @@ public class PowerController : MonoBehaviour
 		currentPowerLevel = Mathf.RoundToInt(currentPowerLevel = currentPowerLevel / 2);
 		if (currentPowerLevel <= 0) currentPowerLevel = 1; //Que no pueda bajar de uno
 		if (OnCurrentPowerChanged != null) OnCurrentPowerChanged(currentPowerLevel);
-		ChangeUIText();
-		ChangeScale();
-	}
-
-	private void ChangeUIText()
-	{
-		powerLevelText.SetText(currentPowerLevel.ToString());
-		if (!isEnemy && playerUI != null) playerUIPowerText.SetText(currentPowerLevel.ToString());
+		Feedback();
 	}
 
 	public float PowerDamage()
@@ -138,8 +100,37 @@ public class PowerController : MonoBehaviour
 		return currentPowerLevel / healthScale;
 	}
 
+	public float GetCurrentPowerLevel()
+	{
+		return currentPowerLevel;
+	}
+
 	private float MapValues(float s, float a1, float a2, float b1, float b2)
 	{
 		return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
+	}
+
+	private void CheckPowerParticles()
+	{
+		if (currentPowerLevel >= maxPowerLevel)
+		{
+			smoke.SetActive(true);
+		} else
+		{
+			smoke.SetActive(false);
+		}
+	}
+
+	private void Feedback()
+	{
+		ChangeScale();
+		CheckPowerParticles();
+		if (isEnemy)
+		{
+			enemyHudController.ChangeUIPower(currentPowerLevel);
+		} else
+		{
+			playerHudController.ChangeUIPower(currentPowerLevel);
+		}
 	}
 }

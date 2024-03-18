@@ -30139,6 +30139,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2755322983777911617}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 301a8d2edc810dd4495446e35655feef,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 177420691542853450}
   m_SourcePrefab: {fileID: 100100000, guid: 301a8d2edc810dd4495446e35655feef, type: 3}
 --- !u!4 &8518027558917819816 stripped
 Transform:
@@ -30249,7 +30253,6 @@ MonoBehaviour:
   healthScale: 2
   maxScaleMultiplier: 5
   minScaleMultiplier: 4
-  powerLevel: {fileID: 7158468482713559330}
   smoke: {fileID: 2410956647420080389}
   instanciatedEnemy: 0
 --- !u!95 &2755322983777911617
@@ -30273,3 +30276,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &177420691542853450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042608217900226322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02cf02663a48ff24a9f4c645f657e92d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerLevel: {fileID: 7158468482713559330}
