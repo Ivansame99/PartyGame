@@ -101,6 +101,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 			if (!fallParticleOn)
 			{
+				player.playerAudioManager.PlayStomp();
 				Instantiate(groundHit, player.transform.position, groundHit.transform.rotation);
 				//groundHit.Play();
 				Instantiate(dropAttackParticle, player.transform.position, dropAttackParticle.transform.rotation);

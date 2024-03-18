@@ -6,7 +6,10 @@ public class ArrowController : MonoBehaviour
 {
     public float baseDamage;
 
-    [HideInInspector]
+    [SerializeField]
+	private AudioSource arrowCollision;
+
+	[HideInInspector]
     public float finalDamage;
 	
     [HideInInspector]
@@ -34,6 +37,9 @@ public class ArrowController : MonoBehaviour
 
     private float destroyTime=10f;
 
+    private float minPitch = 0.8f;
+    private float maxPitch = 1.2f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -55,8 +61,10 @@ public class ArrowController : MonoBehaviour
             ground = true;
             rb.isKinematic = true;
             Destroy(this.gameObject, destroyTime);
-        }
-    }
+		}
+		arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+		arrowCollision.Play();
+	}
 
     private void FixedUpdate()
     {
@@ -97,6 +105,8 @@ public class ArrowController : MonoBehaviour
             speed += 5;
             owner = other.transform.parent.gameObject;
             ownerPos = other.transform.parent.gameObject.transform.position;
+			arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+			arrowCollision.Play();
 		}
     }
 }

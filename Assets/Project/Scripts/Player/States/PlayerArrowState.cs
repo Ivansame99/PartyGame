@@ -48,8 +48,7 @@ public class PlayerArrowState : PlayerState<PlayerController>
 		base.Init(p);
 
 		currentChargingBow = 0f;
-		player.tensingBow.pitch = Random.Range(minPitch, maxPitch);
-		player.tensingBow.Play();
+		player.playerAudioManager.PlayBowCharge();
 	}
 
 	public override void Exit()
@@ -159,8 +158,7 @@ public class PlayerArrowState : PlayerState<PlayerController>
 
 		player.arrowConeIndicator.SetActive(false);
 
-		player.bowAttackSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		player.bowAttackSound.Play();
+		player.playerAudioManager.PlayBowShoot();
 
 		//Change to Idle
 		player.ChangeState(typeof(PlayerIdleState));
