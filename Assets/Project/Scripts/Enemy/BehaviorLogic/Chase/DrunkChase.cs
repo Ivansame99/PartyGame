@@ -25,6 +25,7 @@ public class DrunkChase : EnemyChaseSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        enemy.animator.SetTrigger("Chase");
         enemy.agent.isStopped = false;
     }
     public override void DoFrameUpdateLogic()
