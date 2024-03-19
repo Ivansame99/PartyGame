@@ -52,6 +52,7 @@ public class Drunk : Enemy
         animator = GetComponent<Animator>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
+        drunkAudioManager = GetComponent<DrunkAudioManager>();
 
         //Initialize SO
         enemyIdleBaseInstance.Init(gameObject, this);

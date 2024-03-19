@@ -15,6 +15,7 @@ public class DrunkDamage : EnemyDamageSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Damage");
+        enemy.drunkAudioManager.PlayDamage();
         stunedTimer = stunTime;
     }
 
