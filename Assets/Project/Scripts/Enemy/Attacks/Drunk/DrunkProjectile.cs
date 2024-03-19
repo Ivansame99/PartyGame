@@ -99,6 +99,7 @@ public class DrunkProjectile : MonoBehaviour
         if(line != null) Destroy(line, lineTimeLife);
         if (Vector3.Distance(fPos, transform.position) < 3f)
         {
+            enemy.drunkAudioManager.PlayProjectileHit();
             Destroy(projectile);
             collider.enabled = true;
             Instantiate(explosionParticles, fPos, rotation);

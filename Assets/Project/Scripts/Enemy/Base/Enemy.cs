@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 
 	public SecutorAudioManager secutorAudioManager;
 	public GiantAudioManager giantAudioManager;
+	public DrunkAudioManager drunkAudioManager;
 	#endregion
 
 

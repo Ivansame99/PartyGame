@@ -40,6 +40,7 @@ public class DrunkAttack : EnemyAttackSOBase
     }
     void ThrowBottle()
     {
+        enemy.drunkAudioManager.PlayProjectileLaunch();
         bottle = Instantiate(bottlePrefab, enemy.transform.position, Quaternion.identity);
         bottle.GetComponent<DrunkProjectile>().finalPosition = enemy.playerPos;
         bottle.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
