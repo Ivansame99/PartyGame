@@ -42,7 +42,7 @@ public class SlashController : MonoBehaviour
     {
         if (other.gameObject.tag == "SlashEffect")
         {
-            Instantiate(parryParticles, transform.position, parryParticles.transform.rotation);
+            if(parryParticles!=null) Instantiate(parryParticles, transform.position, parryParticles.transform.rotation);
             pushBack = true;
             attackPosition = other.GetComponent<SlashController>().owner.transform.position;
             if (playerHealthController != null)

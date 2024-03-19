@@ -26155,6 +26155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  parryParticles: {fileID: 1429954232896169633, guid: 7f924a45818f669458ae60993b8aae21,
+    type: 3}
   owner: {fileID: 0}
 --- !u!114 &3426564388897930634
 MonoBehaviour:
@@ -26415,8 +26417,8 @@ MonoBehaviour:
   initialPowerLevel: 20
   minPowerLevel: 20
   maxPowerLevel: 300
-  powerScale: 10
-  healthScale: 2
+  powerScale: 11
+  healthScale: 4
   maxScaleMultiplier: 6
   minScaleMultiplier: 4
   smoke: {fileID: 3304137741441669463}
@@ -31863,6 +31865,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  parryParticles: {fileID: 0}
   owner: {fileID: 0}
 --- !u!114 &3087660152626586900
 MonoBehaviour:

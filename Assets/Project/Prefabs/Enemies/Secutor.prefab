@@ -15418,6 +15418,7 @@ MonoBehaviour:
   <inmuneTime>k__BackingField: 0.01
   secutorAudioManager: {fileID: 0}
   giantAudioManager: {fileID: 0}
+  drunkAudioManager: {fileID: 0}
   enemyChaseBase: {fileID: 11400000, guid: 272d3d3eb1708874dbd6e27d55220279, type: 2}
   enemyPreAttackBase: {fileID: 11400000, guid: ae4880ee6508e714ab91967cbd6fa0ab, type: 2}
   enemyAttackBase: {fileID: 11400000, guid: 0ab7682d2fcb7ed44830610d9d47c663, type: 2}
@@ -15466,8 +15467,8 @@ MonoBehaviour:
   initialPowerLevel: 25
   minPowerLevel: 20
   maxPowerLevel: 300
-  powerScale: 10
-  healthScale: 2
+  powerScale: 11
+  healthScale: 4
   maxScaleMultiplier: 7
   minScaleMultiplier: 3
   smoke: {fileID: 5557540556211379151}
@@ -15672,6 +15673,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  parryParticles: {fileID: 1429954232896169633, guid: 7f924a45818f669458ae60993b8aae21,
+    type: 3}
   owner: {fileID: 0}
 --- !u!114 &2829083824295789400
 MonoBehaviour:
@@ -32412,6 +32415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalDamage: 0
   pushForce: 0
+  parryParticles: {fileID: 0}
   owner: {fileID: 0}
 --- !u!114 &8895718159406444885
 MonoBehaviour:
