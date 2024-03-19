@@ -10,17 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d36e3d947faa024598c38773e1d21da, type: 3}
-  m_Name: OnePlayer
+  m_Name: FourPlayersBackUp
   m_EditorClassIdentifier: 
-  players: 1
+  players: 4
   rounds:
   - enemiesInRound:
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 10
+      power: 20
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 10
+      power: 20
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 20
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 20
   - enemiesInRound:
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
@@ -30,32 +36,24 @@ MonoBehaviour:
       power: 20
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 50
-  - enemiesInRound:
+      power: 70
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 30
+      power: 70
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 30
-    - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
+      power: 70
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 40
+      power: 70
   - enemiesInRound:
-    - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
       power: 150
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
-      power: 50
-  - enemiesInRound:
-    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
-        type: 3}
-      power: 50
-    - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
-        type: 3}
-      power: 100
-    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+      power: 150
+    - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
         type: 3}
       power: 50
     - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
@@ -64,14 +62,82 @@ MonoBehaviour:
   - enemiesInRound:
     - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
         type: 3}
-      power: 200
+      power: 250
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+  - enemiesInRound:
+    - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
+        type: 3}
+      power: 300
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
     - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
         type: 3}
       power: 200
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
     - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
         type: 3}
-      power: 100
+      power: 50
+    - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
+        type: 3}
+      power: 50
   - enemiesInRound:
+    - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
+        type: 3}
+      power: 300
+    - enemy: {fileID: 2833928545811715665, guid: 93922e3718428dc479dbbd9d347cfb53,
+        type: 3}
+      power: 300
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 350
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 350
+    - enemy: {fileID: 6563680104089908513, guid: 91a78c91153fd114ba19deb858a568db,
+        type: 3}
+      power: 300
+  - enemiesInRound:
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
+    - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
+        type: 3}
+      power: 50
     - enemy: {fileID: 4135121720837257046, guid: c3890e87a55f31b43b55a69e4cb51c28,
         type: 3}
       power: 50
