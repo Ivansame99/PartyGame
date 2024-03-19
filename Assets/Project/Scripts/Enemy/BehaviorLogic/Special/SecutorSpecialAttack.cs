@@ -13,12 +13,6 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-        switch (triggerType)
-        {
-            case Enemy.AnimationTriggerType.EnemyAttack:
-                CreateParticles();
-                break;
-        }
     }
 
     public override void DoEnterLogic()
@@ -36,14 +30,13 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
-        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
+        if(!enemy.isDead)
         {
-            Stunned();
-        }
-        if (enemy.isDead)
-        {
-            enemy.stateMachine.ChangeState(enemy.deathState);
-        }
+            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
+            {
+                Stunned();
+            }
+        } else enemy.stateMachine.ChangeState(enemy.deathState);
     }
 
     public override void DoPhysicsLogic()
