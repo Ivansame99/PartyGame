@@ -5,50 +5,97 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-	public Audio[] sounds;
+	//public Audio[] sounds;
 
-	public static AudioManager instance;
+	public static AudioManager Instance;
+
+
+
+	//	foreach (var sound in sounds)
+	//	{
+	//		sound.source = gameObject.AddComponent<AudioSource>();
+	//		sound.source.clip = sound.clip;
+
+	//		sound.source.volume = sound.volume;
+	//		sound.source.pitch = sound.pitch;
+	//		sound.source.loop = sound.loop;
+	//		sound.source.outputAudioMixerGroup = sound.mixer;
+
+	//	}
+	//}
+
+	//private void Start()
+	//{
+	//	PlaySound("BackgroundMusic");
+	//}
+
+	//public void PlaySound(string name)
+	//{
+	//	Audio audio = Array.Find(sounds, sound => sound.name == name);
+	//	if (audio == null)
+	//	{
+	//		Debug.LogError("Audio: " + name + " not found");
+	//		return;
+	//	}
+
+	//	audio.source.Play();
+	//}
+
+	[SerializeField]
+	private AudioSource audioSource;
+
+	[SerializeField]
+	private AudioClip victoryMusic; // La nueva música que deseas reproducir
+
+	[SerializeField]
+	private float fadeDuration = 1.0f; // La duración del fade in/out en segundos
 
 	private void Awake()
 	{
-		if (instance == null)
+		if (Instance == null)
 		{
-			instance = this;
-		} else
+			Instance = this;
+		}
+		else
 		{
 			Destroy(gameObject);
 			return;
 		}
 
-		DontDestroyOnLoad(gameObject);
-
-		foreach (var sound in sounds)
-		{
-			sound.source = gameObject.AddComponent<AudioSource>();
-			sound.source.clip = sound.clip;
-
-			sound.source.volume = sound.volume;
-			sound.source.pitch = sound.pitch;
-			sound.source.loop = sound.loop;
-			sound.source.outputAudioMixerGroup = sound.mixer;
-
-		}
+		//DontDestroyOnLoad(gameObject);
 	}
 
-	private void Start()
+	public void ChangeToVictoryTheme()
 	{
-		PlaySound("BackgroundMusic");
+		StartCoroutine(FadeOutThenIn());
 	}
 
-	public void PlaySound(string name)
+	private IEnumerator FadeOutThenIn()
 	{
-		Audio audio = Array.Find(sounds, sound => sound.name == name);
-		if (audio == null)
+		float tiempoInicio = Time.time;
+		float volumenInicial = audioSource.volume;
+
+		while (Time.time < tiempoInicio + fadeDuration)
 		{
-			Debug.LogError("Audio: " + name + " not found");
-			return;
+			float t = (Time.time - tiempoInicio) / fadeDuration;
+			audioSource.volume = Mathf.Lerp(volumenInicial, 0, t);
+			yield return null;
 		}
 
-		audio.source.Play();
+		// Cambiar la música
+		audioSource.clip = victoryMusic;
+		audioSource.Play();
+
+		tiempoInicio = Time.time;
+
+		while (Time.time < tiempoInicio + fadeDuration)
+		{
+			float t = (Time.time - tiempoInicio) / fadeDuration;
+			audioSource.volume = Mathf.Lerp(0, volumenInicial, t);
+			yield return null;
+		}
+
+		// Ajustar el volumen al valor final
+		audioSource.volume = volumenInicial;
 	}
 }

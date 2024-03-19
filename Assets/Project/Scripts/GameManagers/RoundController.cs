@@ -85,6 +85,7 @@ public class RoundController : MonoBehaviour
 				{
 					SetFinalRound();
 					finalRound = true;
+					betweenRounds = false;
 				}
 			}
 		}

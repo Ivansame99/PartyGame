@@ -77,6 +77,7 @@ public class EndGameController : MonoBehaviour
 			}
 
 			gameManager.eventsController.StopEvents();
+			AudioManager.Instance.ChangeToVictoryTheme();
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
