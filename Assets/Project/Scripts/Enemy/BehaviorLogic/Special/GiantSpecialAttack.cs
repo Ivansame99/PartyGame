@@ -9,7 +9,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
 {
     [SerializeField] private float chargeSpeed = 35f;
     [SerializeField] private float impulseForce = 50f;
-    [SerializeField] private float colisionDistance = 1.5f;
+    [SerializeField] private float colisionDistance;
 
     private bool isAttacking;
     private bool isStunned;
