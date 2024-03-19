@@ -10,6 +10,8 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     [SerializeField] private float chargeSpeed = 35f;
     [SerializeField] private float impulseForce = 50f;
     [SerializeField] private float colisionDistance;
+    [SerializeField] private float atkDuration;
+    private float atkTimer;
 
     private bool isAttacking;
     private bool isStunned;
@@ -35,6 +37,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
+        atkTimer = atkDuration;
     }
 
     public override void DoExitLogic()
@@ -53,6 +56,15 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
             transform.LookAt(new Vector3(enemy.playerPos.position.x, 0, enemy.playerPos.position.z));
             playerDir = (enemy.playerPos.position - transform.position).normalized;
             playerDir.y = 0;
+
+            if (atkTimer <= 0)
+            {
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+            else
+            {
+                atkTimer -= Time.deltaTime;
+            }
         }
     }
 
