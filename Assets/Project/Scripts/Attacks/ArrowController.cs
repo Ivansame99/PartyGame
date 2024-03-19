@@ -15,8 +15,11 @@ public class ArrowController : MonoBehaviour
     [HideInInspector]
 	public float pushForce;
 
-    //[SerializeField]
-    private float speed;
+	[SerializeField]
+	private GameObject parryParticles;
+
+	//[SerializeField]
+	private float speed;
 
     private float gravityScale;
     private float globalGravity = -9.81f;
@@ -40,10 +43,13 @@ public class ArrowController : MonoBehaviour
     private float minPitch = 0.8f;
     private float maxPitch = 1.2f;
 
-    void Start()
+    [SerializeField]
+	private AudioSource hitSound;
+
+	void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
+	}
 
     void Update()
     {
@@ -96,8 +102,9 @@ public class ArrowController : MonoBehaviour
     {
         if (other.gameObject.tag == "SlashEffect")
         {
-            // Calcular la rotación para revertir la dirección original
-            Quaternion rotacionRevertida = Quaternion.LookRotation(-transform.forward);
+			if(parryParticles != null) Instantiate(parryParticles, transform.position, parryParticles.transform.rotation);
+			// Calcular la rotación para revertir la dirección original
+			Quaternion rotacionRevertida = Quaternion.LookRotation(-transform.forward);
 
             // Aplicar la rotación al objeto
             transform.rotation = rotacionRevertida;
@@ -107,6 +114,12 @@ public class ArrowController : MonoBehaviour
             ownerPos = other.transform.parent.gameObject.transform.position;
 			arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 			arrowCollision.Play();
+
+			if (hitSound != null)
+			{
+				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+				hitSound.Play();
+			}
 		}
     }
 }
