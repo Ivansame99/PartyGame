@@ -17980,6 +17980,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1177337987}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1189428595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189428597}
+  - component: {fileID: 1189428596}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1189428596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189428595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f1779f03226d541a01d273c5cfe9da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1967730611}
+  victoryMusic: {fileID: 8300000, guid: 1988c2f73142f6648977bca045df4a11, type: 3}
+  fadeDuration: 1
+--- !u!4 &1189428597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189428595}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20.091919, y: 3.6936808, z: 8.973358}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1191162353
 GameObject:
   m_ObjectHideFlags: 0
@@ -27368,7 +27415,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2915029312892322458, guid: 9505f40a0daaa154d9d21cf074b089fd,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: e110d6b3b3b195642a75db2313254c2f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7ef73b09dfe32da40ad2e70d6993b241, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.05
   m_Pitch: 1
@@ -29061,6 +29108,11 @@ PrefabInstance:
       propertyPath: publicAnim
       value: 
       objectReference: {fileID: 33536539}
+    - target: {fileID: 7806798369090360513, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: winAnimDuration
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8785760671137338243, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_Name

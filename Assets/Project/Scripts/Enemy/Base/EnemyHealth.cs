@@ -145,7 +145,7 @@ public class EnemyHealth : MonoBehaviour
 	public void enemyDestroy()
     {
 		enemy.isDead = true;
-        Destroy(healthBar.gameObject);
+        if(healthBar.gameObject!=null) Destroy(healthBar.gameObject);
         Destroy(powerLevelGameObject.gameObject);
     }
 
