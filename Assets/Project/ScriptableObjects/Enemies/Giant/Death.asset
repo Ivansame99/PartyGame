@@ -12,7 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a653cc7301f3244b9b43aab6ef13d0, type: 3}
   m_Name: Death
   m_EditorClassIdentifier: 
-  helmetPrefabs: []
+  helmetPrefabs:
+  - prefab: {fileID: 4724293580831856043, guid: c8a0aca0efb63344b975b4a4ecc6f442,
+      type: 3}
+    spawnChance: 1
+  - prefab: {fileID: 1899038372838651296, guid: 74b13107b6f952b458179a8e589056d9,
+      type: 3}
+    spawnChance: 0.8
+  - prefab: {fileID: 7219896977348720768, guid: 171a0c1f8fa9c154384b8821de4552f4,
+      type: 3}
+    spawnChance: 0.9
+  - prefab: {fileID: 5345504924010898986, guid: 895c88d28297c7043a78e460c56dbc32,
+      type: 3}
+    spawnChance: 0.2
   minForce: 2
   maxForce: 5
   deathParticles: {fileID: 141433446842962269, guid: 6d2be12e1deae7b4b8d460091035747f,
