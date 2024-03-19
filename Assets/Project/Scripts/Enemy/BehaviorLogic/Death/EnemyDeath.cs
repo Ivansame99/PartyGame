@@ -11,6 +11,9 @@ public class EnemyDeath : EnemyDeathSOBase
 	[SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
 
+
+
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -23,9 +26,26 @@ public class EnemyDeath : EnemyDeathSOBase
         enemy.animator.SetTrigger("Die");
     }
 
+    void StopParticleLoop(ParticleSystem particleSystemInstance)
+    {
+        Debug.Log("Entra");
+        // Detener el sistema de partículas
+        ParticleSystem ps = particleSystemInstance.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            Debug.Log("Funciona");
+            ps.Stop();
+        }
+
+        // Desvincular las partículas del enemigo
+        particleSystemInstance.transform.SetParent(null);
+    }
+
     void Death()
     {
         //Feedback
+        StopParticleLoop(enemy.trailSand);
+
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
 		foreach (var helmetPrefab in helmetPrefabs)
 		{

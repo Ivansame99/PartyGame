@@ -23,10 +23,24 @@ public class GiantDeath : EnemyDeathSOBase
         enemy.animator.SetTrigger("Die");
         //enemy.secutorAudioManager.PlayDeath();
     }
+    void StopParticleLoop(ParticleSystem particleSystemInstance)
+    {
+        Debug.Log("Entra");
+        // Detener el sistema de partículas
+        ParticleSystem ps = particleSystemInstance.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            Debug.Log("Funciona");
+            ps.Stop();
+        }
 
+        // Desvincular las partículas del enemigo
+        particleSystemInstance.transform.SetParent(null);
+    }
     void Death()
     {
         //Feedback
+        StopParticleLoop(enemy.trailSand);
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
         foreach (var helmetPrefab in helmetPrefabs)
         {
