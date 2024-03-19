@@ -9,6 +9,7 @@ public class GiantDeath : EnemyDeathSOBase
     [SerializeField] private float minForce = 2f;
     [SerializeField] private float maxForce = 5f;
     [SerializeField] private GameObject deathParticles;
+    [SerializeField] private float deathTimer;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -18,8 +19,8 @@ public class GiantDeath : EnemyDeathSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Die");
         enemy.giantAudioManager.PlayDeath();
+        enemy.animator.SetTrigger("Die");
         //enemy.secutorAudioManager.PlayDeath();
     }
 
@@ -59,6 +60,14 @@ public class GiantDeath : EnemyDeathSOBase
         if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
         {
             Death();
+        }
+        if (deathTimer <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            deathTimer -= Time.deltaTime;
         }
     }
 

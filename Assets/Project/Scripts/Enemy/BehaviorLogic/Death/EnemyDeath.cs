@@ -19,8 +19,8 @@ public class EnemyDeath : EnemyDeathSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Die");
         enemy.secutorAudioManager.PlayDeath();
+        enemy.animator.SetTrigger("Die");
     }
 
     void Death()

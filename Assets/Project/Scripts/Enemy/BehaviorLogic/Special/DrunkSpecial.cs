@@ -31,6 +31,7 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
 
         attackTimer = attackCooldown;
         feedback = Instantiate(feedbackAttack, enemy.transform);
+        finish = false;
     }
 
     public override void DoExitLogic()
@@ -59,10 +60,10 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
                 }
             }
 
-            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Puke"))
+            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Puke") && !finish)
             {
                 if (feedback != null) Destroy(feedback);
-                puke = Instantiate(pukeParticles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 2, enemy.transform.position.z), Quaternion.identity);
+                puke = Instantiate(pukeParticles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z), enemy.transform.rotation);
                 finish = true;
             }
         }
