@@ -34,9 +34,6 @@ public class GiantAttack : EnemyAttackSOBase
             case Enemy.AnimationTriggerType.EnemyAttack:
                 Attack();
                 break;
-            case Enemy.AnimationTriggerType.EnemyAttackFinished:
-                AttackFinished();
-                break;
         }
     }
     public override void DoEnterLogic()
@@ -62,6 +59,10 @@ public class GiantAttack : EnemyAttackSOBase
             if (!enemy.IsAggreed && !isAttacking)
             {
                 enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+            if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attacking"))
+            {
+                AttackFinished();
             }
 
             if (attackTimer <= 0 && !isAttacking)
