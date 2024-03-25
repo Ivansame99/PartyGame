@@ -6,10 +6,9 @@ using UnityEngine;
 public class SecutorSpecialAttack : EnemySpecialAttackSOBase
 {
     [SerializeField] private ParticleSystem areaAttackParticles;
-    private Quaternion rotation = Quaternion.Euler(-90f, 0f, 0f);
-    private Vector3 scale = new Vector3(4f, 4f, 4f);
-    private bool changeState;
 
+    private float attackTimer;
+    [SerializeField] private float attackTime;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -34,7 +33,17 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
         {
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Special"))
             {
-                Stunned();
+                enemy.stateMachine.ChangeState(enemy.stunnedState);
+            }
+
+            else if (attackTimer <= 0)
+            {
+                enemy.SetDamagedStatus(false);
+                enemy.stateMachine.ChangeState(enemy.chaseState);
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
             }
         } else enemy.stateMachine.ChangeState(enemy.deathState);
     }
@@ -54,14 +63,4 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     {
         base.ResetValues();
     }
-    private void CreateParticles()
-    {
-        ParticleSystem instantiatedObject = Instantiate(areaAttackParticles, enemy.transform.position, rotation);
-        instantiatedObject.transform.localScale = scale;
-    }
-    private void Stunned()
-    {
-        enemy.stateMachine.ChangeState(enemy.stunnedState);
-    }
-
 }

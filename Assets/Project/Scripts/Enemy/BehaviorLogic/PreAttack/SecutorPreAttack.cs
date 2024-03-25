@@ -7,6 +7,8 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
     [SerializeField] GameObject feedbackAttack;
     private GameObject feedback;
 
+    private float preAttackTimer;
+    [SerializeField] private float preAttackTime;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -16,6 +18,7 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Feedback");
         feedback = Instantiate(feedbackAttack, enemy.transform);
+        preAttackTimer = preAttackTime;
     }
     public override void DoExitLogic()
     {
@@ -29,6 +32,15 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Feedback"))
             {
                 enemy.stateMachine.ChangeState(enemy.attackState);
+            }
+
+            else if (preAttackTimer <= 0)
+            {
+                enemy.stateMachine.ChangeState(enemy.attackState);
+            }
+            else
+            {
+                preAttackTimer -= Time.deltaTime;
             }
 
             if (enemy.IsDamaged)
