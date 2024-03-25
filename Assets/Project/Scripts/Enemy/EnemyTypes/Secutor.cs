@@ -15,6 +15,10 @@ public class Secutor : Enemy
     [SerializeField] private EnemyStunedSOBase enemyStunedBase;
     [SerializeField] private EnemyDeathSOBase enemyDeathBase;
     [SerializeField] private EnemyDamageSOBase enemyDamageBase;
+    [SerializeField] private EnemyWaterChaseSOBase enemyWaterChaseBase;
+    [SerializeField] private EnemyWaterAttackSOBase enemyWaterAttackBase;
+    //Water States
+
     void Awake()
     {
         //Initialize SO
@@ -25,6 +29,8 @@ public class Secutor : Enemy
         enemyStunedBaseInstance = Instantiate(enemyStunedBase);
         enemyDeathBaseInstance = Instantiate(enemyDeathBase);
         enemyDamageBaseInstance = Instantiate(enemyDamageBase);
+        enemyWaterChaseBaseInstance = Instantiate(enemyWaterChaseBase);
+        enemyWaterAttackBaseInstance = Instantiate(enemyWaterAttackBase);
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
@@ -35,6 +41,9 @@ public class Secutor : Enemy
         stunnedState = new EnemyStunnedState(this, stateMachine);
         deathState = new EnemyDeathState(this, stateMachine);
         damageState = new EnemyDamageState(this, stateMachine);
+
+        waterChaseState = new EnemyWaterChaseState(this, stateMachine);
+        waterAttackState = new EnemyWaterAttackState(this, stateMachine);
     }
     void Start()
     {
@@ -58,6 +67,8 @@ public class Secutor : Enemy
         enemyStunedBaseInstance.Init(gameObject, this);
         enemyDeathBaseInstance.Init(gameObject, this);
         enemyDamageBaseInstance.Init(gameObject, this);
+        enemyWaterChaseBaseInstance.Init(gameObject, this);
+        enemyWaterAttackBaseInstance.Init(gameObject, this);
         //Initialize State Machine
         stateMachine.Initialize(chaseState);
     }

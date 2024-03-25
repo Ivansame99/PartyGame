@@ -36,7 +36,8 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
 
             else if (preAttackTimer <= 0)
             {
-                enemy.stateMachine.ChangeState(enemy.attackState);
+                if(!enemy.OnWater) enemy.stateMachine.ChangeState(enemy.attackState);
+                else enemy.stateMachine.ChangeState(enemy.waterAttackState);
             }
             else
             {
