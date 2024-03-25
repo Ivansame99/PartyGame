@@ -21864,13 +21864,31 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: Trail Size
+        m_Overridden: 1
+      - m_Value: 0.8
+        m_Name: TrailLifeTime
+        m_Overridden: 1
+      - m_Value: 10
+        m_Name: MeteorLifeTime
+        m_Overridden: 1
+      - m_Value: 5
+        m_Name: Rate
+        m_Overridden: 1
+      - m_Value: 20
+        m_Name: Radius
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0, y: -25, z: 10}
+      - m_Value: {x: 0, y: -25, z: 20}
         m_Name: Direction
+        m_Overridden: 1
+      - m_Value: {x: 0, y: 50, z: 0}
+        m_Name: Initial Position
         m_Overridden: 1
     m_Vector4f:
       m_Array: []
@@ -21885,7 +21903,10 @@ VisualEffect:
     m_Gradient:
       m_Array: []
     m_NamedObject:
-      m_Array: []
+      m_Array:
+      - m_Value: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+        m_Name: TrailTexture
+        m_Overridden: 1
     m_Bool:
       m_Array: []
 --- !u!4 &1389617291
@@ -21895,14 +21916,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389617288}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.32, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.4, y: 1, z: 40.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1390174603
 GameObject:
   m_ObjectHideFlags: 0
