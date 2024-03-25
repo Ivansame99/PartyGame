@@ -102,7 +102,30 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void DamageFeedback()
+	public void ReceiveDamageMultiplier(float multiplier)
+	{
+        //Logic
+        float damage = enemy.maxHealth * multiplier;
+
+		enemy.currentHealth -= damage;
+		timer = enemy.inmuneTime;
+
+		//Feedback
+		if (floatingDamageText != null) ShowDamageText(damage);
+
+		if (healthBarC != null)
+		{
+			healthBarC.SetProgress(enemy.currentHealth / enemy.maxHealth, 5f);
+			DamageFeedback();
+			enemy.SetDamagedStatus(true);
+		}
+		if (enemy.currentHealth <= 0)
+		{
+			Die();
+		}
+	}
+
+	void DamageFeedback()
     {
         Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         crossRight.SetActive(false);
@@ -170,9 +193,9 @@ public class EnemyHealth : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("EventDamage"))
+        if (other.CompareTag("EventDamage") && !invencibility && !enemy.isDead)
         {
-            ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
+			ReceiveDamageMultiplier(other.GetComponent<DealDamageEvent>().GetDamageMultipler());
         }
     }
 

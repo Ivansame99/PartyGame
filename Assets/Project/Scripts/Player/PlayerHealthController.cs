@@ -141,6 +141,32 @@ public class PlayerHealthController : MonoBehaviour
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
 	}
 
+	public void ReceiveDamageMultiplier(float multiplier)
+	{
+		float damage = maxHealth * multiplier;
+		//Feedback
+		StartCoroutine(RedEffect());
+		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+
+		cross1.SetActive(false);
+		cross2.SetActive(false);
+		glow.SetActive(false);
+
+		cross1.SetActive(true);
+		cross2.SetActive(true);
+		glow.SetActive(true);
+
+		//Sound
+		playerController.playerAudioManager.PlayDamage();
+
+		//Logic
+		health -= damage;
+		if (health <= 0) Die();
+		invencibleTimer = inmuneTime;
+
+		playerHudController.ReceivedDamage(damage, health, maxHealth);
+	}
+
 	public void RestoreHealthAfterRound()
 	{
 		float roundHealthAmmount = 0.3f;
@@ -261,9 +287,9 @@ public class PlayerHealthController : MonoBehaviour
 			ReceiveDamage(projectile.finalDamage);
 			Debug.Log("Recibiendo daño");
 		}
-		if (other.CompareTag("EventDamage"))
+		if (other.CompareTag("EventDamage") && invencibleTimer <= 0 && !dead)
 		{
-			ReceiveDamage(other.GetComponent<DealDamageEvent>().damageAmmount);
+			ReceiveDamageMultiplier(other.GetComponent<DealDamageEvent>().GetDamageMultipler());
 		}
 		if (other.gameObject.tag == "EnemyCharge" && invencibleTimer <= 0 && !dead)
 		{

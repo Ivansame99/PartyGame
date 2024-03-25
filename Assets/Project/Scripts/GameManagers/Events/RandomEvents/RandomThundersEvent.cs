@@ -30,11 +30,13 @@ public class RandomThundersEvent : GameEvent
 	private float xPosMin = -22.5f;
 	private float zPosMax = 22f;
 	private float zPosMin = -10.5f;
-	private float previewYPos = 2f;
+	private float previewYPos = 1.5f;
 	private float attackYPos = 98f;
 
 	private CoroutineManager coroutineManager;
 	private bool instanciateCoroutines;
+
+	private float thunderDuration = 1f;
 
 	public override void EventStart()
 	{
@@ -69,11 +71,11 @@ public class RandomThundersEvent : GameEvent
 	private IEnumerator SpawnThunder(int index, float preViewDelay, Vector3 pos, float attackDelay)
 	{
 		yield return new WaitForSeconds(preViewDelay);
-		Instantiate(previewAttack, pos, previewAttack.transform.rotation);
+		Destroy(Instantiate(previewAttack, pos, previewAttack.transform.rotation), attackDelay + 0.2f);
 		yield return new WaitForSeconds(attackDelay);
 		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
 		CameraShake.Shake(0.5f,0.3f);
-		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), 1f);
+		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), thunderDuration);
 		if (index == thundersNumber - 1)
 		{
 			eventFinished = true;
