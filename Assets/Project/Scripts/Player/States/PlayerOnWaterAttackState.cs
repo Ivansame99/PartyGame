@@ -95,7 +95,8 @@ public class PlayerOnWaterAttackState : PlayerState<PlayerController>
 
 					//Animation
 					player.anim.runtimeAnimatorController = player.weaponController.combo[comboCounter].animatorOR;
-					player.anim.SetFloat("AttackSpeed", animationMultiplierSpeed);
+					float attackSpeed = animationMultiplierSpeed + player.powerController.PowerAttackSpeed();
+					player.anim.SetFloat("AttackSpeed", attackSpeed);
 					player.anim.Play("Attack", 0, 0);
 
 					//Sound
