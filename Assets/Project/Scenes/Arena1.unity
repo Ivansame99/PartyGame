@@ -21846,7 +21846,7 @@ VFXRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!2083052967 &1389617290
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -21868,7 +21868,7 @@ VisualEffect:
       - m_Value: 1
         m_Name: Trail Size
         m_Overridden: 1
-      - m_Value: 0.8
+      - m_Value: 0.9
         m_Name: TrailLifeTime
         m_Overridden: 1
       - m_Value: 10
@@ -21884,10 +21884,10 @@ VisualEffect:
       m_Array: []
     m_Vector3f:
       m_Array:
-      - m_Value: {x: 0, y: -25, z: 20}
+      - m_Value: {x: 0, y: -25, z: 12}
         m_Name: Direction
         m_Overridden: 1
-      - m_Value: {x: 0, y: 50, z: 0}
+      - m_Value: {x: 0, y: 40, z: 0}
         m_Name: Initial Position
         m_Overridden: 1
     m_Vector4f:
@@ -21916,14 +21916,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389617288}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.4, y: 1, z: 40.6}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 22.34, y: 1, z: 2.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1390174603
 GameObject:
   m_ObjectHideFlags: 0
