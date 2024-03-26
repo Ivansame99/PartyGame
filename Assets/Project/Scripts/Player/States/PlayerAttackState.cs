@@ -10,8 +10,8 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float attackMovement;
 
-	[SerializeField]
-	private float betweenAttacksCD;
+	//[SerializeField]
+	//private float betweenAttacksCD;
 
 	[SerializeField]
 	private float comboCD;
@@ -31,12 +31,14 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	private int comboCounter;
 	float lastClicked;
 	private float turnSmoothTime;
+	private bool nextAttack=true;
 
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
 		comboCounter = 0;
-		lastClicked = betweenAttacksCD;
+		nextAttack = true;
+		//lastClicked = betweenAttacksCD;
 	}
 
 	public override void Exit()
@@ -81,15 +83,17 @@ public class PlayerAttackState : PlayerState<PlayerController>
 		{
 			if (comboCounter < player.weaponController.combo.Count)
 			{
-				if (Time.time - lastClicked >= betweenAttacksCD)
+				if (nextAttack)
 				{
+					nextAttack = false;
 					player.CancelInvoke(nameof(player.EndCombo));
 
 					ResetVelocity();
 
 					//Animation
 					player.anim.runtimeAnimatorController = player.weaponController.combo[comboCounter].animatorOR;
-					player.anim.SetFloat("AttackSpeed", animationMultiplierSpeed);
+					float attackSpeed = animationMultiplierSpeed + player.powerController.PowerAttackSpeed();
+					player.anim.SetFloat("AttackSpeed", attackSpeed);
 					player.anim.Play("Attack", 0, 0);
 
 					//Sound
@@ -138,6 +142,7 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	{
 		if (player.anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && player.anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
+			nextAttack = true;
 			player.anim.SetTrigger("Attack");
 			ResetVelocity();
 			player.gravityController.gravityOn = true;

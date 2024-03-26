@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class DealDamageEvent : MonoBehaviour
 {
-    public float damageAmmount;
+    [SerializeField] 
+    private float damageMultiplier;
+
+    public float GetDamageMultipler()
+    {
+        return damageMultiplier;
+    }
 }

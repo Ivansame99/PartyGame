@@ -251,10 +251,10 @@ public class EnemyHealthController : MonoBehaviour
             }
         }
 
-		if (other.CompareTag("EventDamage"))
-		{
-			ReceiveDamageSlash(other.GetComponent<DealDamageEvent>().damageAmmount);
-		}
+		//if (other.CompareTag("EventDamage"))
+		//{
+		//	ReceiveDamageSlash(other.GetComponent<DealDamageEvent>().damageAmmount);
+		//}
 	}
 
     private void OnCollisionEnter(Collision collision)

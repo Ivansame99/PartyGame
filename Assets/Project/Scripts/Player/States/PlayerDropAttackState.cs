@@ -97,7 +97,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 			}
 
 			jumpAttackController.finalDamage = dropAttackBaseDamage + player.powerController.PowerDamage();
-			player.jumpAttackCollider.SetActive(true);
+			//player.jumpAttackCollider.SetActive(true);
 
 			if (!fallParticleOn)
 			{
@@ -112,7 +112,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 			if (timerattackCollider >= attackColliderDuration)
 			{
-				player.jumpAttackCollider.SetActive(false);
+				//player.jumpAttackCollider.SetActive(false);
 				if (timerattackFreeze >= attackFreezeTime)
 				{
 					player.ChangeState(typeof(PlayerIdleState));

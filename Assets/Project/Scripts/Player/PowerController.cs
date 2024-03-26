@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PowerController : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class PowerController : MonoBehaviour
 
 	[SerializeField]
 	private float healthScale;
+
+	[SerializeField]
+	private float playerAttackSpeedScale;
+
+	[SerializeField]
+	private float maxPlayerAttackSpeedScale;
 
 	[SerializeField]
 	private float maxScaleMultiplier = 2;
@@ -98,6 +105,13 @@ public class PowerController : MonoBehaviour
 	public float PowerHealth()
 	{
 		return currentPowerLevel / healthScale;
+	}
+
+	public float PowerAttackSpeed()
+	{
+		float attackSpeeedIncrease = currentPowerLevel / playerAttackSpeedScale;
+		//Debug.Log("Aumento attack speed: " + Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale));
+		return Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale);
 	}
 
 	public float GetCurrentPowerLevel()
