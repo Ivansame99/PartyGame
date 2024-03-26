@@ -110,7 +110,7 @@ public class PowerController : MonoBehaviour
 	public float PowerAttackSpeed()
 	{
 		float attackSpeeedIncrease = currentPowerLevel / playerAttackSpeedScale;
-		Debug.Log("Aumento attack speed: " + Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale));
+		//Debug.Log("Aumento attack speed: " + Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale));
 		return Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale);
 	}
 
