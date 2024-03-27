@@ -11,7 +11,7 @@ public class EnemyOnWater : MonoBehaviour
 
     private void Awake()
     {
-       if(enemy == null) enemy = GetComponent<Enemy>();
+       //if(enemy == null) enemy = GetComponent<Enemy>();
     }
 
     private void Update()
@@ -22,7 +22,6 @@ public class EnemyOnWater : MonoBehaviour
 
             if (triggerTimeout <= 0)
             {
-                Debug.Log("On Water");
                 triggerTimeout = 0f;
                 enemy.SetWaterStatus(false);
             }

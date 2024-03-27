@@ -28,6 +28,7 @@ public class GiantChaseWater : EnemyWaterChaseSOBase
 
         if (!enemy.isDead)
         {
+            Debug.Log("Sigo");
             if(!enemy.OnWater) enemy.stateMachine.ChangeState(enemy.chaseState);
 
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);

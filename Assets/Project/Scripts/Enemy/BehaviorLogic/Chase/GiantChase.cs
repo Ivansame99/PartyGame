@@ -40,6 +40,7 @@ public class GiantChase : EnemyChaseSOBase
             if (enemy.IsSpecialAggro)
             {
                 enemy.stateMachine.ChangeState(enemy.specialAttackState);
+
             }
         }
         else
