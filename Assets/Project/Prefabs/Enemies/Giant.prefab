@@ -20591,6 +20591,7 @@ GameObject:
   - component: {fileID: 5874519042736920550}
   - component: {fileID: 990038865229707602}
   - component: {fileID: 1442539315143086935}
+  - component: {fileID: -792489038046964831}
   m_Layer: 8
   m_Name: Giant
   m_TagString: Enemy
@@ -20691,6 +20692,8 @@ MonoBehaviour:
   enemySpecialAttackBase: {fileID: 11400000, guid: a21e2e0bbd83c78428304d583eefe903,
     type: 2}
   enemyDeathBase: {fileID: 11400000, guid: 877e60cbb77e5d34ea4da984408acbd5, type: 2}
+  enemyWaterChaseBase: {fileID: 11400000, guid: 393a6e920fcb7df4297967bf99d08e91,
+    type: 2}
 --- !u!114 &8656153524366571268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20864,6 +20867,18 @@ MonoBehaviour:
   minScaleMultiplier: 2
   smoke: {fileID: 0}
   instanciatedEnemy: 1
+--- !u!114 &-792489038046964831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5969592600396533412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd4ae0c1e2ec5e4fa45e4c77f8a13b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6643832015553414177
 GameObject:
   m_ObjectHideFlags: 0

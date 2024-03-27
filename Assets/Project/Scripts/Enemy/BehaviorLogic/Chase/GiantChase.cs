@@ -17,7 +17,7 @@ public class GiantChase : EnemyChaseSOBase
     {
         base.DoEnterLogic();
         enemy.agent.isStopped = false;
-        //enemy.agent.speed = speed;
+        enemy.agent.speed = speed;
        // enemy.agent.acceleration = acceleration;
         //enemy.agent.angularSpeed = angularSpeed;
 
@@ -28,6 +28,9 @@ public class GiantChase : EnemyChaseSOBase
 
         if (!enemy.isDead)
         {
+            Debug.Log(enemy.OnWater);
+            if (enemy.OnWater) enemy.stateMachine.ChangeState(enemy.waterChaseState);
+
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
 
             if (enemy.IsAggreed)

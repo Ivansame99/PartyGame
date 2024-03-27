@@ -26298,6 +26298,7 @@ GameObject:
   - component: {fileID: 8216235686789440301}
   - component: {fileID: 94142545139451372}
   - component: {fileID: 1319925803318913296}
+  - component: {fileID: 3382923811444854652}
   m_Layer: 6
   m_Name: Drunk
   m_TagString: Enemy
@@ -26378,6 +26379,8 @@ MonoBehaviour:
     type: 2}
   enemyDamageBase: {fileID: 11400000, guid: b5686bb3ead3ec8498b875a9a9c5c25f, type: 2}
   enemyDeathBase: {fileID: 11400000, guid: c775399d92b774145a2fca03f774398e, type: 2}
+  enemyWaterChaseBase: {fileID: 11400000, guid: 7ba1b2c7496b8df47858afbe2670865e,
+    type: 2}
 --- !u!114 &8558231774344219412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26555,6 +26558,19 @@ MonoBehaviour:
   death: {fileID: 7326478021645193468}
   projectileLaunch: {fileID: 2423926767259570098}
   projectileHit: {fileID: 523581752803135588}
+--- !u!114 &3382923811444854652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6563680104089908513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95346870ff74654f8a7759b4f5bcda3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onWater: 0
 --- !u!1 &6590510998308427115
 GameObject:
   m_ObjectHideFlags: 0
