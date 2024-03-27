@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyOnWater : MonoBehaviour
 {
-    private Enemy enemy;
+    [SerializeField] private Enemy enemy;
 
     private float triggerTimeout = 0f;
 
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
+       if(enemy == null) enemy = GetComponent<Enemy>();
     }
 
     private void Update()
@@ -21,6 +22,7 @@ public class EnemyOnWater : MonoBehaviour
 
             if (triggerTimeout <= 0)
             {
+                Debug.Log("On Water");
                 triggerTimeout = 0f;
                 enemy.SetWaterStatus(false);
             }
