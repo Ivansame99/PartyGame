@@ -37,16 +37,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   lift:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {x: 0.97840023, y: 0.8184688, z: 1, w: 0}
   gamma:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {x: 1, y: 0.98329484, z: 0.91226155, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9619579, z: 0.91090614, w: 0}
+    m_Value: {x: 0.4856375, y: 0.65973204, z: 1, w: 0}
 --- !u!114 &-2945238799213567378
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -219,22 +219,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
   m_Name: Vignette
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   color:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
   center:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
-    m_OverrideState: 0
-    m_Value: 0.439
+    m_OverrideState: 1
+    m_Value: 0.54
   smoothness:
     m_OverrideState: 0
     m_Value: 0.01
   rounded:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &4842475858874747663
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -255,7 +255,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {r: 1, g: 0, b: 0, a: 1}
   balance:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
 --- !u!114 &6756487999771274304
 MonoBehaviour:
@@ -269,19 +269,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   skipIterations:
     m_OverrideState: 1
     m_Value: 1
   threshold:
     m_OverrideState: 0
-    m_Value: 11.79
+    m_Value: 1
   intensity:
-    m_OverrideState: 0
-    m_Value: 33.7
+    m_OverrideState: 1
+    m_Value: 1
   scatter:
-    m_OverrideState: 0
-    m_Value: 0.7
+    m_OverrideState: 1
+    m_Value: 0.566
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -319,18 +319,18 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.35
+    m_Value: 0.47
   contrast:
     m_OverrideState: 1
-    m_Value: -7.13
+    m_Value: 12.26
   colorFilter:
     m_OverrideState: 1
-    m_Value: {r: 0.6226415, g: 0.61970454, b: 0.61970454, a: 1}
+    m_Value: {r: 0.5943396, g: 0.5915361, b: 0.5915361, a: 1}
   hueShift:
     m_OverrideState: 0
     m_Value: 86
   saturation:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
 --- !u!114 &8604779635574103070
 MonoBehaviour:
