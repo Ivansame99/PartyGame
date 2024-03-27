@@ -27,6 +27,13 @@ public class PlayerIdleState : PlayerState<PlayerController>
 
     public override void Update()
     {
+		//Change to ak47
+		if (player.ak)
+		{
+			player.ChangeState(typeof(PlayerAk47State));
+			return;
+		}
+
 		//Change to walk
 		if (player.direction.magnitude >= 0.1f)
 		{

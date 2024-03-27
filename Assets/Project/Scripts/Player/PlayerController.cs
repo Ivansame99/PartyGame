@@ -19,6 +19,15 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	public SlashController slashCollider;
 
 	public DetectEnemiesNear detectEnemiesNear;
+
+	[SerializeField]
+	private GameObject sword;
+
+	[SerializeField]
+	private GameObject bow;
+
+	[SerializeField]
+	private GameObject ak47;
 	#endregion
 
 	#region Variables
@@ -44,6 +53,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	//Logic
 	internal Queue<bool> attackBuffer = new Queue<bool>();
+	public bool ak;
 	#endregion
 
 
@@ -119,5 +129,13 @@ public class PlayerController : PlayerStateManager<PlayerController>
 	{
 		return playerId;
 	}
+
+	public void EquipAk()
+	{
+		sword.SetActive(false);
+		bow.SetActive(false);
+		ak47.SetActive(true);
+	}
+
 	#endregion
 }
