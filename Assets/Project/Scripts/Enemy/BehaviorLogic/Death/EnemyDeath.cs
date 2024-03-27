@@ -28,7 +28,6 @@ public class EnemyDeath : EnemyDeathSOBase
 
     void StopParticleLoop(ParticleSystem particleSystemInstance)
     {
-        Debug.Log("Entra");
         // Detener el sistema de partículas
         ParticleSystem ps = particleSystemInstance.GetComponent<ParticleSystem>();
         if (ps != null)

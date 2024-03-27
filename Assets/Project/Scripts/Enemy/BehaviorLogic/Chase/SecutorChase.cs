@@ -47,6 +47,7 @@ public class SecutorChase : EnemyChaseSOBase
     }
     void CheckingStates()
     {
+        if(enemy.OnWater) enemy.stateMachine.ChangeState(enemy.waterChaseState);
         if (enemy.IsDamaged)
         {
             enemy.stateMachine.ChangeState(enemy.damageState);

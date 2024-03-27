@@ -20305,6 +20305,75 @@ Transform:
   m_Father: {fileID: 8054843342333818253}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0.62700874, y: 14.658444, z: 0.1089149}
+--- !u!1 &4445954625276219681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7764546317330368901}
+  - component: {fileID: 1890685173245385562}
+  - component: {fileID: 8427943723050914993}
+  m_Layer: 6
+  m_Name: WaterCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7764546317330368901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445954625276219681}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7648084735595444365}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1890685173245385562
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445954625276219681}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.54397166
+  m_Height: 2.222036
+  m_Direction: 1
+  m_Center: {x: 0.014237881, y: 0.7873628, z: 0}
+--- !u!114 &8427943723050914993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445954625276219681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd4ae0c1e2ec5e4fa45e4c77f8a13b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7047404649623666684}
 --- !u!1 &4714048719203751363
 GameObject:
   m_ObjectHideFlags: 0
@@ -20622,6 +20691,7 @@ Transform:
   - {fileID: 3068819053981961067}
   - {fileID: 7954935024623807873}
   - {fileID: 7122997453961440109}
+  - {fileID: 7764546317330368901}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20691,6 +20761,10 @@ MonoBehaviour:
   enemySpecialAttackBase: {fileID: 11400000, guid: a21e2e0bbd83c78428304d583eefe903,
     type: 2}
   enemyDeathBase: {fileID: 11400000, guid: 877e60cbb77e5d34ea4da984408acbd5, type: 2}
+  enemyWaterChaseBase: {fileID: 11400000, guid: 393a6e920fcb7df4297967bf99d08e91,
+    type: 2}
+  enemyWaterAttackBase: {fileID: 11400000, guid: 562dbb6afb80bf2408b39deb32bb71e6,
+    type: 2}
 --- !u!114 &8656153524366571268
 MonoBehaviour:
   m_ObjectHideFlags: 0

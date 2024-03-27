@@ -32,6 +32,8 @@ public class DrunkChase : EnemyChaseSOBase
     }
     void CheckingStates()
     {
+        if (enemy.OnWater) enemy.stateMachine.ChangeState(enemy.waterChaseState);
+
         if (enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.specialAttackState);
 
         if (enemy.IsAggreed && !enemy.IsSpecialAggro) enemy.stateMachine.ChangeState(enemy.attackState);

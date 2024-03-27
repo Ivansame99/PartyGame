@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public bool IsDamaged { get; set; }
 
 
-	//MOVEMENT INTERFACE
+	//COMPONENTS INTERFACE
 	public NavMeshAgent agent { get; set; }
 	public Rigidbody rb { get; set; }
 	public EnemyHealth enemyHealthController { get; set; }
@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	//AGGRO INTERFACE
 	public bool IsAggreed { get; set; }
 	public bool IsSpecialAggro { get; set; }
+	public bool OnWater { get; set; }
 
 	//COMBAT INTERFICE
 	public PowerController powerController { get; set; }
@@ -43,6 +44,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyStunnedState stunnedState { get; set; }
 	public EnemyDamageState damageState { get; set; }
 	public EnemyDeathState deathState { get; set; }
+
+	//WATER STATES
+	public EnemyWaterChaseState waterChaseState { get; set; }
+	public EnemyWaterAttackState waterAttackState { get; set; }
 	#endregion
 
 	#region SO Variables
@@ -57,6 +62,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyDamageSOBase enemyDamageBaseInstance { get; set; }
 	public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
 
+	//WATER STATES
+	public EnemyWaterChaseSOBase enemyWaterChaseBaseInstance { get; set; }
+	public EnemyWaterAttackSOBase enemyWaterAttackBaseInstance { get; set; }
+
+	//ENEMY UNIQUE COMPONENTS
 	public SecutorAudioManager secutorAudioManager;
 	public GiantAudioManager giantAudioManager;
 	public DrunkAudioManager drunkAudioManager;
@@ -98,7 +108,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	}
 	#endregion
 
-	#region Distance Checks
+	#region Trigger Checks
 	public void SetAggroStatus(bool isAggreed)
 	{
 		IsAggreed = isAggreed;
@@ -108,11 +118,14 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	{
 		IsSpecialAggro = isSpecialAggro;
 	}
+	public void SetWaterStatus(bool isWater)
+	{
+		OnWater = isWater;
+	}
+    #endregion
 
-	#endregion
-
-	#region Combat Functions
-	public float GetPowerDamageScale()
+    #region Combat Functions
+    public float GetPowerDamageScale()
 	{
 		return powerController.PowerDamage();
 	}

@@ -5017,7 +5017,7 @@ GameObject:
   - component: {fileID: 2856105579942961981}
   - component: {fileID: 6366228289845111995}
   m_Layer: 6
-  m_Name: AggroDistance
+  m_Name: Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15346,6 +15346,7 @@ GameObject:
   - component: {fileID: 7944593116176929888}
   - component: {fileID: 2544938430583512672}
   - component: {fileID: 502224325972705219}
+  - component: {fileID: 7370861716088857279}
   m_Layer: 8
   m_Name: Secutor
   m_TagString: Enemy
@@ -15428,6 +15429,10 @@ MonoBehaviour:
   enemyStunedBase: {fileID: 11400000, guid: f1f8e3d31d84bd544802314d8d40acdb, type: 2}
   enemyDeathBase: {fileID: 11400000, guid: 62ba3c14090b7f849b4da8339ed66ecd, type: 2}
   enemyDamageBase: {fileID: 11400000, guid: ba26bee428e50f3469a7c430a9317052, type: 2}
+  enemyWaterChaseBase: {fileID: 11400000, guid: 3769667d7347a94418764865a0586fb7,
+    type: 2}
+  enemyWaterAttackBase: {fileID: 11400000, guid: 90ab680138c435f44a4082b479e95dcf,
+    type: 2}
 --- !u!114 &8729229060380064320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15604,6 +15609,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerLevel: {fileID: 2921234836837993953}
+--- !u!114 &7370861716088857279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135121720837257046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dd4ae0c1e2ec5e4fa45e4c77f8a13b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 2739908313192342664}
 --- !u!1 &4177467650143272775
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24f544d07a025bc47bd684ece0bec050, type: 3}
-  m_Name: PreAttack
+  m_Script: {fileID: 11500000, guid: e07d245914395cb4982578bdc1b29a31, type: 3}
+  m_Name: ChaseWater
   m_EditorClassIdentifier: 
-  feedbackAttack: {fileID: 6210175535125294214, guid: 4aa22b646b490d845a8325cd746c388d,
-    type: 3}
-  preAttackTime: 0.35
+  speed: 0
+  acceleration: 8
+  angularSpeed: 120
