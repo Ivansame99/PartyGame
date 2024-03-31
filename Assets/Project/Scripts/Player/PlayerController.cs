@@ -28,6 +28,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	[SerializeField]
 	private GameObject ak47;
+	public Transform akFirePoint;
 	#endregion
 
 	#region Variables
