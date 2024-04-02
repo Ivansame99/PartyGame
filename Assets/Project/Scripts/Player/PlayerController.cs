@@ -54,7 +54,7 @@ public class PlayerController : PlayerStateManager<PlayerController>
 
 	//Logic
 	internal Queue<bool> attackBuffer = new Queue<bool>();
-	public bool ak;
+	internal bool ak;
 	#endregion
 
 
