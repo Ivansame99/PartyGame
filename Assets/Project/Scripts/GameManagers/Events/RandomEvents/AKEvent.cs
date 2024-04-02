@@ -16,7 +16,7 @@ public class AKEvent : GameEvent
 		eventFinished = false;
 		setAk = false;
 		timer = 0;
-		if (playerController == null) playerController = GameManager.Instance.selectPlayerController.GetPlayersController();
+		playerController = GameManager.Instance.selectPlayerController.GetPlayersController();
 	}
 
     public override void EventUpdate()
