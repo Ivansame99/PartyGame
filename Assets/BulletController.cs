@@ -6,9 +6,6 @@ public class BulletController : MonoBehaviour
 {
 	public float baseDamage;
 
-	[SerializeField]
-	private AudioSource arrowCollision;
-
 	internal float finalDamage;
 
 	internal float pushForce;
@@ -24,8 +21,6 @@ public class BulletController : MonoBehaviour
 	internal GameObject owner;
 
 	internal Vector3 ownerPos;
-
-	private float destroyTime = 10f;
 
 	private float minPitch = 0.8f;
 	private float maxPitch = 1.2f;
@@ -45,8 +40,6 @@ public class BulletController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		arrowCollision.Play();
 		Destroy(this.gameObject);
 	}
 
@@ -64,12 +57,10 @@ public class BulletController : MonoBehaviour
 			speed += 5;
 			owner = other.transform.parent.gameObject;
 			ownerPos = other.transform.parent.gameObject.transform.position;
-			arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-			arrowCollision.Play();
 
 			if (hitSound != null)
 			{
-				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+				hitSound.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 				hitSound.Play();
 			}
 		}
