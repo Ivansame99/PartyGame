@@ -138,5 +138,12 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		ak47.SetActive(true);
 	}
 
+	public void ShowWeapons()
+	{
+		sword.SetActive(true);
+		bow.SetActive(true);
+		ak47.SetActive(false);
+	}
+
 	#endregion
 }

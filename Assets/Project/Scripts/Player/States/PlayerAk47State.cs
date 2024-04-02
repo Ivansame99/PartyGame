@@ -29,11 +29,17 @@ public class PlayerAk47State : PlayerState<PlayerController>
 		base.Init(p);
 		player.anim.SetBool("Bow", true);
 		player.EquipAk();
-		Debug.Log("Estado AK47");
 	}
 
 	public override void Update()
 	{
+		//Change to Idle
+		if (!player.ak)
+		{
+			player.ChangeState(typeof(PlayerIdleState));
+			return;
+		}
+
 		if (player.direction != Vector3.zero) //Player can rotate
 		{
 			float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
@@ -78,6 +84,7 @@ public class PlayerAk47State : PlayerState<PlayerController>
 
 	public override void Exit()
 	{
-
+		player.ShowWeapons();
+		player.anim.SetBool("Bow", false);
 	}
 }

@@ -11,8 +11,7 @@ public class BulletController : MonoBehaviour
 
 	internal float finalDamage;
 
-	[SerializeField]
-	private float pushForce;
+	internal float pushForce;
 
 	[SerializeField]
 	private GameObject parryParticles;

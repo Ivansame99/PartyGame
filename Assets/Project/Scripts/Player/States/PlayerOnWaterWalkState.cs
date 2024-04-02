@@ -51,6 +51,13 @@ public class PlayerOnWaterWalkState : PlayerState<PlayerController>
 			return;
 		}
 
+		//Change to ak47
+		if (player.ak)
+		{
+			player.ChangeState(typeof(PlayerAk47State));
+			return;
+		}
+
 		//Change to Idle
 		if (player.direction.magnitude < 0.1f)
 		{
