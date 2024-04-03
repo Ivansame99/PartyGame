@@ -35,7 +35,6 @@ public class PowerCircle : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log("Entras");
 			currentPlayersIn++;
 		}
 	}
@@ -44,7 +43,6 @@ public class PowerCircle : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log("Sales");
 			currentPlayersIn--;
 		}
 	}
