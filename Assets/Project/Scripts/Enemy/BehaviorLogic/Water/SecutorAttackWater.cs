@@ -25,6 +25,7 @@ public class SecutorAttackWater : EnemyWaterAttackSOBase
         enemy.secutorAudioManager.PlaySwordWhoosh();
         isAttacking = true;
         attackTimer = attackCooldown;
+        Debug.Log("isWater");
     }
     public override void DoExitLogic()
     {

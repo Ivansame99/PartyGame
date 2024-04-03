@@ -31,11 +31,13 @@ public class SecutorPreAttack : EnemyPreAttackSOBase
         if (!enemy.isDead){
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Feedback"))
             {
-                enemy.stateMachine.ChangeState(enemy.attackState);
+                if (!enemy.OnWater) enemy.stateMachine.ChangeState(enemy.attackState);
+                else enemy.stateMachine.ChangeState(enemy.waterAttackState);
             }
 
             else if (preAttackTimer <= 0)
             {
+                Debug.Log(enemy.OnWater);
                 if(!enemy.OnWater) enemy.stateMachine.ChangeState(enemy.attackState);
                 else enemy.stateMachine.ChangeState(enemy.waterAttackState);
             }

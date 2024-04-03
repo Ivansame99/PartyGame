@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class EnemyOnWater : MonoBehaviour
 {
-    [SerializeField] private Enemy enemy;
+    private Enemy enemy;
 
     private float triggerTimeout = 0f;
 
     private void Awake()
     {
-       //if(enemy == null) enemy = GetComponent<Enemy>();
+       enemy = GetComponent<Enemy>();
     }
 
     private void Update()
