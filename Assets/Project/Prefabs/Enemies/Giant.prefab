@@ -15319,6 +15319,88 @@ Transform:
   m_Father: {fileID: 7648084735595444365}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: -92.86088}
+--- !u!1 &3808648031345007893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8356002723905925973}
+  - component: {fileID: 4179376783329344261}
+  - component: {fileID: 6999865037897848089}
+  m_Layer: 6
+  m_Name: HealthController
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8356002723905925973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808648031345007893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7648084735595444365}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4179376783329344261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808648031345007893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89555096010ca4a4aba9b2c57573dfdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7047404649623666684}
+  invencibility: 0
+  timer: 0
+  healthBarC: {fileID: 1726341511371102532}
+  healthBar: {fileID: 1945725015247258228}
+  powerLevelGameObject: {fileID: 9011295435533612152}
+  maxHealthBase: 200
+  floatingDamageText: {fileID: 8703725455407415189, guid: 66b9f0c30a5de9c4783390300516fa8a,
+    type: 3}
+  bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
+    type: 3}
+  crossRight: {fileID: 8970435229605231645}
+  crossLeft: {fileID: 3177736569267665721}
+  glow: {fileID: 3991981310453843818}
+--- !u!136 &6999865037897848089
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808648031345007893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 0.69334066
+  m_Direction: 1
+  m_Center: {x: 0.0032624404, y: 1.0315154, z: -0.023973107}
 --- !u!1 &3991981310453843818
 GameObject:
   m_ObjectHideFlags: 0
@@ -20652,15 +20734,12 @@ GameObject:
   - component: {fileID: 755949201853545293}
   - component: {fileID: 582737845425093091}
   - component: {fileID: 7047404649623666684}
-  - component: {fileID: 8656153524366571268}
   - component: {fileID: 4009623452350410818}
-  - component: {fileID: 8367383840031212153}
   - component: {fileID: 5885468970407020139}
   - component: {fileID: 7997411457486396608}
   - component: {fileID: 3702443535453747451}
   - component: {fileID: 5874519042736920550}
   - component: {fileID: 990038865229707602}
-  - component: {fileID: 1442539315143086935}
   - component: {fileID: 6910404094098615076}
   m_Layer: 8
   m_Name: Giant
@@ -20694,6 +20773,7 @@ Transform:
   - {fileID: 7954935024623807873}
   - {fileID: 7122997453961440109}
   - {fileID: 7764546317330368901}
+  - {fileID: 8356002723905925973}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20767,31 +20847,7 @@ MonoBehaviour:
     type: 2}
   enemyWaterAttackBase: {fileID: 11400000, guid: 562dbb6afb80bf2408b39deb32bb71e6,
     type: 2}
---- !u!114 &8656153524366571268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969592600396533412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89555096010ca4a4aba9b2c57573dfdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invencibility: 0
-  timer: 0
-  healthBarC: {fileID: 1726341511371102532}
-  healthBar: {fileID: 1945725015247258228}
-  powerLevelGameObject: {fileID: 9011295435533612152}
-  maxHealthBase: 200
-  floatingDamageText: {fileID: 8703725455407415189, guid: 66b9f0c30a5de9c4783390300516fa8a,
-    type: 3}
-  bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
-    type: 3}
-  crossRight: {fileID: 8970435229605231645}
-  crossLeft: {fileID: 3177736569267665721}
-  glow: {fileID: 3991981310453843818}
+  enemyHealth: {fileID: 4179376783329344261}
 --- !u!114 &4009623452350410818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20815,29 +20871,6 @@ MonoBehaviour:
   minScaleMultiplier: 5.5
   smoke: {fileID: 5661609198796829325}
   instanciatedEnemy: 1
---- !u!136 &8367383840031212153
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969592600396533412}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Height: 0.69334066
-  m_Direction: 1
-  m_Center: {x: 0.0032624404, y: 1.0315154, z: -0.023973107}
 --- !u!114 &5885468970407020139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20921,29 +20954,6 @@ MonoBehaviour:
   damage: {fileID: 6190384001591752641}
   death: {fileID: 4938101738521858588}
   stomp: {fileID: 3014095921165035712}
---- !u!114 &1442539315143086935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5969592600396533412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1808271e317de54d8d1c7e458f20ed6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialPowerLevel: 100
-  minPowerLevel: 20
-  maxPowerLevel: 300
-  powerScale: 10
-  healthScale: 2
-  playerAttackSpeedScale: 0
-  maxPlayerAttackSpeedScale: 0
-  maxScaleMultiplier: 3
-  minScaleMultiplier: 2
-  smoke: {fileID: 0}
-  instanciatedEnemy: 1
 --- !u!114 &6910404094098615076
 MonoBehaviour:
   m_ObjectHideFlags: 0
