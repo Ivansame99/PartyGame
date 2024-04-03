@@ -19,8 +19,8 @@ public class SelectPlayerController : MonoBehaviour
 	private Transform[] playersSpawns;
 	#endregion
 
-	#region Life Cycle
-	void Awake()
+	#region Init
+	public void Initialize()
 	{
 		Time.timeScale = 1f;
 

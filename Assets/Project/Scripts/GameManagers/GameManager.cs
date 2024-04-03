@@ -23,5 +23,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(selectPlayerController!=null) selectPlayerController.Initialize();
     }
 }

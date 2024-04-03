@@ -5,39 +5,44 @@ using UnityEngine;
 
 public class PowerCircle : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text text;
+	[SerializeField]
+	private TMP_Text text;
 
-    private int currentPlayersIn;
-    private int expectedPlayers;
+	private int currentPlayersIn;
+	private int expectedPlayers;
 
-    private void Update()
-    {
-        if(currentPlayersIn == expectedPlayers)
-        {
-            Debug.Log("Empieza a hacerse pequeño");
-        }
-    }
+	private void Start()
+	{
+		Initialize(2);
+	}
 
-    public void Initialize(int players)
-    {
-        expectedPlayers = players;
-
-        text.text = expectedPlayers.ToString() + "/" + GameManager.Instance.selectPlayerController.GetNumPlayers().ToString();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("Player"))
-        {
-            Debug.Log("Entras");
-            currentPlayersIn++;
+	private void Update()
+	{
+		if (currentPlayersIn == expectedPlayers)
+		{
+			Debug.Log("Empieza a hacerse pequeño");
 		}
-    }
+	}
 
-    private void OnCollisionExit(Collision collision)
-    {
-		if (collision.transform.CompareTag("Player"))
+	public void Initialize(int players)
+	{
+		expectedPlayers = players;
+
+		//text.text = expectedPlayers.ToString() + "/" + GameManager.Instance.selectPlayerController.GetNumPlayers().ToString();
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player"))
+		{
+			Debug.Log("Entras");
+			currentPlayersIn++;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("Player"))
 		{
 			Debug.Log("Sales");
 			currentPlayersIn--;
