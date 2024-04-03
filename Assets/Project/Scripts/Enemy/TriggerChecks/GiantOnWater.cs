@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyOnWater : MonoBehaviour
+public class GiantOnWater : MonoBehaviour
 {
     private Enemy enemy;
 
     private float triggerTimeout = 0f;
 
+    private RaycastHit hit;
+
     private void Awake()
     {
-       enemy = GetComponent<Enemy>();
+        enemy = GetComponent<Enemy>();
     }
 
     private void Update()
@@ -26,11 +27,8 @@ public class EnemyOnWater : MonoBehaviour
                 enemy.SetWaterStatus(false);
             }
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Water"))
+        if(Physics.Raycast(transform.position, -transform.up, out hit, 0.5f))
         {
             enemy.SetWaterStatus(true);
             triggerTimeout = 0.1f;
