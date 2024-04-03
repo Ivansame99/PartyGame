@@ -40,6 +40,12 @@ public class PlayerAk47State : PlayerState<PlayerController>
 			return;
 		}
 
+		if (player.isJumping && player.groundCheck.DetectGround())
+		{
+			player.ChangeState(typeof(PlayerJumpState));
+			return;
+		}
+
 		if (player.direction != Vector3.zero) //Player can rotate
 		{
 			float targetAngle = Mathf.Atan2(player.direction.x, player.direction.z) * Mathf.Rad2Deg;
