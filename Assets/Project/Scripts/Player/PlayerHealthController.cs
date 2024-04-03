@@ -321,19 +321,43 @@ public class PlayerHealthController : MonoBehaviour
 		if (collision.transform.CompareTag("Arrow") && invencibleTimer <= 0 && !dead)
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-			if (this.gameObject == ac.owner && ac.invencibilityTimerOnSpawnOwner > 0)
+			if (ac)
 			{
-				//Se pega contra si mismo al principio, no hace nada
+				if (this.gameObject == ac.owner)
+				{
+					//Se pega contra si mismo al principio, no hace nada
+				}
+				else
+				{
+					lastAttacker = ac.owner;
+					attackPosition = ac.ownerPos;
+					pushBack = true;
+					pushForce = ac.pushForce;
+
+					ReceiveDamage(ac.finalDamage);
+					Destroy(collision.gameObject);
+				}
 			}
 			else
 			{
-				lastAttacker = ac.owner;
-				attackPosition = ac.ownerPos;
-				pushBack = true;
-				pushForce = ac.pushForce;
+				BulletController bc = collision.gameObject.GetComponent<BulletController>();
+				if (bc)
+				{
+					if (this.gameObject == bc.owner)
+					{
+						//Se pega contra si mismo al principio, no hace nada
+					}
+					else
+					{
+						lastAttacker = bc.owner;
+						attackPosition = bc.ownerPos;
+						pushBack = true;
+						pushForce = bc.pushForce;
 
-				ReceiveDamage(ac.finalDamage);
-				Destroy(collision.gameObject);
+						ReceiveDamage(bc.finalDamage);
+						Destroy(collision.gameObject);
+					}
+				}
 			}
 		}
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 
 public class SelectPlayerController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SelectPlayerController : MonoBehaviour
 	#region Variables
 	private int numPlayers;
 	private GameObject[] players;
+	private PlayerController[] playersController;
 	private Transform[] playersSpawns;
 	#endregion
 
@@ -27,6 +29,7 @@ public class SelectPlayerController : MonoBehaviour
 			var playerConfigs = PlayerConfigurationManager.Instance.GetPlayerConfigs().ToArray();
 			numPlayers = playerConfigs.Length;
 			players = new GameObject[numPlayers];
+			playersController = new PlayerController[numPlayers];
 			playersSpawns = GameManager.Instance.playersHealthManager.GetPlayersSpawns();
 			for (int i = 0; i < playerConfigs.Length; i++)
 			{
@@ -36,6 +39,7 @@ public class SelectPlayerController : MonoBehaviour
 				player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);
 				players[i] = player;
 				GameManager.Instance.multipleTargetCamera.AddPlayer(player.transform);
+				playersController[i] = player.GetComponent<PlayerController>();
 			}
 		}
 		catch (Exception)
@@ -54,6 +58,11 @@ public class SelectPlayerController : MonoBehaviour
 	public GameObject[] GetPlayers()
 	{
 		return players;
+	}
+
+	public PlayerController[] GetPlayersController()
+	{
+		return playersController;
 	}
 
 	public GameObject[] GetPlayersHud()

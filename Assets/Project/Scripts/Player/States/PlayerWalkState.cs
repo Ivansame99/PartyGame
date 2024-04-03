@@ -45,6 +45,13 @@ public class PlayerWalkState : PlayerState<PlayerController>
 
 	public override void Update()
 	{
+		//Change to ak47
+		if (player.ak)
+		{
+			player.ChangeState(typeof(PlayerAk47State));
+			return;
+		}
+
 		if (player.waterDetection.onWater)
 		{
 			player.ChangeState(typeof(PlayerOnWaterWalkState));

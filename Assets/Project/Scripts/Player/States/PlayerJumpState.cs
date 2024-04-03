@@ -15,7 +15,7 @@ public class PlayerJumpState : PlayerState<PlayerController>
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
-		player.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.7f).SetRelative(true).SetEase(Ease.OutBack);
+		player.transform.DOPunchScale(new Vector3(1f, -1f, 1f), 0.3f).SetRelative(true).SetEase(Ease.OutBack);
 		player.isJumping = false;
 		Instantiate(jumpParticles, player.transform.position, jumpParticles.transform.rotation);
 		player.playerAudioManager.PlayJump();
@@ -23,7 +23,8 @@ public class PlayerJumpState : PlayerState<PlayerController>
 
 	public override void Exit()
 	{
-
+		player.transform.DORewind();
+		player.transform.DOPunchScale(new Vector3(1, 1, 1), .25f);
 	}
 
 	public override void FixedUpdate()

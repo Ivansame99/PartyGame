@@ -21,11 +21,6 @@ public class ArrowController : MonoBehaviour
 	//[SerializeField]
 	private float speed;
 
-    private float gravityScale;
-    private float globalGravity = -9.81f;
-    private GameObject target;
-    private bool attack;
-
     private Rigidbody rb;
 
     [HideInInspector]
@@ -35,8 +30,6 @@ public class ArrowController : MonoBehaviour
 	public Vector3 ownerPos;
 
 	private bool ground;
-
-    public float invencibilityTimerOnSpawnOwner = 0.3f;
 
     private float destroyTime=10f;
 
@@ -50,14 +43,6 @@ public class ArrowController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 	}
-
-    void Update()
-    {
-        if (invencibilityTimerOnSpawnOwner >= 0)
-        {
-            invencibilityTimerOnSpawnOwner -= Time.deltaTime;
-        }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -81,16 +66,9 @@ public class ArrowController : MonoBehaviour
         }
     }
 
-    void CustomGravity()
-    {
-        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
-        rb.AddForce(gravity, ForceMode.Acceleration);
-    }
-
     public void SetSpeed(float s)
     {
         speed = s;
-        gravityScale = s / 10;
     }
 
     public void SetPushForce(float s)

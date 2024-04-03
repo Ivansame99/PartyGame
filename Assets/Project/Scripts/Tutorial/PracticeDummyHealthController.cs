@@ -56,7 +56,7 @@ public class PracticeDummyHealthController : MonoBehaviour
 	}
 	// Start is called before the first frame update
 	void Start()
-    {
+	{
 		powerController = GetComponent<PowerController>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupHealthBar(healBarCanvas, cameraMain);
@@ -125,7 +125,7 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	void Die()
 	{
-		Vector3 particlesPos = new Vector3(transform.position.x, transform.position.y+1f, transform.position.z);
+		Vector3 particlesPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
 		Instantiate(deathParticles, particlesPos, Quaternion.identity);
 		currentPower = GetComponent<PowerController>().GetCurrentPowerLevel();
 		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
@@ -173,13 +173,29 @@ public class PracticeDummyHealthController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Arrow" && !invencibility && !dead)
+		if (collision.transform.CompareTag("Arrow") && !invencibility && !dead)
 		{
 			ArrowController ac = collision.gameObject.GetComponent<ArrowController>();
-			attackPosition = collision.gameObject.transform.position;
-			lastAttacker = ac.owner;
-			ReceiveDamageArrow(ac.finalDamage);
-			Destroy(collision.gameObject);
+			if (ac)
+			{
+				lastAttacker = ac.owner;
+				attackPosition = ac.ownerPos;
+
+				ReceiveDamageArrow(ac.finalDamage);
+				Destroy(collision.gameObject);
+			}
+			else
+			{
+				BulletController bc = collision.gameObject.GetComponent<BulletController>();
+				if (bc)
+				{
+					lastAttacker = bc.owner;
+					attackPosition = bc.ownerPos;
+
+					ReceiveDamageArrow(bc.finalDamage);
+					Destroy(collision.gameObject);
+				}
+			}
 		}
 	}
 }
