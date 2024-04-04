@@ -17654,8 +17654,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: 911e4001b574ffa44b37a89679aed9cf, type: 3}
+      propertyPath: VelocityModule.y.scalar
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 911e4001b574ffa44b37a89679aed9cf, type: 3}
+      propertyPath: VelocityModule.y.minScalar
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 911e4001b574ffa44b37a89679aed9cf, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 911e4001b574ffa44b37a89679aed9cf, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
