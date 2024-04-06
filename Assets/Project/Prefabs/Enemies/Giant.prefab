@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7977949720429759}
   - component: {fileID: 3402386221784720255}
   - component: {fileID: 1023064219966437191}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5180,7 +5180,7 @@ GameObject:
   - component: {fileID: 7954935024623807873}
   - component: {fileID: 42059575399047662}
   - component: {fileID: 4124817141549434839}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: FeedbackReceiveAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10047,7 +10047,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7367323801704966130}
   - component: {fileID: 3935243959298463982}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: AggroDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10252,7 +10252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8036743552738270813}
   - component: {fileID: 2033995145071514177}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10294,9 +10294,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.54397166
-  m_Height: 1.8490593
+  m_Height: 1.8083904
   m_Direction: 1
-  m_Center: {x: 0.014237881, y: 0.9738512, z: 0}
+  m_Center: {x: 0.014237881, y: 0.9535166, z: 0}
 --- !u!1 &3023611919678092388
 GameObject:
   m_ObjectHideFlags: 0
@@ -10339,7 +10339,7 @@ GameObject:
   - component: {fileID: 8239161627250300772}
   - component: {fileID: 5115134143193893026}
   - component: {fileID: 5145945656363680902}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CrossLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15330,7 +15330,7 @@ GameObject:
   - component: {fileID: 8356002723905925973}
   - component: {fileID: 4179376783329344261}
   - component: {fileID: 6999865037897848089}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: HealthController
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -15393,7 +15393,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -15412,7 +15412,7 @@ GameObject:
   - component: {fileID: 1189205520089215589}
   - component: {fileID: 6987377064969426689}
   - component: {fileID: 7276981499108721579}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20400,7 +20400,7 @@ GameObject:
   - component: {fileID: 7764546317330368901}
   - component: {fileID: 1890685173245385562}
   - component: {fileID: 8427943723050914993}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: WaterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20470,7 +20470,7 @@ GameObject:
   - component: {fileID: 6452261595685477049}
   - component: {fileID: 3002491595511087916}
   - component: {fileID: 7509954357168737455}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20741,7 +20741,7 @@ GameObject:
   - component: {fileID: 5874519042736920550}
   - component: {fileID: 990038865229707602}
   - component: {fileID: 6910404094098615076}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Giant
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -21142,7 +21142,7 @@ GameObject:
   - component: {fileID: 1726341511371102532}
   - component: {fileID: 6745544907793410240}
   - component: {fileID: 3027458245334419621}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Scrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21541,7 +21541,7 @@ GameObject:
   - component: {fileID: 4938101738521858588}
   - component: {fileID: 6190384001591752641}
   - component: {fileID: 3014095921165035712}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21930,7 +21930,7 @@ GameObject:
   - component: {fileID: 7415892484396694439}
   - component: {fileID: 4669073602994783198}
   - component: {fileID: 3390672467739169374}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CrossRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26823,7 +26823,7 @@ GameObject:
   - component: {fileID: 8231916937699657021}
   - component: {fileID: 1131316325588293047}
   - component: {fileID: 7288257291371680647}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyPowerLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27395,6 +27395,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TrailSand_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6413844385333429032, guid: a91fa568be156ee46ab3577bcaa47c67,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8532652793793357703, guid: a91fa568be156ee46ab3577bcaa47c67,
         type: 3}
