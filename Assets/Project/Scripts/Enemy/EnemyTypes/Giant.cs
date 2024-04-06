@@ -13,6 +13,8 @@ public class Giant : Enemy
     [SerializeField] private EnemyWaterChaseSOBase enemyWaterChaseBase;
     [SerializeField] private EnemyWaterAttackSOBase enemyWaterAttackBase;
 
+    [SerializeField] private EnemyHealth enemyHealth;
+
     void Awake()
     {
         //Initialize SO
@@ -42,10 +44,10 @@ public class Giant : Enemy
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        enemyHealthController = GetComponent<EnemyHealth>();
         powerController = GetComponent<PowerController>();
         enemyTargetController = GetComponent<EnemyTargetController>();
 		giantAudioManager = GetComponent<GiantAudioManager>();
+        enemyHealthController = enemyHealth;
 
 		//Initialize SO
 		enemyChaseBaseInstance.Init(gameObject, this);

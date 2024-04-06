@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-	//Enemy
-	private Enemy enemy;
+    //Enemy
+    [SerializeField] private Enemy enemy;
 
 	//Inmune time after hit
 	[HideInInspector] public bool invencibility;
@@ -45,7 +45,7 @@ public class EnemyHealth : MonoBehaviour
 
 	private void Start()
 	{
-		enemy = GetComponent<Enemy>();
+		if(enemy == null) enemy = GetComponent<Enemy>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupHealthBar(healBarCanvas, GetComponent<Camera>());
 		//Invoke(nameof(LoadMaxHealth), 0.1f);
