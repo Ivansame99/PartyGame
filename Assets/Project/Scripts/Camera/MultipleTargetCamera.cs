@@ -44,12 +44,17 @@ public class MultipleTargetCamera : MonoBehaviour
 		targets.Add(player);
 	}
 
-	public void RemovePlayer(Transform player)
+	public bool RemovePlayer(Transform player)
 	{
 		for (int i = 0; i < targets.Count; i++)
 		{
-			if (targets[i] == player) targets.Remove(targets[i]);
+            if (targets[i] == player)
+            {
+                targets.Remove(targets[i]);
+                return true;
+            }
 		}
+        return false;
 	}
 
 	#endregion
