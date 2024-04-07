@@ -81,6 +81,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3073113347142522470, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073113347142522470, guid: 5d64b3901cf0bc64c8080ac947b224d3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073113347142522470, guid: 5d64b3901cf0bc64c8080ac947b224d3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073113347142522470, guid: 5d64b3901cf0bc64c8080ac947b224d3,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.5737753
       objectReference: {fileID: 0}
@@ -619,6 +634,11 @@ PrefabInstance:
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outSlope
       value: -3.2148037
       objectReference: {fileID: 0}
+    - target: {fileID: 4357096951847631539, guid: 5d64b3901cf0bc64c8080ac947b224d3,
+        type: 3}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 3648886244988942089}
     - target: {fileID: 4883394702859905406, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
       propertyPath: m_Materials.Array.size
@@ -927,17 +947,17 @@ PrefabInstance:
     - target: {fileID: 6504445642687124002, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6504445642687124002, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6504445642687124002, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 6504445642687124002, guid: 5d64b3901cf0bc64c8080ac947b224d3,
         type: 3}
@@ -959,3 +979,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d64b3901cf0bc64c8080ac947b224d3, type: 3}
+--- !u!1 &3648886244988942089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6093021311946966406, guid: 5d64b3901cf0bc64c8080ac947b224d3,
+    type: 3}
+  m_PrefabInstance: {fileID: 7362734672354488975}
+  m_PrefabAsset: {fileID: 0}
