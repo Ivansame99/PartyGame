@@ -13,6 +13,9 @@ public class PlayerAk47State : PlayerState<PlayerController>
 	private float fireRate = 0.1f;
 
 	[SerializeField]
+	private float moveSpeed;
+
+	[SerializeField]
 	private float recoilForce = 1.0f;
 
 	[SerializeField]
@@ -86,6 +89,23 @@ public class PlayerAk47State : PlayerState<PlayerController>
 	{
 		//Recoil movement
 		player.rb.AddForce(-player.transform.forward * recoilForce, ForceMode.Impulse);
+
+		//If its in ground, player can move
+		if (player.groundCheck.DetectGround() && player.direction!=Vector3.zero)
+		{
+			Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+			if (currentVelocity.magnitude > moveSpeed)
+			{
+				currentVelocity = currentVelocity.normalized * moveSpeed;
+			}
+
+			Vector3 targetVelocity = player.direction * moveSpeed;
+			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+			player.rb.AddForce(force, ForceMode.Acceleration);
+		}
+
+		Debug.Log(player.direction);
 	}
 
 	public override void Exit()
