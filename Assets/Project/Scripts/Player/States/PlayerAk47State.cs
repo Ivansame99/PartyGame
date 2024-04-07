@@ -104,8 +104,6 @@ public class PlayerAk47State : PlayerState<PlayerController>
 			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
 			player.rb.AddForce(force, ForceMode.Acceleration);
 		}
-
-		Debug.Log(player.direction);
 	}
 
 	public override void Exit()
