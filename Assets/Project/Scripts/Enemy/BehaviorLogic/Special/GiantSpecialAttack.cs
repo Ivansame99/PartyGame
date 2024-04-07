@@ -38,6 +38,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
         atkTimer = atkDuration;
+        isAttacking = false;
     }
 
     public override void DoExitLogic()
@@ -56,6 +57,9 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
             transform.LookAt(new Vector3(enemy.playerPos.position.x, 0, enemy.playerPos.position.z));
             playerDir = (enemy.playerPos.position - transform.position).normalized;
             playerDir.y = 0;
+        }
+        if(isAttacking)
+        {
 
             if (atkTimer <= 0)
             {
