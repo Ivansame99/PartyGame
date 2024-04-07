@@ -9,25 +9,30 @@ public class AKEvent : GameEvent
 	private float eventDuration;
 
 	private float timer;
-	private bool setAk=false;
+	private bool setAk = false;
 	private PlayerController[] playerController;
 	public override void EventStart()
-    {
+	{
 		eventFinished = false;
 		setAk = false;
 		timer = 0;
 		playerController = GameManager.Instance.selectPlayerController.GetPlayersController();
 	}
 
-    public override void EventUpdate()
-    {
+	public override void EventUpdate()
+	{
 		if (!setAk)
 		{
-			for(int i = 0; i < playerController.Length; i++)
+			//int randomPlayer = Random.Range(0, GameManager.Instance.selectPlayerController.GetNumPlayers());
+
+			//playerController[randomPlayer].ak = true;
+
+			for (int i = 0; i < playerController.Length; i++)
 			{
 				playerController[i].ak = true;
 			}
-			setAk=true;
+
+			setAk = true;
 		}
 
 		if (timer >= eventDuration)
@@ -37,11 +42,12 @@ public class AKEvent : GameEvent
 				playerController[i].ak = false;
 			}
 			eventFinished = true;
-		} else
-		{
-			timer +=Time.deltaTime;
 		}
-    }
+		else
+		{
+			timer += Time.deltaTime;
+		}
+	}
 
 	public override void EventDestroy()
 	{
