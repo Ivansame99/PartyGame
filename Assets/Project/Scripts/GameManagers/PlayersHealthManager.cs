@@ -51,10 +51,11 @@ public class PlayersHealthManager : MonoBehaviour
 			return;
 		}
 
+		mtp.RemovePlayer(player);
+
 		StartCoroutine(SlowMotion(player));
 
 		gameManager.endGameController.PlayerDead();
-		mtp.RemovePlayer(player);
 
 		player.transform.position = new Vector3(100, 10, 0);
 	}
