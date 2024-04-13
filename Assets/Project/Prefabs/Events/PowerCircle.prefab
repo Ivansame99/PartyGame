@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 2846404573772272696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.9882011, y: 2.9882011, z: 2.9882011}
+  m_LocalScale: {x: 4.5, y: 4.5, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3802684624997056120}
@@ -5105,7 +5105,7 @@ Transform:
   m_GameObject: {fileID: 4170257531373323012}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.27, y: 1.1, z: 0.7}
-  m_LocalScale: {x: 1.4331, y: 1.4331, z: 1.4331}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8897529643215655765}
@@ -5184,8 +5184,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 6.000001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 6.2492595
+  m_Center: {x: 0, y: 0.77941036, z: -3.134764e-15}
 --- !u!114 &4357096951847631539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5199,6 +5199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 7184130845376905455}
+  circleParticles1: {fileID: 1638678775051431531}
+  circleParticles2: {fileID: 6504445642687124002}
+  reduceSpeed: 0.7
 --- !u!1 &4858287729618945644
 GameObject:
   m_ObjectHideFlags: 0
@@ -5259,7 +5262,7 @@ Transform:
   m_GameObject: {fileID: 6093021311946966406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5008495, y: 2.5008495, z: 2.5008495}
+  m_LocalScale: {x: 4, y: 4, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3802684624997056120}
