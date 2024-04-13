@@ -14,6 +14,7 @@ public class PowerCircleEvent : GameEvent
 	private bool instantiated = false;
 	private GameObject circle;
 
+	private Vector3 spawnZone= new Vector3 (0,2,0);
 
 	public override void EventStart()
 	{
@@ -25,8 +26,9 @@ public class PowerCircleEvent : GameEvent
 	{
 		if (!instantiated)
 		{
-			circle = Instantiate(circlePrefab, Vector3.zero, circlePrefab.transform.rotation);
+			circle = Instantiate(circlePrefab, spawnZone, circlePrefab.transform.rotation);
 			Destroy(circle, circleDuration);
+			instantiated = true;
 		}
 
 		if (circle == null)

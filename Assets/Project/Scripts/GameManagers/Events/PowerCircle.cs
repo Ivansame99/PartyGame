@@ -17,6 +17,9 @@ public class PowerCircle : MonoBehaviour
 	[SerializeField]
 	private float reduceSpeed;
 
+	[SerializeField]
+	private float powerReceive;
+
 	private int currentPlayersIn;
 	private int expectedPlayers;
 
@@ -40,7 +43,7 @@ public class PowerCircle : MonoBehaviour
 			{
 				for(int i=0; i < powerControllerList.Count; i++)
 				{
-					powerControllerList[i].AddPowerLevel(50f);
+					powerControllerList[i].AddPowerLevel(powerReceive);
 				}
 
 				Destroy(this.gameObject);
