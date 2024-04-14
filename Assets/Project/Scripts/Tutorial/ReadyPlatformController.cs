@@ -32,7 +32,8 @@ public class ReadyPlatformController : MonoBehaviour
 		if (changeSceneTimer <= 0)
 		{
 			playerConfigurationManager.onHub = false;
-			GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			//GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			SceneManager.LoadScene("ArenaLeaf");
 		}
 	}
 
