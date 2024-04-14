@@ -24,6 +24,14 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
+        if(!enemy.isDead)
+        {
+            
+        }
+        else enemy.stateMachine.ChangeState(enemy.deathState);
+
+
+
     }
 
     public override void DoPhysicsLogic()
