@@ -9,6 +9,9 @@ public class ArenaSelector : MonoBehaviour
 	[SerializeField]
 	private GameObject scrollGameObject;
 
+	[SerializeField]
+	private GameObject arrow;
+
 	private float speed;
 
 	private bool isScrolling;
@@ -22,9 +25,13 @@ public class ArenaSelector : MonoBehaviour
 			return;
 		}
 
-		speed = Random.Range(4,5);
+		scrollGameObject.GetComponent<RectTransform>().localPosition = new Vector3(1080,0);
+
+		speed = Random.Range(3,5);
 
 		isScrolling = true;
+
+		arrow.SetActive(true);
 
 		if (cells.Count == 0)
 		{

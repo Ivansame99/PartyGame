@@ -11,8 +11,16 @@ public class ReadyPlatformController : MonoBehaviour
 	[SerializeField]
 	private float timeToChangeScene = 2.0f;
 
+	[SerializeField]
+	private ArenaSelector arenaSelector;
+
+	[SerializeField]
+	private GameObject hubUI;
+
+
 	private float changeSceneTimer;
 
+	private bool selectingArena = false;
 	private void Start()
 	{
 		changeSceneTimer = timeToChangeScene;
@@ -29,10 +37,13 @@ public class ReadyPlatformController : MonoBehaviour
 		}
 		else changeSceneTimer = timeToChangeScene;
 
-		if (changeSceneTimer <= 0)
+		if (changeSceneTimer <= 0 && !selectingArena)
 		{
-			playerConfigurationManager.onHub = false;
-			GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			//playerConfigurationManager.onHub = false;
+			//GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			hubUI.SetActive(false);
+			arenaSelector.Scroll();
+			selectingArena = true;
 		}
 	}
 

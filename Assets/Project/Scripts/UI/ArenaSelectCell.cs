@@ -28,7 +28,7 @@ public class ArenaSelectCell : MonoBehaviour
 
     private int Randomize()
     {
-        int id = 1;
+        int id = 0;
 
         for(int i =0; i < chances.Length; i++)
         {
