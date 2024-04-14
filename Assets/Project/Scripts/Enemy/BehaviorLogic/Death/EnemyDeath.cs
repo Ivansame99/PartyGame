@@ -8,9 +8,12 @@ public class EnemyDeath : EnemyDeathSOBase
 	[SerializeField] private HelmetPrefab[] helmetPrefabs;
 	[SerializeField] private float minForce = 2f;
 	[SerializeField] private float maxForce = 5f;
-	[SerializeField] private GameObject deathParticles;
+    [SerializeField] private float PminForce = 0.5f;
+    [SerializeField] private float PmaxForce = 0.5f;
+    [SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
-
+    [SerializeField] private float NumberOfPowerParticles;
+    [SerializeField] private GameObject PowerPrefab;
 
 
 
@@ -46,22 +49,47 @@ public class EnemyDeath : EnemyDeathSOBase
         StopParticleLoop(enemy.trailSand);
 
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
-		foreach (var helmetPrefab in helmetPrefabs)
+
+        float yOffset = 2f;
+        Vector3 enemyUpPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + yOffset, enemy.transform.position.z);
+        Vector3 spawnPosition = enemyUpPos + Random.insideUnitSphere;
+
+
+        for (int i = 0; i < NumberOfPowerParticles; i++)
+        {
+            GameObject powerInstance = Instantiate(PowerPrefab, spawnPosition, Quaternion.identity);
+            Rigidbody PowerRigidbody = powerInstance.GetComponent<Rigidbody>();
+
+            if (PowerRigidbody != null)
+            {
+                // Calcular una dirección aleatoria hacia arriba y ligeramente hacia un lado
+                Vector3 PrandomDirection = Random.onUnitSphere + Vector3.up * 2f;
+                PrandomDirection.Normalize(); // Normalizar para asegurarse de que la magnitud sea 1
+
+                // Aplicar una fuerza aleatoria en esa dirección
+                float PrandomForce = Random.Range(PminForce, PmaxForce);
+                PowerRigidbody.AddForce(PrandomDirection * PrandomForce, ForceMode.Impulse);
+            }
+        }
+
+        foreach (var helmetPrefab in helmetPrefabs)
 		{
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
-				float yOffset = 2f;
-				Vector3 enemyUpPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + yOffset, enemy.transform.position.z);
-				Vector3 spawnPosition = enemyUpPos + Random.insideUnitSphere;
+				
 				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
-				Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
-				if (helmetRigidbody != null)
+             
+                Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
+             
+                
+                if (helmetRigidbody != null)
 				{
 					Vector3 randomDirection = Random.onUnitSphere;
 					float randomForce = Random.Range(minForce, maxForce);
 					helmetRigidbody.AddForce(randomDirection * randomForce, ForceMode.Impulse);
 				}
-			}
+            
+            }
 		}
 		Instantiate(deathParticles, transform.position, Quaternion.identity);
 
