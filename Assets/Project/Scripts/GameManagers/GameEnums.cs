@@ -11,6 +11,7 @@ public class GameEnums : MonoBehaviour
 		Credits,
 		GameOver,
 		Arena1,
+		ArenaSnow,
 	}
 
 	public enum Arenas

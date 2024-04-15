@@ -87,6 +87,22 @@ public class GMSceneManager : MonoBehaviour
 
 		return false;
 	}
+
+	public GameEnums.Arenas GetArenaType()
+	{
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.Arena1.ToString())
+		{
+			return GameEnums.Arenas.StandardArena;
+		}
+
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.Arena1.ToString())
+		{
+			return GameEnums.Arenas.SnowArena;
+		}
+
+		return GameEnums.Arenas.None;
+	}
+
 	#endregion
 
 	#region Coroutines

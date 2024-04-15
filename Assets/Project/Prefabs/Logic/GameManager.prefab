@@ -61,6 +61,7 @@ MonoBehaviour:
   multipleTargetCamera: {fileID: 862325205299733610}
   selectPlayerController: {fileID: 5726284098889303312}
   gmSceneManager: {fileID: 1697052631678738525}
+  hubController: {fileID: 0}
 --- !u!114 &7806798369090360513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b20456816d84143a43d7dac4e0af28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winAnimDuration: 15
+  winAnimDuration: 25
   fireworkPrefab: {fileID: 1978689737715041617, guid: afa54037ffe627545886e2741abb365d,
     type: 3}
   maxFireworksInstanced: 20
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
+  bossRound: 0
   spawns:
   - {fileID: 0}
   - {fileID: 0}
@@ -117,6 +119,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  bossSpawn: {fileID: 0}
   roundsSO:
   - {fileID: 11400000, guid: 33db6cd6768b7774ba9f75b0dcd33699, type: 2}
   - {fileID: 11400000, guid: 682ae5d62fa861b4c82b55817224c549, type: 2}
@@ -186,11 +189,13 @@ MonoBehaviour:
   - randomEvent: {fileID: 11400000, guid: f8abf7f9f5fa376449082f193e2d8ca1, type: 2}
     probability: 0.9
   - randomEvent: {fileID: 11400000, guid: 4166fdf18bd2f4a4ea7bf1f988373dc8, type: 2}
-    probability: 0.2
+    probability: 0.35
   - randomEvent: {fileID: 11400000, guid: 91297dd5f9124314890c4f602b5adcf3, type: 2}
-    probability: 0.1
+    probability: 0.15
+  - randomEvent: {fileID: 11400000, guid: 5634892ecb308f34cb07601805447f67, type: 2}
+    probability: 0.15
   maxTimeToSpawn: 5
-  minTimeToSpawn: 25
+  minTimeToSpawn: 15
 --- !u!114 &4739740214092248614
 MonoBehaviour:
   m_ObjectHideFlags: 0
