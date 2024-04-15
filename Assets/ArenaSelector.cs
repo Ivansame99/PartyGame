@@ -35,9 +35,9 @@ public class ArenaSelector : MonoBehaviour
 			return;
 		}
 
-		scrollGameObject.GetComponent<RectTransform>().localPosition = new Vector3(1080,0);
+		scrollGameObject.GetComponent<RectTransform>().localPosition = new Vector3(1080, 0);
 
-		maxSpeed = Random.Range(2,4);
+		maxSpeed = Random.Range(2, 4);
 		speed = 1;
 		start = true;
 		isScrolling = true;
@@ -46,13 +46,13 @@ public class ArenaSelector : MonoBehaviour
 
 		if (cells.Count == 0)
 		{
-			for(int i = 0; i<50; i++)
+			for (int i = 0; i < 50; i++)
 			{
 				cells.Add(Instantiate(prefab, scrollGameObject.transform).GetComponentInChildren<ArenaSelectCell>());
 			}
 		}
 
-		foreach(ArenaSelectCell cell in cells)
+		foreach (ArenaSelectCell cell in cells)
 		{
 			cell.Setup();
 		}
@@ -62,20 +62,22 @@ public class ArenaSelector : MonoBehaviour
 	{
 		if (!isScrolling) return;
 
-		scrollGameObject.transform.position = Vector2.MoveTowards(scrollGameObject.transform.position, scrollGameObject.transform.position + Vector3.left * 100, speed * Time.deltaTime *1500);
+		scrollGameObject.transform.position = Vector2.MoveTowards(scrollGameObject.transform.position, scrollGameObject.transform.position + Vector3.left * 100, speed * Time.deltaTime * 1500);
 
 		if (start && speed < maxSpeed)
 		{
 			speed += Time.deltaTime;
-		} else if(speed > maxSpeed)
+		}
+		else if (speed > maxSpeed)
 		{
 			start = false;
 		}
 
 		if (!start && speed > 0)
 		{
-			speed-=Time.deltaTime;
-		} else if (!start && speed <= 0)
+			speed -= Time.deltaTime;
+		}
+		else if (!start && speed <= 0)
 		{
 			DetectArena();
 			speed = 0;
@@ -85,26 +87,24 @@ public class ArenaSelector : MonoBehaviour
 
 	private void DetectArena()
 	{
-		Vector3 centerPosition = guiCamera.WorldToScreenPoint(scrollGameObject.transform.position);
-
-		float minDistance = float.MaxValue;
-		ArenaSelectCell selectedCell = null;
+		float minDistance = Mathf.Infinity;
+		ArenaSelectCell closestCell = null;
 
 		foreach (ArenaSelectCell cell in cells)
 		{
-			Vector3 cellPosition = guiCamera.WorldToScreenPoint(cell.transform.position);
-			float distance = Vector3.Distance(centerPosition, cellPosition);
+
+			float distance = Vector2.Distance(cell.transform.position, new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
 
 			if (distance < minDistance)
 			{
 				minDistance = distance;
-				selectedCell = cell;
+				closestCell = cell;
 			}
 		}
 
-		if (selectedCell != null)
+		if (closestCell != null)
 		{
-			selectedArena = selectedCell.arena;
+			selectedArena = closestCell.arena;
 		} else
 		{
 			selectedArena = GameEnums.Arenas.StandardArena;
