@@ -12,4 +12,11 @@ public class GameEnums : MonoBehaviour
 		GameOver,
 		Arena1,
 	}
+
+	public enum Arenas
+	{
+		None = -1,
+		StandardArena = 0,
+		SnowArena = 1,
+	}
 }

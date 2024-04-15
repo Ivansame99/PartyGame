@@ -4,44 +4,17 @@ using UnityEngine.UI;
 
 public class ArenaSelectCell : MonoBehaviour
 {
-    [System.Serializable]
-    private class SpriteList
-    {
-        public List<Sprite> sprites;
-    }
+	public GameEnums.Arenas arena;
 
-    [SerializeField]
-    private List<SpriteList> spriteList;
+	[SerializeField]
+	private List<Sprite> spriteList;
 
-    [SerializeField]
-    private int[] chances;
+	public void Setup()
+	{
+		int index = Random.Range(0, spriteList.Count);
 
-    [SerializeField]
-    private Color[] colors;
+		GetComponent<Image>().sprite = spriteList[index];
 
-    public void Setup()
-    {
-        int index = Randomize();
-
-        GetComponent<Image>().sprite = spriteList[index].sprites[Random.Range(0, spriteList[index].sprites.Count)];
-    }
-
-    private int Randomize()
-    {
-        int id = 0;
-
-        for(int i =0; i < chances.Length; i++)
-        {
-            int rand = Random.Range(0, 100);
-
-            if(rand > chances[i])
-            {
-                return i;
-            }
-
-            id++;
-        }
-        return id;
-    }
-
+		arena = (GameEnums.Arenas) index;
+	}
 }
