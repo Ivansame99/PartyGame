@@ -17,6 +17,12 @@ public class SecutorAttack : EnemyAttackSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                enemy.rb.velocity = Vector3.zero;
+                break;
+        }
     }
     public override void DoEnterLogic()
     {
@@ -41,7 +47,7 @@ public class SecutorAttack : EnemyAttackSOBase
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 //enemy.stateMachine.ChangeState(enemy.chaseState);
-                enemy.rb.velocity = Vector3.zero;
+                
             }
             if(!enemy.IsAggreed)
             {
@@ -78,6 +84,7 @@ public class SecutorAttack : EnemyAttackSOBase
         {
             enemy.rb.AddForce(enemy.transform.forward * attackSpeed, ForceMode.Impulse);
             isAttacking = false;
+            enemy.rb.velocity = Vector3.zero;
         }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
