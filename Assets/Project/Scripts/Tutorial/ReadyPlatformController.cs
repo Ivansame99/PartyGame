@@ -54,7 +54,7 @@ public class ReadyPlatformController : MonoBehaviour
 				switch (arena)
 				{
 					case Arenas.StandardArena:
-						Debug.Log("Arena estándar");
+						Debug.Log("Arena estï¿½ndar");
 						GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
 						break;
 					case Arenas.SnowArena:
