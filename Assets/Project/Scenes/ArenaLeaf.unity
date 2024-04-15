@@ -15590,7 +15590,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 60a79a6fc8e2bb84882fd1d0a2a12fb9, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 39652be29f9e34c459a96d98c21c58ba, type: 2}
 --- !u!4 &832575519
 Transform:
   m_ObjectHideFlags: 0
@@ -35007,9 +35007,34 @@ PrefabInstance:
       objectReference: {fileID: 688576531}
     - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
+      propertyPath: maxZoom
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: minZoom
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: offset.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: offset.z
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
       propertyPath: guiCamera
       value: 
       objectReference: {fileID: 925351425}
+    - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: smoothTime
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2805138501441062883, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: m_RootOrder
