@@ -135,10 +135,13 @@ public class RoundController : MonoBehaviour
 	{
 		ChangeUIText("Final Round");
 		roundUIAnim.SetTrigger("ChangeRound");
-		Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
-		LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
-		godRay.SetActive(false);
-		godRay2.SetActive(false);
+		if (rainPrefab!=null)
+		{
+			Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
+			LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
+			godRay.SetActive(false);
+			godRay2.SetActive(false);
+		}
 	}
 
 	string ToRoman(int number)

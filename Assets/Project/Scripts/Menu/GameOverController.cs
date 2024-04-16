@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using static GameEnums;
 
 public class GameOverController : MonoBehaviour
 {
@@ -53,7 +55,21 @@ public class GameOverController : MonoBehaviour
 
 	public void UiRestartButton()
     {
-		StartCoroutine(CloseTranition("Arena1"));
+		int arenaType = PlayerPrefs.GetInt("arenaType");
+		GameEnums.Arenas arena = (GameEnums.Arenas)arenaType;
+
+		switch (arena)
+		{
+			case Arenas.StandardArena:
+				StartCoroutine(CloseTranition(GameEnums.Scenes.Arena1.ToString()));
+				break;
+			case Arenas.SnowArena:
+				StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow.ToString()));
+				break;
+			default:
+				StartCoroutine(CloseTranition(GameEnums.Scenes.Arena1.ToString()));
+				break;
+		}
     }
 
     public void UiExitMenu()
