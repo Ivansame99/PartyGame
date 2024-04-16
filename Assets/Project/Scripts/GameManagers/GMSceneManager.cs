@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static System.TimeZoneInfo;
 
 public class GMSceneManager : MonoBehaviour
@@ -64,8 +65,23 @@ public class GMSceneManager : MonoBehaviour
 		}
 	}
 
+	public void ChangeSceneToArenaSnow(bool transition = false, float waitTime = 0)
+	{
+		if (transition)
+		{
+			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow, waitTime));
+		}
+		else
+		{
+			SceneManager.LoadScene(GameEnums.Scenes.ArenaSnow.ToString());
+		}
+	}
+
 	public void ChangeSceneToGameOver(bool transition = false, float waitTime = 0)
 	{
+		PlayerPrefs.SetInt("arenaType", (int)GetArenaType());
+		PlayerPrefs.Save();
+
 		if (transition)
 		{
 			StartCoroutine(CloseTranition(GameEnums.Scenes.GameOver, waitTime));
@@ -95,7 +111,7 @@ public class GMSceneManager : MonoBehaviour
 			return GameEnums.Arenas.StandardArena;
 		}
 
-		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.Arena1.ToString())
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaSnow.ToString())
 		{
 			return GameEnums.Arenas.SnowArena;
 		}
