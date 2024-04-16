@@ -39,7 +39,7 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
             else if (attackTimer <= 0)
             {
                 enemy.SetDamagedStatus(false);
-                enemy.stateMachine.ChangeState(enemy.chaseState);
+                enemy.stateMachine.ChangeState(enemy.stunnedState);
             }
             else
             {
