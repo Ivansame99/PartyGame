@@ -31,10 +31,13 @@ public class DrunkIdle : EnemyIdleSOBase
         if (!enemy.isDead)
         {
             CheckingStates();
-            Vector3 lookVector = enemy.playerPos.transform.position - transform.position;
-            lookVector.y = transform.position.y;
-            Quaternion rot = Quaternion.LookRotation(lookVector);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+            if(enemy.playerPos != null)
+            {
+                Vector3 lookVector = enemy.playerPos.transform.position - transform.position;
+                lookVector.y = transform.position.y;
+                Quaternion rot = Quaternion.LookRotation(lookVector);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rot, 1);
+            }
 
             if (attackTimer <= 0)
             {
