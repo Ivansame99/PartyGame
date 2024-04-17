@@ -1,83 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PlayerAudioManager : MonoBehaviour
 {
-	[SerializeField]
-	private float minPitch = 0.8f;
+    [SerializeField]
+    private float minPitch = 0.8f;
 
-	[SerializeField]
-	private float maxPitch = 1.2f;
+    [SerializeField]
+    private float maxPitch = 1.2f;
 
-	[SerializeField]
-    private AudioSource bowCharge;
+    public void PlayBowCharge()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Archery/String", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource bowRelease;
+    public void PlayBowShoot()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Archery/Whoosh", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource damage;
+    public void PlayDamage()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Character/Damage", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource death;
+    public void PlayDeath()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Character/Die", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource jump;
+    public void PlayJump()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Character/Jump", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource stomp;
+    public void PlayStomp()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Character/Land", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource swordWhoosh;
+    public void PlaySwordWhoosh()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Sword/Whoosh", transform.position);
+    }
 
-	[SerializeField]
-	private AudioSource roll;
-
-	public void PlayBowCharge()
-	{
-		bowCharge.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		bowCharge.Play();
-	}
-
-	public void PlayBowShoot()
-	{
-		bowRelease.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		bowRelease.Play();
-	}
-
-	public void PlayDamage()
-	{
-		damage.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		damage.Play();
-	}
-
-	public void PlayDeath()
-	{
-		death.Play();
-	}
-
-	public void PlayJump()
-	{
-		jump.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		jump.Play();
-	}
-
-	public void PlayStomp()
-	{
-		stomp.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		stomp.Play();
-	}
-
-	public void PlaySwordWhoosh()
-	{
-		swordWhoosh.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		swordWhoosh.Play();
-	}
-
-	public void PlayRoll()
-	{
-		roll.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		roll.Play();
-	}
+    public void PlayRoll()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Character/Roll", transform.position);
+    }
 }
