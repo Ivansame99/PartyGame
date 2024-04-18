@@ -45,6 +45,7 @@ public class PowerController : MonoBehaviour
 	private EnemyHudController enemyHudController;
 
 	private float currentPowerLevel;
+	private float PowerObjects = 0f;
 	private bool isEnemy = false;
 	private bool maxPowerParticlesSpawned = false;
 	#endregion
@@ -147,4 +148,23 @@ public class PowerController : MonoBehaviour
 			playerHudController.ChangeUIPower(currentPowerLevel);
 		}
 	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("PowerObject"))
+		{
+		
+			GameObject powerParticle = collision.gameObject;
+
+			
+			powerParticle.SetActive(false);
+
+			print("Has cogido una esfera");
+			PowerObjects = PowerObjects + 1;
+			print(PowerObjects);
+
+
+		}
+	}
+
 }

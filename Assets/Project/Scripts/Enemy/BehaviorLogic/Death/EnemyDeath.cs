@@ -8,8 +8,8 @@ public class EnemyDeath : EnemyDeathSOBase
 	[SerializeField] private HelmetPrefab[] helmetPrefabs;
 	[SerializeField] private float minForce = 2f;
 	[SerializeField] private float maxForce = 5f;
-    [SerializeField] private float PminForce = 0.5f;
-    [SerializeField] private float PmaxForce = 0.5f;
+    [SerializeField] private float PminForce = 0.1f;
+    [SerializeField] private float PmaxForce = 0.3f;
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
     [SerializeField] private float NumberOfPowerParticles;
@@ -50,34 +50,40 @@ public class EnemyDeath : EnemyDeathSOBase
 
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
 
-        float yOffset = 2f;
+        float yOffset = 2f; // Altura inicial sobre el enemigo
         Vector3 enemyUpPos = new Vector3(enemy.transform.position.x, enemy.transform.position.y + yOffset, enemy.transform.position.z);
-        Vector3 spawnPosition = enemyUpPos + Random.insideUnitSphere;
-
+        
+        Vector3 spawnPositionA = enemyUpPos + Random.insideUnitSphere;
 
         for (int i = 0; i < NumberOfPowerParticles; i++)
         {
+           
+            Vector3 spawnPosition = enemyUpPos + Random.insideUnitSphere * 1.5f; 
+
+          
             GameObject powerInstance = Instantiate(PowerPrefab, spawnPosition, Quaternion.identity);
-            Rigidbody PowerRigidbody = powerInstance.GetComponent<Rigidbody>();
+            Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
 
-            if (PowerRigidbody != null)
+            if (powerRigidbody != null)
             {
-                // Calcular una dirección aleatoria hacia arriba y ligeramente hacia un lado
-                Vector3 PrandomDirection = Random.onUnitSphere + Vector3.up * 2f;
-                PrandomDirection.Normalize(); // Normalizar para asegurarse de que la magnitud sea 1
+               
+                Vector3 randomDirection = Random.onUnitSphere + Vector3.up * 20; 
+                randomDirection.Normalize(); 
 
-                // Aplicar una fuerza aleatoria en esa dirección
-                float PrandomForce = Random.Range(PminForce, PmaxForce);
-                PowerRigidbody.AddForce(PrandomDirection * PrandomForce, ForceMode.Impulse);
+               
+                float randomForce = Random.Range(PminForce, PmaxForce);
+                Vector3 force = randomDirection * randomForce;
+
+            
+                powerRigidbody.AddForce(force, ForceMode.Impulse);
             }
         }
-
         foreach (var helmetPrefab in helmetPrefabs)
 		{
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
 				
-				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
+				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPositionA, Quaternion.identity);
              
                 Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
              
