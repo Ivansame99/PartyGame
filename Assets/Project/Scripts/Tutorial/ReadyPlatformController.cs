@@ -19,6 +19,9 @@ public class ReadyPlatformController : MonoBehaviour
 	[SerializeField]
 	private GameObject hubUI;
 
+	[SerializeField]
+	private bool loadArena1;
+
 	private float changeSceneTimer;
 
 	private bool selectingArena = false;
@@ -40,10 +43,16 @@ public class ReadyPlatformController : MonoBehaviour
 
 		if (changeSceneTimer <= 0 && !selectingArena)
 		{
+			if (loadArena1)
+			{
+				GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			} else
+			{
+				arenaSelector.Scroll();
+			}
+
 			playerConfigurationManager.onHub = false;
-			//GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
 			hubUI.SetActive(false);
-			arenaSelector.Scroll();
 			selectingArena = true;
 		} else
 		{
