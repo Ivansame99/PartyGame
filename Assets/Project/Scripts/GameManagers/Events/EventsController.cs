@@ -124,6 +124,7 @@ public class EventsController : MonoBehaviour
 		}
 
 		float totalProbability = 0f;
+
 		foreach (var ev in randomEvents)
 		{
 			totalProbability += ev.probability;

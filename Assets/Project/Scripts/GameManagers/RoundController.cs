@@ -87,9 +87,9 @@ public class RoundController : MonoBehaviour
 			{
 				if (!finalRound)
 				{
-					SetFinalRound();
 					finalRound = true;
 					betweenRounds = false;
+					SetFinalRound();
 				}
 			}
 		}
@@ -133,6 +133,12 @@ public class RoundController : MonoBehaviour
 
 	void SetFinalRound()
 	{
+		if (GameManager.Instance.selectPlayerController.GetNumPlayers() == 1)
+		{
+			GameManager.Instance.endGameController.CheckEndGame();
+			return;
+		}
+
 		ChangeUIText("Final Round");
 		roundUIAnim.SetTrigger("ChangeRound");
 		if (rainPrefab!=null)
