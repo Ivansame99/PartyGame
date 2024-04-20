@@ -117,6 +117,12 @@ public class EventsController : MonoBehaviour
 	#region Private Methods
 	private void SelectNewEvent()
 	{
+		if (randomEvents.Count == 0)
+		{
+			Debug.LogWarning("No hay eventos configurados.");
+			return;
+		}
+
 		float totalProbability = 0f;
 		foreach (var ev in randomEvents)
 		{
