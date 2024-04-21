@@ -23,6 +23,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	[SerializeField] private GameObject deathParticles;
 	[SerializeField] private GameObject bloodParticles;
+	[SerializeField] private GameObject hitParticles;
 
 	[SerializeField] private HelmetPrefab[] dieDrops;
 	[SerializeField] private float minForce = 5f;
@@ -118,17 +119,7 @@ public class PlayerHealthController : MonoBehaviour
 	#region Public Methods
 	public void ReceiveDamage(float damage)
 	{
-		//Feedback
-		StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
-
-		cross1.SetActive(false);
-		cross2.SetActive(false);
-		glow.SetActive(false);
-
-		cross1.SetActive(true);
-		cross2.SetActive(true);
-		glow.SetActive(true);
+		DamageFeedback();
 
 		//Sound
 		playerController.playerAudioManager.PlayDamage();
@@ -143,18 +134,9 @@ public class PlayerHealthController : MonoBehaviour
 
 	public void ReceiveDamageMultiplier(float multiplier)
 	{
+		DamageFeedback();
+
 		float damage = maxHealth * multiplier;
-		//Feedback
-		StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
-
-		cross1.SetActive(false);
-		cross2.SetActive(false);
-		glow.SetActive(false);
-
-		cross1.SetActive(true);
-		cross2.SetActive(true);
-		glow.SetActive(true);
 
 		//Sound
 		playerController.playerAudioManager.PlayDamage();
@@ -197,6 +179,21 @@ public class PlayerHealthController : MonoBehaviour
 	#endregion
 
 	#region Private Methods
+	private void DamageFeedback()
+	{
+		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
+				StartCoroutine(RedEffect());
+		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+
+		cross1.SetActive(false);
+		cross2.SetActive(false);
+		glow.SetActive(false);
+
+		cross1.SetActive(true);
+		cross2.SetActive(true);
+		glow.SetActive(true);
+	}
+	
 	private void Die()
 	{
 		//Feedback
