@@ -130,6 +130,7 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void ReceiveDamageMultiplier(float multiplier)
@@ -147,6 +148,7 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void RestoreHealthAfterRound()
