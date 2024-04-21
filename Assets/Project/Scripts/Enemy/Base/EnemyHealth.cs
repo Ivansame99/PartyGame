@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -127,7 +128,13 @@ public class EnemyHealth : MonoBehaviour
 
 	void DamageFeedback()
 	{
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		//Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		float duration = 40;
+		Destroy(bloodEffectInstance, duration);
+
+
 		crossRight.SetActive(false);
 		crossLeft.SetActive(false);
 		glow.SetActive(false);

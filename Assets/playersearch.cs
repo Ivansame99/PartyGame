@@ -6,53 +6,48 @@ using UnityEngine;
 
 public class playersearch : MonoBehaviour
 {
-    public string tagJugador = "Player"; // Tag del jugador
-    public float rango = 1f; // Rango en el que el objeto seguirá al jugador
-    public float velocidad = 5f; // Velocidad a la que el objeto se moverá hacia el jugador
-
-    private Transform jugador; // Referencia al transform del jugador
-
-    void Start()
-    {
-        // Busca el jugador al inicio del juego
-        BuscarJugador();
-    }
+    public string playerTag = "Player";
+    public string enemyTag = "Enemy";
+    public float range = 1f; 
+    public float speed = 5f;
+    private List<Transform> targets = new List<Transform>();
 
     void Update()
     {
-        if (jugador != null)
-        {
-            // Calcula la distancia entre este objeto y el jugador
-            float distancia = Vector3.Distance(transform.position, jugador.position);
+        SearchTargets();
 
-            // Si el jugador está dentro del rango, mueve este objeto hacia el jugador
-            if (distancia <= rango)
+        foreach (Transform target in targets)
+        {
+            float distance = Vector3.Distance(transform.position, target.position);
+
+            if (distance <= range)
             {
-                Vector3 direccion = (jugador.position - transform.position).normalized;
-                transform.position += direccion * velocidad * Time.deltaTime;
+                Vector3 direction = (target.position - transform.position).normalized;
+                transform.position += direction * speed * Time.deltaTime;
             }
         }
-        else
+    }
+
+    void SearchTargets()
+    {
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag(playerTag);
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag(enemyTag);
+
+        targets.Clear();
+
+        foreach (GameObject playerObject in playerObjects)
         {
-            // Si el jugador no se ha encontrado, busca de nuevo
-            BuscarJugador();
+            targets.Add(playerObject.transform);
+          //  Debug.Log("Reconoce player");
+            Debug.Log(targets.Count);
+        }
+
+        foreach (GameObject enemyObject in enemyObjects)
+        {
+            targets.Add(enemyObject.transform);
+            //Debug.Log("Reconoce enemigo");
+            Debug.Log(targets.Count);
         }
     }
 
-    void BuscarJugador()
-    {
-        // Encuentra el objeto del jugador por su tag
-        GameObject jugadorObject = GameObject.FindGameObjectWithTag(tagJugador);
-       
-        // Si se encuentra el jugador, actualiza la referencia al transform del jugador
-        if (jugadorObject != null)
-        {
-            Debug.LogWarning("se ha encontrado jugador");
-            jugador = jugadorObject.transform;
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró ningún objeto con el tag " + tagJugador);
-        }
-    }
 }
