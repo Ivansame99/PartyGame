@@ -185,7 +185,10 @@ public class PlayerHealthController : MonoBehaviour
 	{
 		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
 		StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+		float duration = 40f;
+		Destroy(bloodEffectInstance, duration);
 
 		cross1.SetActive(false);
 		cross2.SetActive(false);
