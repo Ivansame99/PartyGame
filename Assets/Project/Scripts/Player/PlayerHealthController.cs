@@ -184,7 +184,7 @@ public class PlayerHealthController : MonoBehaviour
 	private void DamageFeedback()
 	{
 		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
-				StartCoroutine(RedEffect());
+		StartCoroutine(RedEffect());
 		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
 
 		cross1.SetActive(false);
@@ -195,7 +195,7 @@ public class PlayerHealthController : MonoBehaviour
 		cross2.SetActive(true);
 		glow.SetActive(true);
 	}
-	
+
 	private void Die()
 	{
 		//Feedback
@@ -284,7 +284,6 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = true;
 			pushForce = projectile.pushForce;
 			ReceiveDamage(projectile.finalDamage);
-			Debug.Log("Recibiendo daño");
 		}
 		if (other.CompareTag("EventDamage") && invencibleTimer <= 0 && !dead)
 		{
