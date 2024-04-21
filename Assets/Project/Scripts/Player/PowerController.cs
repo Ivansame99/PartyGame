@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using static UnityEngine.Rendering.DebugUI;
+using DG.Tweening;
 
 public class PowerController : MonoBehaviour
 {
@@ -70,6 +71,7 @@ public class PowerController : MonoBehaviour
 
 	public void ChangeScale()
 	{
+		transform.DORewind();
 		float scale = MapValues(currentPowerLevel, minPowerLevel, maxPowerLevel, minScaleMultiplier, maxScaleMultiplier);
 		float scaleClamped = Mathf.Clamp(scale, minScaleMultiplier, maxScaleMultiplier);
 		this.gameObject.transform.localScale = new Vector3(scaleClamped, scaleClamped, scaleClamped);

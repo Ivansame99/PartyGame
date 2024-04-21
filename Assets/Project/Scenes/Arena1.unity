@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 42.85
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -15840,7 +15840,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 5
+  m_fontSize: 15
   m_fontSizeBase: 49
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -28933,7 +28933,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: debug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29055,6 +29055,12 @@ PrefabInstance:
       propertyPath: spawns.Array.data[16]
       value: 
       objectReference: {fileID: 688576531}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: roundsSO.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 33db6cd6768b7774ba9f75b0dcd33699,
+        type: 2}
     - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: guiCamera
@@ -29129,6 +29135,21 @@ PrefabInstance:
         type: 3}
       propertyPath: randomEvents.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[0].probability
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[1].probability
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: randomEvents.Array.data[2].probability
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5348037645612716601, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

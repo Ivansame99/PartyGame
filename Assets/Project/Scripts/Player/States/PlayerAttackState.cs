@@ -10,6 +10,9 @@ public class PlayerAttackState : PlayerState<PlayerController>
 	[SerializeField]
 	private float attackMovement;
 
+	[SerializeField]
+	private GameObject hitParticles;
+
 	//[SerializeField]
 	//private float betweenAttacksCD;
 

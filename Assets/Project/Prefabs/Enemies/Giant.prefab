@@ -15446,6 +15446,11 @@ MonoBehaviour:
   crossRight: {fileID: 8970435229605231645}
   crossLeft: {fileID: 3177736569267665721}
   glow: {fileID: 3991981310453843818}
+  hitParticles: {fileID: 1429954232896169633, guid: bc9570f047434b64fb395c0f847fff55,
+    type: 3}
+  redMaterial: {fileID: 2100000, guid: 573d819121975cb4db48841899144e04, type: 2}
+  helmet: {fileID: 5703010680810257739}
+  body: {fileID: 2418502471770119424}
 --- !u!136 &6999865037897848089
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -27436,6 +27441,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e20854e91bbaa64fbc2d6327509ec0f, type: 3}
+--- !u!137 &5703010680810257739 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 960395115519182544, guid: 7e20854e91bbaa64fbc2d6327509ec0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 4787655963102329755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8285398591999544107 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3497763797762388144, guid: 7e20854e91bbaa64fbc2d6327509ec0f,

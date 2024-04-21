@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -42,6 +43,14 @@ public class EnemyHealth : MonoBehaviour
 	[SerializeField] private GameObject bloodParticles;
 	[SerializeField] private GameObject crossRight, crossLeft;
 	[SerializeField] private GameObject glow;
+	[SerializeField] private GameObject hitParticles;
+
+	[SerializeField] private Material redMaterial;
+	[SerializeField] private Renderer helmet;
+	[SerializeField] private Renderer body;
+
+	private Material originalHelmetMaterial;
+	private Material originalBodyMaterial;
 
 	private void Start()
 	{
@@ -53,6 +62,9 @@ public class EnemyHealth : MonoBehaviour
 		{
 			enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
 		}
+
+		originalHelmetMaterial = helmet.material;
+		originalBodyMaterial = body.material;
 	}
 
 	void Update()
@@ -132,10 +144,11 @@ public class EnemyHealth : MonoBehaviour
 		crossLeft.SetActive(false);
 		glow.SetActive(false);
 
-
+		StartCoroutine(RedEffect());
 		crossRight.SetActive(true);
 		crossLeft.SetActive(true);
 		glow.SetActive(true);
+		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
 	}
 
 	void ShowDamageText(float damage)
@@ -236,6 +249,21 @@ public class EnemyHealth : MonoBehaviour
 			pushBack = true;
 			pushForce = rock.pushForce;
 			ReceiveDamage(rock.damage);
+		}
+	}
+
+	IEnumerator RedEffect()
+	{
+		int numTimes = 2;
+		float delay = 0.1f;
+		for (int i = 0; i < numTimes; i++)
+		{
+			helmet.material = redMaterial;
+			body.material = redMaterial;
+			yield return new WaitForSeconds(delay);
+			helmet.material = originalHelmetMaterial;
+			body.material = originalBodyMaterial;
+			yield return new WaitForSeconds(delay);
 		}
 	}
 }
