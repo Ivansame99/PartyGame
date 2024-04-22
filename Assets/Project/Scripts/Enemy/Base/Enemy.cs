@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public Rigidbody rb { get; set; }
 	public EnemyHealth enemyHealthController { get; set; }
 	public bool state { get; set; }
+	public EnemyDirector enemyDirector { get; set; }
 	public Transform playerPos { get; set; }
 	public Transform playerPos2 { get; set; }
 	public EnemyTargetController enemyTargetController { get; set; }
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyDamageState damageState { get; set; }
 	public EnemyDeathState deathState { get; set; }
 	public BossTorus bossTorusState { get; set; }
+	public BossDistanceAttack bossDistanceAttackState { get; set; }
 
 	//WATER STATES
 	public EnemyWaterChaseState waterChaseState { get; set; }
@@ -68,6 +70,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 
 	//BOSS STATES
 	public BossTorusSOBase bossTorusBaseInstance { get; set; }
+	public BossDistanceAttackSOBase bossDistanceAttackBaseInstance { get; set; }
 
 
 	//WATER STATES

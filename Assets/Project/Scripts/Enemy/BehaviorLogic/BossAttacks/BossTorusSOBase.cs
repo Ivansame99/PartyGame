@@ -40,7 +40,6 @@ public class BossTorusSOBase : ScriptableObject
 
     public virtual void DoEnterLogic()
     {
-        Debug.Log("DoEnterLogic");
         
     }
     public virtual void DoExitLogic()
