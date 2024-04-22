@@ -44,10 +44,14 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyStunnedState stunnedState { get; set; }
 	public EnemyDamageState damageState { get; set; }
 	public EnemyDeathState deathState { get; set; }
+	public BossTorus bossTorusState { get; set; }
 
 	//WATER STATES
 	public EnemyWaterChaseState waterChaseState { get; set; }
 	public EnemyWaterAttackState waterAttackState { get; set; }
+
+	//BOSS STATES
+
 	#endregion
 
 	#region SO Variables
@@ -61,6 +65,10 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }
 	public EnemyDamageSOBase enemyDamageBaseInstance { get; set; }
 	public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
+
+	//BOSS STATES
+	public BossTorusSOBase bossTorusBaseInstance { get; set; }
+
 
 	//WATER STATES
 	public EnemyWaterChaseSOBase enemyWaterChaseBaseInstance { get; set; }
