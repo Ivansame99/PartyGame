@@ -381,6 +381,12 @@ public class PlayerHealthController : MonoBehaviour
 			pushForce = rock.pushForce;
 			ReceiveDamage(rock.damage);
 		}
+
+		if (collision.transform.CompareTag("Trap") && invencibleTimer <= 0 && !dead)
+		{
+			float damage = 20f;
+			ReceiveDamage(damage);
+		}
 	}
 	#endregion
 

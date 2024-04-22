@@ -13,6 +13,9 @@ public class GroundCheck : MonoBehaviour
 	[SerializeField]
 	private LayerMask charactersLayer;
 
+	[SerializeField]
+	private LayerMask enemiesLayer;
+
 	private Rigidbody rb;
 
 	private float raycastDistance = 0.5f;
@@ -22,16 +25,13 @@ public class GroundCheck : MonoBehaviour
 		rb = this.GetComponent<Rigidbody>();
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		Debug.DrawRay(raycastPoint.position, Vector3.down * raycastDistance, Color.red);
 
-		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, charactersLayer))
+		if (Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit, raycastDistance, charactersLayer) || Physics.Raycast(raycastPoint.position, Vector3.down, out RaycastHit hit2, raycastDistance, enemiesLayer))
 		{
-			Vector3 slideValue;
-			slideValue = Random.onUnitSphere * 10f;
-			slideValue.y = rb.velocity.y;
-			rb.velocity = slideValue;
+			rb.AddForce(Vector3.up * 15f, ForceMode.Impulse);
 		}
 	}
 
