@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    //Enemy
-    [SerializeField] private Enemy enemy;
+	//Enemy
+	[SerializeField] private Enemy enemy;
 
 	//Inmune time after hit
 	[HideInInspector] public bool invencibility;
@@ -54,7 +54,7 @@ public class EnemyHealth : MonoBehaviour
 
 	private void Start()
 	{
-		if(enemy == null) enemy = GetComponent<Enemy>();
+		if (enemy == null) enemy = GetComponent<Enemy>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupHealthBar(healBarCanvas, GetComponent<Camera>());
 		//Invoke(nameof(LoadMaxHealth), 0.1f);
@@ -139,12 +139,17 @@ public class EnemyHealth : MonoBehaviour
 
 	void DamageFeedback()
 	{
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		float duration = 40f;
+		Destroy(bloodEffectInstance, duration);
+
 		crossRight.SetActive(false);
 		crossLeft.SetActive(false);
 		glow.SetActive(false);
 
 		StartCoroutine(RedEffect());
+		//StartCoroutine(TimeFreeze());
+		
 		crossRight.SetActive(true);
 		crossLeft.SetActive(true);
 		glow.SetActive(true);
@@ -199,8 +204,8 @@ public class EnemyHealth : MonoBehaviour
 				lastAttacker = other.transform.parent.gameObject;
 				SlashController slashController = other.GetComponent<SlashController>();
 				attackPosition = other.gameObject.transform.position;
-				if(other.CompareTag("JumpAttack")) pushForce = slashController.pushForce;
-                else pushForce = slashController.pushForce * 2;
+				if (other.CompareTag("JumpAttack")) pushForce = slashController.pushForce;
+				else pushForce = slashController.pushForce * 2;
 				pushBack = true;
 
 				ReceiveDamage(slashController.finalDamage);
@@ -254,16 +259,20 @@ public class EnemyHealth : MonoBehaviour
 
 	IEnumerator RedEffect()
 	{
-		int numTimes = 2;
-		float delay = 0.1f;
-		for (int i = 0; i < numTimes; i++)
-		{
-			helmet.material = redMaterial;
-			body.material = redMaterial;
-			yield return new WaitForSeconds(delay);
-			helmet.material = originalHelmetMaterial;
-			body.material = originalBodyMaterial;
-			yield return new WaitForSeconds(delay);
-		}
+		float delay = 0.4f;
+		helmet.material = redMaterial;
+		body.material = redMaterial;
+		yield return new WaitForSeconds(delay);
+		helmet.material = originalHelmetMaterial;
+		body.material = originalBodyMaterial;
+	}
+
+	IEnumerator TimeFreeze()
+	{
+		float duration = 0.03f;
+
+		Time.timeScale = 0;
+		yield return new WaitForSecondsRealtime(duration);
+		Time.timeScale = 1;
 	}
 }

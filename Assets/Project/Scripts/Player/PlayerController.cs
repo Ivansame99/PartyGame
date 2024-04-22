@@ -126,6 +126,11 @@ public class PlayerController : PlayerStateManager<PlayerController>
 		ChangeState(typeof(PlayerIdleState));
 	}
 
+	public void TakeDamage()
+	{
+		ChangeState(typeof(PlayerTakeDamageState));
+	}
+
 	public int GetPlayerId()
 	{
 		return playerId;

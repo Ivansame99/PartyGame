@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using TreeEditor;
 using UnityEngine;
 
 public class PracticeDummyHealthController : MonoBehaviour
@@ -50,6 +51,14 @@ public class PracticeDummyHealthController : MonoBehaviour
 	[SerializeField] private GameObject deathParticles;
 	[SerializeField] private GameObject floatingDamageText;
 
+	[SerializeField] private GameObject hitParticles;
+
+	[SerializeField] private Renderer body;
+
+	[SerializeField] private Material whiteMaterial;
+
+	private Material originalBodyMaterial;
+
 	private void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -66,19 +75,13 @@ public class PracticeDummyHealthController : MonoBehaviour
 			powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
 		}
 		health = maxHealth;
+
+		originalBodyMaterial = body.materials[1];
 	}
 
 	public void ReceiveDamageSlash(float damage)
 	{
-		//Feedback
-		Cross1.SetActive(false);
-		Cross2.SetActive(false);
-		Glow.SetActive(false);
-
-
-		Cross1.SetActive(true);
-		Cross2.SetActive(true);
-		Glow.SetActive(true);
+		DamageFeedback();
 
 		if (floatingDamageText != null) ShowDamageText(damage);
 
@@ -110,6 +113,8 @@ public class PracticeDummyHealthController : MonoBehaviour
 		//anim.SetTrigger("Damage");
 		health -= damage;
 
+		DamageFeedback();
+
 		if (floatingDamageText != null) ShowDamageText(damage);
 
 		if (healthBarC != null)
@@ -121,6 +126,23 @@ public class PracticeDummyHealthController : MonoBehaviour
 		{
 			Die();
 		}
+	}
+
+	void DamageFeedback()
+	{
+		//Feedback
+		Cross1.SetActive(false);
+		Cross2.SetActive(false);
+		Glow.SetActive(false);
+
+		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
+
+		StartCoroutine(RedEffect());
+
+		Cross1.SetActive(true);
+		Cross2.SetActive(true);
+		Glow.SetActive(true);
+
 	}
 
 	void Die()
@@ -196,6 +218,19 @@ public class PracticeDummyHealthController : MonoBehaviour
 					Destroy(collision.gameObject);
 				}
 			}
+		}
+	}
+
+	IEnumerator RedEffect()
+	{
+		int numTimes = 3;
+		float delay = 0.1f;
+		for (int i = 0; i < numTimes; i++)
+		{
+			body.materials[1] = whiteMaterial;
+			yield return new WaitForSeconds(delay);
+			body.materials[1] = originalBodyMaterial;
+			yield return new WaitForSeconds(delay);
 		}
 	}
 }

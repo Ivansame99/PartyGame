@@ -130,6 +130,7 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void ReceiveDamageMultiplier(float multiplier)
@@ -147,6 +148,7 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void RestoreHealthAfterRound()
@@ -182,8 +184,11 @@ public class PlayerHealthController : MonoBehaviour
 	private void DamageFeedback()
 	{
 		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
-				StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+		StartCoroutine(RedEffect());
+
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+		float duration = 40f;
+		Destroy(bloodEffectInstance, duration);
 
 		cross1.SetActive(false);
 		cross2.SetActive(false);
@@ -193,7 +198,7 @@ public class PlayerHealthController : MonoBehaviour
 		cross2.SetActive(true);
 		glow.SetActive(true);
 	}
-	
+
 	private void Die()
 	{
 		//Feedback
@@ -282,7 +287,6 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = true;
 			pushForce = projectile.pushForce;
 			ReceiveDamage(projectile.finalDamage);
-			Debug.Log("Recibiendo daño");
 		}
 		if (other.CompareTag("EventDamage") && invencibleTimer <= 0 && !dead)
 		{
@@ -376,6 +380,12 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = true;
 			pushForce = rock.pushForce;
 			ReceiveDamage(rock.damage);
+		}
+
+		if (collision.transform.CompareTag("Trap") && invencibleTimer <= 0 && !dead)
+		{
+			float damage = 20f;
+			ReceiveDamage(damage);
 		}
 	}
 	#endregion
