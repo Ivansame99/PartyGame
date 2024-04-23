@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -259,7 +257,7 @@ public class EnemyHealth : MonoBehaviour
 
 	IEnumerator RedEffect()
 	{
-		float delay = 0.4f;
+		float delay = 0.25f;
 		helmet.material = redMaterial;
 		body.material = redMaterial;
 		yield return new WaitForSeconds(delay);
@@ -267,12 +265,12 @@ public class EnemyHealth : MonoBehaviour
 		body.material = originalBodyMaterial;
 	}
 
-	IEnumerator TimeFreeze()
-	{
-		float duration = 0.03f;
+	//IEnumerator TimeFreeze()
+	//{
+	//	float duration = 0.03f;
 
-		Time.timeScale = 0;
-		yield return new WaitForSecondsRealtime(duration);
-		Time.timeScale = 1;
-	}
+	//	Time.timeScale = 0;
+	//	yield return new WaitForSecondsRealtime(duration);
+	//	Time.timeScale = 1;
+	//}
 }
