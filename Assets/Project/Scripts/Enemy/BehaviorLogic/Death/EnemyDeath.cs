@@ -6,10 +6,10 @@ using UnityEngine;
 public class EnemyDeath : EnemyDeathSOBase
 {
 	[SerializeField] private HelmetPrefab[] helmetPrefabs;
-	[SerializeField] private float minForce = 2f;
-	[SerializeField] private float maxForce = 5f;
-    [SerializeField] private float PminForce = 0.1f;
-    [SerializeField] private float PmaxForce = 0.3f;
+	[SerializeField] private float minForce = 20f;
+	[SerializeField] private float maxForce = 55f;
+    [SerializeField] private float PminForce = 7f;
+    [SerializeField] private float PmaxForce = 12f;
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
     [SerializeField] private int powerPerParticle;
@@ -47,19 +47,37 @@ public class EnemyDeath : EnemyDeathSOBase
     void CalculateNumberOfParticles()
     {
         int powerToCalculate = enemy.powerController.GetHalfPowerLevel();
-        Debug.Log(powerToCalculate);
-        if (powerToCalculate >= 0 && powerToCalculate <= 10)
+       
+        if (powerToCalculate >= 0 && powerToCalculate <= 10) // ENTRE O Y 20 DE FUERZA
         {
             numberOfPowerParticles = 2;
    
 
         }
-        else if (powerToCalculate >= 11 && powerToCalculate <= 25)
+        else if (powerToCalculate >= 11 && powerToCalculate <= 25) // ENTRE 20 Y 50
         {
             numberOfPowerParticles = 5;
         }
+        else if (powerToCalculate >= 26 && powerToCalculate <= 50) // ENTRE 50 Y 100
+        {
+            numberOfPowerParticles = 10;
+        }
+        else if (powerToCalculate >= 51 && powerToCalculate <= 150) // ENTRE 100 Y 300
+        {
+            numberOfPowerParticles = 15;
+        }
+        else if (powerToCalculate >= 151 && powerToCalculate <= 500) // ENTRE 300 Y 1000
+        {
+            numberOfPowerParticles = 20;
+        }
+        else if (powerToCalculate >= 501) // MAS DE 1000
+        {
+            numberOfPowerParticles = 25;
+        }
 
-        powerPerParticle = powerToCalculate / numberOfPowerParticles;
+        if (numberOfPowerParticles!=0) powerPerParticle = powerToCalculate / numberOfPowerParticles;
+
+        
     }
     void Death()
     {
@@ -69,7 +87,7 @@ public class EnemyDeath : EnemyDeathSOBase
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
         // Vector3 spawnPositionA = enemyUpPos + Random.insideUnitSphere;
 
-        Vector3 spawnPosition = enemy.transform.position; // Obtener la posición del enemigo como posición de origen
+        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y +2, enemy.transform.position.z); // Obtener la posición del enemigo como posición de origen
 
         CalculateNumberOfParticles();
 
@@ -77,27 +95,31 @@ public class EnemyDeath : EnemyDeathSOBase
         for (int i = 0; i < numberOfPowerParticles; i++)
         {
             // Agregar un pequeño rango aleatorio al punto de spawn
-            Vector3 randomOffset = Random.insideUnitSphere * 0.5f; // Ajusta el valor para controlar el rango
-            Vector3 adjustedSpawnPosition = spawnPosition + randomOffset;
+           // Vector3 randomOffset = Random.insideUnitSphere * 1.5f; // Ajusta el valor para controlar el rango
+            Vector3 adjustedSpawnPosition = spawnPosition;
 
             // Calcular una dirección aleatoria hacia arriba y ligeramente hacia un lado
-            Vector3 randomDirection = Random.onUnitSphere + Vector3.up * 1f; // Ajusta el valor para cambiar la inclinación lateral
-            randomDirection.Normalize(); // Normalizar para asegurarse de que la magnitud sea 1
+            Vector3 randomDirection = Random.onUnitSphere + Vector3.up*3; // Ajusta el valor para cambiar la inclinación lateral
+            randomDirection.z = randomDirection.z * 3;
+            randomDirection.x = randomDirection.x * 3;
+            Debug.Log(randomDirection);
 
+           // randomDirection.Normalize(); // Normalizar para asegurarse de que la magnitud sea 1
+           // Debug.Log(randomDirection);
             // Aplicar una fuerza aleatoria en esa dirección
             float randomForce = Random.Range(PminForce, PmaxForce);
-            Vector3 force = randomDirection * randomForce;
+            Vector3 force = randomDirection * randomForce * 50;
 
             // Instanciar la partícula en la posición ajustada del enemigo
             GameObject powerInstance = Instantiate(PowerPrefab, adjustedSpawnPosition, Quaternion.identity);
-            powerInstance.GetComponent<PowerParticleController>().powerAmmount = powerPerParticle;
+            powerInstance.GetComponent<PowerParticleController>().SetPowerAmount(powerPerParticle);
 
             Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
 
             if (powerRigidbody != null)
             {
                 powerRigidbody.AddForce(force, ForceMode.Impulse);
-
+                Debug.Log(force);
                 // Elegir aleatoriamente entre color1 y color2
                 Color randomColor = Random.value < 0.5f ? color1 : color2;
 

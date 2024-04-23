@@ -158,13 +158,18 @@ public class PowerController : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("PowerObject"))
 		{
-			transform.DORewind();
-			transform.DOPunchScale(new Vector3(0.5f, -0.5f, 0.5f), 0.15f).SetRelative(true).SetEase(Ease.OutBack);
-
 			GameObject powerParticle = collision.gameObject;
-			AddPowerLevel(powerParticle.GetComponent<PowerParticleController>().powerAmmount);
+			PowerParticleController ppc = powerParticle.GetComponent<PowerParticleController>();
 
-			Destroy(powerParticle);
+			if (ppc.CanBePicked())
+			{
+				transform.DORewind();
+				transform.DOPunchScale(new Vector3(0.5f, -0.5f, 0.5f), 0.15f).SetRelative(true).SetEase(Ease.OutBack);
+
+				AddPowerLevel(ppc.GetPowerAmount());
+
+				Destroy(powerParticle);
+			}
 		}
 	}
 }
