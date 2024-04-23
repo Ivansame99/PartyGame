@@ -108,7 +108,12 @@ public class PowerController : MonoBehaviour
 		return currentPowerLevel / healthScale;
 	}
 
-	public float PowerAttackSpeed()
+	public int GetHalfPowerLevel()
+	{
+		return Mathf.RoundToInt(currentPowerLevel / 2);
+	}
+
+		public float PowerAttackSpeed()
 	{
 		float attackSpeeedIncrease = currentPowerLevel / playerAttackSpeedScale;
 		//Debug.Log("Aumento attack speed: " + Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale));

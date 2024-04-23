@@ -12,7 +12,8 @@ public class EnemyDeath : EnemyDeathSOBase
     [SerializeField] private float PmaxForce = 0.3f;
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
-    [SerializeField] private float NumberOfPowerParticles;
+    [SerializeField] private int powerPerParticle;
+    [SerializeField] private int numberOfPowerParticles;
     [SerializeField] private GameObject PowerPrefab;
 
     [SerializeField] private Color color1 = Color.red;
@@ -43,7 +44,23 @@ public class EnemyDeath : EnemyDeathSOBase
         // Desvincular las partículas del enemigo
         particleSystemInstance.transform.SetParent(null);
     }
+    void CalculateNumberOfParticles()
+    {
+        int powerToCalculate = enemy.powerController.GetHalfPowerLevel();
+        Debug.Log(powerToCalculate);
+        if (powerToCalculate >= 0 && powerToCalculate <= 10)
+        {
+            numberOfPowerParticles = 2;
+   
 
+        }
+        else if (powerToCalculate >= 11 && powerToCalculate <= 25)
+        {
+            numberOfPowerParticles = 5;
+        }
+
+        powerPerParticle = powerToCalculate / numberOfPowerParticles;
+    }
     void Death()
     {
         //Feedback
@@ -54,7 +71,10 @@ public class EnemyDeath : EnemyDeathSOBase
 
         Vector3 spawnPosition = enemy.transform.position; // Obtener la posición del enemigo como posición de origen
 
-        for (int i = 0; i < NumberOfPowerParticles; i++)
+        CalculateNumberOfParticles();
+
+
+        for (int i = 0; i < numberOfPowerParticles; i++)
         {
             // Agregar un pequeño rango aleatorio al punto de spawn
             Vector3 randomOffset = Random.insideUnitSphere * 0.5f; // Ajusta el valor para controlar el rango
@@ -70,6 +90,8 @@ public class EnemyDeath : EnemyDeathSOBase
 
             // Instanciar la partícula en la posición ajustada del enemigo
             GameObject powerInstance = Instantiate(PowerPrefab, adjustedSpawnPosition, Quaternion.identity);
+            powerInstance.GetComponent<PowerParticleController>().powerAmmount = powerPerParticle;
+
             Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
 
             if (powerRigidbody != null)
