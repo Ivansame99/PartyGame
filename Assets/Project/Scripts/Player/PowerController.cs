@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using static UnityEngine.Rendering.DebugUI;
+using DG.Tweening;
 
 public class PowerController : MonoBehaviour
 {
@@ -45,7 +46,6 @@ public class PowerController : MonoBehaviour
 	private EnemyHudController enemyHudController;
 
 	private float currentPowerLevel;
-	private float PowerObjects = 0f;
 	private bool isEnemy = false;
 	private bool maxPowerParticlesSpawned = false;
 	#endregion
@@ -153,18 +153,13 @@ public class PowerController : MonoBehaviour
 	{
 		if (collision.gameObject.CompareTag("PowerObject"))
 		{
-		
+			transform.DORewind();
+			transform.DOPunchScale(new Vector3(0.5f, -0.5f, 0.5f), 0.15f).SetRelative(true).SetEase(Ease.OutBack);
+
 			GameObject powerParticle = collision.gameObject;
+			AddPowerLevel(powerParticle.GetComponent<PowerParticleController>().powerAmmount);
 
-			
-			powerParticle.SetActive(false);
-
-			print("Has cogido una esfera");
-			PowerObjects = PowerObjects + 1;
-			print(PowerObjects);
-
-
+			Destroy(powerParticle);
 		}
 	}
-
 }
