@@ -18,7 +18,7 @@ public class EnemyDeath : EnemyDeathSOBase
 
     [SerializeField] private Color color1 = Color.red;
     [SerializeField] private Color color2 = Color.white;
-
+    private Vector3 scale = new Vector3(1, 1, 1);
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -51,33 +51,42 @@ public class EnemyDeath : EnemyDeathSOBase
         if (powerToCalculate >= 0 && powerToCalculate <= 10) // ENTRE O Y 20 DE FUERZA
         {
             numberOfPowerParticles = 2;
-   
+            scale = new Vector3(0.5f, 0.5f, 0.5f);
 
         }
         else if (powerToCalculate >= 11 && powerToCalculate <= 25) // ENTRE 20 Y 50
         {
             numberOfPowerParticles = 5;
+            scale = new Vector3(0.6f, 0.6f, 0.6f);
         }
         else if (powerToCalculate >= 26 && powerToCalculate <= 50) // ENTRE 50 Y 100
         {
             numberOfPowerParticles = 10;
+            scale = new Vector3(0.7f, 0.7f, 0.7f);
         }
         else if (powerToCalculate >= 51 && powerToCalculate <= 150) // ENTRE 100 Y 300
         {
             numberOfPowerParticles = 15;
+            scale = new Vector3(0.8f, 0.8f, 0.8f);
         }
         else if (powerToCalculate >= 151 && powerToCalculate <= 500) // ENTRE 300 Y 1000
         {
             numberOfPowerParticles = 20;
+            scale = new Vector3(0.9f, 0.9f, 0.9f);
+
         }
         else if (powerToCalculate >= 501) // MAS DE 1000
         {
             numberOfPowerParticles = 25;
+            scale = new Vector3(1f, 1f, 1f);
+
         }
 
-        if (numberOfPowerParticles!=0) powerPerParticle = powerToCalculate / numberOfPowerParticles;
+        if (numberOfPowerParticles!=0) powerPerParticle = powerToCalculate / numberOfPowerParticles; //DIVIDES LA MITAD DEL PODER(LO QUE TIENES QUE REPARTIR) ENTRE EL NUMERO DE PARTICULAS QUE SUELTAN, POR LO QUE CADA PARTICULA TIENE SU PODER
 
-        
+
+
+
     }
     void Death()
     {
@@ -118,6 +127,7 @@ public class EnemyDeath : EnemyDeathSOBase
 
             if (powerRigidbody != null)
             {
+                powerInstance.transform.localScale = scale;
                 powerRigidbody.AddForce(force, ForceMode.Impulse);
                 Debug.Log(force);
                 // Elegir aleatoriamente entre color1 y color2
