@@ -10,6 +10,19 @@ public class BossDistanceAttackSOBase : ScriptableObject
     protected Transform transform;
     protected GameObject gameObject;
     protected Transform playerTransform;
+
+    [Header("Projectile parameters")]
+    [SerializeField] private GameObject projectilePrefab;
+
+     
+    private float attackTimer;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private int totalProjectiles;
+    private int projectilesCounter;
+
+    private GameObject projectile;
+
+    Transform firePoint;
     public virtual void Init(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -21,8 +34,21 @@ public class BossDistanceAttackSOBase : ScriptableObject
 
     public virtual void DoEnterLogic()
     {
-        
+        attackTimer = attackCooldown;
+  
+    }
+    void FireProjectile(Vector3 target)
+    {
+        projectile = Instantiate(projectilePrefab, target, Quaternion.identity);
+    }
 
+    void ThrowBottle(Vector3 target)
+    {
+        firePoint.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 10f, enemy.transform.position.z);
+        projectile = Instantiate(projectilePrefab, target, Quaternion.identity);
+        projectile.GetComponent<DrunkProjectile>().finalPosition = enemy.transform;
+        projectile.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
+        projectile.GetComponent<DrunkProjectile>().enemy = enemy;
     }
     public virtual void DoExitLogic()
     {
@@ -32,8 +58,18 @@ public class BossDistanceAttackSOBase : ScriptableObject
     {
         if (!enemy.isDead)
         {
-            Debug.Log("DoEnterLogic");
-        }
+            if(attackTimer <= 0 && projectilesCounter <= 0)
+            {
+                for (int i = 0; i < enemy.enemyDirector.players.Count; i++)
+                {
+                    Vector3 target = new Vector3(enemy.enemyDirector.players[i].transform.position.x, enemy.enemyDirector.players[i].transform.position.y + 20f, enemy.enemyDirector.players[i].transform.position.z);
+                    FireProjectile(target);
+                }
+                attackTimer = attackCooldown;
+                projectilesCounter++;
+            }
+            else attackTimer -= Time.deltaTime;
+        }else enemy.stateMachine.ChangeState(enemy.deathState);
     }
 
     public virtual void DoPhysicsLogic() { }
