@@ -17,7 +17,7 @@ public class SecutorDamage : EnemyDamageSOBase
         enemy.animator.SetTrigger("Damaged");
         enemy.secutorAudioManager.PlayDamage();
         stunedTimer = stunTime;
-		enemy.rb.velocity = Vector3.zero;
+		//enemy.rb.velocity = Vector3.zero;
 	}
 
     public override void DoExitLogic()
