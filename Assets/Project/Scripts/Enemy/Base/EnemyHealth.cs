@@ -193,8 +193,32 @@ public class EnemyHealth : MonoBehaviour
 				ReceiveDamage(slashController.finalDamage);
 			}
 		}
+        if (other.transform.CompareTag("Arrow") && !invencibility && !enemy.isDead)
+        {
+            ArrowController ac = other.gameObject.GetComponent<ArrowController>();
+            if (ac)
+            {
+                lastAttacker = ac.owner;
+                attackPosition = ac.ownerPos;
+                pushBack = true;
+                pushForce = ac.pushForce;
 
-		if (other.CompareTag("EventDamage") && !invencibility && !enemy.isDead)
+                ReceiveDamage(ac.finalDamage);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                BulletController bc = other.gameObject.GetComponent<BulletController>();
+                lastAttacker = bc.owner;
+                attackPosition = bc.ownerPos;
+                pushBack = true;
+                pushForce = bc.pushForce;
+
+                ReceiveDamage(bc.finalDamage);
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.CompareTag("EventDamage") && !invencibility && !enemy.isDead)
 		{
 			ReceiveDamageMultiplier(other.GetComponent<DealDamageEvent>().GetDamageMultipler());
 		}
