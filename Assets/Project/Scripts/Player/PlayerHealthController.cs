@@ -281,7 +281,7 @@ public class PlayerHealthController : MonoBehaviour
 		}
 		if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)
 		{
-			DrunkProjectile projectile = other.gameObject.GetComponent<DrunkProjectile>();
+			EnemyDamage projectile = other.gameObject.GetComponent<EnemyDamage>();
 			lastAttacker = projectile.owner;
 			attackPosition = projectile.owner.transform.position;
 			pushBack = true;

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3970693576373775690}
   - component: {fileID: 617432790068638880}
   - component: {fileID: 7196490787158382667}
+  - component: {fileID: 4847138825070780808}
   m_Layer: 0
   m_Name: Chalice
   m_TagString: Projectile
@@ -56,11 +57,6 @@ MonoBehaviour:
     type: 3}
   explosionParticles: {fileID: 100000, guid: f9d6185463566cc488a0632e674a481b, type: 3}
   speedMultiplier: 2
-  baseDamage: 10
-  finalDamage: 10
-  pushForce: 25
-  owner: {fileID: 0}
-  enemy: {fileID: 0}
   selfDestruction: 3
 --- !u!33 &3970693576373775690
 MeshFilter:
@@ -133,6 +129,23 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.05
   m_Center: {x: 0.000032670097, y: -6.9849204e-10, z: 0.0036903366}
+--- !u!114 &4847138825070780808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6917567757001349630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b8fef5e3370294c953434ca84e66c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  finalDamage: 10
+  pushForce: 25
+  owner: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1 &8695181001076745622
 GameObject:
   m_ObjectHideFlags: 0

@@ -3778,6 +3778,7 @@ Transform:
   - {fileID: 620061992}
   - {fileID: 688576531}
   - {fileID: 287425126}
+  - {fileID: 1730323384}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4438,7 +4439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 3743270676613228139}
-  skipAnim: 0
+  skipAnim: 1
 --- !u!1 &331183245
 GameObject:
   m_ObjectHideFlags: 0
@@ -25309,6 +25310,37 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2050928038}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1730323383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1730323384}
+  m_Layer: 0
+  m_Name: BossSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1730323384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730323383}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3, y: 1.5, z: 5.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 245008288}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732952696 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5971476123506598425, guid: 250d658e77d26534bb4a87fe0a43bef5,
@@ -29198,6 +29230,16 @@ PrefabInstance:
       propertyPath: roundsUI
       value: 
       objectReference: {fileID: 1222882966}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: bossRound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: bossSpawn
+      value: 
+      objectReference: {fileID: 1730323384}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: rainPrefab

@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public Rigidbody rb { get; set; }
 	public EnemyHealth enemyHealthController { get; set; }
 	public bool state { get; set; }
+	public EnemyDirector enemyDirector { get; set; }
 	public Transform playerPos { get; set; }
 	public Transform playerPos2 { get; set; }
 	public EnemyTargetController enemyTargetController { get; set; }
@@ -44,10 +45,15 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyStunnedState stunnedState { get; set; }
 	public EnemyDamageState damageState { get; set; }
 	public EnemyDeathState deathState { get; set; }
+	public BossTorus bossTorusState { get; set; }
+	public BossDistanceAttack bossDistanceAttackState { get; set; }
 
 	//WATER STATES
 	public EnemyWaterChaseState waterChaseState { get; set; }
 	public EnemyWaterAttackState waterAttackState { get; set; }
+
+	//BOSS STATES
+
 	#endregion
 
 	#region SO Variables
@@ -61,6 +67,11 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyStunedSOBase enemyStunedBaseInstance { get; set; }
 	public EnemyDamageSOBase enemyDamageBaseInstance { get; set; }
 	public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
+
+	//BOSS STATES
+	public BossTorusSOBase bossTorusBaseInstance { get; set; }
+	public BossDistanceAttackSOBase bossDistanceAttackBaseInstance { get; set; }
+
 
 	//WATER STATES
 	public EnemyWaterChaseSOBase enemyWaterChaseBaseInstance { get; set; }

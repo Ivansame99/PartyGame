@@ -25092,6 +25092,10 @@ MonoBehaviour:
   drunkAudioManager: {fileID: 0}
   trailSand: {fileID: 3723748267475556236}
   enemyIdleBase: {fileID: 11400000, guid: 643d675855709e74c9c7fe7e6e23b19a, type: 2}
+  enemyDeathBase: {fileID: 11400000, guid: 55804538cbecc044fab949c75e2058b4, type: 2}
+  enemyAttackBase: {fileID: 11400000, guid: a789002cc78defb479963428403958d6, type: 2}
+  bossTorusAttack: {fileID: 11400000, guid: a98f591dc0ba7664fa662e7985492817, type: 2}
+  bossDistanceAttack: {fileID: 11400000, guid: 613e0e4a8e555f847ba3070a2bba6d5b, type: 2}
 --- !u!114 &8535626857863438699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25111,7 +25115,8 @@ MonoBehaviour:
   healthBar: {fileID: 9004908721378066753}
   powerLevelGameObject: {fileID: 584033507512301021}
   maxHealthBase: 100
-  floatingDamageText: {fileID: 0}
+  floatingDamageText: {fileID: 8703725455407415189, guid: 66b9f0c30a5de9c4783390300516fa8a,
+    type: 3}
   bloodParticles: {fileID: 6024980654667437330, guid: b3d71ab2beb149848a76b50a9e7a3b9b,
     type: 3}
   crossRight: {fileID: 7844224834772414075}
