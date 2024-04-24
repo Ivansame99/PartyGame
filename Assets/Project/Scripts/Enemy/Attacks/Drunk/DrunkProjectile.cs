@@ -28,15 +28,10 @@ public class DrunkProjectile : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private float speedMultiplier = 2f;
-    public float baseDamage;
-    public float finalDamage;
-    public float pushForce;
+
 
     //Prefabs Clones
     private GameObject projectile;
-
-    [HideInInspector] public GameObject owner;
-    [HideInInspector] public Enemy enemy;
 
     //Variables de legibilidad
     private Vector3 fPos;
@@ -47,14 +42,10 @@ public class DrunkProjectile : MonoBehaviour
     //COOLDOWN ATTACKS
     [SerializeField] private float selfDestruction;
 
-    public void SetPushForce(float s)
-    {
-        pushForce = s;
-    }
+
 
     private void Start()
     {
-        ProjectileDamage();
         collider = GetComponent<SphereCollider>();
         collider.enabled = false;
         _cam = Camera.main;
@@ -158,12 +149,5 @@ public class DrunkProjectile : MonoBehaviour
             transform.position = firePoint.position + direction * x + Vector3.up * y;
             yield return null;
         }
-    }
-
-    void ProjectileDamage()
-    {
-        finalDamage = baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
-        SetPushForce(pushForce);
-        owner = enemy.gameObject;
     }
 }

@@ -3,7 +3,7 @@ using static UnityEditor.FilePathAttribute;
 
 public class LionProjectile : MonoBehaviour
 {
-    [SerializeField] private float maxDistance = 1f;
+    [SerializeField] private float maxDistance;
     public LayerMask groundLayer;
 
     [SerializeField] GameObject projectileFeedback;
@@ -16,18 +16,6 @@ public class LionProjectile : MonoBehaviour
 
     private SphereCollider collider;
 
-    public float baseDamage;
-    public float finalDamage;
-    public float pushForce;
-
-    [HideInInspector] public GameObject owner;
-    [HideInInspector] public Enemy enemy;
-
-    public void SetPushForce(float s)
-    {
-        pushForce = s;
-    }
-
     private void Start()
     {
         collider = GetComponent<SphereCollider>();
@@ -37,10 +25,13 @@ public class LionProjectile : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1f, groundLayer))
+        {
+            collider.enabled = true;
+        }
 
         if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
         {
-            collider.enabled = true;
             Instantiate(explosionParticles, hit.point, rotation);
             Destroy(feedbackClone);
             Destroy(gameObject);
