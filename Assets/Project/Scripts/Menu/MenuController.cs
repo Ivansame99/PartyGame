@@ -71,7 +71,6 @@ public class MenuController : MonoBehaviour
 	public void UiPlayButton()
 	{
 		eventSystem.enabled = false;
-		lastButtonSelected.GetComponent<Image>().sprite = buttonPressedSprite;
 		StartCoroutine(CloseTranition());
 	}
 
