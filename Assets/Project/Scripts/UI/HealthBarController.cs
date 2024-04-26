@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
 	[SerializeField]
+	private Slider slider;
+	[SerializeField]
 	private Image fillImage;
 	[SerializeField]
     private float DefaultSpeed = 1f;
@@ -19,12 +21,10 @@ public class HealthBarController : MonoBehaviour
 	[SerializeField]
 	private Gradient gradientColor;
 
-	private Slider slider;
 	private Coroutine AnimationCoroutine;
 
     private void Start()
     {
-        slider = this.GetComponent<Slider>();
 		fillImage.color = gradientColor.Evaluate(1 - slider.value);
 	}
 
