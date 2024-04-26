@@ -16,17 +16,17 @@ public class PlayerIdleState : PlayerState<PlayerController>
 	}
 
 	public override void Exit()
-    {
-        
-    }
+	{
 
-    public override void FixedUpdate()
-    {
-        
-    }
+	}
 
-    public override void Update()
-    {
+	public override void FixedUpdate()
+	{
+
+	}
+
+	public override void Update()
+	{
 		//Change to ak47
 		if (player.ak)
 		{
@@ -67,7 +67,7 @@ public class PlayerIdleState : PlayerState<PlayerController>
 		}
 
 		//Change to drop attack
-		if (player.isJumping && !player.groundCheck.DetectGround())
+		if (player.isJumping && !player.groundCheck.DetectGround() && player.rb.velocity.y >= 0)
 		{
 			player.ChangeState(typeof(PlayerDropAttackState));
 			return;
