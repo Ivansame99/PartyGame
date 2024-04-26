@@ -18,7 +18,9 @@ public class EnemyDeath : EnemyDeathSOBase
 
     [SerializeField] private Color color1 = Color.red;
     [SerializeField] private Color color2 = Color.white;
+
     private Vector3 scale = new Vector3(1, 1, 1);
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -94,50 +96,25 @@ public class EnemyDeath : EnemyDeathSOBase
         StopParticleLoop(enemy.trailSand);
 
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
-        // Vector3 spawnPositionA = enemyUpPos + Random.insideUnitSphere;
-
-        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y +2, enemy.transform.position.z); // Obtener la posición del enemigo como posición de origen
-
+        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 6f, enemy.transform.position.z); 
         CalculateNumberOfParticles();
-
 
         for (int i = 0; i < numberOfPowerParticles; i++)
         {
-            // Agregar un pequeño rango aleatorio al punto de spawn
-           // Vector3 randomOffset = Random.insideUnitSphere * 1.5f; // Ajusta el valor para controlar el rango
             Vector3 adjustedSpawnPosition = spawnPosition;
-
-            // Calcular una dirección aleatoria hacia arriba y ligeramente hacia un lado
-            Vector3 randomDirection = Random.onUnitSphere + Vector3.up*3; // Ajusta el valor para cambiar la inclinación lateral
-            randomDirection.z = randomDirection.z * 3;
-            randomDirection.x = randomDirection.x * 3;
-            Debug.Log(randomDirection);
-
-           // randomDirection.Normalize(); // Normalizar para asegurarse de que la magnitud sea 1
-           // Debug.Log(randomDirection);
-            // Aplicar una fuerza aleatoria en esa dirección
-            float randomForce = Random.Range(PminForce, PmaxForce);
-            Vector3 force = randomDirection * randomForce * 50;
-
-            // Instanciar la partícula en la posición ajustada del enemigo
-            GameObject powerInstance = Instantiate(PowerPrefab, adjustedSpawnPosition, Quaternion.identity);
+            GameObject powerInstance = Instantiate(PowerPrefab,adjustedSpawnPosition, Quaternion.identity);
             powerInstance.GetComponent<PowerParticleController>().SetPowerAmount(powerPerParticle);
-
             Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
 
             if (powerRigidbody != null)
             {
                 powerInstance.transform.localScale = scale;
-                powerRigidbody.AddForce(force, ForceMode.Impulse);
-                Debug.Log(force);
-                // Elegir aleatoriamente entre color1 y color2
+                powerRigidbody.AddForce(new Vector3(Random.Range(-20f, 20f), 10, Random.Range(-20f, 20f)), ForceMode.Impulse);
                 Color randomColor = Random.value < 0.5f ? color1 : color2;
 
-                // Obtener el renderer para cambiar el color del material
                 Renderer renderer = powerInstance.GetComponent<Renderer>();
                 if (renderer != null)
                 {
-                    // Asignar el color aleatorio al material
                     renderer.material.color = randomColor;
                 }
             }
