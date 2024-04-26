@@ -8,31 +8,25 @@ using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
-    [SerializeField]
-    private Image ProgressImage;
-    [SerializeField]
+	[SerializeField]
+	private Image fillImage;
+	[SerializeField]
     private float DefaultSpeed = 1f;
     [SerializeField]
     private UnityEvent<float> OnProgress;
     [SerializeField]
     private UnityEvent OnCompleted;
+	[SerializeField]
+	private Gradient gradientColor;
 
-    [SerializeField]
-    private Gradient colorGradient;
-
-    private Coroutine AnimationCoroutine;
+	private Slider slider;
+	private Coroutine AnimationCoroutine;
 
     private void Start()
     {
-        if (ProgressImage.type != Image.Type.Filled)
-        {
-            Debug.LogError($"{name}'s ProgressImage is not of type \"Filled\" so it cannot be used as a progress bar. Disabling this Progress Bar.");
-            enabled = false;
-#if UNITY_EDITOR
-            EditorGUIUtility.PingObject(this.gameObject);
-#endif
-        }
-    }
+        slider = this.GetComponent<Slider>();
+		fillImage.color = gradientColor.Evaluate(1 - slider.value);
+	}
 
     public void SetProgress(float Progress)
     {
@@ -46,7 +40,7 @@ public class HealthBarController : MonoBehaviour
             //Debug.LogWarning($"Invalid progress passed, expected value is between 0 and 1, got {Progress}. Clamping.");
             Progress = Mathf.Clamp01(Progress);
         }
-        if (Progress != ProgressImage.fillAmount)
+        if (Progress != slider.value)
         {
             if (AnimationCoroutine != null)
             {
@@ -60,20 +54,20 @@ public class HealthBarController : MonoBehaviour
     private IEnumerator AnimateProgress(float Progress, float Speed)
     {
         float time = 0;
-        float initialProgress = ProgressImage.fillAmount;
+        float initialProgress = slider.value;
 
         while (time < 1)
         {
-            ProgressImage.fillAmount = Mathf.Lerp(initialProgress, Progress, time);
+			slider.value = Mathf.Lerp(initialProgress, Progress, time);
             time += Time.deltaTime * Speed;
 
-            ProgressImage.color = colorGradient.Evaluate(1-ProgressImage.fillAmount);
-            OnProgress?.Invoke(ProgressImage.fillAmount);
+            fillImage.color = gradientColor.Evaluate(1- slider.value);
+            OnProgress?.Invoke(slider.value);
             yield return null;
         }
 
-        ProgressImage.fillAmount = Progress;
-        ProgressImage.color = colorGradient.Evaluate(1 - ProgressImage.fillAmount);
+		slider.value = Progress;
+		fillImage.color = gradientColor.Evaluate(1 - slider.value);
         OnProgress?.Invoke(Progress);
         OnCompleted?.Invoke();
     }

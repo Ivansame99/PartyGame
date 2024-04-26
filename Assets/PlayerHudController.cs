@@ -63,7 +63,7 @@ public class PlayerHudController : MonoBehaviour
 	#region Public Methods
 	public void ReceivedDamage(float damage, float health, float maxHealth)
 	{
-		healthBarAnimator.SetTrigger("Damage");
+		//healthBarAnimator.SetTrigger("Damage");
 		if (playerUI != null) playerUIHealthAnimator.SetTrigger("Damage");
 		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
 		text.text = ((int)damage).ToString();
