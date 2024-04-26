@@ -96,7 +96,7 @@ public class EnemyDeath : EnemyDeathSOBase
         StopParticleLoop(enemy.trailSand);
 
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
-        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 6f, enemy.transform.position.z); 
+        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4f, enemy.transform.position.z); 
         CalculateNumberOfParticles();
 
         for (int i = 0; i < numberOfPowerParticles; i++)
