@@ -13,7 +13,7 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        Debug.Log("funciona");
+        Debug.Log("lion idle state");
     }
 
     public override void DoExitLogic()

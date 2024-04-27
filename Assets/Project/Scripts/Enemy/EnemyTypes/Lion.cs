@@ -51,6 +51,6 @@ public class Lion : Enemy
         bossDistanceAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
-        stateMachine.Initialize(bossDistanceAttackState);
+        stateMachine.Initialize(attackState);
     }
 }

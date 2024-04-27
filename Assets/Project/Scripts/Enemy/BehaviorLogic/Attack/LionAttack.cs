@@ -8,8 +8,12 @@ public class LionAttack : EnemyAttackSOBase
 
 
     //COOLDOWN ATTACKS
+    private int attackCount;
     private float attackTimer;
     [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float attackForce;
+
+    int randomPlayerTarget;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -19,9 +23,9 @@ public class LionAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        if (!enemy.IsAggreed){
-            Debug.Log("funciona");
-        }
+        attackCount = 0;
+        attackTimer = 0;
+        randomPlayerTarget = Random.Range(0,enemy.enemyDirector.players.Count);
     }
     public override void DoExitLogic()
     {
@@ -35,7 +39,19 @@ public class LionAttack : EnemyAttackSOBase
         //A BIT OF COOLDOWN WHEN ATTACK FINISHED
         if (!enemy.isDead)
         {
+            if(attackCount >= 3)
+            {
+                enemy.stateMachine.ChangeState(enemy.idleState);
+            }
+            if (attackTimer <= 0)
+            {
+                enemy.animator.SetInteger("AttackCombo",attackCount);
+                enemy.rb.AddForce(enemy.transform.forward * attackForce, ForceMode.Impulse);
 
+                attackCount++;
+                attackTimer = timeBetweenAttacks;
+            }
+            else attackTimer -= Time.deltaTime;
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
 
