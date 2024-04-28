@@ -54,7 +54,7 @@ public class PlayerDropAttackState : PlayerState<PlayerController>
 
 	public override void Exit()
 	{
-		
+		player.gravityController.gravityScale = originalGravityScale;
 	}
 
 	public override void FixedUpdate()
