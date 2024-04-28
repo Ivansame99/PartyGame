@@ -13,8 +13,6 @@ public class LionAttack : EnemyAttackSOBase
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private float attackForce;
 
-    int randomPlayerTarget;
-
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -23,9 +21,9 @@ public class LionAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        //enemy.agent.enabled = false;
         attackCount = 0;
         attackTimer = 0;
-        randomPlayerTarget = Random.Range(0,enemy.enemyDirector.players.Count);
     }
     public override void DoExitLogic()
     {

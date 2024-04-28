@@ -12,16 +12,18 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public float currentHealth { get; set; }
 	public bool isDead { get; set; }
 	public bool IsDamaged { get; set; }
+	public int randomPlayerTarget { get; set; }
 
 
-	//COMPONENTS INTERFACE
-	public NavMeshAgent agent { get; set; }
+    //COMPONENTS INTERFACE
+    public NavMeshAgent agent { get; set; }
 	public Rigidbody rb { get; set; }
 	public EnemyHealth enemyHealthController { get; set; }
 	public bool state { get; set; }
 	public EnemyDirector enemyDirector { get; set; }
 	public Transform playerPos { get; set; }
 	public Transform playerPos2 { get; set; }
+	public Transform bossTarget { get; set; }
 	public EnemyTargetController enemyTargetController { get; set; }
 	public Animator animator { get; set; }
 
