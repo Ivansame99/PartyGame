@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2136668460206032528
 Transform:
   m_ObjectHideFlags: 0
@@ -30794,6 +30794,12 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: f2c1796f02d02634c9eaa9c5c48a712c, type: 2}
   helmet: {fileID: 8979202791291309927}
   body: {fileID: 2726005788778501895}
+  powerPerParticle: 0
+  numberOfPowerParticles: 0
+  PowerPrefab: {fileID: 4867335306626020524, guid: 9a9158ca1dea63742bd8e5bf824a2f92,
+    type: 3}
+  color1: {r: 0.099044085, g: 1, b: 0, a: 1}
+  color2: {r: 0.9780209, g: 1, b: 0, a: 1}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

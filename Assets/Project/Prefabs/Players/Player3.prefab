@@ -10641,7 +10641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &702722232814512137
 Transform:
   m_ObjectHideFlags: 0
@@ -28433,7 +28433,6 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 4e45e23340b59f949b8440e6da820dc0, type: 2}
   - {fileID: 2100000, guid: 49424cbf822cb9d4d846668c68b74d24, type: 2}
-  - {fileID: 2100000, guid: 54d0a1e11edfe4a419b68b5b013f59ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28650,7 +28649,6 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: fa5a6246b58bae74d9ec0b440f5a3a77, type: 2}
   - {fileID: 2100000, guid: 49424cbf822cb9d4d846668c68b74d24, type: 2}
-  - {fileID: 2100000, guid: 54d0a1e11edfe4a419b68b5b013f59ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30484,6 +30482,12 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: f2c1796f02d02634c9eaa9c5c48a712c, type: 2}
   helmet: {fileID: 8835091998135483854}
   body: {fileID: 4500873981634657736}
+  powerPerParticle: 0
+  numberOfPowerParticles: 0
+  PowerPrefab: {fileID: 4867335306626020524, guid: 9a9158ca1dea63742bd8e5bf824a2f92,
+    type: 3}
+  color1: {r: 0.19709802, g: 1, b: 0, a: 1}
+  color2: {r: 1, g: 0.9392471, b: 0.033018887, a: 1}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0
