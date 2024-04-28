@@ -9,8 +9,8 @@ public class LionChase : EnemyChaseSOBase
     [SerializeField] private float acceleration = 8f;
     [SerializeField] private float angularSpeed = 120f;
 
-    Vector3 playerDir;
-    private Transform player;
+    [SerializeField] private float closeDistance = 4f;
+
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -19,21 +19,22 @@ public class LionChase : EnemyChaseSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-
+        enemy.agent.enabled = true;
         enemy.agent.speed = speed;
         enemy.agent.acceleration = acceleration;
         enemy.agent.angularSpeed = angularSpeed;
 
-        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
-        player = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
     }
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
-            if (player != null) enemy.MoveEnemy(player.position);
-            
+            if (enemy.bossTarget != null) enemy.MoveEnemy(enemy.bossTarget.position);
+            if(Vector3.Distance(enemy.transform.position, enemy.bossTarget.position) <= closeDistance)
+            {
+                enemy.stateMachine.ChangeState(enemy.attackState);
+            }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckeable, ICombat
+public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckeable, ICombat, IBoss
 {
 	//HEALTH INTERFACE
 	[field: Header("Health parameters")]
