@@ -113,7 +113,7 @@ public class DrunkDeath : EnemyDeathSOBase
             if (powerRigidbody != null)
             {
                 powerInstance.transform.localScale = scale;
-                powerRigidbody.AddForce(new Vector3(Random.Range(-1.5f, 1.5f), 1, Random.Range(-1.5f, 1.5f)), ForceMode.Impulse);
+                powerRigidbody.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 0.3f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
                 Color randomColor = Random.value < 0.5f ? color1 : color2;
 
                 Renderer renderer = powerInstance.GetComponent<Renderer>();
