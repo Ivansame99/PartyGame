@@ -52,8 +52,6 @@ public class DrunkProjectile : MonoBehaviour
         
         step = 0.1f;
 
-        Ray ray = new Ray(_cam.transform.position, fPos - _cam.transform.position);
-        //Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(transform.position,-transform.up, out hit,0.3f))
         {
@@ -72,7 +70,7 @@ public class DrunkProjectile : MonoBehaviour
                 float time;
 
                 CalculatePathWithHeight(targetPos, height, out v0, out angle, out time);
-                DrawPath(groundDirection.normalized, v0, angle, time, step);
+                //DrawPath(groundDirection.normalized, v0, angle, time, step);
                 start = true;
                 if (start)
                 {
