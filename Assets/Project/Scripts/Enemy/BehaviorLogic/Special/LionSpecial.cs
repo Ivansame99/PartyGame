@@ -28,7 +28,8 @@ public class LionSpecial : EnemySpecialAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.agent.enabled = false;
+        enemy.agent.isStopped = true;
+
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
 
@@ -41,7 +42,9 @@ public class LionSpecial : EnemySpecialAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        enemy.agent.enabled = true;
+        enemy.agent.isStopped = false;
+        isAttacking = false;
+        enemy.rb.velocity = Vector3.zero;
     }
 
     public override void DoFrameUpdateLogic()
@@ -55,6 +58,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
             // Verificar si el objeto golpeado tiene el tag "Wall"
             if (hit.collider.CompareTag("Wall"))
             {
+                isAttacking = false;
                 enemy.stateMachine.ChangeState(enemy.idleState);
             }
         }
@@ -98,8 +102,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
             Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
             enemy.rb.AddForce(force, ForceMode.Acceleration);
         }
-
-
+        else enemy.rb.velocity = Vector3.zero;
     }
 
     public override void Init(GameObject gameObject, Enemy enemy)
