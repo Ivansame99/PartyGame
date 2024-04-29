@@ -9,6 +9,8 @@ public interface IEnemyMoveable
     Rigidbody rb { get; set; }
     Transform playerPos { get; set; }
     Transform playerPos2 { get; set; }
+    Transform bossTarget { get; set; }
+    int randomPlayerTarget { get; set; }
     EnemyTargetController enemyTargetController { get; set; }
     Animator animator { get; set; }
     void AgentState(bool state);

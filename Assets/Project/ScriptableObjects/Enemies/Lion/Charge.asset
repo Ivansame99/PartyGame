@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53b874b6e8eb7d499d492ce5202f616, type: 3}
-  m_Name: Projectile
+  m_Script: {fileID: 11500000, guid: a6e6df0002096304080049af68fc5eea, type: 3}
+  m_Name: Charge
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 1197141494704311148, guid: f408d0230ba00cb419051080c194f211,
-    type: 3}
-  attackCooldown: 0.4
-  totalProjectiles: 6
+  chargeSpeed: 35
+  impulseForce: 50
+  colisionDistance: 1
+  atkDuration: 1
+  preChargeTime: 2

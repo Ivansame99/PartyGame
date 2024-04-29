@@ -35,20 +35,12 @@ public class BossDistanceAttackSOBase : ScriptableObject
     public virtual void DoEnterLogic()
     {
         attackTimer = attackCooldown;
+        projectilesCounter = 0;
   
     }
     void FireProjectile(Vector3 target)
     {
         projectile = Instantiate(projectilePrefab, target, Quaternion.identity);
-        projectile.GetComponent<EnemyDamage>().enemy = enemy;
-    }
-
-    void ThrowBottle(Vector3 target)
-    {
-        firePoint.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 10f, enemy.transform.position.z);
-        projectile = Instantiate(projectilePrefab, target, Quaternion.identity);
-        projectile.GetComponent<DrunkProjectile>().finalPosition = enemy.transform;
-        projectile.GetComponent<DrunkProjectile>().firePoint = enemy.transform;
         projectile.GetComponent<EnemyDamage>().enemy = enemy;
     }
     public virtual void DoExitLogic()
@@ -59,7 +51,8 @@ public class BossDistanceAttackSOBase : ScriptableObject
     {
         if (!enemy.isDead)
         {
-            if(attackTimer <= 0 && projectilesCounter <= totalProjectiles)
+            if(projectilesCounter == totalProjectiles) enemy.stateMachine.ChangeState(enemy.idleState);
+            if(attackTimer <= 0 && projectilesCounter < totalProjectiles)
             {
                 for (int i = 0; i < enemy.enemyDirector.players.Count; i++)
                 {
