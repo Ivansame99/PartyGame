@@ -47,6 +47,7 @@ public class PauseMenuController : MonoBehaviour
             if (pause)
             {
 				//Time.timeScale = 1.0f;
+				eventSystem.SetSelectedGameObject(null);
 				pause = false;
 				anim.SetBool("PauseAppear", false);
 				StartCoroutine(SetTimeNormal());
