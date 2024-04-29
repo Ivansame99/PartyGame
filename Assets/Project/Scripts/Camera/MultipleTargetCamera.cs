@@ -41,6 +41,11 @@ public class MultipleTargetCamera : MonoBehaviour
     #region Public Methods
     public void AddPlayer(Transform player)
     {
+        if (targets.Contains(player))
+        {
+            return;
+        }
+
         targets.Add(player);
     }
 
