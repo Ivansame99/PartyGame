@@ -12246,7 +12246,6 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 80307c3af7fc67a44ad3050afcdb4681, type: 2}
   - {fileID: 2100000, guid: 2c1688ebf2f08744db06b22937065a46, type: 2}
-  - {fileID: 2100000, guid: 482c0cfe4fc8f1944b6326b4efea2773, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27880,8 +27879,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4e45e23340b59f949b8440e6da820dc0, type: 2}
-  - {fileID: 2100000, guid: 482c0cfe4fc8f1944b6326b4efea2773, type: 2}
-  - {fileID: 2100000, guid: 2c1688ebf2f08744db06b22937065a46, type: 2}
+  - {fileID: 2100000, guid: dc5fb22cb7ecf04418a934a51a14e814, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30545,6 +30543,12 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: f2c1796f02d02634c9eaa9c5c48a712c, type: 2}
   helmet: {fileID: 8979202791291309927}
   body: {fileID: 2726005788778501895}
+  powerPerParticle: 0
+  numberOfPowerParticles: 0
+  PowerPrefab: {fileID: 4867335306626020524, guid: 9a9158ca1dea63742bd8e5bf824a2f92,
+    type: 3}
+  color1: {r: 0.099044085, g: 1, b: 0, a: 1}
+  color2: {r: 0.9780209, g: 1, b: 0, a: 1}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -109,7 +109,12 @@ public class PowerController : MonoBehaviour
 		return currentPowerLevel / healthScale;
 	}
 
-	public float PowerAttackSpeed()
+	public int GetHalfPowerLevel()
+	{
+		return Mathf.RoundToInt(currentPowerLevel / 2);
+	}
+
+		public float PowerAttackSpeed()
 	{
 		float attackSpeeedIncrease = currentPowerLevel / playerAttackSpeedScale;
 		//Debug.Log("Aumento attack speed: " + Mathf.Clamp(attackSpeeedIncrease, 0, maxPlayerAttackSpeedScale));
@@ -147,6 +152,25 @@ public class PowerController : MonoBehaviour
 		} else
 		{
 			playerHudController.ChangeUIPower(currentPowerLevel);
+		}
+	}
+
+	private void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("PowerObject"))
+		{
+			GameObject powerParticle = collision.gameObject;
+			PowerParticleController ppc = powerParticle.GetComponent<PowerParticleController>();
+
+			if (ppc.CanBePicked())
+			{
+				transform.DORewind();
+				transform.DOPunchScale(new Vector3(0.5f, -0.5f, 0.5f), 0.15f).SetRelative(true).SetEase(Ease.OutBack);
+
+				AddPowerLevel(ppc.GetPowerAmount());
+
+				Destroy(powerParticle);
+			}
 		}
 	}
 }

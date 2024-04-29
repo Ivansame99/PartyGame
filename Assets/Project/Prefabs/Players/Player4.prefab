@@ -85,8 +85,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4e45e23340b59f949b8440e6da820dc0, type: 2}
-  - {fileID: 2100000, guid: db9db462a72acac4a8f984af091fb083, type: 2}
-  - {fileID: 2100000, guid: 8f665c1e462c01e4d9f1aab1632647dd, type: 2}
+  - {fileID: 2100000, guid: 81b587b11e485be46973c2e5d2ad5dd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6538,8 +6537,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: dd1da6e2b31623c4eb705bfaea54fd83, type: 2}
-  - {fileID: 2100000, guid: db9db462a72acac4a8f984af091fb083, type: 2}
-  - {fileID: 2100000, guid: 8f665c1e462c01e4d9f1aab1632647dd, type: 2}
+  - {fileID: 2100000, guid: 81b587b11e485be46973c2e5d2ad5dd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30550,6 +30548,12 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: f2c1796f02d02634c9eaa9c5c48a712c, type: 2}
   helmet: {fileID: 7300089544043454781}
   body: {fileID: 7985991488957858125}
+  powerPerParticle: 0
+  numberOfPowerParticles: 0
+  PowerPrefab: {fileID: 4867335306626020524, guid: 9a9158ca1dea63742bd8e5bf824a2f92,
+    type: 3}
+  color1: {r: 0.2090857, g: 1, b: 0, a: 1}
+  color2: {r: 1, g: 0.9935299, b: 0, a: 1}
 --- !u!54 &5299610917895187070
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -5,26 +5,26 @@ using UnityEngine;
 
 public class MultipleTargetCamera : MonoBehaviour
 {
-	#region Inspector Variables
-	[SerializeField] private Vector3 offset;
-	[SerializeField] private float smoothTime = 0.5f;
-	[SerializeField] private float minZoom = 40f;
-	[SerializeField] private float maxZoom = 10f;
-	[SerializeField] private float zoomLimiter = 50f;
-	[SerializeField]
-	private Camera guiCamera;
-	#endregion
+    #region Inspector Variables
+    [SerializeField] private Vector3 offset;
+    [SerializeField] private float smoothTime = 0.5f;
+    [SerializeField] private float minZoom = 40f;
+    [SerializeField] private float maxZoom = 10f;
+    [SerializeField] private float zoomLimiter = 50f;
+    [SerializeField]
+    private Camera guiCamera;
+    #endregion
 
-	#region Variables
-	private List<Transform> targets = new List<Transform>();
-	private Camera mainCamera;
-	private Vector3 velocity;
-	#endregion
+    #region Variables
+    private List<Transform> targets = new List<Transform>();
+    private Camera mainCamera;
+    private Vector3 velocity;
+    #endregion
 
-	#region Life Cycle
-	private void Awake()
+    #region Life Cycle
+    private void Awake()
     {
-        mainCamera = Camera.main;    
+        mainCamera = Camera.main;
     }
 
     private void LateUpdate()
@@ -36,42 +36,44 @@ public class MultipleTargetCamera : MonoBehaviour
         Move();
         Zoom();
     }
-	#endregion
+    #endregion
 
-	#region Public Methods
-	public void AddPlayer(Transform player)
-	{
-		targets.Add(player);
-	}
+    #region Public Methods
+    public void AddPlayer(Transform player)
+    {
+        targets.Add(player);
+    }
 
-	public bool RemovePlayer(Transform player)
-	{
-		for (int i = 0; i < targets.Count; i++)
-		{
+    public bool RemovePlayer(Transform player)
+    {
+        for (int i = 0; i < targets.Count; i++)
+        {
             if (targets[i] == player)
             {
+                Debug.Log(player.name);
                 targets.Remove(targets[i]);
+                player.transform.position = new Vector3(100, 10, 0);
                 return true;
             }
-		}
+        }
         return false;
-	}
+    }
 
-	#endregion
+    #endregion
 
-	#region Private Methods
-	private void Zoom()
+    #region Private Methods
+    private void Zoom()
     {
         float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
-		mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
-		guiCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
-	}
+        mainCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
+        guiCamera.fieldOfView = Mathf.Lerp(mainCamera.fieldOfView, newZoom, Time.deltaTime);
+    }
 
     private void Move()
     {
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPosition = centerPoint + offset;
-		mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, newPosition, ref velocity, smoothTime);
+        mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, newPosition, ref velocity, smoothTime);
     }
 
     private float GetGreatestDistance()
@@ -110,5 +112,5 @@ public class MultipleTargetCamera : MonoBehaviour
 
         return bounds.center;
     }
-	#endregion
+    #endregion
 }

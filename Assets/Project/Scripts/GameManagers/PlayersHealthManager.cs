@@ -142,10 +142,7 @@ public class PlayersHealthManager : MonoBehaviour
 		mtp.enabled = true;
 		Time.timeScale = 1f;
 
-		if (mtp.RemovePlayer(player))
-		{
-			player.transform.position = new Vector3(100, 10, 0);
-		}
+		mtp.RemovePlayer(player);
 	}
 	#endregion
 }
