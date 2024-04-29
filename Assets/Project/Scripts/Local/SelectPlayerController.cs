@@ -33,7 +33,7 @@ public class SelectPlayerController : MonoBehaviour
 			playersSpawns = GameManager.Instance.playersHealthManager.GetPlayersSpawns();
 			for (int i = 0; i < playerConfigs.Length; i++)
 			{
-				playersUI[i].SetActive(true);
+				//playersUI[i].SetActive(true);
 				GameObject player = Instantiate(prefabPlayers[i], playersSpawns[i].position, playersSpawns[i].rotation) as GameObject;
 				player.name = prefabPlayers[i].name;
 				player.GetComponent<PlayerInputHandler>().InitializePlayer(playerConfigs[i]);

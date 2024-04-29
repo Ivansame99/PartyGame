@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using static GameEnums;
 
 public class GameOverController : MonoBehaviour
 {
+	[SerializeField]
+	private Image backgroundImage;
+
 	[SerializeField]
 	private GameObject defaultButton;
 
@@ -22,6 +26,9 @@ public class GameOverController : MonoBehaviour
 	[SerializeField]
 	private string propertyName = "_Progress";
 
+	[SerializeField]
+	private Sprite[] arenasSprite;
+
 	private EventSystem eventSystem;
 
 	private GameObject lastButtonSelected;
@@ -34,6 +41,7 @@ public class GameOverController : MonoBehaviour
 	public void Start()
 	{
 		transitionMaterial.SetFloat(propertyName, 1);
+		backgroundImage.sprite = arenasSprite[PlayerPrefs.GetInt("arenaType")];
 	}
 
 	private void Update()
@@ -55,6 +63,7 @@ public class GameOverController : MonoBehaviour
 
 	public void UiRestartButton()
     {
+		eventSystem.enabled = false;
 		int arenaType = PlayerPrefs.GetInt("arenaType");
 		GameEnums.Arenas arena = (GameEnums.Arenas)arenaType;
 
@@ -74,6 +83,7 @@ public class GameOverController : MonoBehaviour
 
     public void UiExitMenu()
     {
+		eventSystem.enabled = false;
 		StartCoroutine(CloseTranition("Menu"));
     }
 

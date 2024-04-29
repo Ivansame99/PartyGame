@@ -86,7 +86,7 @@ public class PlayerWalkState : PlayerState<PlayerController>
 		}
 
 		//Change to drop attack
-		if (player.isJumping && !player.groundCheck.DetectGround())
+		if (player.isJumping && !player.groundCheck.DetectGround() && player.rb.velocity.y >= 0)
 		{
 			player.ChangeState(typeof(PlayerDropAttackState));
 			return;
