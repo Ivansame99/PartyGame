@@ -45,7 +45,7 @@ public class ReadyPlatformController : MonoBehaviour
 		{
 			if (loadArena1)
 			{
-				GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+				GameManager.Instance.gmSceneManager.ChangeSceneToArenaSnow(true);
 			} else
 			{
 				arenaSelector.Scroll();
@@ -67,6 +67,9 @@ public class ReadyPlatformController : MonoBehaviour
 						break;
 					case Arenas.SnowArena:
 						GameManager.Instance.gmSceneManager.ChangeSceneToArenaSnow(true);
+						break;
+					case Arenas.ArenaLeaf:
+						GameManager.Instance.gmSceneManager.ChangeSceneToArenaLeaf(true);
 						break;
 					default:
 						Debug.Log("Arena no reconocida");

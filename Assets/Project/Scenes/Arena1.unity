@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.39966118, g: 0.4227935, b: 0.41563395, a: 1}
+  m_IndirectSpecularColor: {r: 0.39966118, g: 0.42279354, b: 0.41563395, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -29788,7 +29788,7 @@ PrefabInstance:
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
       propertyPath: bossRound
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}
@@ -29900,6 +29900,12 @@ PrefabInstance:
       propertyPath: roundsSO.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 33db6cd6768b7774ba9f75b0dcd33699,
+        type: 2}
+    - target: {fileID: 552776905513233568, guid: 5e6f1646701d3024d87a928af154219a,
+        type: 3}
+      propertyPath: roundsSO.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 18395d5f410e26a4eae73b47d39eeb67,
         type: 2}
     - target: {fileID: 862325205299733610, guid: 5e6f1646701d3024d87a928af154219a,
         type: 3}

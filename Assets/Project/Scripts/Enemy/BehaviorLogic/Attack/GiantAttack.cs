@@ -39,11 +39,14 @@ public class GiantAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
-        rotation.y = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
-        //enemy.AgentState(false);
-    }
+        if(enemy.playerPos != null)
+        {
+			var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
+			rotation.y = 0;
+			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
+			//enemy.AgentState(false);
+		}
+	}
     public override void DoExitLogic()
     {
         base.DoExitLogic();

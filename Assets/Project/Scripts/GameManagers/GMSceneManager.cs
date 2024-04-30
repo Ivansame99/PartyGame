@@ -69,6 +69,18 @@ public class GMSceneManager : MonoBehaviour
 	{
 		if (transition)
 		{
+			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow, waitTime));
+		}
+		else
+		{
+			SceneManager.LoadScene(GameEnums.Scenes.ArenaSnow.ToString());
+		}
+	}
+
+	public void ChangeSceneToArenaLeaf(bool transition = false, float waitTime = 0)
+	{
+		if (transition)
+		{
 			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaLeaf, waitTime));
 		}
 		else
