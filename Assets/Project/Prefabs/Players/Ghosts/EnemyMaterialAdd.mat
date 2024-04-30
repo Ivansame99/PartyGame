@@ -33,7 +33,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _FresnelPower
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -51,11 +51,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FresnelPower: 0
-    - _GlowSpred: 1
+    - _FresnelPower: -1
+    - _GlowSpred: 0.81
     - _QueueControl: 1
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 0.00073146453, g: 0.000013627809, b: 0, a: 0}
-    - _InteriorColor: {r: 1, g: 0.011976048, b: 0, a: 0}
+    - _Color: {r: 1, g: 0.015686275, b: 0, a: 0}
+    - _InteriorColor: {r: 8, g: 0.9433961, b: 0.9433961, a: 0}
   m_BuildTextureStacks: []
