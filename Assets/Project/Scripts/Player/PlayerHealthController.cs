@@ -16,6 +16,8 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField]
 	private float inmuneTime;
 
+	[SerializeField] private GameObject powerParticlesPrefab;
+
 	[Header("Feedback")]
 	[SerializeField] private GameObject cross1;
 	[SerializeField] private GameObject cross2;
@@ -64,12 +66,8 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Material originalHelmetMaterial;
 	private Material originalBodyMaterial;
-	[SerializeField] private int powerPerParticle;
-	[SerializeField] private int numberOfPowerParticles;
-	[SerializeField] private GameObject PowerPrefab;
-
-	[SerializeField] private Color color1 = Color.red;
-	[SerializeField] private Color color2 = Color.white;
+	private int powerPerParticle;
+	private int numberOfPowerParticles;
 
 	private Vector3 scale = new Vector3(1, 1, 1);
 	#endregion
@@ -249,11 +247,9 @@ public class PlayerHealthController : MonoBehaviour
 		}
 
 		if (numberOfPowerParticles != 0) powerPerParticle = powerToCalculate / numberOfPowerParticles; //DIVIDES LA MITAD DEL PODER(LO QUE TIENES QUE REPARTIR) ENTRE EL NUMERO DE PARTICULAS QUE SUELTAN, POR LO QUE CADA PARTICULA TIENE SU PODER
-
-
-
-
 	}
+
+
 	private void Die()
 	{
 		//Feedback
@@ -263,7 +259,7 @@ public class PlayerHealthController : MonoBehaviour
 		for (int i = 0; i < numberOfPowerParticles; i++)
 		{
 			Vector3 adjustedSpawnPosition = spawnPosition;
-			GameObject powerInstance = Instantiate(PowerPrefab, adjustedSpawnPosition, Quaternion.identity);
+			GameObject powerInstance = Instantiate(powerParticlesPrefab, adjustedSpawnPosition, Quaternion.identity);
 			powerInstance.GetComponent<PowerParticleController>().SetPowerAmount(powerPerParticle);
 			Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
 
@@ -271,13 +267,6 @@ public class PlayerHealthController : MonoBehaviour
 			{
 				powerInstance.transform.localScale = scale;
 				powerRigidbody.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 0.3f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
-				Color randomColor = Random.value < 0.5f ? color1 : color2;
-
-				Renderer renderer = powerInstance.GetComponent<Renderer>();
-				if (renderer != null)
-				{
-					renderer.material.color = randomColor;
-				}
 			}
 		}
 
@@ -308,9 +297,7 @@ public class PlayerHealthController : MonoBehaviour
 		ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
 		ghost.GetComponent<GhostInputHandler>().InitializeGhost(playerConfig);
 
-		//Power control pass
-		currentPower = powerController.GetCurrentPowerLevel() / 2;
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+		//Power
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic

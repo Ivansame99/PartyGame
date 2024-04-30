@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +11,28 @@ public class PowerParticleController : MonoBehaviour
 	[SerializeField]
 	private float speed;
 
+	[SerializeField] private Color color1 = Color.red;
+	[SerializeField] private Color color2 = Color.white;
+
 	private Transform target;
 	private int powerAmmount;
 	private float timer;
 	private bool canBePicked = false;
 
-    void Update()
+	private void Awake()
 	{
+		Color randomColor = Random.value < 0.5f ? color1 : color2;
 
-	/*	if(this.transform.position.y < 1.5f)
-        {
-			this.transform.position = new Vector3(this.transform.position.x, 1.6f, this.transform.position.z);
+		Renderer renderer = GetComponent<Renderer>();
+
+		if (renderer != null)
+		{
+			renderer.material.color = randomColor;
 		}
-	*/
+	}
+
+	void Update()
+	{
 		if (timer > activeTime)
 		{
 			canBePicked = true;

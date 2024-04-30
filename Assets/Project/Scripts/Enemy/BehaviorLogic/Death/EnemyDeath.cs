@@ -12,16 +12,13 @@ public class EnemyDeath : EnemyDeathSOBase
     [SerializeField] private float PmaxForce = 12f;
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private float deathTimer;
-    [SerializeField] private int powerPerParticle;
-    [SerializeField] private int numberOfPowerParticles;
     [SerializeField] private GameObject PowerPrefab;
 
-    [SerializeField] private Color color1 = Color.red;
-    [SerializeField] private Color color2 = Color.white;
-
     private Vector3 scale = new Vector3(1, 1, 1);
+	private int powerPerParticle;
+	private int numberOfPowerParticles;
 
-    public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
+	public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
     }
@@ -110,13 +107,6 @@ public class EnemyDeath : EnemyDeathSOBase
             {
                 powerInstance.transform.localScale = scale;
                 powerRigidbody.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 0.3f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
-                Color randomColor = Random.value < 0.5f ? color1 : color2;
-
-                Renderer renderer = powerInstance.GetComponent<Renderer>();
-                if (renderer != null)
-                {
-                    renderer.material.color = randomColor;
-                }
             }
         }
         foreach (var helmetPrefab in helmetPrefabs)

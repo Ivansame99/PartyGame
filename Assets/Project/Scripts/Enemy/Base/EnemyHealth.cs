@@ -147,7 +147,6 @@ public class EnemyHealth : MonoBehaviour
 		glow.SetActive(false);
 
 		StartCoroutine(RedEffect());
-		//StartCoroutine(TimeFreeze());
 		
 		crossRight.SetActive(true);
 		crossLeft.SetActive(true);
@@ -169,18 +168,8 @@ public class EnemyHealth : MonoBehaviour
 
 	void Die()
 	{
-		//currentPower = enemy.GetPowerDamage();
-		//if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
-		currentPower = enemy.GetPoweLevel() / 2;
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower);
-
 		enemyDestroy();
 	}
-
-	//private void HandleCurrentPowerChanged(float newValue)
-	//{
-	//	maxHealth = maxHealthBase + powerController.PowerHealth();
-	//}
 
 	public void enemyDestroy()
 	{
@@ -289,13 +278,4 @@ public class EnemyHealth : MonoBehaviour
 		helmet.material = originalHelmetMaterial;
 		body.material = originalBodyMaterial;
 	}
-
-	//IEnumerator TimeFreeze()
-	//{
-	//	float duration = 0.03f;
-
-	//	Time.timeScale = 0;
-	//	yield return new WaitForSecondsRealtime(duration);
-	//	Time.timeScale = 1;
-	//}
 }
