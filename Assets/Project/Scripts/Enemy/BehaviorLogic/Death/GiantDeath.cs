@@ -18,7 +18,7 @@ public class GiantDeath : EnemyDeathSOBase
     [SerializeField] private Color color2 = Color.white;
 
     private Vector3 scale = new Vector3(1, 1, 1);
-
+    private bool deathFlag = false;
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -93,6 +93,7 @@ public class GiantDeath : EnemyDeathSOBase
 
     void Death()
     {
+        deathFlag = true;
         //Feedback
         StopParticleLoop(enemy.trailSand);
         enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
@@ -153,11 +154,11 @@ public class GiantDeath : EnemyDeathSOBase
         base.DoFrameUpdateLogic();
         if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Death"))
         {
-            Death();
+            if(!deathFlag) Death();
         }
         if (deathTimer <= 0)
         {
-            Destroy(gameObject);
+            if(!deathFlag) Death();
         }
         else
         {
