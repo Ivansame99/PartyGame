@@ -13,6 +13,7 @@ public class GameEnums : MonoBehaviour
 		Arena1,
 		ArenaSnow,
 		ArenaLeaf,
+		WWEGym,
 	}
 
 	public enum Arenas
@@ -21,5 +22,6 @@ public class GameEnums : MonoBehaviour
 		StandardArena = 0,
 		SnowArena = 1,
 		ArenaLeaf = 2,
+		WWEGym = 3,
 	}
 }
