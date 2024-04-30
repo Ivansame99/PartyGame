@@ -75,6 +75,9 @@ public class GameOverController : MonoBehaviour
 			case Arenas.SnowArena:
 				StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow.ToString()));
 				break;
+			case Arenas.ArenaLeaf:
+				StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaLeaf.ToString()));
+				break;
 			default:
 				StartCoroutine(CloseTranition(GameEnums.Scenes.Arena1.ToString()));
 				break;
