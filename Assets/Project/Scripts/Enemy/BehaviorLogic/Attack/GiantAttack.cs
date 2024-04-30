@@ -50,7 +50,6 @@ public class GiantAttack : EnemyAttackSOBase
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        if(waveAttack != null) Destroy(waveAttack);
     }
     public override void DoFrameUpdateLogic()
     {
