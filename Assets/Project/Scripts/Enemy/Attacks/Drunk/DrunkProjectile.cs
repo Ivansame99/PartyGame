@@ -70,7 +70,7 @@ public class DrunkProjectile : MonoBehaviour
                 float time;
 
                 CalculatePathWithHeight(targetPos, height, out v0, out angle, out time);
-                //DrawPath(groundDirection.normalized, v0, angle, time, step);
+                DrawPath(groundDirection.normalized, v0, angle, time, step);
                 start = true;
                 if (start)
                 {
