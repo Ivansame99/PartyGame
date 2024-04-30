@@ -20,6 +20,15 @@ public class PowerCircle : MonoBehaviour
 	[SerializeField]
 	private float powerReceive;
 
+	[SerializeField]
+	private GameObject cage;
+
+	[SerializeField]
+	private GameObject explosionParticles;
+
+	[SerializeField]
+	private Rigidbody[] particles;
+
 	private int currentPlayersIn;
 	private int expectedPlayers;
 
@@ -28,7 +37,7 @@ public class PowerCircle : MonoBehaviour
 	private void Start()
 	{
 		int numPlayers = GameManager.Instance.selectPlayerController.GetNumPlayers();
-		expectedPlayers = Random.Range(1, numPlayers+1);
+		expectedPlayers = Random.Range(1, numPlayers + 1);
 		Initialize(expectedPlayers);
 	}
 
@@ -41,9 +50,19 @@ public class PowerCircle : MonoBehaviour
 
 			if (circleParticles2.localScale.x <= 0f && circleParticles2.localScale.y <= 0f)
 			{
-				for(int i=0; i < powerControllerList.Count; i++)
+				//for(int i=0; i < powerControllerList.Count; i++)
+				//{
+				//	powerControllerList[i].AddPowerLevel(powerReceive);
+				//}
+
+				Instantiate(explosionParticles, cage.transform.position, Quaternion.identity);
+				Destroy(cage);
+
+				for (int i = 0; i < particles.Length; i++)
 				{
-					powerControllerList[i].AddPowerLevel(powerReceive);
+					particles[i].useGravity = true;
+					particles[i].AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 0.3f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
+					particles[i].transform.parent = null;
 				}
 
 				Destroy(this.gameObject);

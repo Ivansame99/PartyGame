@@ -14,8 +14,9 @@ public class PowerParticleController : MonoBehaviour
 	[SerializeField] private Color color1 = Color.red;
 	[SerializeField] private Color color2 = Color.white;
 
+	public int powerAmmount;
+
 	private Transform target;
-	private int powerAmmount;
 	private float timer;
 	private bool canBePicked = false;
 
