@@ -18,6 +18,7 @@ public class EnemyDeath : EnemyDeathSOBase
 	private int powerPerParticle;
 	private int numberOfPowerParticles;
 
+    private Vector3 spawnPosition;
 	public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -92,8 +93,12 @@ public class EnemyDeath : EnemyDeathSOBase
         //Feedback
         StopParticleLoop(enemy.trailSand);
 
-        enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
-        Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4f, enemy.transform.position.z); 
+        if(enemy.playerPos != null)
+        {
+			enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
+			spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4f, enemy.transform.position.z);
+		}
+            
         CalculateNumberOfParticles();
 
         for (int i = 0; i < numberOfPowerParticles; i++)
