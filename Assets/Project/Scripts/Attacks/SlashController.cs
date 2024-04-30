@@ -38,7 +38,7 @@ public class SlashController : MonoBehaviour
 		playerHealthController = player.GetComponent<PlayerHealthController>();
 		enemy1Controller = transform.parent.GetComponent<EnemyHealthController>();
 		pushForceParry = 30f;
-		pushForceAttack = 9f;
+		pushForceAttack = 7f;
 		hitSound = GetComponent<AudioSource>();
 	}
 

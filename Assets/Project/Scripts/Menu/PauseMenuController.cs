@@ -53,11 +53,10 @@ public class PauseMenuController : MonoBehaviour
 				StartCoroutine(SetTimeNormal());
 			} else
             {
-				eventSystem.SetSelectedGameObject(defaultButton);
+				eventSystem.SetSelectedGameObject(null);
 				lastButtonSelected = defaultButton;
 				StartCoroutine(SetStartCursosPos());
 				Time.timeScale = 0.00001f;
-                pause = true;
 				anim.SetBool("PauseAppear", true);
 			}
 		}
@@ -114,8 +113,10 @@ public class PauseMenuController : MonoBehaviour
 
 	private IEnumerator SetStartCursosPos()
 	{
-		yield return new WaitForSecondsRealtime(0.8f);
+		yield return new WaitForSecondsRealtime(1f);
 		cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
+		eventSystem.SetSelectedGameObject(defaultButton);
+		pause = true;
 	}
 
 	private IEnumerator SetTimeNormal()

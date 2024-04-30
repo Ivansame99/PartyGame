@@ -87,7 +87,6 @@ public class MenuController : MonoBehaviour
 	public void UiExitButton()
 	{
 		eventSystem.enabled = false;
-		lastButtonSelected.GetComponent<Image>().sprite = buttonPressedSprite;
 		Invoke(nameof(ExitGame), 0.2f);
 	}
 

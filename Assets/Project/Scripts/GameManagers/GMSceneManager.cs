@@ -123,6 +123,11 @@ public class GMSceneManager : MonoBehaviour
 			return GameEnums.Arenas.StandardArena;
 		}
 
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaSnow.ToString())
+		{
+			return GameEnums.Arenas.SnowArena;
+		}
+
 		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaLeaf.ToString())
 		{
 			return GameEnums.Arenas.ArenaLeaf;
