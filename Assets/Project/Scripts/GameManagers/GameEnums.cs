@@ -12,6 +12,7 @@ public class GameEnums : MonoBehaviour
 		GameOver,
 		Arena1,
 		ArenaSnow,
+		ArenaLeaf,
 	}
 
 	public enum Arenas
@@ -19,5 +20,6 @@ public class GameEnums : MonoBehaviour
 		None = -1,
 		StandardArena = 0,
 		SnowArena = 1,
+		ArenaLeaf = 2,
 	}
 }

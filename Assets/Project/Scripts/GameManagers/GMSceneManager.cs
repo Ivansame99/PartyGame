@@ -69,11 +69,11 @@ public class GMSceneManager : MonoBehaviour
 	{
 		if (transition)
 		{
-			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow, waitTime));
+			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaLeaf, waitTime));
 		}
 		else
 		{
-			SceneManager.LoadScene(GameEnums.Scenes.ArenaSnow.ToString());
+			SceneManager.LoadScene(GameEnums.Scenes.ArenaLeaf.ToString());
 		}
 	}
 
@@ -111,9 +111,9 @@ public class GMSceneManager : MonoBehaviour
 			return GameEnums.Arenas.StandardArena;
 		}
 
-		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaSnow.ToString())
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaLeaf.ToString())
 		{
-			return GameEnums.Arenas.SnowArena;
+			return GameEnums.Arenas.ArenaLeaf;
 		}
 
 		return GameEnums.Arenas.None;
