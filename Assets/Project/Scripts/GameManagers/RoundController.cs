@@ -202,6 +202,7 @@ public class RoundController : MonoBehaviour
 		betweenRounds = false;
 		for (int i = 0; i < enemyNumberInCurrentRound; i++)
 		{
+			if (currentRound.rounds[roundIndex].enemiesInRound[i].enemy == null) continue;
 			int randomSpawn = Random.Range(0, spawns.Length);
 			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
 			if(bossRound) currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, bossSpawn.position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
