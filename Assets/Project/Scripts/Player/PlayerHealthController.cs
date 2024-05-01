@@ -16,6 +16,8 @@ public class PlayerHealthController : MonoBehaviour
 	[SerializeField]
 	private float inmuneTime;
 
+	[SerializeField] private GameObject powerParticlesPrefab;
+
 	[Header("Feedback")]
 	[SerializeField] private GameObject cross1;
 	[SerializeField] private GameObject cross2;
@@ -23,6 +25,7 @@ public class PlayerHealthController : MonoBehaviour
 
 	[SerializeField] private GameObject deathParticles;
 	[SerializeField] private GameObject bloodParticles;
+	[SerializeField] private GameObject hitParticles;
 
 	[SerializeField] private HelmetPrefab[] dieDrops;
 	[SerializeField] private float minForce = 5f;
@@ -63,6 +66,10 @@ public class PlayerHealthController : MonoBehaviour
 
 	private Material originalHelmetMaterial;
 	private Material originalBodyMaterial;
+	private int powerPerParticle;
+	private int numberOfPowerParticles;
+
+	private Vector3 scale = new Vector3(1, 1, 1);
 	#endregion
 
 	#region Life Cycle
@@ -118,17 +125,7 @@ public class PlayerHealthController : MonoBehaviour
 	#region Public Methods
 	public void ReceiveDamage(float damage)
 	{
-		//Feedback
-		StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
-
-		cross1.SetActive(false);
-		cross2.SetActive(false);
-		glow.SetActive(false);
-
-		cross1.SetActive(true);
-		cross2.SetActive(true);
-		glow.SetActive(true);
+		DamageFeedback();
 
 		//Sound
 		playerController.playerAudioManager.PlayDamage();
@@ -139,22 +136,14 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void ReceiveDamageMultiplier(float multiplier)
 	{
+		DamageFeedback();
+
 		float damage = maxHealth * multiplier;
-		//Feedback
-		StartCoroutine(RedEffect());
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
-
-		cross1.SetActive(false);
-		cross2.SetActive(false);
-		glow.SetActive(false);
-
-		cross1.SetActive(true);
-		cross2.SetActive(true);
-		glow.SetActive(true);
 
 		//Sound
 		playerController.playerAudioManager.PlayDamage();
@@ -165,6 +154,7 @@ public class PlayerHealthController : MonoBehaviour
 		invencibleTimer = inmuneTime;
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
+		playerController.TakeDamage();
 	}
 
 	public void RestoreHealthAfterRound()
@@ -197,16 +187,96 @@ public class PlayerHealthController : MonoBehaviour
 	#endregion
 
 	#region Private Methods
+	private void DamageFeedback()
+	{
+		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
+		StartCoroutine(RedEffect());
+
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), Quaternion.identity);
+		float duration = 40f;
+		Destroy(bloodEffectInstance, duration);
+
+		cross1.SetActive(false);
+		cross2.SetActive(false);
+		glow.SetActive(false);
+
+		cross1.SetActive(true);
+		cross2.SetActive(true);
+		glow.SetActive(true);
+	}
+
+
+
+
+	void CalculateNumberOfParticles()
+	{
+		int powerToCalculate = this.powerController.GetHalfPowerLevel();
+
+		if (powerToCalculate >= 0 && powerToCalculate <= 10) // ENTRE O Y 20 DE FUERZA
+		{
+			numberOfPowerParticles = 2;
+			scale = new Vector3(0.5f, 0.5f, 0.5f);
+
+		}
+		else if (powerToCalculate >= 11 && powerToCalculate <= 25) // ENTRE 20 Y 50
+		{
+			numberOfPowerParticles = 5;
+			scale = new Vector3(0.6f, 0.6f, 0.6f);
+		}
+		else if (powerToCalculate >= 26 && powerToCalculate <= 50) // ENTRE 50 Y 100
+		{
+			numberOfPowerParticles = 10;
+			scale = new Vector3(0.7f, 0.7f, 0.7f);
+		}
+		else if (powerToCalculate >= 51 && powerToCalculate <= 150) // ENTRE 100 Y 300
+		{
+			numberOfPowerParticles = 15;
+			scale = new Vector3(0.8f, 0.8f, 0.8f);
+		}
+		else if (powerToCalculate >= 151 && powerToCalculate <= 500) // ENTRE 300 Y 1000
+		{
+			numberOfPowerParticles = 20;
+			scale = new Vector3(0.9f, 0.9f, 0.9f);
+
+		}
+		else if (powerToCalculate >= 501) // MAS DE 1000
+		{
+			numberOfPowerParticles = 25;
+			scale = new Vector3(1f, 1f, 1f);
+
+		}
+
+		if (numberOfPowerParticles != 0) powerPerParticle = powerToCalculate / numberOfPowerParticles; //DIVIDES LA MITAD DEL PODER(LO QUE TIENES QUE REPARTIR) ENTRE EL NUMERO DE PARTICULAS QUE SUELTAN, POR LO QUE CADA PARTICULA TIENE SU PODER
+	}
+
+
 	private void Die()
 	{
 		//Feedback
+		Vector3 spawnPosition = new Vector3(this.transform.position.x, this.transform.position.y + 4f, this.transform.position.z);
+		CalculateNumberOfParticles();
+
+		for (int i = 0; i < numberOfPowerParticles; i++)
+		{
+			Vector3 adjustedSpawnPosition = spawnPosition;
+			GameObject powerInstance = Instantiate(powerParticlesPrefab, adjustedSpawnPosition, Quaternion.identity);
+			powerInstance.GetComponent<PowerParticleController>().SetPowerAmount(powerPerParticle);
+			Rigidbody powerRigidbody = powerInstance.GetComponent<Rigidbody>();
+
+			if (powerRigidbody != null)
+			{
+				powerInstance.transform.localScale = scale;
+				powerRigidbody.AddForce(new Vector3(Random.Range(-0.3f, 0.3f), 0.3f, Random.Range(-0.3f, 0.3f)), ForceMode.Impulse);
+			}
+		}
+
 		foreach (var helmetPrefab in dieDrops)
 		{
 			if (Random.value <= helmetPrefab.spawnChance)
 			{
 				float yOffset = 2f;
 				Vector3 playerUpPos = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
-				Vector3 spawnPosition = playerUpPos + Random.insideUnitSphere;
+				//Vector3 spawnPosition = playerUpPos + Random.insideUnitSphere;
 				GameObject helmetInstance = Instantiate(helmetPrefab.prefab, spawnPosition, Quaternion.identity);
 				Rigidbody helmetRigidbody = helmetInstance.GetComponent<Rigidbody>();
 				if (helmetRigidbody != null)
@@ -227,9 +297,7 @@ public class PlayerHealthController : MonoBehaviour
 		ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
 		ghost.GetComponent<GhostInputHandler>().InitializeGhost(playerConfig);
 
-		//Power control pass
-		currentPower = powerController.GetCurrentPowerLevel() / 2;
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower); //Se le suma la puntuacion del enemigo
+		//Power
 		powerController.OnDieSetCurrentPowerLevel();
 
 		//Logic
@@ -279,13 +347,12 @@ public class PlayerHealthController : MonoBehaviour
 		}
 		if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)
 		{
-			DrunkProjectile projectile = other.gameObject.GetComponent<DrunkProjectile>();
+			EnemyDamage projectile = other.gameObject.GetComponent<EnemyDamage>();
 			lastAttacker = projectile.owner;
 			attackPosition = projectile.owner.transform.position;
 			pushBack = true;
 			pushForce = projectile.pushForce;
 			ReceiveDamage(projectile.finalDamage);
-			Debug.Log("Recibiendo daño");
 		}
 		if (other.CompareTag("EventDamage") && invencibleTimer <= 0 && !dead)
 		{
@@ -379,6 +446,12 @@ public class PlayerHealthController : MonoBehaviour
 			pushBack = true;
 			pushForce = rock.pushForce;
 			ReceiveDamage(rock.damage);
+		}
+
+		if (collision.transform.CompareTag("Trap") && invencibleTimer <= 0 && !dead)
+		{
+			float damage = 20f;
+			ReceiveDamage(damage);
 		}
 	}
 	#endregion

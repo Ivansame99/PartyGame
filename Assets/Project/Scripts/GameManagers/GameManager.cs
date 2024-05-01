@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public MultipleTargetCamera multipleTargetCamera;
     public SelectPlayerController selectPlayerController;
 	public GMSceneManager gmSceneManager;
+    public HubController hubController;
 
 	private void Awake()
     {
@@ -23,5 +24,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(selectPlayerController!=null) selectPlayerController.Initialize();
     }
 }

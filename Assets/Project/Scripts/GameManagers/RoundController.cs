@@ -10,10 +10,14 @@ public class RoundController : MonoBehaviour
 	#region Inspector Variables
 	[SerializeField]
 	private bool debug;
+	[SerializeField]
+	private bool bossRound;
 
 	[Header("Logic")]
 	[SerializeField]
 	private Transform[] spawns;
+	[SerializeField]
+	private Transform bossSpawn;
 
 	[SerializeField]
 	private Rounds[] roundsSO;
@@ -83,9 +87,9 @@ public class RoundController : MonoBehaviour
 			{
 				if (!finalRound)
 				{
-					SetFinalRound();
 					finalRound = true;
 					betweenRounds = false;
+					SetFinalRound();
 				}
 			}
 		}
@@ -129,12 +133,21 @@ public class RoundController : MonoBehaviour
 
 	void SetFinalRound()
 	{
+		if (GameManager.Instance.selectPlayerController.GetNumPlayers() == 1)
+		{
+			GameManager.Instance.endGameController.CheckEndGame();
+			return;
+		}
+
 		ChangeUIText("Final Round");
 		roundUIAnim.SetTrigger("ChangeRound");
-		Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
-		LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
-		godRay.SetActive(false);
-		godRay2.SetActive(false);
+		if (rainPrefab!=null)
+		{
+			Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
+			LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
+			godRay.SetActive(false);
+			godRay2.SetActive(false);
+		}
 	}
 
 	string ToRoman(int number)
@@ -189,9 +202,11 @@ public class RoundController : MonoBehaviour
 		betweenRounds = false;
 		for (int i = 0; i < enemyNumberInCurrentRound; i++)
 		{
+			if (currentRound.rounds[roundIndex].enemiesInRound[i].enemy == null) continue;
 			int randomSpawn = Random.Range(0, spawns.Length);
 			yield return new WaitForSeconds(secondsBetweenEnemySpawn);
-			currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+			if(bossRound) currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, bossSpawn.position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
+            else currentEnemies.Add(Instantiate(currentRound.rounds[roundIndex].enemiesInRound[i].enemy, spawns[randomSpawn].position, currentRound.rounds[roundIndex].enemiesInRound[i].enemy.transform.rotation));
 			StartCoroutine(ChangePowerLevel(roundIndex, i));
 		}
 		coliseumAnimator.SetBool("DoorOpen", false);

@@ -11,5 +11,15 @@ public class GameEnums : MonoBehaviour
 		Credits,
 		GameOver,
 		Arena1,
+		ArenaSnow,
+		ArenaLeaf,
+	}
+
+	public enum Arenas
+	{
+		None = -1,
+		StandardArena = 0,
+		SnowArena = 1,
+		ArenaLeaf = 2,
 	}
 }

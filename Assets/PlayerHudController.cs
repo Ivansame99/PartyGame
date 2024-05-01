@@ -50,21 +50,21 @@ public class PlayerHudController : MonoBehaviour
 			playerUI = GameManager.Instance.selectPlayerController.GetPlayersHud()[hudIndex];
 		}
 		
-		if (playerUI != null)
-		{
-			PlayerHud playerHud = playerUI.GetComponent<PlayerHud>();
-			playerUIHealthAnimator = playerHud.animator;
-			playerUIHealth = playerHud.healthBarController;
-			playerUIPowerText = playerHud.powerText;
-		}
+		//if (playerUI != null)
+		//{
+		//	PlayerHud playerHud = playerUI.GetComponent<PlayerHud>();
+		//	playerUIHealthAnimator = playerHud.animator;
+		//	playerUIHealth = playerHud.healthBarController;
+		//	playerUIPowerText = playerHud.powerText;
+		//}
 	}
 	#endregion
 
 	#region Public Methods
 	public void ReceivedDamage(float damage, float health, float maxHealth)
 	{
-		healthBarAnimator.SetTrigger("Damage");
-		if (playerUI != null) playerUIHealthAnimator.SetTrigger("Damage");
+		//healthBarAnimator.SetTrigger("Damage");
+		//if (playerUI != null) playerUIHealthAnimator.SetTrigger("Damage");
 		TMP_Text text = Instantiate(floatingDamageText, transform.position, Quaternion.identity).GetComponent<TMP_Text>();
 		text.text = ((int)damage).ToString();
 		ChangeUIHealth(health, maxHealth);
@@ -73,13 +73,13 @@ public class PlayerHudController : MonoBehaviour
 	public void ChangeUIHealth(float health, float maxHealth)
 	{
 		healthBarC.SetProgress(health / maxHealth, 2);
-		if (playerUI != null) playerUIHealth.SetProgress(health / maxHealth, 2);
+		//if (playerUI != null) playerUIHealth.SetProgress(health / maxHealth, 2);
 	}
 
 	public void ChangeUIPower(float powerLevel)
 	{
 		powerLevelText.SetText(powerLevel.ToString());
-		if (playerUI != null) playerUIPowerText.SetText(powerLevel.ToString());
+		//if (playerUI != null) playerUIPowerText.SetText(powerLevel.ToString());
 	}
 
 	public void DisableHud()

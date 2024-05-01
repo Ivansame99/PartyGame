@@ -54,9 +54,6 @@ public class PlayersHealthManager : MonoBehaviour
 		StartCoroutine(SlowMotion(player));
 
 		gameManager.endGameController.PlayerDead();
-		mtp.RemovePlayer(player);
-
-		player.transform.position = new Vector3(100, 10, 0);
 	}
 
 	#region Methods
@@ -127,7 +124,7 @@ public class PlayersHealthManager : MonoBehaviour
 	IEnumerator SlowMotion(Transform player)
 	{
 		float slowdownFactor = 0.2f;
-		float slowdownDuration = 0.5f;
+		float slowdownDuration = 0.2f;
 
 		Time.timeScale = slowdownFactor;
 		mtp.enabled = false;
@@ -144,6 +141,8 @@ public class PlayersHealthManager : MonoBehaviour
 
 		mtp.enabled = true;
 		Time.timeScale = 1f;
+
+		mtp.RemovePlayer(player);
 	}
 	#endregion
 }

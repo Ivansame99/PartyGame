@@ -31,7 +31,8 @@ public class PlayerOnWaterRollState : PlayerState<PlayerController>
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
-		
+		ResetVelocity();
+
 		if (player.direction == Vector3.zero)
 		{
 			rollDirection = player.transform.forward;

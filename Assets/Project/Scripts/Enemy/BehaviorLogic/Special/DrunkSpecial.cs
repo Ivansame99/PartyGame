@@ -40,6 +40,7 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
 
         enemy.animator.SetBool("Puke", false);
         if(puke != null) Destroy(puke,2f);
+        if(feedback != null) Destroy(feedback);
     }
 
     public override void DoFrameUpdateLogic()
@@ -47,18 +48,15 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
-
-            if(finish)
-            {
                 if (attackTimer <= 0)
                 {
-                    enemy.stateMachine.ChangeState(enemy.idleState);
+                enemy.stateMachine.ChangeState(enemy.idleState);
                 }
                 else
                 {
                     attackTimer -= Time.deltaTime;
                 }
-            }
+            
 
             if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("Puke") && !finish)
             {

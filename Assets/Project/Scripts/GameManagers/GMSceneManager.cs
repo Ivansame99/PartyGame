@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static System.TimeZoneInfo;
 
 public class GMSceneManager : MonoBehaviour
@@ -64,8 +65,35 @@ public class GMSceneManager : MonoBehaviour
 		}
 	}
 
+	public void ChangeSceneToArenaSnow(bool transition = false, float waitTime = 0)
+	{
+		if (transition)
+		{
+			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaSnow, waitTime));
+		}
+		else
+		{
+			SceneManager.LoadScene(GameEnums.Scenes.ArenaSnow.ToString());
+		}
+	}
+
+	public void ChangeSceneToArenaLeaf(bool transition = false, float waitTime = 0)
+	{
+		if (transition)
+		{
+			StartCoroutine(CloseTranition(GameEnums.Scenes.ArenaLeaf, waitTime));
+		}
+		else
+		{
+			SceneManager.LoadScene(GameEnums.Scenes.ArenaLeaf.ToString());
+		}
+	}
+
 	public void ChangeSceneToGameOver(bool transition = false, float waitTime = 0)
 	{
+		PlayerPrefs.SetInt("arenaType", (int)GetArenaType());
+		PlayerPrefs.Save();
+
 		if (transition)
 		{
 			StartCoroutine(CloseTranition(GameEnums.Scenes.GameOver, waitTime));
@@ -87,6 +115,27 @@ public class GMSceneManager : MonoBehaviour
 
 		return false;
 	}
+
+	public GameEnums.Arenas GetArenaType()
+	{
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.Arena1.ToString())
+		{
+			return GameEnums.Arenas.StandardArena;
+		}
+
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaSnow.ToString())
+		{
+			return GameEnums.Arenas.SnowArena;
+		}
+
+		if (SceneManager.GetActiveScene().name == GameEnums.Scenes.ArenaLeaf.ToString())
+		{
+			return GameEnums.Arenas.ArenaLeaf;
+		}
+
+		return GameEnums.Arenas.None;
+	}
+
 	#endregion
 
 	#region Coroutines

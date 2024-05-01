@@ -13,6 +13,9 @@ public class PlayerAk47State : PlayerState<PlayerController>
 	private float fireRate = 0.1f;
 
 	[SerializeField]
+	private float moveSpeed;
+
+	[SerializeField]
 	private float recoilForce = 1.0f;
 
 	[SerializeField]
@@ -43,6 +46,25 @@ public class PlayerAk47State : PlayerState<PlayerController>
 		if (player.isJumping && player.groundCheck.DetectGround())
 		{
 			player.ChangeState(typeof(PlayerJumpState));
+			return;
+		}
+
+		if (player.isJumping && player.groundCheck.DetectGround())
+		{
+			player.ChangeState(typeof(PlayerJumpState));
+			return;
+		}
+
+		//Change to roll
+		if (player.isDodging && player.dodgeTimer <= 0)
+		{
+			if (player.waterDetection.onWater)
+			{
+				player.ChangeState(typeof(PlayerOnWaterRollState));
+				return;
+			}
+
+			player.ChangeState(typeof(PlayerRollState));
 			return;
 		}
 
@@ -86,11 +108,27 @@ public class PlayerAk47State : PlayerState<PlayerController>
 	{
 		//Recoil movement
 		player.rb.AddForce(-player.transform.forward * recoilForce, ForceMode.Impulse);
+
+		//If its in ground, player can move
+		if (player.groundCheck.DetectGround() && player.direction!=Vector3.zero)
+		{
+			Vector3 currentVelocity = new Vector3(player.rb.velocity.x, 0f, player.rb.velocity.z);
+
+			if (currentVelocity.magnitude > moveSpeed)
+			{
+				currentVelocity = currentVelocity.normalized * moveSpeed;
+			}
+
+			Vector3 targetVelocity = player.direction * moveSpeed;
+			Vector3 force = (targetVelocity - currentVelocity) / Time.fixedDeltaTime;
+			player.rb.AddForce(force, ForceMode.Acceleration);
+		}
 	}
 
 	public override void Exit()
 	{
 		player.ShowWeapons();
 		player.anim.SetBool("Bow", false);
+		player.powerController.ChangeScale();
 	}
 }

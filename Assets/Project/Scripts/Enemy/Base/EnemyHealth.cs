@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class EnemyHealth : MonoBehaviour
 {
 	//Enemy
-	private Enemy enemy;
+	[SerializeField] private Enemy enemy;
 
 	//Inmune time after hit
 	[HideInInspector] public bool invencibility;
@@ -42,10 +42,18 @@ public class EnemyHealth : MonoBehaviour
 	[SerializeField] private GameObject bloodParticles;
 	[SerializeField] private GameObject crossRight, crossLeft;
 	[SerializeField] private GameObject glow;
+	[SerializeField] private GameObject hitParticles;
+
+	[SerializeField] private Material redMaterial;
+	[SerializeField] private Renderer helmet;
+	[SerializeField] private Renderer body;
+
+	private Material originalHelmetMaterial;
+	private Material originalBodyMaterial;
 
 	private void Start()
 	{
-		enemy = GetComponent<Enemy>();
+		if (enemy == null) enemy = GetComponent<Enemy>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
 		SetupHealthBar(healBarCanvas, GetComponent<Camera>());
 		//Invoke(nameof(LoadMaxHealth), 0.1f);
@@ -53,6 +61,9 @@ public class EnemyHealth : MonoBehaviour
 		{
 			enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;
 		}
+
+		originalHelmetMaterial = helmet.material;
+		originalBodyMaterial = body.material;
 	}
 
 	void Update()
@@ -127,15 +138,20 @@ public class EnemyHealth : MonoBehaviour
 
 	void DamageFeedback()
 	{
-		Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		GameObject bloodEffectInstance = Instantiate(bloodParticles, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+		float duration = 40f;
+		Destroy(bloodEffectInstance, duration);
+
 		crossRight.SetActive(false);
 		crossLeft.SetActive(false);
 		glow.SetActive(false);
 
-
+		StartCoroutine(RedEffect());
+		
 		crossRight.SetActive(true);
 		crossLeft.SetActive(true);
 		glow.SetActive(true);
+		Instantiate(hitParticles, this.transform.position, Quaternion.identity);
 	}
 
 	void ShowDamageText(float damage)
@@ -152,18 +168,8 @@ public class EnemyHealth : MonoBehaviour
 
 	void Die()
 	{
-		//currentPower = enemy.GetPowerDamage();
-		//if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().SetCurrentPowerLevel(currentPower / 2); //Se le suma la puntuacion del enemigo
-		currentPower = enemy.GetPoweLevel() / 2;
-		if (lastAttacker != null) lastAttacker.GetComponent<PowerController>().AddPowerLevel(currentPower);
-
 		enemyDestroy();
 	}
-
-	//private void HandleCurrentPowerChanged(float newValue)
-	//{
-	//	maxHealth = maxHealthBase + powerController.PowerHealth();
-	//}
 
 	public void enemyDestroy()
 	{
@@ -186,14 +192,39 @@ public class EnemyHealth : MonoBehaviour
 				lastAttacker = other.transform.parent.gameObject;
 				SlashController slashController = other.GetComponent<SlashController>();
 				attackPosition = other.gameObject.transform.position;
-				pushForce = slashController.pushForce * 2f;
+				if (other.CompareTag("JumpAttack")) pushForce = slashController.pushForce;
+				else pushForce = slashController.pushForce * 2;
 				pushBack = true;
 
 				ReceiveDamage(slashController.finalDamage);
 			}
 		}
+        if (other.transform.CompareTag("Arrow") && !invencibility && !enemy.isDead)
+        {
+            ArrowController ac = other.gameObject.GetComponent<ArrowController>();
+            if (ac)
+            {
+                lastAttacker = ac.owner;
+                attackPosition = ac.ownerPos;
+                pushBack = true;
+                pushForce = ac.pushForce;
 
-		if (other.CompareTag("EventDamage") && !invencibility && !enemy.isDead)
+                ReceiveDamage(ac.finalDamage);
+                Destroy(other.gameObject);
+            }
+            else
+            {
+                BulletController bc = other.gameObject.GetComponent<BulletController>();
+                lastAttacker = bc.owner;
+                attackPosition = bc.ownerPos;
+                pushBack = true;
+                pushForce = bc.pushForce;
+
+                ReceiveDamage(bc.finalDamage);
+                Destroy(other.gameObject);
+            }
+        }
+        if (other.CompareTag("EventDamage") && !invencibility && !enemy.isDead)
 		{
 			ReceiveDamageMultiplier(other.GetComponent<DealDamageEvent>().GetDamageMultipler());
 		}
@@ -236,5 +267,15 @@ public class EnemyHealth : MonoBehaviour
 			pushForce = rock.pushForce;
 			ReceiveDamage(rock.damage);
 		}
+	}
+
+	IEnumerator RedEffect()
+	{
+		float delay = 0.25f;
+		helmet.material = redMaterial;
+		body.material = redMaterial;
+		yield return new WaitForSeconds(delay);
+		helmet.material = originalHelmetMaterial;
+		body.material = originalBodyMaterial;
 	}
 }

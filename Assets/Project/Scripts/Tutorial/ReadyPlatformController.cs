@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static GameEnums;
 
 public class ReadyPlatformController : MonoBehaviour
 {
@@ -11,8 +13,18 @@ public class ReadyPlatformController : MonoBehaviour
 	[SerializeField]
 	private float timeToChangeScene = 2.0f;
 
+	[SerializeField]
+	private ArenaSelector arenaSelector;
+
+	[SerializeField]
+	private GameObject hubUI;
+
+	[SerializeField]
+	private bool loadArena1;
+
 	private float changeSceneTimer;
 
+	private bool selectingArena = false;
 	private void Start()
 	{
 		changeSceneTimer = timeToChangeScene;
@@ -29,10 +41,42 @@ public class ReadyPlatformController : MonoBehaviour
 		}
 		else changeSceneTimer = timeToChangeScene;
 
-		if (changeSceneTimer <= 0)
+		if (changeSceneTimer <= 0 && !selectingArena)
 		{
+			if (loadArena1)
+			{
+				GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			} else
+			{
+				arenaSelector.Scroll();
+			}
+
 			playerConfigurationManager.onHub = false;
-			GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+			hubUI.SetActive(false);
+			selectingArena = true;
+		} else
+		{
+			if (arenaSelector.GetSelectedArena() != GameEnums.Arenas.None)
+			{
+				GameEnums.Arenas arena = arenaSelector.GetSelectedArena();
+
+				switch (arena)
+				{
+					case Arenas.StandardArena:
+						GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+						break;
+					case Arenas.SnowArena:
+						GameManager.Instance.gmSceneManager.ChangeSceneToArenaSnow(true);
+						break;
+					case Arenas.ArenaLeaf:
+						GameManager.Instance.gmSceneManager.ChangeSceneToArenaLeaf(true);
+						break;
+					default:
+						Debug.Log("Arena no reconocida");
+						GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+						break;
+				}
+			}
 		}
 	}
 

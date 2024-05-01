@@ -37,7 +37,7 @@ public class EndGameController : MonoBehaviour
 	#endregion
 
 	#region Variables
-	internal int playersDead;
+	internal int playersDead = 0;
 	private List<GameObject> coinsPool = new List<GameObject>();
 	private float arenaLimitMin = -30f;
 	private float arenaLimitMax = 30f;
@@ -63,7 +63,7 @@ public class EndGameController : MonoBehaviour
     }
 
 	#region Methods
-	void CheckEndGame()
+	public void CheckEndGame()
 	{
 		int playersCount = GameManager.Instance.selectPlayerController.GetNumPlayers();
 

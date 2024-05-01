@@ -39,15 +39,17 @@ public class GiantAttack : EnemyAttackSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
-        rotation.y = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
-        //enemy.AgentState(false);
-    }
+        if(enemy.playerPos != null)
+        {
+			var rotation = Quaternion.LookRotation(enemy.playerPos.position - transform.position);
+			rotation.y = 0;
+			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 0.1f);
+			//enemy.AgentState(false);
+		}
+	}
     public override void DoExitLogic()
     {
         base.DoExitLogic();
-        if(waveAttack != null) Destroy(waveAttack);
     }
     public override void DoFrameUpdateLogic()
     {
@@ -75,10 +77,7 @@ public class GiantAttack : EnemyAttackSOBase
                 attackTimer -= Time.deltaTime;
             }
 
-            if (waveAttack != null)
-            {
-                waveAttack.transform.localScale += new Vector3(waveSpeed, waveSpeed, waveSpeed);
-            }
+
         }
         else
         {
@@ -112,6 +111,8 @@ public class GiantAttack : EnemyAttackSOBase
         torus.finalDamage = torus.baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
         torus.SetPushForce(torus.pushForce);
         torus.owner = enemy.gameObject;
+        torus.waveSpeed = waveSpeed;
+        torus.waveTimeLife = waveTimeLife;
 
         Destroy(waveAttack, waveTimeLife);
     }
