@@ -59,6 +59,6 @@ public class Lion : Enemy
         enemySpecialAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(chaseState);
     }
 }

@@ -48,7 +48,7 @@ public class LionAttack : EnemyAttackSOBase
 
         if (attackTimer <= 0)
         {   
-            enemy.animator.SetInteger("AttackCombo", attackCount);
+            //enemy.animator.SetInteger("AttackCombo", attackCount);
             isAttacking = true;
             attackTimer = timeBetweenAttacks;
         }

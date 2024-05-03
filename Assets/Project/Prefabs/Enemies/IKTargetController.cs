@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class IKTargetController : MonoBehaviour
 {
-    public Transform root;
-    public float maxDistance = 1.5f;
-    public float lerpSpeed = 0.1f;
+    [SerializeField] Transform body = default;
+    [SerializeField] float speed = 1;
+    [SerializeField] float stepDistance = 4;
+    [SerializeField] float stepLength = 4;
+    [SerializeField] Vector3 footOffset = default;
 
     private void Update()
     {
-        // Calcula la distancia entre este objeto y el root
-        float distance = Vector3.Distance(transform.position, root.position);
+        Vector3 currentPosition = transform.position;
+        Vector3 targetPosition = body.position + (body.forward * stepLength) + footOffset;
 
-        // Si la distancia es mayor que la distancia máxima permitida
-        if (distance > maxDistance)
+        // Calcular la distancia entre currentPosition y targetPosition
+        float distance = Vector3.Distance(currentPosition, targetPosition);
+
+        // Si la distancia supera el umbral de stepDistance, mover el target hacia targetPosition con lerp
+        if (distance > stepDistance)
         {
-            // Calcula la dirección hacia el root
-            Vector3 direction = (root.position - transform.position).normalized;
-
-            // Calcula la posición hacia la que se moverá el target
-            Vector3 targetPosition = transform.position + direction * (distance - maxDistance);
-
-            // Aplica el lerp para suavizar el movimiento hacia adelante
-            transform.position = Vector3.Lerp(transform.position, targetPosition, lerpSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(currentPosition, targetPosition, Time.deltaTime * speed);
         }
     }
 }

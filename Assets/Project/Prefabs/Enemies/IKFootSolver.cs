@@ -29,6 +29,7 @@ public class IKFootSolver : MonoBehaviour
 
     void Update()
     {
+        transform.rotation = body.rotation;
         transform.position = currentPosition;
         transform.up = currentNormal;
 

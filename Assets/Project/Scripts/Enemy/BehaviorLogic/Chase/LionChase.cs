@@ -39,7 +39,7 @@ public class LionChase : EnemyChaseSOBase
 
             if(Vector3.Distance(enemy.transform.position, enemy.bossTarget.position) <= closeDistance && EnemyVision(65f))
             {
-                enemy.stateMachine.ChangeState(enemy.attackState);
+                //enemy.stateMachine.ChangeState(enemy.attackState);
             }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
