@@ -17,6 +17,9 @@ public class ArenaSelector : MonoBehaviour
 	[SerializeField]
 	private GameObject arrow;
 
+	[SerializeField]
+	private GameObject backgroundImg;
+
 	private float maxSpeed;
 	private float speed;
 
@@ -43,6 +46,7 @@ public class ArenaSelector : MonoBehaviour
 		isScrolling = true;
 
 		arrow.SetActive(true);
+		backgroundImg.SetActive(true);
 
 		if (cells.Count == 0)
 		{
