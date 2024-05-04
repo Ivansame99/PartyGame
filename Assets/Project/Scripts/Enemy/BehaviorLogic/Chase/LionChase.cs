@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
+
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(fileName = "Lion Chase", menuName = "Enemy Logic/Boss/Lion/Chase Logic/Chase To Player")]
 public class LionChase : EnemyChaseSOBase
@@ -24,6 +25,10 @@ public class LionChase : EnemyChaseSOBase
         enemy.agent.speed = speed;
         enemy.agent.acceleration = acceleration;
         enemy.agent.angularSpeed = angularSpeed;
+
+        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
+
+        enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
         Debug.Log("Preparando ataque");
     }
     public override void DoFrameUpdateLogic()
@@ -39,7 +44,7 @@ public class LionChase : EnemyChaseSOBase
 
             if(Vector3.Distance(enemy.transform.position, enemy.bossTarget.position) <= closeDistance && EnemyVision(65f))
             {
-                //enemy.stateMachine.ChangeState(enemy.attackState);
+                enemy.stateMachine.ChangeState(enemy.attackState);
             }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
@@ -66,7 +71,7 @@ public class LionChase : EnemyChaseSOBase
     }
     private bool EnemyVision(float vision)
     {
-        if (Math.Abs(Vector3.Angle(transform.forward, direction)) < vision)
+        if (Mathf.Abs(Vector3.Angle(transform.forward, direction)) < vision)
         {
             return true;
         }

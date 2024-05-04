@@ -25,7 +25,7 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Idle");
+        //enemy.animator.SetTrigger("Idle");
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
 
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
