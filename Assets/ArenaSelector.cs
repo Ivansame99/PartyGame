@@ -28,6 +28,8 @@ public class ArenaSelector : MonoBehaviour
 
 	private GameEnums.Arenas selectedArena = GameEnums.Arenas.None;
 
+	[SerializeField] private RouletteSound rouletteSound;
+
 	public void Scroll()
 	{
 		if (isScrolling)
@@ -41,8 +43,10 @@ public class ArenaSelector : MonoBehaviour
 		speed = 1;
 		start = true;
 		isScrolling = true;
+		rouletteSound.RouletteScrollSound();
 
-		arrow.SetActive(true);
+
+        arrow.SetActive(true);
 
 		if (cells.Count == 0)
 		{
@@ -87,7 +91,9 @@ public class ArenaSelector : MonoBehaviour
 
 	private void DetectArena()
 	{
-		float minDistance = Mathf.Infinity;
+		rouletteSound.RouletteFinishSound();
+
+        float minDistance = Mathf.Infinity;
 		ArenaSelectCell closestCell = null;
 
 		foreach (ArenaSelectCell cell in cells)
