@@ -2084,7 +2084,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 96.2
+  m_fontSize: 112
   m_fontSizeBase: 115.96
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2301,7 +2301,7 @@ PrefabInstance:
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
@@ -2310,12 +2310,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1263697823}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1042577263}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
@@ -2325,12 +2340,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SubmitButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SettingsController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UISoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512506463360827211, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6512506463360827213, guid: 57b92bc3b322842e99f6eaaf41f35654,
@@ -2341,12 +2371,12 @@ PrefabInstance:
     - target: {fileID: 6512506464402637067, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.486
       objectReference: {fileID: 0}
     - target: {fileID: 6512506464402637067, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2360,6 +2390,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 735178325}
+    - targetCorrespondingSourceObject: {fileID: 6512506463360827213, guid: 57b92bc3b322842e99f6eaaf41f35654,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 735178327}
   m_SourcePrefab: {fileID: 100100000, guid: 57b92bc3b322842e99f6eaaf41f35654, type: 3}
 --- !u!224 &735178323 stripped
 RectTransform:
@@ -2398,6 +2432,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &735178327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735178324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &745864227
 GameObject:
   m_ObjectHideFlags: 0
@@ -3851,6 +3914,7 @@ GameObject:
   - component: {fileID: 1039994342}
   - component: {fileID: 1039994341}
   - component: {fileID: 1039994344}
+  - component: {fileID: 1039994345}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -3953,6 +4017,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1042577263}
+        m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+        m_MethodName: SubmitButtonSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &1039994342
 MonoBehaviour:
@@ -4005,6 +4081,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPos: {fileID: 911737980}
+--- !u!114 &1039994345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039994339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: SubmitButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1042577262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4060,12 +4181,12 @@ PrefabInstance:
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.486
       objectReference: {fileID: 0}
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
@@ -4080,7 +4201,7 @@ PrefabInstance:
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
@@ -4089,12 +4210,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1263697823}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1042577263}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
@@ -4104,12 +4240,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SubmitButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SettingsController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UISoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440178, guid: 01cda1b7591044d1681d471acb246c02,
@@ -4234,6 +4385,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1706225240}
+    - targetCorrespondingSourceObject: {fileID: 2006816634410440178, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1706225241}
   m_SourcePrefab: {fileID: 100100000, guid: 01cda1b7591044d1681d471acb246c02, type: 3}
 --- !u!224 &1095416954 stripped
 RectTransform:
@@ -4956,7 +5111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1392060301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6142,6 +6297,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPos: {fileID: 194306066}
+--- !u!114 &1706225241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706225237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1944805930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6583,12 +6767,12 @@ PrefabInstance:
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.486
       objectReference: {fileID: 0}
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
@@ -6608,7 +6792,7 @@ PrefabInstance:
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
@@ -6617,12 +6801,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1263697823}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1042577263}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
@@ -6632,12 +6831,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SubmitButtonSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: SettingsController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UISoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440178, guid: 01cda1b7591044d1681d471acb246c02,
@@ -6762,6 +6976,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1963893398}
+    - targetCorrespondingSourceObject: {fileID: 2006816634410440178, guid: 01cda1b7591044d1681d471acb246c02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1963893399}
   m_SourcePrefab: {fileID: 100100000, guid: 01cda1b7591044d1681d471acb246c02, type: 3}
 --- !u!224 &1963893394 stripped
 RectTransform:
@@ -6794,6 +7012,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPos: {fileID: 540810014}
+--- !u!114 &1963893399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424488833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2066011870
 GameObject:
   m_ObjectHideFlags: 0
