@@ -7,10 +7,10 @@ public class RouletteSound : MonoBehaviour
     // Start is called before the first frame update
     public void RouletteScrollSound()
     {
-        Debug.Log("Scrolling");
+    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/UI/Roulette", transform.position);      
     }
     public void RouletteFinishSound()
     {
-        Debug.Log("Scroll finished");
+    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/UI/Roulette_Accept", transform.position);      
     }
 }
