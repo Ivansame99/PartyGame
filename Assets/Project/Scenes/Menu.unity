@@ -2084,7 +2084,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 112
+  m_fontSize: 96.2
   m_fontSizeBase: 115.96
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2341,12 +2341,12 @@ PrefabInstance:
     - target: {fileID: 6512506464402637067, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6512506464402637067, guid: 57b92bc3b322842e99f6eaaf41f35654,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3012,6 +3012,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 861869812}
+    - targetCorrespondingSourceObject: {fileID: 1566452728909448934, guid: 2d6a92863952c424982aaa7f8b09403d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 861869814}
   m_SourcePrefab: {fileID: 100100000, guid: 2d6a92863952c424982aaa7f8b09403d, type: 3}
 --- !u!224 &861869810 stripped
 RectTransform:
@@ -3044,6 +3048,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &861869814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 59517718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: SubmitButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &890017038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3702,6 +3751,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 996495635}
+    - targetCorrespondingSourceObject: {fileID: 2899983283745781748, guid: f4df4f50c3d39462d88eebbd8e0fbd21,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 996495640}
   m_SourcePrefab: {fileID: 100100000, guid: f4df4f50c3d39462d88eebbd8e0fbd21, type: 3}
 --- !u!224 &996495633 stripped
 RectTransform:
@@ -3740,6 +3793,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &996495640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996495634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: SubmitButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1039994339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,6 +4005,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPos: {fileID: 911737980}
+--- !u!1 &1042577262
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042577264}
+  - component: {fileID: 1042577263}
+  m_Layer: 0
+  m_Name: UISoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1042577263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042577262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a62f95e1175a454b8f684ff233ce061, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1042577264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042577262}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 620.306, y: 635.7196, z: -1029.1173}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1095416953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3918,12 +4060,12 @@ PrefabInstance:
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
@@ -4625,6 +4767,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 1095416955}
   cursor: {fileID: 1585376687}
   setingsOn: 0
+  soundManager: {fileID: 1042577263}
 --- !u!95 &1263697824
 Animator:
   serializedVersion: 5
@@ -4813,7 +4956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1392060301
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5627,6 +5770,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1615968107}
+    - targetCorrespondingSourceObject: {fileID: 1566452728909448934, guid: 2d6a92863952c424982aaa7f8b09403d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1615968109}
   m_SourcePrefab: {fileID: 100100000, guid: 2d6a92863952c424982aaa7f8b09403d, type: 3}
 --- !u!224 &1615968105 stripped
 RectTransform:
@@ -5659,6 +5806,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1615968109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94362588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 15
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: SubmitButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1624371870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6299,6 +6491,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1944805933}
+    - targetCorrespondingSourceObject: {fileID: 1566452728909448934, guid: 2d6a92863952c424982aaa7f8b09403d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1944805935}
   m_SourcePrefab: {fileID: 100100000, guid: 2d6a92863952c424982aaa7f8b09403d, type: 3}
 --- !u!224 &1944805931 stripped
 RectTransform:
@@ -6331,6 +6527,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1944805935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965233950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: ChangeButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1042577263}
+          m_TargetAssemblyTypeName: UISoundManager, Assembly-CSharp
+          m_MethodName: SubmitButtonSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1963893393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6342,12 +6583,12 @@ PrefabInstance:
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2006816633819513626, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2006816634410440172, guid: 01cda1b7591044d1681d471acb246c02,
         type: 3}
