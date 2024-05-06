@@ -144,7 +144,7 @@ public class DrunkProjectile : MonoBehaviour
             t += Time.deltaTime * speedMultiplier; // Ajusta el tiempo de acuerdo al multiplicador de velocidad
             float x = v0 * Mathf.Cos(angle) * t;
             float y = v0 * Mathf.Sin(angle) * t - 0.5f * 9.8f * t * t;
-            transform.position = firePoint.position + direction * x + Vector3.up * y;
+            if(firePoint!=null) transform.position = firePoint.position + direction * x + Vector3.up * y;
             yield return null;
         }
     }
