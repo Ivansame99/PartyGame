@@ -5305,6 +5305,77 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.043116108, y: -0.0020907652, z: -0.07785661}
     m_Extent: {x: 0.06277725, y: 0.03411258, z: 0.061680295}
   m_DirtyAABB: 0
+--- !u!1 &1288630908709010660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7586459443119091194}
+  - component: {fileID: 8975323985824741288}
+  - component: {fileID: 1648667720687637394}
+  m_Layer: 8
+  m_Name: AttackCollider
+  m_TagString: Projectile
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7586459443119091194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288630908709010660}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687519140883487700}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8975323985824741288
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288630908709010660}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2518312, y: 1.1547948, z: 1.7407944}
+  m_Center: {x: -0.017013967, y: 0.47879666, z: 0.7403835}
+--- !u!114 &1648667720687637394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1288630908709010660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b8fef5e3370294c953434ca84e66c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 10
+  finalDamage: 10
+  pushForce: 25
+  owner: {fileID: 0}
+  enemy: {fileID: 3172128955135727291}
 --- !u!1 &1326349085215905478
 GameObject:
   m_ObjectHideFlags: 0
@@ -27787,6 +27858,7 @@ Transform:
   - {fileID: 2102938443299662272}
   - {fileID: 956566904407611349}
   - {fileID: 6293310493131933540}
+  - {fileID: 7586459443119091194}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -27855,6 +27927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <maxHealth>k__BackingField: 1000
   <inmuneTime>k__BackingField: 0.1
+  attackCollider: {fileID: 0}
   secutorAudioManager: {fileID: 0}
   giantAudioManager: {fileID: 0}
   drunkAudioManager: {fileID: 0}
@@ -28028,7 +28101,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.48712257, y: 0.27028233, z: 1.3230202}
   m_Center: {x: 0.008008733, y: 0.03855461, z: -0.38716698}
@@ -28051,10 +28124,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.45996124
+  m_Radius: 0.6843277
   m_Height: 1.6909213
   m_Direction: 2
-  m_Center: {x: 0.035682082, y: 0.73958796, z: -0.2583828}
+  m_Center: {x: 0.035682082, y: 0.5152215, z: -0.2583828}
 --- !u!1 &7752325880312408322
 GameObject:
   m_ObjectHideFlags: 0

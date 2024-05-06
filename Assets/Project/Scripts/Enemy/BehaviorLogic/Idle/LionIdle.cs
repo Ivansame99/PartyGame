@@ -25,7 +25,7 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        //enemy.animator.SetTrigger("Idle");
+        enemy.animator.SetTrigger("Chase");
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
 
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
@@ -58,18 +58,24 @@ public class LionIdle : EnemyIdleSOBase
             */
 
             //while(behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
-            behaviorIndex = Random.Range(0, 2);
+            behaviorIndex = Random.Range(0, 4);
+            //behaviorIndex = 3;
             if (idleTimer <= 0)
             {
                 switch(behaviorIndex)
                 {
                     case 0:
-                        enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                        enemy.stateMachine.ChangeState(enemy.bossTorusState);
                         break;
                     case 1:
+                        enemy.stateMachine.ChangeState(enemy.bossDistanceAttackState);
+                        break;
+                    case 2:
                         enemy.stateMachine.ChangeState(enemy.chaseState);
                         break;
-
+                    case 3:
+                        enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                        break;
                 }
             }
             else

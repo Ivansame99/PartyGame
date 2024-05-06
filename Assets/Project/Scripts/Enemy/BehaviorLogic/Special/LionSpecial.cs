@@ -30,12 +30,14 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoEnterLogic();
         enemy.agent.isStopped = true;
 
+        
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
 
         atkTimer = atkDuration;
         preChargeTimer = preChargeTime;
 
+        enemy.animator.SetTrigger("Charge");
         Debug.Log("Aqui");
     }
 
@@ -68,6 +70,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
         if (!isAttacking && preChargeTimer <= 0)
         {
             isAttacking = true;
+            enemy.animator.SetTrigger("ChargeAtk");
         }
         else if (!isAttacking && preChargeTimer > 0)
         {
@@ -92,6 +95,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoPhysicsLogic();
         if(isAttacking)
         {
+            Debug.Log("isacaharging");
             Vector3 currentVelocity = new Vector3(enemy.rb.velocity.x, 0f, enemy.rb.velocity.z);
 
             if (currentVelocity.magnitude > chargeSpeed)

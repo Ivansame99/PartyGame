@@ -29,7 +29,7 @@ public class LionChase : EnemyChaseSOBase
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
 
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
-        Debug.Log("Preparando ataque");
+        enemy.animator.SetTrigger("Chase");
     }
     public override void DoFrameUpdateLogic()
     {

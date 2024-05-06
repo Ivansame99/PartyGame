@@ -24,9 +24,9 @@ public class LionProjectile : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1f, groundLayer))
+        if (Physics.Raycast(ray, out hit, 0.6f, groundLayer))
         {
-            collider.enabled = true;
+           collider.enabled = true;
         }
 
         if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))

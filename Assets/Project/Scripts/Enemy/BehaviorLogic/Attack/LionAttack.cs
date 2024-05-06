@@ -18,7 +18,15 @@ public class LionAttack : EnemyAttackSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttack:
+                isAttacking = true;
+                break;
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                enemy.stateMachine.ChangeState(enemy.idleState);
+                break;
+        }
     }
     public override void DoEnterLogic()
     {
@@ -26,33 +34,19 @@ public class LionAttack : EnemyAttackSOBase
         enemy.agent.isStopped = true;
         attackCount = 0;
         attackTimer = timeBetweenAttacks;
+        enemy.animator.ResetTrigger("Chase");
+        enemy.animator.SetTrigger("Attack");
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
         enemy.rb.velocity = Vector3.zero;
+        //enemy.attackCollider.enabled = false;
     }
     public override void DoFrameUpdateLogic()
     {
         base.DoFrameUpdateLogic();
 
-        //A BIT OF COOLDOWN WHEN ATTACK FINISHED
-        if (!enemy.isDead)
-        {
-            if(attackCount >= 4)
-            {
-                enemy.stateMachine.ChangeState(enemy.idleState);
-            }
-        }
-        else enemy.stateMachine.ChangeState(enemy.deathState);
-
-        if (attackTimer <= 0)
-        {   
-            //enemy.animator.SetInteger("AttackCombo", attackCount);
-            isAttacking = true;
-            attackTimer = timeBetweenAttacks;
-        }
-        else attackTimer -= Time.deltaTime;
     }
     public override void DoPhysicsLogic()
     {
@@ -61,10 +55,7 @@ public class LionAttack : EnemyAttackSOBase
 
         if (isAttacking)
         {
-            
-            attackCount++;
             enemy.rb.AddForce(enemy.transform.forward * attackForce, ForceMode.Impulse);
-            enemy.rb.velocity = Vector3.zero;
             isAttacking = false;
         }
     }

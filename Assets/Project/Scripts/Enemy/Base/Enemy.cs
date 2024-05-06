@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyTargetController enemyTargetController { get; set; }
 	public Animator animator { get; set; }
 
-
 	//AGGRO INTERFACE
 	public bool IsAggreed { get; set; }
 	public bool IsSpecialAggro { get; set; }
