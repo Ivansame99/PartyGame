@@ -68,6 +68,8 @@ public class PlayerConfigurationManager : MonoBehaviour
 			controlsPanel.SetActive(true);
 
 			pi.transform.SetParent(transform);
+			
+			//Debug.Log(pi.devices[0].deviceId);
 
 			PlayerConfiguration playerConfig = new PlayerConfiguration(pi);
 
