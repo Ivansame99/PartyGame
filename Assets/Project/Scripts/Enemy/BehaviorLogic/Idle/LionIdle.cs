@@ -64,8 +64,8 @@ public class LionIdle : EnemyIdleSOBase
                 enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
             }
 
-            //behaviorIndex = Random.Range(0, 4);
-            behaviorIndex = 2;
+            behaviorIndex = Random.Range(0, 4);
+            //behaviorIndex = 2;
             if (idleTimer <= 0)
             {
                 switch(behaviorIndex)
