@@ -14,6 +14,7 @@ public class LionProjectile : MonoBehaviour
     private GameObject feedbackClone;
 
     private SphereCollider collider;
+    private Vector3 hitPosition;
 
     private void Start()
     {
@@ -26,20 +27,32 @@ public class LionProjectile : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 0.6f, groundLayer))
         {
-           collider.enabled = true;
+           
         }
 
         if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
         {
-            Instantiate(explosionParticles, hit.point, rotation);
-            Destroy(gameObject);
+            //Instantiate(explosionParticles, hit.point, rotation);
+            //Destroy(gameObject);
         }
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer) && !onlyOnce)
         {
             feedbackClone = Instantiate(projectileFeedback, new Vector3(hit.point.x,hit.point.y + 0.1f,hit.point.z), rotation);
-            Destroy(feedbackClone, 1f);
+            hitPosition = hit.point;
+            
             onlyOnce = true;
         }
+
+        if(Vector3.Distance(transform.position, hitPosition) <= 0.1) {
+            collider.enabled = true;
+            Instantiate(explosionParticles, hit.point, rotation);
+            Destroy(feedbackClone,0.2f);
+            Destroy(gameObject,0.2f);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
