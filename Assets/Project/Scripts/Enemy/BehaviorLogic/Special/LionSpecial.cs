@@ -23,6 +23,12 @@ public class LionSpecial : EnemySpecialAttackSOBase
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                enemy.stateMachine.ChangeState(enemy.idleState);
+                break;
+        }
     }
 
     public override void DoEnterLogic()
