@@ -26,9 +26,9 @@ public class LionIdle : EnemyIdleSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetTrigger("Chase");
-        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
-
+        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+
         //behaviorIndex = Random.Range(0, 3);
         idleTimer = idleDuration;
 
@@ -58,6 +58,12 @@ public class LionIdle : EnemyIdleSOBase
             */
 
             //while(behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
+            if (enemy.bossTarget == null)
+            {
+                enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
+                enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+            }
+
             behaviorIndex = Random.Range(0, 4);
             //behaviorIndex = 3;
             if (idleTimer <= 0)

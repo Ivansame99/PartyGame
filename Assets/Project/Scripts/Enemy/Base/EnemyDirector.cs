@@ -6,7 +6,7 @@ public class EnemyDirector : MonoBehaviour
 {
     public int[] playerTarget;
     private float currentEnemies;
-    public float currentPlayers;
+    public int currentPlayers;
     public float splitEnemies;
     public bool[] full;
     public List<Transform> players;

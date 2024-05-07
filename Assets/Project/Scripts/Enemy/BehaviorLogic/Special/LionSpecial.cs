@@ -60,7 +60,11 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoFrameUpdateLogic();
 
         TimersFunction();
-
+        if (enemy.bossTarget == null)
+        {
+            enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
+            enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+        }
         if (Physics.Raycast(transform.position, transform.forward, out hit, colisionDistance))
         {
             // Verificar si el objeto golpeado tiene el tag "Wall"
