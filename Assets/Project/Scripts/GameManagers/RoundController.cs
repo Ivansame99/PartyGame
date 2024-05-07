@@ -191,6 +191,11 @@ public class RoundController : MonoBehaviour
 	#region Coroutines
 	IEnumerator IStartNextRound()
 	{
+		if (bossRound)
+		{
+			GameManager.Instance.eventsController.StopEvents();
+		}
+
 		ChangeUIText("Round: " + ToRoman(roundIndex + 1) + " / " + ToRoman(currentRound.rounds.Length + 1));
 		roundUIAnim.SetTrigger("ChangeRound");
 		yield return new WaitForSeconds(secondsBetweenRounds);
