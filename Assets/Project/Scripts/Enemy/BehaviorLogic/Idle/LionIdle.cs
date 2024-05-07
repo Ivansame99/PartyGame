@@ -65,7 +65,7 @@ public class LionIdle : EnemyIdleSOBase
             }
 
             //behaviorIndex = Random.Range(0, 4);
-            behaviorIndex = 0;
+            behaviorIndex = 2;
             if (idleTimer <= 0)
             {
                 switch(behaviorIndex)

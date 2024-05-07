@@ -20,6 +20,8 @@ public class LionSpecial : EnemySpecialAttackSOBase
     [SerializeField] float preChargeTime;
     private float preChargeTimer;
 
+
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
