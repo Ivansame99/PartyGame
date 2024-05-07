@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8941994158753436760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Archery/String
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Archery/String
+  Guid:
+    Data1: 989617437
+    Data2: 1100478222
+    Data3: -1861605461
+    Data4: 1958961153
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 562
 --- !u!114 &-7750814270113136363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,7 +54,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 682
---- !u!114 &-7745776414550626957
+--- !u!114 &-7542032802464396216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,14 +64,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Damage
+  m_Name: event:/SFX/Sword/Armor
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Damage
+  Path: event:/SFX/Sword/Armor
   Guid:
-    Data1: 256919357
-    Data2: 1336023032
-    Data3: -204047716
-    Data4: 773643691
+    Data1: -1125752704
+    Data2: 1230312331
+    Data3: -1611614565
+    Data4: -1459480512
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -53,7 +80,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 682
+  Length: 509
 --- !u!114 &-7491661755292715975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +135,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 509
---- !u!114 &-6713487966034427340
+--- !u!114 &-7058665189771595950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,14 +145,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Archery/Whoosh
+  m_Name: event:/SFX/UI/Back
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Archery/Whoosh
+  Path: event:/SFX/UI/Back
   Guid:
-    Data1: 1460629324
-    Data2: 1335190419
-    Data3: -1168821875
-    Data4: 555995226
+    Data1: 1357462034
+    Data2: 1134296837
+    Data3: 306792589
+    Data4: 921507511
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -134,34 +161,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 468
---- !u!114 &-6401833521352814800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/Roulette_Accept
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/Roulette_Accept
-  Guid:
-    Data1: 1733493695
-    Data2: 1171658443
-    Data3: -114031170
-    Data4: 1203058927
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1073
+  Length: 219
 --- !u!114 &-6092487317008551876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,87 +189,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-5472896365591015026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/Roulette
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/Roulette
-  Guid:
-    Data1: 802605603
-    Data2: 1134466872
-    Data3: 725152170
-    Data4: -629155008
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 9875
---- !u!114 &-5245068144130841903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Sword/Whoosh
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Sword/Whoosh
-  Guid:
-    Data1: 1749641111
-    Data2: 1223569010
-    Data3: 1858367361
-    Data4: -1590344552
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 341
---- !u!114 &-4937480147340100213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/Back
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/Back
-  Guid:
-    Data1: 1357462034
-    Data2: 1134296837
-    Data3: 306792589
-    Data4: 921507511
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 219
 --- !u!114 &-4670811792699950147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +216,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 682
---- !u!114 &-4170920081581200882
+--- !u!114 &-4469761043868349574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -307,14 +226,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Archery/String
+  m_Name: event:/SFX/Character/Land
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Archery/String
+  Path: event:/SFX/Character/Land
   Guid:
-    Data1: 989617437
-    Data2: 1100478222
-    Data3: -1861605461
-    Data4: 1958961153
+    Data1: 1349015876
+    Data2: 1106261476
+    Data3: 923399048
+    Data4: -857637555
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -323,8 +242,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 562
---- !u!114 &-4089019807774967302
+  Length: 750
+--- !u!114 &-4242691696953321088
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,14 +253,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Sword/Armor
+  m_Name: event:/SFX/UI/Roulette
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Sword/Armor
+  Path: event:/SFX/UI/Roulette
   Guid:
-    Data1: -1125752704
-    Data2: 1230312331
-    Data3: -1611614565
-    Data4: -1459480512
+    Data1: 802605603
+    Data2: 1134466872
+    Data3: 725152170
+    Data4: -629155008
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -350,7 +269,88 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 509
+  Length: 9875
+--- !u!114 &-3502684060466318453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE
+  Guid:
+    Data1: -84067703
+    Data2: 1154408020
+    Data3: 495302582
+    Data4: -507679012
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 325218
+--- !u!114 &-3125992164936004803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Secutor/Attack_Spin
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Secutor/Attack_Spin
+  Guid:
+    Data1: -716996227
+    Data2: 1126404965
+    Data3: 407342503
+    Data4: -592273348
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 875
+--- !u!114 &-2906937308299236845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Archery/Armor
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Archery/Armor
+  Guid:
+    Data1: 523813413
+    Data2: 1222427719
+    Data3: -380161883
+    Data4: -646379166
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 682
 --- !u!114 &-2345798678716517105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-2055311534420855403
+--- !u!114 &-1618714270055883930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,14 +415,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/UpDown
+  m_Name: event:/SFX/Archery/Whoosh
   m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/UpDown
+  Path: event:/SFX/Archery/Whoosh
   Guid:
-    Data1: 2021506517
-    Data2: 1203412122
-    Data3: -608296277
-    Data4: 1768555121
+    Data1: 1460629324
+    Data2: 1335190419
+    Data3: -1168821875
+    Data4: 555995226
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 236
---- !u!114 &-1731969835602734890
+  Length: 468
+--- !u!114 &-998303168709661239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,14 +442,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Archery/Armor
+  m_Name: event:/SFX/Events/Thunder
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Archery/Armor
+  Path: event:/SFX/Events/Thunder
   Guid:
-    Data1: 523813413
-    Data2: 1222427719
-    Data3: -380161883
-    Data4: -646379166
+    Data1: -1676179423
+    Data2: 1169992903
+    Data3: 2109384341
+    Data4: -1458752715
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 682
+  Length: 4458
 --- !u!114 &-937723152431812636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,10 +474,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638505305196686039
+  lastModified: 638507247036671231
   FileSizes:
   - Name: Desktop
-    Value: 1634
+    Value: 2028
   Exists: 1
 --- !u!114 &-925677908262626029
 MonoBehaviour:
@@ -571,6 +571,33 @@ MonoBehaviour:
   - Name: 
     Value: 1594
   Exists: 1
+--- !u!114 &-260195271318808390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Roll
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Roll
+  Guid:
+    Data1: 1589976726
+    Data2: 1330037024
+    Data3: 1439749761
+    Data4: 1276785642
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1625
 --- !u!114 &-159095077771206448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,10 +613,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638505305196661557
+  lastModified: 638507247036657006
   FileSizes:
   - Name: Desktop
-    Value: 514112
+    Value: 5437024
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -607,33 +634,40 @@ MonoBehaviour:
   - {fileID: -937723152431812636}
   - {fileID: -159095077771206448}
   EditorEvents:
-  - {fileID: -4170920081581200882}
-  - {fileID: -1731969835602734890}
-  - {fileID: -7745776414550626957}
-  - {fileID: 4230661786364274255}
-  - {fileID: -6713487966034427340}
-  - {fileID: 7338581724171012661}
-  - {fileID: -4089019807774967302}
-  - {fileID: 850605393225117222}
-  - {fileID: -5245068144130841903}
-  - {fileID: 3741366705320861084}
-  - {fileID: 4845918802754043934}
-  - {fileID: 1266066554490412361}
-  - {fileID: 6265663127532144213}
-  - {fileID: 7312724759852082127}
-  - {fileID: 204624081170323459}
-  - {fileID: 8060701579218715836}
-  - {fileID: 2280970526455580672}
-  - {fileID: -4937480147340100213}
-  - {fileID: -5472896365591015026}
-  - {fileID: -6401833521352814800}
-  - {fileID: -2055311534420855403}
+  - {fileID: 8627360157032362043}
+  - {fileID: -7058665189771595950}
+  - {fileID: -8941994158753436760}
+  - {fileID: -998303168709661239}
+  - {fileID: -4242691696953321088}
+  - {fileID: -2906937308299236845}
+  - {fileID: 3655663647051751078}
+  - {fileID: 4661492509115136862}
+  - {fileID: -4469761043868349574}
+  - {fileID: -1618714270055883930}
+  - {fileID: 4908607942090690496}
+  - {fileID: 8181521666300811561}
+  - {fileID: -3125992164936004803}
+  - {fileID: -7542032802464396216}
+  - {fileID: -3502684060466318453}
+  - {fileID: -260195271318808390}
+  - {fileID: 2470700234144245110}
+  - {fileID: 9084824565549192724}
+  - {fileID: 1336507363359664092}
+  - {fileID: 8082105589748215514}
+  - {fileID: 5119855395274226565}
+  - {fileID: 7307980418354255192}
+  - {fileID: 7960540939657373853}
+  - {fileID: 7565668087531044856}
+  - {fileID: 8164125758009897374}
+  - {fileID: 6262715367109460009}
+  - {fileID: 4544769286472700417}
+  - {fileID: 397534613009041214}
   EditorParameters: []
   MasterBanks:
   - {fileID: -159095077771206448}
   StringsBanks:
   - {fileID: -937723152431812636}
-  cacheTime: 638505305196686039
+  cacheTime: 638507247036671231
   cacheVersion: 131617
 --- !u!114 &33524165311997506
 MonoBehaviour:
@@ -662,7 +696,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1750
---- !u!114 &204624081170323459
+--- !u!114 &397534613009041214
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -672,14 +706,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Sword/Sword
+  m_Name: event:/SFX/Sword/Wall
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Sword/Sword
+  Path: event:/SFX/Sword/Wall
   Guid:
-    Data1: -762874123
-    Data2: 1180273527
-    Data3: 1489998246
-    Data4: 1414033090
+    Data1: -1598693387
+    Data2: 1189693162
+    Data3: 926845621
+    Data4: 929985510
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -688,34 +722,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 234
---- !u!114 &850605393225117222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Roll
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Roll
-  Guid:
-    Data1: 1589976726
-    Data2: 1330037024
-    Data3: 1439749761
-    Data4: 1276785642
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1625
+  Length: 682
 --- !u!114 &1007933465781628250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,7 +750,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 234
---- !u!114 &1266066554490412361
+--- !u!114 &1336507363359664092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -753,14 +760,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Archery/Wall
+  m_Name: event:/SFX/UI/Roulette_Accept
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Archery/Wall
+  Path: event:/SFX/UI/Roulette_Accept
   Guid:
-    Data1: -742018856
-    Data2: 1244463119
-    Data3: 1493272750
-    Data4: -2036040942
+    Data1: 1733493695
+    Data2: 1171658443
+    Data3: -114031170
+    Data4: 1203058927
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -769,8 +776,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 750
---- !u!114 &2280970526455580672
+  Length: 1073
+--- !u!114 &2470700234144245110
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -780,14 +787,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/UI/Accept
+  m_Name: event:/SFX/Sword/Whoosh
   m_EditorClassIdentifier: 
-  Path: event:/SFX/UI/Accept
+  Path: event:/SFX/Sword/Whoosh
   Guid:
-    Data1: -421921791
-    Data2: 1292233381
-    Data3: 1171216566
-    Data4: 208903972
+    Data1: 1749641111
+    Data2: 1223569010
+    Data3: 1858367361
+    Data4: -1590344552
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -796,7 +803,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 265
+  Length: 341
 --- !u!114 &2906203429613960276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,7 +858,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
---- !u!114 &3741366705320861084
+--- !u!114 &3655663647051751078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -861,14 +868,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Jump
+  m_Name: event:/SFX/Enemies/Giant/Attack_Stomp
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Jump
+  Path: event:/SFX/Enemies/Giant/Attack_Stomp
   Guid:
-    Data1: -1067153979
-    Data2: 1318957150
-    Data3: 1578011537
-    Data4: 33686519
+    Data1: -947567825
+    Data2: 1248129754
+    Data3: 1585533841
+    Data4: 1232535666
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -877,7 +884,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 682
+  Length: 1375
 --- !u!114 &3848887605537161008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,7 +912,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 682
---- !u!114 &4230661786364274255
+--- !u!114 &4544769286472700417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -915,14 +922,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Land
+  m_Name: event:/SFX/Sword/Sword
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Land
+  Path: event:/SFX/Sword/Sword
   Guid:
-    Data1: 1349015876
-    Data2: 1106261476
-    Data3: 923399048
-    Data4: -857637555
+    Data1: -762874123
+    Data2: 1180273527
+    Data3: 1489998246
+    Data4: 1414033090
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -931,8 +938,8 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 750
---- !u!114 &4845918802754043934
+  Length: 234
+--- !u!114 &4661492509115136862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -942,14 +949,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Sword/Archery
+  m_Name: event:/SFX/Character/Damage
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Sword/Archery
+  Path: event:/SFX/Character/Damage
   Guid:
-    Data1: -1891739945
-    Data2: 1137819141
-    Data3: 83046784
-    Data4: 1372186367
+    Data1: 256919357
+    Data2: 1336023032
+    Data3: -204047716
+    Data4: 773643691
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -958,7 +965,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 289
+  Length: 682
+--- !u!114 &4908607942090690496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Drunk/Puke
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Drunk/Puke
+  Guid:
+    Data1: 239999590
+    Data2: 1233784159
+    Data3: -398527337
+    Data4: 2009086090
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 764
 --- !u!114 &5031626277003034933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -986,6 +1020,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1625
+--- !u!114 &5119855395274226565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/UpDown
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/UpDown
+  Guid:
+    Data1: 2021506517
+    Data2: 1203412122
+    Data3: -608296277
+    Data4: 1768555121
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 236
 --- !u!114 &5243818213042097592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,34 +1101,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1365
---- !u!114 &6265663127532144213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Footsteps
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Footsteps
-  Guid:
-    Data1: -1125617950
-    Data2: 1303867248
-    Data3: -257194332
-    Data4: -474843139
-  Banks:
-  - {fileID: -159095077771206448}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 1365
---- !u!114 &7312724759852082127
+--- !u!114 &6262715367109460009
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1094,7 +1128,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1125
---- !u!114 &7338581724171012661
+--- !u!114 &7307980418354255192
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1104,14 +1138,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Character/Die
+  m_Name: event:/SFX/Sword/Archery
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Character/Die
+  Path: event:/SFX/Sword/Archery
   Guid:
-    Data1: 648622182
-    Data2: 1261418867
-    Data3: 596285852
-    Data4: -535672197
+    Data1: -1891739945
+    Data2: 1137819141
+    Data3: 83046784
+    Data4: 1372186367
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -1120,7 +1154,34 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 1750
+  Length: 289
+--- !u!114 &7565668087531044856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Drunk/Bottle_Attack
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Drunk/Bottle_Attack
+  Guid:
+    Data1: -2051392547
+    Data2: 1270688614
+    Data3: 1604380093
+    Data4: 1033962442
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1166
 --- !u!114 &7681731864512102681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,6 +1202,33 @@ MonoBehaviour:
     Data4: -2036040942
   Banks:
   - {fileID: -925677908262626029}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 750
+--- !u!114 &7960540939657373853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Archery/Wall
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Archery/Wall
+  Guid:
+    Data1: -742018856
+    Data2: 1244463119
+    Data3: 1493272750
+    Data4: -2036040942
+  Banks:
+  - {fileID: -159095077771206448}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1175,7 +1263,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &8060701579218715836
+--- !u!114 &8082105589748215514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1185,14 +1273,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Sword/Wall
+  m_Name: event:/SFX/Character/Jump
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Sword/Wall
+  Path: event:/SFX/Character/Jump
   Guid:
-    Data1: -1598693387
-    Data2: 1189693162
-    Data3: 926845621
-    Data4: 929985510
+    Data1: -1067153979
+    Data2: 1318957150
+    Data3: 1578011537
+    Data4: 33686519
   Banks:
   - {fileID: -159095077771206448}
   IsStream: 0
@@ -1202,6 +1290,87 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 682
+--- !u!114 &8164125758009897374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Footsteps
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Footsteps
+  Guid:
+    Data1: -1125617950
+    Data2: 1303867248
+    Data3: -257194332
+    Data4: -474843139
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1365
+--- !u!114 &8181521666300811561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Character/Die
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Character/Die
+  Guid:
+    Data1: 648622182
+    Data2: 1261418867
+    Data3: 596285852
+    Data4: -535672197
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1750
+--- !u!114 &8627360157032362043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/UI/Accept
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/UI/Accept
+  Guid:
+    Data1: -421921791
+    Data2: 1292233381
+    Data3: 1171216566
+    Data4: 208903972
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 265
 --- !u!114 &8727326386855088468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,3 +1398,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 289
+--- !u!114 &9084824565549192724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Events/Water
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Events/Water
+  Guid:
+    Data1: 983984060
+    Data2: 1113928490
+    Data3: 797219760
+    Data4: 1079156994
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 13653
