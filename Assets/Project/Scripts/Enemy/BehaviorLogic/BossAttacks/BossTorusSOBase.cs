@@ -40,7 +40,7 @@ public class BossTorusSOBase : ScriptableObject
 
     public virtual void DoEnterLogic()
     {
-        
+        enemy.animator.ResetTrigger("Chase");
     }
     public virtual void DoExitLogic()
     {
@@ -57,7 +57,7 @@ public class BossTorusSOBase : ScriptableObject
 
             if (attackTimer <= 0)
             {
-                CreateTorus();
+                
                 enemy.animator.SetTrigger("Torus");
                 attackTimer = attackCooldown;
                 wavesCounter++;
@@ -84,7 +84,15 @@ public class BossTorusSOBase : ScriptableObject
         Destroy(waveAttack, waveTimeLife);
     }
     public virtual void DoPhysicsLogic() { }
-    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType) { }
+    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType) {
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttack:
+                CreateTorus();
+                break;
+        }
+    
+    }
     public virtual void ResetValues() {
         wavesCounter = 0;
     }
