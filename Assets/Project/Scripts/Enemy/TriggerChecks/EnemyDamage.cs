@@ -9,8 +9,8 @@ public class EnemyDamage : MonoBehaviour
     public float pushForce;
 
     [HideInInspector] public GameObject owner;
-    [HideInInspector] public Enemy enemy;
-    [HideInInspector] public float power;
+    public Enemy enemy;
+    internal float power;
     public void SetPushForce(float s)
     {
         pushForce = s;

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4917058530798735106}
   - component: {fileID: 6810569470719235583}
   - component: {fileID: 1052855410137882255}
+  - component: {fileID: -555955332788873334}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Projectile
@@ -150,9 +151,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 6
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1052855410137882255
 MonoBehaviour:
@@ -171,4 +172,17 @@ MonoBehaviour:
   pushForce: 25
   owner: {fileID: 0}
   enemy: {fileID: 0}
-  power: 0
+--- !u!114 &-555955332788873334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197141494704311148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a244e99d03c0a343a3cc52914a42912, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 3
+  gravityOn: 1

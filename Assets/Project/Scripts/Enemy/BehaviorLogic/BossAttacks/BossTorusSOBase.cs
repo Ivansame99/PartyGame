@@ -58,6 +58,7 @@ public class BossTorusSOBase : ScriptableObject
             if (attackTimer <= 0)
             {
                 CreateTorus();
+                enemy.animator.SetTrigger("Torus");
                 attackTimer = attackCooldown;
                 wavesCounter++;
             }
