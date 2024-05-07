@@ -25,16 +25,6 @@ public class LionProjectile : MonoBehaviour
     {
         Ray ray = new Ray(transform.position, Vector3.down);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 0.6f, groundLayer))
-        {
-           
-        }
-
-        if (Physics.Raycast(ray, out hit, maxDistance, groundLayer))
-        {
-            //Instantiate(explosionParticles, hit.point, rotation);
-            //Destroy(gameObject);
-        }
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer) && !onlyOnce)
         {
@@ -47,12 +37,8 @@ public class LionProjectile : MonoBehaviour
         if(Vector3.Distance(transform.position, hitPosition) <= 0.1) {
             collider.enabled = true;
             Instantiate(explosionParticles, hit.point, rotation);
-            Destroy(feedbackClone,0.2f);
-            Destroy(gameObject,0.2f);
+            Destroy(feedbackClone,0.1f);
+            Destroy(gameObject,0.1f);
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        
     }
 }

@@ -36,6 +36,11 @@ public class LionChase : EnemyChaseSOBase
         base.DoFrameUpdateLogic();
         if (!enemy.isDead)
         {
+            if (enemy.bossTarget == null)
+            {
+                enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
+                enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+            }
             if (enemy.bossTarget != null)
             {
                 direction = enemy.bossTarget.position - transform.position;
