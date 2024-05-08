@@ -1879,17 +1879,17 @@ PrefabInstance:
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.b
-      value: 0.31910825
+      value: 0.27394092
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.31910825
+      value: 0.27394092
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.9528302
+      value: 0.7169812
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567908889093, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
@@ -4858,7 +4858,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1392060301}
   - component: {fileID: 1392060303}
-  - component: {fileID: 1392060302}
   m_Layer: 5
   m_Name: SettingsContainer
   m_TagString: Untagged
@@ -4894,36 +4893,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1392060302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392060300}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.9622642, g: 0.7762656, b: 0.45843717, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1392060303
 CanvasRenderer:
   m_ObjectHideFlags: 0
