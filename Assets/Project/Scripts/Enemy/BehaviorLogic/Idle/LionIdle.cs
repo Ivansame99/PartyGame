@@ -25,7 +25,8 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Chase");
+        enemy.animator.ResetTrigger("Idle");
+        enemy.animator.SetTrigger("Idle");
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
 
@@ -34,6 +35,8 @@ public class LionIdle : EnemyIdleSOBase
 
         enemy.agent.isStopped = false;
         enemy.agent.speed = speed;
+
+        behaviorIndex = Random.Range(0, 4);
     }
 
     public override void DoExitLogic()
@@ -64,9 +67,20 @@ public class LionIdle : EnemyIdleSOBase
                 enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
             }
 
-            behaviorIndex = Random.Range(0, 4);
-            //behaviorIndex = 2;
-            if (idleTimer <= 0)
+            if (behaviorIndex == lastBehaviorIndex)
+            {
+                fixBehavior = false;
+                behaviorIndex = Random.Range(0, 4);
+                
+            }
+            else if (behaviorIndex != lastBehaviorIndex)
+            {
+                fixBehavior = true;
+                lastBehaviorIndex = behaviorIndex;
+            }
+            
+            //behaviorIndex = 0;
+            if (idleTimer <= 0 && fixBehavior)
             {
                 switch(behaviorIndex)
                 {
@@ -94,6 +108,7 @@ public class LionIdle : EnemyIdleSOBase
 
 
     }
+
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 

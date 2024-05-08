@@ -37,7 +37,7 @@ public class LionAttack : EnemyAttackSOBase
         attackForce = attackForceValor;
 
         //Animator
-        enemy.animator.ResetTrigger("Chase");
+        //enemy.animator.ResetTrigger("Chase");
         enemy.animator.SetTrigger("Attack");
     }
     public override void DoExitLogic()

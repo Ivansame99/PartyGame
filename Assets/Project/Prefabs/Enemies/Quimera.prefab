@@ -4949,8 +4949,8 @@ MonoBehaviour:
   speed: 4
   stepDistance: 1.5
   stepLength: 1
-  stepHeight: 0.2
-  footOffset: {x: 0, y: 0, z: 0}
+  stepHeight: 0.5
+  footOffset: {x: 1, y: 0, z: 1}
 --- !u!1 &342973437339696816
 GameObject:
   m_ObjectHideFlags: 0
@@ -28536,12 +28536,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8515331f9198d3458b8ad265799cfb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHealth>k__BackingField: 50
+  <maxHealth>k__BackingField: 500
   <inmuneTime>k__BackingField: 0.1
   secutorAudioManager: {fileID: 0}
   giantAudioManager: {fileID: 0}
   drunkAudioManager: {fileID: 0}
   trailSand: {fileID: 0}
+  attackCollider: {fileID: 8975323985824741288}
   enemyIdleBase: {fileID: 11400000, guid: 643d675855709e74c9c7fe7e6e23b19a, type: 2}
   enemyChaseBase: {fileID: 11400000, guid: 34b43ead947e1684fa898be59fdf221c, type: 2}
   enemyDeathBase: {fileID: 11400000, guid: 55804538cbecc044fab949c75e2058b4, type: 2}
