@@ -28,6 +28,8 @@ public class LionSpecial : EnemySpecialAttackSOBase
         switch (triggerType)
         {
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                enemy.attackCollider.enabled = false;
+                enemy.rb.velocity = Vector3.zero;  
                 enemy.stateMachine.ChangeState(enemy.idleState);
                 break;
         }
@@ -38,14 +40,20 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoEnterLogic();
         enemy.agent.isStopped = true;
 
-        
+        transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
+        playerDir = (enemy.bossTarget.position - transform.position).normalized;
+        playerDir.y = 0;
+
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
 
         atkTimer = atkDuration;
         preChargeTimer = preChargeTime;
 
+        enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Charge");
+
+
         Debug.Log("Aqui");
     }
 
@@ -73,12 +81,20 @@ public class LionSpecial : EnemySpecialAttackSOBase
             if (hit.collider.CompareTag("Wall"))
             {
                 isAttacking = false;
+                enemy.rb.velocity = Vector3.zero;
+                enemy.attackCollider.enabled = false;
                 enemy.stateMachine.ChangeState(enemy.idleState);
             }
         }
     }
     public void TimersFunction()
     {
+        if (enemy.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f && enemy.animator.GetCurrentAnimatorStateInfo(0).IsTag("OnCharge"))
+        {
+            isAttacking = true;
+            enemy.animator.SetTrigger("ChargeAtk");
+        }        
+        
         if (!isAttacking && preChargeTimer <= 0)
         {
             isAttacking = true;
@@ -86,15 +102,15 @@ public class LionSpecial : EnemySpecialAttackSOBase
         }
         else if (!isAttacking && preChargeTimer > 0)
         {
-            transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
-            playerDir = (enemy.bossTarget.position - transform.position).normalized;
-            playerDir.y = 0;
+
             preChargeTimer -= Time.deltaTime;
         }
 
         if (isAttacking && atkTimer <= 0)
         {
             isAttacking = false;
+            enemy.rb.velocity = Vector3.zero;
+            enemy.attackCollider.enabled = false;
             enemy.stateMachine.ChangeState(enemy.idleState);
         }
         else if (isAttacking && atkTimer > 0)
@@ -107,7 +123,6 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoPhysicsLogic();
         if(isAttacking)
         {
-            Debug.Log("isacaharging");
             Vector3 currentVelocity = new Vector3(enemy.rb.velocity.x, 0f, enemy.rb.velocity.z);
 
             if (currentVelocity.magnitude > chargeSpeed)

@@ -29,6 +29,7 @@ public class LionChase : EnemyChaseSOBase
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
 
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+        enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Chase");
     }
     public override void DoFrameUpdateLogic()

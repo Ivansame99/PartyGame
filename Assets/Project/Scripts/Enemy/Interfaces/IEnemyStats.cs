@@ -7,7 +7,6 @@ public interface ICombat
 {
     PowerController powerController { get; set; }
     EnemyDirector enemyDirector { get; set; }
-
     public float GetPowerDamageScale();
     public float GetPoweLevel();
 }

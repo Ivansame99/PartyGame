@@ -84,11 +84,12 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public DrunkAudioManager drunkAudioManager;
 
 	public ParticleSystem trailSand;
-	#endregion
+    public BoxCollider attackCollider;
+    #endregion
 
 
-	#region Health/Damage
-	public void SetDamagedStatus(bool isDamaged)
+    #region Health/Damage
+    public void SetDamagedStatus(bool isDamaged)
 	{
 		IsDamaged = isDamaged;
 	}
@@ -160,6 +161,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 
 	private void FixedUpdate()
 	{
+		Debug.Log(stateMachine.CurrentEnemyState);
 		stateMachine.CurrentEnemyState.PhysicUpdate();
 	}
 

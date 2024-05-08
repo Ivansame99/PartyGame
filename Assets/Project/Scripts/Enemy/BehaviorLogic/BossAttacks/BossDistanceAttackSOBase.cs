@@ -38,6 +38,7 @@ public class BossDistanceAttackSOBase : ScriptableObject
     {
         attackTimer = attackCooldown;
         projectilesCounter = 0;
+        enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Fireball");
 
     }
@@ -54,9 +55,9 @@ public class BossDistanceAttackSOBase : ScriptableObject
     {
         if (!enemy.isDead)
         {
-            BossRandomMovement();
-            if (projectilesCounter == totalProjectiles) enemy.stateMachine.ChangeState(enemy.idleState);
-            if(attackTimer <= 0 && projectilesCounter < totalProjectiles)
+            //BossRandomMovement();
+            if (projectilesCounter >= totalProjectiles) enemy.stateMachine.ChangeState(enemy.idleState);
+            if(attackTimer <= 0 && projectilesCounter <= totalProjectiles)
             {
                 
                 for (int i = 0; i < enemy.enemyDirector.players.Count; i++)
