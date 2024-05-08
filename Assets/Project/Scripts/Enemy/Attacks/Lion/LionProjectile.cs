@@ -7,7 +7,8 @@ public class LionProjectile : MonoBehaviour
 
     [SerializeField] GameObject projectileFeedback;
     [SerializeField] GameObject explosionParticles;
-
+    [SerializeField] ParticleSystem TrailSand;
+    [SerializeField] ParticleSystem Ember;
     private bool onlyOnce = false;
     private Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
 
@@ -20,6 +21,18 @@ public class LionProjectile : MonoBehaviour
     {
         collider = GetComponent<SphereCollider>();
         collider.enabled = false;
+    }
+    void StopParticleLoop(ParticleSystem particleSystemInstance)
+    {
+        // Detener el sistema de partículas
+        ParticleSystem ps = particleSystemInstance.GetComponent<ParticleSystem>();
+        if (ps != null)
+        {
+            ps.Stop();
+        }
+
+        // Desvincular las partículas del enemigo
+        particleSystemInstance.transform.SetParent(null);
     }
     void Update()
     {
@@ -36,6 +49,8 @@ public class LionProjectile : MonoBehaviour
 
         if(Vector3.Distance(transform.position, hitPosition) <= 0.1) {
             collider.enabled = true;
+            StopParticleLoop(TrailSand);
+            StopParticleLoop(Ember);
             Instantiate(explosionParticles, hit.point, rotation);
             Destroy(feedbackClone,0.1f);
             Destroy(gameObject,0.1f);
