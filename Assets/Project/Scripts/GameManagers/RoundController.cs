@@ -83,7 +83,13 @@ public class RoundController : MonoBehaviour
 		if (!debug)
 		{
 			if (roundIndex <= currentRound.rounds.Length) CheckCurrentEnemiesDeath();
-			else
+
+			if (roundIndex == currentRound.rounds.Length)
+			{
+				bossRound = true;
+			}
+
+			if (roundIndex > currentRound.rounds.Length)
 			{
 				if (!finalRound)
 				{
