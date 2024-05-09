@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class GiantAudioManager : MonoBehaviour
 {
@@ -10,27 +11,19 @@ public class GiantAudioManager : MonoBehaviour
 	[SerializeField]
 	private float maxPitch = 1.2f;
 
-	[SerializeField]
-	private AudioSource damage;
-
-	[SerializeField]
-	private AudioSource death;
-
-	[SerializeField]
-	private AudioSource stomp;
-
-	public void PlayDamage()
+	public void PlayDamage() //que es
 	{
-		damage.Play();
+	// FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemys/Drunk/Puke", transform.position);
 	}
 
 	public void PlayDeath()
 	{
-		death.Play();
+	//FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Archery/String", transform.position);
 	}
 
 	public void PlayStomp()
 	{
-		stomp.Play();
+	FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Giant/Attack_Stomp", transform.position);
 	}
-}
+	}
+

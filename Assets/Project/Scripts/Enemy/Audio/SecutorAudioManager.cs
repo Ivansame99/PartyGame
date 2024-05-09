@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class SecutorAudioManager : MonoBehaviour
 {
@@ -10,27 +11,24 @@ public class SecutorAudioManager : MonoBehaviour
 	[SerializeField]
 	private float maxPitch = 1.2f;
 
-	[SerializeField]
-	private AudioSource damage;
-
-	[SerializeField]
-	private AudioSource death;
-
-	[SerializeField]
-	private AudioSource swordWhoosh;
-
 	public void PlayDamage()
 	{
-		damage.Play();
+	// FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemys/Drunk/Puke", transform.position);
 	}
 
 	public void PlayDeath()
 	{
-		death.Play();
+	//FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Archery/String", transform.position);
 	}
 
 	public void PlaySwordWhoosh()
 	{
-		swordWhoosh.Play();
+	FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Sword/Whoosh", transform.position);
+	}
+
+	public void PlaySpin()
+	{
+	FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Secutor/Attack_Spin", transform.position);
 	}
 }
+

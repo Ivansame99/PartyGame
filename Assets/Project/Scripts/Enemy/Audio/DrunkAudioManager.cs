@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class DrunkAudioManager : MonoBehaviour
 {
@@ -10,28 +11,24 @@ public class DrunkAudioManager : MonoBehaviour
     [SerializeField]
     private float maxPitch = 1.2f;
 
-    [SerializeField]
-    private AudioSource damage;
-
-    [SerializeField]
-    private AudioSource death;
-
-    [SerializeField]
-    private AudioSource projectileLaunch;
-
-    [SerializeField]
-    private AudioSource projectileHit;
-
-    public void PlayDamage()
+    public void PlayDamage() 
     {
-        damage.Play();
-        damage.pitch = Random.Range(1.5f, 1.8f);
+    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemys/Drunk/Puke", transform.position);
     }
-    public void PlayProjectileHit() { projectileHit.Play(); Random.Range(1.2f, 1.5f); }
-    public void PlayProjectileLaunch() { projectileLaunch.Play(); Random.Range(1.5f, 1.8f); }
+
     public void PlayDeath()
     {
-        death.pitch = Random.Range(minPitch, maxPitch);
-        death.Play();
+    // FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Archery/String", transform.position);
     }
-}
+
+    public void PlayProjectileLaunch()
+    {
+    //FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Drunk/Bottle_Attack", transform.position);
+    }
+    public void PlayProjectileHit()
+    {
+    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Drunk/Bottle_Attack", transform.position);
+    }
+
+
+    }
