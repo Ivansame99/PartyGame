@@ -13,7 +13,7 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] private float lineTimeLife = 0.5f;
     private SphereCollider collider;
 
-    //Variables para el cálculo de la trayectoria
+    //Variables para el cï¿½lculo de la trayectoria
     private float step;
     private Camera _cam;
 
