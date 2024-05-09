@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using FMODUnity;
 
 [CreateAssetMenu(menuName = "Events/Water")]
 public class WaterEvent : GameEvent
@@ -36,7 +37,9 @@ public class WaterEvent : GameEvent
 	private float waterTimer;
 
 	private bool fountainInstanciated;
-
+	[FMODUnity.EventRef] 
+    public string waterEventPath = "event:/SFX/Events/Water";
+	
 	public override void EventStart()
     {
 		eventFinished = false;
@@ -46,6 +49,8 @@ public class WaterEvent : GameEvent
 		waterExpanding=true;
 		waterRetract = false;
 		fountainInstanciated = false;
+
+		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
 	}
 
     public override void EventUpdate()
