@@ -40,9 +40,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoEnterLogic();
         enemy.agent.isStopped = true;
 
-        transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
-        playerDir = (enemy.bossTarget.position - transform.position).normalized;
-        playerDir.y = 0;
+
 
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
@@ -102,7 +100,9 @@ public class LionSpecial : EnemySpecialAttackSOBase
         }
         else if (!isAttacking && preChargeTimer > 0)
         {
-
+            transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
+            playerDir = (enemy.bossTarget.position - transform.position).normalized;
+            playerDir.y = 0;
             preChargeTimer -= Time.deltaTime;
         }
 

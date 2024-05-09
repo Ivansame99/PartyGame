@@ -24,6 +24,7 @@ public class LionAttack : EnemyAttackSOBase
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
                 enemy.stateMachine.ChangeState(enemy.idleState);
+                enemy.rb.velocity = Vector3.zero;
                 break;
         }
     }

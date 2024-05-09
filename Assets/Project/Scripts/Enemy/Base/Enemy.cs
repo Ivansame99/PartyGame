@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public bool isDead { get; set; }
 	public bool IsDamaged { get; set; }
 	public int randomPlayerTarget { get; set; }
-
+	public Transform patrolPoint { get; set; }
 
     //COMPONENTS INTERFACE
     public NavMeshAgent agent { get; set; }
@@ -101,6 +102,13 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 		agent.SetDestination(position);
 	}
 
+	public Transform RandomPatrol()
+	{
+        int randomPoint = Random.Range(0, enemyDirector.enemyPatrolPoints.Length);
+        patrolPoint = enemyDirector.enemyPatrolPoints[randomPoint];
+
+		return patrolPoint;
+    }
 	public void AgentState(bool state)
 	{
 		agent.enabled = state;

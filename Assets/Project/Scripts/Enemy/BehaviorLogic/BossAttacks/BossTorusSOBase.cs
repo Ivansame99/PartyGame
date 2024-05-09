@@ -41,23 +41,26 @@ public class BossTorusSOBase : ScriptableObject
     public virtual void DoEnterLogic()
     {
         enemy.animator.ResetTrigger("Idle");
+        enemy.agent.isStopped = true;
     }
     public virtual void DoExitLogic()
     {
         ResetValues();
+        enemy.animator.ResetTrigger("Idle");
     }
     public virtual void DoFrameUpdateLogic()
     {
         if (!enemy.isDead)
         {
+            enemy.rb.velocity = Vector3.zero;
             if (wavesCounter > totalWaves)
             {
                 enemy.stateMachine.ChangeState(enemy.idleState);
             }
 
-            if (attackTimer <= 0)
+            if (attackTimer <= 0 && wavesCounter <= totalWaves)
             {
-                enemy.animator.ResetTrigger("Idle");
+                //enemy.animator.ResetTrigger("AgainTorus");
                 enemy.animator.SetTrigger("Torus");
                 attackTimer = attackCooldown;
                 
