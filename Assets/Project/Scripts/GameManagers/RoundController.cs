@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Random = UnityEngine.Random;
+using FMODUnity;
 
 public class RoundController : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class RoundController : MonoBehaviour
 	[SerializeField]
 	private GameObject godRay2;
 	#endregion
+	
+	[FMODUnity.EventRef] 
+    public string waterEventPath = "event:/SFX/Events/Water"; //cambiar evento
 
 	#region Variables
 	internal List<GameObject> currentEnemies;
@@ -144,6 +148,7 @@ public class RoundController : MonoBehaviour
 		if (rainPrefab!=null)
 		{
 			Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
+			FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);  
 			LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
 			godRay.SetActive(false);
 			godRay2.SetActive(false);
