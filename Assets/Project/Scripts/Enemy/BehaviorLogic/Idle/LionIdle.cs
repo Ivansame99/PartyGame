@@ -38,10 +38,14 @@ public class LionIdle : EnemyIdleSOBase
         //behaviorIndex = Random.Range(0, 3);
         idleTimer = idleDuration;
 
-        
-        //enemy.agent.speed = speed;
 
-        behaviorIndex = Random.Range(0, 4);
+        int randomIndex;
+        do
+        {
+            randomIndex = Random.Range(0, 4);
+        } while (randomIndex == lastBehaviorIndex);
+
+        behaviorIndex = randomIndex;
         //while (behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
     }
 
@@ -74,7 +78,7 @@ public class LionIdle : EnemyIdleSOBase
                 enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
             }
 
-            behaviorIndex = Random.Range(0, 4);
+            //behaviorIndex = Random.Range(0, 4);
             //behaviorIndex = 0;
             if (idleTimer <= 0)
             {
