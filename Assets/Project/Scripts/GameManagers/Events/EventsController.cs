@@ -57,6 +57,7 @@ public class EventsController : MonoBehaviour
     {
 		if (randomEvents == null || randomEvents.Count == 0 || stopEvents)
 		{
+			Debug.Log("Entras");
 			return;
 		}
 
