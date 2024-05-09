@@ -42,11 +42,13 @@ public class LionIdle : EnemyIdleSOBase
         //enemy.agent.speed = speed;
 
         behaviorIndex = Random.Range(0, 4);
+        //while (behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        lastBehaviorIndex = behaviorIndex;
     }
 
     public override void DoFrameUpdateLogic()
@@ -72,20 +74,9 @@ public class LionIdle : EnemyIdleSOBase
                 enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
             }
 
-            if (behaviorIndex == lastBehaviorIndex)
-            {
-                fixBehavior = false;
-                behaviorIndex = Random.Range(0, 4);
-                
-            }
-            else if (behaviorIndex != lastBehaviorIndex)
-            {
-                fixBehavior = true;
-                lastBehaviorIndex = behaviorIndex;
-            }
-            
+            behaviorIndex = Random.Range(0, 4);
             //behaviorIndex = 0;
-            if (idleTimer <= 0 && fixBehavior)
+            if (idleTimer <= 0)
             {
                 enemy.agent.isStopped = true;
                 switch(behaviorIndex)

@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 
 	private void FixedUpdate()
 	{
-		Debug.Log(stateMachine.CurrentEnemyState);
+		//Debug.Log(stateMachine.CurrentEnemyState);
 		stateMachine.CurrentEnemyState.PhysicUpdate();
 	}
 

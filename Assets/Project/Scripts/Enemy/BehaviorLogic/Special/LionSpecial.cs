@@ -53,6 +53,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
         //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Charge");
         feedback = Instantiate(feedbackAttack, enemy.transform);
+        feedback.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.1f, enemy.transform.position.z);
     }
 
     public override void DoExitLogic()
