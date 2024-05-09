@@ -20,7 +20,9 @@ public class LionSpecial : EnemySpecialAttackSOBase
     [SerializeField] float preChargeTime;
     private float preChargeTimer;
 
-
+    [Header("Feedback prefab")]
+    [SerializeField] private GameObject feedbackAttack;
+    private GameObject feedback;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -40,9 +42,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
         base.DoEnterLogic();
         enemy.agent.isStopped = true;
 
-        transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
-        playerDir = (enemy.bossTarget.position - transform.position).normalized;
-        playerDir.y = 0;
+
 
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
@@ -50,11 +50,10 @@ public class LionSpecial : EnemySpecialAttackSOBase
         atkTimer = atkDuration;
         preChargeTimer = preChargeTime;
 
-        enemy.animator.ResetTrigger("Idle");
+        //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Charge");
-
-
-        Debug.Log("Aqui");
+        feedback = Instantiate(feedbackAttack, enemy.transform);
+        feedback.transform.position = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.1f, enemy.transform.position.z);
     }
 
     public override void DoExitLogic()
@@ -93,18 +92,30 @@ public class LionSpecial : EnemySpecialAttackSOBase
         {
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
-        }        
-        
+            enemy.attackCollider.enabled = true;
+            if (feedback != null) Destroy(feedback);
+        }
+
+        if (!isAttacking && preChargeTimer > preChargeTime / 2)
+        {
+            transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
+            playerDir = (enemy.bossTarget.position - transform.position).normalized;
+            playerDir.y = 0;
+        }
+
         if (!isAttacking && preChargeTimer <= 0)
         {
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
+            enemy.attackCollider.enabled = true;
+            if (feedback != null) Destroy(feedback);
         }
         else if (!isAttacking && preChargeTimer > 0)
         {
 
             preChargeTimer -= Time.deltaTime;
         }
+
 
         if (isAttacking && atkTimer <= 0)
         {

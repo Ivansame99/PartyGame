@@ -25,23 +25,30 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.ResetTrigger("Idle");
+        enemy.agent.isStopped = false;
+        //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Idle");
+        //enemy.animator.ResetTrigger("Idle");
+        //enemy.animator.SetTrigger("Chase");
+        enemy.MoveEnemy(enemy.RandomPatrol().transform.position);
         enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+        int ola = Random.Range(0, enemy.enemyDirector.enemyPatrolPoints.Length);
 
         //behaviorIndex = Random.Range(0, 3);
         idleTimer = idleDuration;
 
-        enemy.agent.isStopped = false;
-        enemy.agent.speed = speed;
+        
+        //enemy.agent.speed = speed;
 
         behaviorIndex = Random.Range(0, 4);
+        //while (behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
     }
 
     public override void DoExitLogic()
     {
         base.DoExitLogic();
+        lastBehaviorIndex = behaviorIndex;
     }
 
     public override void DoFrameUpdateLogic()
@@ -67,21 +74,11 @@ public class LionIdle : EnemyIdleSOBase
                 enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
             }
 
-            if (behaviorIndex == lastBehaviorIndex)
-            {
-                fixBehavior = false;
-                behaviorIndex = Random.Range(0, 4);
-                
-            }
-            else if (behaviorIndex != lastBehaviorIndex)
-            {
-                fixBehavior = true;
-                lastBehaviorIndex = behaviorIndex;
-            }
-            
+            behaviorIndex = Random.Range(0, 4);
             //behaviorIndex = 0;
-            if (idleTimer <= 0 && fixBehavior)
+            if (idleTimer <= 0)
             {
+                enemy.agent.isStopped = true;
                 switch(behaviorIndex)
                 {
                     case 0:
@@ -101,6 +98,7 @@ public class LionIdle : EnemyIdleSOBase
             else
             {
                 idleTimer -= Time.deltaTime;
+                enemy.rb.velocity = Vector3.zero;
             }
         }
         else enemy.stateMachine.ChangeState(enemy.deathState);
@@ -109,22 +107,6 @@ public class LionIdle : EnemyIdleSOBase
 
     }
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
-    {
-
-        Vector3 randomPoint = center + Random.insideUnitSphere * range; //random point in a sphere 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
-        {
-            //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
-            //or add a for loop like in the documentation
-            result = hit.position;
-            return true;
-        }
-
-        result = Vector3.zero;
-        return false;
-    }
     public override void DoPhysicsLogic()
     {
         base.DoPhysicsLogic();

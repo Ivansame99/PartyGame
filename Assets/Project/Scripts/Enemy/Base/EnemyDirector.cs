@@ -15,7 +15,7 @@ public class EnemyDirector : MonoBehaviour
 
     private PlayerHealthController[] playerHealth;
     public int playerDead;
-
+    public Transform[] enemyPatrolPoints;
     void Start()
     {
         roundController = this.GetComponent<RoundController>();

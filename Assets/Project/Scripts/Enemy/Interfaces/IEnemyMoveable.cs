@@ -16,5 +16,5 @@ public interface IEnemyMoveable
     void AgentState(bool state);
     void MoveEnemy(Vector3 position);
 
-
+    Transform patrolPoint {  get; set; }
 }

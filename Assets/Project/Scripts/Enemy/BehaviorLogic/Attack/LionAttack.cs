@@ -5,8 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Lion Attack State", menuName = "Enemy Logic/Boss/Lion/Attack Logic/AttackState")]
 public class LionAttack : EnemyAttackSOBase
 {
+    [Header("Attack parameters")]
     [SerializeField] private float attackForceValor;
     [SerializeField, Range(0f, 1f)] private float comboMultiplyForce;
+
+    [Header("Feedback prefab")]
+    [SerializeField] private GameObject feedbackAttack;
+    private GameObject feedback;
 
     //Combo controller
     private int attackCount;
@@ -24,6 +29,7 @@ public class LionAttack : EnemyAttackSOBase
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
                 enemy.stateMachine.ChangeState(enemy.idleState);
+                enemy.rb.velocity = Vector3.zero;
                 break;
         }
     }
@@ -39,11 +45,13 @@ public class LionAttack : EnemyAttackSOBase
         //Animator
         //enemy.animator.ResetTrigger("Chase");
         enemy.animator.SetTrigger("Attack");
+        feedback = Instantiate(feedbackAttack, enemy.transform);
     }
     public override void DoExitLogic()
     {
         base.DoExitLogic();
         enemy.rb.velocity = Vector3.zero;
+        enemy.attackCollider.enabled = false;
     }
     public override void DoFrameUpdateLogic()
     {
@@ -57,15 +65,18 @@ public class LionAttack : EnemyAttackSOBase
 
         if (isAttacking)
         {
+            if (feedback != null) Destroy(feedback);
             if (attackCount > 1)
             {
                 sumForces = attackForce * comboMultiplyForce;
                 attackForce += sumForces;
             }
             enemy.rb.AddForce(transform.forward * attackForce, ForceMode.Impulse);
+            enemy.attackCollider.enabled = true;
             attackCount++;
             sumForces = 0;
             isAttacking = false;
+            
         }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
