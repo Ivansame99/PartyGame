@@ -31,6 +31,7 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
 
         attackTimer = attackCooldown;
         feedback = Instantiate(feedbackAttack, enemy.transform);
+      
         finish = false;
     }
 
@@ -62,6 +63,7 @@ public class DrunkSpecial : EnemySpecialAttackSOBase
             {
                 if (feedback != null) Destroy(feedback);
                 puke = Instantiate(pukeParticles, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 1, enemy.transform.position.z), enemy.transform.rotation);
+                enemy.drunkAudioManager.PlayVomitAttack();
                 finish = true;
             }
         }

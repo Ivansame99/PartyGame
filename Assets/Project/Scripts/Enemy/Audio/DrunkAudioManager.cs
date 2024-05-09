@@ -30,5 +30,9 @@ public class DrunkAudioManager : MonoBehaviour
     FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Drunk/Bottle_Attack", transform.position);
     }
 
+    public void PlayVomitAttack()
+    {
+
+    }
 
     }
