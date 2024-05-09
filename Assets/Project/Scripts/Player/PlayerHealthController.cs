@@ -343,6 +343,12 @@ public class PlayerHealthController : MonoBehaviour
 		if (other.CompareTag("Potion"))
 		{
 			RestoreHealth(other.GetComponent<RestoreHealthEvent>().recoverAmmountMultiplier);
+			ParticleSystem ps = other.GetComponent<RestoreHealthEvent>().TrailSand.GetComponent<ParticleSystem>();
+			if (ps != null)
+			{
+				ps.Stop();
+			}
+			other.GetComponent<RestoreHealthEvent>().TrailSand.transform.SetParent(null);
 			Destroy(other.gameObject);
 		}
 		if (other.transform.CompareTag("Projectile") && invencibleTimer <= 0 && !dead)

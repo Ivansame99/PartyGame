@@ -110,7 +110,7 @@ public class EventsController : MonoBehaviour
 	{
 		stopEvents = true;
 		eventsCanvas.gameObject.SetActive(false);
-		currentEvent.EventDestroy();
+		if(currentEvent!=null) currentEvent.EventDestroy();
 	}
 	#endregion
 

@@ -74,7 +74,7 @@ public class SettingsController : MonoBehaviour
 			if(lastButtonSelected.GetComponent<ButtonCursorPos>()!=null) cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
 		}
 
-		if (Gamepad.current != null && Gamepad.current.buttonEast.isPressed)
+		if ((Gamepad.current != null && Gamepad.current.buttonEast.isPressed) || Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
 		{
 			Hide();
 			soundManager.CancelButtonSound();

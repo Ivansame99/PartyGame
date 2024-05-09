@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
 	//Enemy
 	[SerializeField] private Enemy enemy;
 
+	[SerializeField] private bool isBoss = false;
 	//Inmune time after hit
 	[HideInInspector] public bool invencibility;
 	[HideInInspector] public float timer;
@@ -55,8 +56,8 @@ public class EnemyHealth : MonoBehaviour
 	{
 		if (enemy == null) enemy = GetComponent<Enemy>();
 		healBarCanvas = GameObject.FindGameObjectWithTag("UICanvas").GetComponent<Canvas>();
-		SetupHealthBar(healBarCanvas, GetComponent<Camera>());
-		//Invoke(nameof(LoadMaxHealth), 0.1f);
+		if(!isBoss) SetupHealthBar(healBarCanvas, GetComponent<Camera>());
+
 		if (enemy.powerController != null)
 		{
 			enemy.powerController.OnCurrentPowerChanged += HandleCurrentPowerChanged;

@@ -40,7 +40,7 @@ public class BossTorusSOBase : ScriptableObject
 
     public virtual void DoEnterLogic()
     {
-        
+        enemy.animator.ResetTrigger("Idle");
     }
     public virtual void DoExitLogic()
     {
@@ -50,16 +50,17 @@ public class BossTorusSOBase : ScriptableObject
     {
         if (!enemy.isDead)
         {
-            if (wavesCounter >= totalWaves)
+            if (wavesCounter > totalWaves)
             {
                 enemy.stateMachine.ChangeState(enemy.idleState);
             }
 
             if (attackTimer <= 0)
             {
-                CreateTorus();
+                enemy.animator.ResetTrigger("Idle");
+                enemy.animator.SetTrigger("Torus");
                 attackTimer = attackCooldown;
-                wavesCounter++;
+                
             }
             else
             {
@@ -79,12 +80,21 @@ public class BossTorusSOBase : ScriptableObject
         torus.owner = enemy.gameObject;
         torus.waveSpeed = waveSpeed;
         torus.waveTimeLife = waveTimeLife;
-
         Destroy(waveAttack, waveTimeLife);
+        wavesCounter++;
     }
     public virtual void DoPhysicsLogic() { }
-    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType) { }
-    public virtual void ResetValues() {
+    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
+    {
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttack:
+                CreateTorus();
+                break;
+        }
+    }
+    public virtual void ResetValues()
+    {
         wavesCounter = 0;
     }
 }

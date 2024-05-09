@@ -5,27 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Lion Attack State", menuName = "Enemy Logic/Boss/Lion/Attack Logic/AttackState")]
 public class LionAttack : EnemyAttackSOBase
 {
+    [SerializeField] private float attackForceValor;
+    [SerializeField, Range(0f, 1f)] private float comboMultiplyForce;
 
-
-    //COOLDOWN ATTACKS
+    //Combo controller
     private int attackCount;
-    private float attackTimer;
-    [SerializeField] private float timeBetweenAttacks;
-    [SerializeField] private float attackForce;
-
+    private float attackForce;
+    private float sumForces;
     bool isAttacking;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
-
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttack:
+                isAttacking = true;
+                break;
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                enemy.stateMachine.ChangeState(enemy.idleState);
+                break;
+        }
     }
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        //Reset parameters
         enemy.agent.isStopped = true;
         attackCount = 0;
-        attackTimer = timeBetweenAttacks;
+        sumForces = 0;
+        attackForce = attackForceValor;
+
+        //Animator
+        //enemy.animator.ResetTrigger("Chase");
+        enemy.animator.SetTrigger("Attack");
     }
     public override void DoExitLogic()
     {
@@ -36,23 +49,6 @@ public class LionAttack : EnemyAttackSOBase
     {
         base.DoFrameUpdateLogic();
 
-        //A BIT OF COOLDOWN WHEN ATTACK FINISHED
-        if (!enemy.isDead)
-        {
-            if(attackCount >= 4)
-            {
-                enemy.stateMachine.ChangeState(enemy.idleState);
-            }
-        }
-        else enemy.stateMachine.ChangeState(enemy.deathState);
-
-        if (attackTimer <= 0)
-        {   
-            enemy.animator.SetInteger("AttackCombo", attackCount);
-            isAttacking = true;
-            attackTimer = timeBetweenAttacks;
-        }
-        else attackTimer -= Time.deltaTime;
     }
     public override void DoPhysicsLogic()
     {
@@ -61,10 +57,14 @@ public class LionAttack : EnemyAttackSOBase
 
         if (isAttacking)
         {
-            
+            if (attackCount > 1)
+            {
+                sumForces = attackForce * comboMultiplyForce;
+                attackForce += sumForces;
+            }
+            enemy.rb.AddForce(transform.forward * attackForce, ForceMode.Impulse);
             attackCount++;
-            enemy.rb.AddForce(enemy.transform.forward * attackForce, ForceMode.Impulse);
-            enemy.rb.velocity = Vector3.zero;
+            sumForces = 0;
             isAttacking = false;
         }
     }

@@ -13,7 +13,7 @@ public class Lion : Enemy
     [SerializeField] private BossTorusSOBase bossTorusAttack;
     [SerializeField] private BossDistanceAttackSOBase bossDistanceAttack;
     [SerializeField] private EnemySpecialAttackSOBase enemySpecialAttackBase;
-
+    
     private void Awake()
     {
         enemyIdleBaseInstance = Instantiate(enemyIdleBase);

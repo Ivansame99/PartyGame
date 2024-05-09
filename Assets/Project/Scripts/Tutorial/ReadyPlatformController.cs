@@ -45,7 +45,7 @@ public class ReadyPlatformController : MonoBehaviour
 		{
 			if (loadArena1)
 			{
-				GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
+				GameManager.Instance.gmSceneManager.ChangeSceneToArenaSnow(true);
 			} else
 			{
 				arenaSelector.Scroll();

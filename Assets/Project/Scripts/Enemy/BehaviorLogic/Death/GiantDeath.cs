@@ -96,7 +96,7 @@ public class GiantDeath : EnemyDeathSOBase
         deathFlag = true;
         //Feedback
         StopParticleLoop(enemy.trailSand);
-        enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
+        if(enemy.playerPos!=null) enemy.enemyTargetController.DecreasePlayerTarget(enemy.playerPos.name);
 
         Vector3 spawnPosition = new Vector3(enemy.transform.position.x, enemy.transform.position.y + 4f, enemy.transform.position.z);
         CalculateNumberOfParticles();

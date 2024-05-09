@@ -25,15 +25,18 @@ public class LionIdle : EnemyIdleSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
+        enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Idle");
-        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.players.Count);
-
+        enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
         enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+
         //behaviorIndex = Random.Range(0, 3);
         idleTimer = idleDuration;
 
         enemy.agent.isStopped = false;
         enemy.agent.speed = speed;
+
+        behaviorIndex = Random.Range(0, 4);
     }
 
     public override void DoExitLogic()
@@ -58,18 +61,41 @@ public class LionIdle : EnemyIdleSOBase
             */
 
             //while(behaviorIndex != lastBehaviorIndex) behaviorIndex = Random.Range(0, 4);
-            behaviorIndex = Random.Range(0, 2);
-            if (idleTimer <= 0)
+            if (enemy.bossTarget == null)
+            {
+                enemy.randomPlayerTarget = Random.Range(0, enemy.enemyDirector.currentPlayers);
+                enemy.bossTarget = enemy.enemyDirector.players[enemy.randomPlayerTarget].transform;
+            }
+
+            if (behaviorIndex == lastBehaviorIndex)
+            {
+                fixBehavior = false;
+                behaviorIndex = Random.Range(0, 4);
+                
+            }
+            else if (behaviorIndex != lastBehaviorIndex)
+            {
+                fixBehavior = true;
+                lastBehaviorIndex = behaviorIndex;
+            }
+            
+            //behaviorIndex = 0;
+            if (idleTimer <= 0 && fixBehavior)
             {
                 switch(behaviorIndex)
                 {
                     case 0:
-                        enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                        enemy.stateMachine.ChangeState(enemy.bossTorusState);
                         break;
                     case 1:
+                        enemy.stateMachine.ChangeState(enemy.bossDistanceAttackState);
+                        break;
+                    case 2:
                         enemy.stateMachine.ChangeState(enemy.chaseState);
                         break;
-
+                    case 3:
+                        enemy.stateMachine.ChangeState(enemy.specialAttackState);
+                        break;
                 }
             }
             else
@@ -82,6 +108,7 @@ public class LionIdle : EnemyIdleSOBase
 
 
     }
+
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
 

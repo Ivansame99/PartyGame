@@ -15,7 +15,7 @@ public class LionDeath : EnemyDeathSOBase
     public override void DoEnterLogic()
     {
         base.DoEnterLogic();
-        enemy.animator.SetTrigger("Death");
+        //enemy.animator.SetTrigger("Death");
         //enemy.secutorAudioManager.PlayDeath();
     }
     void StopParticleLoop(ParticleSystem particleSystemInstance)

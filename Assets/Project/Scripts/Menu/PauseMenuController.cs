@@ -42,7 +42,7 @@ public class PauseMenuController : MonoBehaviour
     {
 		if (settingsController.setingsOn) return;
 
-		if (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame)
+		if ((Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame) || (Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame))
 		{
             if (pause)
             {
