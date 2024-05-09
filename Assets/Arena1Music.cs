@@ -8,9 +8,9 @@ public class Arena1Music : MonoBehaviour
 
 	void Start()
 	{
-		Music = FMODUnity.RuntimeManager.CreateInstance("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+		Music = FMODUnity.RuntimeManager.CreateInstance("event:/MUSIC/BS-TFG_FINAL_BOSS");
 		Music.start();
 		Music.release();
-
+		
 	}
 }

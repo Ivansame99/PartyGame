@@ -498,10 +498,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638508991312263632
+  lastModified: 638508997269512699
   FileSizes:
   - Name: Desktop
-    Value: 2078
+    Value: 2124
   Exists: 1
 --- !u!114 &-925677908262626029
 MonoBehaviour:
@@ -637,10 +637,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638508991312263632
+  lastModified: 638508997269452168
   FileSizes:
   - Name: Desktop
-    Value: 5412128
+    Value: 7683008
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -686,12 +686,13 @@ MonoBehaviour:
   - {fileID: 6262715367109460009}
   - {fileID: 4544769286472700417}
   - {fileID: 397534613009041214}
+  - {fileID: 1689941198907293712}
   EditorParameters: []
   MasterBanks:
   - {fileID: -159095077771206448}
   StringsBanks:
   - {fileID: -937723152431812636}
-  cacheTime: 638508991312263632
+  cacheTime: 638508997269512699
   cacheVersion: 131617
 --- !u!114 &33524165311997506
 MonoBehaviour:
@@ -801,6 +802,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1073
+--- !u!114 &1689941198907293712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MUSIC/BS-TFG_FINAL_BOSS
+  m_EditorClassIdentifier: 
+  Path: event:/MUSIC/BS-TFG_FINAL_BOSS
+  Guid:
+    Data1: -276910827
+    Data2: 1244133914
+    Data3: 1230944144
+    Data4: 821779791
+  Banks:
+  - {fileID: -159095077771206448}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 174581
 --- !u!114 &2470700234144245110
 MonoBehaviour:
   m_ObjectHideFlags: 0
