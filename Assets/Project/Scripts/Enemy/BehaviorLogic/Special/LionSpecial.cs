@@ -48,11 +48,8 @@ public class LionSpecial : EnemySpecialAttackSOBase
         atkTimer = atkDuration;
         preChargeTimer = preChargeTime;
 
-        enemy.animator.ResetTrigger("Idle");
+        //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Charge");
-
-
-        Debug.Log("Aqui");
     }
 
     public override void DoExitLogic()
@@ -91,12 +88,14 @@ public class LionSpecial : EnemySpecialAttackSOBase
         {
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
+            enemy.attackCollider.enabled = true;
         }        
         
         if (!isAttacking && preChargeTimer <= 0)
         {
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
+            enemy.attackCollider.enabled = true;
         }
         else if (!isAttacking && preChargeTimer > 0)
         {

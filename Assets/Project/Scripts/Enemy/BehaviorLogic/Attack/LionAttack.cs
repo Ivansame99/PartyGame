@@ -45,6 +45,7 @@ public class LionAttack : EnemyAttackSOBase
     {
         base.DoExitLogic();
         enemy.rb.velocity = Vector3.zero;
+        enemy.attackCollider.enabled = false;
     }
     public override void DoFrameUpdateLogic()
     {
@@ -64,9 +65,11 @@ public class LionAttack : EnemyAttackSOBase
                 attackForce += sumForces;
             }
             enemy.rb.AddForce(transform.forward * attackForce, ForceMode.Impulse);
+            enemy.attackCollider.enabled = true;
             attackCount++;
             sumForces = 0;
             isAttacking = false;
+            
         }
     }
     public override void Init(GameObject gameObject, Enemy enemy)
