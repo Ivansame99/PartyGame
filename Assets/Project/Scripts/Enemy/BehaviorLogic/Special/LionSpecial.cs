@@ -20,7 +20,9 @@ public class LionSpecial : EnemySpecialAttackSOBase
     [SerializeField] float preChargeTime;
     private float preChargeTimer;
 
-
+    [Header("Feedback prefab")]
+    [SerializeField] private GameObject feedbackAttack;
+    private GameObject feedback;
 
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
@@ -50,6 +52,7 @@ public class LionSpecial : EnemySpecialAttackSOBase
 
         //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Charge");
+        feedback = Instantiate(feedbackAttack, enemy.transform);
     }
 
     public override void DoExitLogic()
@@ -89,21 +92,29 @@ public class LionSpecial : EnemySpecialAttackSOBase
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
             enemy.attackCollider.enabled = true;
-        }        
-        
+            if (feedback != null) Destroy(feedback);
+        }
+
+        if (!isAttacking && preChargeTimer > preChargeTime / 2)
+        {
+            transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
+            playerDir = (enemy.bossTarget.position - transform.position).normalized;
+            playerDir.y = 0;
+        }
+
         if (!isAttacking && preChargeTimer <= 0)
         {
             isAttacking = true;
             enemy.animator.SetTrigger("ChargeAtk");
             enemy.attackCollider.enabled = true;
+            if (feedback != null) Destroy(feedback);
         }
         else if (!isAttacking && preChargeTimer > 0)
         {
-            transform.LookAt(new Vector3(enemy.bossTarget.position.x, 0, enemy.bossTarget.position.z));
-            playerDir = (enemy.bossTarget.position - transform.position).normalized;
-            playerDir.y = 0;
+
             preChargeTimer -= Time.deltaTime;
         }
+
 
         if (isAttacking && atkTimer <= 0)
         {
