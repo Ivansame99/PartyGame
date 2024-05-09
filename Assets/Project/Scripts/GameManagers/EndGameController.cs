@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 
 public class EndGameController : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class EndGameController : MonoBehaviour
 
 	[SerializeField]
 	private IdleAnimation publicAnim;
+	[FMODUnity.EventRef] 
+    public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+
 	#endregion
 
 	#region Variables
@@ -145,6 +149,7 @@ public class EndGameController : MonoBehaviour
 			{
 				Vector3 randomPos = new Vector3(Random.Range(arenaLimitMin, arenaLimitMax), 0f, Random.Range(arenaLimitMin, arenaLimitMax));
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
+				FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
 			}
 		}
 	}

@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(menuName = "States/Player/Ak47")]
 public class PlayerAk47State : PlayerState<PlayerController>
@@ -26,7 +27,10 @@ public class PlayerAk47State : PlayerState<PlayerController>
 
 	private float timer = 0;
 	private float turnSmooth = 0.1f;
-
+	
+	[FMODUnity.EventRef] 
+    public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+	
 	public override void Init(PlayerController p)
 	{
 		base.Init(p);
@@ -92,11 +96,11 @@ public class PlayerAk47State : PlayerState<PlayerController>
 		//Vector3 randomRot = rot.eulerAngles + new Vector3(Random.Range(-bulletSpreadAngle, bulletSpreadAngle), 0, 0);
 		Vector3 randomRot = rot.eulerAngles + new Vector3(90, 0, Random.Range(-bulletSpreadAngle, bulletSpreadAngle));
 
-		// Instanciar la bala en la dirección calculada
+		// Instanciar la bala en la direcciï¿½n calculada
 		Instantiate(shootParticle, player.akFirePoint.position, rot);
 		GameObject bullet = Instantiate(bulletPrefab, player.akFirePoint.position, rot);
 		bullet.transform.eulerAngles = randomRot;
-
+		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
 		BulletController bc = bullet.GetComponent<BulletController>();
 
 		bc.finalDamage = bc.baseDamage + player.powerController.PowerDamage();
