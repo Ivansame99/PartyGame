@@ -13,6 +13,9 @@ public class LionAttack : EnemyAttackSOBase
     [SerializeField] private GameObject feedbackAttack;
     private GameObject feedback;
 
+    [Header("Feedback prefab")]
+    [SerializeField] private GameObject clawAttack;
+
     //Combo controller
     private int attackCount;
     private float attackForce;
@@ -66,6 +69,7 @@ public class LionAttack : EnemyAttackSOBase
         if (isAttacking)
         {
             if (feedback != null) Destroy(feedback);
+            //Instantiate(clawAttack, enemy.transform);
             if (attackCount > 1)
             {
                 sumForces = attackForce * comboMultiplyForce;
