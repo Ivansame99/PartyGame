@@ -26,7 +26,7 @@ public class FmodPlayer_v2 : MonoBehaviour {
 
         if (hit.collider)
         {
-            if (hit.collider.tag == "Material: Earth")
+            if (hit.collider.tag == "Material: Sand")
                 Material = 1f;
             else if (hit.collider.tag == "Material: Stone")
                 Material = 2f;

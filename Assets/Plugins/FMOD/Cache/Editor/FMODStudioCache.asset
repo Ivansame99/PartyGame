@@ -162,6 +162,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 219
+--- !u!114 &-6517257014292078790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Footsteps/Material
+  m_EditorClassIdentifier: 
+  Name: Material
+  StudioPath: 
+  Min: 1
+  Max: 2
+  Default: 1
+  ID:
+    data1: 3820438246
+    data2: 852426601
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-6092487317008551876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,10 +498,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638507976819152378
+  lastModified: 638508792761410920
   FileSizes:
   - Name: Desktop
-    Value: 2028
+    Value: 2078
   Exists: 1
 --- !u!114 &-925677908262626029
 MonoBehaviour:
@@ -613,10 +637,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638507976819111125
+  lastModified: 638508792761372401
   FileSizes:
   - Name: Desktop
-    Value: 5437024
+    Value: 5412128
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -667,7 +691,7 @@ MonoBehaviour:
   - {fileID: -159095077771206448}
   StringsBanks:
   - {fileID: -937723152431812636}
-  cacheTime: 638507976819152378
+  cacheTime: 638508792761410920
   cacheVersion: 131617
 --- !u!114 &33524165311997506
 MonoBehaviour:
@@ -1313,10 +1337,11 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: -6517257014292078790}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1365
+  Length: 468
 --- !u!114 &8181521666300811561
 MonoBehaviour:
   m_ObjectHideFlags: 0
