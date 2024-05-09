@@ -37,6 +37,7 @@ public class WaterEvent : GameEvent
 	private float waterTimer;
 
 	private bool fountainInstanciated;
+	
 	[FMODUnity.EventRef] 
     public string waterEventPath = "event:/SFX/Events/Water";
 	
@@ -50,7 +51,6 @@ public class WaterEvent : GameEvent
 		waterRetract = false;
 		fountainInstanciated = false;
 
-		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
 	}
 
     public override void EventUpdate()
@@ -58,6 +58,7 @@ public class WaterEvent : GameEvent
 		if (!fountainInstanciated)
 		{
 			Instantiate(waterFountainPrefab, startPositionFountain, waterFountainPrefab.transform.rotation);
+			FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
 			fountainInstanciated = true;
 			water = Instantiate(waterPrefab, startPositionWater, Quaternion.identity);
 			water.transform.localScale = Vector3.zero;
