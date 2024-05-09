@@ -28,8 +28,6 @@ public class LionIdle : EnemyIdleSOBase
         enemy.agent.isStopped = false;
         //enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Idle");
-
-        Debug.Log(enemy.RandomPatrol().position);
         //enemy.animator.ResetTrigger("Idle");
         //enemy.animator.SetTrigger("Chase");
         enemy.MoveEnemy(enemy.RandomPatrol().transform.position);
