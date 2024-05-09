@@ -1,16 +1,13 @@
+using FMOD.Studio;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class hubmusic : MonoBehaviour
-{
-    private static FMOD.Studio.EventInstance Music;
-    
+public class HubMusic : Music
+{   
     void Start()
     {
-        Music = FMODUnity.RuntimeManager.CreateInstance("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
-        Music.start();
-        Music.release();
-        
-    }
+		PlayMusic("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+		//PlayEnvirovment("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+	}
 }

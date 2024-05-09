@@ -10,7 +10,7 @@ public class EndGameController : MonoBehaviour
 	#region Inspector Variables
 	[Header("Win Properties")]
 	[SerializeField]
-	private float winAnimDuration=15f;
+	private float winAnimDuration = 15f;
 
 	[SerializeField]
 	private GameObject fireworkPrefab;
@@ -35,8 +35,12 @@ public class EndGameController : MonoBehaviour
 
 	[SerializeField]
 	private IdleAnimation publicAnim;
-	[FMODUnity.EventRef] 
-    public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+
+	[SerializeField]
+	private Music music;
+
+	[FMODUnity.EventRef]
+	public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
 
 	#endregion
 
@@ -51,20 +55,20 @@ public class EndGameController : MonoBehaviour
 	#region Life Cycle
 	private void Awake()
 	{
-		gameManager = GameManager.Instance;	
+		gameManager = GameManager.Instance;
 	}
 	#endregion
 
 	public void PlayerDead()
-    {
-        playersDead++;
-        CheckEndGame();
+	{
+		playersDead++;
+		CheckEndGame();
 	}
 
-    public void ResetPlayersDead()
-    {
-        playersDead = 0;
-    }
+	public void ResetPlayersDead()
+	{
+		playersDead = 0;
+	}
 
 	#region Methods
 	public void CheckEndGame()
@@ -85,12 +89,14 @@ public class EndGameController : MonoBehaviour
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
+			if (music != null) music.StopMusic();
 			gameManager.gmSceneManager.ChangeSceneToMenu(true, winAnimDuration);
 		}
 
 		//Check lose
 		if (playersDead >= playersCount)
-        {
+		{
+			if (music != null) music.StopMusic();
 			gameManager.gmSceneManager.ChangeSceneToGameOver(true);
 		}
 	}
@@ -112,7 +118,7 @@ public class EndGameController : MonoBehaviour
 		{
 			if (!moneda.activeInHierarchy)
 			{
-				moneda.transform.position = new Vector3(Random.Range(arenaLimitMin/2, arenaLimitMax/2), 25f, Random.Range(arenaLimitMin / 2, arenaLimitMax / 2));
+				moneda.transform.position = new Vector3(Random.Range(arenaLimitMin / 2, arenaLimitMax / 2), 25f, Random.Range(arenaLimitMin / 2, arenaLimitMax / 2));
 				moneda.transform.rotation = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 				moneda.SetActive(true);
 				return;
@@ -145,7 +151,7 @@ public class EndGameController : MonoBehaviour
 		{
 			yield return new WaitForSeconds(Random.Range(minTimeFirework, maxTimeFirework));
 			int randomFirework = Random.Range(1, maxFireworksInstanced);
-			for(int i=0;i< randomFirework; i++)
+			for (int i = 0; i < randomFirework; i++)
 			{
 				Vector3 randomPos = new Vector3(Random.Range(arenaLimitMin, arenaLimitMax), 0f, Random.Range(arenaLimitMin, arenaLimitMax));
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
