@@ -42,6 +42,7 @@ public class LionProjectile : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer) && !onlyOnce)
         {
             feedbackClone = Instantiate(projectileFeedback, new Vector3(hit.point.x,hit.point.y + 0.1f,hit.point.z), rotation);
+            Destroy(feedbackClone,1f);
             hitPosition = hit.point;
             
             onlyOnce = true;
@@ -52,7 +53,7 @@ public class LionProjectile : MonoBehaviour
             StopParticleLoop(TrailSand);
             StopParticleLoop(Ember);
             Instantiate(explosionParticles, hit.point, rotation);
-            Destroy(feedbackClone,0.1f);
+            
             Destroy(gameObject,0.1f);
         }
     }
