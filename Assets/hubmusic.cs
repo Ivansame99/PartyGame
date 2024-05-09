@@ -13,10 +13,4 @@ public class hubmusic : MonoBehaviour
         Music.release();
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
