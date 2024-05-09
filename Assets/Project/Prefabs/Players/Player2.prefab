@@ -30248,6 +30248,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3239827681709826218}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f142cd81e67aac42b7d6958b3139914,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6272149700132303259}
   m_SourcePrefab: {fileID: 100100000, guid: 7f142cd81e67aac42b7d6958b3139914, type: 3}
 --- !u!1 &5971476123506598425 stripped
 GameObject:
@@ -30504,14 +30508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.8
   maxPitch: 1.2
-  bowCharge: {fileID: 1620832637049071833}
-  bowRelease: {fileID: 7510844002802295012}
-  damage: {fileID: 8755945957712206631}
-  death: {fileID: 2727938268335099044}
-  jump: {fileID: 6494380535592509124}
-  stomp: {fileID: 4988313289461777262}
-  swordWhoosh: {fileID: 8552393285250276615}
-  roll: {fileID: 4663734904965884988}
 --- !u!114 &3239827681709826218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30529,6 +30525,22 @@ MonoBehaviour:
   powerLevel: {fileID: 4149807985443987564}
   floatingDamageText: {fileID: 8703725455407415189, guid: 7e2d6ce9b1556694aaf3135b7d38eb33,
     type: 3}
+--- !u!114 &6272149700132303259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971476123506598425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c542d104aa62b4976abb7e920a4d9523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastPoint: {fileID: 3235542828691253567}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!4 &6455102242564749475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7f142cd81e67aac42b7d6958b3139914,
