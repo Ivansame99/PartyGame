@@ -2592,6 +2592,7 @@ GameObject:
   - component: {fileID: 861778766}
   - component: {fileID: 861778765}
   - component: {fileID: 861778764}
+  - component: {fileID: 861778768}
   m_Layer: 5
   m_Name: FadeCanvas
   m_TagString: Untagged
@@ -2683,6 +2684,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &861778768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861778763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d3a9cf2629f9c4bb798e5440a6e77f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionMaterial: {fileID: 2100000, guid: 5069195b951f970489a52142e1cf71b4, type: 2}
+  transitionTime: 2
+  propertyName: _Progress
 --- !u!1001 &861869809
 PrefabInstance:
   m_ObjectHideFlags: 0
