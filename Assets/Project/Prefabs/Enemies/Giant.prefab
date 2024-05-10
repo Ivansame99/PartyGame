@@ -15433,6 +15433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 7047404649623666684}
+  isBoss: 0
   invencibility: 0
   timer: 0
   healthBarC: {fileID: 6124141503597066655}
@@ -15501,7 +15502,7 @@ RectTransform:
   m_GameObject: {fileID: 3991981310453843818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 4.81}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.61109, y: 0.61109, z: 0.61109}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7954935024623807873}
@@ -20806,7 +20807,9 @@ MonoBehaviour:
   secutorAudioManager: {fileID: 0}
   giantAudioManager: {fileID: 0}
   drunkAudioManager: {fileID: 0}
+  lionAudioManager: {fileID: 0}
   trailSand: {fileID: 3088135072795771891}
+  attackCollider: {fileID: 0}
   enemyChaseBase: {fileID: 11400000, guid: 8790452154143ba4b8acdebef1696a85, type: 2}
   enemyAttackBase: {fileID: 11400000, guid: c66fd7e43f030cb45bb21d964ffbc22c, type: 2}
   enemySpecialAttackBase: {fileID: 11400000, guid: a21e2e0bbd83c78428304d583eefe903,
