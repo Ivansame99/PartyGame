@@ -4405,18 +4405,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1fda8d2bb6466a448bc03b5697f5018a,
+        type: 3}
+    - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
+        type: 3}
       propertyPath: m_Color.b
-      value: 0.25490198
+      value: 0.7176471
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.29279894
+      value: 0.5309071
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.69803923
+      value: 0.2745098
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567908889092, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
@@ -4431,7 +4442,7 @@ PrefabInstance:
     - target: {fileID: 8689707567908889093, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567908889095, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
@@ -5785,7 +5796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.05}
   m_AnchorMax: {x: 1, y: 0.15}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 27}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!65 &439438632
@@ -16496,23 +16507,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1fda8d2bb6466a448bc03b5697f5018a,
+        type: 3}
+    - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
+        type: 3}
       propertyPath: m_Color.b
-      value: 0.25355998
+      value: 0.7176471
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.34186164
+      value: 0.5309071
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567253524647, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_Color.r
-      value: 0.6981132
+      value: 0.2745098
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567908889093, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8689707567908889095, guid: 8bfe7be66ff664295813cce36facaaa9,
         type: 3}
@@ -16810,8 +16832,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -16834,7 +16856,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 5
   m_fontSizeMax: 10
-  m_fontStyle: 0
+  m_fontStyle: 4
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -24974,7 +24996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -56}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1522482191
@@ -29543,7 +29565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 114}
+  m_AnchoredPosition: {x: 0, y: 114}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!95 &2062460482
