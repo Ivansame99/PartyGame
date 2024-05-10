@@ -7,6 +7,7 @@ public class Music : MonoBehaviour
 {
 	protected FMOD.Studio.EventInstance musicInstance;
 	protected FMOD.Studio.EventInstance envirovmentInstance;
+	protected FMOD.Studio.EventInstance envirovment2Instance;
 
 	protected void PlayMusic(string eventName)
 	{
@@ -22,6 +23,13 @@ public class Music : MonoBehaviour
 		envirovmentInstance.release();
 	}
 
+	protected void PlayEnvirovment2(string eventName)
+	{
+		envirovment2Instance = FMODUnity.RuntimeManager.CreateInstance(eventName);
+		envirovment2Instance.start();
+		envirovment2Instance.release();
+	}
+
 	// Método para detener la música
 	public void StopMusic()
 	{
@@ -33,6 +41,11 @@ public class Music : MonoBehaviour
 		if (envirovmentInstance.isValid())
 		{
 			envirovmentInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		}
+
+		if (envirovment2Instance.isValid())
+		{
+			envirovment2Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 		}
 	}
 }
