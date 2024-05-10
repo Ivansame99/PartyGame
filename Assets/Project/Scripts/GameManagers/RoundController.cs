@@ -53,7 +53,9 @@ public class RoundController : MonoBehaviour
 	#endregion
 	
 	[FMODUnity.EventRef] 
-    public string waterEventPath = "event:/SFX/Events/Water"; //cambiar evento
+    public string waterEventPath = "event:/SFX/Events/Water"; //cambiar evento lluvia
+	public string waterEventPath = "event:/SFX/Events/Water"; //cambiar evento puerta
+
 
 	#region Variables
 	internal List<GameObject> currentEnemies;
@@ -206,6 +208,7 @@ public class RoundController : MonoBehaviour
 		yield return new WaitForSeconds(secondsBetweenRounds);
 
 		coliseumAnimator.SetBool("DoorOpen", true);
+		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);  
 		yield return new WaitForSeconds(1);
 
 		int enemyNumberInCurrentRound = currentRound.rounds[roundIndex].enemiesInRound.Length;
