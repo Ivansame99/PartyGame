@@ -42,6 +42,7 @@ public class EndGameController : MonoBehaviour
 	[FMODUnity.EventRef]
 	public string fireworksEventPath = "event:/SFX/Animations/Fireworks"; //cambiar evento
 
+	private bool soundEffectOnce;
 	#endregion
 
 	#region Variables
@@ -89,6 +90,12 @@ public class EndGameController : MonoBehaviour
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
+			if (!soundEffectOnce)
+			{
+                FMODUnity.RuntimeManager.PlayOneShot(fireworksEventPath);
+				//AQUIIIII
+                soundEffectOnce = true;
+			}
 			if (music != null) music.StopMusic();
 			gameManager.gmSceneManager.ChangeSceneToMenu(true, winAnimDuration);
 		}
@@ -155,7 +162,6 @@ public class EndGameController : MonoBehaviour
 			{
 				Vector3 randomPos = new Vector3(Random.Range(arenaLimitMin, arenaLimitMax), 0f, Random.Range(arenaLimitMin, arenaLimitMax));
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
-				FMODUnity.RuntimeManager.PlayOneShot(fireworksEventPath);
 			}
 		}
 	}
