@@ -29,7 +29,7 @@ public class PlayerAk47State : PlayerState<PlayerController>
 	private float turnSmooth = 0.1f;
 	
 	[FMODUnity.EventRef] 
-    public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+    public string akEventPath = "event:/SFX/Events/AK47"; //cambiar evento
 	
 	public override void Init(PlayerController p)
 	{
@@ -100,7 +100,7 @@ public class PlayerAk47State : PlayerState<PlayerController>
 		Instantiate(shootParticle, player.akFirePoint.position, rot);
 		GameObject bullet = Instantiate(bulletPrefab, player.akFirePoint.position, rot);
 		bullet.transform.eulerAngles = randomRot;
-		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
+		FMODUnity.RuntimeManager.PlayOneShot(akEventPath);
 		BulletController bc = bullet.GetComponent<BulletController>();
 
 		bc.finalDamage = bc.baseDamage + player.powerController.PowerDamage();
