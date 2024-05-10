@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public SecutorAudioManager secutorAudioManager;
 	public GiantAudioManager giantAudioManager;
 	public DrunkAudioManager drunkAudioManager;
+	public LionAudioManager lionAudioManager;
 
 	public ParticleSystem trailSand;
     public BoxCollider attackCollider;

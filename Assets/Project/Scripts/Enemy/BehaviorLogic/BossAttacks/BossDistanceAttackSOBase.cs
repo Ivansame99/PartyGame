@@ -25,6 +25,7 @@ public class BossDistanceAttackSOBase : ScriptableObject
     private GameObject projectile;
 
     Transform firePoint;
+    bool startFireballs;
     public virtual void Init(GameObject gameObject, Enemy enemy)
     {
         this.gameObject = gameObject;
@@ -40,7 +41,7 @@ public class BossDistanceAttackSOBase : ScriptableObject
         projectilesCounter = 0;
         enemy.animator.ResetTrigger("Idle");
         enemy.animator.SetTrigger("Fireball");
-
+        startFireballs = false;
     }
     void FireProjectile(Vector3 target)
     {
@@ -56,24 +57,38 @@ public class BossDistanceAttackSOBase : ScriptableObject
         if (!enemy.isDead)
         {
             //BossRandomMovement();
-            if (projectilesCounter >= totalProjectiles) enemy.stateMachine.ChangeState(enemy.idleState);
-            if(attackTimer <= 0 && projectilesCounter <= totalProjectiles)
+            if(startFireballs)
             {
-                
-                for (int i = 0; i < enemy.enemyDirector.players.Count; i++)
+                if (projectilesCounter >= totalProjectiles) enemy.stateMachine.ChangeState(enemy.idleState);
+                if (attackTimer <= 0 && projectilesCounter <= totalProjectiles)
                 {
-                    Vector3 target = new Vector3(enemy.enemyDirector.players[i].transform.position.x, enemy.enemyDirector.players[i].transform.position.y + 20f, enemy.enemyDirector.players[i].transform.position.z);
-                    FireProjectile(target);
+
+                    for (int i = 0; i < enemy.enemyDirector.players.Count; i++)
+                    {
+                        Vector3 target = new Vector3(enemy.enemyDirector.players[i].transform.position.x, enemy.enemyDirector.players[i].transform.position.y + 20f, enemy.enemyDirector.players[i].transform.position.z);
+                        FireProjectile(target);
+                    }
+                    attackTimer = attackCooldown;
+                    projectilesCounter++;
                 }
-                attackTimer = attackCooldown;
-                projectilesCounter++;
+                else attackTimer -= Time.deltaTime;
             }
-            else attackTimer -= Time.deltaTime;
+
         }else enemy.stateMachine.ChangeState(enemy.deathState);
     }
 
     public virtual void DoPhysicsLogic() { }
-    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType) { }
+    public virtual void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType) {
+        switch (triggerType)
+        {
+            case Enemy.AnimationTriggerType.EnemyAttack:
+                enemy.lionAudioManager.RoarAudio();
+                break;
+            case Enemy.AnimationTriggerType.EnemyAttackFinished:
+                startFireballs = true;
+                break;
+        }
+    }
     public virtual void ResetValues()
     {
 

@@ -77,6 +77,7 @@ public class BossTorusSOBase : ScriptableObject
     void CreateTorus()
     {
         waveAttack = Instantiate(expansiveWave, new Vector3(enemy.transform.position.x, enemy.transform.position.y + 0.2f, enemy.transform.position.z), Quaternion.identity);
+        enemy.lionAudioManager.TorusAttack();
         Torus torus = waveAttack.GetComponent<Torus>();
         torus.finalDamage = torus.baseDamage + enemy.GetPowerDamageScale(); //cambiar escalado de poder
         torus.SetPushForce(torus.pushForce);

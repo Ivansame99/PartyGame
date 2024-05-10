@@ -87224,6 +87224,7 @@ GameObject:
   - component: {fileID: 8924301519064577644}
   - component: {fileID: 2886905596517369648}
   - component: {fileID: 2688830335047990970}
+  - component: {fileID: 3756978185297581565}
   m_Layer: 8
   m_Name: Quimera
   m_TagString: Enemy
@@ -87326,6 +87327,7 @@ MonoBehaviour:
   secutorAudioManager: {fileID: 0}
   giantAudioManager: {fileID: 0}
   drunkAudioManager: {fileID: 0}
+  lionAudioManager: {fileID: 3756978185297581565}
   trailSand: {fileID: 0}
   attackCollider: {fileID: 8975323985824741288}
   enemyIdleBase: {fileID: 11400000, guid: 643d675855709e74c9c7fe7e6e23b19a, type: 2}
@@ -87525,6 +87527,18 @@ CapsuleCollider:
   m_Height: 1.6909213
   m_Direction: 0
   m_Center: {x: 0.035682082, y: 0.5152215, z: -0.2583828}
+--- !u!114 &3756978185297581565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632477943377892713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69ac3c1713df194e8dacbaac72b01b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7752325880312408322
 GameObject:
   m_ObjectHideFlags: 0
@@ -87678,7 +87692,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &983482859157678100
 Transform:
   m_ObjectHideFlags: 0
