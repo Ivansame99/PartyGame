@@ -40,7 +40,7 @@ public class EndGameController : MonoBehaviour
 	private Music music;
 
 	[FMODUnity.EventRef]
-	public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+	public string fireworksEventPath = "event:/SFX/Animations/Fireworks"; //cambiar evento
 
 	#endregion
 
@@ -155,7 +155,7 @@ public class EndGameController : MonoBehaviour
 			{
 				Vector3 randomPos = new Vector3(Random.Range(arenaLimitMin, arenaLimitMax), 0f, Random.Range(arenaLimitMin, arenaLimitMax));
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
-				FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
+				FMODUnity.RuntimeManager.PlayOneShot(fireworksEventPath);
 			}
 		}
 	}

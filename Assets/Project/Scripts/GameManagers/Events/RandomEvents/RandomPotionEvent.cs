@@ -47,7 +47,7 @@ public class RandomPotionEvent : GameEvent
 	Vector3 finalPosition;
 
 	[FMODUnity.EventRef] 
-    public string waterEventPath = "event:/SFX/UI/Accept"; //cambiar evento
+    public string potionEventPath = "event:/SFX/Events/Potion"; 
 
 	public override void EventStart()
 	{
@@ -88,7 +88,7 @@ public class RandomPotionEvent : GameEvent
 	public override void EventUpdate()
 	{
 		potion = Instantiate(currentObject, initialPosition, currentObject.transform.rotation);
-		FMODUnity.RuntimeManager.PlayOneShot(waterEventPath);
+		FMODUnity.RuntimeManager.PlayOneShot(potionEventPath);
 		Destroy(potion, destroyTime);
 		potionRb = potion.GetComponent<Rigidbody>();
 		float distanceToTarget = Vector3.Distance(potion.transform.position, finalPosition);

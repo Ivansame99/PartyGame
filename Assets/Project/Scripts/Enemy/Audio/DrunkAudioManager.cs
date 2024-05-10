@@ -32,7 +32,7 @@ public class DrunkAudioManager : MonoBehaviour
 
     public void PlayVomitAttack()
     {
-
+    FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Drunk/Puke", transform.position);
     }
 
     }
