@@ -7,6 +7,7 @@ public class ArenaLeafMusic : Music
 	void Start()
 	{
 		PlayMusic("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
-		//PlayEnvirovment("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+		PlayEnvirovment("event:/SFX/Ambient/Jungle");
+		PlayEnvirovment("event:/SFX/Ambient/Crowd");
 	}
 }
