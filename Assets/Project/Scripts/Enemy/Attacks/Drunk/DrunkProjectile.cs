@@ -43,7 +43,7 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] private float selfDestruction;
 
     internal Enemy enemy;
-
+    private bool hitSound;
     private void Start()
     {
         collider = GetComponent<SphereCollider>();
@@ -88,7 +88,12 @@ public class DrunkProjectile : MonoBehaviour
         if(line != null) Destroy(line, lineTimeLife);
         if (Vector3.Distance(fPos, transform.position) < 3f)
         {
-            enemy.drunkAudioManager.PlayProjectileHit();
+            if(!hitSound)
+            {
+                enemy.drunkAudioManager.PlayProjectileHit();
+                hitSound = true;
+            }
+                
             Destroy(projectile);
             collider.enabled = true;
             Instantiate(explosionParticles, fPos, rotation);
