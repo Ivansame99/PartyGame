@@ -22,6 +22,10 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     [SerializeField] float timeToStun;
     private float timer;
 
+    [Header("Feedback prefab")]
+    [SerializeField] private GameObject feedbackAttack;
+    private GameObject feedback;
+
     public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -37,6 +41,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetInteger("AttackType", 2);
+        feedback = Instantiate(feedbackAttack, enemy.transform);
         atkTimer = atkDuration;
         isAttacking = false;
     }
@@ -112,6 +117,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     private void ChargeAttack()
     {
         isAttacking = true;
+        if (feedback != null) Destroy(feedback);
         enemy.animator.SetInteger("AttackType", 3);
     }
 
