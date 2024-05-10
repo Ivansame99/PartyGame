@@ -22,6 +22,9 @@ public class ReadyPlatformController : MonoBehaviour
 	[SerializeField]
 	private bool loadArena1;
 
+	[SerializeField]
+	private Music hubMusic;
+
 	private float changeSceneTimer;
 
 	private bool selectingArena = false;
@@ -45,6 +48,7 @@ public class ReadyPlatformController : MonoBehaviour
 		{
 			if (loadArena1)
 			{
+				hubMusic.StopMusic();
 				GameManager.Instance.gmSceneManager.ChangeSceneToArena1(true);
 			} else
 			{
@@ -59,6 +63,7 @@ public class ReadyPlatformController : MonoBehaviour
 			if (arenaSelector.GetSelectedArena() != GameEnums.Arenas.None)
 			{
 				GameEnums.Arenas arena = arenaSelector.GetSelectedArena();
+				hubMusic.StopMusic();
 
 				switch (arena)
 				{

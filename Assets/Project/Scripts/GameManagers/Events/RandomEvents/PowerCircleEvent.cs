@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(menuName = "Events/PowerCircle")]
 public class PowerCircleEvent : GameEvent
@@ -15,6 +16,9 @@ public class PowerCircleEvent : GameEvent
 	private GameObject circle;
 
 	private Vector3 spawnZone= new Vector3 (0,2,0);
+
+	[FMODUnity.EventRef] 
+    public string cageEventPath = "event:/SFX/Events/Cage"; //cambiar evento
 
 	public override void EventStart()
 	{
@@ -34,6 +38,7 @@ public class PowerCircleEvent : GameEvent
 		if (circle == null)
 		{
 			eventFinished = true;
+			FMODUnity.RuntimeManager.PlayOneShot(cageEventPath);
 		}
 	}
 

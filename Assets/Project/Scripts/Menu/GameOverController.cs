@@ -33,7 +33,10 @@ public class GameOverController : MonoBehaviour
 
 	private GameObject lastButtonSelected;
 
-	private void Awake()
+    [SerializeField]
+    private Music music;
+
+    private void Awake()
 	{
 		eventSystem = EventSystem.current;
 	}
@@ -99,7 +102,7 @@ public class GameOverController : MonoBehaviour
 			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
 			yield return null;
 		}
-
-		SceneManager.LoadScene(levelName);
+        music.StopMusic();
+        SceneManager.LoadScene(levelName);
 	}
 }

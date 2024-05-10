@@ -71,7 +71,9 @@ public class RandomThundersEvent : GameEvent
 	private IEnumerator SpawnThunder(int index, float preViewDelay, Vector3 pos, float attackDelay)
 	{
 		yield return new WaitForSeconds(preViewDelay);
-		Destroy(Instantiate(previewAttack, pos, previewAttack.transform.rotation), attackDelay + 0.2f);
+		GameObject thunder = Instantiate(previewAttack, pos, previewAttack.transform.rotation);
+		FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Events/Thunder", thunder.transform.position);
+		Destroy(thunder, attackDelay + 0.2f);
 		yield return new WaitForSeconds(attackDelay);
 		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
 		//CameraShake.Shake(0.5f,0.3f);

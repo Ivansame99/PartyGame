@@ -32,7 +32,11 @@ public class MenuController : MonoBehaviour
 	private GameObject lastButtonSelected;
 
 	bool start;
-	private void Awake()
+
+    [SerializeField]
+    private Music menuMusic;
+
+    private void Awake()
 	{
 		eventSystem = EventSystem.current;
 	}
@@ -81,7 +85,8 @@ public class MenuController : MonoBehaviour
 
 	public void UiCreditsButton()
 	{
-		SceneManager.LoadScene("Credits");
+        menuMusic.StopMusic();
+        SceneManager.LoadScene("Credits");
 	}
 
 	public void UiExitButton()
@@ -104,7 +109,8 @@ public class MenuController : MonoBehaviour
 			transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
 			yield return null;
 		}
+		menuMusic.StopMusic();
 
-		SceneManager.LoadScene("HUB");
+        SceneManager.LoadScene("HUB");
 	}
 }

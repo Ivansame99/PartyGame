@@ -45,6 +45,7 @@ public class SettingsController : MonoBehaviour
 	private EventSystem eventSystem;
 
 	private GameObject lastButtonSelected;
+	[SerializeField] private UISoundManager soundManager;
 
 	private void Awake()
     {
@@ -76,6 +77,7 @@ public class SettingsController : MonoBehaviour
 		if ((Gamepad.current != null && Gamepad.current.buttonEast.isPressed) || Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
 		{
 			Hide();
+			soundManager.CancelButtonSound();
 		}
 	}
 

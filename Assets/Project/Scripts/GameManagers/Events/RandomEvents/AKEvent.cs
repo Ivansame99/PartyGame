@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(menuName = "Events/Ak")]
 public class AKEvent : GameEvent
 {
@@ -11,6 +12,8 @@ public class AKEvent : GameEvent
 	private float timer;
 	private bool setAk = false;
 	private PlayerController[] playerController;
+	
+
 	public override void EventStart()
 	{
 		eventFinished = false;

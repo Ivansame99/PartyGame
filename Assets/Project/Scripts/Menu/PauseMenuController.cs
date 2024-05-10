@@ -20,6 +20,9 @@ public class PauseMenuController : MonoBehaviour
 	[SerializeField]
 	private GameObject cursor;
 
+	[SerializeField]
+	private Music music;
+
 	[Header("Circle Transition")]
 	[SerializeField]
 	private Material transitionMaterial;
@@ -108,7 +111,9 @@ public class PauseMenuController : MonoBehaviour
 		}
 
 		Time.timeScale = 1.0f;
-		SceneManager.LoadScene("Menu");
+		if(music!=null) music.StopMusic();
+        GameManager.Instance.roundController.StopRain();
+        SceneManager.LoadScene("Menu");
 	}
 
 	private IEnumerator SetStartCursosPos()

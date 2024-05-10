@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using Random = UnityEngine.Random;
+using FMODUnity;
 
 public class RoundController : MonoBehaviour
 {
@@ -50,6 +51,10 @@ public class RoundController : MonoBehaviour
 	[SerializeField]
 	private GameObject godRay2;
 	#endregion
+	
+	[FMODUnity.EventRef] 
+   	public string rainEventPath = "event:/SFX/Ambient/Rain"; 
+	public string doorsEventPath = "event:/SFX/Ambient/Doors"; 
 
 	#region Variables
 	internal List<GameObject> currentEnemies;
@@ -60,10 +65,12 @@ public class RoundController : MonoBehaviour
 	private Animator roundUIAnim;
 
 	public Action OnRoundFinish;
-	#endregion
 
-	#region Life Cycle
-	private void Awake()
+    FMOD.Studio.EventInstance rainFmod;
+    #endregion
+
+    #region Life Cycle
+    private void Awake()
 	{
 		roundUIAnim = roundsUI.GetComponent<Animator>();
 		currentEnemies = new List<GameObject>();
@@ -150,7 +157,10 @@ public class RoundController : MonoBehaviour
 		if (rainPrefab!=null)
 		{
 			Instantiate(rainPrefab, Vector3.zero, rainPrefab.transform.rotation);
-			LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
+            rainFmod = RuntimeManager.CreateInstance(rainEventPath);
+            rainFmod.start();
+            rainFmod.release();
+            LightIntensity.ChangeIntensityOverTime(0.5f, 2f);
 			godRay.SetActive(false);
 			godRay2.SetActive(false);
 		}
@@ -192,6 +202,14 @@ public class RoundController : MonoBehaviour
 	{
 		return betweenRounds;
 	}
+
+	public void StopRain()
+	{
+		if (rainFmod.isValid())
+		{
+            rainFmod.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+	}
 	#endregion
 
 	#region Coroutines
@@ -207,6 +225,7 @@ public class RoundController : MonoBehaviour
 		yield return new WaitForSeconds(secondsBetweenRounds);
 
 		coliseumAnimator.SetBool("DoorOpen", true);
+		FMODUnity.RuntimeManager.PlayOneShot(doorsEventPath);  
 		yield return new WaitForSeconds(1);
 
 		int enemyNumberInCurrentRound = currentRound.rounds[roundIndex].enemiesInRound.Length;

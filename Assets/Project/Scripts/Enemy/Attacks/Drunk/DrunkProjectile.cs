@@ -13,7 +13,7 @@ public class DrunkProjectile : MonoBehaviour
     [SerializeField] private float lineTimeLife = 0.5f;
     private SphereCollider collider;
 
-    //Variables para el cálculo de la trayectoria
+    //Variables para el cï¿½lculo de la trayectoria
     private float step;
     private Camera _cam;
 
@@ -42,8 +42,8 @@ public class DrunkProjectile : MonoBehaviour
     //COOLDOWN ATTACKS
     [SerializeField] private float selfDestruction;
 
-
-
+    internal Enemy enemy;
+    private bool hitSound;
     private void Start()
     {
         collider = GetComponent<SphereCollider>();
@@ -88,7 +88,12 @@ public class DrunkProjectile : MonoBehaviour
         if(line != null) Destroy(line, lineTimeLife);
         if (Vector3.Distance(fPos, transform.position) < 3f)
         {
-            //enemy.drunkAudioManager.PlayProjectileHit();
+            if(!hitSound)
+            {
+                enemy.drunkAudioManager.PlayProjectileHit();
+                hitSound = true;
+            }
+                
             Destroy(projectile);
             collider.enabled = true;
             Instantiate(explosionParticles, fPos, rotation);

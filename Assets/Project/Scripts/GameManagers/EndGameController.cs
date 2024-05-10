@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using FMODUnity;
+using static System.TimeZoneInfo;
 
 public class EndGameController : MonoBehaviour
 {
 	#region Inspector Variables
 	[Header("Win Properties")]
 	[SerializeField]
-	private float winAnimDuration=15f;
+	private float winAnimDuration = 15f;
 
 	[SerializeField]
 	private GameObject fireworkPrefab;
@@ -34,6 +36,26 @@ public class EndGameController : MonoBehaviour
 
 	[SerializeField]
 	private IdleAnimation publicAnim;
+
+	[SerializeField]
+	private Music music;
+
+    [Header("Circle Transition")]
+    [SerializeField]
+    private Material transitionMaterial;
+    [SerializeField]
+    private float transitionTime = 2f;
+    [SerializeField]
+    private string propertyName = "_Progress";
+
+    private static FMOD.Studio.EventInstance Music;
+
+	[FMODUnity.EventRef]
+	public string fireworksEventPath = "event:/SFX/Animations/Fireworks";
+	[FMODUnity.EventRef]
+	public string coinsEventPath = "event:/SFX/Animations/Coins";
+
+	private bool soundEffectOnce;
 	#endregion
 
 	#region Variables
@@ -42,25 +64,27 @@ public class EndGameController : MonoBehaviour
 	private float arenaLimitMin = -30f;
 	private float arenaLimitMax = 30f;
 	private GameManager gameManager;
-	#endregion
+	FMOD.Studio.EventInstance fireworks;
+    FMOD.Studio.EventInstance coins;
+    #endregion
 
-	#region Life Cycle
-	private void Awake()
+    #region Life Cycle
+    private void Awake()
 	{
-		gameManager = GameManager.Instance;	
+		gameManager = GameManager.Instance;
 	}
 	#endregion
 
 	public void PlayerDead()
-    {
-        playersDead++;
-        CheckEndGame();
+	{
+		playersDead++;
+		CheckEndGame();
 	}
 
-    public void ResetPlayersDead()
-    {
-        playersDead = 0;
-    }
+	public void ResetPlayersDead()
+	{
+		playersDead = 0;
+	}
 
 	#region Methods
 	public void CheckEndGame()
@@ -77,16 +101,37 @@ public class EndGameController : MonoBehaviour
 			}
 
 			gameManager.eventsController.StopEvents();
-			AudioManager.Instance.ChangeToVictoryTheme();
+			Music = FMODUnity.RuntimeManager.CreateInstance("event:/MUSIC/TFG.-Alpha_Stinger_Victoria V2");
+			Music.start();
+			Music.release();
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());
-			gameManager.gmSceneManager.ChangeSceneToMenu(true, winAnimDuration);
+			if (!soundEffectOnce)
+			{
+                fireworks = RuntimeManager.CreateInstance(fireworksEventPath);
+                fireworks.start();
+                fireworks.release();
+
+                coins = RuntimeManager.CreateInstance(coinsEventPath);
+                coins.start();
+                coins.release();
+
+                soundEffectOnce = true;
+			}
+			if (music != null) music.StopMusic();
+			ChangeSceneToMenu(true, winAnimDuration);
 		}
 
 		//Check lose
 		if (playersDead >= playersCount)
-        {
+		{
+			if (music != null) music.StopMusic();
+			if (Music.isValid())
+			{
+                Music.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            }
+			GameManager.Instance.roundController.StopRain();
 			gameManager.gmSceneManager.ChangeSceneToGameOver(true);
 		}
 	}
@@ -108,7 +153,7 @@ public class EndGameController : MonoBehaviour
 		{
 			if (!moneda.activeInHierarchy)
 			{
-				moneda.transform.position = new Vector3(Random.Range(arenaLimitMin/2, arenaLimitMax/2), 25f, Random.Range(arenaLimitMin / 2, arenaLimitMax / 2));
+				moneda.transform.position = new Vector3(Random.Range(arenaLimitMin / 2, arenaLimitMax / 2), 25f, Random.Range(arenaLimitMin / 2, arenaLimitMax / 2));
 				moneda.transform.rotation = Quaternion.Euler(Random.Range(0f, 360f), Random.Range(0f, 360f), Random.Range(0f, 360f));
 				moneda.SetActive(true);
 				return;
@@ -123,10 +168,23 @@ public class EndGameController : MonoBehaviour
 		coinsPool.Remove(firstCoint);
 		coinsPool.Add(firstCoint);
 	}
-	#endregion
+    #endregion
 
-	#region Coroutines
-	private IEnumerator StartCoins()
+
+    public void ChangeSceneToMenu(bool transition = false, float waitTime = 0)
+    {
+        if (transition)
+        {
+            StartCoroutine(CloseTranition(GameEnums.Scenes.Menu, waitTime));
+        }
+        else
+        {
+            SceneManager.LoadScene(GameEnums.Scenes.Menu.ToString());
+        }
+    }
+
+    #region Coroutines
+    private IEnumerator StartCoins()
 	{
 		while (true)
 		{
@@ -141,12 +199,37 @@ public class EndGameController : MonoBehaviour
 		{
 			yield return new WaitForSeconds(Random.Range(minTimeFirework, maxTimeFirework));
 			int randomFirework = Random.Range(1, maxFireworksInstanced);
-			for(int i=0;i< randomFirework; i++)
+			for (int i = 0; i < randomFirework; i++)
 			{
 				Vector3 randomPos = new Vector3(Random.Range(arenaLimitMin, arenaLimitMax), 0f, Random.Range(arenaLimitMin, arenaLimitMax));
 				Instantiate(fireworkPrefab, randomPos, Quaternion.identity);
 			}
 		}
 	}
-	#endregion
+
+    private IEnumerator CloseTranition(GameEnums.Scenes scene, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        float currentTime = transitionTime;
+        while (currentTime > 0)
+        {
+            currentTime -= Time.deltaTime;
+            transitionMaterial.SetFloat(propertyName, Mathf.Clamp01(currentTime / transitionTime));
+            yield return null;
+        }
+        Time.timeScale = 1.0f;
+        if (fireworks.isValid())
+        {
+            fireworks.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+        if (coins.isValid())
+        {
+            coins.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        }
+
+		GameManager.Instance.roundController.StopRain();
+        SceneManager.LoadScene(scene.ToString());
+    }
+    #endregion
 }

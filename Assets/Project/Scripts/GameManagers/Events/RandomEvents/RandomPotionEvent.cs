@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 [CreateAssetMenu(menuName = "Events/RandomPotion")]
 public class RandomPotionEvent : GameEvent
@@ -45,6 +46,9 @@ public class RandomPotionEvent : GameEvent
 	Vector3 initialPosition;
 	Vector3 finalPosition;
 
+	[FMODUnity.EventRef] 
+    public string potionEventPath = "event:/SFX/Events/Potion"; 
+
 	public override void EventStart()
 	{
 		int randomObjectIndex = Random.Range(0, objectThrowed.Length);
@@ -84,6 +88,7 @@ public class RandomPotionEvent : GameEvent
 	public override void EventUpdate()
 	{
 		potion = Instantiate(currentObject, initialPosition, currentObject.transform.rotation);
+		FMODUnity.RuntimeManager.PlayOneShot(potionEventPath);
 		Destroy(potion, destroyTime);
 		potionRb = potion.GetComponent<Rigidbody>();
 		float distanceToTarget = Vector3.Distance(potion.transform.position, finalPosition);
