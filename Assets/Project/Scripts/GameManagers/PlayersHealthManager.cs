@@ -129,8 +129,10 @@ public class PlayersHealthManager : MonoBehaviour
 		Time.timeScale = slowdownFactor;
 		mtp.enabled = false;
 
-		float zoomDistance = 120;
+		float zoomDistance = 145;
 		cameraMain.transform.position = player.position - cameraMain.transform.forward * zoomDistance;
+
+		mtp.enabled = true;
 
 		while (Time.timeScale < 1f)
 		{
@@ -139,7 +141,6 @@ public class PlayersHealthManager : MonoBehaviour
 			yield return null;
 		}
 
-		mtp.enabled = true;
 		Time.timeScale = 1f;
 
 		mtp.RemovePlayer(player);

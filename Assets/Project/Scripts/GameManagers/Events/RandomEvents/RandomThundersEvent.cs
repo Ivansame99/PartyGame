@@ -74,7 +74,7 @@ public class RandomThundersEvent : GameEvent
 		Destroy(Instantiate(previewAttack, pos, previewAttack.transform.rotation), attackDelay + 0.2f);
 		yield return new WaitForSeconds(attackDelay);
 		Vector3 attackPos = new Vector3(pos.x, attackYPos, pos.z);
-		CameraShake.Shake(0.5f,0.3f);
+		//CameraShake.Shake(0.5f,0.3f);
 		Destroy(Instantiate(thunderAttack, attackPos, thunderAttack.transform.rotation), thunderDuration);
 		if (index == thundersNumber - 1)
 		{
