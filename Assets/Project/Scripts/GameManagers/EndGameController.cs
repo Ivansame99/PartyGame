@@ -39,6 +39,8 @@ public class EndGameController : MonoBehaviour
 	[SerializeField]
 	private Music music;
 
+	private static FMOD.Studio.EventInstance Music;
+
 	[FMODUnity.EventRef]
 	public string fireworksEventPath = "event:/SFX/Animations/Fireworks";
 	[FMODUnity.EventRef]
@@ -88,7 +90,9 @@ public class EndGameController : MonoBehaviour
 			}
 
 			gameManager.eventsController.StopEvents();
-			AudioManager.Instance.ChangeToVictoryTheme();
+			Music = FMODUnity.RuntimeManager.CreateInstance("event:/MUSIC/TFG.-Alpha_Stinger_Victoria V2");
+			Music.start();
+			Music.release();
 			InstantiateCoinsPool();
 			StartCoroutine(StartCoins());
 			StartCoroutine(StartFireworks());

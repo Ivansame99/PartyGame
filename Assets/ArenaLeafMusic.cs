@@ -6,7 +6,7 @@ public class ArenaLeafMusic : Music
 {
 	void Start()
 	{
-		PlayMusic("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+		PlayMusic("event:/MUSIC/BS-TFG_ALPHA_2");
 		PlayEnvirovment("event:/SFX/Ambient/Jungle");
 		PlayEnvirovment2("event:/SFX/Ambient/Crowd");
 	}

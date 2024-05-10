@@ -7,7 +7,7 @@ public class HubMusic : Music
 {   
     void Start()
     {
-		PlayMusic("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
+		PlayMusic("event:/MUSIC/BS-TFG_entradilla_mazmorra");
 		//PlayEnvirovment("event:/MUSIC/BS-TFG_FINAL_ARENA_NIEVE");
 	}
 }
