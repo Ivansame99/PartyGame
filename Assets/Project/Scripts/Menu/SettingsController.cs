@@ -14,7 +14,7 @@ public class SettingsController : MonoBehaviour
 	private GameObject playButton;
 
 	[SerializeField]
-    private GameObject settingsContainer;
+	private GameObject settingsContainer;
 
 	[SerializeField]
 	private AudioMixer audioMixer;
@@ -39,8 +39,8 @@ public class SettingsController : MonoBehaviour
 
 	private Animator anim;
 
-    [HideInInspector]
-    public bool setingsOn;
+	[HideInInspector]
+	public bool setingsOn;
 
 	private EventSystem eventSystem;
 
@@ -48,13 +48,13 @@ public class SettingsController : MonoBehaviour
 	[SerializeField] private UISoundManager soundManager;
 
 	private void Awake()
-    {
-        anim = GetComponent<Animator>();
+	{
+		anim = GetComponent<Animator>();
 		eventSystem = EventSystem.current;
 	}
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Start is called before the first frame update
+	void Start()
+	{
 		dropDown.GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("GraphicsQuality", 2);
 		masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
 		musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
@@ -62,22 +62,22 @@ public class SettingsController : MonoBehaviour
 		settingsContainer.SetActive(false);
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		if (!setingsOn) return;
 
 		CheckIfAnyButtonSelected();
 		if (eventSystem.currentSelectedGameObject != lastButtonSelected)
-        {
+		{
 			lastButtonSelected = eventSystem.currentSelectedGameObject;
-			if(lastButtonSelected.GetComponent<ButtonCursorPos>()!=null) cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
+			if (lastButtonSelected.GetComponent<ButtonCursorPos>() != null) cursor.transform.position = lastButtonSelected.GetComponent<ButtonCursorPos>().cursorPos.position;
 		}
 
 		if ((Gamepad.current != null && Gamepad.current.buttonEast.isPressed) || Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
 		{
 			Hide();
-			soundManager.CancelButtonSound();
+			if (soundManager != null) soundManager.CancelButtonSound();
 		}
 	}
 
@@ -87,7 +87,7 @@ public class SettingsController : MonoBehaviour
 	}
 
 	public void UiChangeGraphicsQuality(int value)
-    {
+	{
 		QualitySettings.SetQualityLevel(QualitySettings.GetQualityLevel());
 		PlayerPrefs.SetInt("GraphicsQuality", value);
 	}
@@ -114,10 +114,10 @@ public class SettingsController : MonoBehaviour
 	}
 
 	public void Show()
-    {
-        settingsContainer.SetActive(true);
-        anim.SetTrigger("Appear");
-        setingsOn = true;
+	{
+		settingsContainer.SetActive(true);
+		anim.SetTrigger("Appear");
+		setingsOn = true;
 		eventSystem.SetSelectedGameObject(dropDown);
 	}
 
@@ -128,7 +128,7 @@ public class SettingsController : MonoBehaviour
 		Invoke(nameof(SetActiveFalse), 1.5f);
 		eventSystem.SetSelectedGameObject(playButton);
 	}
-	
+
 	private void SetActiveFalse()
 	{
 		settingsContainer.SetActive(false);

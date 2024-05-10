@@ -112,7 +112,7 @@ public class PauseMenuController : MonoBehaviour
 
 		Time.timeScale = 1.0f;
 		if(music!=null) music.StopMusic();
-        GameManager.Instance.roundController.StopRain();
+        if(GameManager.Instance.roundController!=null) GameManager.Instance.roundController.StopRain();
         SceneManager.LoadScene("Menu");
 	}
 
