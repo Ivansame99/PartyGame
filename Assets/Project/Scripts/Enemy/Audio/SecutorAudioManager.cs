@@ -13,7 +13,7 @@ public class SecutorAudioManager : MonoBehaviour
 
 	public void PlayDamage()
 	{
-	// FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemys/Drunk/Puke", transform.position);
+	FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Secutor/Damage", transform.position);
 	}
 
 	public void PlayDeath()

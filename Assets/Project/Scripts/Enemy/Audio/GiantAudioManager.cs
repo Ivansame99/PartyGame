@@ -13,7 +13,7 @@ public class GiantAudioManager : MonoBehaviour
 
 	public void PlayDamage() //que es
 	{
-	// FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemys/Drunk/Puke", transform.position);
+	FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Enemies/Giant/Damage", transform.position);
 	}
 
 	public void PlayDeath()
