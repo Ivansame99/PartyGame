@@ -3,6 +3,7 @@ using TMPro;
 using System;
 using static UnityEngine.Rendering.DebugUI;
 using DG.Tweening;
+using FMODUnity;
 
 public class PowerController : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class PowerController : MonoBehaviour
 	private bool isEnemy = false;
 	private bool maxPowerParticlesSpawned = false;
 	#endregion
+
+	[FMODUnity.EventRef] 
+    public string powerupEventPath = "event:/SFX/UI/PowerUp"; 
 
 	#region Actions
 	public Action<float> OnCurrentPowerChanged;
@@ -168,7 +172,7 @@ public class PowerController : MonoBehaviour
 				transform.DOPunchScale(new Vector3(0.5f, -0.5f, 0.5f), 0.15f).SetRelative(true).SetEase(Ease.OutBack);
 
 				AddPowerLevel(ppc.GetPowerAmount());
-
+				FMODUnity.RuntimeManager.PlayOneShot(powerupEventPath);
 				Destroy(powerParticle);
 			}
 		}
