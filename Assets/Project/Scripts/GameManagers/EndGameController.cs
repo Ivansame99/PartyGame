@@ -40,7 +40,9 @@ public class EndGameController : MonoBehaviour
 	private Music music;
 
 	[FMODUnity.EventRef]
-	public string fireworksEventPath = "event:/SFX/Animations/Fireworks"; //cambiar evento
+	public string fireworksEventPath = "event:/SFX/Animations/Fireworks";
+	[FMODUnity.EventRef]
+	public string coinsEventPath = "event:/SFX/Animations/Coins";
 
 	private bool soundEffectOnce;
 	#endregion
@@ -93,7 +95,7 @@ public class EndGameController : MonoBehaviour
 			if (!soundEffectOnce)
 			{
                 FMODUnity.RuntimeManager.PlayOneShot(fireworksEventPath);
-				//AQUIIIII
+				FMODUnity.RuntimeManager.PlayOneShot(coinsEventPath);
                 soundEffectOnce = true;
 			}
 			if (music != null) music.StopMusic();
