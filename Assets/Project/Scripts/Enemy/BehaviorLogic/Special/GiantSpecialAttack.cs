@@ -11,6 +11,9 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     [SerializeField] private float impulseForce = 50f;
     [SerializeField] private float colisionDistance;
     [SerializeField] private float atkDuration;
+
+    [SerializeField] private float preChargeDuration;
+    private float preChargeTimer;
     private float atkTimer;
 
     private bool isAttacking;
@@ -18,9 +21,6 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     private Vector3 playerDir;
 
     private RaycastHit hit;
-
-    [SerializeField] float timeToStun;
-    private float timer;
 
     [Header("Feedback prefab")]
     [SerializeField] private GameObject feedbackAttack;
@@ -43,6 +43,7 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
         enemy.animator.SetInteger("AttackType", 2);
         feedback = Instantiate(feedbackAttack, enemy.transform);
         atkTimer = atkDuration;
+        preChargeTimer = preChargeDuration;
         isAttacking = false;
     }
 
@@ -57,12 +58,12 @@ public class GiantSpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoFrameUpdateLogic();
         
-        if (!isAttacking)
+        if (!isAttacking || (!isAttacking && preChargeTimer > 0))
         {
             transform.LookAt(new Vector3(enemy.playerPos.position.x, 0, enemy.playerPos.position.z));
             playerDir = (enemy.playerPos.position - transform.position).normalized;
             playerDir.y = 0;
-        }
+        }else preChargeTimer -= Time.deltaTime;
         if(isAttacking)
         {
 
