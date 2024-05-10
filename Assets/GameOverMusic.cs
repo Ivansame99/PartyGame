@@ -6,6 +6,6 @@ public class GameOverMusic : Music
 {
 	void Start()
 	{
-		PlayMusic("event:/MUSIC/BS-TFG_ALPHA_2");
+		PlayMusic("event:/MUSIC/TFG.-Alpha_Stinger_Derrota V2");
 	}
 }
