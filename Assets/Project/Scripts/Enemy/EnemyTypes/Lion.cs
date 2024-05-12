@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class Lion : Enemy
 {
     [Header("Enemy States")]
+    [SerializeField] private BossEntranceSOBase bossEntranceBase;
     [SerializeField] private EnemyIdleSOBase enemyIdleBase;
     [SerializeField] private EnemyChaseSOBase enemyChaseBase;
     [SerializeField] private EnemyDeathSOBase enemyDeathBase;
@@ -16,6 +17,7 @@ public class Lion : Enemy
     
     private void Awake()
     {
+        bossEntranceBaseInstance = Instantiate(bossEntranceBase);
         enemyIdleBaseInstance = Instantiate(enemyIdleBase);
         enemyChaseBaseInstance = Instantiate(enemyChaseBase);
         enemyDeathBaseInstance = Instantiate(enemyDeathBase);
@@ -27,6 +29,7 @@ public class Lion : Enemy
         //Initialize State Machine
         stateMachine = new EnemyStateMachine();
 
+        bossEntranceState = new BossEntranceState(this, stateMachine);
         idleState = new EnemyIdleState(this, stateMachine);
         chaseState = new EnemyChaseState(this, stateMachine);
         deathState = new EnemyDeathState(this, stateMachine);
@@ -50,6 +53,7 @@ public class Lion : Enemy
         enemyDirector = GameManager.Instance.enemyDirector;
 
         //Initialize SO
+        bossEntranceBaseInstance.Init(gameObject, this);
         enemyIdleBaseInstance.Init(gameObject, this);
         enemyChaseBaseInstance.Init(gameObject, this);
         enemyDeathBaseInstance.Init(gameObject, this);
@@ -59,6 +63,6 @@ public class Lion : Enemy
         enemySpecialAttackBaseInstance.Init(gameObject, this);
 
         //Initialize State Machine
-        stateMachine.Initialize(idleState);
+        stateMachine.Initialize(bossEntranceState);
     }
 }

@@ -49,6 +49,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyDeathState deathState { get; set; }
 	public BossTorus bossTorusState { get; set; }
 	public BossDistanceAttack bossDistanceAttackState { get; set; }
+	public BossEntranceState bossEntranceState { get; set; }
 
 	//WATER STATES
 	public EnemyWaterChaseState waterChaseState { get; set; }
@@ -71,6 +72,7 @@ public class Enemy : MonoBehaviour, IDamageable, IEnemyMoveable, ITriggerCheckea
 	public EnemyDeathSOBase enemyDeathBaseInstance { get; set; }
 
 	//BOSS STATES
+	public BossEntranceSOBase bossEntranceBaseInstance { get; set; }
 	public BossTorusSOBase bossTorusBaseInstance { get; set; }
 	public BossDistanceAttackSOBase bossDistanceAttackBaseInstance { get; set; }
 
