@@ -42,7 +42,7 @@ public class ArenaSelector : MonoBehaviour
 
 		scrollGameObject.GetComponent<RectTransform>().localPosition = new Vector3(1080, 0);
 
-		maxSpeed = Random.Range(1, 3);
+		maxSpeed = Random.Range(2, 5);
 		speed = 1;
 		start = true;
 		isScrolling = true;
@@ -77,7 +77,7 @@ public class ArenaSelector : MonoBehaviour
 		{
 			speed += Time.deltaTime;
 		}
-		else if (speed > maxSpeed)
+		else if (speed >= maxSpeed)
 		{
 			start = false;
 		}
