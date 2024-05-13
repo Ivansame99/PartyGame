@@ -201,10 +201,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638512144608625523
+  lastModified: 638512163785542393
   FileSizes:
   - Name: Desktop
-    Value: 19961632
+    Value: 19971296
   Exists: 1
 --- !u!114 &-5386368059600730620
 MonoBehaviour:
@@ -719,6 +719,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 174581
+--- !u!114 &-180216087651638632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Drunk/Die
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Drunk/Die
+  Guid:
+    Data1: 1411810447
+    Data2: 1115900612
+    Data3: 336822156
+    Data4: -1121765784
+  Banks:
+  - {fileID: -5501966006449312452}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 682
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,12 +813,15 @@ MonoBehaviour:
   - {fileID: 460786614508210927}
   - {fileID: -2079925238708084159}
   - {fileID: 2410904253698751295}
+  - {fileID: 8113270554120682818}
+  - {fileID: -180216087651638632}
+  - {fileID: 1376576917861315443}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5501966006449312452}
   StringsBanks:
   - {fileID: 104989634909102104}
-  cacheTime: 638512144608655467
+  cacheTime: 638512163785562344
   cacheVersion: 131617
 --- !u!114 &104989634909102104
 MonoBehaviour:
@@ -808,10 +838,10 @@ MonoBehaviour:
   Path: FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638512144608655467
+  lastModified: 638512163785562344
   FileSizes:
   - Name: Desktop
-    Value: 3112
+    Value: 3246
   Exists: 1
 --- !u!114 &189816924451834161
 MonoBehaviour:
@@ -921,6 +951,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 750
+--- !u!114 &1376576917861315443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Secutor/Die
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Secutor/Die
+  Guid:
+    Data1: 596313810
+    Data2: 1160059804
+    Data3: 177055879
+    Data4: -749673963
+  Banks:
+  - {fileID: -5501966006449312452}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 682
 --- !u!114 &1447985987067606050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1516,3 +1573,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 28104
+--- !u!114 &8113270554120682818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Enemies/Giant/Die
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Enemies/Giant/Die
+  Guid:
+    Data1: -1179048448
+    Data2: 1161211542
+    Data3: -1674856786
+    Data4: 764269007
+  Banks:
+  - {fileID: -5501966006449312452}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 682
