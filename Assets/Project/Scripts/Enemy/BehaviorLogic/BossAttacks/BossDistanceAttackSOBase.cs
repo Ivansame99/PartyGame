@@ -86,6 +86,7 @@ public class BossDistanceAttackSOBase : ScriptableObject
                 break;
             case Enemy.AnimationTriggerType.EnemyAttackFinished:
                 startFireballs = true;
+                enemy.MoveEnemy(enemy.RandomPatrol().transform.position);
                 break;
         }
     }
