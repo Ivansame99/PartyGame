@@ -35,17 +35,17 @@ public class Music : MonoBehaviour
 	{
 		if (musicInstance.isValid())
 		{
-			musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		}
 
 		if (envirovmentInstance.isValid())
 		{
-			envirovmentInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			envirovmentInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		}
 
 		if (envirovment2Instance.isValid())
 		{
-			envirovment2Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			envirovment2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		}
 	}
 }
