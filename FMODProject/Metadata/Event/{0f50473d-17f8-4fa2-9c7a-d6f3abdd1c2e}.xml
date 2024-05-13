@@ -132,7 +132,7 @@
 			<value>pitch</value>
 		</property>
 		<property name="amount">
-			<value>7</value>
+			<value>11.5</value>
 		</property>
 	</object>
 	<object class="RandomizerModulator" id="{a3b78933-8527-41a2-9df6-4694dec3da82}">
@@ -152,6 +152,12 @@
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{4a085c70-ded4-4fdc-9dbe-c1d8958bcc9a}">
+		<property name="startOffset">
+			<value>8</value>
+		</property>
+		<property name="pitch">
+			<value>1.20000005</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{1bd2e846-2c0e-4745-9561-010624ae12da}</destination>
 		</relationship>
