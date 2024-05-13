@@ -55,7 +55,6 @@ public class MultipleTargetCamera : MonoBehaviour
         {
             if (targets[i] == player)
             {
-                Debug.Log(player.name);
                 targets.Remove(targets[i]);
                 player.transform.position = new Vector3(100, 10, 0);
                 return true;

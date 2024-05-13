@@ -22,7 +22,6 @@ public class DrunkChaseWater : EnemyWaterChaseSOBase
         if (!enemy.isDead)
         {
             CheckingStates();
-            Debug.Log("Chase Water");
             if (enemy.playerPos != null) enemy.MoveEnemy(enemy.playerPos.position);
         }
         else
