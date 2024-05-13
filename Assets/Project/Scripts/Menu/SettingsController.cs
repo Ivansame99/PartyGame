@@ -16,11 +16,9 @@ public class SettingsController : MonoBehaviour
 	[SerializeField]
 	private GameObject settingsContainer;
 
-	[SerializeField]
-	private AudioMixer audioMixer;
-
-	[SerializeField]
-	private AudioSource sliderChangeValueSFX;
+	private FMOD.Studio.VCA vcaMasterController;
+	private FMOD.Studio.VCA vcaMusicController;
+	private FMOD.Studio.VCA vcaSFXController;
 
 	[SerializeField]
 	private GameObject dropDown;
@@ -47,6 +45,8 @@ public class SettingsController : MonoBehaviour
 	private GameObject lastButtonSelected;
 	[SerializeField] private UISoundManager soundManager;
 
+	private string changeSliderPath = "event:/SFX/UI/UpDown";
+
 	private void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -55,7 +55,10 @@ public class SettingsController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		dropDown.GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("GraphicsQuality", 2);
+		dropDown.GetComponent<TMP_Dropdown>().value = PlayerPrefs.GetInt("GraphicsQuality", 1);
+		vcaMasterController = FMODUnity.RuntimeManager.GetVCA("vca:/Master");
+		vcaMusicController = FMODUnity.RuntimeManager.GetVCA("vca:/Music");
+		vcaSFXController = FMODUnity.RuntimeManager.GetVCA("vca:/SFX");
 		masterSlider.value = PlayerPrefs.GetFloat("MasterVolume", 1f);
 		musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
 		sfxSlider.value = PlayerPrefs.GetFloat("SfxVolume", 0.5f);
@@ -94,22 +97,24 @@ public class SettingsController : MonoBehaviour
 
 	public void UiChangeMasterVolume(float value)
 	{
-		//if (!sliderChangeValueSFX.isPlaying && setingsOn) sliderChangeValueSFX.Play();
-		audioMixer.SetFloat("MasterVolume", Mathf.Log10(value) * 20);
+		FMODUnity.RuntimeManager.PlayOneShot(changeSliderPath);
+		vcaMasterController.setVolume(value);
 		PlayerPrefs.SetFloat("MasterVolume", value);
 	}
 
 	public void UiChangeMusicVolume(float value)
 	{
-		//if (!sliderChangeValueSFX.isPlaying && setingsOn) sliderChangeValueSFX.Play();
-		audioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
+		if (value <= 0) return;
+		FMODUnity.RuntimeManager.PlayOneShot(changeSliderPath);
+		vcaMusicController.setVolume(value);
 		PlayerPrefs.SetFloat("MusicVolume", value);
 	}
 
 	public void UiChangeSFXVolume(float value)
 	{
-		if (!sliderChangeValueSFX.isPlaying && setingsOn) sliderChangeValueSFX.Play();
-		audioMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20);
+		if (value <= 0) return;
+		FMODUnity.RuntimeManager.PlayOneShot(changeSliderPath);
+		vcaSFXController.setVolume(value);
 		PlayerPrefs.SetFloat("SfxVolume", value);
 	}
 

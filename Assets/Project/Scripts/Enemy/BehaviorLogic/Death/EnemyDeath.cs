@@ -20,6 +20,9 @@ public class EnemyDeath : EnemyDeathSOBase
 
     private Vector3 spawnPosition;
     private bool deathFlag = false;
+
+	private string diePath = "event:/SFX/Enemies/Secutor/Die";
+
 	public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
@@ -30,7 +33,8 @@ public class EnemyDeath : EnemyDeathSOBase
         base.DoEnterLogic();
         enemy.secutorAudioManager.PlayDeath();
         enemy.animator.SetTrigger("Die");
-    }
+		FMODUnity.RuntimeManager.PlayOneShot(diePath);
+	}
 
     void StopParticleLoop(ParticleSystem particleSystemInstance)
     {

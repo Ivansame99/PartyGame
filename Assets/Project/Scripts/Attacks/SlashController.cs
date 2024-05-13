@@ -30,7 +30,8 @@ public class SlashController : MonoBehaviour
 
 	private EnemyHealth enemy;
 
-	private AudioSource hitSound;
+	private string parryPath = "event:/SFX/Sword/Sword";
+
 	private void Awake()
 	{
 		player = transform.parent.gameObject;
@@ -39,7 +40,6 @@ public class SlashController : MonoBehaviour
 		enemy1Controller = transform.parent.GetComponent<EnemyHealthController>();
 		pushForceParry = 30f;
 		pushForceAttack = 7f;
-		hitSound = GetComponent<AudioSource>();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -65,11 +65,8 @@ public class SlashController : MonoBehaviour
 				enemy.timer = 1f;
 				enemy.invencibility = true;
 			}
-			if (hitSound != null)
-			{
-				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-				hitSound.Play();
-			}
+
+			FMODUnity.RuntimeManager.PlayOneShot(parryPath);
 		}
 
 		if (other.CompareTag("Armor"))
@@ -78,11 +75,7 @@ public class SlashController : MonoBehaviour
 			attackPosition = other.transform.position;
 			pushBackParry = true;
 
-			if (hitSound != null)
-			{
-				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-				hitSound.Play();
-			}
+			FMODUnity.RuntimeManager.PlayOneShot(parryPath);
 		}
 
 		if (other.CompareTag("Player") || other.CompareTag("Enemy"))

@@ -15398,6 +15398,7 @@ GameObject:
   - component: {fileID: 8356002723905925973}
   - component: {fileID: 4179376783329344261}
   - component: {fileID: 6999865037897848089}
+  - component: {fileID: 9123758196466235388}
   m_Layer: 8
   m_Name: HealthController
   m_TagString: Enemy
@@ -15475,6 +15476,19 @@ CapsuleCollider:
   m_Height: 1.0812571
   m_Direction: 1
   m_Center: {x: 0.0032624484, y: 1.2254748, z: -0.023973107}
+--- !u!114 &9123758196466235388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808648031345007893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e1e95493b2464a4e8e82bc360f313be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7047404649623666684}
 --- !u!1 &3991981310453843818
 GameObject:
   m_ObjectHideFlags: 0
@@ -20843,6 +20857,7 @@ MonoBehaviour:
   minScaleMultiplier: 5.5
   smoke: {fileID: 5661609198796829325}
   instanciatedEnemy: 1
+  powerupEventPath: event:/SFX/UI/PowerUp
 --- !u!114 &5885468970407020139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20923,9 +20938,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minPitch: 0.8
   maxPitch: 1.2
-  damage: {fileID: 6190384001591752641}
-  death: {fileID: 4938101738521858588}
-  stomp: {fileID: 3014095921165035712}
 --- !u!114 &6910404094098615076
 MonoBehaviour:
   m_ObjectHideFlags: 0

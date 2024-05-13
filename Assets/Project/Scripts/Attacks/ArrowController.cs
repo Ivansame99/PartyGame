@@ -6,9 +6,6 @@ public class ArrowController : MonoBehaviour
 {
     public float baseDamage;
 
-    [SerializeField]
-	private AudioSource arrowCollision;
-
 	[HideInInspector]
     public float finalDamage;
 	
@@ -33,11 +30,9 @@ public class ArrowController : MonoBehaviour
 
     private float destroyTime=10f;
 
-    private float minPitch = 0.8f;
-    private float maxPitch = 1.2f;
+	private string collisionPath = "event:/SFX/Archery/Wall";
 
-    [SerializeField]
-	private AudioSource hitSound;
+	private string parryPath = "event:/SFX/Sword/Sword";
 
 	void Start()
     {
@@ -53,8 +48,7 @@ public class ArrowController : MonoBehaviour
             rb.isKinematic = true;
             Destroy(this.gameObject, destroyTime);
 		}
-		arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-		arrowCollision.Play();
+		FMODUnity.RuntimeManager.PlayOneShot(collisionPath);
 	}
 
     private void FixedUpdate()
@@ -90,14 +84,7 @@ public class ArrowController : MonoBehaviour
             speed += 5;
             owner = other.transform.parent.gameObject;
             ownerPos = other.transform.parent.gameObject.transform.position;
-			arrowCollision.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-			arrowCollision.Play();
-
-			if (hitSound != null)
-			{
-				hitSound.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-				hitSound.Play();
-			}
+			FMODUnity.RuntimeManager.PlayOneShot(parryPath);
 		}
     }
 }

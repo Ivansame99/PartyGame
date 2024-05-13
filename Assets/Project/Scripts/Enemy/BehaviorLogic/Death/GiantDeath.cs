@@ -19,7 +19,10 @@ public class GiantDeath : EnemyDeathSOBase
 
     private Vector3 scale = new Vector3(1, 1, 1);
     private bool deathFlag = false;
-    public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
+
+	private string diePath = "event:/SFX/Enemies/Giant/Die";
+
+	public override void DoAnimationTriggerEventLogic(Enemy.AnimationTriggerType triggerType)
     {
         base.DoAnimationTriggerEventLogic(triggerType);
     }
@@ -29,8 +32,9 @@ public class GiantDeath : EnemyDeathSOBase
         base.DoEnterLogic();
         enemy.giantAudioManager.PlayDeath();
         enemy.animator.SetTrigger("Die");
-        //enemy.secutorAudioManager.PlayDeath();
-    }
+		FMODUnity.RuntimeManager.PlayOneShot(diePath);
+		//enemy.secutorAudioManager.PlayDeath();
+	}
     void StopParticleLoop(ParticleSystem particleSystemInstance)
     {
         // Detener el sistema de partículas
