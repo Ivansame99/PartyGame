@@ -18,6 +18,7 @@ public class SecutorSpecialAttack : EnemySpecialAttackSOBase
     {
         base.DoEnterLogic();
         enemy.animator.SetBool("Special",true);
+        attackTimer = attackTime;
     }
 
     public override void DoExitLogic()
