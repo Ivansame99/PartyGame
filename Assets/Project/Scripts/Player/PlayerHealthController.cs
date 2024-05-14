@@ -137,7 +137,8 @@ public class PlayerHealthController : MonoBehaviour
 
 		playerHudController.ReceivedDamage(damage, health, maxHealth);
 		playerController.TakeDamage();
-	}
+		PlayerConfigurationManager.Instance.RumblePulse(playerConfig.PlayerIndex, 0.5f, 0.5f, 0.5f);
+    }
 
 	public void ReceiveDamageMultiplier(float multiplier)
 	{
