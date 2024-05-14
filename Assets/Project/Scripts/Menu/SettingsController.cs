@@ -43,7 +43,6 @@ public class SettingsController : MonoBehaviour
 	private EventSystem eventSystem;
 
 	private GameObject lastButtonSelected;
-	[SerializeField] private UISoundManager soundManager;
 
 	private string changeSliderPath = "event:/SFX/UI/UpDown";
 
@@ -80,7 +79,6 @@ public class SettingsController : MonoBehaviour
 		if ((Gamepad.current != null && Gamepad.current.buttonEast.isPressed) || Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
 		{
 			Hide();
-			if (soundManager != null) soundManager.CancelButtonSound();
 		}
 	}
 
