@@ -37,6 +37,7 @@ public class OnBoardingController : MonoBehaviour
 
 			onBoarding=true;
 			anim.SetBool("Onboarding", true);
+			PlayerPrefs.SetInt("onBoarding", 1);
 		}
 	}
 }
